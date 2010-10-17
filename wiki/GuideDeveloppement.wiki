@@ -3,7 +3,7 @@
 
 = Documentation projet =
 
-La documentation est disponible sur GoogleCode :
+La documentation est disponible sur Google Code :
 http://code.google.com/p/pds2011/
 
 Le WIKI permet d'initialiser la rédaction des documents. Utiliser la syntaxe proposé par Google Code à droite de la fenêtre d'édition.
