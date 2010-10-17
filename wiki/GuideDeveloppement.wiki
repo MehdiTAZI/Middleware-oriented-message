@@ -11,7 +11,7 @@ Le WIKI permet d'initialiser la rédaction des documents. Utiliser la syntaxe pr
 Conseil : 
   * Rédiger en dehors (éditeur de texte) en sauvegardant régulièrement)
   * Plus simple : Utiliser Firefox 3.6 avec l'extension Textarea Cache (https://addons.mozilla.org/en-US/firefox/addon/5761/) qui en cas de crash vous permet de garder le contenu courant de la zone de saisie.
-
+  * Utiliser les commentaires pour rapidement faire des remarques sur un doc.
 
 
 = Poste de travail développeur =
