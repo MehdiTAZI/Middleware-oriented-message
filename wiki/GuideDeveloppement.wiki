@@ -1,12 +1,18 @@
+#summary Guide de développement. Rêgle SVN apllicables dés maintenant, le reste reste en construction
 #labels Phase-Implementation
-#Description de la plate-forme de développement en prévision de la rédaction du Plan Projet
 
 = Documentation projet =
 
 La documentation est disponible sur GoogleCode :
 http://code.google.com/p/pds2011/
 
-Le WIKI permet d'initialiser la rédaction des documents.
+Le WIKI permet d'initialiser la rédaction des documents. Utiliser la syntaxe proposé par Google Code à droite de la fenêtre d'édition.
+
+Conseil : 
+  * Rédiger en dehors (éditeur de texte) en sauvegardant régulièrement)
+  * Plus simple : Utiliser Firefox 3.6 avec l'extension Textarea Cache (https://addons.mozilla.org/en-US/firefox/addon/5761/) qui en cas de crash vous permet de garder le contenu courant de la zone de saisie.
+
+
 
 = Poste de travail développeur =
 
