@@ -5,6 +5,12 @@
 
 == Objet du projet ==
 
+Le projet consiste en la réalisation de modules d'un nouveau framework middleware destiné à un environnement orienté message dans le but d'offrir aux développeurs d'application distribuer les services Event et Time.
+
+Il consiste en deux sous-systèmes :
+  * Le COS Event permettant de gérer des envoie et réceptions de message de manière découplée entre fournisseurs et consommateurs
+  * Le COS Time offrant la synchronisation à une horloge commune aux composants répartis, dont le COS Event.
+
 == Objectif et enjeux du projet ==
 
 == Elevator Statement ==
