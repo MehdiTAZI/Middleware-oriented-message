@@ -1,7 +1,7 @@
 #summary Vision Document du projet (pour draft)
 #labels Phase-Requirements
 
-= POSITIONNELENT =
+= POSITIONNEMENT =
 
 == Objet du projet ==
 
@@ -9,9 +9,9 @@
 
 == Elevator Statement ==
 
-= DECIDEURS ET UTILISATEURS =
+= DÉCIDEURS ET UTILISATEURS =
 
-== Utiisateurs ==
+== Utilisateurs ==
 
 == Décideurs ==
 
@@ -21,9 +21,9 @@
 
 = LIENS ENTRE APPLICATIONS =
 
-= FONCTIONNALITES DU PRODUIT =
+= FONCTIONNALITÉS DU PRODUIT =
 
-= EXIGEENCES SUPPLEMENTAIRES ET CONTRAITES =
+= EXIGENCES SUPPLÉMENTAIRES ET CONTRAINTES =
 
 == FURPS ==
 
@@ -31,4 +31,4 @@
 
 == Contraintes "+" ==
 
-= CRITERES D'EVALUATION =
+= CRITÈRES D'ÉVALUATION =
