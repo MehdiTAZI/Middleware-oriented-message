@@ -1,0 +1,11 @@
+module InterfaceIDL {
+	exception TacheRefusee {
+		string imprimante;
+		string raison;
+	};
+	
+	interface Imprimante {
+		void getInfo(out string imprimante, out string serveur, out string hostname, out short tacheEnCours);
+		short printDocument(in string nomFichier, out long nbOctets) raises(TacheRefusee);
+	};
+};
