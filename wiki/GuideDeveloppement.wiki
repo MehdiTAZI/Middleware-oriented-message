@@ -1,4 +1,4 @@
-#summary Guide de développement. Rêgle SVN apllicables dés maintenant, le reste reste en construction
+#summary Guide de développement. Règles SVN applicables dés maintenant, le reste en construction
 #labels Phase-Implementation
 
 = Documentation projet =
