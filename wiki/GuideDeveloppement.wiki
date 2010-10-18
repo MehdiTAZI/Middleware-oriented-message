@@ -31,6 +31,18 @@ Nom, Version de chaque brique :
   * Maven ?
   * JDK ?
 
+=== Installation de Subclipse ===
+
+  * Ajouter la source http://subclipse.tigris.org/update_1.6.x dans les site update eclipse ou recherchez "subclipse" dans le marketplace (3.6)
+  * Sous linux faire aussi :
+{{{
+sudo apt-get install libsvn-java
+}}}
+et ajouter à la fin de votre ~/opt/eclipse/eclipse.ini :
+{{{
+-Djava.library.path=/usr/lib/jni
+}}}
+
 = Gestion des sources =
 
 == Emplacement ==
