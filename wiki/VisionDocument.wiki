@@ -1,6 +1,8 @@
 #summary Vision Document du projet (pour draft)
 #labels Phase-Requirements
 
+<wiki:toc max_depth="1" />
+
 = POSITIONNEMENT =
 
 == Objet du projet ==
