@@ -1,6 +1,6 @@
 #summary Guide de développement. Règles SVN applicables dés maintenant, le reste en construction
 #labels Phase-Implementation
-
+<wiki:toc max_depth="2" />
 = Documentation projet =
 
 La documentation est disponible sur Google Code :
