@@ -29,6 +29,8 @@ Il consiste en deux sous-systèmes :
 
 = LIENS ENTRE APPLICATIONS =
 
+http://pds2011.googlecode.com/files/liens_entre_applications.png
+
 = FONCTIONNALITÉS DU PRODUIT =
 
 = EXIGENCES SUPPLÉMENTAIRES ET CONTRAINTES =
