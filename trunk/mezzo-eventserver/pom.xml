@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>mezzo-parent</artifactId>
+		<groupId>fr.esiag.mezzodijava</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>fr.esiag.mezzodijava</groupId>
+	<artifactId>mezzo-eventserver</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>mezzo-eventserver</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>mezzo-common</artifactId>
+		</dependency>
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId> hibernate-core </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId> hibernate-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId>hibernate-entitymanager </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence </groupId>
+			<artifactId>hibernate-jpa-2.0-api </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12 </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>c3p0 </groupId>
+			<artifactId>c3p0 </artifactId>
+		</dependency>
+	</dependencies>
+</project>
