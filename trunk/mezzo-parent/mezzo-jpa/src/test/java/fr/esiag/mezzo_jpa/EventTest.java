@@ -32,6 +32,7 @@ public class EventTest extends TestCase
     public void testFindAll()
     {
 
+    	//TODO 
         dao.getAllMessage("test");
 
     }
