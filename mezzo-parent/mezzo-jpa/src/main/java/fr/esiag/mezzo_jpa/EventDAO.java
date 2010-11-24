@@ -25,6 +25,25 @@ public class EventDAO {
 	public  void persistEvent(Event ev){		
 		entityManager.persist(ev);
 	}
+
+	public Event findEventById(Integer id) {
+		try {
+			Event instance = entityManager.find(Event.class, id);
+			return instance;
+		} catch (RuntimeException re) {
+			return null;
+		}
+	}
+	public Event findEventByMessage(String message) {
+		try {
+			Query query = entityManager.createQuery("select e from Event e where e.message like :message");
+			query.setParameter("message", message);
+			Event event = (Event) query.getSingleResult();
+			return event;
+		} catch (RuntimeException re) {
+			return null;
+		}
+	}
 	@SuppressWarnings("unchecked")
 	public synchronized List<String> getAllMessage(String topic)
     {
