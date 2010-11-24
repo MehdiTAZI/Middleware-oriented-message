@@ -5,8 +5,11 @@
 	<persistence-unit name="mezzo-jpa"></persistence-unit>
 	<persistence-unit name="mezzo-jpa-test"
 		transaction-type="RESOURCE_LOCAL">
-		<class>fr.esiag.mezzo_jpa.User</class>
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<class>fr.esiag.mezzo_jpa.Event</class>
+		<class>fr.esiag.mezzo_jpa.Topic</class>
 		<properties>
+		
 			<property name="hibernate.dialect"
 				value="org.hibernate.dialect.HSQLDialect" />
 			<property name="hibernate.connection.driver_class"

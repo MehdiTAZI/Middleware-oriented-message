@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import junit.framework.TestCase;
 
 import org.hibernate.ejb.HibernateEntityManager;
+import org.junit.Test;
 
 public class EventTest extends TestCase
 {
@@ -19,20 +20,31 @@ public class EventTest extends TestCase
     {
     	dao = new EventDAO();
     	
-        InputStream testData = Event.class.getResourceAsStream("/event.db.xml");
+        /*InputStream testData = Event.class.getResourceAsStream("/event.db.xml");
 
         HibernateEntityManager em = (HibernateEntityManager) emf.createEntityManager();
 
         DbUnitDataLoader loader = new DbUnitDataLoader(testData, em.getSession().connection());
 
-        loader.populateTestData();
-        dao.setEntityManager(emf.createEntityManager());
+        loader.populateTestData();*/
+       // dao.setEntityManager(emf.createEntityManager());
+        
+        
+        
+    }
+    @Test
+    public void testPersist(){
+    	Topic topic= new Topic("test");
+        Event event = new Event(topic,"testEvent");
+    	dao.persistTopic(topic);
+    	dao.persistEvent(event);
     }
 
+    @Test
     public void testFindAll()
     {
-
-    	//TODO 
+    	Topic topic= new Topic("test");
+        Event event = new Event(topic,"testEvent");
         dao.getAllMessage("test");
 
     }

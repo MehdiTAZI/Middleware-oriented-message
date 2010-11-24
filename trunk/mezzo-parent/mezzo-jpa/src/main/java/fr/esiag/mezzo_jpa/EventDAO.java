@@ -18,16 +18,19 @@ public class EventDAO {
 	public void setEntityManager(EntityManager em){
 		 entityManager = em;
 	}
+	public  void persistTopic(Topic topic){		
+		entityManager.persist(topic);
+	}
 	
-	public  void persist(String nomTopic, String message){
-		Event event = new Event(nomTopic,message);
-		entityManager.persist(event);
+	public  void persistEvent(Event ev){		
+		entityManager.persist(ev);
 	}
 	@SuppressWarnings("unchecked")
 	public synchronized List<String> getAllMessage(String topic)
     {
 		//TODO : erreur
-		Query q = entityManager.createQuery("SELECT h FROM MESSAGE h WHERE TOPIC = "+topic);
+		Query q = entityManager.createQuery("SELECT h FROM Event h WHERE h.topic like :topic");
+		q.setParameter("topic", topic);
 		return (List<String>)q.getResultList();
     }
 }

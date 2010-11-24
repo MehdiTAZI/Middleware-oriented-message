@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -15,17 +17,20 @@ import javax.persistence.Table;
 @Table(name="EVENT")
 public class Event {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int id;
 	
 	@Column(name="MESSAGE")
 	public String message;
 	
-	@Column(name="TOPIC")
-	public String topic;
+	@ManyToOne
+	@JoinColumn(name="TOPIC")
+	public Topic topic;
 	
 	public Event(){}
-	public Event(String topic, String message){
+	public Event(Topic topic, String message){
 		this.topic = topic;
 		this.message = message;
+		topic.addEvent(this);
 	}
 }
