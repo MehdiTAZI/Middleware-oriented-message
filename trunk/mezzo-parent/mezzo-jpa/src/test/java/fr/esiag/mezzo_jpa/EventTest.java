@@ -27,7 +27,7 @@ public class EventTest extends TestCase
         DbUnitDataLoader loader = new DbUnitDataLoader(testData, em.getSession().connection());
 
         loader.populateTestData();*/
-       // dao.setEntityManager(emf.createEntityManager());
+        dao.setEntityManager(emf.createEntityManager());
         
         
         
@@ -38,14 +38,18 @@ public class EventTest extends TestCase
         Event event = new Event(topic,"testEvent");
     	dao.persistTopic(topic);
     	dao.persistEvent(event);
+    
     }
 
     @Test
-    public void testFindAll()
+    public void testFindByMessage()
     {
     	Topic topic= new Topic("test");
         Event event = new Event(topic,"testEvent");
-        dao.getAllMessage("test");
+        dao.persistTopic(topic);
+    	dao.persistEvent(event);
+    	
+        assertNotNull(dao.findEventByMessage("testEvent"));
 
     }
 }
