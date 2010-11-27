@@ -13,6 +13,7 @@
   <artifactId>mezzo-manager</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
+  <name>mezzo-manager</name>
 
   <properties>
 
