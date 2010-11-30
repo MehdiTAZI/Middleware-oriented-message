@@ -1,0 +1,5 @@
+module appDate {
+	interface Date {
+	string getDate();
+	};
+};
