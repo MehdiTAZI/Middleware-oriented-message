@@ -22,9 +22,9 @@ public class ProxyPushSupplierImpl extends ProxyPushSupplierPOA{
 	private ORB orb;
 	
 	
-	public ProxyPushSupplierImpl(String topic) {
+	public ProxyPushSupplierImpl(String topic,ORB orb) {
 		try{
-		orb=ORB.init(new String[]{}, null);
+		this.orb=orb;
 		NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));
 		
 		canal=CanalHelper.narrow(nc.resolve_str(topic));

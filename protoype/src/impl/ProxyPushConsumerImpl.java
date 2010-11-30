@@ -19,11 +19,11 @@ public class ProxyPushConsumerImpl extends ProxyPushConsumerPOA{
 	private PushSupplier ps;	
 	private ORB orb;
 	
-	public ProxyPushConsumerImpl(String topic) {
+	public ProxyPushConsumerImpl(String topic,ORB orb) {
 		try {
 			
 		
-		orb=ORB.init(new String[]{}, null);
+		this.orb=orb;
 		NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));
 		
 		canal=CanalHelper.narrow(nc.resolve_str(topic));
