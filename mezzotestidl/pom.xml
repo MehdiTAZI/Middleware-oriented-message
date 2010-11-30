@@ -31,9 +31,14 @@
 				<version>1.1</version>
 				<dependencies>
 					<dependency>
-						<groupId>org.jacorb</groupId>
-						<artifactId>jacorb-idl</artifactId>
-						<version>2.2.3-jonas-patch-20071018</version>
+						<groupId>jacorb</groupId>
+						<artifactId>idl</artifactId>
+						<version>2.3.1jboss.patch01-brew</version>
+					</dependency>
+					<dependency>
+						<groupId>logkit</groupId>
+						<artifactId>logkit</artifactId>
+						<version>1.2</version>
 					</dependency>
 				</dependencies>
 				<executions>
@@ -47,18 +52,9 @@
 					<compiler>jacorb</compiler>
 					<sources>
 						<source>
-							<packagePrefix>fr.gouv.esiag.mezzodijava</packagePrefix>
+							<packagePrefix>fr.esiag.mezzodijava.mezzoproto</packagePrefix>
 						</source>
 					</sources>
-				</configuration>
-
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
 				</configuration>
 			</plugin>
 		</plugins>
