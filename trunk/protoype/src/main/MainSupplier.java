@@ -29,7 +29,7 @@ public void run() {
 	try {
 		
 
-	ORB orb=ORB.init(new String[]{}, null);
+	ORB orb=ORB.init(args, null);
 	PushSupplierImpl ps=new PushSupplierImpl();
 	EventChannelImpl ec=new EventChannelImpl(orb);
 	

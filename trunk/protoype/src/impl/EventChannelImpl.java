@@ -36,7 +36,7 @@ public class EventChannelImpl extends EventChannelPOA{
 		try {
 			
 		
-			proxy=new ProxyPushConsumerImpl("MEZZO1");
+			proxy=new ProxyPushConsumerImpl("MEZZO1",orb);
 			
 			
 			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
@@ -60,7 +60,7 @@ public class EventChannelImpl extends EventChannelPOA{
 		try {
 			
 		
-			proxy=new ProxyPushSupplierImpl("MEZZO2");
+			proxy=new ProxyPushSupplierImpl("MEZZO2",orb);
 			
 			
 			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
