@@ -1,0 +1,49 @@
+module CosEvent{
+
+interface Event{
+	attribute string message;
+};
+
+interface MessageListener{
+	void receive(in Event myEvent);
+};
+
+interface PushSupplier: MessageListener {
+	void disconnect();
+	
+};
+
+
+interface PushConsumer {
+	void disconnect();
+	void push (in Event myEvent);
+};
+
+
+
+interface ProxyPushConsumer : PushConsumer{
+
+	void connect(in PushSupplier ps);
+	PushSupplier getSupplier();	
+
+};
+
+interface ProxyPushSupplier:PushSupplier{
+	void connect(in PushConsumer pc);		
+	PushConsumer getConsumer();
+};
+
+interface ChannelManager{
+	ProxyPushSupplier get_Proxy_Push_Supplier(in string topic);
+	ProxyPushConsumer get_Proxy_Push_Consumer(in string topic);
+};
+
+interface Channel {
+	void add_consumer(in ProxyPushConsumer ppc);
+	void add_supplier(in ProxyPushSupplier pps);
+	void remove_consumer(in ProxyPushConsumer ppc);
+	void remove_supplier(in ProxyPushSupplier pps);
+	void add_event(in Event myEvent);
+};
+
+};
