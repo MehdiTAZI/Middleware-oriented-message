@@ -20,8 +20,6 @@ public class MainSupplier extends Thread{
 	}
 	public static void main(String[] args) {
 		new MainSupplier();
-		
-
 	}
 
 @Override
