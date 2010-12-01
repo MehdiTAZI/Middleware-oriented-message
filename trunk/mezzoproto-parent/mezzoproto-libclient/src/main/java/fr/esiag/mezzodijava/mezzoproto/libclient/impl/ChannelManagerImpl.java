@@ -37,8 +37,9 @@ public class ChannelManagerImpl extends ChannelManagerPOA{
 			return ProxyPushConsumerHelper.narrow(poa.servant_to_reference(proxy));
 		
 		} catch (Exception e) {
-			System.out.println("erreur : "+e.getMessage());
-			return null;
+			throw new RuntimeException(e);
+			//System.out.println("erreur : "+e.getMessage());
+			//return null;
 		}
 		
 	}
