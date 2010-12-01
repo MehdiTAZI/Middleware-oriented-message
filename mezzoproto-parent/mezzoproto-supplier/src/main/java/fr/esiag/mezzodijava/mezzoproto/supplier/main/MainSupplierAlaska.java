@@ -3,33 +3,29 @@ package fr.esiag.mezzodijava.mezzoproto.supplier.main;
 import java.util.Vector;
 
 import org.omg.CORBA.ORB;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
-import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManager;
-import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManagerHelper;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.EventHelper;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushConsumer;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.PushSupplierHelper;
 import fr.esiag.mezzodijava.mezzoproto.capteur.Capteur;
 import fr.esiag.mezzodijava.mezzoproto.capteur.XMLFile;
+import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.ChannelManagerImpl;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.PushSupplierImpl;
-import fr.esiag.mezzodijava.mezzoproto.supplier.impl.EventString;
 
-public class MainSupplier extends Thread {
+public class MainSupplierAlaska extends Thread {
 
 	private Capteur capteur;
 	private String[] args;
 
-	public MainSupplier(String[] args) {
+	public MainSupplierAlaska(String[] args) {
 		this.args = args;
 	}
 
 	public static void main(String[] args) {
-		(new MainSupplier(args)).start();
+		(new MainSupplierAlaska(args)).start();
 	}
 
 	public void run() {
@@ -64,8 +60,8 @@ public class MainSupplier extends Thread {
 			}
 
 		} catch (Exception e) {
-			throw new RuntimeException(e);
-			//System.out.println("erreur : " + e.getMessage());
+			//throw new RuntimeException(e);
+			System.out.println("erreur : " + e.getMessage());
 		}
 
 	}

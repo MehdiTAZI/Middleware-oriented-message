@@ -1,9 +1,9 @@
-123   type1  message x 
-243   type12  message y 
-345   type11  message A 
-652   type13  message B 
-831   type8  message C 
-983   type17  message D 
-836   type14  message E 
-909   type62  message F 
-123   type9  message G 
+123 Pression 600 hPa
+243 Pression alerte 2000 hPa 
+345  Pression 1012 hPa
+652  Temperature alerte 100° c
+831  Temperature 10° c 
+983  Temperature 43° c 
+836  Radioactivité 20 Bq 
+909  Radioactivité 60 Bq 
+123  Radioactivité alerte 100 Bq
