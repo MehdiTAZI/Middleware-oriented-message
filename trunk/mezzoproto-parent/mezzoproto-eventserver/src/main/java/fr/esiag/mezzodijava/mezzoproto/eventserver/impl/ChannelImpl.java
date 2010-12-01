@@ -10,6 +10,9 @@ import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelPOA;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.Event;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushConsumer;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushSupplier;
+import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
+import fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.ChannelDAO;
+
 
 
 
@@ -20,6 +23,7 @@ public class ChannelImpl extends ChannelPOA{
 	private String topic;
 	private int capacity;	
 	private Vector<Event> events;
+	private ChannelDAO dao;
 	
 	
 	public ChannelImpl(String topic,int capacity) {
@@ -29,13 +33,13 @@ public class ChannelImpl extends ChannelPOA{
 		ppConsumers=new Vector<ProxyPushConsumer>(capacity);
 		ppSuppliers=new Vector<ProxyPushSupplier>(capacity);				
 		events=new Vector<Event>(200);
-		
+		dao=new ChannelDAO();
 	}
 
 	@Override
 	public void add_consumer(ProxyPushConsumer ppc) {
 		
-		System.out.println("ADD_SUPPLIER");
+		System.out.println("EventServer : Ajout d'un supplier PUSH");
 		if(!ppConsumers.contains(ppc))
 			ppConsumers.add(ppc);
 		
@@ -43,11 +47,16 @@ public class ChannelImpl extends ChannelPOA{
 
 	@Override
 	public void add_event(Event event) {		
-		System.out.println("ADD_EVENt "+ event.message());
+		//System.out.println("ADD_EVENt "+ event.message());
+		System.out.println("EventServer : Ajout d'un evenement dans le canal " + topic + ": " + event.message());
+		EventString es=new EventString(event.message());
+		
+		dao.persist(es);
+		
 		events.add(event);
 		
 		for (ProxyPushSupplier s:ppSuppliers) {	
-			System.out.println("APPEL ADD_EVENt");
+			//System.out.println("APPEL ADD_EVENt");
 			s.receive(event);
 			
 		}
@@ -55,7 +64,8 @@ public class ChannelImpl extends ChannelPOA{
 	}
 	
 	public void add_supplier(ProxyPushSupplier pps) {
-		System.out.println("ADD_CONSUMER");
+		//System.out.println("ADD_CONSUMER");
+		System.out.println("EventServer : Ajout d'un consumer PUSH");
 		if(!ppSuppliers.contains(pps))
 			ppSuppliers.add(pps);
 		
