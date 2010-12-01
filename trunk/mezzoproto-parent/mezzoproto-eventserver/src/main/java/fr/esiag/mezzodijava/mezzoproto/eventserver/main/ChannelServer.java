@@ -21,12 +21,12 @@ public class ChannelServer {
 		ChannelImpl channel=new ChannelImpl(channelName1, 20);				
 		nc.rebind(nc.to_name(channelName1), poa.servant_to_reference(channel));
 		
-	/*	String channelName2="MEZZO-DI-JAVA-2";
+		String channelName2="MEZZO-DI-JAVA-2";
 		ChannelImpl channel2=new ChannelImpl(channelName2, 20);				
 		nc.rebind(nc.to_name(channelName2), poa.servant_to_reference(channel2));
-	*/	
+	
 		System.out.println("channel "+channelName1+" is running...");
-		//System.out.println("channel "+channelName2+" is running...");
+		System.out.println("channel "+channelName2+" is running...");
 		orb.run();
 		} catch (Exception e) {
 			throw new RuntimeException(e);

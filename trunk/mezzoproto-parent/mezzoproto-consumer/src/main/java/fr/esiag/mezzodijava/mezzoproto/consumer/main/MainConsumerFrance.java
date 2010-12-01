@@ -9,23 +9,23 @@ import fr.esiag.mezzodijava.mezzoproto.CosEvent.PushConsumerHelper;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.ChannelManagerImpl;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.PushConsumerImpl;
 
-public class MainConsumer extends Thread{
+public class MainConsumerFrance extends Thread{
 	
 	private String[] args;
 
-	public MainConsumer(String[] args) {
+	public MainConsumerFrance(String[] args) {
 		this.args = args;
 	}
 
 	public static void main(String[] args) {
-		(new MainConsumer(args)).start();
+		(new MainConsumerFrance(args)).start();
 	}
 	
 	public void run() {
 		try {
 			
 		String channelName="MEZZO-DI-JAVA-1";
-		String consumerName="MOROCCO";
+		String consumerName="FRANCE";
 		
 		ORB orb=ORB.init(args, null);
 		PushConsumerImpl pc=new PushConsumerImpl(consumerName);
