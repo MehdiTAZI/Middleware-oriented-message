@@ -22,7 +22,9 @@ public class ProxyPushConsumerImpl extends ProxyPushConsumerPOA {
 	private ORB orb;
 
 	public ProxyPushConsumerImpl(String topic, ORB orb) {
+
 		try {
+
 			this.orb = orb;
 			NamingContextExt nc = NamingContextExtHelper.narrow(orb
 					.resolve_initial_references("NameService"));

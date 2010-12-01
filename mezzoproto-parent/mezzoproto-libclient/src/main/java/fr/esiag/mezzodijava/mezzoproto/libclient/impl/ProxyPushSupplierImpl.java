@@ -20,6 +20,7 @@ public class ProxyPushSupplierImpl extends ProxyPushSupplierPOA {
 	private ORB orb;
 
 	public ProxyPushSupplierImpl(String topic, ORB orb) {
+
 		try {
 			this.orb = orb;
 			NamingContextExt nc = NamingContextExtHelper.narrow(orb
