@@ -18,37 +18,42 @@ import fr.esiag.mezzodijava.mezzoproto.capteur.XMLFile;
 import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.PushSupplierImpl;
 
-public class MainSupplierIndonesia extends Thread {
+public class MainSupplierSudan extends Thread {
 
 	private Capteur capteur;
 	private String[] args;
 
-	public MainSupplierIndonesia(String[] args) {
+	public MainSupplierSudan(String[] args) {
 		this.args = args;
 	}
 
 	public static void main(String[] args) {
-		(new MainSupplierIndonesia(args)).start();
+		(new MainSupplierSudan(args)).start();
 	}
 
 	public void run() {
 
 		try {
 
-			String supplierName = "INDONESIA";
-			String channelName = "MEZZO-DI-JAVA-2";
+			String supplierName = "SUDAN";
+			String channelName = "MEZZO-DI-JAVA-3";
 			ORB orb = ORB.init(args, null);
-
+									
+			
 			PushSupplierImpl ps = new PushSupplierImpl(supplierName);
+
+			
 			
 			NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));
-									
+			
+			
+			
 			ChannelManager ec=ChannelManagerHelper.narrow(nc.resolve_str("ChannelManager"));
-
-			ProxyPushConsumer ppc = ec.get_Proxy_Push_Consumer(channelName);
-			POA poa = POAHelper.narrow(orb
-					.resolve_initial_references("RootPOA"));
+			
+			POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 			poa.the_POAManager().activate();
+			ProxyPushConsumer ppc = ec.get_Proxy_Push_Consumer(channelName);
+			
 
 			ppc.connect(PushSupplierHelper.narrow(poa.servant_to_reference(ps)));
 			System.out.println("le supplier est connecte au canal "

@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzoproto.libclient.impl;
+package fr.esiag.mezzodijava.mezzoproto.eventserver.impl;
 
 import org.omg.CORBA.ORB;
 import org.omg.CosNaming.NamingContextExt;
