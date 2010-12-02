@@ -33,9 +33,14 @@ public class ChannelImpl extends ChannelPOA{
 		ppConsumers=new Vector<ProxyPushConsumer>(capacity);
 		ppSuppliers=new Vector<ProxyPushSupplier>(capacity);				
 		events=new Vector<Event>(200);
-		dao=new ChannelDAO();
+		dao=ChannelDAO.getInstance();
 	}
 
+	/**
+	 * Ajouter un consumers à la liste des consumers dans le canal.
+	 * @param event un évènement (peut être String, Integer ou Double)
+	 * @see fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelOperations#add_event(fr.esiag.mezzodijava.mezzoproto.CosEvent.Event)
+	 */
 	@Override
 	public void add_consumer(ProxyPushConsumer ppc) {
 		
@@ -45,8 +50,13 @@ public class ChannelImpl extends ChannelPOA{
 		
 	}
 
+	/**
+	 * Ajouter un évènement à la liste des évènement dans le canal.
+	 * @param event un évènement (peut être String, Integer ou Double)
+	 * @see fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelOperations#add_event(fr.esiag.mezzodijava.mezzoproto.CosEvent.Event)
+	 */
 	@Override
-	public void add_event(Event event) {		
+	public synchronized void add_event(Event event) {		
 		//System.out.println("ADD_EVENt "+ event.message());
 		System.out.println("EventServer : Ajout d'un evenement dans le canal " + topic + ": " + event.message());
 		EventString es=new EventString(event.message());
@@ -63,6 +73,11 @@ public class ChannelImpl extends ChannelPOA{
 		
 	}
 	
+	/**
+	 * Ajouter un supplier à la liste des supplier dans le canal.
+	 * @param event un évènement (peut être String, Integer ou Double)
+	 * @see fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelOperations#add_event(fr.esiag.mezzodijava.mezzoproto.CosEvent.Event)
+	 */
 	public void add_supplier(ProxyPushSupplier pps) {
 		//System.out.println("ADD_CONSUMER");
 		System.out.println("EventServer : Ajout d'un consumer PUSH");

@@ -1,12 +1,15 @@
 package fr.esiag.mezzodijava.mezzoproto.consumer.main;
 
 import org.omg.CORBA.ORB;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
+import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManager;
+import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManagerHelper;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushSupplier;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.PushConsumerHelper;
-import fr.esiag.mezzodijava.mezzoproto.libclient.impl.ChannelManagerImpl;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.PushConsumerImpl;
 
 public class MainConsumerFrance extends Thread{
@@ -24,12 +27,16 @@ public class MainConsumerFrance extends Thread{
 	public void run() {
 		try {
 			
-		String channelName="MEZZO-DI-JAVA-1";
+		String channelName="MEZZO-DI-JAVA-2";
 		String consumerName="FRANCE";
 		
 		ORB orb=ORB.init(args, null);
 		PushConsumerImpl pc=new PushConsumerImpl(consumerName);
-		ChannelManagerImpl ec=new ChannelManagerImpl(orb);
+		
+		NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));			
+		
+		ChannelManager ec=ChannelManagerHelper.narrow(nc.resolve_str("ChannelManager"));
+
 		
 		ProxyPushSupplier ppc=ec.get_Proxy_Push_Supplier(channelName);
 		

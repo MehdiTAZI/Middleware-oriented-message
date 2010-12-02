@@ -23,4 +23,12 @@ import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
 // Regardez du c�t� de la classe m�re 
 public class ChannelDAO extends JpaDAO<Integer, EventString> {
 
+	private static ChannelDAO instance = null;
+	
+	public static synchronized ChannelDAO getInstance() {
+		if (instance == null) {
+			instance = new ChannelDAO();
+		}
+		return instance;
+	}
 }
