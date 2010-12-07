@@ -1,7 +1,7 @@
 module CosEvent{
 
-interface Event{
-	attribute string message;
+struct Event{
+	string message;
 };
 
 interface MessageListener{

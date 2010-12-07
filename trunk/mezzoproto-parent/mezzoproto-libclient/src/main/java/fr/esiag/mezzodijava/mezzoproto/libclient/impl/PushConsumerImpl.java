@@ -22,7 +22,7 @@ public class PushConsumerImpl extends PushConsumerPOA{
 	
 	public void push(Event event) {
 		
-		System.out.println("le consumer "+ name+ " � recu le message { "+ event.message()+" }");
+		System.out.println("le consumer "+ name+ " � recu le message { "+ event.message+" }");
 		
 	}
 

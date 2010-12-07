@@ -10,7 +10,7 @@ import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelPOA;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.Event;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushConsumer;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushSupplier;
-import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
+import fr.esiag.mezzodijava.mezzoproto.eventserver.model.EventString;
 import fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.ChannelDAO;
 
 
@@ -58,8 +58,8 @@ public class ChannelImpl extends ChannelPOA{
 	@Override
 	public synchronized void add_event(Event event) {		
 		//System.out.println("ADD_EVENt "+ event.message());
-		System.out.println("EventServer : Ajout d'un evenement dans le canal " + topic + ": " + event.message());
-		EventString es=new EventString(event.message());
+		System.out.println("EventServer : Ajout d'un evenement dans le canal " + topic + ": " + event.message);
+		EventString es=new EventString(event.message);
 		
 		dao.persist(es);
 		

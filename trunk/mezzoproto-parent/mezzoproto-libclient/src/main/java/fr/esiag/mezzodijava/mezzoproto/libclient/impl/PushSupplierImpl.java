@@ -16,7 +16,7 @@ public class PushSupplierImpl extends PushSupplierPOA{
 	
 	
 	public void receive(Event event) {
-		System.out.println("le supplier "+name+" � envoy� le message envoy� est : "+event.message());
+		System.out.println("le supplier "+name+" � envoy� le message envoy� est : "+event.message);
 		
 	}
 	

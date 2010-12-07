@@ -10,12 +10,11 @@ import org.omg.PortableServer.POAHelper;
 
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManager;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ChannelManagerHelper;
-import fr.esiag.mezzodijava.mezzoproto.CosEvent.EventHelper;
+import fr.esiag.mezzodijava.mezzoproto.CosEvent.Event;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushConsumer;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.PushSupplierHelper;
 import fr.esiag.mezzodijava.mezzoproto.capteur.Capteur;
 import fr.esiag.mezzodijava.mezzoproto.capteur.XMLFile;
-import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
 import fr.esiag.mezzodijava.mezzoproto.libclient.impl.PushSupplierImpl;
 
 public class MainSupplierIndonesia extends Thread {
@@ -59,8 +58,9 @@ public class MainSupplierIndonesia extends Thread {
 
 			int nb = 0;
 			while (true) {
-				ppc.push(EventHelper.narrow(poa
-						.servant_to_reference(new EventString(data.get(nb++)))));
+				Event event = new Event();
+				event.message = data.get(nb++);
+				ppc.push(event);
 				Thread.sleep(1000);
 				if (nb == 6)
 					nb = 0;

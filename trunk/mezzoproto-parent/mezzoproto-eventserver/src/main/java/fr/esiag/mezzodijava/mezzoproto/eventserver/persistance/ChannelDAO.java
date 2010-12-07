@@ -17,7 +17,7 @@
  */
 package fr.esiag.mezzodijava.mezzoproto.eventserver.persistance;
 
-import fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString;
+import fr.esiag.mezzodijava.mezzoproto.eventserver.model.EventString;
 
 // LGE - Vive la g�n�ricit�
 // Regardez du c�t� de la classe m�re 
