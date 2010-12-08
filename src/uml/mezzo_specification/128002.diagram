@@ -1,0 +1,14 @@
+format 76
+
+subject 128002 "CosEvent"
+  xyzwh 128 12 2000 321 241
+usecasecanvas 128130 usecase_ref 128002 // UC03 : Donner un Event (push)
+  xyzwh 263 60 3005 64 32 label_xy 221 92
+end
+classcanvas 128258 class_ref 128002 // Supplier
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 21 46 2000
+end
+line 128386 ----
+  from ref 128258 z 3006 to ref 128130
+end
