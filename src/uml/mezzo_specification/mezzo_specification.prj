@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 7
+  revision 8
   modified_by 3 "Ordi"
 
 
@@ -92,7 +92,7 @@ format 76
       size A4
     end
 
-    class 134530 "EventServer"
+    class 134530 "EventSystem"
       visibility package 
       cpp_decl ""
       java_decl ""
