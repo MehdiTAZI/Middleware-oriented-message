@@ -1,39 +1,58 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventServer
-  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
-classinstance 128130 class_ref 134658 // Consummer
-  name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
-durationcanvas 128258 classinstance_ref 128130 // :Consummer
-  xyzwh 61 76 2010 11 329
+classinstance 128002 class_ref 134530 // EventSystem
+  name ""   xyz 420.139 5.15628 2000 life_line_z 2000
+classinstance 128130 class_ref 134658 // Consumer
+  name ""   xyz 36.6337 3.76488 2000 life_line_z 2000
+textcanvas 128259 "processEvent"
+  xyzwh 88.6 303.8 2000 56 11
+textcanvas 128387 "processEvent"
+  xyzwh 92.4 363.8 2000 56 11
+textcanvas 128515 "processEvent"
+  xyzwh 92.2 429 2000 56 11
+durationcanvas 128258 classinstance_ref 128130 // :Consumer
+  xyzwh 55 76.6 2010 11 401
   overlappingdurationcanvas 131074
-    xyzwh 67 133 2020 11 26
+    xyzwh 61 132.5 2020 11 26
   end
   overlappingdurationcanvas 131842
-    xyzwh 67 283 2020 11 25
+    xyzwh 61 270.7 2020 11 54
+    overlappingdurationcanvas 128003
+      xyzwh 67 293 2030 11 25
+    end
   end
   overlappingdurationcanvas 132354
-    xyzwh 67 312 2020 11 25
+    xyzwh 61 340.8 2020 11 51
+    overlappingdurationcanvas 128643
+      xyzwh 67 358 2030 11 25
+    end
   end
   overlappingdurationcanvas 132610
-    xyzwh 67 344 2020 11 32
+    xyzwh 61 401.3 2020 11 54
+    overlappingdurationcanvas 128899
+      xyzwh 67 420 2030 11 25
+    end
   end
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventServer
-  xyzwh 451 72 2010 11 48
+durationcanvas 128386 classinstance_ref 128002 // :EventSystem
+  xyzwh 451 71.5 2010 11 48
 end
-durationcanvas 129026 classinstance_ref 128002 // :EventServer
-  xyzwh 451 175 2010 11 38
+durationcanvas 129026 classinstance_ref 128002 // :EventSystem
+  xyzwh 451 175.1 2010 11 38
 end
-durationcanvas 130818 classinstance_ref 128002 // :EventServer
-  xyzwh 451 390 2010 11 34
+durationcanvas 130818 classinstance_ref 128002 // :EventSystem
+  xyzwh 451 450.6 2010 11 41
 end
-durationcanvas 131330 classinstance_ref 128002 // :EventServer
-  xyzwh 451 225 2010 11 34
+durationcanvas 131330 classinstance_ref 128002 // :EventSystem
+  xyzwh 451 222.5 2010 11 44
 end
-durationcanvas 131714 classinstance_ref 128002 // :EventServer
-  xyzwh 451 283 2010 11 88
+durationcanvas 131714 classinstance_ref 128002 // :EventSystem
+  xyzwh 451 277.4 2010 11 153
 end
+reflexivemsg 128131 synchronous
+  to durationcanvas_ref 128003
+  yz 293 2035 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
@@ -46,6 +65,14 @@ msg 128642 return
   yz 109 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 213 96
+reflexivemsg 128771 synchronous
+  to durationcanvas_ref 128643
+  yz 358 2035 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+reflexivemsg 129027 synchronous
+  to durationcanvas_ref 128899
+  yz 420 2035 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
@@ -61,20 +88,20 @@ msg 129282 return
 msg 130946 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 130818
-  yz 394 2015 explicitmsg "disconnect"
+  yz 468 2015 explicitmsg "disconnect"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 238 381
+  label_xy 238 456
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
-  yz 133 2025 explicitmsg "createCallback"
+  yz 132 2025 explicitmsg "createCallback"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 98 132
 msg 131458 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131330
-  yz 227 3005 explicitmsg "register()"
+  yz 221 3005 explicitmsg "register()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 241 214
+  label_xy 241 208
 msg 131586 return
   from durationcanvas_ref 131330
   to durationcanvas_ref 128258
@@ -84,19 +111,19 @@ msg 131586 return
 msg 131970 asynchronous
   from durationcanvas_ref 131714
   to durationcanvas_ref 131842
-  yz 283 2025 explicitmsg "push(Event)"
+  yz 278 2025 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 235 270
+  label_xy 235 265
 msg 132482 asynchronous
   from durationcanvas_ref 131714
   to durationcanvas_ref 132354
-  yz 312 2025 explicitmsg "push(Event)"
+  yz 348 2025 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 235 299
+  label_xy 235 333
 msg 132738 asynchronous
   from durationcanvas_ref 131714
   to durationcanvas_ref 132610
-  yz 344 2025 explicitmsg "push(Event)"
+  yz 406 2025 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 235 331
+  label_xy 235 394
 end

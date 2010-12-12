@@ -1,29 +1,29 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventServer
+classinstance 128002 class_ref 134530 // EventSystem
   name ""   xyz 420.939 4.95628 2000 life_line_z 2000
-classinstance 128130 class_ref 134658 // Consummer
+classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
-note 132098 "Le Consumer est tombÃ© ou inaccessible"
+note 132098 "Le Consumer est tombé ou inaccessible"
   xyzwh 141 267 2000 227 35
 note 132610 "EXCEPTION : Network Error : Time Out / Refused"
   xyzwh 108 342 2000 265 35
-durationcanvas 128258 classinstance_ref 128130 // :Consummer
-  xyzwh 61 74 2010 11 217
+durationcanvas 128258 classinstance_ref 128130 // :Consumer
+  xyzwh 55 74 2010 11 217
   overlappingdurationcanvas 131074
-    xyzwh 67 133 2020 11 26
+    xyzwh 61 133 2020 11 26
   end
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventServer
+durationcanvas 128386 classinstance_ref 128002 // :EventSystem
   xyzwh 451 72 2010 11 48
 end
-durationcanvas 129026 classinstance_ref 128002 // :EventServer
+durationcanvas 129026 classinstance_ref 128002 // :EventSystem
   xyzwh 451 175 2010 11 38
 end
-durationcanvas 131330 classinstance_ref 128002 // :EventServer
+durationcanvas 131330 classinstance_ref 128002 // :EventSystem
   xyzwh 451 225 2010 11 34
 end
-durationcanvas 132226 classinstance_ref 128002 // :EventServer
+durationcanvas 132226 classinstance_ref 128002 // :EventSystem
   xyzwh 451 332 2010 11 40
 end
 lostfoundmsgsupport 132354 xyz 74 335 2015
