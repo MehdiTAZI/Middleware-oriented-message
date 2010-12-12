@@ -1,0 +1,26 @@
+format 76
+
+classcanvas 128132 class_ref 128132 // EventChannel
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 130 11 2000
+end
+classcanvas 128260 class_ref 128260 // Consumer
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 23 97 2000
+end
+classcanvas 128516 class_ref 128388 // PushSupplier
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 13 15 2000
+end
+relationcanvas 128644 relation_ref 128132 // <association>
+  from ref 128516 z 2001 to ref 128132
+  no_role_a no_role_b
+  multiplicity_a_pos 114 41 3000 multiplicity_b_pos 97 41 3000
+end
+relationcanvas 128900 relation_ref 128388 // <association>
+  decenter_begin 529
+  from ref 128516 z 2001 to ref 128260
+  no_role_a no_role_b
+  multiplicity_a_pos 37 80 3000 multiplicity_b_pos 38 63 3000
+end
+end
