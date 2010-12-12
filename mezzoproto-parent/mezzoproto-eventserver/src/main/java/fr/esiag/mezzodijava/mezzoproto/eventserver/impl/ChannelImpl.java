@@ -12,6 +12,7 @@ import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushConsumer;
 import fr.esiag.mezzodijava.mezzoproto.CosEvent.ProxyPushSupplier;
 import fr.esiag.mezzodijava.mezzoproto.eventserver.model.EventString;
 import fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.ChannelDAO;
+import fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.ChannelJpaDAO;
 
 
 
@@ -25,15 +26,22 @@ public class ChannelImpl extends ChannelPOA{
 	private Vector<Event> events;
 	private ChannelDAO dao;
 	
+	public void setDao(ChannelDAO dao){
+		this.dao = dao;
+	}
 	
 	public ChannelImpl(String topic,int capacity) {
+		this(topic,capacity,ChannelJpaDAO.getInstance());
+	}
+	
+    public ChannelImpl(String topic,int capacity,ChannelDAO dao) {
 		
 		this.capacity=capacity;
 		this.topic=topic;
 		ppConsumers=new Vector<ProxyPushConsumer>(capacity);
 		ppSuppliers=new Vector<ProxyPushSupplier>(capacity);				
 		events=new Vector<Event>(200);
-		dao=ChannelDAO.getInstance();
+		this.dao=dao;
 	}
 
 	/**

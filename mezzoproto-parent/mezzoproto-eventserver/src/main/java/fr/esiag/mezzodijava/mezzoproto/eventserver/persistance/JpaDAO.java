@@ -9,7 +9,7 @@ import javax.persistence.Query;
 
 // LGE - Classe m�re de tous les DAO
 // Toutes les m�thodes sont synchronized...
-public abstract class JpaDAO<K, E> {
+public abstract class JpaDAO<K, E> implements DAO<K, E> {
 	protected Class<E> entityClass;
 
 	protected EntityManager entityManager;
@@ -24,6 +24,10 @@ public abstract class JpaDAO<K, E> {
 		entityManager = EntityManagerUtil.getEntityManager();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#persist(E)
+	 */
+	@Override
 	public synchronized void persist(E entity) {
 		EntityManagerUtil.initEntityManagerFactory();
 		EntityTransaction tx = entityManager.getTransaction();
@@ -33,6 +37,10 @@ public abstract class JpaDAO<K, E> {
 		EntityManagerUtil.closeEntityManager();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#remove(E)
+	 */
+	@Override
 	public synchronized void remove(E entity) {
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
@@ -40,6 +48,10 @@ public abstract class JpaDAO<K, E> {
 		tx.commit();
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#merge(E)
+	 */
+	@Override
 	public synchronized E merge(E entity) {
 		EntityTransaction tx = entityManager.getTransaction();
 		tx.begin();
@@ -48,19 +60,35 @@ public abstract class JpaDAO<K, E> {
 		return entity;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#refresh(E)
+	 */
+	@Override
 	public synchronized void refresh(E entity) {
 		entityManager.refresh(entity);
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#findById(K)
+	 */
+	@Override
 	public synchronized E findById(K id) {
 		return entityManager.find(entityClass, id);
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#flush(E)
+	 */
+	@Override
 	public synchronized E flush(E entity) {
 		entityManager.flush();
 		return entity;
 	}
 
+	/* (non-Javadoc)
+	 * @see fr.esiag.mezzodijava.mezzoproto.eventserver.persistance.DAO#findAll()
+	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public synchronized List<E> findAll() {
 		Query q = entityManager.createQuery("SELECT h FROM "
