@@ -1,7 +1,7 @@
 format 76
 "mezzo_specification"
-  revision 6
-  modified_by 2 "Franck"
+  revision 7
+  modified_by 3 "Ordi"
 
 
   
@@ -139,7 +139,7 @@ format 76
 	show_infonote default drawing_language default show_stereotype_properties default
       end
 
-      class 134658 "Consummer"
+      class 134658 "Consumer"
 	visibility package stereotype "actor"
 	cpp_decl ""
 	java_decl ""

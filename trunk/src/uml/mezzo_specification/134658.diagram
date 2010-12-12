@@ -1,33 +1,42 @@
 format 76
 
 classinstance 128002 class_ref 134530 // EventServer
-  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
-classinstance 128130 class_ref 134658 // Consummer
-  name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
-durationcanvas 128258 classinstance_ref 128130 // :Consummer
-  xyzwh 61 76 2010 11 309
+  name ""   xyz 421.139 4.75628 2000 life_line_z 2000
+classinstance 128130 class_ref 134658 // Consumer
+  name ""   xyz 41.9337 4.86488 2000 life_line_z 2000
+textcanvas 128387 "processEvent"
+  xyzwh 97 318 2020 71 11
+durationcanvas 128258 classinstance_ref 128130 // :Consumer
+  xyzwh 60 76 2010 11 309
   overlappingdurationcanvas 131074
-    xyzwh 67 133 2020 11 26
+    xyzwh 66 133 2020 11 26
   end
   overlappingdurationcanvas 131842
-    xyzwh 67 286 2020 11 25
+    xyzwh 66 286.4 2020 11 25
+  end
+  overlappingdurationcanvas 128003
+    xyzwh 66 320.6 2020 11 25
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :EventServer
-  xyzwh 451 72 2010 11 48
+  xyzwh 449 72 2010 11 48
 end
 durationcanvas 129026 classinstance_ref 128002 // :EventServer
-  xyzwh 451 175 2010 11 38
+  xyzwh 449 175.4 2010 11 38
 end
 durationcanvas 130818 classinstance_ref 128002 // :EventServer
-  xyzwh 451 348 2010 11 34
+  xyzwh 449 348.2 2010 11 34
 end
 durationcanvas 131330 classinstance_ref 128002 // :EventServer
-  xyzwh 451 225 2010 11 34
+  xyzwh 449 224.8 2010 11 34
 end
 durationcanvas 131714 classinstance_ref 128002 // :EventServer
-  xyzwh 451 284 2010 11 40
+  xyzwh 449 284.4 2010 11 40
 end
+reflexivemsg 128131 synchronous
+  to durationcanvas_ref 128003
+  yz 320 2025 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
@@ -62,7 +71,7 @@ reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 133 2025 explicitmsg "createCallback"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 98 132
+  label_xy 96 130
 msg 131458 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131330
