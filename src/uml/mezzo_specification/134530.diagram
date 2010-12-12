@@ -1,0 +1,18 @@
+format 76
+
+subject 128002 "EventServer"
+  xyzwh 129 10 2000 312 138
+classcanvas 128642 class_ref 134658 // Consummer
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz -328 123 2000
+end
+usecasecanvas 128770 usecase_ref 134530 // UC02 : S'abonner a un Channel (push)
+  xyzwh 249 63 3005 64 32 label_xy 190 95
+end
+classcanvas 128898 class_ref 134658 // Consummer
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 20 48 2000
+end
+line 129026 ----
+  from ref 128898 z 3006 to ref 128770
+end

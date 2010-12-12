@@ -1,0 +1,48 @@
+format 76
+
+classinstance 128002 class_ref 134530 // EventServer
+  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
+classinstance 128130 class_ref 134658 // Consummer
+  name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128130 // :Consummer
+  xyzwh 61 75 2010 11 151
+  overlappingdurationcanvas 131074
+    xyzwh 67 133 2020 11 26
+  end
+end
+durationcanvas 128386 classinstance_ref 128002 // :EventServer
+  xyzwh 451 72 2010 11 48
+end
+durationcanvas 129026 classinstance_ref 128002 // :EventServer
+  xyzwh 451 175 2010 11 38
+end
+msg 128514 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 75 2015 explicitmsg "resolveChannel(EventServer adress, Topic)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 144 60
+msg 128642 return
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128258
+  yz 108 2020 explicitmsg "Channel reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 213 95
+msg 129154 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 129026
+  yz 178 2015 explicitmsg "connect(Channel reference)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 198 165
+msg 129282 return
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 128258
+  yz 201 2015 explicitmsg "EXCEPTION : Cannot Connect to Channel : Time Out / Connection Refused"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 80 189
+reflexivemsg 131202 synchronous
+  to durationcanvas_ref 131074
+  yz 133 2025 explicitmsg "createCallback"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 98 132
+end
