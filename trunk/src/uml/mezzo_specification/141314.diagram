@@ -1,13 +1,13 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventSystem
-  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
+classinstance 128002 class_ref 141698 // Framework
+  name ""   xyz 425.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
   xyzwh 57 76 2010 11 57
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventSystem
+durationcanvas 128386 classinstance_ref 128002 // :Framework
   xyzwh 453 72 2010 11 48
 end
 msg 128514 synchronous

@@ -1,0 +1,18 @@
+format 76
+
+subject 128002 "EventServer"
+  xyzwh 113 9 2000 312 138
+classcanvas 128642 class_ref 134658 // Consumer
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz -328 123 2000
+end
+usecasecanvas 129282 usecase_ref 128002 // UC03 : Donner un Event (push)
+  xyzwh 238 54 3005 64 32 label_xy 196 86
+end
+classcanvas 129410 class_ref 141570 // Supplier
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 26 38 2000
+end
+line 129538 ----
+  from ref 129410 z 3006 to ref 129282
+end

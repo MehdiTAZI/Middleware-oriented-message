@@ -1,7 +1,7 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventSystem
-  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
+classinstance 128002 class_ref 141698 // Framework
+  name ""   xyz 425.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 37.4337 4 2000 life_line_z 2000
 textcanvas 128259 "processEvent"
@@ -18,19 +18,19 @@ durationcanvas 128258 classinstance_ref 128130 // :Consumer
     end
   end
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventSystem
+durationcanvas 128386 classinstance_ref 128002 // :Framework
   xyzwh 453 71 2010 11 48
 end
-durationcanvas 129026 classinstance_ref 128002 // :EventSystem
+durationcanvas 129026 classinstance_ref 128002 // :Framework
   xyzwh 453 174 2010 11 38
 end
-durationcanvas 131330 classinstance_ref 128002 // :EventSystem
+durationcanvas 131330 classinstance_ref 128002 // :Framework
   xyzwh 453 224 2010 11 34
 end
-durationcanvas 131714 classinstance_ref 128002 // :EventSystem
+durationcanvas 131714 classinstance_ref 128002 // :Framework
   xyzwh 453 283 2010 11 40
 end
-durationcanvas 132098 classinstance_ref 128002 // :EventSystem
+durationcanvas 132098 classinstance_ref 128002 // :Framework
   xyzwh 453 336 2010 11 45
 end
 reflexivemsg 128131 synchronous

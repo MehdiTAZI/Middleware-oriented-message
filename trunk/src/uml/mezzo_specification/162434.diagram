@@ -1,0 +1,40 @@
+format 76
+
+classinstance 128002 class_ref 141570 // Supplier
+  name ""   xyz 132 4 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // Framework
+  name ""   xyz 470 4 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :Supplier
+  xyzwh 149 53 2010 11 99
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 498 51 2010 11 39
+end
+durationcanvas 131586 classinstance_ref 128130 // :Framework
+  xyzwh 498 108 2010 11 36
+end
+msg 130306 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 53 2015 explicitmsg "obtain_reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 244 39
+msg 131458 return
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128258
+  yz 79 2015 explicitmsg "Channel Reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 283 66
+msg 131714 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 131586
+  yz 108 2015 explicitmsg "connect"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 309 95
+msg 131842 return
+  from durationcanvas_ref 131586
+  to durationcanvas_ref 128258
+  yz 133 2015 explicitmsg "EXCEPTION : MaximalConnectionReached"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 226 120
+end

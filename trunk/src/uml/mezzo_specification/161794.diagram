@@ -1,0 +1,40 @@
+format 76
+
+classinstance 128002 class_ref 141570 // Supplier
+  name ""   xyz 104 5 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // Framework
+  name ""   xyz 508 15 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :Supplier
+  xyzwh 121 90 2010 11 110
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 536 86 2010 11 33
+end
+durationcanvas 130178 classinstance_ref 128130 // :Framework
+  xyzwh 536 157 2010 11 37
+end
+msg 129154 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 90 2015 explicitmsg "obtain_refernce"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 204 76
+msg 129666 return
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128258
+  yz 108 3005 explicitmsg "Channel Reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 288 95
+msg 130306 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 130178
+  yz 157 2015 explicitmsg "connect"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 311 144
+msg 130434 return
+  from durationcanvas_ref 130178
+  to durationcanvas_ref 128258
+  yz 182 2015 explicitmsg "EXCEPTION : CannotConnectToChannel"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 236 169
+end
