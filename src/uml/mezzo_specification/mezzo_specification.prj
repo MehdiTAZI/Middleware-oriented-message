@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 16
+  revision 17
   modified_by 2 "Franck"
 
 
@@ -40,7 +40,7 @@ format 76
   
   ncouples 1
   key "html dir" value "c:/mezzodev/MEZ-20101213-SPEC-DSS/"
-  usecaseview 128002 "mezzo_usecase"
+  usecaseview 128002 "SPECIFICATION : DIAGRAMMES DE SEQUENCE SYSTEME"
     //use case diagram settings
     package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
     //sequence diagram settings
