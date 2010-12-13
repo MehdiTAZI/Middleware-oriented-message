@@ -1,7 +1,7 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventSystem
-  name ""   xyz 420.939 4.95628 2000 life_line_z 2000
+classinstance 128002 class_ref 141698 // Framework
+  name ""   xyz 425.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
 note 132098 "Le Consumer est tombe ou inaccessible"
@@ -16,13 +16,13 @@ durationcanvas 128258 classinstance_ref 128130 // :Consumer
     xyzwh 63 133 2020 11 26
   end
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventSystem
+durationcanvas 128386 classinstance_ref 128002 // :Framework
   xyzwh 453 72 2010 11 48
 end
-durationcanvas 129026 classinstance_ref 128002 // :EventSystem
+durationcanvas 129026 classinstance_ref 128002 // :Framework
   xyzwh 453 175 2010 11 38
 end
-durationcanvas 132226 classinstance_ref 128002 // :EventSystem
+durationcanvas 132226 classinstance_ref 128002 // :Framework
   xyzwh 453 332 2010 11 44
   overlappingdurationcanvas 133250
     xyzwh 459 345 2020 11 25

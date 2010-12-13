@@ -1,0 +1,86 @@
+format 76
+
+classinstance 128002 class_ref 141570 // Supplier
+  name ""   xyz 113 4 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // Framework
+  name ""   xyz 557 7 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :Supplier
+  xyzwh 130 68 2010 11 273
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 585 67 2010 11 41
+end
+durationcanvas 131714 classinstance_ref 128130 // :Framework
+  xyzwh 585 128 2010 11 47
+end
+durationcanvas 132098 classinstance_ref 128130 // :Framework
+  xyzwh 585 197 2010 11 33
+end
+durationcanvas 132738 classinstance_ref 128130 // :Framework
+  xyzwh 585 260 2010 11 38
+  overlappingdurationcanvas 132994
+    xyzwh 591 267 2020 11 25
+  end
+end
+durationcanvas 133250 classinstance_ref 128130 // :Framework
+  xyzwh 585 306 2010 11 37
+end
+msg 130434 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 69 2015 explicitmsg "obtain_reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 328 55
+msg 131586 return
+  from durationcanvas_ref 128386
+  to durationcanvas_ref 128258
+  yz 97 3005 explicitmsg "Channel Reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 317 84
+msg 131842 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 131714
+  yz 130 2015 explicitmsg "connect(Channel reference)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 300 119
+msg 131970 return
+  from durationcanvas_ref 131714
+  to durationcanvas_ref 128258
+  yz 162 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 132226 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 132098
+  yz 200 2015 explicitmsg "connect(Channel reference)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 297 187
+msg 132354 return
+  from durationcanvas_ref 132098
+  to durationcanvas_ref 128258
+  yz 219 2020 explicitmsg "EXCEPTION : AlreadyConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 285 206
+msg 132866 asynchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 132738
+  yz 262 2015 explicitmsg "push(Event)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 334 249
+reflexivemsg 133122 synchronous
+  to durationcanvas_ref 132994
+  yz 267 2025 explicitmsg "updateListeEvents"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 623 268
+msg 133378 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 133250
+  yz 306 2015 explicitmsg "connect(Channel reference)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 297 293
+msg 133506 return
+  from durationcanvas_ref 133250
+  to durationcanvas_ref 128258
+  yz 330 3005 explicitmsg "EXCEPTION : AlreadyConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 285 317
+end
