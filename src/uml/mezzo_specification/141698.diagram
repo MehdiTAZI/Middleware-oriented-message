@@ -4,70 +4,55 @@ classinstance 128002 class_ref 134530 // EventSystem
   name ""   xyz 420.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
-note 132098 "Le Consumer est tombé ou inaccessible"
-  xyzwh 141 267 2000 227 35
-note 132610 "EXCEPTION : Network Error : Time Out / Refused"
+note 132098 "Le Consumer est tombe ou inaccessible"
+  xyzwh 105 246 2000 227 35
+note 132610 "EXCEPTION : ConsummerUnreachable : Time Out / Refused"
   xyzwh 108 342 2000 265 35
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 74 2010 11 217
+  xyzwh 57 73 2010 11 164
   overlappingdurationcanvas 131074
-    xyzwh 61 133 2020 11 26
+    xyzwh 63 133 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :EventSystem
-  xyzwh 451 72 2010 11 48
+  xyzwh 453 72 2010 11 48
 end
 durationcanvas 129026 classinstance_ref 128002 // :EventSystem
-  xyzwh 451 175 2010 11 38
-end
-durationcanvas 131330 classinstance_ref 128002 // :EventSystem
-  xyzwh 451 225 2010 11 34
+  xyzwh 453 175 2010 11 38
 end
 durationcanvas 132226 classinstance_ref 128002 // :EventSystem
-  xyzwh 451 332 2010 11 40
+  xyzwh 453 332 2010 11 40
 end
 lostfoundmsgsupport 132354 xyz 74 335 2015
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 74 2015 explicitmsg "resolveChannel(EventServer adress, Topic)"
+  yz 73 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 144 59
+  label_xy 201 60
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 107 2020 explicitmsg "Channel reference"
+  yz 106 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 213 94
+  label_xy 213 93
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 177 2015 explicitmsg "connect(Channel reference)"
+  yz 176 2015 explicitmsg "connect(Channel reference, Callback)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 198 164
+  label_xy 198 163
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 200 2015 explicitmsg "connection"
+  yz 199 2015 explicitmsg "connection"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 237 187
+  label_xy 237 186
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 133 2025 explicitmsg "createCallback"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 98 132
-msg 131458 synchronous
-  from durationcanvas_ref 128258
-  to durationcanvas_ref 131330
-  yz 225 3005 explicitmsg "register()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 241 212
-msg 131586 return
-  from durationcanvas_ref 131330
-  to durationcanvas_ref 128258
-  yz 246 3010 explicitmsg "ok"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 255 233
 msg 132482 lost_synchronous
   from durationcanvas_ref 132226
   to lostfoundmsgsupport_ref 132354
@@ -76,6 +61,6 @@ msg 132482 lost_synchronous
   label_xy 237 320
 line 132738 -_-_
   from ref 132610 z 2011 to ref 132226
-line 133122 -_-_ decenter_begin 39 decenter_end 958
+line 133122 -_-_ decenter_begin 39 decenter_end 921
   from ref 132098 z 2011 to ref 128258
 end
