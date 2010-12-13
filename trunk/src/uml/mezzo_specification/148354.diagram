@@ -37,9 +37,9 @@ msg 129154 synchronous
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 201 2015 explicitmsg "EXCEPTION : CannotConnectToChannel : Time Out / Connection Refused"
+  yz 201 2015 explicitmsg "EXCEPTION : MaximalConnectionReached"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 80 189
+  label_xy 162 189
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 133 2025 explicitmsg "createCallback"

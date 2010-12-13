@@ -1,25 +1,25 @@
 format 76
 
-classinstance 128002 class_ref 134530 // EventServer
+classinstance 128002 class_ref 134530 // EventSystem
   name ""   xyz 420.939 4.95628 2000 life_line_z 2000
-classinstance 128130 class_ref 134658 // Consummer
+classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
-durationcanvas 128258 classinstance_ref 128130 // :Consummer
-  xyzwh 61 76 2010 11 57
+durationcanvas 128258 classinstance_ref 128130 // :Consumer
+  xyzwh 57 76 2010 11 57
 end
-durationcanvas 128386 classinstance_ref 128002 // :EventServer
-  xyzwh 451 72 2010 11 48
+durationcanvas 128386 classinstance_ref 128002 // :EventSystem
+  xyzwh 453 72 2010 11 48
 end
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 76 2015 explicitmsg "resolveChannel(EventServer adress, Topic)"
+  yz 76 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 144 61
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 109 2020 explicitmsg "EXCEPTION : Channel Not Found"
+  yz 109 2020 explicitmsg "EXCEPTION : TopicNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 213 96
 end

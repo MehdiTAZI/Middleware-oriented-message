@@ -1,7 +1,7 @@
 format 76
 "mezzo_specification"
-  revision 8
-  modified_by 3 "Ordi"
+  revision 9
+  modified_by 2 "Franck"
 
 
   
@@ -155,7 +155,7 @@ format 76
 	size A4
       end
 
-      sequencediagram 134658 "UC02 - Scenario Nominal"
+      sequencediagram 148226 "UC02 - Scenario Nominal"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
@@ -165,22 +165,27 @@ format 76
 	overlapping_bars size A4
       end
 
-      sequencediagram 141698 "UC02 - Scenario Exceptionnel 1 - Le Consumer n'existe plus"
+      sequencediagram 141314 "UC02 - Scenario Exceptionnel 1 - Channel inexistant"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 141314 "UC02 - Scenario Exceptionnel 2 : Channel inexistant"
+      sequencediagram 141570 "UC02 - Scenario Exceptionnel 2 - Connexion impossible au Channel"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 141442 "UC02 - Scenario Exceptionnel 3 - Deja connecte au Channel"
+      sequencediagram 148354 "UC02 - Scenario Exceptionnel 3 : Nombre maximal de connexions atteint"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 141570 "UC02 - Scenario Exceptionnel 4 - Connexion impossible au Channel"
+      sequencediagram 141698 "UC02 - Scenario Exceptionnel 4 - Le Consumer n'existe plus"
+	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+	overlapping_bars size A4
+      end
+
+      sequencediagram 141442 "UC02 - Scenario Exceptionnel 5 - Deja connecte au Channel"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
