@@ -7,7 +7,9 @@ classinstance 128130 class_ref 134658 // Consumer
 note 132098 "Le Consumer est tombe ou inaccessible"
   xyzwh 105 246 2000 227 35
 note 132610 "EXCEPTION : ConsummerUnreachable : Time Out / Refused"
-  xyzwh 108 342 2000 265 35
+  xyzwh 109 341 2000 317 35
+note 133506 "Le Système journalise l'erreur"
+  xyzwh 269 393 2000 183 35
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
   xyzwh 57 73 2010 11 164
   overlappingdurationcanvas 131074
@@ -21,7 +23,10 @@ durationcanvas 129026 classinstance_ref 128002 // :EventSystem
   xyzwh 453 175 2010 11 38
 end
 durationcanvas 132226 classinstance_ref 128002 // :EventSystem
-  xyzwh 453 332 2010 11 40
+  xyzwh 453 332 2010 11 44
+  overlappingdurationcanvas 133250
+    xyzwh 459 345 2020 11 25
+  end
 end
 lostfoundmsgsupport 132354 xyz 74 335 2015
 msg 128514 synchronous
@@ -59,8 +64,15 @@ msg 132482 lost_synchronous
   yz 333 2015 explicitmsg "push (Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 237 320
+reflexivemsg 133378 synchronous
+  to durationcanvas_ref 133250
+  yz 345 2025 explicitmsg "errorLog"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 459 332
 line 132738 -_-_
   from ref 132610 z 2011 to ref 132226
 line 133122 -_-_ decenter_begin 39 decenter_end 921
   from ref 132098 z 2011 to ref 128258
+line 133634 -_-_
+  from ref 133506 z 2021 to ref 133250
 end

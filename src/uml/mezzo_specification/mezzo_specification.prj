@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 9
+  revision 10
   modified_by 2 "Franck"
 
 
@@ -186,6 +186,11 @@ format 76
       end
 
       sequencediagram 141442 "UC02 - Scenario Exceptionnel 5 - Deja connecte au Channel"
+	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+	overlapping_bars size A4
+      end
+
+      sequencediagram 154882 "UC02 - Scenario Exceptionnel 6 - Deja deconnecte du Channel"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
