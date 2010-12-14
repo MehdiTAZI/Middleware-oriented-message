@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 18
+  revision 19
   modified_by 4 "michael"
 
 
@@ -239,6 +239,8 @@ ${members}}
     end
   end
 
+  package_ref 128004 // Consumer
+
   package_ref 134530 // EventServer
 
   classview 128002 "Classes Participantes"
@@ -346,10 +348,10 @@ ${members}}
 	
       end
 
-      operation 142466 "connect(ProxyPushConsumer ppc)"
+      operation 142466 "connect"
 	public explicit_return_type ""
 	nparams 1
-	  param in name "ppc" explicit_type "ProxyPushConsumer"
+	  param in name "callBack" type class_ref 128002 // CallbackConsumer
 	
 	
 	
@@ -458,6 +460,17 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 128130 "receive"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 128386 "Event"
@@ -499,21 +512,10 @@ ${members}}
       
       operation 128002 "connect"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "callBack" type class_ref 128002 // CallbackConsumer
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 128130 "receive"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -557,6 +559,13 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 177794 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+      end
+
+      classrelation 128004 // <dependency>
+	relation 128004 -_->
+	  a default
+	    classrelation_ref 128004 // <dependency>
 	  b parent class_ref 128002 // CallbackConsumer
       end
     end
