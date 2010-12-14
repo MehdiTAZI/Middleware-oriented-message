@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse"
-  revision 19
-  modified_by 4 "michael"
+  revision 20
+  modified_by 2 "Franck"
 
 
   
@@ -441,6 +441,18 @@ ${members}}
 "
 	    classrelation_ref 177922 // <unidirectional association>
 	  b parent class_ref 128514 // ProxyPushConsumer
+      end
+
+      operation 169602 "processEvents"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 

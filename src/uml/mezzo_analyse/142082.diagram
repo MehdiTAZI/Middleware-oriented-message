@@ -48,7 +48,7 @@ relationcanvas 130050 relation_ref 168578 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130562 relation_ref 168834 // <unidirectional association>
-  decenter_begin 514
+  decenter_begin 513
   decenter_end 400
   from ref 128770 z 2001 to ref 129282
   no_role_a no_role_b
@@ -80,7 +80,7 @@ relationcanvas 131714 relation_ref 176258 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131970 relation_ref 176514 // <unidirectional association>
-  decenter_begin 588
+  decenter_begin 587
   decenter_end 763
   from ref 129282 z 2001 to ref 128770
   no_role_a no_role_b
