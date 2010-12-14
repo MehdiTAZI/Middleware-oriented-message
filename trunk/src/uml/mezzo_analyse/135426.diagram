@@ -1,0 +1,31 @@
+format 76
+
+classinstance 128002 class_ref 135554 // supplier
+  name ""   xyz 147 4 2000 life_line_z 2000
+classinstance 128130 class_ref 135682 // Framework
+  name ""   xyz 578 4 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :supplier
+  xyzwh 163 85 2010 11 40
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 606 85 2010 11 25
+end
+durationcanvas 128514 classinstance_ref 128130 // :Framework
+  xyzwh 606 148 2010 11 40
+end
+durationcanvas 128642 classinstance_ref 128002 // :supplier
+  xyzwh 163 148 2010 11 25
+end
+msg 128770 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 85 2015 explicitmsg "obtain_reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 350 71
+msg 128898 return
+  from durationcanvas_ref 128514
+  to durationcanvas_ref 128642
+  yz 148 2015 explicitmsg "Exception :TopicNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 326 134
+end

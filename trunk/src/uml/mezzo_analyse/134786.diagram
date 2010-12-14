@@ -1,0 +1,73 @@
+format 76
+
+classinstance 128002 class_ref 135682 // Framework
+  name ""   xyz 481.5 17 2000 life_line_z 2000
+classinstance 128130 class_ref 135554 // supplier
+  name ""   xyz 142.5 4 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :Framework
+  xyzwh 509 80 2010 11 55
+end
+durationcanvas 128386 classinstance_ref 128130 // :supplier
+  xyzwh 158 80 2010 11 55
+end
+durationcanvas 128514 classinstance_ref 128130 // :supplier
+  xyzwh 158 120 2010 11 97
+end
+durationcanvas 128642 classinstance_ref 128002 // :Framework
+  xyzwh 509 120 2010 11 82
+end
+durationcanvas 128770 classinstance_ref 128130 // :supplier
+  xyzwh 158 159 2010 11 141
+end
+durationcanvas 128898 classinstance_ref 128002 // :Framework
+  xyzwh 509 159 2010 11 126
+end
+durationcanvas 129026 classinstance_ref 128130 // :supplier
+  xyzwh 158 63 2010 11 774
+end
+durationcanvas 129154 classinstance_ref 128002 // :Framework
+  xyzwh 509 67 2010 11 787
+  overlappingdurationcanvas 129282
+    xyzwh 515 82 2020 11 35
+  end
+  overlappingdurationcanvas 129410
+    xyzwh 515 224 2020 11 35
+  end
+end
+msg 129538 synchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 129282
+  yz 82 3005 explicitmsg "obtain_reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 341 67
+msg 129666 asynchronous
+  from durationcanvas_ref 129026
+  to durationcanvas_ref 129154
+  yz 266 2015 explicitmsg "Disconnect"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 354 252
+msg 129794 asynchronous
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128898
+  yz 191 2015 explicitmsg "push_event"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 348 176
+reflexivemsg 129922 asynchronous
+  to durationcanvas_ref 129410
+  yz 224 2025 explicitmsg "updateListEvents"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 471 210
+msg 130050 return
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 114 2015 explicitmsg "result"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 357 102
+msg 130178 asynchronous
+  from durationcanvas_ref 128514
+  to durationcanvas_ref 128642
+  yz 146 2015 explicitmsg "Connect"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "C"
+  label_xy 357 131
+end
