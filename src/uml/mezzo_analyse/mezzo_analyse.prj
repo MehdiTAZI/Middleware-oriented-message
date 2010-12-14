@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 16
+  revision 17
   modified_by 2 "Franck"
 
 
@@ -315,6 +315,15 @@ ${members}}
 	    classrelation_ref 170370 // <unidirectional association>
 	  b parent class_ref 168706 // EventServerIntf
       end
+
+      classrelation 177666 // <unidirectional association>
+	relation 176258 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177666 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+      end
     end
 
     class 148738 "ChannelCtr"
@@ -422,6 +431,15 @@ ${members}}
 	    classrelation_ref 171010 // <unidirectional association>
 	  b parent class_ref 161922 // Channel
       end
+
+      classrelation 177922 // <unidirectional association>
+	relation 176514 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177922 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+      end
     end
 
     classdiagram 128002 "UC2UC3 - Classes Participantes"
@@ -440,14 +458,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 170114 // <unidirectional association>
-	relation 168706 --->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 170114 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
-      end
     end
 
     class 128386 "Event"
@@ -539,6 +549,15 @@ ${members}}
 "
 	    classrelation_ref 170242 // <unidirectional association>
 	  b parent class_ref 148738 // ChannelCtr
+      end
+
+      classrelation 177794 // <unidirectional association>
+	relation 176386 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177794 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
       end
     end
 
@@ -750,12 +769,12 @@ ${members}}
       size A4
     end
 
-    classdiagram 142210 "UC03 - Classes Participantes"
+    classdiagram 142082 "UC02 - Classes Participantes"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
 
-    classdiagram 142082 "UC02 - Classes Participantes"
+    classdiagram 142210 "UC03 - Classes Participantes"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
