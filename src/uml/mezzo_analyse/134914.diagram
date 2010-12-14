@@ -1,0 +1,52 @@
+format 76
+
+classinstance 128002 class_ref 135554 // supplier
+  name ""   xyz 104 5 2000 life_line_z 2000
+classinstance 128130 class_ref 135682 // Framework
+  name ""   xyz 508 15 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :supplier
+  xyzwh 120 86 2010 11 40
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 536 86 2010 11 25
+end
+durationcanvas 128514 classinstance_ref 128002 // :supplier
+  xyzwh 120 132 2010 11 83
+end
+durationcanvas 128642 classinstance_ref 128130 // :Framework
+  xyzwh 536 153 2010 11 66
+end
+durationcanvas 128770 classinstance_ref 128130 // :Framework
+  xyzwh 536 132 2010 11 40
+end
+durationcanvas 128898 classinstance_ref 128130 // :Framework
+  xyzwh 536 237 2010 11 40
+end
+durationcanvas 129026 classinstance_ref 128002 // :supplier
+  xyzwh 120 237 2010 11 25
+end
+msg 129154 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 86 2015 explicitmsg "obtain_refernce"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 204 72
+msg 129282 asynchronous
+  from durationcanvas_ref 128514
+  to durationcanvas_ref 128642
+  yz 191 2015 explicitmsg "connect"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 223 177
+msg 129410 return
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128514
+  yz 133 2015 explicitmsg "result"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 229 119
+msg 129538 return
+  from durationcanvas_ref 128898
+  to durationcanvas_ref 129026
+  yz 237 2015 explicitmsg "Exception : : CannotConnectToChannelException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 169 223
+end
