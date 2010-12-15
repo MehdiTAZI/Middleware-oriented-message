@@ -16,11 +16,6 @@
 		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>javax.persistence </groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0</version>
-		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
