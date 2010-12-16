@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 22
+  revision 23
   modified_by 2 "Franck"
 
 
@@ -159,16 +159,16 @@ format 76
 	    classrelation_ref 142338 // (suppliers)
       end
 
-      classrelation 184834 // (consummers)
-	relation 183298 *--- name "consummers"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 184834 // (consumers)
+	relation 183298 *--- name "consumers"
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 184834 // (consummers)
+	    classrelation_ref 184834 // (consumers)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 184962 // (consummers)
+	    classrelation_ref 184962 // (consumers)
       end
     end
 
@@ -233,8 +233,8 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 184962 // (consummers)
-	relation_ref 183298 // consummers
+      classrelation 184962 // (consumers)
+	relation_ref 183298 // consumers
       end
     end
   end
@@ -242,6 +242,8 @@ ${members}}
   package_ref 128004 // Consumer
 
   package_ref 134530 // EventServer
+
+  package_ref 141058 // Supplier
 
   classview 128002 "Classes Participantes"
     //class diagram settings
@@ -259,6 +261,11 @@ ${members}}
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    classdiagram 128002 "UC02/UC03 - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
     class 168450 "Supplier"
       visibility package stereotype "actor"
       cpp_decl ""
@@ -587,10 +594,12 @@ ${members}}
 	  b parent class_ref 128002 // CallbackConsumer
       end
 
-      classrelation 128004 // <dependency>
-	relation 128004 -_->
-	  a default
-	    classrelation_ref 128004 // <dependency>
+      classrelation 192130 // <unidirectional association>
+	relation 190338 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 192130 // <unidirectional association>
 	  b parent class_ref 128002 // CallbackConsumer
       end
     end
@@ -853,22 +862,24 @@ ${members}}
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    classdiagram 128002 "UC02/UC03 - Classes Participantes"
+    classdiagram 128004 "Classes du Domaine"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
 
-    classdiagram 128004 "UC02/UC03 - Classes du Domaine"
+    classdiagram 148738 "Packages"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
 
-    classdiagram 148738 "UC02/UC03 - Packages"
+    classdiagram 155266 "UC02 - S'abonner en tant que consumer (PUSH) - Classes Participantes"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
 
+    classdiagram 155394 "UC03 - Envoyer un Event (PUSH) - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
   end
-
-  package_ref 141058 // Supplier
 end

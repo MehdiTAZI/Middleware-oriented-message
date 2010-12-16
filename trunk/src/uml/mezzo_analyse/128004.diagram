@@ -29,7 +29,7 @@ relationcanvas 128258 relation_ref 141442 // channels
   multiplicity_a_pos 318 207 3000 no_multiplicity_b
 end
 relationcanvas 128514 relation_ref 141570 // events
-  from ref 128002 z 2001 label "events" italic xyz 433.5 242 2001 to ref 128386
+  from ref 128002 z 2001 label "events" italic xyz 433 242 2001 to ref 128386
   no_role_a no_role_b
   multiplicity_a_pos 483 261 3000 no_multiplicity_b
 end
@@ -38,9 +38,9 @@ relationcanvas 128642 relation_ref 141698 // suppliers
   no_role_a no_role_b
   multiplicity_a_pos 98 260 3000 no_multiplicity_b
 end
-relationcanvas 129410 relation_ref 183298 // consummers
-  from ref 128002 z 2001 label "consummers" italic xyz 304 338 3000 to ref 129282
+relationcanvas 129410 relation_ref 183298 // consumers
+  from ref 128002 z 2001 label "consumers" italic xyz 308 338 2001 to ref 129282
   no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  multiplicity_a_pos 319 400 3000 no_multiplicity_b
 end
 end
