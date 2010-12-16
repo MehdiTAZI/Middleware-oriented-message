@@ -8,7 +8,7 @@
 <!--	  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 	  <!-- Classes du model pris en charge par l'ORM -->
-	  <class>fr.esiag.mezzodijava.mezzoproto.cosevent.model.EventString</class>
+	  <class>fr.esiag.mezzodijava.mezzoproto.eventserver.model.EventString</class>
 	
  	  <properties>
  	    <!-- Propriétés de connexion -->

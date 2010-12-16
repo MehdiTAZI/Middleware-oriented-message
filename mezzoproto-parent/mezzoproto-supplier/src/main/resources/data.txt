@@ -1,9 +1,0 @@
-123 Pression 600 hPa
-243 Pression alerte 2000 hPa 
-345  Pression 1012 hPa
-652  Temperature alerte 100° c
-831  Temperature 10° c 
-983  Temperature 43° c 
-836  Radioactivité 20 Bq 
-909  Radioactivité 60 Bq 
-123  Radioactivité alerte 100 Bq
