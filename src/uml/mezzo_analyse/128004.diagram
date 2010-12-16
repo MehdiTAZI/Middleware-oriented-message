@@ -6,32 +6,41 @@ classcanvas 128002 class_ref 135170 // Channel
 end
 classcanvas 128130 class_ref 135426 // EventServer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 298 52 2005
+  xyz 291 54 2005
 end
 classcanvas 128386 class_ref 142210 // Event
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 539 246 2000
+  xyz 540 232 2000
 end
-classcanvas 128516 class_ref 128388 // CallbackConsumer
+classcanvas 128516 class_ref 128388 // Supplier
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 29 249 2000
+  xyz 30 236 2000
 end
 note 128770 "UC02 - S'abonner en tant que Consumer (PUSH)
 UC03 - Envoyer un Event (PUSH)"
   xyzwh 26 37 2000 251 47
+classcanvas 129282 class_ref 175362 // Consumer
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 300 418 2000
+end
 relationcanvas 128258 relation_ref 141442 // channels
-  from ref 128130 z 2006 label "channels" italic xyz 342 142 2006 to ref 128002
+  from ref 128130 z 2006 label "channels" italic xyz 335 148 2006 to ref 128002
   no_role_a no_role_b
-  multiplicity_a_pos 325 207 3000 no_multiplicity_b
+  multiplicity_a_pos 318 207 3000 no_multiplicity_b
 end
 relationcanvas 128514 relation_ref 141570 // events
-  from ref 128002 z 2001 label "events" italic xyz 439.5 258.5 2001 to ref 128386
+  from ref 128002 z 2001 label "events" italic xyz 433.5 242 2001 to ref 128386
   no_role_a no_role_b
-  multiplicity_a_pos 486 273 3000 no_multiplicity_b
+  multiplicity_a_pos 483 261 3000 no_multiplicity_b
 end
-relationcanvas 128642 relation_ref 141698 // consumers
-  from ref 128002 z 2001 label "consumers" italic xyz 198.5 259 2001 to ref 128516
+relationcanvas 128642 relation_ref 141698 // suppliers
+  from ref 128002 z 2001 label "suppliers" italic xyz 175 241 2001 to ref 128516
   no_role_a no_role_b
-  multiplicity_a_pos 137 275 3000 no_multiplicity_b
+  multiplicity_a_pos 98 260 3000 no_multiplicity_b
+end
+relationcanvas 129410 relation_ref 183298 // consummers
+  from ref 128002 z 2001 label "consummers" italic xyz 304 338 3000 to ref 129282
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
 end
 end
