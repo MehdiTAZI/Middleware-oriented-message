@@ -17,25 +17,25 @@ classinstance 128771 class_ref 128771 // Channel
 classinstance 128899 class_ref 128899 // Event
   name ""   xyz 787 8 2000 life_line_z 2000
 durationcanvas 129027 classinstance_ref 128003 // :Consumer
-  xyzwh 70 71 2010 11 48
+  xyzwh 72 71 2010 11 48
 end
 durationcanvas 129155 classinstance_ref 128131 // :CallBackConsumer
-  xyzwh 206 69 2010 11 54
+  xyzwh 210 69 2010 11 54
 end
 durationcanvas 129411 classinstance_ref 128003 // :Consumer
-  xyzwh 70 150 2010 11 76
+  xyzwh 72 150 2010 11 76
 end
 durationcanvas 129539 classinstance_ref 128387 // :EventServerIntf
-  xyzwh 303 150 2010 11 45
+  xyzwh 306 150 2010 11 45
 end
 durationcanvas 129795 classinstance_ref 128515 // :EventServerCtr
-  xyzwh 421 159 2010 11 25
+  xyzwh 424 159 2010 11 25
 end
 durationcanvas 130051 classinstance_ref 128259 // :ProxyPushConsumer
-  xyzwh 551 170 2010 11 56
+  xyzwh 555 170 2010 11 56
 end
 durationcanvas 130691 classinstance_ref 128131 // :CallBackConsumer
-  xyzwh 206 211 2010 11 25
+  xyzwh 210 211 2010 11 25
 end
 msg 129283 synchronous
   from durationcanvas_ref 129027
