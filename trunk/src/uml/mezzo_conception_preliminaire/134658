@@ -1,0 +1,985 @@
+format 76
+"mezzo_analyse" // Lien vers projet mezzo_analyse::mezzo_analyse
+  revision 1
+  modified_by 2 "Franck"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  oid -1
+  ncouples 1
+  key "html dir" value "c:/mezzodev/MEZ-20101213-ANA-DOMAINE-DCP/"
+  classview 134530 "Classes du Domaine"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    oid 128004
+    class 135426 "EventServer"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 135426
+      classrelation 135042 // <dependency>
+	relation 134786 -_->
+	  oid 134786
+	  a default
+	    classrelation_ref 135042 // <dependency>
+	  b parent class_ref 135170 // Channel
+	oid 135042
+      end
+
+      classrelation 141698 // (channels)
+	relation 141442 *--- name "channels"
+	  oid 141442
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 141698 // (channels)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 141826 // (channels)
+	oid 141698
+      end
+
+      attribute 167938 "name"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 167938
+      end
+
+      classrelation 184450 // <dependency>
+	relation 183042 -_->
+	  oid 183042
+	  a default
+	    classrelation_ref 184450 // <dependency>
+	  b parent class_ref 135554 // Supplier
+	oid 184450
+      end
+    end
+
+    class 135170 "Channel"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 135170
+      attribute 134530 "capacity"
+	private explicit_type ""
+	stereotype "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 134530
+      end
+
+      attribute 135042 "topic"
+	private explicit_type ""
+	stereotype "string"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 135042
+      end
+
+      classrelation 141826 // (channels)
+	relation_ref 141442 // channels
+	oid 141826
+      end
+
+      classrelation 141954 // (events)
+	relation 141570 *--- name "events"
+	  oid 141570
+	  a role_name "" multiplicity "[capacity]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 141954 // (events)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142082 // (events)
+	oid 141954
+      end
+
+      classrelation 142210 // (suppliers)
+	relation 141698 *--- name "suppliers"
+	  oid 141698
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 142210 // (suppliers)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142338 // (suppliers)
+	oid 142210
+      end
+
+      classrelation 184834 // (consumers)
+	relation 183298 *--- name "consumers"
+	  oid 183298
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 184834 // (consumers)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 184962 // (consumers)
+	oid 184834
+      end
+    end
+
+    class 135554 "Supplier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 128388
+      classrelation 142338 // (suppliers)
+	relation_ref 141698 // suppliers
+	oid 142338
+      end
+
+      classrelation 149506 // consumers
+	relation_ref 148482 // consumers
+	oid 149506
+      end
+    end
+
+    class 142210 "Event"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 142210
+      attribute 141570 "content"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 141570
+      end
+
+      classrelation 142082 // (events)
+	relation_ref 141570 // events
+	oid 142082
+      end
+
+      classrelation 149250 // events
+	relation_ref 148354 // events
+	oid 149250
+      end
+    end
+
+    class 175362 "Consumer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 175362
+      classrelation 184962 // (consumers)
+	relation_ref 183298 // consumers
+	oid 184962
+      end
+    end
+  end
+
+  package_ref 134786 // Consumer
+
+  package_ref 134914 // EventServer
+
+  package_ref 141058 // Supplier
+
+  classview 128002 "Classes Participantes"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    oid 128002
+    classdiagram 128002 "UC02/UC03 - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 128002
+      size A4
+    end
+
+    class 168450 "Supplier"
+      visibility package stereotype "actor"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 168450
+      classrelation 170626 // <unidirectional association>
+	relation 169218 --->
+	  oid 169218
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170626 // <unidirectional association>
+	  b parent class_ref 161794 // ProxyPushSupplier
+	oid 170626
+      end
+
+      classrelation 171138 // <unidirectional association>
+	relation 169730 --->
+	  oid 169730
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 171138 // <unidirectional association>
+	  b parent class_ref 168706 // EventServerIntf
+	oid 171138
+      end
+
+      classrelation 185346 // <unidirectional association>
+	relation 183554 --->
+	  oid 183554
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 185346 // <unidirectional association>
+	  b parent class_ref 175618 // CallbackSupplier
+	oid 185346
+      end
+    end
+
+    class 168578 "Consumer"
+      visibility package stereotype "actor"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 168578
+      classrelation 169986 // <unidirectional association>
+	relation 168578 --->
+	  oid 168578
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 169986 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 169986
+      end
+
+      classrelation 170370 // <unidirectional association>
+	relation 168962 --->
+	  oid 168962
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170370 // <unidirectional association>
+	  b parent class_ref 168706 // EventServerIntf
+	oid 170370
+      end
+
+      classrelation 177666 // <unidirectional association>
+	relation 176258 --->
+	  oid 176258
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177666 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+	oid 177666
+      end
+
+      classrelation 185474 // <unidirectional association>
+	relation 183682 --->
+	  oid 183682
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 185474 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+	oid 185474
+      end
+    end
+
+    class 148738 "ChannelCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 148738
+      operation 142338 "push"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "e" type class_ref 142210 // Event
+	
+	
+	
+	
+	
+	oid 142338
+      end
+
+      operation 142466 "connect"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "callBack" type class_ref 128002 // CallbackConsumer
+	
+	
+	
+	
+	
+	oid 142466
+      end
+
+      operation 142594 "connect"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "pps" type class_ref 161794 // ProxyPushSupplier
+	
+	
+	
+	
+	
+	oid 142594
+      end
+
+      operation 142722 "disconnect"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "ppc" explicit_type "ProxyPushConsumer"
+	
+	
+	
+	
+	
+	oid 142722
+      end
+
+      operation 142850 "disconnect"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "pps" explicit_type "ProxyPushSupplier"
+	
+	
+	
+	
+	
+	oid 142850
+      end
+
+      classrelation 149122 // (events)
+	relation 148354 *--- name "events"
+	  oid 148354
+	  a role_name "" multiplicity "[capacity]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 149122 // (events)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149250 // events
+	oid 149122
+      end
+
+      classrelation 149378 // (consumers)
+	relation 148482 *--- name "consumers"
+	  oid 148482
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 149378 // (consumers)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149506 // consumers
+	oid 149378
+      end
+
+      classrelation 170882 // <unidirectional association>
+	relation 169474 --->
+	  oid 169474
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170882 // <unidirectional association>
+	  b parent class_ref 128386 // Event
+	oid 170882
+      end
+
+      classrelation 171010 // <unidirectional association>
+	relation 169602 --->
+	  oid 169602
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 171010 // <unidirectional association>
+	  b parent class_ref 161922 // Channel
+	oid 171010
+      end
+
+      classrelation 177922 // <unidirectional association>
+	relation 176514 --->
+	  oid 176514
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177922 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+	oid 177922
+      end
+
+      operation 169602 "processEvents"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 169602
+      end
+    end
+
+    class 128002 "CallbackConsumer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 128002
+      operation 128130 "receive"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128130
+      end
+    end
+
+    class 128386 "Event"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 128386
+      attribute 161410 "content"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 161410
+      end
+
+      classrelation 169858 // events
+	relation_ref 168450 // events
+	oid 169858
+      end
+    end
+
+    class 128514 "ProxyPushConsumer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 128514
+      operation 128002 "connect"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "callBack" type class_ref 128002 // CallbackConsumer
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128002
+      end
+
+      operation 128258 "disconnect"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128258
+      end
+
+      classrelation 163202 // <unidirectional association>
+	relation 161922 --->
+	  oid 161922
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 163202 // <unidirectional association>
+	  b parent class_ref 128642 // EventServerCtr
+	oid 163202
+      end
+
+      classrelation 170242 // <unidirectional association>
+	relation 168834 --->
+	  oid 168834
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170242 // <unidirectional association>
+	  b parent class_ref 148738 // ChannelCtr
+	oid 170242
+      end
+
+      classrelation 177794 // <unidirectional association>
+	relation 176386 --->
+	  oid 176386
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 177794 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 177794
+      end
+
+      classrelation 192130 // <unidirectional association>
+	relation 190338 --->
+	  oid 190338
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 192130 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 192130
+      end
+    end
+
+    class 128642 "EventServerCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 128642
+      operation 128386 "getProxyPushConsumer"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128386
+      end
+
+      operation 156418 "getProxyPushSupplier"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 156418
+      end
+
+      classrelation 185602 // <unidirectional association>
+	relation 183810 --->
+	  oid 183810
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 185602 // <unidirectional association>
+	  b parent class_ref 175490 // EventServer
+	oid 185602
+      end
+    end
+
+    class 161794 "ProxyPushSupplier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 161794
+      operation 156034 "connect"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+	oid 156034
+      end
+
+      operation 156162 "push"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "" type class_ref 142210 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 156162
+      end
+
+      operation 156290 "disconnect"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 156290
+      end
+
+      classrelation 170754 // <unidirectional association>
+	relation 169346 --->
+	  oid 169346
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170754 // <unidirectional association>
+	  b parent class_ref 148738 // ChannelCtr
+	oid 170754
+      end
+    end
+
+    class 161922 "Channel"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 161922
+      attribute 154754 "topic"
+	public explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 154754
+      end
+
+      attribute 161282 "capacity"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 161282
+      end
+
+      classrelation 169730 // (events)
+	relation 168450 *--- name "events"
+	  oid 168450
+	  a role_name "" multiplicity "[capacity]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+"
+	    classrelation_ref 169730 // (events)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 169858 // events
+	oid 169730
+      end
+
+      classrelation 185218 // channels
+	relation_ref 183426 // channels
+	oid 185218
+      end
+    end
+
+    class 168706 "EventServerIntf"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 168706
+      operation 162946 "getProxyPushConsumer"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 162946
+      end
+
+      operation 163074 "getProxyPushSupplier"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 163074
+      end
+
+      classrelation 170498 // <unidirectional association>
+	relation 169090 --->
+	  oid 169090
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 170498 // <unidirectional association>
+	  b parent class_ref 128642 // EventServerCtr
+	oid 170498
+      end
+    end
+
+    class 175490 "EventServer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 175490
+      attribute 168066 "name"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+	oid 168066
+      end
+
+      classrelation 185090 // (channels)
+	relation 183426 *--- name "channels"
+	  oid 183426
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 185090 // (channels)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 185218 // channels
+	oid 185090
+      end
+    end
+
+    class 175618 "CallbackSupplier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 175618
+    end
+  end
+
+  classview 141058 "ANALYSE : DIAGRAMME DU DOMAINE ET CLASSES PARTICIPANTES"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    oid 141058
+    classdiagram 134530 "Classes du Domaine"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 128004
+      size A4
+    end
+
+    classdiagram 148738 "Packages"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 148738
+      size A4
+    end
+
+    classdiagram 155266 "UC02 - S'abonner en tant que consumer (PUSH) - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 155266
+      size A4
+    end
+
+    classdiagram 155394 "UC03 - Envoyer un Event (PUSH) - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 155394
+      size A4
+    end
+  end
+end
