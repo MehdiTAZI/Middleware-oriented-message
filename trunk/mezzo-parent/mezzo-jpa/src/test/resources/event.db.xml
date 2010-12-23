@@ -1,8 +1,0 @@
-<?xml version="1.0"?>
-<dataset>
-
-	<event id="1" message= "lolilol" topic="test" />
-	<event id="2" message= "loliloli" topic="test" />
-	<event id="3" message= "lolilolil" topic="test2" />
-
-</dataset>
