@@ -1,0 +1,121 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>fr.esiag.mezzodijava</groupId>
+	<artifactId>mezzo-parent</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<name>Mezzo di Java Parent Project</name>
+	<url>http://maven.apache.org</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<org.hibernate.version>3.5.1-Final</org.hibernate.version>
+		<derby.version>10.6.2.1</derby.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>fr.esiag.mezzodijava</groupId>
+				<artifactId>mezzo-commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.esiag.mezzodijava</groupId>
+				<artifactId>mezzo-server-commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.esiag.mezzodijava</groupId>
+				<artifactId>mezzo-cosevent</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.esiag.mezzodijava</groupId>
+				<artifactId>mezzo-libclient</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<!-- HIBERNATE -->
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId> hibernate-core </artifactId>
+				<version> ${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId> hibernate-annotations</artifactId>
+				<version> ${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId>hibernate-entitymanager </artifactId>
+				<version>${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence </groupId>
+				<artifactId>hibernate-jpa-2.0-api </artifactId>
+				<version> 1.0.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12 </artifactId>
+				<version>1.5.8</version>
+			</dependency>
+			<dependency>
+				<groupId>c3p0 </groupId>
+				<artifactId>c3p0 </artifactId>
+				<version>0.9.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>4.7</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.easymock</groupId>
+				<artifactId>easymock</artifactId>
+				<version>3.0</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.easymock</groupId>
+			<artifactId>easymock</artifactId>
+		</dependency>
+	</dependencies>
+	<build>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<modules>
+		<module>mezzo-commons</module>
+		<module>mezzo-server-commons</module>
+		<module>mezzo-cosevent</module>
+		<module>mezzo-cosevent-server</module>
+		<module>mezzo-libclient</module>
+	</modules>
+</project>
