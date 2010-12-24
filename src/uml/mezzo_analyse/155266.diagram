@@ -37,13 +37,13 @@ classcanvas 131714 class_ref 175490 // EventServer
   xyz 750 49 2000
 end
 relationcanvas 129666 relation_ref 168450 // events
-  from ref 129538 z 2001 label "events" italic xyz 791 312.5 2001 to ref 129410
+  from ref 129538 z 2001 label "events" italic xyz 791 312 2001 to ref 129410
   no_role_a no_role_b
   multiplicity_a_pos 730 365 3000 no_multiplicity_b
 end
 relationcanvas 130050 relation_ref 168578 // <unidirectional association>
   decenter_begin 873
-  decenter_end 168
+  decenter_end 166
   from ref 129922 z 2001 to ref 128642
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
@@ -76,7 +76,7 @@ relationcanvas 131458 relation_ref 169602 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131842 relation_ref 183426 // channels
-  from ref 131714 z 2001 label "channels" italic xyz 738.5 139 2001 to ref 129538
+  from ref 131714 z 2001 label "channels" italic xyz 738 139 2001 to ref 129538
   no_role_a no_role_b
   multiplicity_a_pos 767 178 3000 no_multiplicity_b
 end
@@ -97,13 +97,13 @@ relationcanvas 132482 relation_ref 161922 // <unidirectional association>
 end
 relationcanvas 132994 relation_ref 190338 // <unidirectional association>
   decenter_begin 859
-  decenter_end 151
+  decenter_end 150
   from ref 128770 z 2001 to ref 128642
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 133890 relation_ref 176514 // <unidirectional association>
-  decenter_end 801
+  decenter_end 800
   from ref 129282 z 2001 to ref 128770
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
