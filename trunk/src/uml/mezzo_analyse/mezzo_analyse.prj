@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 24
+  revision 27
   modified_by 4 "michael"
 
 
@@ -479,6 +479,52 @@ ${members}}
 	
 	
       end
+
+      operation 134660 "suscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 134788 "unsuscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134916 "suscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135044 "unsuscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 128002 "CallbackConsumer"
@@ -542,7 +588,7 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 128002 "connect"
+      operation 128002 "suscribe"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "callBack" type class_ref 128002 // CallbackConsumer
@@ -601,6 +647,30 @@ ${members}}
 "
 	    classrelation_ref 192130 // <unidirectional association>
 	  b parent class_ref 128002 // CallbackConsumer
+      end
+
+      operation 128004 "connect"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128132 "unsuscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
