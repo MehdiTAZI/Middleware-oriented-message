@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse"
-  revision 27
-  modified_by 4 "michael"
+  revision 28
+  modified_by 2 "Franck"
 
 
   
@@ -384,32 +384,10 @@ ${members}}
 	
       end
 
-      operation 142594 "connect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "pps" type class_ref 161794 // ProxyPushSupplier
-	
-	
-	
-	
-	
-      end
-
       operation 142722 "disconnect"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "ppc" explicit_type "ProxyPushConsumer"
-	
-	
-	
-	
-	
-      end
-
-      operation 142850 "disconnect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "pps" explicit_type "ProxyPushSupplier"
 	
 	
 	
@@ -502,29 +480,6 @@ ${members}}
 	
       end
 
-      operation 134916 "suscribe"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135044 "unsuscribe"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
     end
 
     class 128002 "CallbackConsumer"
