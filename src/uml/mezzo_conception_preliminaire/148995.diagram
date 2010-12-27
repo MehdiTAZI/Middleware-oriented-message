@@ -1,0 +1,28 @@
+format 76
+
+classinstance 128003 class_ref 135427 // Supplier
+  name ""   xyz 56 4 2000 life_line_z 2000
+classinstancecanvas 140420 classinstance_ref 134532 // 
+  xyz 349 5 2000 life_line_z 2000
+end
+durationcanvas 129412 classinstance_ref 128003 // :Supplier
+  xyzwh 70 78 2010 11 45
+end
+durationcanvas 140548 classinstance_ref 140420 // :NameService
+  xyzwh 379 86 2010 11 31
+end
+msg 140676 synchronous
+  from durationcanvas_ref 129412
+  to durationcanvas_ref 140548
+  yz 86 3005 explicitmsg "resolveInitialReferences"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "topic"
+  label_xy 116 74
+msg 141060 return
+  from durationcanvas_ref 140548
+  to durationcanvas_ref 129412
+  yz 106 3010 explicitmsg "SupplierException.SupplierNotFound"
+  stereotype "<<Exception>>" xyz 137 118 3000
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 133 94
+end

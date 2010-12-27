@@ -81,23 +81,26 @@ durationcanvas 139140 classinstance_ref 128003 // :Consumer
   xyzwh 70 607 2010 11 40
 end
 durationcanvas 139268 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 724 607 2010 11 25
+  xyzwh 724 608 2010 11 44
 end
 durationcanvas 139524 classinstance_ref 129284 // :Channel
-  xyzwh 802 619 2010 11 25
-end
-durationcanvas 139780 classinstance_ref 128003 // :Consumer
-  xyzwh 70 667 2010 11 40
-end
-durationcanvas 139908 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 724 667 2010 11 25
-end
-durationcanvas 140164 classinstance_ref 129284 // :Channel
-  xyzwh 802 681 2010 11 25
+  xyzwh 802 619 2010 11 28
 end
 durationcanvas 140548 classinstance_ref 140420 // :NameService
   xyzwh 254 86 2010 11 31
 end
+msg 128131 return
+  from durationcanvas_ref 139524
+  to durationcanvas_ref 139268
+  yz 636 3020 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 128259 return
+  from durationcanvas_ref 139268
+  to durationcanvas_ref 139140
+  yz 630 3025 explicitmsg "ChannelException.AlreadyConnected"
+  stereotype "<<Exception>>" xyz 372 642 3000
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 325 618
 msg 132484 synchronous
   from durationcanvas_ref 132228
   to durationcanvas_ref 132356
@@ -195,27 +198,15 @@ reflexivemsg 138884 synchronous
 msg 139396 synchronous
   from durationcanvas_ref 139140
   to durationcanvas_ref 139268
-  yz 607 3010 explicitmsg "disconnect()"
+  yz 608 3010 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 377 595
+  label_xy 377 596
 msg 139652 synchronous
   from durationcanvas_ref 139268
   to durationcanvas_ref 139524
-  yz 620 3015 explicitmsg "disconnect()"
+  yz 621 3015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 743 608
-msg 140036 synchronous
-  from durationcanvas_ref 139780
-  to durationcanvas_ref 139908
-  yz 667 2015 explicitmsg "Unsuscribe()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 376 655
-msg 140292 synchronous
-  from durationcanvas_ref 139908
-  to durationcanvas_ref 140164
-  yz 681 2020 explicitmsg "unsuscribe()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 743 669
+  label_xy 743 609
 msg 140676 synchronous
   from durationcanvas_ref 129412
   to durationcanvas_ref 140548

@@ -1,7 +1,0 @@
-format 76
-
-classinstance 128002 class_ref 168578 // Consumer
-  name ""   xyz 3 4 2000 life_line_z 2000
-classinstance 128130 class_ref 128002 // CallbackConsumer
-  name ""   xyz 105 4 2000 life_line_z 2000
-end
