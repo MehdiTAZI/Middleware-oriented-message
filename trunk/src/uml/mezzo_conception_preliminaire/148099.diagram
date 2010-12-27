@@ -90,14 +90,26 @@ durationcanvas 139780 classinstance_ref 128003 // :Consumer
   xyzwh 70 667 2010 11 40
 end
 durationcanvas 139908 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 724 667 2010 11 25
+  xyzwh 724 668 2010 11 45
 end
 durationcanvas 140164 classinstance_ref 129284 // :Channel
-  xyzwh 802 681 2010 11 25
+  xyzwh 802 681 2010 11 29
 end
 durationcanvas 140548 classinstance_ref 140420 // :NameService
   xyzwh 254 86 2010 11 31
 end
+msg 128131 return
+  from durationcanvas_ref 140164
+  to durationcanvas_ref 139908
+  yz 699 2025 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 128259 return
+  from durationcanvas_ref 139908
+  to durationcanvas_ref 139780
+  yz 693 2030 explicitmsg "ChannelException.NotConnected"
+  stereotype "<<Exception>>" xyz 372 705 3000
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 333 681
 msg 132484 synchronous
   from durationcanvas_ref 132228
   to durationcanvas_ref 132356
@@ -207,15 +219,15 @@ msg 139652 synchronous
 msg 140036 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 139908
-  yz 667 2015 explicitmsg "Unsuscribe()"
+  yz 668 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 376 655
+  label_xy 376 656
 msg 140292 synchronous
   from durationcanvas_ref 139908
   to durationcanvas_ref 140164
-  yz 681 2020 explicitmsg "unsuscribe()"
+  yz 682 2020 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 743 669
+  label_xy 743 670
 msg 140676 synchronous
   from durationcanvas_ref 129412
   to durationcanvas_ref 140548
