@@ -1,50 +1,64 @@
 format 76
 
 classinstance 128002 class_ref 141698 // Framework
-  name ""   xyz 425.939 4.95628 2000 life_line_z 2000
+  name ""   xyz 425.139 5.15628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
-  name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
+  name ""   xyz 36.6337 4 2000 life_line_z 2000
+durationcanvas 128004 classinstance_ref 128002 // :Framework
+  xyzwh 450 233 2010 11 30
+end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 75 2010 11 151
+  xyzwh 55 72 2010 11 430
   overlappingdurationcanvas 131074
-    xyzwh 61 133 2020 11 26
+    xyzwh 61 132 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 72 2010 11 48
+  xyzwh 450 70 2010 11 40
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
   xyzwh 450 175 2010 11 38
 end
+msg 128132 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128004
+  yz 233 2015 explicitmsg "connect()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 239 221
+msg 128260 return
+  from durationcanvas_ref 128004
+  to durationcanvas_ref 128258
+  yz 252 2020 explicitmsg "EXCEPTION : ChannelException.MaximalConnectionReached"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 162 242
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 76 2015 explicitmsg "resolveChannel()"
+  yz 72 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  args "Topic"
-  label_xy 144 60
+  label_xy 144 57
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 108 2020 explicitmsg "Channel reference"
+  yz 98 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 213 95
+  label_xy 213 85
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 178 2015 explicitmsg "suscribe()"
+  yz 176 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  args "Callback"
-  label_xy 198 165
+  args "CallBack"
+  label_xy 198 163
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 201 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
+  yz 199 2015 explicitmsg "register"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 80 189
+  label_xy 237 186
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
-  yz 133 2025 explicitmsg "createCallback"
+  yz 132 2025 explicitmsg "createCallback"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 98 132
 end
