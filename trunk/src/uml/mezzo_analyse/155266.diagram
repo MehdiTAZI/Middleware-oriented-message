@@ -43,7 +43,7 @@ relationcanvas 129666 relation_ref 168450 // events
 end
 relationcanvas 130050 relation_ref 168578 // <unidirectional association>
   decenter_begin 873
-  decenter_end 166
+  decenter_end 165
   from ref 129922 z 2001 to ref 128642
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
