@@ -5,32 +5,33 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 130 67 2010 11 312
+  xyzwh 127 67 2010 11 312
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 585 67 2010 11 41
+  xyzwh 582 67 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 585 128 2010 11 47
+  xyzwh 582 128 2010 11 47
 end
 durationcanvas 132738 classinstance_ref 128130 // :Framework
-  xyzwh 585 195 2010 11 38
+  xyzwh 582 195 2010 11 38
   overlappingdurationcanvas 132994
-    xyzwh 591 202 2020 11 25
+    xyzwh 588 202 2020 11 25
   end
 end
 durationcanvas 133634 classinstance_ref 128130 // :Framework
-  xyzwh 585 261 2010 11 40
+  xyzwh 582 261 2010 11 40
 end
 durationcanvas 134146 classinstance_ref 128130 // :Framework
-  xyzwh 585 322 2010 11 36
+  xyzwh 582 322 2010 11 36
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 68 2015 explicitmsg "obtain_reference"
+  yz 68 2015 explicitmsg "resolveChannel()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 328 54
+  args "Topic"
+  label_xy 310 55
 msg 131586 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
@@ -40,14 +41,15 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 129 2015 explicitmsg "connect(Channel reference)"
+  yz 129 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 300 118
+  label_xy 340 117
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 161 2015 unspecifiedmsg
+  yz 161 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 339 149
 msg 132866 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132738

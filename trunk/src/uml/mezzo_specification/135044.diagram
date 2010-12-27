@@ -1,0 +1,27 @@
+format 76
+
+classinstance 128002 class_ref 141570 // Supplier
+  name ""   xyz 113 4 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // Framework
+  name ""   xyz 557 7 2000 life_line_z 2000
+durationcanvas 128258 classinstance_ref 128002 // :Supplier
+  xyzwh 127 62 2010 11 35
+end
+durationcanvas 128386 classinstance_ref 128130 // :Framework
+  xyzwh 582 63 2010 11 103
+end
+lostfoundmsgsupport 128772 xyz 175 111 2015
+msg 128900 lost_synchronous
+  from durationcanvas_ref 128386
+  to lostfoundmsgsupport_ref 128772
+  yz 109 2015 explicitmsg "EXCEPTION :SupplierException.SupplierNotFound"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 279 97
+msg 130434 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 128386
+  yz 63 2015 explicitmsg "resolveChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "Topic"
+  label_xy 318 50
+end
