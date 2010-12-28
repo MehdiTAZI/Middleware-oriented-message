@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 28
+  revision 29
   modified_by 2 "Franck"
 
 
@@ -303,6 +303,15 @@ ${members}}
 	    classrelation_ref 185346 // <unidirectional association>
 	  b parent class_ref 175618 // CallbackSupplier
       end
+
+      classrelation 198786 // <unidirectional association>
+	relation 196994 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198786 // <unidirectional association>
+	  b parent class_ref 182146 // EventClient
+      end
     end
 
     class 168578 "Consumer"
@@ -350,6 +359,15 @@ ${members}}
 "
 	    classrelation_ref 185474 // <unidirectional association>
 	  b parent class_ref 128514 // ProxyPushConsumer
+      end
+
+      classrelation 198658 // <unidirectional association>
+	relation 196866 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198658 // <unidirectional association>
+	  b parent class_ref 182146 // EventClient
       end
     end
 
@@ -479,7 +497,6 @@ ${members}}
 	
 	
       end
-
     end
 
     class 128002 "CallbackConsumer"
@@ -868,6 +885,30 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 182146 "EventClient"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 176130 "resolveChannelByTopic"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
   end
 
