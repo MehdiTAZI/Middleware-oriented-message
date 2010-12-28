@@ -42,6 +42,20 @@
 						</goals>
 					</execution>
 				</executions>
+<!--				<configuration>-->
+<!--					<compiler>idlj</compiler>-->
+<!--					<sources>-->
+<!--						<source>-->
+<!--							<additionalArguments>-->
+<!--								<additionalArgument>-fall</additionalArgument>-->
+<!--								<additionalArgument>-pkgTranslate</additionalArgument>-->
+<!--								<additionalArgument>cosevent</additionalArgument>-->
+<!--								<additionalArgument>fr.esiag.mezzodijava.mezzo.cosevent</additionalArgument>-->
+<!--							</additionalArguments>-->
+<!---->
+<!--						</source>-->
+<!--					</sources>-->
+<!--				</configuration>-->
 				<configuration>
 					<compiler>jacorb</compiler>
 					<sources>

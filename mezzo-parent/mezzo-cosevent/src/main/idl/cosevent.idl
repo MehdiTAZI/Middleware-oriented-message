@@ -1,0 +1,38 @@
+module cosevent {
+	
+	struct Event{
+		long timeStamp;
+		any content;
+	};
+	
+	exception AlreadyConnectedException{
+	};
+	
+	exception NotConnectedException{
+	};
+	
+	exception MaximalConnectionReachedException{
+	};
+	
+	interface CallbackConsumer{
+		void receive(in Event evt);
+	};
+	
+	interface ProxyForPushConsumer{
+		void subscribe(in CallbackConsumer cc);
+		void unsubscribe();
+		void connect() raises (AlreadyConnectedException,MaximalConnectionReachedException);
+		void disconnect() raises (NotConnectedException);
+	};
+	
+	interface ProxyForPushSupplier{
+		boolean connect() raises (AlreadyConnectedException);
+		void push(in Event evt);
+		boolean disconnect() raises (NotConnectedException);
+	};
+	
+	interface Channel{
+		ProxyForPushConsumer getProxyForPushConsumer();
+		ProxyForPushSupplier getProxyForPushSupplier();
+	};
+};
