@@ -5,6 +5,12 @@ module cosevent {
 		any content;
 	};
 	
+	exception AlreadyRegisteredException{
+	};
+	
+	exception NotRegisteredException{
+	};
+	
 	exception AlreadyConnectedException{
 	};
 	
@@ -19,14 +25,14 @@ module cosevent {
 	};
 	
 	interface ProxyForPushConsumer{
-		void subscribe(in CallbackConsumer cc);
-		void unsubscribe();
+		void subscribe(in CallbackConsumer cc) raises (AlreadyRegisteredException);
+		void unsubscribe() raises (NotRegisteredException);
 		void connect() raises (AlreadyConnectedException,MaximalConnectionReachedException);
 		void disconnect() raises (NotConnectedException);
 	};
 	
 	interface ProxyForPushSupplier{
-		boolean connect() raises (AlreadyConnectedException);
+		boolean connect() raises (AlreadyConnectedException,MaximalConnectionReachedException);
 		void push(in Event evt);
 		boolean disconnect() raises (NotConnectedException);
 	};
