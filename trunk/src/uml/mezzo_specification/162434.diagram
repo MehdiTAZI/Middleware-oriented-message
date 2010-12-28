@@ -5,13 +5,16 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 470 4 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 146 53 2010 11 99
+  xyzwh 149 53 2010 11 135
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 495 51 2010 11 39
+  xyzwh 498 51 2010 11 39
 end
 durationcanvas 131586 classinstance_ref 128130 // :Framework
-  xyzwh 495 108 2010 11 36
+  xyzwh 498 149 2010 11 39
+end
+durationcanvas 131970 classinstance_ref 128130 // :Framework
+  xyzwh 498 109 2010 11 31
 end
 msg 130306 synchronous
   from durationcanvas_ref 128258
@@ -29,13 +32,25 @@ msg 131458 return
 msg 131714 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131586
-  yz 108 2015 explicitmsg "connect()"
+  yz 152 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 309 95
+  label_xy 309 139
 msg 131842 return
   from durationcanvas_ref 131586
   to durationcanvas_ref 128258
-  yz 133 2015 explicitmsg "EXCEPTION : ChannelException.MaximalConnectionReached"
+  yz 177 2015 explicitmsg "EXCEPTION : ChannelException.MaximalConnectionReached"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 226 120
+  label_xy 186 163
+msg 132098 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 131970
+  yz 109 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 277 96
+msg 132226 return
+  from durationcanvas_ref 131970
+  to durationcanvas_ref 128258
+  yz 128 3005 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 285 115
 end

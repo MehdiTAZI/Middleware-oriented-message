@@ -5,25 +5,28 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 127 67 2010 11 312
+  xyzwh 130 67 2010 11 387
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 582 67 2010 11 41
+  xyzwh 585 67 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 582 128 2010 11 47
+  xyzwh 585 201 2010 11 47
 end
 durationcanvas 132738 classinstance_ref 128130 // :Framework
-  xyzwh 582 195 2010 11 38
+  xyzwh 585 268 2010 11 38
   overlappingdurationcanvas 132994
-    xyzwh 588 202 2020 11 25
+    xyzwh 591 275 2020 11 25
   end
 end
 durationcanvas 133634 classinstance_ref 128130 // :Framework
-  xyzwh 582 261 2010 11 40
+  xyzwh 585 334 2010 11 40
 end
 durationcanvas 134146 classinstance_ref 128130 // :Framework
-  xyzwh 582 322 2010 11 36
+  xyzwh 585 395 2010 11 36
+end
+durationcanvas 134530 classinstance_ref 128130 // :Framework
+  xyzwh 585 130 2010 11 25
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
@@ -41,47 +44,59 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 129 2015 explicitmsg "connect()"
+  yz 202 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 340 117
+  label_xy 339 190
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 161 2015 explicitmsg "connected"
+  yz 234 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 339 149
+  label_xy 338 222
 msg 132866 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132738
-  yz 196 2015 explicitmsg "push(Event)"
+  yz 269 2015 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 332 183
+  label_xy 331 256
 reflexivemsg 133122 synchronous
   to durationcanvas_ref 132994
-  yz 202 2025 explicitmsg "updateListeEvents"
+  yz 275 2025 explicitmsg "updateListeEvents"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 621 203
+  label_xy 620 276
 msg 133762 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 133634
-  yz 262 2015 explicitmsg "disconnect()"
+  yz 335 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 333 249
+  label_xy 332 322
 msg 133890 return
   from durationcanvas_ref 133634
   to durationcanvas_ref 128258
-  yz 284 2020 explicitmsg "disconnected"
+  yz 357 2020 explicitmsg "disconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 327 271
+  label_xy 326 344
 msg 134274 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 134146
-  yz 322 2015 unspecifiedmsg
+  yz 395 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 134402 return
   from durationcanvas_ref 134146
   to durationcanvas_ref 128258
-  yz 347 2015 explicitmsg "EXCEPTION : CannotPushEventAllreadyDisconnected"
+  yz 420 2015 explicitmsg "EXCEPTION : CannotPushEventAllreadyDisconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 234 334
+  label_xy 233 407
+msg 134658 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 134530
+  yz 130 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 311 117
+msg 134786 return
+  from durationcanvas_ref 134530
+  to durationcanvas_ref 128258
+  yz 151 2015 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 319 138
 end

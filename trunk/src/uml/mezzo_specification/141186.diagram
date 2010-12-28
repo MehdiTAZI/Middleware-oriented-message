@@ -5,61 +5,76 @@ classinstance 128004 class_ref 134658 // Consumer
 classinstance 128132 class_ref 141698 // Framework
   name ""   xyz 403.139 23 2000 life_line_z 2000
 textcanvas 128260 "processEvent"
-  xyzwh 80 364 2000 71 15
+  xyzwh 84 437 2000 71 15
 fragment 132740 "loop"
-  xyzwh 1 325 2035 463 85
+  xyzwh 5 398 2035 463 85
 end
 fragment 132868 "loop"
-  xyzwh 1 525 2040 461 77
+  xyzwh 5 598 2040 461 77
+end
+durationcanvas 128002 classinstance_ref 128132 // :Framework
+  xyzwh 431 224 2010 11 33
 end
 durationcanvas 128388 classinstance_ref 128132 // :Framework
-  xyzwh 428 273 2010 11 30
+  xyzwh 431 346 2010 11 30
 end
 durationcanvas 128516 classinstance_ref 128004 // :Consumer
-  xyzwh 33 77 2010 11 1187
+  xyzwh 35 77 2010 11 1187
   overlappingdurationcanvas 128644
-    xyzwh 39 172 2020 11 26
+    xyzwh 41 172 2020 11 26
   end
   overlappingdurationcanvas 128772
-    xyzwh 39 341 2020 11 54
+    xyzwh 41 414 2020 11 54
     overlappingdurationcanvas 128900
-      xyzwh 45 364 2030 11 25
+      xyzwh 47 437 2030 11 25
     end
   end
   overlappingdurationcanvas 132228
-    xyzwh 39 540 2020 11 55
+    xyzwh 41 613 2020 11 55
     overlappingdurationcanvas 132484
-      xyzwh 45 560 2030 11 25
+      xyzwh 47 633 2030 11 25
     end
   end
 end
 durationcanvas 129028 classinstance_ref 128132 // :Framework
-  xyzwh 428 427 2010 11 34
+  xyzwh 431 500 2010 11 34
 end
 durationcanvas 129156 classinstance_ref 128132 // :Framework
-  xyzwh 428 110 2010 11 40
+  xyzwh 431 110 2010 11 40
 end
 durationcanvas 129284 classinstance_ref 128132 // :Framework
-  xyzwh 428 620 2010 11 28
+  xyzwh 431 693 2010 11 28
 end
 durationcanvas 129412 classinstance_ref 128132 // :Framework
-  xyzwh 428 215 2010 11 38
+  xyzwh 431 288 2010 11 38
 end
 durationcanvas 129540 classinstance_ref 128132 // :Framework
-  xyzwh 428 347 2010 11 50
+  xyzwh 431 420 2010 11 50
 end
 durationcanvas 131716 classinstance_ref 128132 // :Framework
-  xyzwh 428 485 2010 11 34
+  xyzwh 431 558 2010 11 34
 end
 durationcanvas 132100 classinstance_ref 128132 // :Framework
-  xyzwh 428 539 2010 11 40
+  xyzwh 431 612 2010 11 40
 end
+msg 128130 synchronous
+  from durationcanvas_ref 128516
+  to durationcanvas_ref 128002
+  yz 224 2015 explicitmsg "getProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 182 211
+msg 128258 return
+  from durationcanvas_ref 128002
+  to durationcanvas_ref 128516
+  yz 244 2015 explicitmsg "ProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 190 231
 msg 129668 return
   from durationcanvas_ref 129284
   to durationcanvas_ref 128516
-  yz 637 2020 explicitmsg "notRegister"
+  yz 710 2020 explicitmsg "notRegister"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 249 625
+  label_xy 253 698
 reflexivemsg 129796 synchronous
   to durationcanvas_ref 128644
   yz 172 2025 explicitmsg "createCallback"
@@ -74,9 +89,9 @@ msg 129924 return
 msg 130052 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 129284
-  yz 620 2015 explicitmsg "unsuscribe()"
+  yz 693 2015 explicitmsg "unsuscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 248 608
+  label_xy 252 681
 msg 130180 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 129156
@@ -86,72 +101,72 @@ msg 130180 synchronous
 msg 130308 return
   from durationcanvas_ref 129028
   to durationcanvas_ref 128516
-  yz 450 2015 explicitmsg "disconnected"
+  yz 523 2015 explicitmsg "disconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 262 437
+  label_xy 266 510
 reflexivemsg 130436 synchronous
   to durationcanvas_ref 128900
-  yz 364 2035 unspecifiedmsg
+  yz 437 2035 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 130564 return
   from durationcanvas_ref 128388
   to durationcanvas_ref 128516
-  yz 292 2020 explicitmsg "connected"
+  yz 365 2020 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 215 280
+  label_xy 219 353
 msg 130692 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 129028
-  yz 427 2015 explicitmsg "disconnect()"
+  yz 500 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 265 414
+  label_xy 269 487
 msg 130820 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 128388
-  yz 273 2015 explicitmsg "connect()"
+  yz 346 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 217 261
+  label_xy 221 334
 msg 130948 asynchronous
   from durationcanvas_ref 129540
   to durationcanvas_ref 128772
-  yz 348 2025 explicitmsg "push(Event)"
+  yz 421 2025 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 209 335
+  label_xy 213 408
 msg 131076 return
   from durationcanvas_ref 129412
   to durationcanvas_ref 128516
-  yz 239 2015 explicitmsg "register"
+  yz 312 2015 explicitmsg "register"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 215 226
+  label_xy 219 299
 msg 131204 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 129412
-  yz 216 2015 explicitmsg "suscribe()"
+  yz 289 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "CallBack"
-  label_xy 176 203
+  label_xy 180 276
 msg 131844 synchronous
   from durationcanvas_ref 128516
   to durationcanvas_ref 131716
-  yz 485 2015 explicitmsg "connect()"
+  yz 558 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 217 473
+  label_xy 221 546
 msg 131972 return
   from durationcanvas_ref 131716
   to durationcanvas_ref 128516
-  yz 504 2020 explicitmsg "connected"
+  yz 577 2020 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 215 492
+  label_xy 219 565
 msg 132356 synchronous
   from durationcanvas_ref 132100
   to durationcanvas_ref 132228
-  yz 540 2025 explicitmsg "push()"
+  yz 613 2025 explicitmsg "push()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Event"
-  label_xy 214 528
+  label_xy 218 601
 reflexivemsg 132612 synchronous
   to durationcanvas_ref 132484
-  yz 560 2035 explicitmsg "processEvent"
+  yz 633 2035 explicitmsg "processEvent"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 78 561
+  label_xy 82 634
 end

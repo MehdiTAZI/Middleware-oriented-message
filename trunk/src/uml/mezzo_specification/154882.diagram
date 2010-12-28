@@ -5,54 +5,57 @@ classinstance 128002 class_ref 141698 // Framework
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 37.4337 4 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 56 80 2010 11 377
+  xyzwh 58 81 2010 11 329
   overlappingdurationcanvas 131074
-    xyzwh 62 136 2020 11 26
+    xyzwh 64 136 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 71 2010 11 53
+  xyzwh 453 71 2010 11 54
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 174 2010 11 43
+  xyzwh 453 244 2010 11 43
 end
 durationcanvas 132482 classinstance_ref 128002 // :Framework
-  xyzwh 450 226 2010 11 29
+  xyzwh 453 296 2010 11 30
 end
 durationcanvas 132738 classinstance_ref 128002 // :Framework
-  xyzwh 450 278 2010 11 49
+  xyzwh 453 348 2010 11 49
+end
+durationcanvas 133122 classinstance_ref 128002 // :Framework
+  xyzwh 453 186 2010 11 37
 end
 msg 128004 return
   from durationcanvas_ref 132482
   to durationcanvas_ref 128258
-  yz 244 3005 explicitmsg "disconnected"
+  yz 315 3005 explicitmsg "disconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 233 232
+  label_xy 231 303
 msg 128132 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 205 3005 explicitmsg "register"
+  yz 276 3005 explicitmsg "register"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 242 193
+  label_xy 240 264
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 80 2015 explicitmsg "resolveChannel(Topic)"
+  yz 81 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 144 65
+  label_xy 144 66
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 113 2020 explicitmsg "Channel reference"
+  yz 114 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 213 100
+  label_xy 213 101
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 183 2015 explicitmsg "suscribe()"
+  yz 254 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Callback"
-  label_xy 198 170
+  label_xy 196 241
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 136 2025 explicitmsg "createCallback"
@@ -61,19 +64,31 @@ reflexivemsg 131202 synchronous
 msg 132610 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132482
-  yz 226 2015 explicitmsg "disconnect()"
+  yz 297 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 237 213
+  label_xy 235 284
 msg 132866 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132738
-  yz 278 2015 explicitmsg "disconnect"
+  yz 349 2015 explicitmsg "disconnect"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 237 265
+  label_xy 235 336
 msg 132994 return
   from durationcanvas_ref 132738
   to durationcanvas_ref 128258
-  yz 305 2015 explicitmsg "EXCEPTION : ChannelException.NotConnected"
+  yz 376 2015 explicitmsg "EXCEPTION : ChannelException.NotConnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 190 292
+  label_xy 188 363
+msg 133250 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 133122
+  yz 189 2015 explicitmsg "getProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 205 176
+msg 133378 return
+  from durationcanvas_ref 133122
+  to durationcanvas_ref 128258
+  yz 212 2020 explicitmsg "ProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 213 199
 end

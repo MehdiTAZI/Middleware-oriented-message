@@ -5,13 +5,16 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 508 15 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 118 90 2010 11 110
+  xyzwh 121 90 2010 11 134
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 533 86 2010 11 33
+  xyzwh 536 86 2010 11 33
 end
 durationcanvas 130178 classinstance_ref 128130 // :Framework
-  xyzwh 533 157 2010 11 37
+  xyzwh 536 188 2010 11 37
+end
+durationcanvas 130562 classinstance_ref 128130 // :Framework
+  xyzwh 536 139 2010 11 32
 end
 msg 129154 synchronous
   from durationcanvas_ref 128258
@@ -29,13 +32,25 @@ msg 129666 return
 msg 130306 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 130178
-  yz 157 2015 explicitmsg "connect()"
+  yz 188 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 311 144
+  label_xy 314 175
 msg 130434 return
   from durationcanvas_ref 130178
   to durationcanvas_ref 128258
-  yz 182 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
+  yz 213 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 236 169
+  label_xy 239 200
+msg 130690 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 130562
+  yz 139 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 282 126
+msg 130818 return
+  from durationcanvas_ref 130562
+  to durationcanvas_ref 128258
+  yz 160 3005 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 290 147
 end
