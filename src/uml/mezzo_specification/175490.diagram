@@ -5,25 +5,28 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 fragment 128516 "loop"
-  xyzwh 89 176 2015 620 66
+  xyzwh 90 220 2015 620 66
 end
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 127 66 2010 11 236
+  xyzwh 130 66 2010 11 271
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 582 67 2010 11 41
+  xyzwh 585 67 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 582 127 2010 11 34
+  xyzwh 585 171 2010 11 34
 end
 durationcanvas 132738 classinstance_ref 128130 // :Framework
-  xyzwh 582 195 2010 11 38
+  xyzwh 585 239 2010 11 38
   overlappingdurationcanvas 132994
-    xyzwh 588 202 2020 11 25
+    xyzwh 591 246 2020 11 25
   end
 end
 durationcanvas 133634 classinstance_ref 128130 // :Framework
-  xyzwh 582 260 2010 11 40
+  xyzwh 585 304 2010 11 40
+end
+durationcanvas 134018 classinstance_ref 128130 // :Framework
+  xyzwh 585 120 2010 11 33
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
@@ -41,36 +44,48 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 127 2015 explicitmsg "connect()"
+  yz 171 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 340 115
+  label_xy 341 159
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 149 2015 explicitmsg "connected"
+  yz 193 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 339 137
+  label_xy 340 181
 msg 132866 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132738
-  yz 195 2015 explicitmsg "push(Event)"
+  yz 239 2015 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 332 182
+  label_xy 333 226
 reflexivemsg 133122 synchronous
   to durationcanvas_ref 132994
-  yz 202 2025 explicitmsg "updateListeEvents"
+  yz 246 2025 explicitmsg "updateListeEvents"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 621 203
+  label_xy 622 247
 msg 133762 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 133634
-  yz 260 2015 explicitmsg "disconnect()"
+  yz 304 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 334 247
+  label_xy 335 291
 msg 133890 return
   from durationcanvas_ref 133634
   to durationcanvas_ref 128258
-  yz 282 2020 explicitmsg "disconnected"
+  yz 326 2020 explicitmsg "disconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 328 269
+  label_xy 329 313
+msg 134146 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 134018
+  yz 120 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 311 107
+msg 134274 return
+  from durationcanvas_ref 134018
+  to durationcanvas_ref 128258
+  yz 142 3005 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 319 129
 end

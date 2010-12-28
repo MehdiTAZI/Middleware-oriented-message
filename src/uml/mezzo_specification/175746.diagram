@@ -5,25 +5,28 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 127 67 2010 11 283
+  xyzwh 130 67 2010 11 322
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 582 67 2010 11 41
+  xyzwh 585 67 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 582 128 2010 11 47
+  xyzwh 585 167 2010 11 47
 end
 durationcanvas 132738 classinstance_ref 128130 // :Framework
-  xyzwh 582 195 2010 11 38
+  xyzwh 585 234 2010 11 38
   overlappingdurationcanvas 132994
-    xyzwh 588 202 2020 11 25
+    xyzwh 591 241 2020 11 25
   end
 end
 durationcanvas 133634 classinstance_ref 128130 // :Framework
-  xyzwh 582 260 2010 11 40
+  xyzwh 585 299 2010 11 40
 end
 durationcanvas 134146 classinstance_ref 128130 // :Framework
-  xyzwh 582 317 2010 11 33
+  xyzwh 585 356 2010 11 33
+end
+durationcanvas 134530 classinstance_ref 128130 // :Framework
+  xyzwh 585 120 2010 11 33
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
@@ -41,48 +44,60 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 129 2015 explicitmsg "connect()"
+  yz 168 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 338 116
+  label_xy 338 155
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 161 2015 explicitmsg "connected"
+  yz 200 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 339 149
+  label_xy 339 188
 msg 132866 asynchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132738
-  yz 196 2015 explicitmsg "push(Event)"
+  yz 235 2015 explicitmsg "push(Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 332 183
+  label_xy 332 222
 reflexivemsg 133122 synchronous
   to durationcanvas_ref 132994
-  yz 202 2025 explicitmsg "updateListeEvents"
+  yz 241 2025 explicitmsg "updateListeEvents"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 621 203
+  label_xy 621 242
 msg 133762 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 133634
-  yz 261 2015 explicitmsg "disconnect()"
+  yz 300 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 334 248
+  label_xy 334 287
 msg 133890 return
   from durationcanvas_ref 133634
   to durationcanvas_ref 128258
-  yz 283 2020 explicitmsg "disconnected"
+  yz 322 2020 explicitmsg "disconnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 328 270
+  label_xy 328 309
 msg 134274 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 134146
-  yz 317 2015 explicitmsg "disconnect()"
+  yz 356 2015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 334 304
+  label_xy 334 343
 msg 134402 return
   from durationcanvas_ref 134146
   to durationcanvas_ref 128258
-  yz 339 2015 explicitmsg "EXCEPTION : NotConnected"
+  yz 378 2015 explicitmsg "EXCEPTION : NotConnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 294 326
+  label_xy 294 365
+msg 134658 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 134530
+  yz 120 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 311 107
+msg 134786 return
+  from durationcanvas_ref 134530
+  to durationcanvas_ref 128258
+  yz 142 3005 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 319 129
 end

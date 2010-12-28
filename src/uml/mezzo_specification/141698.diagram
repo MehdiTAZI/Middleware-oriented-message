@@ -5,45 +5,48 @@ classinstance 128002 class_ref 141698 // Framework
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 35.9337 4.06488 2000 life_line_z 2000
 note 132098 "Le Consumer est tombe ou inaccessible"
-  xyzwh 114 345 2000 227 35
+  xyzwh 118 406 2000 227 35
 note 132610 "EXCEPTION : ConsumerException.ConsumerNotFound"
-  xyzwh 118 440 2000 317 35
+  xyzwh 122 501 2000 317 35
 note 133506 "Le Systeme journalise l'erreur"
-  xyzwh 278 492 2000 183 35
+  xyzwh 282 553 2000 183 35
 durationcanvas 128132 classinstance_ref 128002 // :Framework
-  xyzwh 450 242 2010 11 31
+  xyzwh 453 303 2010 11 31
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 54 74 2010 11 267
+  xyzwh 56 74 2010 11 267
   overlappingdurationcanvas 131074
-    xyzwh 60 133 2020 11 26
+    xyzwh 62 133 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 72 2010 11 48
+  xyzwh 453 72 2010 11 48
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 175 2010 11 38
+  xyzwh 453 236 2010 11 38
 end
 durationcanvas 132226 classinstance_ref 128002 // :Framework
-  xyzwh 450 431 2010 11 44
+  xyzwh 453 492 2010 11 44
   overlappingdurationcanvas 133250
-    xyzwh 456 444 2020 11 25
+    xyzwh 459 505 2020 11 25
   end
 end
-lostfoundmsgsupport 132354 xyz 83 434 2015
+durationcanvas 133762 classinstance_ref 128002 // :Framework
+  xyzwh 453 181 2010 11 36
+end
+lostfoundmsgsupport 132354 xyz 87 495 2015
 msg 128260 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128132
-  yz 242 2015 explicitmsg "connect()"
+  yz 303 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 238 230
+  label_xy 242 291
 msg 128388 return
   from durationcanvas_ref 128132
   to durationcanvas_ref 128258
-  yz 262 2015 explicitmsg "connected"
+  yz 323 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 236 250
+  label_xy 240 311
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
@@ -59,16 +62,16 @@ msg 128642 return
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 177 2015 explicitmsg "suscribe()"
+  yz 238 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Callback"
-  label_xy 197 164
+  label_xy 201 225
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 200 2015 explicitmsg "register"
+  yz 261 2015 explicitmsg "register"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 236 187
+  label_xy 240 248
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 133 2025 explicitmsg "createCallback"
@@ -77,14 +80,26 @@ reflexivemsg 131202 synchronous
 msg 132482 lost_synchronous
   from durationcanvas_ref 132226
   to lostfoundmsgsupport_ref 132354
-  yz 432 2015 explicitmsg "push (Event)"
+  yz 493 2015 explicitmsg "push (Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 246 419
+  label_xy 250 480
 reflexivemsg 133378 synchronous
   to durationcanvas_ref 133250
-  yz 444 2025 explicitmsg "errorLog"
+  yz 505 2025 explicitmsg "errorLog"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 468 431
+  label_xy 472 492
+msg 133890 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 133762
+  yz 181 2015 explicitmsg "getProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 204 168
+msg 134018 return
+  from durationcanvas_ref 133762
+  to durationcanvas_ref 128258
+  yz 206 2020 explicitmsg "ProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 212 193
 line 132738 -_-_
   from ref 132610 z 2011 to ref 132226
 line 133122 -_-_ decenter_begin 39 decenter_end 921

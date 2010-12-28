@@ -5,16 +5,19 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 127 67 2010 11 188
+  xyzwh 130 67 2010 11 260
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 582 67 2010 11 41
+  xyzwh 585 67 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 582 128 2010 11 47
+  xyzwh 585 204 2010 11 47
 end
 durationcanvas 132098 classinstance_ref 128130 // :Framework
-  xyzwh 582 197 2010 11 33
+  xyzwh 585 273 2010 11 33
+end
+durationcanvas 132482 classinstance_ref 128130 // :Framework
+  xyzwh 585 138 2010 11 39
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
@@ -32,25 +35,37 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 129 2015 explicitmsg "connect(Channel reference)"
+  yz 205 2015 explicitmsg "connect(Channel reference)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 300 118
+  label_xy 303 194
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 161 2015 explicitmsg "connected"
+  yz 237 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 339 149
+  label_xy 342 225
 msg 132226 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132098
-  yz 199 2015 explicitmsg "connect(Channel reference)"
+  yz 275 2015 explicitmsg "connect(Channel reference)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 297 186
+  label_xy 300 262
 msg 132354 return
   from durationcanvas_ref 132098
   to durationcanvas_ref 128258
-  yz 218 2020 explicitmsg "EXCEPTION : AlreadyConnected"
+  yz 294 2020 explicitmsg "EXCEPTION : AlreadyConnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 285 205
+  label_xy 288 281
+msg 132610 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 132482
+  yz 138 2015 explicitmsg "getProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 311 125
+msg 132738 return
+  from durationcanvas_ref 132482
+  to durationcanvas_ref 128258
+  yz 170 2015 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 319 157
 end

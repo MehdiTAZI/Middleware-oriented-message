@@ -5,18 +5,18 @@ classinstance 128002 class_ref 141570 // Supplier
 classinstance 128130 class_ref 141698 // Framework
   name ""   xyz 557 7 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 127 62 2010 11 35
+  xyzwh 130 63 2010 11 62
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 582 63 2010 11 103
+  xyzwh 585 62 2010 11 59
 end
-lostfoundmsgsupport 128772 xyz 175 111 2015
+lostfoundmsgsupport 128772 xyz 177 103 2015
 msg 128900 lost_synchronous
   from durationcanvas_ref 128386
   to lostfoundmsgsupport_ref 128772
-  yz 109 2015 explicitmsg "EXCEPTION :SupplierException.SupplierNotFound"
+  yz 101 2015 explicitmsg "EXCEPTION :SupplierException.SupplierNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 279 97
+  label_xy 281 89
 msg 130434 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386

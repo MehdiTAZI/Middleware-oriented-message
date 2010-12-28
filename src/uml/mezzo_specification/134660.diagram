@@ -121,13 +121,13 @@ msg 132354 return
 msg 132994 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132866
-  yz 162 2015 explicitmsg "getProxySupplierPush"
+  yz 162 2015 explicitmsg "getProxyPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 204 149
 msg 133122 return
   from durationcanvas_ref 132866
   to durationcanvas_ref 128258
-  yz 184 3005 explicitmsg "Proxy Supplier Push"
+  yz 184 3005 explicitmsg "ProxyPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 213 171
 end

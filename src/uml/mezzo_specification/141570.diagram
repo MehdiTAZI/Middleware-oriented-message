@@ -5,16 +5,19 @@ classinstance 128002 class_ref 141698 // Framework
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 75 2010 11 151
+  xyzwh 57 75 2010 11 214
   overlappingdurationcanvas 131074
-    xyzwh 61 133 2020 11 26
+    xyzwh 63 133 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 72 2010 11 48
+  xyzwh 453 72 2010 11 48
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 175 2010 11 38
+  xyzwh 453 232 2010 11 38
+end
+durationcanvas 131330 classinstance_ref 128002 // :Framework
+  xyzwh 453 176 2010 11 36
 end
 msg 128514 synchronous
   from durationcanvas_ref 128258
@@ -32,19 +35,31 @@ msg 128642 return
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 178 2015 explicitmsg "suscribe()"
+  yz 235 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Callback"
-  label_xy 198 165
+  label_xy 196 222
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 201 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
+  yz 258 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 80 189
+  label_xy 78 246
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 133 2025 explicitmsg "createCallback"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 98 132
+msg 131458 synchronous
+  from durationcanvas_ref 128258
+  to durationcanvas_ref 131330
+  yz 176 2025 explicitmsg "getProxyPushConsumer"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 204 163
+msg 131586 return
+  from durationcanvas_ref 131330
+  to durationcanvas_ref 128258
+  yz 201 2030 explicitmsg "EXCEPTION : ConnectionExcepetion.ChannelNotFound"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 127 188
 end
