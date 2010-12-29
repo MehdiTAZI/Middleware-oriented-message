@@ -20,25 +20,31 @@ module cosevent {
 	exception MaximalConnectionReachedException{
 	};
 	
+	exception ChannelNotFoundException{
+	};
+	
+	exception ConsumerNotFoundException{
+	};
+	
 	interface CallbackConsumer{
-		void receive(in Event evt);
+		void receive(in Event evt) raises (ConsumerNotFoundException);
 	};
 	
 	interface ProxyForPushConsumer{
-		void subscribe(in CallbackConsumer cc) raises (AlreadyRegisteredException);
-		void unsubscribe() raises (NotRegisteredException);
-		void connect() raises (AlreadyConnectedException,MaximalConnectionReachedException);
-		void disconnect() raises (NotConnectedException);
+		void subscribe(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
+		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
+		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);
 	};
 	
 	interface ProxyForPushSupplier{
-		boolean connect() raises (AlreadyConnectedException,MaximalConnectionReachedException);
-		void push(in Event evt);
-		boolean disconnect() raises (NotConnectedException);
+		boolean connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
+		void push(in Event evt) raises (ChannelNotFoundException);
+		boolean disconnect() raises (ChannelNotFoundException,NotConnectedException);
 	};
 	
 	interface Channel{
-		ProxyForPushConsumer getProxyForPushConsumer();
-		ProxyForPushSupplier getProxyForPushSupplier();
+		ProxyForPushConsumer getProxyForPushConsumer() raises (ChannelNotFoundException);
+		ProxyForPushSupplier getProxyForPushSupplier() raises (ChannelNotFoundException);
 	};
 };
