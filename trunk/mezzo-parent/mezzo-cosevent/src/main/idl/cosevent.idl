@@ -25,19 +25,23 @@ module cosevent {
 	
 	exception ConsumerNotFoundException{
 	};
+	interface Consumer{
+	};
+	interface Supplier{
+	};
 	
 	interface CallbackConsumer{
 		void receive(in Event evt) raises (ConsumerNotFoundException);
 	};
 	
-	interface ProxyForPushConsumer{
+	interface ProxyForPushConsumer : Consumer{
 		void subscribe(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
 		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
 		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
 		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);
 	};
 	
-	interface ProxyForPushSupplier{
+	interface ProxyForPushSupplier : Supplier{
 		boolean connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
 		void push(in Event evt) raises (ChannelNotFoundException);
 		boolean disconnect() raises (ChannelNotFoundException,NotConnectedException);
