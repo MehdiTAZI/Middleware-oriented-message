@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 6
-  modified_by 3 "Ordi"
+  revision 9
+  modified_by 2 "Franck"
 
 
   
@@ -58,6 +58,11 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    sequencediagram 161922 "UC02 - Scenario nominal reloaded"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A3-Landscape
+    end
+
     sequencediagram 128003 "UC02 - Scénario nominal"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4

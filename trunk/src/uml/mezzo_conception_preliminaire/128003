@@ -1,6 +1,6 @@
 format 76
 "Diagramme d'intéraction" // Diagramme d'intéraction
-  revision 9
+  revision 12
   modified_by 2 "Franck"
   // class settings
   //class diagram settings
@@ -91,14 +91,14 @@ ${members}}
     end
 
     classinstance 128131 ""
-      type class_ref 161794 // ProxyPushSupplier
+      type class_ref 128514 // ProxyPushConsumer
       attributes
         end
       relations
         end
     end
 
-    class 128387 "EventServerIntf"
+    class 128387 "ChannelAdminIntf"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -112,7 +112,7 @@ ${members}}
     end
 
     classinstance 128259 ""
-      type class_ref 128387 // EventServerIntf
+      type class_ref 128387 // ChannelAdminIntf
       attributes
         end
       relations
@@ -214,10 +214,21 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 176130 "resolveChannelByTopic"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     classinstance 134532 ""
-      type class_ref 134532 // EventClient
+      type class_ref 182146 // EventClient
       attributes
         end
       relations
