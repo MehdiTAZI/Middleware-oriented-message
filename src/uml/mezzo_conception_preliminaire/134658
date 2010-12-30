@@ -264,7 +264,7 @@ ${members}}
 
   classview 128002 "Classes Participantes"
     //class diagram settings
-    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode boundary drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
     //collaboration diagram settings
     show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
     //object diagram settings
@@ -280,7 +280,7 @@ ${members}}
     show_infonote default drawing_language default show_stereotype_properties default
     oid 128002
     classdiagram 128002 "UC02/UC03 - Classes Participantes"
-      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode boundary drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       oid 128002
       size A4
     end
@@ -315,7 +315,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 171138 // <unidirectional association>
-	  b parent class_ref 168706 // EventServerIntf
+	  b parent class_ref 168706 // ChannelAdminIntf
 	oid 171138
       end
 
@@ -328,6 +328,17 @@ ${members}}
 	    classrelation_ref 185346 // <unidirectional association>
 	  b parent class_ref 175618 // CallbackSupplier
 	oid 185346
+      end
+
+      classrelation 198786 // <unidirectional association>
+	relation 196994 --->
+	  oid 196994
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198786 // <unidirectional association>
+	  b parent class_ref 182146 // EventClient
+	oid 198786
       end
     end
 
@@ -361,7 +372,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 170370 // <unidirectional association>
-	  b parent class_ref 168706 // EventServerIntf
+	  b parent class_ref 168706 // ChannelAdminIntf
 	oid 170370
       end
 
@@ -386,6 +397,17 @@ ${members}}
 	  b parent class_ref 128514 // ProxyPushConsumer
 	oid 185474
       end
+
+      classrelation 198658 // <unidirectional association>
+	relation 196866 --->
+	  oid 196866
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198658 // <unidirectional association>
+	  b parent class_ref 182146 // EventClient
+	oid 198658
+      end
     end
 
     class 148738 "ChannelCtr"
@@ -398,66 +420,6 @@ ${members}}
       explicit_switch_type ""
       
       oid 148738
-      operation 142338 "push"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "e" type class_ref 142210 // Event
-	
-	
-	
-	
-	
-	oid 142338
-      end
-
-      operation 142466 "connect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "callBack" type class_ref 128002 // CallbackConsumer
-	
-	
-	
-	
-	
-	oid 142466
-      end
-
-      operation 142594 "connect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "pps" type class_ref 161794 // ProxyPushSupplier
-	
-	
-	
-	
-	
-	oid 142594
-      end
-
-      operation 142722 "disconnect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "ppc" explicit_type "ProxyPushConsumer"
-	
-	
-	
-	
-	
-	oid 142722
-      end
-
-      operation 142850 "disconnect"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "pps" explicit_type "ProxyPushSupplier"
-	
-	
-	
-	
-	
-	oid 142850
-      end
-
       classrelation 149122 // (events)
 	relation 148354 *--- name "events"
 	  oid 148354
@@ -519,7 +481,7 @@ ${members}}
 	oid 177922
       end
 
-      operation 169602 "processEvents"
+      operation 182658 "addCallbackConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -529,7 +491,79 @@ ${members}}
 	
 	
 	
-	oid 169602
+	oid 134787
+      end
+
+      operation 182786 "getEventToChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 134915
+      end
+
+      classrelation 198914 // <unidirectional association>
+	relation 197122 --->
+	  oid 134915
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 198914 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+	oid 134915
+      end
+
+      operation 182914 "removeCallbackConsumer"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 135043
+      end
+
+      classrelation 199042 // <unidirectional association>
+	relation 197250 --->
+	  oid 135171
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199042 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 135171
+      end
+
+      operation 183042 "addEventToChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 135171
+      end
+
+      classrelation 199170 // <unidirectional association>
+	relation 197378 --->
+	  oid 135555
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199170 // <unidirectional association>
+	  b parent class_ref 148738 // ChannelCtr
+	oid 135555
       end
     end
 
@@ -600,7 +634,7 @@ ${members}}
       explicit_switch_type ""
       
       oid 128514
-      operation 128002 "connect"
+      operation 128002 "suscribe"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "callBack" type class_ref 128002 // CallbackConsumer
@@ -634,7 +668,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 163202 // <unidirectional association>
-	  b parent class_ref 128642 // EventServerCtr
+	  b parent class_ref 128642 // ChannelAdminCtr
 	oid 163202
       end
 
@@ -670,9 +704,57 @@ ${members}}
 	  b parent class_ref 128002 // CallbackConsumer
 	oid 192130
       end
+
+      operation 183170 "connect"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128004
+      end
+
+      operation 183298 "unsuscribe"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 128132
+      end
+
+      classrelation 199298 // <unidirectional association>
+	relation 197506 --->
+	  oid 134787
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199298 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 134787
+      end
+
+      classrelation 199426 // <unidirectional association>
+	relation 197634 --->
+	  oid 135043
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199426 // <unidirectional association>
+	  b parent class_ref 148738 // ChannelCtr
+	oid 135043
+      end
     end
 
-    class 128642 "EventServerCtr"
+    class 128642 "ChannelAdminCtr"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -684,32 +766,6 @@ ${members}}
       explicit_switch_type ""
       
       oid 128642
-      operation 128386 "getProxyPushConsumer"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	oid 128386
-      end
-
-      operation 156418 "getProxyPushSupplier"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	oid 156418
-      end
-
       classrelation 185602 // <unidirectional association>
 	relation 183810 --->
 	  oid 183810
@@ -719,6 +775,76 @@ ${members}}
 	    classrelation_ref 185602 // <unidirectional association>
 	  b parent class_ref 175490 // EventServer
 	oid 185602
+      end
+
+      operation 183426 "createProxyPushConsumer"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 134531
+      end
+
+      operation 183554 "createProxyPushSupplier"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 134659
+      end
+
+      classrelation 199554 // <unidirectional association>
+	relation 197762 --->
+	  oid 134531
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199554 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyPushConsumer
+	oid 134531
+      end
+
+      classrelation 199682 // <unidirectional association>
+	relation 197890 --->
+	  oid 134659
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199682 // <unidirectional association>
+	  b parent class_ref 161922 // Channel
+	oid 134659
+      end
+
+      classrelation 199810 // <unidirectional association>
+	relation 198018 --->
+	  oid 135299
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199810 // <unidirectional association>
+	  b parent class_ref 161922 // Channel
+	oid 135299
+      end
+
+      classrelation 199938 // <unidirectional association>
+	relation 198146 --->
+	  oid 135427
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199938 // <unidirectional association>
+	  b parent class_ref 161794 // ProxyPushSupplier
+	oid 135427
       end
     end
 
@@ -836,9 +962,20 @@ ${members}}
 	relation_ref 183426 // channels
 	oid 185218
       end
+
+      classrelation 205570 // <unidirectional association>
+	relation 203778 --->
+	  oid 203778
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 205570 // <unidirectional association>
+	  b parent class_ref 188674 // EventDelivererCtr
+	oid 205570
+      end
     end
 
-    class 168706 "EventServerIntf"
+    class 168706 "ChannelAdminIntf"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -883,7 +1020,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 170498 // <unidirectional association>
-	  b parent class_ref 128642 // EventServerCtr
+	  b parent class_ref 128642 // ChannelAdminCtr
 	oid 170498
       end
     end
@@ -939,6 +1076,80 @@ ${members}}
       
       oid 175618
     end
+
+    class 182146 "EventClient"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 182146
+      operation 183682 "resolveChannelByTopic"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 176130
+      end
+
+      classrelation 205698 // <unidirectional association>
+	relation 203906 --->
+	  oid 135683
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 205698 // <unidirectional association>
+	  b parent class_ref 182146 // EventClient
+	oid 135683
+      end
+    end
+
+    class 188674 "EventDelivererCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      oid 188674
+      operation 183810 "deliverEvents"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 182658
+      end
+
+      classrelation 205314 // <unidirectional association>
+	relation 203522 --->
+	  oid 203522
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 205314 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
+	oid 205314
+      end
+    end
   end
 
   classview 141058 "ANALYSE : DIAGRAMME DU DOMAINE ET CLASSES PARTICIPANTES"
@@ -979,6 +1190,18 @@ ${members}}
     classdiagram 155394 "UC03 - Envoyer un Event (PUSH) - Classes Participantes"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       oid 155394
+      size A4
+    end
+
+    classdiagram 162050 "UC02 - abonnement PUSH modif - classes participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 128259
+      size A4
+    end
+
+    classdiagram 162178 "UC03 - envoi PUSH modif - classes participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      oid 134787
       size A4
     end
   end
