@@ -49,7 +49,7 @@ end
 relationcanvas 129666 relation_ref 168450 // events
   from ref 129538 z 2001 label "events" italic xyz 780 382 2001 to ref 129410
   no_role_a no_role_b
-  multiplicity_a_pos 719 412 3000 no_multiplicity_b
+  multiplicity_a_pos 718 411 3000 no_multiplicity_b
 end
 relationcanvas 130818 relation_ref 169090 // <unidirectional association>
   from ref 130434 z 2006 to ref 128898
@@ -84,7 +84,7 @@ end
 relationcanvas 131842 relation_ref 183426 // channels
   from ref 131714 z 2001 label "channels" italic xyz 728 233 2001 to ref 129538
   no_role_a no_role_b
-  multiplicity_a_pos 757 270 3000 no_multiplicity_b
+  multiplicity_a_pos 761 269 3000 no_multiplicity_b
 end
 relationcanvas 132354 relation_ref 183810 // <unidirectional association>
   from ref 128898 z 2001 to ref 131714
