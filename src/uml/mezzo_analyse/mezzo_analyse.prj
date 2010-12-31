@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 33
+  revision 34
   modified_by 2 "Franck"
 
 
@@ -292,7 +292,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 171138 // <unidirectional association>
-	  b parent class_ref 168706 // ChannelAdminIntf
+	  b parent class_ref 168706 // ChannelAdmin
       end
 
       classrelation 185346 // <unidirectional association>
@@ -340,7 +340,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 170370 // <unidirectional association>
-	  b parent class_ref 168706 // ChannelAdminIntf
+	  b parent class_ref 168706 // ChannelAdmin
       end
 
       classrelation 177666 // <unidirectional association>
@@ -866,7 +866,7 @@ ${members}}
       end
     end
 
-    class 168706 "ChannelAdminIntf"
+    class 168706 "ChannelAdmin"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {

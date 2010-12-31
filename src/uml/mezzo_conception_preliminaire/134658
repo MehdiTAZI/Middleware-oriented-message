@@ -315,7 +315,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 171138 // <unidirectional association>
-	  b parent class_ref 168706 // ChannelAdminIntf
+	  b parent class_ref 168706 // ChannelAdmin
 	oid 171138
       end
 
@@ -372,7 +372,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 170370 // <unidirectional association>
-	  b parent class_ref 168706 // ChannelAdminIntf
+	  b parent class_ref 168706 // ChannelAdmin
 	oid 170370
       end
 
@@ -975,7 +975,7 @@ ${members}}
       end
     end
 
-    class 168706 "ChannelAdminIntf"
+    class 168706 "ChannelAdmin"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {

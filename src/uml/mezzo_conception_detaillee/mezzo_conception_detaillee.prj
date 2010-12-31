@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 5
-  modified_by 4 "michael"
+  revision 6
+  modified_by 2 "Franck"
 
 
   
@@ -111,14 +111,14 @@ ${members}}
 	relation 128386 -_->
 	  a default
 	    classrelation_ref 128514 // <dependency>
-	  b parent class_ref 128642 // Channel
+	  b parent class_ref 128642 // ChannelAdmin
       end
 
       classrelation 128642 // <dependency>
 	relation 128514 -_->
 	  a default
 	    classrelation_ref 128642 // <dependency>
-	  b parent class_ref 128770 // ChannelHelper
+	  b parent class_ref 128770 // ChannelAdminHelper
       end
 
       classrelation 128770 // <dependency>
@@ -226,7 +226,7 @@ ${members}}
       
     end
 
-    class 128642 "Channel"
+    class 128642 "ChannelAdmin"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -239,7 +239,7 @@ ${members}}
       
     end
 
-    class 128770 "ChannelHelper"
+    class 128770 "ChannelAdminHelper"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {

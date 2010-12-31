@@ -13,46 +13,46 @@ classinstance 129666 class_ref 128130 // ORB
 classinstance 130178 class_ref 128386 // NamingContextExtHelper
   name ""   xyz 657 4 2000 life_line_z 2000
 classinstance 131330 class_ref 128258 // NamingContextExt
- color blue  name "nce"   xyz 891 4 2000 life_line_z 2000
-classinstance 131842 class_ref 128770 // ChannelHelper
-  name ""   xyz 798 4 2000 life_line_z 2000
+ color blue  name "nce"   xyz 912 4 2000 life_line_z 2000
+classinstance 131842 class_ref 128770 // ChannelAdminHelper
+  name ""   xyz 794 4 2000 life_line_z 2000
 note 132738 "Service publié par le NameService distant de JacORB"
   xyzwh 975 66 2000 109 63
 fragment 133122 "break"
   xyzwh 10 188 2015 678 50
 end
 fragment 134274 "break"
-  xyzwh 10 399 2015 965 59
+  xyzwh 10 398 2015 985 61
 end
 fragment 134402 "break"
-  xyzwh 10 481 2015 965 51
+  xyzwh 10 481 2015 985 51
 end
 durationcanvas 128386 classinstance_ref 128002 // :Client
   xyzwh 35 67 2010 11 574
 end
 durationcanvas 128514 classinstance_ref 128258 // :EventClient
-  xyzwh 209 103 2010 11 244
+  xyzwh 212 103 2010 11 244
 end
 durationcanvas 129026 classinstance_ref 128898 // ec:EventClient
-  xyzwh 339 117 2010 11 212
+  xyzwh 343 117 2010 11 212
 end
 durationcanvas 129282 classinstance_ref 128130 // :ORB
   xyzwh 520 124 2010 11 29
 end
 durationcanvas 129794 classinstance_ref 129666 // orb:ORB
-  xyzwh 611 176 2010 11 95
+  xyzwh 613 176 2010 11 95
 end
 durationcanvas 130306 classinstance_ref 130178 // :NamingContextExtHelper
-  xyzwh 712 287 2010 11 33
+  xyzwh 718 287 2010 11 33
 end
 durationcanvas 130818 classinstance_ref 128898 // ec:EventClient
-  xyzwh 339 369 2010 11 272
+  xyzwh 343 369 2010 11 272
 end
 durationcanvas 131458 classinstance_ref 131330 // nce:NamingContextExt
-  xyzwh 939 369 2010 11 193
+  xyzwh 966 369 2010 11 193
 end
-durationcanvas 131970 classinstance_ref 131842 // :ChannelHelper
-  xyzwh 830 566 2010 11 48
+durationcanvas 131970 classinstance_ref 131842 // :ChannelAdminHelper
+  xyzwh 845 566 2010 11 48
 end
 msg 128642 synchronous
   from durationcanvas_ref 128386
@@ -145,13 +145,13 @@ msg 132098 synchronous
 msg 132482 return
   from durationcanvas_ref 131970
   to durationcanvas_ref 130818
-  yz 603 2025 explicitmsg "Channel"
+  yz 603 2025 explicitmsg "ChannelAdmin"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 626 590
 msg 132610 return
   from durationcanvas_ref 130818
   to durationcanvas_ref 128386
-  yz 630 2015 explicitmsg "Channel"
+  yz 630 2015 explicitmsg "ChannelAdmin"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 173 617
 msg 132994 return
