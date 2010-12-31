@@ -14,10 +14,9 @@ import org.omg.PortableServer.POAHelper;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
-import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOA;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
-import fr.esiag.mezzodijava.mezzo.cosevent.Channel;
-import fr.esiag.mezzodijava.mezzo.cosevent.ChannelHelper;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
@@ -108,7 +107,7 @@ public class EventClient {
 	 *             when name resolution is wrong
 	 * @throws TopicNotFoundException
 	 */
-	public Channel resolveChannelByTopic(String topic)
+	public ChannelAdmin resolveChannelByTopic(String topic)
 			throws EventClientException, TopicNotFoundException {
 		Object channelObj = null;
 		try {
@@ -125,7 +124,7 @@ public class EventClient {
 			// TODO log here
 			throw new EventClientException("Invalid topic name", e);
 		}
-		return ChannelHelper.narrow(channelObj);
+		return ChannelAdminHelper.narrow(channelObj);
 	}
 
 	/**

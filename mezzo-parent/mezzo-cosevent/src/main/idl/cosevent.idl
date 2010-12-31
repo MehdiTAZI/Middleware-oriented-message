@@ -47,7 +47,7 @@ module cosevent {
 		boolean disconnect() raises (ChannelNotFoundException,NotConnectedException);
 	};
 	
-	interface Channel{
+	interface ChannelAdmin{
 		ProxyForPushConsumer getProxyForPushConsumer() raises (ChannelNotFoundException);
 		ProxyForPushSupplier getProxyForPushSupplier() raises (ChannelNotFoundException);
 	};
