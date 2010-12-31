@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 4
-  modified_by 2 "Franck"
+  revision 5
+  modified_by 4 "michael"
 
 
   
@@ -163,7 +163,6 @@ ${members}}
 	
 	
       end
-
     end
 
     class 128258 "NamingContextExt"
