@@ -12,7 +12,7 @@ classinstancecanvas 136327 classinstance_ref 134532 //
   xyz 192 13 2000 life_line_z 2000
 end
 classinstance 136455 class_ref 128002 // CallbackConsumer
-  name ""   xyz 64 100.5 2000 life_line_z 2000
+  name ""   xyz 65 103.5 2000 life_line_z 2000
 classinstance 136583 class_ref 148738 // ChannelCtr
   name ""   xyz 588 13 2000 life_line_z 2000
 classinstance 136711 class_ref 128003 // Consumer
@@ -31,7 +31,7 @@ durationcanvas 137223 classinstance_ref 136711 // :Consumer
   xyzwh 40 420.5 2010 11 40
 end
 durationcanvas 137351 classinstance_ref 136455 // :CallbackConsumer
-  xyzwh 110 153.5 2010 11 26
+  xyzwh 111 153.5 2010 11 26
 end
 durationcanvas 137479 classinstance_ref 136967 // :Channel
   xyzwh 772 433.5 2010 11 25
@@ -43,7 +43,7 @@ durationcanvas 137735 classinstance_ref 136839 // :ChannelAdminIntf
   xyzwh 310 213.5 2010 11 108
 end
 durationcanvas 137863 classinstance_ref 136455 // :CallbackConsumer
-  xyzwh 110 487.5 2010 11 25
+  xyzwh 111 487.5 2010 11 25
 end
 durationcanvas 137991 classinstance_ref 136711 // :Consumer
   xyzwh 40 916.5 2010 11 29
@@ -112,7 +112,7 @@ durationcanvas 143751 classinstance_ref 136967 // :Channel
   xyzwh 772 729 2010 11 40
 end
 durationcanvas 143879 classinstance_ref 136455 // :CallbackConsumer
-  xyzwh 110 729 2010 11 26
+  xyzwh 111 729 2010 11 26
 end
 durationcanvas 144135 classinstance_ref 136711 // :Consumer
   xyzwh 40 744 2010 11 45
@@ -124,7 +124,7 @@ durationcanvas 144775 classinstance_ref 136711 // :Consumer
   xyzwh 40 849 2010 11 40
 end
 durationcanvas 144903 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 849 2010 11 25
+  xyzwh 696 849 2010 11 27
 end
 durationcanvas 145159 classinstance_ref 136967 // :Channel
   xyzwh 772 865 2010 11 25
@@ -177,7 +177,7 @@ msg 141191 asynchronous
   yz 487.5 2015 msg operation_ref 128130 // "receive()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Event"
-  label_xy 413 475.5
+  label_xy 414 475.5
 msg 141319 synchronous
   from durationcanvas_ref 137991
   to durationcanvas_ref 139783
@@ -277,7 +277,7 @@ msg 144007 asynchronous
   to durationcanvas_ref 143879
   yz 729 2015 msg operation_ref 128130 // "receive()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 425 716
+  label_xy 426 716
 msg 144263 asynchronous
   from durationcanvas_ref 143879
   to durationcanvas_ref 144135
