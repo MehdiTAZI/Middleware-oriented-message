@@ -362,7 +362,7 @@ msg 140676 synchronous
 msg 141060 return
   from durationcanvas_ref 140548
   to durationcanvas_ref 139780
-  yz 171 3010 explicitmsg "Channel"
+  yz 171 3010 explicitmsg "ChannelAdminIntf"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 133 159
 end
