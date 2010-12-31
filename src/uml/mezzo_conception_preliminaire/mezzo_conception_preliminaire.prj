@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 10
-  modified_by 2 "Franck"
+  revision 11
+  modified_by 7 "Mehdi"
 
 
   
@@ -144,6 +144,11 @@ format 76
     end
 
     sequencediagram 149379 "UC03 - Scenario Exceptionnel 7 - Le Supplier envoie un event mais deja deconnecte"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 128007 "UC02 - Scenario Alternatif -Reconnexion"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4
     end
