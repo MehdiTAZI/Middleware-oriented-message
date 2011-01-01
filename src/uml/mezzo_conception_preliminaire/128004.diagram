@@ -1,0 +1,309 @@
+format 76
+
+classinstance 128003 class_ref 135427 // Supplier
+  name ""   xyz 50 4 2000 life_line_z 2000
+classinstancecanvas 128772 classinstance_ref 141060 // 
+  xyz 299 4 2000 life_line_z 2000
+end
+classinstance 128900 class_ref 128642 // ChannelAdminCtr
+  name ""   xyz 389 4 2000 life_line_z 2000
+classinstance 129284 class_ref 161922 // Channel
+  name ""   xyz 733 8 2000 life_line_z 2000
+fragment 139012 "loop"
+  xyzwh 44 602 3010 778 280
+end
+classinstancecanvas 140420 classinstance_ref 134532 // 
+  xyz 225 4 2000 life_line_z 2000
+end
+fragment 141316 "break ScEc 1 Topic non trouvé"
+  xyzwh 6 99 3010 275 54
+end
+fragment 141572 "break ScEc 2 Connection impossible"
+  xyzwh 40 239 2015 313 51
+end
+classinstancecanvas 141700 classinstance_ref 141188 // 
+  xyz 464 191 2005 life_line_z 2000
+end
+fragment 146436 "break ScEc 2 Connection impossible"
+  xyzwh 39 382 3010 785 43
+end
+fragment 147460 "break ScEc 3 Le channel a atteint le nombre maximal de connexions"
+  xyzwh 40 430 3015 785 52
+end
+fragment 147844 "break ScEc 4 le supplier est deja connecte"
+  xyzwh 42 486 3020 785 48
+end
+fragment 148484 "break ScEc 2 Connection impossible"
+  xyzwh 52 693 2020 736 48
+end
+fragment 148868 "break ScEc 5 Le supplier n'est pas connecte"
+  xyzwh 52 742 3005 735 50
+end
+fragment 149380 "break ScEc 2 Connection impossible"
+  xyzwh 46 936 3010 776 51
+end
+fragment 149764 "break ScEc 5 Le supplier n'est pas connecte"
+  xyzwh 45 995 3005 779 47
+end
+durationcanvas 129412 classinstance_ref 128003 // :Supplier
+  xyzwh 64 78 2010 11 119
+end
+durationcanvas 132612 classinstance_ref 128003 // :Supplier
+  xyzwh 64 227 2010 11 116
+end
+durationcanvas 132740 classinstance_ref 128772 // :ChannelAdmin
+  xyzwh 331 226 2010 11 118
+end
+durationcanvas 132996 classinstance_ref 128900 // :ChannelAdminCtr
+  xyzwh 427 227 2010 11 102
+end
+durationcanvas 138500 classinstance_ref 128003 // :Supplier
+  xyzwh 64 622 2010 11 252
+  overlappingdurationcanvas 138756
+    xyzwh 70 635 2020 11 25
+  end
+end
+durationcanvas 140548 classinstance_ref 140420 // :EventClient
+  xyzwh 251 86 2010 11 111
+end
+durationcanvas 141828 classinstance_ref 141700 // :ProxyPushSupplier
+  xyzwh 505 253 2010 11 59
+end
+durationcanvas 142212 classinstance_ref 128003 // :Supplier
+  xyzwh 64 355 2010 11 234
+end
+durationcanvas 142340 classinstance_ref 141700 // :ProxyPushSupplier
+  xyzwh 505 354 2010 11 221
+end
+durationcanvas 143492 classinstance_ref 129284 // :Channel
+  xyzwh 752 372 2010 11 200
+end
+durationcanvas 143748 classinstance_ref 141700 // :ProxyPushSupplier
+  xyzwh 505 675 2010 11 199
+end
+durationcanvas 144772 classinstance_ref 129284 // :Channel
+  xyzwh 752 680 2010 11 188
+  overlappingdurationcanvas 145028
+    xyzwh 758 821 2020 11 25
+  end
+end
+durationcanvas 145284 classinstance_ref 128003 // :Supplier
+  xyzwh 64 915 2010 11 175
+end
+durationcanvas 145412 classinstance_ref 141700 // :ProxyPushSupplier
+  xyzwh 505 915 2010 11 170
+end
+durationcanvas 148996 classinstance_ref 129284 // :Channel
+  xyzwh 752 926 2010 11 131
+end
+msg 132868 synchronous
+  from durationcanvas_ref 132612
+  to durationcanvas_ref 132740
+  yz 227 2015 msg operation_ref 163074 // "getProxyPushSupplier()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "topic"
+  label_xy 108 215
+msg 133124 synchronous
+  from durationcanvas_ref 132740
+  to durationcanvas_ref 132996
+  yz 228 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 136580 return
+  from durationcanvas_ref 132996
+  to durationcanvas_ref 132740
+  yz 316 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 136708 return
+  from durationcanvas_ref 132740
+  to durationcanvas_ref 132612
+  yz 322 2015 explicitmsg "ProxyPushSupplier"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 127 310
+reflexivemsg 138884 synchronous
+  to durationcanvas_ref 138756
+  yz 635 2025 explicitmsg "generate()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "Event"
+  label_xy 92 614
+msg 140676 synchronous
+  from durationcanvas_ref 129412
+  to durationcanvas_ref 140548
+  yz 86 3005 msg operation_ref 183682 // "resolveChannelByTopic()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "topic"
+  label_xy 110 74
+msg 141060 return
+  from durationcanvas_ref 140548
+  to durationcanvas_ref 129412
+  yz 172 3010 explicitmsg "ChannelAdmin"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 127 160
+msg 141188 return
+  from durationcanvas_ref 140548
+  to durationcanvas_ref 129412
+  yz 132 3005 explicitmsg "TopicNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 107 120
+msg 141444 return
+  from durationcanvas_ref 132740
+  to durationcanvas_ref 132612
+  yz 271 2015 explicitmsg "ConnectionException.ChannelNotFound (Not Exist)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 115 259
+msg 141956 synchronous
+  from durationcanvas_ref 132996
+  to durationcanvas_ref 141828
+  yz 253 2015 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 459 241
+msg 142084 return
+  from durationcanvas_ref 141828
+  to durationcanvas_ref 132996
+  yz 301 2020 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 142468 synchronous
+  from durationcanvas_ref 142212
+  to durationcanvas_ref 142340
+  yz 371 3005 msg operation_ref 156034 // "connect()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 272 359
+msg 143620 synchronous
+  from durationcanvas_ref 142340
+  to durationcanvas_ref 143492
+  yz 375 2015 explicitmsg "connect()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 638 363
+msg 143876 synchronous
+  from durationcanvas_ref 138500
+  to durationcanvas_ref 143748
+  yz 676 2015 explicitmsg "push()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "Event"
+  label_xy 277 664
+msg 144900 synchronous
+  from durationcanvas_ref 143748
+  to durationcanvas_ref 144772
+  yz 682 2015 explicitmsg "push()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "Event"
+  label_xy 609 670
+reflexivemsg 145156 synchronous
+  to durationcanvas_ref 145028
+  yz 821 2025 explicitmsg "updateList()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 756 809
+msg 145540 synchronous
+  from durationcanvas_ref 145284
+  to durationcanvas_ref 145412
+  yz 920 2015 msg operation_ref 156290 // "disconnect()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 276 908
+msg 145924 return
+  from durationcanvas_ref 143492
+  to durationcanvas_ref 142340
+  yz 404 2015 explicitmsg "SystemException.TimeOut"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 601 392
+msg 146308 return
+  from durationcanvas_ref 142340
+  to durationcanvas_ref 142212
+  yz 410 2015 explicitmsg "ConnectionException.ChannelNotFound (TimeOut)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 208 398
+msg 146692 return
+  from durationcanvas_ref 145412
+  to durationcanvas_ref 145284
+  yz 976 2015 explicitmsg "ConnectionException.ChannelNotFound(TimeOut)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 198 964
+msg 146948 return
+  from durationcanvas_ref 143492
+  to durationcanvas_ref 142340
+  yz 453 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 147332 return
+  from durationcanvas_ref 142340
+  to durationcanvas_ref 142212
+  yz 466 2015 explicitmsg "ChannelException.MaximalConnectionReached"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 194 454
+msg 147588 return
+  from durationcanvas_ref 143492
+  to durationcanvas_ref 142340
+  yz 504 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 147716 return
+  from durationcanvas_ref 142340
+  to durationcanvas_ref 142212
+  yz 519 2015 explicitmsg "ChannelException.AlreadyConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 215 507
+msg 147972 return
+  from durationcanvas_ref 143492
+  to durationcanvas_ref 142340
+  yz 544 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 148100 return
+  from durationcanvas_ref 142340
+  to durationcanvas_ref 142212
+  yz 560 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 148228 return
+  from durationcanvas_ref 144772
+  to durationcanvas_ref 143748
+  yz 707 2015 explicitmsg "SystemException.TimeOut"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 577 695
+msg 148356 return
+  from durationcanvas_ref 143748
+  to durationcanvas_ref 138500
+  yz 723 2015 explicitmsg "ConnectionException.ChannelNotFound(TimeOut)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 185 711
+msg 148612 return
+  from durationcanvas_ref 144772
+  to durationcanvas_ref 143748
+  yz 760 2015 explicitmsg "ChannelException.NotConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 564 748
+msg 148740 return
+  from durationcanvas_ref 143748
+  to durationcanvas_ref 138500
+  yz 775 2015 explicitmsg "ChannelException.NotConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 219 763
+msg 149124 synchronous
+  from durationcanvas_ref 145412
+  to durationcanvas_ref 148996
+  yz 926 2015 explicitmsg "disconnect()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 609 914
+msg 149252 return
+  from durationcanvas_ref 148996
+  to durationcanvas_ref 145412
+  yz 964 2020 explicitmsg "SystemException.TimeOut"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 578 952
+msg 149508 return
+  from durationcanvas_ref 148996
+  to durationcanvas_ref 145412
+  yz 1013 2015 explicitmsg "ChannelException.NotConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 565 1001
+msg 149636 return
+  from durationcanvas_ref 145412
+  to durationcanvas_ref 145284
+  yz 1025 2015 explicitmsg "ChannelException.NotConnected"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 221 1013
+msg 149892 return
+  from durationcanvas_ref 148996
+  to durationcanvas_ref 145412
+  yz 1046 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 150020 return
+  from durationcanvas_ref 145412
+  to durationcanvas_ref 145284
+  yz 1065 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+end
