@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 22
-  modified_by 2 "Franck"
+  revision 23
+  modified_by 4 "michael"
 
 
   
@@ -110,7 +110,7 @@ format 76
 
     sequencediagram 128004 "UC03 - Scénario nominal + exc"
       show_full_operations_definition default write_horizontally default class_drawing_mode boundary drawing_language java draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
+      overlapping_bars size A3
     end
 
     sequencediagram 148483 "UC03 - Scénario nominal"
@@ -166,7 +166,7 @@ format 76
         end
     end
 
-    classinstance 141188 ""
+    classinstance 141188 "pps"
       type class_ref 161794 // ProxyPushSupplier
       attributes
         end

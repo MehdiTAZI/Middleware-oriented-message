@@ -2,12 +2,12 @@ format 76
 
 classinstance 128003 class_ref 135427 // Supplier
   name ""   xyz 56 4 2000 life_line_z 2000
-classinstancecanvas 128260 classinstance_ref 128131 // 
-  xyz 680 76 2000 life_line_z 2000
+classinstancecanvas 128260 classinstance_ref 128131 // pps
+  xyz 673 76 2000 life_line_z 2000
 end
-classinstance 128772 class_ref 168706 // EventServerIntf
+classinstance 128772 class_ref 168706 // ChannelAdmin
   name ""   xyz 299 4 2000 life_line_z 2000
-classinstance 128900 class_ref 128642 // EventServerCtr
+classinstance 128900 class_ref 128642 // ChannelAdminCtr
   name ""   xyz 389 4 2000 life_line_z 2000
 classinstance 129028 class_ref 175490 // EventServer
   name ""   xyz 477 4 2000 life_line_z 2000
@@ -18,8 +18,8 @@ classinstance 129284 class_ref 161922 // Channel
 classinstancecanvas 140420 classinstance_ref 134532 // 
   xyz 224 4 2000 life_line_z 2000
 end
-durationcanvas 128131 classinstance_ref 128260 // :ProxyPushSupplier
-  xyzwh 721 440 2010 11 38
+durationcanvas 128131 classinstance_ref 128260 // pps:ProxyPushConsumer
+  xyzwh 726 440 2010 11 38
 end
 durationcanvas 129412 classinstance_ref 128003 // :Supplier
   xyzwh 70 78 2010 11 45
@@ -27,23 +27,23 @@ end
 durationcanvas 132612 classinstance_ref 128003 // :Supplier
   xyzwh 70 161 2010 11 116
 end
-durationcanvas 132740 classinstance_ref 128772 // :EventServerIntf
-  xyzwh 335 162 2010 11 129
+durationcanvas 132740 classinstance_ref 128772 // :ChannelAdmin
+  xyzwh 331 162 2010 11 129
 end
-durationcanvas 132996 classinstance_ref 128900 // :EventServerCtr
-  xyzwh 424 178 2010 11 85
+durationcanvas 132996 classinstance_ref 128900 // :ChannelAdminCtr
+  xyzwh 427 178 2010 11 85
 end
 durationcanvas 135812 classinstance_ref 129156 // :ChannelCtr
   xyzwh 645 197 2010 11 76
 end
-durationcanvas 136068 classinstance_ref 128260 // :ProxyPushSupplier
-  xyzwh 721 209 2010 11 31
+durationcanvas 136068 classinstance_ref 128260 // pps:ProxyPushConsumer
+  xyzwh 726 209 2010 11 31
 end
 durationcanvas 137476 classinstance_ref 128003 // :Supplier
   xyzwh 70 289 2010 11 43
 end
-durationcanvas 137604 classinstance_ref 128260 // :ProxyPushSupplier
-  xyzwh 721 279 2010 11 47
+durationcanvas 137604 classinstance_ref 128260 // pps:ProxyPushConsumer
+  xyzwh 726 279 2010 11 47
 end
 durationcanvas 137860 classinstance_ref 129284 // :Channel
   xyzwh 795 276 2010 11 51
@@ -57,14 +57,14 @@ end
 durationcanvas 139140 classinstance_ref 128003 // :Supplier
   xyzwh 70 335 2010 11 35
 end
-durationcanvas 139268 classinstance_ref 128260 // :ProxyPushSupplier
-  xyzwh 721 340 2010 11 49
+durationcanvas 139268 classinstance_ref 128260 // pps:ProxyPushConsumer
+  xyzwh 726 340 2010 11 49
 end
 durationcanvas 139524 classinstance_ref 129284 // :Channel
   xyzwh 795 345 2010 11 44
 end
-durationcanvas 140548 classinstance_ref 140420 // :NameService
-  xyzwh 254 86 2010 11 31
+durationcanvas 140548 classinstance_ref 140420 // :EventClient
+  xyzwh 250 86 2010 11 31
 end
 msg 128259 synchronous
   from durationcanvas_ref 138500
