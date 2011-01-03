@@ -88,7 +88,7 @@ relationcanvas 131458 relation_ref 169602 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131842 relation_ref 183426 // channels
-  from ref 131714 z 2001 label "channels" italic xyz 742 194.5 2001 to ref 129538
+  from ref 131714 z 2001 label "channels" italic xyz 742 194 2001 to ref 129538
   no_role_a no_role_b
   multiplicity_a_pos 771 226 3000 no_multiplicity_b
 end

@@ -1,6 +1,6 @@
 format 76
 "mezzo_analyse"
-  revision 38
+  revision 39
   modified_by 4 "michael"
 
 
@@ -433,9 +433,10 @@ ${members}}
 
       operation 134787 "addCallbackConsumer"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "cb" type class_ref 128002 // CallbackConsumer
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -454,9 +455,10 @@ ${members}}
 
       operation 135043 "removeCallbackConsumer"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "cb" type class_ref 128002 // CallbackConsumer
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -466,9 +468,10 @@ ${members}}
 
       operation 135171 "addEvent"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "ev" type class_ref 128386 // Event
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -487,9 +490,10 @@ ${members}}
 
       operation 189186 "addProxyConsumer"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "consumer" type class_ref 168578 // Consumer
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -499,9 +503,10 @@ ${members}}
 
       operation 189314 "addProxySupplier"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "ps" type class_ref 128388 // Supplier
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -511,9 +516,10 @@ ${members}}
 
       operation 189442 "removeProxyConsumer"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "pc" type class_ref 168578 // Consumer
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -523,9 +529,10 @@ ${members}}
 
       operation 189570 "removeProxySupplier"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "ps" type class_ref 128388 // Supplier
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -577,9 +584,10 @@ ${members}}
       
       operation 128130 "receive"
 	public explicit_return_type ""
-	nparams 0
+	nparams 1
+	  param in name "ev" type class_ref 128386 // Event
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
