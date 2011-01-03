@@ -46,7 +46,7 @@ classcanvas 130434 class_ref 189954 // ChannelAdminImpl
 end
 classcanvas 130818 class_ref 190082 // ProxyPushSupplierImpl
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 323 118 2000
+  xyz 323 99 2000
 end
 classcanvas 131074 class_ref 190210 // CallbackConsumer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode interface drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -57,12 +57,16 @@ classcanvas 131202 class_ref 190338 // CallbackConsumerImpl
   color blue
   xyz 22 588 2000
 end
-note 134786 "L'implémentation du CallbackConsumer est de la responsabilités du développeur client"
-  xyzwh 35 480 2000 169 77
+note 134786 "L'implémentation du CallbackConsumer est de la responsabilité du développeur du client"
+  xyzwh 59 482 2000 143 77
 classcanvas 135426 class_ref 190466 // CosEventServer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 634 45 2000
 end
+note 136194 "Mezzo Di Java
+Conception Préliminaire
+Diagramme de classes"
+  xyzwh 9 46 2000 133 57
 relationcanvas 129154 relation_ref 229890 // <dependency>
   from ref 129026 z 2001 to ref 128642
   no_role_a no_role_b
@@ -79,7 +83,7 @@ relationcanvas 129666 relation_ref 230146 // <composition>
   multiplicity_a_pos 886 481 3000 multiplicity_b_pos 884 373 3000
 end
 relationcanvas 129794 relation_ref 230274 // channels
-  from ref 128258 z 2001 label "channels" italic xyz 880 255.5 3000 to ref 128002
+  from ref 128258 z 2001 label "channels" italic xyz 880 255 2001 to ref 128002
   no_role_a no_role_b
   multiplicity_a_pos 887 289 3000 multiplicity_b_pos 885 237 3000
 end
@@ -126,10 +130,10 @@ relationcanvas 132482 relation_ref 231682 // <unidirectional association>
 end
 relationcanvas 132610 relation_ref 231810 // <unidirectional association>
   geometry HV
-  from ref 130818 z 2001 to point 693 145
+  from ref 130818 z 2001 to point 693 127
   line 133762 z 2001 to ref 128386
   no_role_a no_role_b
-  multiplicity_a_pos 680 260 3000 multiplicity_b_pos 473 154 3000
+  multiplicity_a_pos 679 260 3000 multiplicity_b_pos 473 135 3000
 end
 relationcanvas 132738 relation_ref 231938 // <unidirectional association>
   from ref 128386 z 2001 to ref 128898
@@ -141,7 +145,7 @@ relationcanvas 132866 relation_ref 232066 // <unidirectional association>
   from ref 130178 z 2001 to point 693 529
   line 134018 z 2001 to ref 128386
   no_role_a no_role_b
-  multiplicity_a_pos 680 404 3000 multiplicity_b_pos 480 537 3000
+  multiplicity_a_pos 679 404 3000 multiplicity_b_pos 480 537 3000
 end
 relationcanvas 133378 relation_ref 232194 // <unidirectional association>
   from ref 130434 z 2001 to ref 128514

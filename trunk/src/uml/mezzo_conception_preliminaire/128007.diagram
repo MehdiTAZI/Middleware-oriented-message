@@ -1,6 +1,6 @@
 format 76
 
-classinstancecanvas 135943 classinstance_ref 128131 // 
+classinstancecanvas 135943 classinstance_ref 128131 // pps
   xyz 646 210.5 2000 life_line_z 2000
 end
 fragment 136071 "loop"
@@ -17,7 +17,7 @@ classinstance 136583 class_ref 148738 // ChannelCtr
   name ""   xyz 588 13 2000 life_line_z 2000
 classinstance 136711 class_ref 128003 // Consumer
   name ""   xyz 19 7 2000 life_line_z 2000
-classinstance 136839 class_ref 168706 // ChannelAdminIntf
+classinstance 136839 class_ref 168706 // ChannelAdmin
   name ""   xyz 267 13 2000 life_line_z 2000
 classinstance 136967 class_ref 161922 // Channel
   name ""   xyz 751 13 2000 life_line_z 2000
@@ -28,82 +28,82 @@ durationcanvas 137095 classinstance_ref 136711 // :Consumer
   xyzwh 40 60 2010 11 45
 end
 durationcanvas 137223 classinstance_ref 136711 // :Consumer
-  xyzwh 40 420.5 2010 11 40
+  xyzwh 40 420 2010 11 40
 end
 durationcanvas 137351 classinstance_ref 136455 // :CallbackConsumer
-  xyzwh 111 153.5 2010 11 26
+  xyzwh 111 153 2010 11 26
 end
 durationcanvas 137479 classinstance_ref 136967 // :Channel
-  xyzwh 772 433.5 2010 11 25
+  xyzwh 772 433 2010 11 25
 end
-durationcanvas 137607 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 587.5 2010 11 25
+durationcanvas 137607 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 587 2010 11 25
 end
-durationcanvas 137735 classinstance_ref 136839 // :ChannelAdminIntf
-  xyzwh 310 213.5 2010 11 108
+durationcanvas 137735 classinstance_ref 136839 // :ChannelAdmin
+  xyzwh 303 213 2010 11 108
 end
 durationcanvas 137863 classinstance_ref 136455 // :CallbackConsumer
-  xyzwh 111 487.5 2010 11 25
+  xyzwh 111 487 2010 11 25
 end
 durationcanvas 137991 classinstance_ref 136711 // :Consumer
-  xyzwh 40 916.5 2010 11 29
+  xyzwh 40 916 2010 11 29
 end
 durationcanvas 138119 classinstance_ref 136583 // :ChannelCtr
-  xyzwh 616 244.5 2010 11 56
+  xyzwh 616 244 2010 11 56
 end
 durationcanvas 138247 classinstance_ref 136967 // :Channel
-  xyzwh 772 911.5 2010 11 30
+  xyzwh 772 911 2010 11 30
 end
 durationcanvas 138375 classinstance_ref 136711 // :Consumer
-  xyzwh 40 356.5 2010 11 40
+  xyzwh 40 356 2010 11 40
 end
 durationcanvas 138503 classinstance_ref 136967 // :Channel
-  xyzwh 772 370.5 2010 11 25
+  xyzwh 772 370 2010 11 25
 end
 durationcanvas 138631 classinstance_ref 136711 // :Consumer
-  xyzwh 40 143.5 2010 11 25
+  xyzwh 40 143 2010 11 25
 end
-durationcanvas 138759 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 420.5 2010 11 25
+durationcanvas 138759 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 420 2010 11 25
 end
 durationcanvas 138887 classinstance_ref 136711 // :Consumer
-  xyzwh 40 587.5 2010 11 40
+  xyzwh 40 587 2010 11 40
 end
 durationcanvas 139015 classinstance_ref 136711 // :Consumer
-  xyzwh 40 213.5 2010 11 116
+  xyzwh 40 213 2010 11 116
 end
 durationcanvas 139143 classinstance_ref 136967 // :Channel
-  xyzwh 772 487.5 2010 11 40
+  xyzwh 772 487 2010 11 40
 end
 durationcanvas 139271 classinstance_ref 136967 // :Channel
-  xyzwh 772 599.5 2010 11 25
+  xyzwh 772 599 2010 11 25
 end
 durationcanvas 139399 classinstance_ref 136199 // :ChannelAdminCtr
-  xyzwh 399 226.5 2010 11 85
+  xyzwh 399 226 2010 11 85
 end
 durationcanvas 139527 classinstance_ref 136711 // :Consumer
-  xyzwh 40 497.5 2010 11 46
+  xyzwh 40 497 2010 11 46
   overlappingdurationcanvas 139655
-    xyzwh 46 512.5 2020 11 25
+    xyzwh 46 512 2020 11 25
   end
 end
-durationcanvas 139783 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 911.5 2010 11 34
+durationcanvas 139783 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 911 2010 11 34
 end
-durationcanvas 139911 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 263.5 2010 11 31
+durationcanvas 139911 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 263 2010 11 31
 end
 durationcanvas 140039 classinstance_ref 136327 // :EventClient
-  xyzwh 221 66.5 2010 11 33
+  xyzwh 221 66 2010 11 33
 end
-durationcanvas 140167 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 358.5 2010 11 40
+durationcanvas 140167 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 358 2010 11 40
 end
 durationcanvas 143111 classinstance_ref 136711 // :Consumer
   xyzwh 40 667 2010 11 40
 end
-durationcanvas 143239 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 667 2010 11 25
+durationcanvas 143239 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 667 2010 11 25
 end
 durationcanvas 143495 classinstance_ref 136967 // :Channel
   xyzwh 772 680 2010 11 25
@@ -123,8 +123,8 @@ end
 durationcanvas 144775 classinstance_ref 136711 // :Consumer
   xyzwh 40 849 2010 11 40
 end
-durationcanvas 144903 classinstance_ref 135943 // :ProxyPushConsumer
-  xyzwh 696 849 2010 11 27
+durationcanvas 144903 classinstance_ref 135943 // pps:ProxyPushConsumer
+  xyzwh 705 849 2010 11 27
 end
 durationcanvas 145159 classinstance_ref 136967 // :Channel
   xyzwh 772 865 2010 11 25
@@ -132,134 +132,134 @@ end
 msg 140295 synchronous
   from durationcanvas_ref 138887
   to durationcanvas_ref 137607
-  yz 587.5 3010 explicitmsg "disconnect()"
+  yz 587 3010 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 345 575.5
+  label_xy 345 575
 msg 140423 synchronous
   from durationcanvas_ref 137095
   to durationcanvas_ref 140039
   yz 68 3005 msg operation_ref 176130 // "resolveChannelByTopic()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "topic"
-  label_xy 72 54.5
+  label_xy 72 54
 msg 140551 synchronous
   from durationcanvas_ref 137735
   to durationcanvas_ref 139399
-  yz 228.5 2015 unspecifiedmsg
+  yz 228 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 140679 asynchronous
   from durationcanvas_ref 137863
   to durationcanvas_ref 139527
-  yz 497.5 2015 unspecifiedmsg
+  yz 497 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 reflexivemsg 140807 synchronous
   to durationcanvas_ref 139655
   yz 512 2025 explicitmsg "process()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Event"
-  label_xy 32 500.5
+  label_xy 32 500
 msg 140935 synchronous
   from durationcanvas_ref 139783
   to durationcanvas_ref 138247
-  yz 930.5 2020 explicitmsg "unsuscribe()"
+  yz 930 2020 explicitmsg "unsuscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 711 918.5
+  label_xy 711 918
 msg 141063 synchronous
   from durationcanvas_ref 139015
   to durationcanvas_ref 137735
-  yz 215.5 2015 msg operation_ref 162946 // "getProxyPushConsumer()"
+  yz 215 2015 msg operation_ref 162946 // "getProxyPushConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "topic"
-  label_xy 83 203.5
+  label_xy 83 203
 msg 141191 asynchronous
   from durationcanvas_ref 139143
   to durationcanvas_ref 137863
-  yz 487.5 2015 msg operation_ref 128130 // "receive()"
+  yz 487 2015 msg operation_ref 128130 // "receive(in ev : Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Event"
-  label_xy 414 475.5
+  label_xy 414 475
 msg 141319 synchronous
   from durationcanvas_ref 137991
   to durationcanvas_ref 139783
-  yz 934.5 2015 explicitmsg "Unsuscribe()"
+  yz 934 2015 explicitmsg "Unsuscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 344 922.5
+  label_xy 344 922
 msg 141447 return
   from durationcanvas_ref 137735
   to durationcanvas_ref 139015
-  yz 310.5 2015 explicitmsg "ProxyPushConsumer"
+  yz 310 2015 explicitmsg "ProxyPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 102 298.5
+  label_xy 102 298
 msg 141575 synchronous
   from durationcanvas_ref 138759
   to durationcanvas_ref 137479
-  yz 433.5 2020 explicitmsg "connect()"
+  yz 433 2020 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 717 421.5
+  label_xy 717 421
 msg 141703 return
   from durationcanvas_ref 139399
   to durationcanvas_ref 137735
-  yz 300.5 2015 unspecifiedmsg
+  yz 300 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 141831 synchronous
   from durationcanvas_ref 137223
   to durationcanvas_ref 138759
-  yz 420.5 2015 explicitmsg "connect()"
+  yz 420 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 351 408.5
+  label_xy 351 408
 msg 141959 return
   from durationcanvas_ref 138119
   to durationcanvas_ref 139399
-  yz 289.5 2030 unspecifiedmsg
+  yz 289 2030 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 142087 synchronous
   from durationcanvas_ref 140167
   to durationcanvas_ref 138503
-  yz 371.5 2020 explicitmsg "suscribe()"
+  yz 371 2020 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 716 359.5
+  label_xy 716 359
 msg 142215 synchronous
   from durationcanvas_ref 138631
   to durationcanvas_ref 137351
-  yz 153.5 2015 explicitmsg "new"
+  yz 153 2015 explicitmsg "new"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 69 141.5
+  label_xy 69 141
 msg 142343 return
   from durationcanvas_ref 139911
   to durationcanvas_ref 138119
-  yz 283.5 2025 unspecifiedmsg
+  yz 283 2025 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 142471 synchronous
   from durationcanvas_ref 138375
   to durationcanvas_ref 140167
-  yz 358.5 2015 explicitmsg "suscribe()"
+  yz 358 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "CallBackConsumer"
-  label_xy 310 346.5
+  label_xy 310 346
 msg 142599 synchronous
   from durationcanvas_ref 138119
   to durationcanvas_ref 139911
-  yz 265.5 2020 explicitmsg "new"
+  yz 265 2020 explicitmsg "new"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 647 253.5
+  label_xy 647 253
 msg 142727 synchronous
   from durationcanvas_ref 137607
   to durationcanvas_ref 139271
-  yz 600.5 3015 explicitmsg "disconnect()"
+  yz 600 3015 explicitmsg "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 711 588.5
+  label_xy 711 588
 msg 142855 return
   from durationcanvas_ref 140039
   to durationcanvas_ref 137095
   yz 88 3010 explicitmsg "Channel"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 101 74.5
+  label_xy 101 74
 msg 142983 synchronous
   from durationcanvas_ref 139399
   to durationcanvas_ref 138119
-  yz 245.5 2015 explicitmsg "createProxyPushConsumer()"
+  yz 245 2015 explicitmsg "createProxyPushConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 450 233.5
+  label_xy 450 233
 msg 143367 synchronous
   from durationcanvas_ref 143111
   to durationcanvas_ref 143239
@@ -275,7 +275,7 @@ msg 143623 synchronous
 msg 144007 asynchronous
   from durationcanvas_ref 143751
   to durationcanvas_ref 143879
-  yz 729 2015 msg operation_ref 128130 // "receive()"
+  yz 729 2015 msg operation_ref 128130 // "receive(in ev : Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 426 716
 msg 144263 asynchronous

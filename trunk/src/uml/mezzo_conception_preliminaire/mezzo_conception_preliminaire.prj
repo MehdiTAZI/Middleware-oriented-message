@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 28
+  revision 33
   modified_by 2 "Franck"
 
 
@@ -38,143 +38,11 @@ format 76
 
   mark_for_import
   
+  ncouples 1
+  key "html dir" value "c:/mezzodev/MEZ-20101213-CP_CLASSES/"
   package_ref 128003 // Diagramme d'intéraction
 
   package_ref 134530 // Lien vers projet mezzo_analyse
-
-  classview 147586 "CONCEPTION PRELIMINAIRE : DIAGRAMME DE SEQUENCE D'INTERACTION"
-    //class diagram settings
-    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-    //collaboration diagram settings
-    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
-    //object diagram settings
-     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
-    //sequence diagram settings
-    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-    //state diagram settings
-    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
-    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
-    //class settings
-    //activity diagram settings
-    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
-    show_infonote default drawing_language default show_stereotype_properties default
-    sequencediagram 161922 "UC02 - Scenario nominal + exc reloaded"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A3-Landscape
-    end
-
-    sequencediagram 128003 "UC02 - Scénario nominal"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 134659 "UC02 - Scenario Exceptionnel 1 - Le Channel n'est pas trouve avec son topic"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 141187 "UC02 - Scenario Exceptionnel 2 - Le Consumer n'arrive pas a se connecter au Channel avec sa reference"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 147715 "UC02 - Scenario Exceptionnel 3 : Le Channel a atteint le nombre maximal de connexions"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 147843 "UC02 - Scenario Exceptionnel 4 - Le Consumer n'est plus accessible"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 147971 "UC02 - Scenario Exceptionnel 5 - Le Consumer se connecte mais deja connecte"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148099 "UC02 - Scenario Exceptionnel 6 - Le Consumer se deconnecte mais deja deconnecte"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148227 "UC02 - Scenario Exceptionnel 7 : Le Consumer s'enregistre mais déjà enregistré"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148355 "UC02 - Scenario Exceptionnel 8 : Le Consumer se désinscrit mais pas inscrit"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 128004 "UC03 - Scénario nominal + exc"
-      show_full_operations_definition default write_horizontally default class_drawing_mode boundary drawing_language java draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A3
-    end
-
-    sequencediagram 148483 "UC03 - Scénario nominal"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148611 "UC03 - Scenario Exceptionnel 1 - Le Channel n'est pas trouve avec son topic"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148739 "UC03 - Scenario Exceptionnel 2 - Le Supplier n'arrive pas a se connecter au Channel avec sa reference"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148867 "UC03 - Scenario Exceptionnel 3 - Le Channel a atteint le nombre maximal de connexions"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 148995 "UC03 - Scenario Exceptionnel 4 - Le Supplier n'est plus accessible"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 149123 "UC03 - Scenario Exceptionnel 5 - Le Supplier se connecte mais deja connecte"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 149251 "UC03 - Scenario Exceptionnel 6 - Le Supplier se deconnecte mais deja deconnecte du Channel"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 149379 "UC03 - Scenario Exceptionnel 7 - Le Supplier envoie un event mais deja deconnecte"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    sequencediagram 128007 "UC02 - Scenario Alternatif -Reconnexion"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
-    end
-
-    classinstance 141060 ""
-      type class_ref 168706 // ChannelAdmin
-      attributes
-        end
-      relations
-        end
-    end
-
-    classinstance 141188 "pps"
-      type class_ref 161794 // ProxyPushSupplier
-      attributes
-        end
-      relations
-        end
-    end
-
-  end
 
   classview 154114 "Classes de conception preliminaire"
     //class diagram settings
@@ -192,11 +60,6 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    classdiagram 168834 "DIAGRAMME DE CLASSE DE CONCEPTION PRELIMINAIRE"
-      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-      size A4-Landscape
-    end
-
     class 188674 "Channel"
       visibility package 
       cpp_decl ""
@@ -220,7 +83,7 @@ ${members}}
 	    classrelation_ref 232066 // <composition>
       end
 
-      classrelation 232322 // (channels)
+      classrelation 232322 // channels
 	relation_ref 230274 // channels
       end
 
@@ -301,7 +164,7 @@ ${members}}
 	  b role_name "" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 232322 // (channels)
+	    classrelation_ref 232322 // channels
       end
 
       attribute 175106 "name"
@@ -837,6 +700,115 @@ ${members}}
 	
 	
       end
+    end
+  end
+
+  package_ref 147586 // CONCEPTION PRELIMINAIRE
+
+  classview 167170 "Anciens diagrammes"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    sequencediagram 128007 "UC02 - Scenario Alternatif -Reconnexion"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 149379 "UC03 - Scenario Exceptionnel 7 - Le Supplier envoie un event mais deja deconnecte"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 149251 "UC03 - Scenario Exceptionnel 6 - Le Supplier se deconnecte mais deja deconnecte du Channel"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 149123 "UC03 - Scenario Exceptionnel 5 - Le Supplier se connecte mais deja connecte"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148995 "UC03 - Scenario Exceptionnel 4 - Le Supplier n'est plus accessible"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148867 "UC03 - Scenario Exceptionnel 3 - Le Channel a atteint le nombre maximal de connexions"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148739 "UC03 - Scenario Exceptionnel 2 - Le Supplier n'arrive pas a se connecter au Channel avec sa reference"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148611 "UC03 - Scenario Exceptionnel 1 - Le Channel n'est pas trouve avec son topic"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148483 "UC03 - Scénario nominal"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148355 "UC02 - Scenario Exceptionnel 8 : Le Consumer se désinscrit mais pas inscrit"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148227 "UC02 - Scenario Exceptionnel 7 : Le Consumer s'enregistre mais déjà enregistré"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 148099 "UC02 - Scenario Exceptionnel 6 - Le Consumer se deconnecte mais deja deconnecte"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 147971 "UC02 - Scenario Exceptionnel 5 - Le Consumer se connecte mais deja connecte"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 147843 "UC02 - Scenario Exceptionnel 4 - Le Consumer n'est plus accessible"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 147715 "UC02 - Scenario Exceptionnel 3 : Le Channel a atteint le nombre maximal de connexions"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 141187 "UC02 - Scenario Exceptionnel 2 - Le Consumer n'arrive pas a se connecter au Channel avec sa reference"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 134659 "UC02 - Scenario Exceptionnel 1 - Le Channel n'est pas trouve avec son topic"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
+    end
+
+    sequencediagram 128003 "UC02 - Scénario nominal"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
     end
   end
 end
