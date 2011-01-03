@@ -17,7 +17,7 @@ end
 classinstance 129156 class_ref 148738 // ChannelCtr
   drawing_mode control  name ""   xyz 702 5 2000 life_line_z 2000
 classinstance 129284 class_ref 161922 // Channel
-  drawing_mode entity  name ""   xyz 988 6 2000 life_line_z 2000
+  drawing_mode entity  name ""   xyz 827 4 2000 life_line_z 2000
 fragment 129410 "break ScEx 2 Connection impossible"
   xyzwh 23 321 2015 351 49
 end
@@ -30,81 +30,79 @@ end
 fragment 131586 "break ScEx 3 Nombre de connection maximal atteind"
   xyzwh 27 598 2015 727 40
 end
-classinstance 131970 class_ref 188674 // EventDelivererCtr
-  drawing_mode control  name ""   xyz 900 4 2000 life_line_z 2000
 fragment 136194 "break ScEx 4 Consumer injoignable"
-  xyzwh 33 762 2025 941 39
+  xyzwh 33 788 2025 736 39
 end
 fragment 137090 "break ScEx 6 Pas connecté"
-  xyzwh 27 874 2015 727 40
+  xyzwh 27 944 2015 727 40
 end
 fragment 137730 "break ScEx 8 Pas inscrit"
-  xyzwh 27 989 2015 727 40
+  xyzwh 27 1059 2015 727 40
 end
 fragment 139012 "loop"
-  xyzwh 27 663 2020 1019 147
+  xyzwh 19 702 2020 897 146
 end
 classinstancecanvas 140420 classinstance_ref 134532 // 
   drawing_mode boundary  xyz 228 4 2000 life_line_z 2000
 end
 durationcanvas 128002 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 575 321 2010 11 49
+  xyzwh 579 321 2010 11 49
 end
 durationcanvas 128386 classinstance_ref 128644 // :CallbackConsumer
-  xyzwh 162 228 2010 11 41
+  xyzwh 167 228 2010 11 41
 end
 durationcanvas 129538 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 723 452 2010 11 70
+  xyzwh 726 452 2010 11 70
 end
 durationcanvas 130690 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 723 548 2010 11 104
-end
-durationcanvas 132098 classinstance_ref 131970 // :EventDelivererCtr
-  xyzwh 936 681 2010 11 152
-end
-durationcanvas 132226 classinstance_ref 129284 // :Channel
-  xyzwh 1003 679 2010 11 35
+  xyzwh 726 548 2010 11 104
 end
 durationcanvas 132740 classinstance_ref 128772 // :ChannelAdmin
-  xyzwh 327 278 2000 11 143
+  xyzwh 331 278 2000 11 143
 end
 durationcanvas 132996 classinstance_ref 128900 // :ChannelAdminCtr
-  xyzwh 490 307 2000 11 72
+  xyzwh 494 307 2000 11 72
 end
 durationcanvas 134402 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 723 707 2010 11 123
-end
-durationcanvas 134914 classinstance_ref 128644 // :CallbackConsumer
-  xyzwh 162 716 2010 11 30
+  xyzwh 726 705 2010 11 138
+  overlappingdurationcanvas 138114
+    xyzwh 732 719 2020 11 96
+  end
 end
 durationcanvas 136322 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 723 863 2010 11 78
+  xyzwh 726 933 2010 11 78
 end
 durationcanvas 136964 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 575 447 2000 11 85
+  xyzwh 579 447 2000 11 85
 end
 durationcanvas 137218 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 723 978 2010 11 69
+  xyzwh 726 1048 2010 11 69
 end
 durationcanvas 137604 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 575 543 2010 11 119
+  xyzwh 579 543 2010 11 119
+end
+durationcanvas 138370 classinstance_ref 129284 // :Channel
+  xyzwh 844 732 2010 11 31
 end
 durationcanvas 139268 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 575 861 2010 11 86
+  xyzwh 579 931 2010 11 86
+end
+durationcanvas 139522 classinstance_ref 128644 // :CallbackConsumer
+  xyzwh 167 760 2010 11 25
 end
 durationcanvas 139780 classinstance_ref 128003 // :Consumer
-  xyzwh 70 90 2010 11 1001
-  overlappingdurationcanvas 135170
-    xyzwh 76 722 2025 11 25
+  xyzwh 72 90 2010 11 1039
+  overlappingdurationcanvas 139778
+    xyzwh 78 773 2020 11 25
   end
 end
 durationcanvas 139908 classinstance_ref 128260 // :ProxyPushConsumer
-  xyzwh 575 964 2010 11 98
+  xyzwh 579 1034 2010 11 98
 end
 durationcanvas 140548 classinstance_ref 140420 // :EventClient
-  xyzwh 250 86 2000 11 96
+  xyzwh 253 86 2000 11 96
 end
-lostfoundmsgsupport 135938 xyz 425 775 2015
+lostfoundmsgsupport 140034 xyz 428 803 2025
 msg 128130 synchronous
   from durationcanvas_ref 132996
   to durationcanvas_ref 128002
@@ -169,8 +167,9 @@ msg 130562 return
 msg 130818 synchronous
   from durationcanvas_ref 137604
   to durationcanvas_ref 130690
-  yz 548 2025 unspecifiedmsg
+  yz 548 2025 msg operation_ref 189186 // "addProxyConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 610 535
 msg 131074 return
   from durationcanvas_ref 137604
   to durationcanvas_ref 139780
@@ -203,18 +202,6 @@ msg 131842 return
   to durationcanvas_ref 139780
   yz 650 2025 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
-msg 132354 synchronous
-  from durationcanvas_ref 132098
-  to durationcanvas_ref 132226
-  yz 682 2025 explicitmsg "getEvents"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 959 669
-msg 132482 return
-  from durationcanvas_ref 132226
-  to durationcanvas_ref 132098
-  yz 703 3005 explicitmsg "events"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 967 690
 msg 132868 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 132740
@@ -228,50 +215,16 @@ msg 133124 synchronous
   yz 308 2010 msg operation_ref 183426 // "createProxyPushConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 358 294
-msg 134530 synchronous
-  from durationcanvas_ref 132098
-  to durationcanvas_ref 134402
-  yz 710 2015 msg operation_ref 182786 // "getEventToChannel()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 760 697
-msg 135042 asynchronous
-  from durationcanvas_ref 134402
-  to durationcanvas_ref 134914
-  yz 717 2015 msg operation_ref 128130 // "receive()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 423 704
-msg 135298 synchronous
-  from durationcanvas_ref 134914
-  to durationcanvas_ref 135170
-  yz 724 3005 explicitmsg "processEvent"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 96 711
-msg 135682 return
-  from durationcanvas_ref 134402
-  to durationcanvas_ref 132098
-  yz 780 2015 explicitmsg "ConnectionException.ConsumerNotFound"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 746 768
-msg 135810 return
-  from durationcanvas_ref 134402
-  to durationcanvas_ref 132098
-  yz 812 2015 unspecifiedmsg
-  show_full_operations_definition default drawing_language default show_context_mode default
-msg 136066 lost_synchronous
-  from durationcanvas_ref 134402
-  to lostfoundmsgsupport_ref 135938
-  yz 773 2015 explicitmsg "receive()"
-  show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 552 760
 msg 136450 synchronous
   from durationcanvas_ref 139268
   to durationcanvas_ref 136322
-  yz 864 3015 unspecifiedmsg
+  yz 934 3015 msg operation_ref 189442 // "removeProxyConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 601 921
 msg 136578 return
   from durationcanvas_ref 136322
   to durationcanvas_ref 139268
-  yz 894 2015 unspecifiedmsg
+  yz 964 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 136580 return
   from durationcanvas_ref 132996
@@ -281,9 +234,9 @@ msg 136580 return
 msg 136706 return
   from durationcanvas_ref 139268
   to durationcanvas_ref 139780
-  yz 904 2015 explicitmsg "ChannelException.NotConnected"
+  yz 974 2015 explicitmsg "ChannelException.NotConnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 252 891
+  label_xy 252 961
 msg 136708 return
   from durationcanvas_ref 132740
   to durationcanvas_ref 139780
@@ -293,65 +246,100 @@ msg 136708 return
 msg 136834 return
   from durationcanvas_ref 136322
   to durationcanvas_ref 139268
-  yz 924 2015 unspecifiedmsg
+  yz 994 2015 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 136962 return
   from durationcanvas_ref 139268
   to durationcanvas_ref 139780
-  yz 935 2020 unspecifiedmsg
+  yz 1005 2020 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 137092 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 136964
-  yz 455 2010 explicitmsg "suscribe()"
+  yz 449 2010 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "CallBackConsumer"
-  label_xy 341 443
+  label_xy 341 437
 msg 137346 synchronous
   from durationcanvas_ref 139908
   to durationcanvas_ref 137218
-  yz 978 2020 msg operation_ref 182914 // "removeCallbackConsumer()"
+  yz 1048 2020 msg operation_ref 182914 // "removeCallbackConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 592 965
+  label_xy 592 1035
 msg 137474 return
   from durationcanvas_ref 137218
   to durationcanvas_ref 139908
-  yz 994 2025 unspecifiedmsg
+  yz 1064 2025 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 137602 return
   from durationcanvas_ref 139908
   to durationcanvas_ref 139780
-  yz 1006 2030 explicitmsg "ChannelException.NotRegistered"
+  yz 1076 2030 explicitmsg "ChannelException.NotRegistered"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 252 993
+  label_xy 252 1063
 msg 137732 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 137604
-  yz 550 2010 msg operation_ref 183170 // "connect()"
+  yz 545 2010 msg operation_ref 183170 // "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 382 538
+  label_xy 382 533
 msg 137858 return
   from durationcanvas_ref 137218
   to durationcanvas_ref 139908
-  yz 1036 2020 unspecifiedmsg
+  yz 1106 2020 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
 msg 137986 return
   from durationcanvas_ref 139908
   to durationcanvas_ref 139780
-  yz 1048 2025 unspecifiedmsg
+  yz 1118 2025 unspecifiedmsg
   show_full_operations_definition default drawing_language default show_context_mode default
+reflexivemsg 138242 synchronous
+  to durationcanvas_ref 138114
+  yz 719 2025 msg operation_ref 196098 // "deliverEvents()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 744 707
+msg 138498 synchronous
+  from durationcanvas_ref 138114
+  to durationcanvas_ref 138370
+  yz 732 2030 explicitmsg "getEvents"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 850 719
+msg 138626 return
+  from durationcanvas_ref 138370
+  to durationcanvas_ref 138114
+  yz 747 2030 explicitmsg "events"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 858 734
 msg 139396 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 139268
-  yz 866 3010 msg operation_ref 128258 // "disconnect()"
+  yz 931 3010 msg operation_ref 128258 // "disconnect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 383 854
+  label_xy 383 919
+msg 139650 asynchronous
+  from durationcanvas_ref 138114
+  to durationcanvas_ref 139522
+  yz 760 2025 msg operation_ref 128130 // "receive()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 434 747
+msg 139906 asynchronous
+  from durationcanvas_ref 139522
+  to durationcanvas_ref 139778
+  yz 773 2030 explicitmsg "processEvent"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 95 760
 msg 140036 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 139908
-  yz 968 2015 msg operation_ref 183298 // "unsuscribe()"
+  yz 1038 2015 msg operation_ref 183298 // "unsuscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 311 958
+  label_xy 311 1028
+msg 140162 lost_synchronous
+  from durationcanvas_ref 138114
+  to lostfoundmsgsupport_ref 140034
+  yz 801 2025 explicitmsg "receive()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 563 788
 msg 140676 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 140548

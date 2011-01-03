@@ -117,11 +117,6 @@ relationcanvas 132354 relation_ref 183682 // <unidirectional association>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 132482 relation_ref 183810 // <unidirectional association>
-  from ref 128898 z 2001 to ref 131714
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
 relationcanvas 132610 relation_ref 161922 // <unidirectional association>
   from ref 128770 z 2001 to point 331 136
   line 132738 z 2001 to point 562 136
