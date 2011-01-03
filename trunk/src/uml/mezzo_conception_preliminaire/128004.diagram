@@ -46,55 +46,55 @@ fragment 149764 "break ScEc 5 Le supplier n'est pas connecte"
   xyzwh 45 995 3005 779 47
 end
 durationcanvas 129412 classinstance_ref 128003 // :Supplier
-  xyzwh 64 78 2010 11 119
+  xyzwh 65 78 2010 11 119
 end
 durationcanvas 132612 classinstance_ref 128003 // :Supplier
-  xyzwh 64 227 2010 11 116
+  xyzwh 65 227 2010 11 116
 end
 durationcanvas 132740 classinstance_ref 128772 // :ChannelAdmin
-  xyzwh 331 226 2010 11 118
+  xyzwh 335 226 2010 11 118
 end
 durationcanvas 132996 classinstance_ref 128900 // :ChannelAdminCtr
-  xyzwh 427 227 2010 11 102
+  xyzwh 431 227 2010 11 102
 end
 durationcanvas 138500 classinstance_ref 128003 // :Supplier
-  xyzwh 64 622 2010 11 252
+  xyzwh 65 622 2010 11 252
   overlappingdurationcanvas 138756
-    xyzwh 70 635 2020 11 25
+    xyzwh 71 635 2020 11 25
   end
 end
 durationcanvas 140548 classinstance_ref 140420 // :EventClient
-  xyzwh 251 86 2010 11 111
+  xyzwh 254 86 2010 11 111
 end
 durationcanvas 141828 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 506 253 2010 11 59
+  xyzwh 511 253 2010 11 59
 end
 durationcanvas 142212 classinstance_ref 128003 // :Supplier
-  xyzwh 64 355 2010 11 234
+  xyzwh 65 355 2010 11 234
 end
 durationcanvas 142340 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 506 354 2010 11 221
+  xyzwh 511 354 2010 11 221
 end
 durationcanvas 143492 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 751 372 2010 11 200
+  xyzwh 754 372 2010 11 200
 end
 durationcanvas 143748 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 506 675 2010 11 199
+  xyzwh 511 675 2010 11 199
 end
 durationcanvas 144772 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 751 680 2010 11 188
+  xyzwh 754 680 2010 11 188
   overlappingdurationcanvas 145028
-    xyzwh 757 821 2020 11 25
+    xyzwh 760 821 2020 11 25
   end
 end
 durationcanvas 145284 classinstance_ref 128003 // :Supplier
-  xyzwh 64 915 2010 11 175
+  xyzwh 65 915 2010 11 175
 end
 durationcanvas 145412 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 506 915 2010 11 170
+  xyzwh 511 915 2010 11 170
 end
 durationcanvas 148996 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 751 926 2010 11 131
+  xyzwh 754 926 2010 11 131
 end
 msg 132868 synchronous
   from durationcanvas_ref 132612
@@ -169,7 +169,7 @@ msg 142468 synchronous
 msg 143620 synchronous
   from durationcanvas_ref 142340
   to durationcanvas_ref 143492
-  yz 375 2015 msg operation_ref 189314 // "addProxySupplier()"
+  yz 375 2015 msg operation_ref 189314 // "addProxySupplier(in ps : Supplier)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 603 364
@@ -183,7 +183,7 @@ msg 143876 synchronous
 msg 144900 synchronous
   from durationcanvas_ref 143748
   to durationcanvas_ref 144772
-  yz 682 2015 msg operation_ref 183042 // "addEvent()"
+  yz 682 2015 msg operation_ref 183042 // "addEvent(in ev : Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Event"
   label_xy 609 670
@@ -275,7 +275,7 @@ msg 148740 return
 msg 149124 synchronous
   from durationcanvas_ref 145412
   to durationcanvas_ref 148996
-  yz 926 2015 msg operation_ref 189570 // "removeProxySupplier()"
+  yz 926 2015 msg operation_ref 189570 // "removeProxySupplier(in ps : Supplier)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 609 914
