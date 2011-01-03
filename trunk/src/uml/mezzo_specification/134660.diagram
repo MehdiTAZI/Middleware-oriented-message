@@ -10,37 +10,37 @@ fragment 128900 "loop"
   xyzwh 30 333 2040 448 77
 end
 durationcanvas 128004 classinstance_ref 128002 // :Framework
-  xyzwh 453 272 2010 11 30
+  xyzwh 450 272 2010 11 30
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 57 72 2010 11 457
+  xyzwh 55 72 2010 11 457
   overlappingdurationcanvas 131074
-    xyzwh 63 120 2020 11 26
+    xyzwh 61 120 2020 11 26
   end
   overlappingdurationcanvas 131842
-    xyzwh 63 340 2020 11 54
+    xyzwh 61 340 2020 11 54
     overlappingdurationcanvas 128003
-      xyzwh 69 363 2030 11 25
+      xyzwh 67 363 2030 11 25
     end
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 453 70 2010 11 40
+  xyzwh 450 70 2010 11 40
 end
 durationcanvas 128388 classinstance_ref 128002 // :Framework
-  xyzwh 453 479 2010 11 28
+  xyzwh 450 479 2010 11 28
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 453 214 2010 11 38
+  xyzwh 450 214 2010 11 38
 end
 durationcanvas 131714 classinstance_ref 128002 // :Framework
-  xyzwh 453 346 2010 11 50
+  xyzwh 450 346 2010 11 50
 end
 durationcanvas 132098 classinstance_ref 128002 // :Framework
-  xyzwh 453 422 2010 11 34
+  xyzwh 450 422 2010 11 34
 end
 durationcanvas 132866 classinstance_ref 128002 // :Framework
-  xyzwh 453 162 2010 11 36
+  xyzwh 450 162 2010 11 36
 end
 reflexivemsg 128131 synchronous
   to durationcanvas_ref 128003
@@ -92,9 +92,9 @@ msg 129154 synchronous
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 238 2015 explicitmsg "register"
+  yz 238 2015 explicitmsg "registered"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 242 225
+  label_xy 241 225
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 120 2025 explicitmsg "createCallback"
