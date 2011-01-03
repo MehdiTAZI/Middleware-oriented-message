@@ -5,22 +5,22 @@ classinstance 128002 class_ref 141698 // Framework
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.6337 4 2000 life_line_z 2000
 durationcanvas 128004 classinstance_ref 128002 // :Framework
-  xyzwh 453 305 2010 11 30
+  xyzwh 450 305 2010 11 30
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 57 72 2010 11 430
+  xyzwh 55 72 2010 11 430
   overlappingdurationcanvas 131074
-    xyzwh 63 132 2020 11 26
+    xyzwh 61 132 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 453 70 2010 11 40
+  xyzwh 450 70 2010 11 40
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 453 247 2010 11 38
+  xyzwh 450 247 2010 11 38
 end
 durationcanvas 131330 classinstance_ref 128002 // :Framework
-  xyzwh 453 176 2010 11 25
+  xyzwh 450 176 2010 11 25
 end
 msg 128132 synchronous
   from durationcanvas_ref 128258
@@ -56,7 +56,7 @@ msg 129154 synchronous
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 271 2015 explicitmsg "register"
+  yz 271 2015 explicitmsg "registered"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 208 258
 reflexivemsg 131202 synchronous
