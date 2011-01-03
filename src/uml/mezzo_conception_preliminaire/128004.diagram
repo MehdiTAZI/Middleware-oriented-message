@@ -67,19 +67,19 @@ durationcanvas 140548 classinstance_ref 140420 // :EventClient
   xyzwh 251 86 2010 11 111
 end
 durationcanvas 141828 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 505 253 2010 11 59
+  xyzwh 506 253 2010 11 59
 end
 durationcanvas 142212 classinstance_ref 128003 // :Supplier
   xyzwh 64 355 2010 11 234
 end
 durationcanvas 142340 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 505 354 2010 11 221
+  xyzwh 506 354 2010 11 221
 end
 durationcanvas 143492 classinstance_ref 129284 // :ChannelCtr
   xyzwh 751 372 2010 11 200
 end
 durationcanvas 143748 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 505 675 2010 11 199
+  xyzwh 506 675 2010 11 199
 end
 durationcanvas 144772 classinstance_ref 129284 // :ChannelCtr
   xyzwh 751 680 2010 11 188
@@ -91,7 +91,7 @@ durationcanvas 145284 classinstance_ref 128003 // :Supplier
   xyzwh 64 915 2010 11 175
 end
 durationcanvas 145412 classinstance_ref 141700 // pps:ProxyPushSupplier
-  xyzwh 505 915 2010 11 170
+  xyzwh 506 915 2010 11 170
 end
 durationcanvas 148996 classinstance_ref 129284 // :ChannelCtr
   xyzwh 751 926 2010 11 131
@@ -165,13 +165,14 @@ msg 142468 synchronous
   to durationcanvas_ref 142340
   yz 371 3005 msg operation_ref 156034 // "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 503 241
 msg 143620 synchronous
   from durationcanvas_ref 142340
   to durationcanvas_ref 143492
   yz 375 2015 msg operation_ref 189314 // "addProxySupplier()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
-  label_xy 638 363
+  label_xy 603 364
 msg 143876 synchronous
   from durationcanvas_ref 138500
   to durationcanvas_ref 143748
