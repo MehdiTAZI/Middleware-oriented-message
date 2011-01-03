@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 23
+  revision 24
   modified_by 2 "Franck"
 
 
@@ -177,12 +177,7 @@ format 76
 	overlapping_bars size A4
       end
 
-      sequencediagram 175746 "UC03 - Scenario Exceptionnel 5 - Le Supplier se deconnecte mais deja deconnecte du Channel"
-	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-	overlapping_bars size A4
-      end
-
-      sequencediagram 175874 "UC03 - Scenario Exceptionnel 6 - Le Supplier envoie un event mais deja deconnecte"
+      sequencediagram 175746 "UC03 - Scenario Exceptionnel 5 - Le Supplier n'est pas connecte"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end

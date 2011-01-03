@@ -62,7 +62,7 @@ msg 129154 synchronous
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 242 2015 explicitmsg "register"
+  yz 242 2015 explicitmsg "registered"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 238 229
 reflexivemsg 131202 synchronous

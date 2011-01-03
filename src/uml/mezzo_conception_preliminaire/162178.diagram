@@ -76,22 +76,12 @@ relationcanvas 131842 relation_ref 183426 // channels
   no_role_a no_role_b
   multiplicity_a_pos 761 269 3000 no_multiplicity_b
 end
-relationcanvas 132354 relation_ref 183810 // <unidirectional association>
-  from ref 128898 z 2001 to ref 131714
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132610 relation_ref 198018 // <unidirectional association>
-  from ref 128898 z 2001 to ref 129538
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132738 relation_ref 198146 // <unidirectional association>
+relationcanvas 132610 relation_ref 198146 // <unidirectional association>
   from ref 128898 z 2001 to ref 129026
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 132866 relation_ref 196994 // <unidirectional association>
+relationcanvas 132738 relation_ref 196994 // <unidirectional association>
   from ref 130946 z 2001 to ref 132482
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b

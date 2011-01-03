@@ -35,7 +35,7 @@ msg 131586 return
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 205 2015 explicitmsg "connect(Channel reference)"
+  yz 205 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 303 194
 msg 131970 return
@@ -47,7 +47,7 @@ msg 131970 return
 msg 132226 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132098
-  yz 275 2015 explicitmsg "connect(Channel reference)"
+  yz 275 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 300 262
 msg 132354 return
