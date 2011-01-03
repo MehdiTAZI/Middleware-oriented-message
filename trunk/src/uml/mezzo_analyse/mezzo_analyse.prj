@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse"
-  revision 37
-  modified_by 2 "Franck"
+  revision 38
+  modified_by 4 "michael"
 
 
   
@@ -553,6 +553,15 @@ ${members}}
 	    classrelation_ref 218626 // <unidirectional association>
 	  b parent class_ref 128002 // CallbackConsumer
       end
+
+      classrelation 128004 // <unidirectional association>
+	relation 128004 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128004 // <unidirectional association>
+	  b parent class_ref 128386 // Event
+      end
     end
 
     class 128002 "CallbackConsumer"
@@ -876,7 +885,6 @@ ${members}}
       classrelation 185218 // channels
 	relation_ref 183426 // channels
       end
-
     end
 
     class 168706 "ChannelAdmin"
@@ -1003,7 +1011,6 @@ ${members}}
 	  b parent class_ref 182146 // EventClient
       end
     end
-
   end
 
   classview 141058 "ANALYSE : DIAGRAMME DU DOMAINE ET CLASSES PARTICIPANTES"
