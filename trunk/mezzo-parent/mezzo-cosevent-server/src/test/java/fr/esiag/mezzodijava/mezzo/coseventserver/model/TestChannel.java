@@ -1,6 +1,3 @@
-/**
- * 
- */
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import static org.junit.Assert.*;
@@ -11,17 +8,18 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-/**
- * @author fab
- *
- */
 public class TestChannel {
+	
+	Channel ch;
+	String topic;
+	int capacity;
 
 	/**
 	 * @throws java.lang.Exception
 	 */
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+		
 	}
 
 	/**
@@ -29,6 +27,7 @@ public class TestChannel {
 	 */
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
+		
 	}
 
 	/**
@@ -36,6 +35,7 @@ public class TestChannel {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		this.ch = new Channel();
 	}
 
 	/**
@@ -43,6 +43,7 @@ public class TestChannel {
 	 */
 	@After
 	public void tearDown() throws Exception {
+		this.ch=null;
 	}
 
 	/**
@@ -50,7 +51,13 @@ public class TestChannel {
 	 */
 	@Test
 	public void testGetTopic() {
-		fail("Not yet implemented"); // TODO
+		this.topic="toto";
+		assertNull("topic n'est pas null", ch.getTopic());
+		ch.setTopic(null);
+		assertNull("topic n'est pas null", ch.getTopic());
+		ch.setTopic(this.topic);
+		assertNotNull("topic n'est pas null", ch.getTopic());
+		assertEquals(this.topic, ch.getTopic());
 	}
 
 	/**
@@ -58,7 +65,15 @@ public class TestChannel {
 	 */
 	@Test
 	public void testSetTopic() {
-		fail("Not yet implemented"); // TODO
+		this.topic="nuclear";
+		assertNull("topic n'est pas null", ch.getTopic());
+		ch.setTopic(null);
+		assertNull("topic n'est pas null", ch.getTopic());
+		ch.setTopic(this.topic);
+		assertNotNull("topic n'est pas null", ch.getTopic());
+		assertEquals(this.topic, ch.getTopic());
+		ch.setTopic("foot");
+		assertEquals("foot", ch.getTopic());
 	}
 
 	/**
@@ -66,7 +81,13 @@ public class TestChannel {
 	 */
 	@Test
 	public void testGetCapacity() {
-		fail("Not yet implemented"); // TODO
+		this.capacity=1000;
+		assertEquals(0, ch.getCapacity());
+		ch.setCapacity(-2);
+		assertTrue("capacity est négative", ch.getCapacity()<0);
+		ch.setCapacity(this.capacity);
+		assertTrue("capacity est négative", ch.getCapacity()>0);
+		assertEquals(this.capacity, ch.getCapacity());
 	}
 
 	/**
@@ -74,7 +95,15 @@ public class TestChannel {
 	 */
 	@Test
 	public void testSetCapacity() {
-		fail("Not yet implemented"); // TODO
+		this.capacity=5;
+		assertEquals(0, ch.getCapacity());
+		ch.setCapacity(-2);
+		assertTrue("capacity est négative", ch.getCapacity()<0);
+		ch.setCapacity(this.capacity);
+		assertTrue("capacity est négative", ch.getCapacity()>0);
+		assertEquals(this.capacity, ch.getCapacity());
+		ch.setCapacity(22);
+		assertEquals(22, ch.getCapacity());
 	}
 
 	/**
