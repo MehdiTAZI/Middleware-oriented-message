@@ -17,14 +17,16 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 		this.chadmctr=cac;
 	}
 
+	@Override
 	public ProxyForPushSupplier getProxyForPushSupplier()
 			throws ChannelNotFoundException {
 		return chadmctr.createProxyForPushSupplier();
 	}
 
+	@Override
 	public ProxyForPushConsumer getProxyForPushConsumer()
 			throws ChannelNotFoundException {
-		return null;
+		return chadmctr.createProxyForPushConsumer();
 	}
 
 }
