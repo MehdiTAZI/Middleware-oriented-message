@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 33
+  revision 34
   modified_by 2 "Franck"
 
 
@@ -286,6 +286,18 @@ ${members}}
       end
 
       operation 203906 "removeProxySupplier"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 211458 "deliverEvents"
 	public explicit_return_type ""
 	nparams 0
 	

@@ -75,7 +75,7 @@ end
 relationcanvas 129538 relation_ref 230018 // <unidirectional association>
   from ref 128386 z 2001 to ref 128002
   no_role_a no_role_b
-  multiplicity_a_pos 855 343 3000 multiplicity_b_pos 776 343 3000
+  multiplicity_a_pos 855 343 3000 multiplicity_b_pos 776 348 3000
 end
 relationcanvas 129666 relation_ref 230146 // <composition>
   from ref 128002 z 2001 to ref 128130
@@ -121,12 +121,12 @@ relationcanvas 132098 relation_ref 231298 // <unidirectional association>
   decenter_begin 836
   from ref 128386 z 2001 to ref 131074
   no_role_a no_role_b
-  multiplicity_a_pos 729 568 3000 multiplicity_b_pos 727 404 3000
+  multiplicity_a_pos 729 568 3000 multiplicity_b_pos 727 420 3000
 end
 relationcanvas 132482 relation_ref 231682 // <unidirectional association>
   from ref 128386 z 2001 to ref 128770
   no_role_a no_role_b
-  multiplicity_a_pos 461 249 3000 multiplicity_b_pos 609 318 3000
+  multiplicity_a_pos 461 252 3000 multiplicity_b_pos 609 326 3000
 end
 relationcanvas 132610 relation_ref 231810 // <unidirectional association>
   geometry HV
@@ -138,14 +138,14 @@ end
 relationcanvas 132738 relation_ref 231938 // <unidirectional association>
   from ref 128386 z 2001 to ref 128898
   no_role_a no_role_b
-  multiplicity_a_pos 467 407 3000 multiplicity_b_pos 609 360 3000
+  multiplicity_a_pos 467 409 3000 multiplicity_b_pos 609 366 3000
 end
 relationcanvas 132866 relation_ref 232066 // <unidirectional association>
   geometry HV
   from ref 130178 z 2001 to point 693 529
   line 134018 z 2001 to ref 128386
   no_role_a no_role_b
-  multiplicity_a_pos 679 404 3000 multiplicity_b_pos 480 537 3000
+  multiplicity_a_pos 679 420 3000 multiplicity_b_pos 480 537 3000
 end
 relationcanvas 133378 relation_ref 232194 // <unidirectional association>
   from ref 130434 z 2001 to ref 128514
@@ -167,7 +167,7 @@ end
 relationcanvas 135682 relation_ref 232578 // <unidirectional association>
   from ref 128514 z 2001 to ref 128386
   no_role_a no_role_b
-  multiplicity_a_pos 609 344 3000 multiplicity_b_pos 478 344 3000
+  multiplicity_a_pos 609 349 3000 multiplicity_b_pos 478 345 3000
 end
 relationcanvas 135810 relation_ref 232706 // <dependency>
   geometry VHr
