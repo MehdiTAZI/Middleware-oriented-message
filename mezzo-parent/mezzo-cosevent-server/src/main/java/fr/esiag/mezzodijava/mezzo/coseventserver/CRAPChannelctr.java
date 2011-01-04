@@ -12,7 +12,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Supplier;
 
-public class Channelctr {
+public class CRAPChannelctr {
 	private String topic;
 	private int capacity;
 	// TODO : not consumer / supplier sont les parents de PPC / PPS
@@ -20,7 +20,7 @@ public class Channelctr {
 	private List<Supplier> suppliers;
 	private List<Event> events;
 	
-	public Channelctr(String topic, int capacity) {
+	public CRAPChannelctr(String topic, int capacity) {
 		this.topic=topic;
 		this.capacity=capacity;
 		consumers = new HashMap<Consumer,Queue<Event>>();

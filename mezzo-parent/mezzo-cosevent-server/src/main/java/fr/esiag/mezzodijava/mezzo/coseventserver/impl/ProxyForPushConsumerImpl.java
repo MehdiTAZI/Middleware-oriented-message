@@ -21,8 +21,8 @@ public class ProxyForPushConsumerImpl implements ProxyForPushConsumerOperations 
 	 * Build an instance of ProxyForPushConsumerImpl associated to a Channel
 	 * Controler
 	 * 
-	 * @param channelCtr
-	 *            A Channel Controller
+	 * @param channelCtr A Channel Controller
+	 *            
 	 */
 	public ProxyForPushConsumerImpl(ChannelCtr channelCtr) {
 		this.channelCtr = channelCtr;
