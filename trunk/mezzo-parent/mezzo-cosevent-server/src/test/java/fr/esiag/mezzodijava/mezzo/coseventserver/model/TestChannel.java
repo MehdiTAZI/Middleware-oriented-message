@@ -2,11 +2,16 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 public class TestChannel {
 	
@@ -51,6 +56,7 @@ public class TestChannel {
 	 */
 	@Test
 	public void testGetTopic() {
+		
 		this.topic="toto";
 		assertNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(null);
@@ -65,6 +71,7 @@ public class TestChannel {
 	 */
 	@Test
 	public void testSetTopic() {
+		
 		this.topic="nuclear";
 		assertNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(null);
@@ -81,6 +88,7 @@ public class TestChannel {
 	 */
 	@Test
 	public void testGetCapacity() {
+		
 		this.capacity=1000;
 		assertEquals(0, ch.getCapacity());
 		ch.setCapacity(-2);
@@ -95,6 +103,7 @@ public class TestChannel {
 	 */
 	@Test
 	public void testSetCapacity() {
+		
 		this.capacity=5;
 		assertEquals(0, ch.getCapacity());
 		ch.setCapacity(-2);
@@ -111,7 +120,16 @@ public class TestChannel {
 	 */
 	@Test
 	public void testGetEvents() {
-		fail("Not yet implemented"); // TODO
+		
+		Event testevent = new Event();
+		List<Event> testObject = new ArrayList<Event>();
+		assertTrue(testObject.isEmpty());
+		assertTrue(ch.getEvents().isEmpty());
+		testObject.add(testevent);
+		ch.addEvents(testevent);
+		assertTrue(testObject.contains(testevent));
+		assertTrue(ch.getEvents().contains(testevent));
+		assertEquals(testObject,ch.getEvents());
 	}
 
 	/**
@@ -119,7 +137,16 @@ public class TestChannel {
 	 */
 	@Test
 	public void testSetEvents() {
-		fail("Not yet implemented"); // TODO
+		
+		Event testevent = new Event();
+		List<Event> testObject = new ArrayList<Event>();
+		assertTrue(testObject.isEmpty());
+		assertTrue(ch.getEvents().isEmpty());
+		testObject.add(testevent);
+		ch.setEvents(testObject);
+		assertTrue(testObject.contains(testevent));
+		assertTrue(ch.getEvents().contains(testevent));
+		assertEquals(testObject,ch.getEvents());
 	}
 
 	/**
@@ -127,7 +154,16 @@ public class TestChannel {
 	 */
 	@Test
 	public void testAddEvents() {
-		fail("Not yet implemented"); // TODO
+		
+		Event testevent = new Event();
+		List<Event> testObject = new ArrayList<Event>();
+		assertTrue(testObject.isEmpty());
+		assertTrue(ch.getEvents().isEmpty());
+		testObject.add(testevent);
+		ch.addEvents(testevent);
+		assertTrue(testObject.contains(testevent));
+		assertTrue(ch.getEvents().contains(testevent));
+		assertEquals(testObject,ch.getEvents());
 	}
 
 }
