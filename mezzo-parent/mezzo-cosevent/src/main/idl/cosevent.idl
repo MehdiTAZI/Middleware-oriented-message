@@ -42,9 +42,9 @@ module cosevent {
 	};
 	
 	interface ProxyForPushSupplier : Supplier{
-		boolean connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
+		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
 		void push(in Event evt) raises (ChannelNotFoundException);
-		boolean disconnect() raises (ChannelNotFoundException,NotConnectedException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException);
 	};
 	
 	interface ChannelAdmin{
