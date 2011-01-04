@@ -4,7 +4,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ChannelAdminCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 /**
  * @author fab
