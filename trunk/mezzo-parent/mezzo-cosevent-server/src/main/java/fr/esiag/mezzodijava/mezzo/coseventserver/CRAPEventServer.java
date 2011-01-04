@@ -5,15 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EventServer {
+public class CRAPEventServer {
 	private String name;
-	private Map<String,Channelctr> channels;
+	private Map<String,CRAPChannelctr> channels;
 	
-	public EventServer(String name){
+	public CRAPEventServer(String name){
 		this.name=name;
-		channels = new HashMap<String,Channelctr>();
+		channels = new HashMap<String,CRAPChannelctr>();
 	}
-	public void addChannel(Channelctr channel){
+	public void addChannel(CRAPChannelctr channel){
 		channels.put(channel.getTopic(), channel);
 	}
 	public void removeChannel(String topic){
