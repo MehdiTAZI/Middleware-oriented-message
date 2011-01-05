@@ -46,7 +46,7 @@ public class CRAPChannelctr {
 		
 	}
 	
-	// TODO : hypothèse sur problème de concurence
+	// TODO : hypothese sur probleme de concurence
 	public boolean consumersFull(){
 		return (capacity == consumers.size());
 	}
