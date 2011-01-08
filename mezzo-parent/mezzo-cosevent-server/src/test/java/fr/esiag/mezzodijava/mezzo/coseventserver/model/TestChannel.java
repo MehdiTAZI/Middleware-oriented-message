@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -139,7 +140,7 @@ public class TestChannel {
 	public void testSetEvents() {
 		
 		Event testevent = new Event();
-		List<Event> testObject = new ArrayList<Event>();
+		Vector<Event> testObject = new Vector<Event>();
 		assertTrue(testObject.isEmpty());
 		assertTrue(ch.getEvents().isEmpty());
 		testObject.add(testevent);
