@@ -32,6 +32,11 @@ module cosevent {
 	exception ConsumerNotFoundException{
 		string message;
 	};
+	
+	exception EventClientException{
+		string message;
+	};
+	
 	interface Consumer{
 	};
 	interface Supplier{
