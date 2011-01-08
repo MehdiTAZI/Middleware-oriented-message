@@ -33,7 +33,11 @@ module cosevent {
 		string message;
 	};
 	
+	//TMA : ADD Exception
 	exception EventClientException{
+		string message;
+	};
+	exception TopicNotFoundException{
 		string message;
 	};
 	
