@@ -2,6 +2,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
@@ -11,7 +12,7 @@ public class Channel {
 	
 	private int capacity;
 	
-	List<Event> events = new ArrayList<Event>();
+	Vector<Event> events = new Vector<Event>();
 
 	public String getTopic() {
 		return topic;
@@ -33,7 +34,7 @@ public class Channel {
 		return events;
 	}
 
-	public void setEvents(List<Event> events) {
+	public void setEvents(Vector<Event> events) {
 		this.events = events;
 	}
 	
