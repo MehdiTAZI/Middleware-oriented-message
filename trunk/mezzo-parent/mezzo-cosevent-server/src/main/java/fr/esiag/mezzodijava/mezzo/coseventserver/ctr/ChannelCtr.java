@@ -26,7 +26,7 @@ public class ChannelCtr {
 	// lien vers le model
 	Channel channel;
 
-	//Edit Mehdi : Utilisation du Vector parcequ'il est synchronized. 
+	//Edit MTA : Edit Set to Vector => Utilisation du Vector parcequ'il est synchronized. 
 	Vector<CallbackConsumer> callbackConsumers = new Vector<CallbackConsumer>();
 
 	Vector<ProxyForPushConsumerOperations> proxyForPushConsumers = new Vector<ProxyForPushConsumerOperations>();
