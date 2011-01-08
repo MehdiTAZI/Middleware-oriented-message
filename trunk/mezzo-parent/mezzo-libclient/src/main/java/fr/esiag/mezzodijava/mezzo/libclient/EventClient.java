@@ -11,6 +11,7 @@ import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
+import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
@@ -18,7 +19,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventClientException;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.TopicNotFoundException;
 
 /**
  * Classe client
@@ -105,7 +106,7 @@ public class EventClient {
 	 * @return an instance of Channel (distant object)
 	 * @throws EventClientExceptionCRAP
 	 *             when name resolution is wrong
-	 * @throws TopicNotFoundException
+	 * @throws TopicNotFoundException 
 	 */
 	public ChannelAdmin resolveChannelByTopic(String topic)
 			throws EventClientException, TopicNotFoundException {
@@ -116,7 +117,7 @@ public class EventClient {
 			// before throwing exception
 		} catch (NotFound e) {
 			// TODO log here
-			throw new TopicNotFoundException(topic, e);
+			throw new TopicNotFoundException("Cannot find the Topic '" +topic+"'");
 		} catch (CannotProceed e) {
 			// TODO log here
 			throw new EventClientException("Cannot resolve the channel");
@@ -147,14 +148,18 @@ public class EventClient {
 		}
 		// TODO make a child POA to handle callbacks
 		callbacksPOA = POAHelper.narrow(rootPOAObj);
-
+		try {
+			callbacksPOA.the_POAManager().activate();
+		} catch (AdapterInactive e) {
+			throw new EventClientException("Cannot activate the RootPOAManager");
+		}
 		// create a tie, with servant being the delegate.
 		CallbackConsumerPOATie tie = new CallbackConsumerPOATie(
-				callbackConsumerImplementation);
+				callbackConsumerImplementation,callbacksPOA);
 
 		// obtain the objectRef for the tie
-		// this step also implicitly activates the
-		// the object
-		return tie._this(orb);
+		CallbackConsumer href = tie._this(orb);
+		//return the object and 		
+		return href;
 	}
 }

@@ -1,6 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.libclient.exception;
 
-public class TopicNotFoundException extends Exception {
+public class TopicNotFoundExceptionCRAP extends Exception {
 	/**
 	 * When a topic is not kfound
 	 * 
@@ -9,7 +9,7 @@ public class TopicNotFoundException extends Exception {
 	 * @param exception
 	 *            Cause exception
 	 */
-	public TopicNotFoundException(String topic, Throwable exception) {
+	public TopicNotFoundExceptionCRAP(String topic, Throwable exception) {
 		super("Channel not found with this topic : " + topic, exception);
 	}
 
