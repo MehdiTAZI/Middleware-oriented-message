@@ -12,22 +12,22 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
  */
 public class ChannelAdminImpl implements ChannelAdminOperations {
 	
-	private ChannelAdminCtr chadmctr;
+	private ChannelAdminCtr chanelAdminctrl;
 
 	public ChannelAdminImpl(ChannelAdminCtr cac) {
-		this.chadmctr=cac;
+		this.chanelAdminctrl=cac;
 	}
 
 	@Override
 	public ProxyForPushSupplier getProxyForPushSupplier()
 			throws ChannelNotFoundException {
-		return chadmctr.createProxyForPushSupplier();
+		return chanelAdminctrl.createProxyForPushSupplier();
 	}
 
 	@Override
 	public ProxyForPushConsumer getProxyForPushConsumer()
 			throws ChannelNotFoundException {
-		return chadmctr.createProxyForPushConsumer();
+		return chanelAdminctrl.createProxyForPushConsumer();
 	}
 
 }

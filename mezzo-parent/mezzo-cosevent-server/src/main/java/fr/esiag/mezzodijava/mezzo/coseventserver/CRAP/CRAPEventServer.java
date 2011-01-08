@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.coseventserver;
+package fr.esiag.mezzodijava.mezzo.coseventserver.CRAP;
 
 import java.util.ArrayList;
 import java.util.HashMap;
