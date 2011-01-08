@@ -7,7 +7,8 @@ package fr.esiag.mezzodijava.mezzo.libclient.exception;
  * @author Franck
  * 
  */
-public class EventClientException extends Exception {
+//MTA : depreced utilisé plutot EventClientException Definie dans l'IDL
+public class EventClientExceptionCRAP extends Exception {
 
 	/**
 	 * Build a Client Exception
@@ -17,7 +18,7 @@ public class EventClientException extends Exception {
 	 * @param exception
 	 *            Cause exception
 	 */
-	public EventClientException(String message, Throwable exception) {
+	public EventClientExceptionCRAP(String message, Throwable exception) {
 		super(message, exception);
 	}
 
