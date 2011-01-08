@@ -6,6 +6,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 import java.nio.channels.AlreadyConnectedException;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.Vector;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
@@ -25,11 +26,12 @@ public class ChannelCtr {
 	// lien vers le model
 	Channel channel;
 
-	Set<CallbackConsumer> callbackConsumers = new HashSet<CallbackConsumer>();
+	//Edit Mehdi : Utilisation du Vector parcequ'il est synchronized. 
+	Vector<CallbackConsumer> callbackConsumers = new Vector<CallbackConsumer>();
 
-	Set<ProxyForPushConsumerOperations> proxyForPushConsumers = new HashSet<ProxyForPushConsumerOperations>();
+	Vector<ProxyForPushConsumerOperations> proxyForPushConsumers = new Vector<ProxyForPushConsumerOperations>();
 
-	Set<ProxyForPushSupplierOperations> proxyForPushSuppliers = new HashSet<ProxyForPushSupplierOperations>();
+	Vector<ProxyForPushSupplierOperations> proxyForPushSuppliers = new Vector<ProxyForPushSupplierOperations>();
 
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
