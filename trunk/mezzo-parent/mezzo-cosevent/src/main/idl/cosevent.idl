@@ -6,24 +6,31 @@ module cosevent {
 	};
 	
 	exception AlreadyRegisteredException{
+		string message;
 	};
 	
 	exception NotRegisteredException{
+		string message;
 	};
 	
 	exception AlreadyConnectedException{
+		string message;
 	};
 	
 	exception NotConnectedException{
+		string message;
 	};
 	
 	exception MaximalConnectionReachedException{
+		string message;
 	};
 	
 	exception ChannelNotFoundException{
+		string message;
 	};
 	
 	exception ConsumerNotFoundException{
+		string message;
 	};
 	interface Consumer{
 	};
