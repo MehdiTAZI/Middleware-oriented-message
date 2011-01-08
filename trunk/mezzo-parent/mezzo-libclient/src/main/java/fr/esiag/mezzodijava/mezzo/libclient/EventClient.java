@@ -17,7 +17,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 /**
@@ -44,7 +44,7 @@ public class EventClient {
 			nceObj = orb.resolve_initial_references("NameService");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve NameService", e);
+			throw new EventClientException("Cannot resolve NameService");
 		}
 		nce = NamingContextExtHelper.narrow(nceObj);
 	}
@@ -73,7 +73,7 @@ public class EventClient {
 	 * @param args
 	 *            Command line parameters
 	 * @return a initialized singleton instance of EventClient
-	 * @throws EventClientException
+	 * @throws EventClientExceptionCRAP
 	 *             Cannot init a resource (ORB or NameService) with this
 	 *             configuration
 	 */
@@ -103,7 +103,7 @@ public class EventClient {
 	 * @param topic
 	 *            Channel to find topic
 	 * @return an instance of Channel (distant object)
-	 * @throws EventClientException
+	 * @throws EventClientExceptionCRAP
 	 *             when name resolution is wrong
 	 * @throws TopicNotFoundException
 	 */
@@ -119,10 +119,10 @@ public class EventClient {
 			throw new TopicNotFoundException(topic, e);
 		} catch (CannotProceed e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve the channel", e);
+			throw new EventClientException("Cannot resolve the channel");
 		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Invalid topic name", e);
+			throw new EventClientException("Invalid topic name");
 		}
 		return ChannelAdminHelper.narrow(channelObj);
 	}
@@ -133,7 +133,7 @@ public class EventClient {
 	 * @param callbackConsumerImplementation
 	 *            implementation of callbackConsumerOperation
 	 * @return IOR CallbackConsumer
-	 * @throws EventClientException
+	 * @throws EventClientExceptionCRAP
 	 */
 	public CallbackConsumer serveCallbackConsumer(
 			CallbackConsumerOperations callbackConsumerImplementation)
@@ -143,7 +143,7 @@ public class EventClient {
 			rootPOAObj = orb.resolve_initial_references("RootPOA");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve RootPOA", e);
+			throw new EventClientException("Cannot resolve RootPOA");
 		}
 		// TODO make a child POA to handle callbacks
 		callbacksPOA = POAHelper.narrow(rootPOAObj);
