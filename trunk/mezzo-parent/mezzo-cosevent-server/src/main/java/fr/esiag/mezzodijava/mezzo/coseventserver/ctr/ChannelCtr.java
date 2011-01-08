@@ -26,6 +26,14 @@ public class ChannelCtr {
 	// lien vers le model
 	Channel channel;
 
+	public Channel getChannelModel() {
+		return channel;
+	}
+
+	public void setChannelModel(Channel channelModel) {
+		this.channel = channelModel;
+	}
+
 	//Edit MTA : Edit Set to Vector => Utilisation du Vector parcequ'il est synchronized. 
 	Vector<CallbackConsumer> callbackConsumers = new Vector<CallbackConsumer>();
 
