@@ -3,12 +3,14 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOA;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 
-public class ProxyForPushConsumerImpl implements ProxyForPushConsumerOperations {
+public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements MessageListener{
 
 	/**
 	 * The Channel Controller used by this facade
@@ -49,6 +51,11 @@ public class ProxyForPushConsumerImpl implements ProxyForPushConsumerOperations 
 	public void disconnect() throws NotConnectedException {
 		channelCtr.removeProxyForPushConsumer(this);
 
+	}
+
+	@Override
+	public void receive(Event evt) {
+			
 	}
 
 }
