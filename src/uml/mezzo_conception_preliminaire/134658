@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse" // Lien vers projet mezzo_analyse::mezzo_analyse
   revision 1
-  modified_by 2 "Franck"
+  modified_by 3 "Ordi"
   // class settings
   //class diagram settings
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -304,7 +304,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 170626 // <unidirectional association>
-	  b parent class_ref 161794 // ProxyPushSupplier
+	  b parent class_ref 161794 // ProxyForPushSupplier
 	oid 170626
       end
 
@@ -383,7 +383,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 177666 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
+	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 177666
       end
 
@@ -394,7 +394,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 185474 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
+	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 185474
       end
 
@@ -477,7 +477,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 177922 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
+	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 177922
       end
 
@@ -502,7 +502,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 198914 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
+	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 134915
       end
 
@@ -545,7 +545,7 @@ ${members}}
 	oid 135555
       end
 
-      operation 189186 "addProxyConsumer"
+      operation 189186 "addProxyForConsumer"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "consumer" type class_ref 168578 // Consumer
@@ -559,7 +559,7 @@ ${members}}
 	oid 189186
       end
 
-      operation 189314 "addProxySupplier"
+      operation 189314 "addProxyForSupplier"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "ps" type class_ref 135554 // Supplier
@@ -573,7 +573,7 @@ ${members}}
 	oid 189314
       end
 
-      operation 189442 "removeProxyConsumer"
+      operation 189442 "removeProxyForConsumer"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "pc" type class_ref 168578 // Consumer
@@ -587,7 +587,7 @@ ${members}}
 	oid 189442
       end
 
-      operation 189570 "removeProxySupplier"
+      operation 189570 "removeProxyForSupplier"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "ps" type class_ref 135554 // Supplier
@@ -693,7 +693,7 @@ ${members}}
       end
     end
 
-    class 128514 "ProxyPushConsumer"
+    class 128514 "ProxyForPushConsumer"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -837,7 +837,7 @@ ${members}}
       explicit_switch_type ""
       
       oid 128642
-      operation 183426 "createProxyPushConsumer"
+      operation 183426 "createProxyForPushConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -850,7 +850,7 @@ ${members}}
 	oid 134531
       end
 
-      operation 183554 "createProxyPushSupplier"
+      operation 183554 "createProxyForPushSupplier"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -870,7 +870,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 199554 // <unidirectional association>
-	  b parent class_ref 128514 // ProxyPushConsumer
+	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 134531
       end
 
@@ -881,12 +881,12 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 199938 // <unidirectional association>
-	  b parent class_ref 161794 // ProxyPushSupplier
+	  b parent class_ref 161794 // ProxyForPushSupplier
 	oid 135427
       end
     end
 
-    class 161794 "ProxyPushSupplier"
+    class 161794 "ProxyForPushSupplier"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -1014,7 +1014,7 @@ ${members}}
       explicit_switch_type ""
       
       oid 168706
-      operation 162946 "getProxyPushConsumer"
+      operation 162946 "getProxyForPushConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -1027,7 +1027,7 @@ ${members}}
 	oid 162946
       end
 
-      operation 163074 "getProxyPushSupplier"
+      operation 163074 "getProxyForPushSupplier"
 	public explicit_return_type ""
 	nparams 0
 	

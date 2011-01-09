@@ -48,62 +48,62 @@ end
 fragment 141188 "loop"
   xyzwh 8 666 3010 919 194
 end
-durationcanvas 128002 classinstance_ref 128260 // pps:ProxyPushConsumer
-  xyzwh 581 321 2010 11 49
+durationcanvas 128002 classinstance_ref 128260 // pps:ProxyForPushConsumer
+  xyzwh 583 321 2010 11 49
 end
 durationcanvas 128386 classinstance_ref 128644 // cb:CallbackConsumer
-  xyzwh 168 228 2010 11 41
+  xyzwh 162 228 2010 11 41
 end
 durationcanvas 129538 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 726 452 2010 11 70
+  xyzwh 723 452 2010 11 70
 end
 durationcanvas 130690 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 726 548 2010 11 104
+  xyzwh 723 548 2010 11 104
 end
 durationcanvas 132740 classinstance_ref 128772 // :ChannelAdmin
-  xyzwh 331 278 2000 11 143
+  xyzwh 327 278 2000 11 143
 end
 durationcanvas 132996 classinstance_ref 128900 // :ChannelAdminCtr
-  xyzwh 494 307 2000 11 72
+  xyzwh 490 307 2000 11 72
 end
 durationcanvas 134402 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 726 679 2010 11 164
+  xyzwh 723 679 2010 11 164
   overlappingdurationcanvas 138114
-    xyzwh 732 679 2020 11 136
+    xyzwh 729 679 2020 11 136
   end
 end
 durationcanvas 136322 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 726 933 2010 11 78
+  xyzwh 723 933 2010 11 78
 end
-durationcanvas 136964 classinstance_ref 128260 // pps:ProxyPushConsumer
-  xyzwh 581 447 2000 11 85
+durationcanvas 136964 classinstance_ref 128260 // pps:ProxyForPushConsumer
+  xyzwh 583 447 2000 11 85
 end
 durationcanvas 137218 classinstance_ref 129156 // :ChannelCtr
-  xyzwh 726 1048 2010 11 69
+  xyzwh 723 1048 2010 11 69
 end
-durationcanvas 137604 classinstance_ref 128260 // pps:ProxyPushConsumer
-  xyzwh 581 543 2010 11 119
+durationcanvas 137604 classinstance_ref 128260 // pps:ProxyForPushConsumer
+  xyzwh 583 543 2010 11 119
 end
 durationcanvas 138370 classinstance_ref 129284 // :Channel
-  xyzwh 844 692 2010 11 31
+  xyzwh 842 692 2010 11 31
 end
-durationcanvas 139268 classinstance_ref 128260 // pps:ProxyPushConsumer
-  xyzwh 581 931 2010 11 86
+durationcanvas 139268 classinstance_ref 128260 // pps:ProxyForPushConsumer
+  xyzwh 583 931 2010 11 86
 end
 durationcanvas 139522 classinstance_ref 128644 // cb:CallbackConsumer
-  xyzwh 168 760 2010 11 25
+  xyzwh 162 760 2010 11 25
 end
 durationcanvas 139780 classinstance_ref 128003 // :Consumer
-  xyzwh 72 90 2010 11 1039
+  xyzwh 70 90 2010 11 1039
   overlappingdurationcanvas 139778
-    xyzwh 78 773 2020 11 25
+    xyzwh 76 773 2020 11 25
   end
 end
-durationcanvas 139908 classinstance_ref 128260 // pps:ProxyPushConsumer
-  xyzwh 581 1034 2010 11 98
+durationcanvas 139908 classinstance_ref 128260 // pps:ProxyForPushConsumer
+  xyzwh 583 1034 2010 11 98
 end
 durationcanvas 140548 classinstance_ref 140420 // :EventClient
-  xyzwh 253 86 2000 11 96
+  xyzwh 250 86 2000 11 96
 end
 lostfoundmsgsupport 140034 xyz 428 803 2025
 msg 128130 synchronous
@@ -171,7 +171,7 @@ msg 130562 return
 msg 130818 synchronous
   from durationcanvas_ref 137604
   to durationcanvas_ref 130690
-  yz 548 2025 msg operation_ref 189186 // "addProxyConsumer(in consumer : Consumer)"
+  yz 548 2025 msg operation_ref 189186 // "addProxyForConsumer(in consumer : Consumer)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 610 535
@@ -210,20 +210,20 @@ msg 131842 return
 msg 132868 synchronous
   from durationcanvas_ref 139780
   to durationcanvas_ref 132740
-  yz 309 2010 msg operation_ref 162946 // "getProxyPushConsumer()"
+  yz 309 2010 msg operation_ref 162946 // "getProxyForPushConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "topic"
   label_xy 114 297
 msg 133124 synchronous
   from durationcanvas_ref 132740
   to durationcanvas_ref 132996
-  yz 308 2010 msg operation_ref 183426 // "createProxyPushConsumer()"
+  yz 308 2010 msg operation_ref 183426 // "createProxyForPushConsumer()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 358 294
 msg 136450 synchronous
   from durationcanvas_ref 139268
   to durationcanvas_ref 136322
-  yz 934 3015 msg operation_ref 189442 // "removeProxyConsumer(in pc : Consumer)"
+  yz 934 3015 msg operation_ref 189442 // "removeProxyForConsumer(in pc : Consumer)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 601 921
@@ -246,7 +246,7 @@ msg 136706 return
 msg 136708 return
   from durationcanvas_ref 132740
   to durationcanvas_ref 139780
-  yz 410 2015 explicitmsg "ProxyPushConsumer"
+  yz 410 2015 explicitmsg "ProxyForPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 133 398
 msg 136834 return

@@ -47,63 +47,63 @@ fragment 149764 "break ScEc 5 Le supplier n'est pas connecte"
   xyzwh 45 995 2015 779 47
 end
 durationcanvas 128258 classinstance_ref 128002 // :ChannelAdmin
-  xyzwh 342 228 2010 11 98
+  xyzwh 338 228 2010 11 98
 end
 durationcanvas 128770 classinstance_ref 128900 // :ChannelAdminCtr
-  xyzwh 473 246 2010 11 55
+  xyzwh 469 246 2010 11 55
 end
-durationcanvas 129026 classinstance_ref 141700 // :ProxyPushSupplier
-  xyzwh 532 255 2010 11 27
+durationcanvas 129026 classinstance_ref 141700 // :ProxyForPushSupplier
+  xyzwh 534 255 2010 11 27
 end
 durationcanvas 129412 classinstance_ref 128003 // :Supplier
-  xyzwh 65 78 2010 11 119
+  xyzwh 62 78 2010 11 119
 end
 durationcanvas 130306 classinstance_ref 129794 // :Channel
-  xyzwh 794 813 2010 11 31
+  xyzwh 793 813 2010 11 31
 end
 durationcanvas 138500 classinstance_ref 128003 // :Supplier
-  xyzwh 65 622 2010 11 252
+  xyzwh 62 622 2010 11 252
   overlappingdurationcanvas 138756
-    xyzwh 71 635 2020 11 25
+    xyzwh 68 635 2020 11 25
   end
 end
 durationcanvas 140548 classinstance_ref 140420 // :EventClient
-  xyzwh 254 86 2010 11 111
+  xyzwh 251 86 2010 11 111
 end
 durationcanvas 142212 classinstance_ref 128003 // :Supplier
-  xyzwh 65 229 2010 11 360
+  xyzwh 62 229 2010 11 360
 end
-durationcanvas 142340 classinstance_ref 141700 // :ProxyPushSupplier
-  xyzwh 532 354 2010 11 221
+durationcanvas 142340 classinstance_ref 141700 // :ProxyForPushSupplier
+  xyzwh 534 354 2010 11 221
 end
 durationcanvas 143492 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 718 372 2010 11 200
+  xyzwh 715 372 2010 11 200
 end
-durationcanvas 143748 classinstance_ref 141700 // :ProxyPushSupplier
-  xyzwh 532 675 2010 11 199
+durationcanvas 143748 classinstance_ref 141700 // :ProxyForPushSupplier
+  xyzwh 534 675 2010 11 199
 end
 durationcanvas 144772 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 718 680 2010 11 188
+  xyzwh 715 680 2010 11 188
 end
 durationcanvas 145284 classinstance_ref 128003 // :Supplier
-  xyzwh 65 915 2010 11 175
+  xyzwh 62 915 2010 11 175
 end
-durationcanvas 145412 classinstance_ref 141700 // :ProxyPushSupplier
-  xyzwh 532 915 2010 11 170
+durationcanvas 145412 classinstance_ref 141700 // :ProxyForPushSupplier
+  xyzwh 534 915 2010 11 170
 end
 durationcanvas 148996 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 718 926 2010 11 131
+  xyzwh 715 926 2010 11 131
 end
 msg 128386 synchronous
   from durationcanvas_ref 142212
   to durationcanvas_ref 128258
-  yz 230 2020 msg operation_ref 163074 // "getProxyPushSupplier()"
+  yz 230 2020 msg operation_ref 163074 // "getProxyForPushSupplier()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 154 217
 msg 128898 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128770
-  yz 246 2015 msg operation_ref 183554 // "createProxyPushSupplier()"
+  yz 246 2015 msg operation_ref 183554 // "createProxyForPushSupplier()"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 351 233
 msg 129154 synchronous
@@ -132,7 +132,7 @@ msg 129538 return
 msg 129666 return
   from durationcanvas_ref 128258
   to durationcanvas_ref 142212
-  yz 309 2015 explicitmsg "ProxyPushSupplier"
+  yz 309 2015 explicitmsg "ProxyForPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 165 296
 msg 130434 synchronous
@@ -180,7 +180,7 @@ msg 142468 synchronous
 msg 143620 synchronous
   from durationcanvas_ref 142340
   to durationcanvas_ref 143492
-  yz 375 2015 msg operation_ref 189314 // "addProxySupplier(in ps : Supplier)"
+  yz 375 2015 msg operation_ref 189314 // "addProxyForSupplier(in ps : Supplier)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 560 364
@@ -281,7 +281,7 @@ msg 148740 return
 msg 149124 synchronous
   from durationcanvas_ref 145412
   to durationcanvas_ref 148996
-  yz 926 2015 msg operation_ref 189570 // "removeProxySupplier(in ps : Supplier)"
+  yz 926 2015 msg operation_ref 189570 // "removeProxyForSupplier(in ps : Supplier)"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "pps"
   label_xy 561 915
