@@ -41,4 +41,5 @@ public class Channel {
 	public void addEvents(Event event){
 		events.add(event);
 	}
+
 }
