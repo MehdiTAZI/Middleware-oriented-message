@@ -4,9 +4,9 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.nio.channels.AlreadyConnectedException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Vector;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
@@ -34,12 +34,15 @@ public class ChannelCtr {
 		this.channel = channelModel;
 	}
 
-	//Edit MTA : Edit Set to Vector => Utilisation du Vector parcequ'il est synchronized. 
-	Vector<CallbackConsumer> callbackConsumers = new Vector<CallbackConsumer>();
+	// Edit FGI : Vector -> Set synchronized car moderne
+	Set<CallbackConsumer> callbackConsumers = Collections
+			.synchronizedSet(new HashSet<CallbackConsumer>());
 
-	Vector<ProxyForPushConsumerOperations> proxyForPushConsumers = new Vector<ProxyForPushConsumerOperations>();
+	Set<ProxyForPushConsumerOperations> proxyForPushConsumers = Collections
+			.synchronizedSet(new HashSet<ProxyForPushConsumerOperations>());
 
-	Vector<ProxyForPushSupplierOperations> proxyForPushSuppliers = new Vector<ProxyForPushSupplierOperations>();
+	Set<ProxyForPushSupplierOperations> proxyForPushSuppliers = Collections
+			.synchronizedSet(new HashSet<ProxyForPushSupplierOperations>());
 
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
