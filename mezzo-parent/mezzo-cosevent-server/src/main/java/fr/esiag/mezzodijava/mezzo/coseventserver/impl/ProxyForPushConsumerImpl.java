@@ -3,6 +3,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
@@ -55,8 +56,8 @@ public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements
 
 	//pour recevoir la notification qu'il y a des events envoyé par un supplier 
 	@Override
-	public void receive(Event evt) {
-			
+	public void receive(Event evt) throws ConsumerNotFoundException {
+			callbackConsumer.receive(evt);
 	}
 
 }
