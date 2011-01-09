@@ -53,6 +53,7 @@ public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements
 
 	}
 
+	//pour recevoir la notification qu'il y a des events envoyé par un supplier 
 	@Override
 	public void receive(Event evt) {
 			
