@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 34
-  modified_by 2 "Franck"
+  revision 35
+  modified_by 3 "Ordi"
 
 
   
@@ -213,7 +213,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 233986 // <unidirectional association>
-	  b multiplicity "1" parent class_ref 189442 // ProxyPushSupplier
+	  b multiplicity "1" parent class_ref 189442 // ProxyForPushSupplier
       end
 
       classrelation 234242 // <unidirectional association>
@@ -222,7 +222,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 234242 // <unidirectional association>
-	  b multiplicity "1" parent class_ref 189570 // ProxyPushConsumer
+	  b multiplicity "1" parent class_ref 189570 // ProxyForPushConsumer
       end
 
       operation 203266 "addCallbackConsumer"
@@ -249,7 +249,7 @@ ${members}}
 	
       end
 
-      operation 203522 "addProxyConsumer"
+      operation 203522 "addProxyForConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -261,7 +261,7 @@ ${members}}
 	
       end
 
-      operation 203650 "removeProxyConsumer"
+      operation 203650 "removeProxyForConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -273,7 +273,7 @@ ${members}}
 	
       end
 
-      operation 203778 "addProxySupplier"
+      operation 203778 "addProxyForSupplier"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -285,7 +285,7 @@ ${members}}
 	
       end
 
-      operation 203906 "removeProxySupplier"
+      operation 203906 "removeProxyForSupplier"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -325,17 +325,17 @@ ${members}}
 	relation 230402 -_->
 	  a default
 	    classrelation_ref 232450 // <dependency>
-	  b parent class_ref 189442 // ProxyPushSupplier
+	  b parent class_ref 189442 // ProxyForPushSupplier
       end
 
       classrelation 232578 // <dependency>
 	relation 230530 -_->
 	  a default
 	    classrelation_ref 232578 // <dependency>
-	  b parent class_ref 189570 // ProxyPushConsumer
+	  b parent class_ref 189570 // ProxyForPushConsumer
       end
 
-      operation 202626 "createProxyPushConsumer"
+      operation 202626 "createProxyForPushConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -347,7 +347,7 @@ ${members}}
 	
       end
 
-      operation 202754 "createProxyPushSupplier"
+      operation 202754 "createProxyForPushSupplier"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -382,7 +382,7 @@ ${members}}
       
     end
 
-    class 189442 "ProxyPushSupplier"
+    class 189442 "ProxyForPushSupplier"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -395,7 +395,7 @@ ${members}}
       
     end
 
-    class 189570 "ProxyPushConsumer"
+    class 189570 "ProxyForPushConsumer"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -439,7 +439,7 @@ ${members}}
       end
     end
 
-    class 189826 "ProxyPushConsumerImpl"
+    class 189826 "ProxyForPushConsumerImpl"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -455,7 +455,7 @@ ${members}}
 	  a public
 	    java "${type}"
 	    classrelation_ref 232706 // <realization>
-	  b parent class_ref 189570 // ProxyPushConsumer
+	  b parent class_ref 189570 // ProxyForPushConsumer
       end
 
       classrelation 234370 // <unidirectional association>
@@ -542,7 +542,7 @@ ${members}}
 	  b parent class_ref 189314 // ChannelAdmin
       end
 
-      operation 203010 "getProxyPushConsumer"
+      operation 203010 "getProxyForPushConsumer"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -554,7 +554,7 @@ ${members}}
 	
       end
 
-      operation 203138 "getProxyPushSupplier"
+      operation 203138 "getProxyForPushSupplier"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -576,7 +576,7 @@ ${members}}
       end
     end
 
-    class 190082 "ProxyPushSupplierImpl"
+    class 190082 "ProxyForPushSupplierImpl"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -592,7 +592,7 @@ ${members}}
 	  a public
 	    java "${type}"
 	    classrelation_ref 232962 // <realization>
-	  b parent class_ref 189442 // ProxyPushSupplier
+	  b parent class_ref 189442 // ProxyForPushSupplier
       end
 
       classrelation 234114 // <unidirectional association>
