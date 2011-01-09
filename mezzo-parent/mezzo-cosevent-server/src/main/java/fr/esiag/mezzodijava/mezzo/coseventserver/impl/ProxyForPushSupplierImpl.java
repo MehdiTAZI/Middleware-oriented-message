@@ -1,5 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -15,9 +18,21 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	 * 
 	 * @param channelCtr A channel Controler
 	 */
+	
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
-		this.channelCtr = channelCtr;
+		this.channelCtr = channelCtr;		 		
+
 	}
+	
+	public ProxyForPushSupplierImpl(String topic){
+		this.channelCtr = channelCtr;
+		 
+		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
+		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
+
+	}
+
+	
 	@Override
 	public void connect() throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
