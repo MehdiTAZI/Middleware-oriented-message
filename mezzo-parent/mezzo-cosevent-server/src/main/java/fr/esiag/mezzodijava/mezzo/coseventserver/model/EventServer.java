@@ -5,7 +5,9 @@ import java.util.Vector;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 
 public class EventServer {
-	
+	/*
+	 * Auteur : MTA
+	 */
 	private Vector<ChannelCtr> channels;
 	
 	public EventServer()
