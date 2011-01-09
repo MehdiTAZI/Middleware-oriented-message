@@ -31,6 +31,10 @@ public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements
 		this.channelCtr = channelCtr;
 	}
 
+	public ProxyForPushConsumerImpl(String topic) {
+		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
+		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
+	}
 	@Override
 	public void subscribe(CallbackConsumer cc)
 			throws AlreadyRegisteredException {
