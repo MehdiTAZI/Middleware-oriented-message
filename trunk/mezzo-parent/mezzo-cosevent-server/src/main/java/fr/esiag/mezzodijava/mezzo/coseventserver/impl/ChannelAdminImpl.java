@@ -19,15 +19,15 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	}
 
 	@Override
-	public ProxyForPushSupplier getProxyForPushSupplier(String topic)
+	public ProxyForPushSupplier getProxyForPushSupplier()
 			throws ChannelNotFoundException {
-		return chanelAdminctrl.createProxyForPushSupplier(topic);
+		return chanelAdminctrl.createProxyForPushSupplier();
 	}
 
 	@Override
-	public ProxyForPushConsumer getProxyForPushConsumer(String topic)
+	public ProxyForPushConsumer getProxyForPushConsumer()
 			throws ChannelNotFoundException {
-		return chanelAdminctrl.createProxyForPushConsumer(topic);
+		return chanelAdminctrl.createProxyForPushConsumer();
 	}
 
 }

@@ -11,7 +11,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOA;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 
-public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements MessageListener{
+public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushConsumerOperations{
 
 	/**
 	 * The Channel Controller used by this facade
@@ -31,7 +31,7 @@ public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements
 		this.channelCtr = channelCtr;
 	}
 
-	public ProxyForPushConsumerImpl(String topic) {
+	public ProxyForPushConsumerImpl() {
 		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
 		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
 	}
@@ -40,6 +40,8 @@ public class ProxyForPushConsumerImpl extends ProxyForPushConsumerPOA implements
 			throws AlreadyRegisteredException {
 		this.callbackConsumer = cc;
 		channelCtr.addCallbackConsumer(cc);
+		System.out.println("Consumer Subscribed to " + channelCtr.getChannelModel().getTopic());
+		
 	}
 
 	@Override

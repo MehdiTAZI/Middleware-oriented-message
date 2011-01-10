@@ -21,16 +21,12 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
 		this.channelCtr = channelCtr;		 		
+				
+		
 
 	}
 	
-	public ProxyForPushSupplierImpl(String topic){
-		this.channelCtr = channelCtr;
-		 
-		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
-		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
-
-	}
+	
 
 	
 	@Override

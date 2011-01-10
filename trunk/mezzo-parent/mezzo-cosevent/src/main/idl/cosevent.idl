@@ -59,7 +59,7 @@ module cosevent {
 	};
 	
 	interface ChannelAdmin{
-		ProxyForPushConsumer getProxyForPushConsumer(in string topic) raises (ChannelNotFoundException);
-		ProxyForPushSupplier getProxyForPushSupplier(in string topic) raises (ChannelNotFoundException);
+		ProxyForPushConsumer getProxyForPushConsumer() raises (ChannelNotFoundException);
+		ProxyForPushSupplier getProxyForPushSupplier() raises (ChannelNotFoundException);
 	};
 };
