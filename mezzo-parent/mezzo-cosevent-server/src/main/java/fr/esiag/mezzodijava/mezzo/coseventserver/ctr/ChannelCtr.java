@@ -13,8 +13,12 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 /**
@@ -38,12 +42,7 @@ public class ChannelCtr {
 	Set<CallbackConsumer> callbackConsumers = Collections
 			.synchronizedSet(new HashSet<CallbackConsumer>());
 
-	Set<ProxyForPushConsumerOperations> proxyForPushConsumers = Collections
-			.synchronizedSet(new HashSet<ProxyForPushConsumerOperations>());
-
-	Set<ProxyForPushSupplierOperations> proxyForPushSuppliers = Collections
-			.synchronizedSet(new HashSet<ProxyForPushSupplierOperations>());
-
+	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
 	 * 
@@ -69,8 +68,8 @@ public class ChannelCtr {
 	}
 
 	public void addProxyForPushConsumer(
-			ProxyForPushConsumerOperations proxyConsumer) {
-		if (!proxyForPushConsumers.add(proxyConsumer)) {
+			ProxyForPushConsumerImpl proxyConsumer) {
+		if (!channel.getProxyForPushConsumers().add(proxyConsumer)) {
 			throw new AlreadyConnectedException();
 		}
 	}
@@ -78,14 +77,14 @@ public class ChannelCtr {
 	public void removeProxyForPushConsumer(
 			ProxyForPushConsumerOperations proxyConsumer)
 			throws NotConnectedException {
-		if (!proxyForPushConsumers.remove(proxyConsumer)) {
+		if (!channel.getProxyForPushConsumers().remove(proxyConsumer)) {
 			throw new NotConnectedException();
 		}
 	}
 
 	public void addProxyForPushSupplier(
-			ProxyForPushSupplierOperations proxySupplier) {
-		if (!proxyForPushSuppliers.add(proxySupplier)) {
+			ProxyForPushSupplierImpl proxySupplier) {
+		if (!this.channel.getProxyForPushSuppliers().add(proxySupplier)) {
 			throw new AlreadyConnectedException();
 		}
 	}
@@ -93,7 +92,7 @@ public class ChannelCtr {
 	public void removeProxyForPushSupplier(
 			ProxyForPushSupplierOperations proxySupplier)
 			throws NotConnectedException {
-		if (!proxyForPushSuppliers.remove(proxySupplier)) {
+		if (!this.channel.getProxyForPushSuppliers().remove(proxySupplier)) {
 			throw new NotConnectedException();
 		}
 	}
