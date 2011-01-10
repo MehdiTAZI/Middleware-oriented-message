@@ -144,14 +144,14 @@ public class EventClient {
 			rootPOAObj = orb.resolve_initial_references("RootPOA");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve RootPOA");
+			throw new EventClientException("Cannot resolve RootPOA",e);
 		}
 		// TODO make a child POA to handle callbacks
 		callbacksPOA = POAHelper.narrow(rootPOAObj);
 		try {
 			callbacksPOA.the_POAManager().activate();
 		} catch (AdapterInactive e) {
-			throw new EventClientException("Cannot activate the RootPOAManager");
+			throw new EventClientException("Cannot activate the RootPOAManager",e);
 		}
 		// create a tie, with servant being the delegate.
 		CallbackConsumerPOATie tie = new CallbackConsumerPOATie(
