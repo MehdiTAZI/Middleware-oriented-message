@@ -98,6 +98,7 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
+		
 		channel.addEvents(e);
 	}
 

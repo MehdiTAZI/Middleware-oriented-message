@@ -45,6 +45,8 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
 	@Override
 	public void push(Event evt) throws ChannelNotFoundException {
+		
+		System.out.println("evt "+evt.toString());
 		channelCtr.addEvent(evt);
 		
 	}
