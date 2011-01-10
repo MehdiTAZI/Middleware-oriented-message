@@ -30,6 +30,7 @@ public class MainSupplier {
 		EventClient ec = EventClient.init(null);
 		orb=ec.getOrb();
 		ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
+		
 		ProxyForPushSupplier supplierProxy = channelAdmin.getProxyForPushSupplier();			
 		supplierProxy.connect();
 		Any any=orb.create_any();

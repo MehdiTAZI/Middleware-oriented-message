@@ -8,9 +8,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
-public class simleMainTest {
+public class MainConsumer {
 
-	public simleMainTest() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, AlreadyRegisteredException
+	public MainConsumer() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, AlreadyRegisteredException
 	{
 		EventClient ec = EventClient.init(null);
 		ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
@@ -21,7 +21,7 @@ public class simleMainTest {
 		System.out.println("ALL DONE");
 	}
 	public static void main(String[] args) throws ChannelNotFoundException, AlreadyRegisteredException, EventClientException, TopicNotFoundException {
-		new simleMainTest();
+		new MainConsumer();
 
 	}
 

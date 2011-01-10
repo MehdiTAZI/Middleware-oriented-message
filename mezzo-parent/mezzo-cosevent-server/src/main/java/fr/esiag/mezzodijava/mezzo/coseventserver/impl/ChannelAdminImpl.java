@@ -17,13 +17,11 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	public ChannelAdminImpl(ChannelAdminCtr cac) {
 		this.chanelAdminctrl=cac;
 	}
-
 	@Override
 	public ProxyForPushSupplier getProxyForPushSupplier()
 			throws ChannelNotFoundException {
 		return chanelAdminctrl.createProxyForPushSupplier();
 	}
-
 	@Override
 	public ProxyForPushConsumer getProxyForPushConsumer()
 			throws ChannelNotFoundException {
