@@ -11,7 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.EventClientException;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientExceptionCRAP;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 
 /**Test Event client.
  * 

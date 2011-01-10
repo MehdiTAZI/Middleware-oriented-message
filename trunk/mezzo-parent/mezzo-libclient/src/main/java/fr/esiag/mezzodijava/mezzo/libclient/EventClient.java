@@ -18,8 +18,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
-import fr.esiag.mezzodijava.mezzo.cosevent.EventClientException;
-import fr.esiag.mezzodijava.mezzo.cosevent.TopicNotFoundException;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 /**
  * Classe client
@@ -45,7 +45,7 @@ public class EventClient {
 			nceObj = orb.resolve_initial_references("NameService");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve NameService");
+			throw new EventClientException("Cannot resolve NameService",e);
 		}
 		nce = NamingContextExtHelper.narrow(nceObj);
 	}
@@ -74,7 +74,7 @@ public class EventClient {
 	 * @param args
 	 *            Command line parameters
 	 * @return a initialized singleton instance of EventClient
-	 * @throws EventClientExceptionCRAP
+	 * @throws EventClientException
 	 *             Cannot init a resource (ORB or NameService) with this
 	 *             configuration
 	 */
@@ -104,7 +104,7 @@ public class EventClient {
 	 * @param topic
 	 *            Channel to find topic
 	 * @return an instance of Channel (distant object)
-	 * @throws EventClientExceptionCRAP
+	 * @throws EventClientException
 	 *             when name resolution is wrong
 	 * @throws TopicNotFoundException 
 	 */
@@ -117,13 +117,13 @@ public class EventClient {
 			// before throwing exception
 		} catch (NotFound e) {
 			// TODO log here
-			throw new TopicNotFoundException("Cannot find the Topic '" +topic+"'");
+			throw new TopicNotFoundException("Cannot find the Topic '" +topic+"'",e);
 		} catch (CannotProceed e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve the channel");
+			throw new EventClientException("Cannot resolve the channel",e);
 		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Invalid topic name");
+			throw new EventClientException("Invalid topic name",e);
 		}
 		return ChannelAdminHelper.narrow(channelObj);
 	}
@@ -134,7 +134,7 @@ public class EventClient {
 	 * @param callbackConsumerImplementation
 	 *            implementation of callbackConsumerOperation
 	 * @return IOR CallbackConsumer
-	 * @throws EventClientExceptionCRAP
+	 * @throws EventClientException
 	 */
 	public CallbackConsumer serveCallbackConsumer(
 			CallbackConsumerOperations callbackConsumerImplementation)
