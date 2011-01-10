@@ -58,12 +58,12 @@ public class TestEventClient {
 	@Test
 	public void testInit() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, AlreadyRegisteredException{
 
-			EventClient ec = EventClient.init(null);
+			/*EventClient ec = EventClient.init(null);
 			ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
 			ProxyForPushConsumer consumerProxy = channelAdmin.getProxyForPushConsumer("MEZZO");
 			callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
 			CallbackConsumer cbc=ec.serveCallbackConsumer(callbackImpl);
 			consumerProxy.subscribe(cbc);
-			System.out.println("ALL DONE");
+			System.out.println("ALL DONE");*/
 	}
 }

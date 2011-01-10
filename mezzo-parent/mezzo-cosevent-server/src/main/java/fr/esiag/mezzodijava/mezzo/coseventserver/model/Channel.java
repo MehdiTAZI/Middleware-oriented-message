@@ -65,7 +65,10 @@ public class Channel {
 	
 	
 	public void addEvents(Event event){
+		
 		events.add(event);
+		for(Event e:events)
+			System.out.println("In CAddEvent in Channel "+e);
 	}
 
 }

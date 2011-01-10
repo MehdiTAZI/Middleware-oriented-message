@@ -162,4 +162,9 @@ public class EventClient {
 		//return the object and 		
 		return href;
 	}
+
+	public ORB getOrb() {
+		return orb;
+	}
+	
 }
