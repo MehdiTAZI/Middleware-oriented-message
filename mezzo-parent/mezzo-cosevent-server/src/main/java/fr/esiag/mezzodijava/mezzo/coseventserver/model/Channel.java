@@ -13,6 +13,7 @@ public class Channel {
 	private int capacity;
 	
 	Vector<Event> events = new Vector<Event>();
+	
 
 	public String getTopic() {
 		return topic;
