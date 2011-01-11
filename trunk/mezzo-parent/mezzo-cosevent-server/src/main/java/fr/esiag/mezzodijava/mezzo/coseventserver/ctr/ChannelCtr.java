@@ -13,35 +13,31 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 /**
- * @author Franck
+ * Classe ChannelCtr
+ * 
+ * To interact with the model
+ * 
+ * UC n°: US14,US15 (+US children) 
+ * 
+ * @author Mezzo-Team
  * 
  */
+
 public class ChannelCtr {
 
 	// lien vers le model
 	Channel channel;
-
-	public Channel getChannelModel() {
-		return channel;
-	}
-
-	public void setChannelModel(Channel channelModel) {
-		this.channel = channelModel;
-	}
-
+	
 	// Edit FGI : Vector -> Set synchronized car moderne
 	Set<CallbackConsumer> callbackConsumers = Collections
 			.synchronizedSet(new HashSet<CallbackConsumer>());
-
 	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
@@ -51,6 +47,14 @@ public class ChannelCtr {
 	 */
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
+	}
+	
+	public Channel getChannelModel() {
+		return channel;
+	}
+
+	public void setChannelModel(Channel channelModel) {
+		this.channel = channelModel;
 	}
 
 	public void addCallbackConsumer(CallbackConsumer callbackConsummer)
@@ -98,7 +102,6 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
-		
 		channel.addEvents(e);
 	}
 
