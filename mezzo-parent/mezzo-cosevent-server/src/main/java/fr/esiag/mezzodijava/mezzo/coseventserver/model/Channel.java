@@ -1,9 +1,10 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.Vector;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
@@ -23,7 +24,8 @@ public class Channel {
 
 	private String topic;	
 	private int capacity;	
-	private Vector<Event> events = new Vector<Event>();	
+	List<Event> events = Collections.synchronizedList(new ArrayList<Event>());
+	// private Vector<Event> events = new Vector<Event>();	
 	private Set<ProxyForPushConsumerImpl> consumers=new HashSet<ProxyForPushConsumerImpl>();
 	private Set<ProxyForPushSupplierImpl> suppliers=new HashSet<ProxyForPushSupplierImpl>();
 	
@@ -63,7 +65,7 @@ public class Channel {
 		return events;
 	}
 
-	public void setEvents(Vector<Event> events) {
+	public void setEvents(List<Event> events) {
 		this.events = events;
 	}
 	
