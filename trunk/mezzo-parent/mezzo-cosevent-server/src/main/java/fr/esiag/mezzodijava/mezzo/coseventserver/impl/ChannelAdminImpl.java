@@ -9,7 +9,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 /**
  * Classe ChannelAdminImpl
  * 
- * For Proxy access to a client, implementation of the ChannelAdmin Interface
+ * For Proxy access to a client, implementation of the ChannelAdmin IDL Interface
  * 
  * UC n°: US14,US15 (+US children) 
  * 

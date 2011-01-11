@@ -8,8 +8,19 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOA;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+
+/**
+ * Classe ProxyForPushConsumerImpl
+ * 
+ * Proxy for subscribing and receiving Events, acts as a Supplier 
+ * accessible to a client, implementation of the ProxyForPushConsumer IDL Interface
+ * 
+ * UC n°: US15 (+US children)
+ * 
+ * @author Mezzo-Team
+ * 
+ */
 
 public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushConsumerOperations{
 
@@ -35,6 +46,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
 		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
 	}
+	
 	@Override
 	public void subscribe(CallbackConsumer cc)
 			throws AlreadyRegisteredException {
@@ -60,7 +72,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 
 	}
 
-	//pour recevoir la notification qu'il y a des events envoyé par un supplier 
+	//pour recevoir une notification s'il y a des events envoyés par un supplier 
 	@Override
 	public void receive(Event evt) throws ConsumerNotFoundException {
 			callbackConsumer.receive(evt);
