@@ -1,8 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
-
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -11,23 +8,30 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 
+/**
+ * Classe ProxyForPushSupplierImpl
+ * 
+ * Proxy for pushing Events, acts as a Consumer 
+ * accessible to a client, implementation of the ProxyForPushSupplier IDL Interface
+ * 
+ * UC n°: US14 (+US children)
+ * 
+ * @author Mezzo-Team
+ * 
+ */
+
+
 public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
 	private ChannelCtr channelCtr;
+	
 	/**
-	 * 
 	 * @param channelCtr A channel Controler
 	 */
 	
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
 		this.channelCtr = channelCtr;		 		
-				
-		
-
 	}
-	
-	
-
 	
 	@Override
 	public void connect() throws ChannelNotFoundException,
