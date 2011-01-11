@@ -12,30 +12,29 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierHelper;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 /**
- * @author fab
- *
+ * Classe ChannelAdminCtr
+ * 
+ * For Proxy creation : create, store in POA and return the Proxy
+ * 
+ * UC n°: US14,US15 (+US children) 
+ * 
+ * @author Mezzo-Team
+ * 
  */
 
 public class ChannelAdminCtr {
 
-	/**
-	 * 
-	 */
-
 	private ORB orb;
 	private ChannelCtr channelCtr;
-	private ProxyForPushConsumerImpl ppc;
-	private ProxyForPushSupplierImpl pps;
 	
 
+	// Constructor
 	public ChannelAdminCtr(ORB orb,ChannelCtr channel) {
 		this.orb=orb;
 		this.channelCtr=channel;
 	}	
-	
 	
 
 	public ProxyForPushSupplier createProxyForPushSupplier(){
@@ -64,7 +63,6 @@ public class ChannelAdminCtr {
 			return ProxyForPushConsumerHelper.narrow(poa.servant_to_reference(new ProxyForPushConsumerPOATie(proxy)));
 		
 		} catch (Exception e) {
-			
 			return null;
 		}
 	}
