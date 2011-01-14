@@ -65,12 +65,13 @@ public class CosEventServer {
 		}
 
 		orb = ORB.init(args, props);
-		Channel channel = new Channel();
+		Channel channel = new Channel(channelName);
+		
 		ChannelCtr channelCtr = new ChannelCtr(channel);
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 				channelAdminCtr);
-		channel.setTopic(channelName);
+		
 
 		try {
 			POA poa = POAHelper.narrow(orb
