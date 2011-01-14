@@ -31,12 +31,17 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	 * The Channel Controller used by this facade
 	 */
 	ChannelCtr channelCtr;
+	String channel;
 
 	CallbackConsumer callbackConsumer;
 
 	
 	public ProxyForPushConsumerImpl(ChannelCtr channelCtr) {
 		this.channelCtr = channelCtr;
+	}
+	public ProxyForPushConsumerImpl(String channel){
+		this.channel = channel;	
+		BFFactory.createChannelCtr(channel);
 	}
 
 	public ProxyForPushConsumerImpl() {
@@ -49,7 +54,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 			throws AlreadyRegisteredException {
 		this.callbackConsumer = cc;
 		channelCtr.addProxyForPushConsumerToSubscribedList(this);
-		System.out.println("Consumer Subscribed to " + channelCtr.getChannelModel().getTopic());
+		System.out.println("Consumer Subscribed to " + channelCtr.getChannel().getTopic());
 		
 	}
 
