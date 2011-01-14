@@ -72,18 +72,22 @@ public class ChannelCtr {
 
 		if(channel.getConsumersSubscribed().containsKey(callbackConsumer))
 			throw new AlreadyRegisteredException();
-		else
+		else 
 			channel.getConsumersSubscribed().put(callbackConsumer, Collections.synchronizedList(new ArrayList<Event>()));
 		/*if (!callbackConsumers.add(callbackConsumer)) {
 			throw new AlreadyRegisteredException();
 		}*/
 	}
 
-	public void removeCallbackConsumer(CallbackConsumer callbackConsummer)
+	public void removeCallbackConsumer(CallbackConsumer callbackConsumer)
 			throws NotRegisteredException {
-		if (!callbackConsumers.remove(callbackConsummer)) {
+		if(!channel.getConsumersSubscribed().containsKey(callbackConsumer))
 			throw new NotRegisteredException();
-		}
+		else 
+			channel.getConsumersSubscribed().remove(callbackConsumer);
+		/*if (!callbackConsumers.remove(callbackConsumer)) {
+			throw new NotRegisteredException();
+		}*/
 	}
 
 	public void addProxyForPushConsumer(ProxyForPushConsumerImpl proxyConsumer) {
@@ -115,7 +119,9 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
-		channel.addEvents(e);
+		for(CallbackConsumer callback :channel.getConsumersSubscribed().keySet()){		
+			channel.getConsumersSubscribed().get(callback).add(e);
+		}
 	}
 
 }
