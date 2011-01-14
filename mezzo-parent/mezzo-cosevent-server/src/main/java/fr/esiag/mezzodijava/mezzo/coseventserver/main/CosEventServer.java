@@ -74,7 +74,7 @@ public class CosEventServer {
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 				channelAdminCtr);*/
-		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName);
+		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,90);
 		
 		
 		

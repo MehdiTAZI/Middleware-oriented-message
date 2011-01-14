@@ -41,7 +41,7 @@ public class TestChannel {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.ch = new Channel("");
+		this.ch = new Channel("",99);
 	}
 
 	/**
