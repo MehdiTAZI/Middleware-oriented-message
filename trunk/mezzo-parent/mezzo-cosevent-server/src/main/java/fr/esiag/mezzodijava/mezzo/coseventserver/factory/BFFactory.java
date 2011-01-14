@@ -32,34 +32,34 @@ public class BFFactory {
 		return orb;
 		
 	}
-	public static Channel getChannel(String channel){
+	public static Channel createChannel(String channel){
 		if (mapChannel.get(channel)==null)
 			mapChannel.put(channel, new Channel(channel));
 		return mapChannel.get(channel);
 	}
 	
-	public static ChannelCtr getChannelCtr (String channel){
+	public static ChannelCtr createChannelCtr (String channel){
 		if (mapChannelCtr.get(channel)==null)
 			mapChannelCtr.put(channel, new ChannelCtr(channel));
 		return mapChannelCtr.get(channel);
 		
 	}
 	
-	public static ChannelAdminCtr getChannelAdminCtr(String channel){
+	public static ChannelAdminCtr createChannelAdminCtr(String channel){
 		if (mapChannelAdminCtr.get(channel)==null)
 			mapChannelAdminCtr.put(channel, new ChannelAdminCtr(channel));
 		return mapChannelAdminCtr.get(channel);
 		
 	}
 	
-	public static ChannelAdminImpl getChannelAdminImpl(String channel){
+	public static ChannelAdminImpl createChannelAdminImpl(String channel){
 		if (mapChannelAdminImpl.get(channel)==null)
 			mapChannelAdminImpl.put(channel, new ChannelAdminImpl(channel));
 		return mapChannelAdminImpl.get(channel);
 	}
 	
-	public static ChannelAdminImpl createChannel(ORB orb,String channel){
-		return getChannelAdminImpl( channel);
+	public static ChannelAdminImpl initiateChannel(String channel){
+		return createChannelAdminImpl( channel);
 	}
 	
 

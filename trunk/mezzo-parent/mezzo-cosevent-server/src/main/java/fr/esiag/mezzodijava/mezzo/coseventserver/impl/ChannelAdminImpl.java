@@ -28,7 +28,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	}
 	public ChannelAdminImpl(String channel) {
 		this.channel=channel;
-		this.channelAdminctrl= BFFactory.getChannelAdminCtr(channel);
+		this.channelAdminctrl= BFFactory.createChannelAdminCtr(channel);
 	}
 	
 	@Override

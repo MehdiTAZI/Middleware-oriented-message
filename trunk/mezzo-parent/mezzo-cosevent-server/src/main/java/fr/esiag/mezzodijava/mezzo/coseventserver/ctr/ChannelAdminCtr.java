@@ -38,7 +38,7 @@ public class ChannelAdminCtr {
 	}	
 	public ChannelAdminCtr(String channel){
 		this.orb=BFFactory.createOrb(null, null);
-		this.channelCtr=BFFactory.getChannelCtr(channel);
+		this.channelCtr=BFFactory.createChannelCtr(channel);
 	}
 	
 
