@@ -29,14 +29,17 @@ public class ChannelAdminCtr {
 
 	private ORB orb;
 	private ChannelCtr channelCtr;
+	private String channel;
 	
 
 	// Constructor
+	@Deprecated
 	public ChannelAdminCtr(ORB orb,ChannelCtr channel) {
 		this.orb=orb;
 		this.channelCtr=channel;
 	}	
 	public ChannelAdminCtr(String channel){
+		this.channel=channel;
 		this.orb=BFFactory.createOrb(null, null);
 		this.channelCtr=BFFactory.createChannelCtr(channel);
 	}
@@ -61,7 +64,7 @@ public class ChannelAdminCtr {
 		ProxyForPushConsumerImpl proxy=null;
 		
 		try {
-			proxy=new ProxyForPushConsumerImpl(channelCtr);
+			proxy=new ProxyForPushConsumerImpl(channel);
 			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 			poa.the_POAManager().activate();									
 		

@@ -34,7 +34,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 public class ChannelCtr {
 
 	// lien vers le model
-	Channel channel;
+	private String channelName;
+	private Channel channel;
 	
 	// Edit FGI : Vector -> Set synchronized car moderne
 	Set<CallbackConsumer> callbackConsumers = Collections
@@ -46,10 +47,12 @@ public class ChannelCtr {
 	 * @param channel
 	 *            Channel entity
 	 */
+	@Deprecated
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
 	}
 	public ChannelCtr(String channel) {
+		this.channelName=channel;
 		this.channel = BFFactory.createChannel(channel);
 	}
 	
