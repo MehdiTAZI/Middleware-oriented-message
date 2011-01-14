@@ -23,6 +23,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	private ChannelAdminCtr channelAdminctrl;
 	private String channel;
 
+	@Deprecated
 	public ChannelAdminImpl(ChannelAdminCtr cac) {
 		this.channelAdminctrl=cac;
 	}

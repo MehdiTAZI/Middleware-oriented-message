@@ -7,6 +7,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushSupplierImpl
@@ -24,13 +25,18 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
 	private ChannelCtr channelCtr;
+	private String channel;
 	
 	/**
 	 * @param channelCtr A channel Controler
 	 */
-	
+	@Deprecated
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
 		this.channelCtr = channelCtr;		 		
+	}
+	public ProxyForPushSupplierImpl(String channel){
+		channelCtr = BFFactory.createChannelCtr(channel);
+		this.channel = channel;		 		
 	}
 	
 	@Override

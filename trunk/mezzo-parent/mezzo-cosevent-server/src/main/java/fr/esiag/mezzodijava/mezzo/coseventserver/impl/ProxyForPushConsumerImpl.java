@@ -9,6 +9,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushConsumerImpl
@@ -27,9 +28,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	/**
 	 * The Channel Controller used by this facade
 	 */
-	ChannelCtr channelCtr;
-
-	CallbackConsumer callbackConsumer;
+	private String channel;
+	private ChannelCtr channelCtr;
+	private CallbackConsumer callbackConsumer;
 
 	/**
 	 * Build an instance of ProxyForPushConsumerImpl associated to a Channel
@@ -38,8 +39,13 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	 * @param channelCtr A Channel Controller
 	 *            
 	 */
+	@Deprecated
 	public ProxyForPushConsumerImpl(ChannelCtr channelCtr) {
 		this.channelCtr = channelCtr;
+	}
+	public ProxyForPushConsumerImpl(String channel){
+		this.channel=channel;
+		channelCtr = BFFactory.createChannelCtr(channel);
 	}
 
 	public ProxyForPushConsumerImpl() {
