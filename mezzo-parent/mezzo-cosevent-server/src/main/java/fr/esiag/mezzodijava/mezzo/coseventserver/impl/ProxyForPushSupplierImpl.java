@@ -27,6 +27,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
 	private ChannelCtr channelCtr;
 	private String channel;
+	private boolean connected=false;
 	
 	/**
 	 * @param channelCtr A channel Controler
@@ -43,18 +44,22 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	@Override
 	public void connect() throws AlreadyConnectedException, MaximalConnectionReachedException{
 		channelCtr.addProxyForPushSupplierToConnectedList(this);	
+		connected=true;
 	}
 
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
 		channelCtr.removeProxyForPushSupplierFromConnectedList(this);
+		connected=false;
 		
 	}
 
 	@Override
-	public void push(Event evt) throws ChannelNotFoundException {
+	public void push(Event evt) throws ChannelNotFoundException, NotConnectedException{
 		System.out.println("evt "+evt.toString());
+		if(!connected)
+			throw new NotConnectedException();
 		channelCtr.addEvent(evt);
 		
 	}
