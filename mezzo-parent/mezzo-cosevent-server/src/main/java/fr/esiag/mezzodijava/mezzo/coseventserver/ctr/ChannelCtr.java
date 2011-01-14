@@ -131,7 +131,7 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
-		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){		
+		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
 			channel.getConsumersSubscribed().get(consumer).add(e);
 		}
 	}
