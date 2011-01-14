@@ -7,6 +7,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -33,7 +34,12 @@ public class MainSupplierIT {
 		Any any=orb.create_any();
 		any.insert_string("TEST");
 		for(int i=0;i<3;i++)
-		supplierProxy.push(new Event(i, any));
+			try {
+				supplierProxy.push(new Event(i, any));
+			} catch (NotConnectedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		
 		System.out.println("ALL DONE");
 		

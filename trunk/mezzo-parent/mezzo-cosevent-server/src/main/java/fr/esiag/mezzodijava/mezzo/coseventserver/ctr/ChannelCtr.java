@@ -11,6 +11,7 @@ import java.util.Set;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
@@ -131,7 +132,7 @@ public class ChannelCtr {
 			throw new NotRegisteredException();
 	}
 
-	public void addEvent(Event e) {
+	public void addEvent(Event e) throws ChannelNotFoundException,NotConnectedException{
 		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
 			channel.getConsumersSubscribed().get(consumer).add(e);
 		}
