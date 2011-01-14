@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
 import org.junit.Test;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -10,6 +11,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
@@ -35,7 +37,10 @@ public class MainConsumerIT {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		System.out.println("ALL DONE");
+		ORB orb = BFFactory.createOrb(null, null);
+		orb.run();
 	}
 	public static void main(String[] args) throws ChannelNotFoundException, AlreadyRegisteredException, EventClientException, TopicNotFoundException {
 		new MainConsumerIT();

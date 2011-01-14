@@ -1,14 +1,16 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
+import java.util.ArrayList;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 
-public class ThreadMichael implements Runnable{
+public class ThreadEvent implements Runnable{
 	private ChannelCtr channelCtr;
-	public ThreadMichael(String channel){
-		BFFactory.createChannelCtr(channel);
+	public ThreadEvent(String channel){
+		channelCtr = BFFactory.createChannelCtr(channel);
 	}
 
 	@Override
@@ -19,9 +21,12 @@ public class ThreadMichael implements Runnable{
 					for(Event e:channelCtr.getChannel().getConsumersSubscribed().get(consumer))
 						try {
 							consumer.receive(e);
+							
 						} catch (ConsumerNotFoundException e1) {
 							e1.printStackTrace();
 						}
+						
+					channelCtr.getChannel().getConsumersSubscribed().put(consumer, new ArrayList<Event>());
 			}
 			try {
 				Thread.sleep(60);

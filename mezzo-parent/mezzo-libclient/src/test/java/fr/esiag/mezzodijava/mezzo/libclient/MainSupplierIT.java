@@ -32,7 +32,9 @@ public class MainSupplierIT {
 		supplierProxy.connect();
 		Any any=orb.create_any();
 		any.insert_string("TEST");
-		supplierProxy.push(new Event(1, any));
+		for(int i=0;i<3;i++)
+		supplierProxy.push(new Event(i, any));
+		
 		System.out.println("ALL DONE");
 		
 	}
