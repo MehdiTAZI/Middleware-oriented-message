@@ -26,6 +26,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
 
 	private ChannelCtr channelCtr;
+	private String channel;
 	
 	/**
 	 * @param channelCtr A channel Controler
@@ -33,6 +34,10 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
 		this.channelCtr = channelCtr;		 		
+	}
+	public ProxyForPushSupplierImpl(String channel){
+		this.channel = channel;	
+		BFFactory.createChannelCtr(channel);
 	}
 	
 	@Override

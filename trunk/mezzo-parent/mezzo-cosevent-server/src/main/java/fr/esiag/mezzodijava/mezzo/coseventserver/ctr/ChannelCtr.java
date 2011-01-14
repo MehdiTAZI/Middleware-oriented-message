@@ -50,12 +50,15 @@ public class ChannelCtr {
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
 	}
+	public ChannelCtr(String channel) {
+		
+	}
 	
-	public Channel getChannelModel() {
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannelModel(Channel channelModel) {
+	public void setChannel(Channel channelModel) {
 		this.channel = channelModel;
 	}
 
