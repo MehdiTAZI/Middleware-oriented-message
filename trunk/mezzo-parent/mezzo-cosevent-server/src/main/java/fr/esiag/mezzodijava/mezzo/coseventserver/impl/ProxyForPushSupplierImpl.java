@@ -24,38 +24,31 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 
+
 	private ChannelCtr channelCtr;
-	private String channel;
 	
 	/**
 	 * @param channelCtr A channel Controler
 	 */
-	@Deprecated
+	
 	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
 		this.channelCtr = channelCtr;		 		
 	}
-	public ProxyForPushSupplierImpl(String channel){
-		channelCtr = BFFactory.createChannelCtr(channel);
-		this.channel = channel;		 		
-	}
 	
 	@Override
-	public void connect() throws ChannelNotFoundException,
-			MaximalConnectionReachedException, AlreadyConnectedException {
-		channelCtr.addProxyForPushSupplier(this);
-		
+	public void connect() throws AlreadyConnectedException, MaximalConnectionReachedException{
+		channelCtr.addProxyForPushSupplierToConnectedList(this);	
 	}
 
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
-		channelCtr.removeProxyForPushSupplier(this);
+		channelCtr.removeProxyForPushSupplierFromConnectedList(this);
 		
 	}
 
 	@Override
 	public void push(Event evt) throws ChannelNotFoundException {
-		
 		System.out.println("evt "+evt.toString());
 		channelCtr.addEvent(evt);
 		

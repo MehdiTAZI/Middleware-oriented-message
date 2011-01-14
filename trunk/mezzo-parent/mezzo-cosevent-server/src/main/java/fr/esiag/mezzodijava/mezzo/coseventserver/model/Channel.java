@@ -32,37 +32,49 @@ public class Channel {
 	private int capacity;	
 	List<Event> events = Collections.synchronizedList(new ArrayList<Event>());
 	// private Vector<Event> events = new Vector<Event>();	
-	private Map<CallbackConsumer, List<Event>> consumersSubscribed = Collections.synchronizedMap(new HashMap<CallbackConsumer, List<Event>>());
-	private Set<ProxyForPushConsumerImpl> consumersConnected= Collections.synchronizedSet(new HashSet<ProxyForPushConsumerImpl>());
-	private Set<ProxyForPushSupplierImpl> suppliersConnected=Collections.synchronizedSet(new HashSet<ProxyForPushSupplierImpl>());
+	private Set<ProxyForPushConsumerImpl> consumersConnected=new HashSet<ProxyForPushConsumerImpl>();
+	private Set<ProxyForPushSupplierImpl> suppliersConnected=new HashSet<ProxyForPushSupplierImpl>();
+	private Set<ProxyForPushConsumerImpl> consumersSubscribed=new HashSet<ProxyForPushConsumerImpl>();
+	private Set<ProxyForPushSupplierImpl> suppliersSubscribed=new HashSet<ProxyForPushSupplierImpl>();
 	
 	public Channel(String topic){
 		this.topic=topic;
 	}
 	
-	public Set<ProxyForPushConsumerImpl> getProxyForPushConsumers() {
+	public Set<ProxyForPushConsumerImpl> getConsumersConnected() {
 		return consumersConnected;
 	}
 
-	public void setConsumers(Set<ProxyForPushConsumerImpl> consumers) {
-		this.consumersConnected = consumers;
+	public void setConsumersConnected(
+			Set<ProxyForPushConsumerImpl> consumersConnected) {
+		this.consumersConnected = consumersConnected;
 	}
 
-	public Set<ProxyForPushSupplierImpl> getProxyForPushSuppliers() {
+	public Set<ProxyForPushSupplierImpl> getSuppliersConnected() {
 		return suppliersConnected;
 	}
 
-	public void setSuppliers(Set<ProxyForPushSupplierImpl> suppliers) {
-		this.suppliersConnected = suppliers;
+	public void setSuppliersConnected(
+			Set<ProxyForPushSupplierImpl> suppliersConnected) {
+		this.suppliersConnected = suppliersConnected;
 	}
-	
-	public Map<CallbackConsumer, List<Event>> getConsumersSubscribed() {
+
+	public Set<ProxyForPushConsumerImpl> getConsumersSubscribed() {
 		return consumersSubscribed;
 	}
 
 	public void setConsumersSubscribed(
-			Map<CallbackConsumer, List<Event>> consumersSubscribed) {
+			Set<ProxyForPushConsumerImpl> consumersSubscribed) {
 		this.consumersSubscribed = consumersSubscribed;
+	}
+
+	public Set<ProxyForPushSupplierImpl> getSuppliersSubscribed() {
+		return suppliersSubscribed;
+	}
+
+	public void setSuppliersSubscribed(
+			Set<ProxyForPushSupplierImpl> suppliersSubscribed) {
+		this.suppliersSubscribed = suppliersSubscribed;
 	}
 
 	public String getTopic() {
@@ -76,7 +88,12 @@ public class Channel {
 	public int getCapacity() {
 		return capacity;
 	}
-
+	public boolean ConsumersConnectedListcapacityReached(){
+		return capacity>consumersConnected.size();
+	}
+	public boolean SuppliersConnectedsListcapacityReached(){
+		return capacity>suppliersConnected.size();
+	}
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
 	}

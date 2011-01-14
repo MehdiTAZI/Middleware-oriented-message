@@ -12,6 +12,7 @@ import java.util.Set;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
@@ -35,93 +36,95 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 public class ChannelCtr {
 
 	// lien vers le model
-	private String channelName;
-	private Channel channel;
-
+	Channel channel;
+	
 	// Edit FGI : Vector -> Set synchronized car moderne
 
-	Set<CallbackConsumer> callbackConsumers = Collections
-			.synchronizedSet(new HashSet<CallbackConsumer>());
-
+	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
 	 * 
 	 * @param channel
 	 *            Channel entity
 	 */
-	@Deprecated
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
 	}
-
-	public ChannelCtr(String channel) {
-		this.channelName = channel;
-		this.channel = BFFactory.createChannel(channel);
-	}
-
-	public Channel getChannel() {
+	
+	public Channel getChannelModel() {
 		return channel;
 	}
 
-	public void setChannel(Channel channel) {
-		this.channel = channel;
+	public void setChannelModel(Channel channelModel) {
+		this.channel = channelModel;
 	}
 
-	public void addCallbackConsumer(CallbackConsumer callbackConsumer)
-			throws AlreadyRegisteredException {
-
-		if(channel.getConsumersSubscribed().containsKey(callbackConsumer))
+	
+	public void addProxyForPushConsumerToSubscribedList(
+			ProxyForPushConsumerImpl proxyConsumer)throws AlreadyRegisteredException {
+		if (!channel.getConsumersSubscribed().add(proxyConsumer)) {
 			throw new AlreadyRegisteredException();
-		else 
-			channel.getConsumersSubscribed().put(callbackConsumer, Collections.synchronizedList(new ArrayList<Event>()));
-		/*if (!callbackConsumers.add(callbackConsumer)) {
-			throw new AlreadyRegisteredException();
-		}*/
-	}
-
-	public void removeCallbackConsumer(CallbackConsumer callbackConsumer)
-			throws NotRegisteredException {
-		if(!channel.getConsumersSubscribed().containsKey(callbackConsumer))
-			throw new NotRegisteredException();
-		else 
-			channel.getConsumersSubscribed().remove(callbackConsumer);
-		/*if (!callbackConsumers.remove(callbackConsumer)) {
-			throw new NotRegisteredException();
-		}*/
-	}
-
-	public void addProxyForPushConsumer(ProxyForPushConsumerImpl proxyConsumer) {
-		if (!channel.getProxyForPushConsumers().add(proxyConsumer)) {
-			throw new AlreadyConnectedException();
 		}
 	}
+	public void addProxyForPushConsumerToConnectedList(
+			ProxyForPushConsumerImpl proxyConsumer) throws NotRegisteredException,AlreadyConnectedException,MaximalConnectionReachedException{
+		if(!channel.getConsumersSubscribed().contains(proxyConsumer))
+			throw new NotRegisteredException();
+		if(!channel.ConsumersConnectedListcapacityReached())
+			throw new MaximalConnectionReachedException();
+		if (!channel.getConsumersConnected().add(proxyConsumer))
+			throw new AlreadyConnectedException();
+	}
 
-	public void removeProxyForPushConsumer(
+	public void removeProxyForPushConsumerFromConnectedList(
 			ProxyForPushConsumerOperations proxyConsumer)
-			throws NotConnectedException {
-		if (!channel.getProxyForPushConsumers().remove(proxyConsumer)) {
+			throws NotRegisteredException ,NotConnectedException{
+		if(!channel.getConsumersSubscribed().contains(proxyConsumer))
+			throw new NotRegisteredException();
+		if (!channel.getConsumersConnected().remove(proxyConsumer)) {
 			throw new NotConnectedException();
 		}
 	}
 
-	public void addProxyForPushSupplier(ProxyForPushSupplierImpl proxySupplier) {
-		if (!this.channel.getProxyForPushSuppliers().add(proxySupplier)) {
+	public void removeProxyForPushConsumerFromSubscribedList(
+			ProxyForPushConsumerOperations proxyConsumer)
+			throws NotRegisteredException{
+		if (!channel.getConsumersSubscribed().remove(proxyConsumer)) {
+			throw new NotRegisteredException();
+		}
+	}
+	
+	public void addProxyForPushSupplierToSubscribedList(
+			ProxyForPushSupplierImpl proxySupplier) throws AlreadyRegisteredException{
+		if (!channel.getSuppliersSubscribed().add(proxySupplier)) {
+			throw new AlreadyRegisteredException();
+		}
+	}
+
+	public void addProxyForPushSupplierToConnectedList(
+			ProxyForPushSupplierImpl proxySupplier)throws fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException,MaximalConnectionReachedException{
+		if(!channel.SuppliersConnectedsListcapacityReached())
+			throw new MaximalConnectionReachedException();
+		if (!channel.getSuppliersConnected().add(proxySupplier)) 
 			throw new AlreadyConnectedException();
-		}
 	}
-
-	public void removeProxyForPushSupplier(
+	public void removeProxyForPushSupplierFromConnectedList(
 			ProxyForPushSupplierOperations proxySupplier)
-			throws NotConnectedException {
-		if (!this.channel.getProxyForPushSuppliers().remove(proxySupplier)) {
+			throws NotConnectedException{
+		if (!channel.getSuppliersConnected().remove(proxySupplier)) {
 			throw new NotConnectedException();
 		}
+	}
+	public void removeProxyForPushSupplierFromSubscribedList(
+			ProxyForPushSupplierOperations proxySupplier)
+			throws NotRegisteredException {
+		if (!channel.getSuppliersSubscribed().remove(proxySupplier)) 
+			throw new NotRegisteredException();
 	}
 
 	public void addEvent(Event e) {
-		for(CallbackConsumer callback :channel.getConsumersSubscribed().keySet()){		
-			channel.getConsumersSubscribed().get(callback).add(e);
-		}
+		channel.addEvents(e);
 	}
 
+	
 }
