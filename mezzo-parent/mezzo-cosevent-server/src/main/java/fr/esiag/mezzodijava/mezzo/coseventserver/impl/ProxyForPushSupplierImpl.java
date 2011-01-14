@@ -37,7 +37,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	}
 	public ProxyForPushSupplierImpl(String channel){
 		this.channel = channel;	
-		BFFactory.createChannelCtr(channel);
+		channelCtr = BFFactory.createChannelCtr(channel);
 	}
 	
 	@Override
