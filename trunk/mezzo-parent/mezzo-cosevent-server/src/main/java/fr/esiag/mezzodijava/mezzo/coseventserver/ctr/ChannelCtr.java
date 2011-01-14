@@ -52,6 +52,7 @@ public class ChannelCtr {
 	}
 	public ChannelCtr(String channel) {
 		this.channel = BFFactory.createChannel(channel,0);
+		
 	}
 	
 	public Channel getChannel() {
