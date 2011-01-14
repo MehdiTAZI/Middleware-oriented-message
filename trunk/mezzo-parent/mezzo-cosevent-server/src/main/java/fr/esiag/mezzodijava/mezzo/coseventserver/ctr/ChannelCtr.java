@@ -65,13 +65,24 @@ public class ChannelCtr {
 	
 	public void addProxyForPushConsumerToSubscribedList(
 			ProxyForPushConsumerImpl proxyConsumer)throws AlreadyRegisteredException {
-		if (!channel.getConsumersSubscribed().add(proxyConsumer)) {
+		if(channel.getConsumersSubscribed().containsKey(proxyConsumer))
 			throw new AlreadyRegisteredException();
+		else
+			channel.getConsumersSubscribed().put(proxyConsumer, new ArrayList<Event>());	
 		}
-	}
+	
+	public void removeProxyForPushConsumerFromSubscribedList(
+			ProxyForPushConsumerOperations proxyConsumer)
+			throws NotRegisteredException{
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throw new NotRegisteredException();
+		else
+			channel.getConsumersSubscribed().remove(proxyConsumer);	
+		}
+	
 	public void addProxyForPushConsumerToConnectedList(
 			ProxyForPushConsumerImpl proxyConsumer) throws NotRegisteredException,AlreadyConnectedException,MaximalConnectionReachedException{
-		if(!channel.getConsumersSubscribed().contains(proxyConsumer))
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
 			throw new NotRegisteredException();
 		if(!channel.ConsumersConnectedListcapacityReached())
 			throw new MaximalConnectionReachedException();
@@ -82,20 +93,14 @@ public class ChannelCtr {
 	public void removeProxyForPushConsumerFromConnectedList(
 			ProxyForPushConsumerOperations proxyConsumer)
 			throws NotRegisteredException ,NotConnectedException{
-		if(!channel.getConsumersSubscribed().contains(proxyConsumer))
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
 			throw new NotRegisteredException();
 		if (!channel.getConsumersConnected().remove(proxyConsumer)) {
 			throw new NotConnectedException();
 		}
 	}
 
-	public void removeProxyForPushConsumerFromSubscribedList(
-			ProxyForPushConsumerOperations proxyConsumer)
-			throws NotRegisteredException{
-		if (!channel.getConsumersSubscribed().remove(proxyConsumer)) {
-			throw new NotRegisteredException();
-		}
-	}
+
 	
 	public void addProxyForPushSupplierToSubscribedList(
 			ProxyForPushSupplierImpl proxySupplier) throws AlreadyRegisteredException{
