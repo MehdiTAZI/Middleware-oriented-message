@@ -22,6 +22,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
@@ -65,12 +66,15 @@ public class CosEventServer {
 		}
 
 		orb = ORB.init(args, props);
-		Channel channel = new Channel(channelName);
+		/*Channel channel = new Channel(channelName);
 		
 		ChannelCtr channelCtr = new ChannelCtr(channel);
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
-				channelAdminCtr);
+				channelAdminCtr);*/
+		ChannelAdminImpl channelAdminImpl = BFFactory.createChannel(orb, channelName);
+		
+		
 		
 
 		try {
