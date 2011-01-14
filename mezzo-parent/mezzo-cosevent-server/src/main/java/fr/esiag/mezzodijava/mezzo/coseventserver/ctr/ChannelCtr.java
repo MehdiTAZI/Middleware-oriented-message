@@ -4,6 +4,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.nio.channels.AlreadyConnectedException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +26,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
  * 
  * To interact with the model
  * 
- * UC n°: US14,US15 (+US children) 
+ * UC n°: US14,US15 (+US children)
  * 
  * @author Mezzo-Team
  * 
@@ -36,11 +37,12 @@ public class ChannelCtr {
 	// lien vers le model
 	private String channelName;
 	private Channel channel;
-	
+
 	// Edit FGI : Vector -> Set synchronized car moderne
+
 	Set<CallbackConsumer> callbackConsumers = Collections
 			.synchronizedSet(new HashSet<CallbackConsumer>());
-	
+
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity
 	 * 
@@ -51,24 +53,30 @@ public class ChannelCtr {
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
 	}
+
 	public ChannelCtr(String channel) {
-		this.channelName=channel;
+		this.channelName = channel;
 		this.channel = BFFactory.createChannel(channel);
 	}
-	
-	public Channel getChannelModel() {
+
+	public Channel getChannel() {
 		return channel;
 	}
 
-	public void setChannelModel(Channel channelModel) {
-		this.channel = channelModel;
+	public void setChannel(Channel channel) {
+		this.channel = channel;
 	}
 
-	public void addCallbackConsumer(CallbackConsumer callbackConsummer)
+	public void addCallbackConsumer(CallbackConsumer callbackConsumer)
 			throws AlreadyRegisteredException {
-		if (!callbackConsumers.add(callbackConsummer)) {
+
+		if(channel.getConsumersSubscribed().containsKey(callbackConsumer))
 			throw new AlreadyRegisteredException();
-		}
+		else
+			channel.getConsumersSubscribed().put(callbackConsumer, Collections.synchronizedList(new ArrayList<Event>()));
+		/*if (!callbackConsumers.add(callbackConsumer)) {
+			throw new AlreadyRegisteredException();
+		}*/
 	}
 
 	public void removeCallbackConsumer(CallbackConsumer callbackConsummer)
@@ -78,8 +86,7 @@ public class ChannelCtr {
 		}
 	}
 
-	public void addProxyForPushConsumer(
-			ProxyForPushConsumerImpl proxyConsumer) {
+	public void addProxyForPushConsumer(ProxyForPushConsumerImpl proxyConsumer) {
 		if (!channel.getProxyForPushConsumers().add(proxyConsumer)) {
 			throw new AlreadyConnectedException();
 		}
@@ -93,8 +100,7 @@ public class ChannelCtr {
 		}
 	}
 
-	public void addProxyForPushSupplier(
-			ProxyForPushSupplierImpl proxySupplier) {
+	public void addProxyForPushSupplier(ProxyForPushSupplierImpl proxySupplier) {
 		if (!this.channel.getProxyForPushSuppliers().add(proxySupplier)) {
 			throw new AlreadyConnectedException();
 		}
