@@ -126,7 +126,9 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
-		channel.addEvents(e);
+		for(CallbackConsumer callback :channel.getConsumersSubscribed().keySet()){		
+			channel.getConsumersSubscribed().get(callback).add(e);
+		}
 	}
 
 	
