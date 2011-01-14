@@ -2,12 +2,13 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 
 public class ThreadMichael implements Runnable{
 	private ChannelCtr channelCtr;
-	public ThreadMichael(ChannelCtr channelCtr){
-		this.channelCtr=channelCtr;
+	public ThreadMichael(String channel){
+		BFFactory.createChannelCtr(channel);
 	}
 
 	@Override
