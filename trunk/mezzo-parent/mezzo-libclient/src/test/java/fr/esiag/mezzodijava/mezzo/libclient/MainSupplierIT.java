@@ -12,7 +12,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 
-public class MainSupplier {
+public class MainSupplierIT {
 
 	/**
 	 * @param args
@@ -23,7 +23,7 @@ public class MainSupplier {
 	 * @throws MaximalConnectionReachedException 
 	 */
 	private ORB orb;
-	public MainSupplier() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException{
+	public MainSupplierIT() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException{
 		EventClient ec = EventClient.init(null);
 		orb=ec.getOrb();
 		ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
@@ -38,7 +38,7 @@ public class MainSupplier {
 	}
 	
 	public static void main(String[] args) throws ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException, EventClientException, TopicNotFoundException {
-			new MainSupplier();
+			new MainSupplierIT();
 
 	}
 

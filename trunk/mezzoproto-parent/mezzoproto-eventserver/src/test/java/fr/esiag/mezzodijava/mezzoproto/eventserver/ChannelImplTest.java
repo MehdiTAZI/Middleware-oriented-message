@@ -1,8 +1,6 @@
 package fr.esiag.mezzodijava.mezzoproto.eventserver;
 
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.replay;
-
+import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -33,9 +31,9 @@ public class ChannelImplTest {
 
 	@Before
 	public void setUp() throws Exception {
-		mockDao = createMock(ChannelDAO.class); // 1
+		mockDao = EasyMock.createMock(ChannelDAO.class); // 1
 		channel = new ChannelImpl("MEZZO", 10, mockDao);
-		mockPPS = createMock(ProxyPushSupplier.class); // 1
+		mockPPS = EasyMock.createMock(ProxyPushSupplier.class); // 1
 	}
 
 	@After
@@ -53,11 +51,11 @@ public class ChannelImplTest {
 		
 		mockDao.persist(new EventString(event.message));
 		// 3 on passe le mock en mode replay
-		replay(mockDao);
+		EasyMock.replay(mockDao);
 
 		//Essayons EasyMock avec le proxy push supplier
 		mockPPS.receive(event);
-		replay(mockPPS);
+		EasyMock.replay(mockPPS);
 		channel.add_supplier(mockPPS);
 		
 		//TEST !
