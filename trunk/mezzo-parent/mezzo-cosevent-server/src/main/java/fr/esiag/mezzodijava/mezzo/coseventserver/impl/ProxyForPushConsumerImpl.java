@@ -58,7 +58,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 			throws AlreadyRegisteredException {
 		this.callbackConsumer = cc;
 		channelCtr.addCallbackConsumer(cc);
-		System.out.println("Consumer Subscribed to " + channelCtr.getChannelModel().getTopic());
+		System.out.println("Consumer Subscribed to " + channelCtr.getChannel().getTopic());
 		
 	}
 

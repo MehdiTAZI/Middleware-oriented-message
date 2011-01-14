@@ -2,9 +2,15 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+
+import javax.security.auth.callback.Callback;
+
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
@@ -26,27 +32,37 @@ public class Channel {
 	private int capacity;	
 	List<Event> events = Collections.synchronizedList(new ArrayList<Event>());
 	// private Vector<Event> events = new Vector<Event>();	
-	private Set<ProxyForPushConsumerImpl> consumers=new HashSet<ProxyForPushConsumerImpl>();
-	private Set<ProxyForPushSupplierImpl> suppliers=new HashSet<ProxyForPushSupplierImpl>();
+	private Map<CallbackConsumer, List<Event>> consumersSubscribed = Collections.synchronizedMap(new HashMap<CallbackConsumer, List<Event>>());
+	private Set<ProxyForPushConsumerImpl> consumersConnected= Collections.synchronizedSet(new HashSet<ProxyForPushConsumerImpl>());
+	private Set<ProxyForPushSupplierImpl> suppliersConnected=Collections.synchronizedSet(new HashSet<ProxyForPushSupplierImpl>());
 	
 	public Channel(String topic){
 		this.topic=topic;
 	}
 	
 	public Set<ProxyForPushConsumerImpl> getProxyForPushConsumers() {
-		return consumers;
+		return consumersConnected;
 	}
 
 	public void setConsumers(Set<ProxyForPushConsumerImpl> consumers) {
-		this.consumers = consumers;
+		this.consumersConnected = consumers;
 	}
 
 	public Set<ProxyForPushSupplierImpl> getProxyForPushSuppliers() {
-		return suppliers;
+		return suppliersConnected;
 	}
 
 	public void setSuppliers(Set<ProxyForPushSupplierImpl> suppliers) {
-		this.suppliers = suppliers;
+		this.suppliersConnected = suppliers;
+	}
+	
+	public Map<CallbackConsumer, List<Event>> getConsumersSubscribed() {
+		return consumersSubscribed;
+	}
+
+	public void setConsumersSubscribed(
+			Map<CallbackConsumer, List<Event>> consumersSubscribed) {
+		this.consumersSubscribed = consumersSubscribed;
 	}
 
 	public String getTopic() {

@@ -38,6 +38,6 @@ public class EventServer {
 	
 	public static Channel getChannelModel(ChannelCtr channelCtr)
 	{	
-		return channelCtr.getChannelModel();
+		return channelCtr.getChannel();
 	}
 }
