@@ -15,6 +15,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
@@ -47,6 +48,9 @@ public class ChannelCtr {
 	 */
 	public ChannelCtr(Channel channel) {
 		this.channel = channel;
+	}
+	public ChannelCtr(String channel) {
+		this.channel = BFFactory.getChannel(channel);
 	}
 	
 	public Channel getChannelModel() {

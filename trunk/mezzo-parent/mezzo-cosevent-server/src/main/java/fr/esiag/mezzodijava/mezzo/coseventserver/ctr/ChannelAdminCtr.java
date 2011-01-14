@@ -10,6 +10,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierHelper;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierPOATie;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
@@ -35,6 +36,10 @@ public class ChannelAdminCtr {
 		this.orb=orb;
 		this.channelCtr=channel;
 	}	
+	public ChannelAdminCtr(String channel){
+		this.orb=BFFactory.createOrb(null, null);
+		this.channelCtr=BFFactory.getChannelCtr(channel);
+	}
 	
 
 	public ProxyForPushSupplier createProxyForPushSupplier(){

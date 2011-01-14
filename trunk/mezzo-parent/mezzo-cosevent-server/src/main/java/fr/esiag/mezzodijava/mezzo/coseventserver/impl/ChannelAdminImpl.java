@@ -5,6 +5,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ChannelAdminImpl
@@ -19,22 +20,27 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 public class ChannelAdminImpl implements ChannelAdminOperations {
 	
-	private ChannelAdminCtr chanelAdminctrl;
+	private ChannelAdminCtr channelAdminctrl;
+	private String channel;
 
 	public ChannelAdminImpl(ChannelAdminCtr cac) {
-		this.chanelAdminctrl=cac;
+		this.channelAdminctrl=cac;
+	}
+	public ChannelAdminImpl(String channel) {
+		this.channel=channel;
+		this.channelAdminctrl= BFFactory.getChannelAdminCtr(channel);
 	}
 	
 	@Override
 	public ProxyForPushSupplier getProxyForPushSupplier()
 			throws ChannelNotFoundException {
-		return chanelAdminctrl.createProxyForPushSupplier();
+		return channelAdminctrl.createProxyForPushSupplier();
 	}
 	
 	@Override
 	public ProxyForPushConsumer getProxyForPushConsumer()
 			throws ChannelNotFoundException {
-		return chanelAdminctrl.createProxyForPushConsumer();
+		return channelAdminctrl.createProxyForPushConsumer();
 	}
 
 }
