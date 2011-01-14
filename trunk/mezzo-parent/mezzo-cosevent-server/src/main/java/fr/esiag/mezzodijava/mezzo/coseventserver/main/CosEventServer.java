@@ -21,7 +21,7 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadMichael;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
@@ -76,7 +76,8 @@ public class CosEventServer {
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 				channelAdminCtr);*/
 		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,90);
-		ThreadMichael th = new ThreadMichael(channelName);
+		
+		ThreadEvent th = new ThreadEvent(channelName);
 		Thread thread = new Thread(th);
 		thread.start();
 		
