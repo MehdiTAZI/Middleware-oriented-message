@@ -29,6 +29,10 @@ public class Channel {
 	private Set<ProxyForPushConsumerImpl> consumers=new HashSet<ProxyForPushConsumerImpl>();
 	private Set<ProxyForPushSupplierImpl> suppliers=new HashSet<ProxyForPushSupplierImpl>();
 	
+	public Channel(String topic){
+		this.topic=topic;
+	}
+	
 	public Set<ProxyForPushConsumerImpl> getProxyForPushConsumers() {
 		return consumers;
 	}
