@@ -126,8 +126,8 @@ public class ChannelCtr {
 	}
 
 	public void addEvent(Event e) {
-		for(CallbackConsumer callback :channel.getConsumersSubscribed().keySet()){		
-			channel.getConsumersSubscribed().get(callback).add(e);
+		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){		
+			channel.getConsumersSubscribed().get(consumer).add(e);
 		}
 	}
 

@@ -32,7 +32,7 @@ public class Channel {
 	private int capacity;	
 	List<Event> events = Collections.synchronizedList(new ArrayList<Event>());
 	// private Vector<Event> events = new Vector<Event>();	
-	private Map<CallbackConsumer, List<Event>> consumersSubscribed = Collections.synchronizedMap(new HashMap<CallbackConsumer, List<Event>>());
+	private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections.synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
 	private Set<ProxyForPushConsumerImpl> consumersConnected=new HashSet<ProxyForPushConsumerImpl>();
 	private Set<ProxyForPushSupplierImpl> suppliersConnected=new HashSet<ProxyForPushSupplierImpl>();
 	private Set<ProxyForPushSupplierImpl> suppliersSubscribed=new HashSet<ProxyForPushSupplierImpl>();
@@ -59,12 +59,16 @@ public class Channel {
 		this.suppliersConnected = suppliersConnected;
 	}
 
-	public Set<ProxyForPushConsumerImpl> getConsumersSubscribed() {
+
+
+
+
+	public Map<ProxyForPushConsumerImpl, List<Event>> getConsumersSubscribed() {
 		return consumersSubscribed;
 	}
 
 	public void setConsumersSubscribed(
-			Set<ProxyForPushConsumerImpl> consumersSubscribed) {
+			Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed) {
 		this.consumersSubscribed = consumersSubscribed;
 	}
 
