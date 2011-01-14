@@ -54,6 +54,7 @@ public class CosEventServer {
 	private String channelName = "MEZZO";
 
 	public CosEventServer(String[] args) throws EventServerException {
+		
 		Properties props = new Properties();
 
 		try {
@@ -64,9 +65,10 @@ public class CosEventServer {
 			throw new EventServerException(
 					"Error in opening client property file", e);
 		}
-
+		orb = BFFactory.createOrb(args, props);
+		/*
 		orb = ORB.init(args, props);
-		/*Channel channel = new Channel(channelName);
+		Channel channel = new Channel(channelName);
 		
 		ChannelCtr channelCtr = new ChannelCtr(channel);
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
