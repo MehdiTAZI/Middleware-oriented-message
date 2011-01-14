@@ -32,9 +32,9 @@ public class BFFactory {
 		return orb;
 		
 	}
-	public static Channel createChannel(String channel){
+	public static Channel createChannel(String channel, int capacity){
 		if (mapChannel.get(channel)==null)
-			mapChannel.put(channel, new Channel(channel));
+			mapChannel.put(channel, new Channel(channel, capacity));
 		return mapChannel.get(channel);
 	}
 	
@@ -58,7 +58,8 @@ public class BFFactory {
 		return mapChannelAdminImpl.get(channel);
 	}
 	
-	public static ChannelAdminImpl initiateChannel(String channel){
+	public static ChannelAdminImpl initiateChannel(String channel,int capacity){
+		createChannel(channel, capacity);
 		return createChannelAdminImpl( channel);
 	}
 	

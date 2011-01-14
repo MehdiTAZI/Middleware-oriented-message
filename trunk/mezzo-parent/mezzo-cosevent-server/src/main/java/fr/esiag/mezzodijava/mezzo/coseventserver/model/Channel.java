@@ -37,8 +37,9 @@ public class Channel {
 	private Set<ProxyForPushSupplierImpl> suppliersConnected=new HashSet<ProxyForPushSupplierImpl>();
 	private Set<ProxyForPushSupplierImpl> suppliersSubscribed=new HashSet<ProxyForPushSupplierImpl>();
 	
-	public Channel(String topic){
+	public Channel(String topic, int capacity){
 		this.topic=topic;
+		this.capacity=capacity;
 	}
 	
 	public Set<ProxyForPushConsumerImpl> getConsumersConnected() {
