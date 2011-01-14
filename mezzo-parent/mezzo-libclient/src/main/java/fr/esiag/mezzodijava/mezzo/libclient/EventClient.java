@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
@@ -22,12 +24,35 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 /**
- * Classe client
+ * Class EventClient.
  * 
- * @author Franck
+ * Client API first class. Provide methods to allow Mezzo COS EVent client's
+ * developper to use the service such as:
  * 
+ * - resolving a channel by its topic from the CORBA CosNaming
+ * 
+ * - as a consumer, serving a Callback implementation to get its reference to
+ * send to the Event Server.
+ * 
+ * UC n°: US14,US15 (+US children)
+ * 
+ * Program argmuments to use when launching a client:
+ * 
+ * -ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService
+ * -Djacorb.home=C:\\mezzodev\\jacorb-2.3.1
+ * -Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB
+ * -Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton
+ * 
+ * VM argmuments: -Djava.endorsed.dirs=${env_var:JACORB_HOME}/lib
+ * 
+ * @author Mezzo-Team
  */
 public class EventClient {
+
+	/**
+	 * Default Event Client Property File.
+	 */
+	private final static String CLIENT_PROPERTIES = "eventclient.properties";
 
 	private static EventClient instance;
 
@@ -37,15 +62,34 @@ public class EventClient {
 
 	private POA callbacksPOA;
 
-	public EventClient(String[] args, Properties props)
+	/**
+	 * Event Client private Constructor. Use EventClient.init
+	 * 
+	 * @param args
+	 * @param props
+	 * @throws EventClientException
+	 *             Initialization failure
+	 */
+	private EventClient(String[] args, Properties props)
 			throws EventClientException {
+		if (props == null) {
+			props = new Properties();
+			try {
+				props.load(this.getClass().getClassLoader()
+						.getResourceAsStream(EventClient.CLIENT_PROPERTIES));
+			} catch (IOException e) {
+				// TODO log here
+				throw new EventClientException(
+						"Error in opening client property file", e);
+			}
+		}
 		orb = ORB.init(args, props);
 		Object nceObj = null;
 		try {
 			nceObj = orb.resolve_initial_references("NameService");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve NameService",e);
+			throw new EventClientException("Cannot resolve NameService", e);
 		}
 		nce = NamingContextExtHelper.narrow(nceObj);
 	}
@@ -81,16 +125,17 @@ public class EventClient {
 	public static synchronized EventClient init(String[] args)
 			throws EventClientException {
 		if (instance == null) {
-			// Properties à externaliser
-			props = new Properties();
-			props.setProperty("ORBInitRef.NameService",
-					"corbaloc::127.0.0.1:1050/NameService");
-			props.setProperty("jacorb.home", System.getenv("JACORB_HOME"));
-			props.setProperty("org.omg.CORBA.ORBClass", "org.jacorb.orb.ORB");
-			props.setProperty("org.omg.CORBA.ORBSingletonClass",
-					"org.jacorb.orb.ORBSingleton");
-			// props.setProperty("java.endorsed.dirs",
-			// System.getenv("JACORB_HOME") + "/lib");
+			// // Properties à externaliser
+			// props = new Properties();
+			// props.setProperty("ORBInitRef.NameService",
+			// "corbaloc::127.0.0.1:1050/NameService");
+			// props.setProperty("jacorb.home", System.getenv("JACORB_HOME"));
+			// props.setProperty("org.omg.CORBA.ORBClass",
+			// "org.jacorb.orb.ORB");
+			// props.setProperty("org.omg.CORBA.ORBSingletonClass",
+			// "org.jacorb.orb.ORBSingleton");
+			// // props.setProperty("java.endorsed.dirs",
+			// // System.getenv("JACORB_HOME") + "/lib");
 
 			instance = new EventClient(args, props);
 		}
@@ -106,7 +151,7 @@ public class EventClient {
 	 * @return an instance of Channel (distant object)
 	 * @throws EventClientException
 	 *             when name resolution is wrong
-	 * @throws TopicNotFoundException 
+	 * @throws TopicNotFoundException
 	 */
 	public ChannelAdmin resolveChannelByTopic(String topic)
 			throws EventClientException, TopicNotFoundException {
@@ -117,13 +162,14 @@ public class EventClient {
 			// before throwing exception
 		} catch (NotFound e) {
 			// TODO log here
-			throw new TopicNotFoundException("Cannot find the Topic '" +topic+"'",e);
+			throw new TopicNotFoundException("Cannot find the Topic '" + topic
+					+ "'", e);
 		} catch (CannotProceed e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve the channel",e);
+			throw new EventClientException("Cannot resolve the channel", e);
 		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Invalid topic name",e);
+			throw new EventClientException("Invalid topic name", e);
 		}
 		return ChannelAdminHelper.narrow(channelObj);
 	}
@@ -144,27 +190,28 @@ public class EventClient {
 			rootPOAObj = orb.resolve_initial_references("RootPOA");
 		} catch (InvalidName e) {
 			// TODO log here
-			throw new EventClientException("Cannot resolve RootPOA",e);
+			throw new EventClientException("Cannot resolve RootPOA", e);
 		}
 		// TODO make a child POA to handle callbacks
 		callbacksPOA = POAHelper.narrow(rootPOAObj);
 		try {
 			callbacksPOA.the_POAManager().activate();
 		} catch (AdapterInactive e) {
-			throw new EventClientException("Cannot activate the RootPOAManager",e);
+			throw new EventClientException(
+					"Cannot activate the RootPOAManager", e);
 		}
 		// create a tie, with servant being the delegate.
 		CallbackConsumerPOATie tie = new CallbackConsumerPOATie(
-				callbackConsumerImplementation,callbacksPOA);
+				callbackConsumerImplementation, callbacksPOA);
 
 		// obtain the objectRef for the tie
 		CallbackConsumer href = tie._this(orb);
-		//return the object and 		
+		// return the object and
 		return href;
 	}
 
 	public ORB getOrb() {
 		return orb;
 	}
-	
+
 }
