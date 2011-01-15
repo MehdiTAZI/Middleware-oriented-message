@@ -1,0 +1,45 @@
+format 76
+
+packagecanvas 128003 
+  package_ref 128643 // EventServer
+    xyzwh 11 6 2000 189 157
+end
+packagecanvas 128131 
+  package_ref 128515 // Consumer
+    xyzwh 245 141 2000 81 93
+end
+classcanvas 128259 class_ref 135939 // Event
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode class drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyzwh 32 47 2005 47 37
+end
+classcanvas 128387 class_ref 135811 // Supplier
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 254 69 2005
+end
+classcanvas 128515 class_ref 135683 // Channel
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 32 103 2011
+end
+classcanvas 128643 class_ref 135555 // EventServer
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 94 47 2017
+end
+packagecanvas 128771 
+  package_ref 128771 // Supplier
+    xyzwh 246 27 2000 81 109
+end
+classcanvas 128899 class_ref 136067 // Consumer
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 253 182 2005
+end
+note 129027 "Mezzo Di Java - Diagramme de Package"
+  xyzwh 16 178 2000 223 37
+simplerelationcanvas 129155 simplerelation_ref 128131
+  from ref 128771 z 2001 to ref 128003
+end
+simplerelationcanvas 129283 simplerelation_ref 128003
+  decenter_begin 136
+  decenter_end 939
+  from ref 128131 z 2001 to ref 128003
+end
+end

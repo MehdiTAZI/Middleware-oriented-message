@@ -1,0 +1,78 @@
+format 76
+
+classinstance 128003 class_ref 128003 // Consumer
+  name ""   xyz 51 4 2000 life_line_z 2000
+classinstance 128131 class_ref 136707 // CallbackConsumer
+  name ""   xyz 96 126 2000 life_line_z 2000
+classinstance 128259 class_ref 136323 // ChannelAdmin
+  name ""   xyz 299 4 2000 life_line_z 2000
+classinstance 128387 class_ref 137219 // ChannelAdminCtr
+  name ""   xyz 389 4 2000 life_line_z 2000
+classinstancecanvas 128515 classinstance_ref 128899 // 
+  xyz 224 4 2000 life_line_z 2000
+end
+durationcanvas 128643 classinstance_ref 128003 // :Consumer
+  xyzwh 70 78 2010 11 45
+end
+durationcanvas 128771 classinstance_ref 128003 // :Consumer
+  xyzwh 70 163 2010 11 25
+end
+durationcanvas 128899 classinstance_ref 128131 // :CallbackConsumer
+  xyzwh 137 173 2010 11 26
+end
+durationcanvas 129027 classinstance_ref 128003 // :Consumer
+  xyzwh 70 233 2010 11 116
+end
+durationcanvas 129155 classinstance_ref 128259 // :ChannelAdmin
+  xyzwh 331 233 2010 11 108
+end
+durationcanvas 129283 classinstance_ref 128387 // :ChannelAdminCtr
+  xyzwh 427 246 2010 11 85
+end
+durationcanvas 129411 classinstance_ref 128515 // :EventClient
+  xyzwh 250 86 2010 11 31
+end
+msg 129539 synchronous
+  from durationcanvas_ref 128771
+  to durationcanvas_ref 128899
+  yz 173 2015 explicitmsg "new"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 101 161
+msg 129667 synchronous
+  from durationcanvas_ref 129027
+  to durationcanvas_ref 129155
+  yz 235 2015 msg operation_ref 130435 // "getProxyForPushConsumer()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "topic"
+  label_xy 115 223
+msg 129795 synchronous
+  from durationcanvas_ref 129155
+  to durationcanvas_ref 129283
+  yz 248 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 129923 return
+  from durationcanvas_ref 129283
+  to durationcanvas_ref 129155
+  yz 320 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 130051 return
+  from durationcanvas_ref 129155
+  to durationcanvas_ref 129027
+  yz 330 2015 explicitmsg "ConnectionException.ChannelNotFound"
+  stereotype "<<Exception>>" xyz 178 342 3000
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 134 318
+msg 130179 synchronous
+  from durationcanvas_ref 128643
+  to durationcanvas_ref 129411
+  yz 86 3005 explicitmsg "resolveInitialReferences"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "topic"
+  label_xy 116 74
+msg 130307 return
+  from durationcanvas_ref 129411
+  to durationcanvas_ref 128643
+  yz 106 3010 explicitmsg "EventServerIntf"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 133 94
+end
