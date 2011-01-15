@@ -16,20 +16,22 @@ classcanvas 128516 class_ref 128388 // Supplier
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 113 107 2000
 end
-note 128770 "UC02 - S'abonner en tant que Consumer (PUSH)
+note 128770 "MEZZO DI JAVA - ANALYSE
+DIAGRAMME DE CLASSES METIERS
+UC02 - S'abonner en tant que Consumer (PUSH)
 UC03 - Envoyer un Event (PUSH)"
-  xyzwh 8 13 2000 251 47
+  xyzwh 8 183 2000 257 77
 classcanvas 129282 class_ref 175362 // Consumer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 273 224 2000
 end
 relationcanvas 128258 relation_ref 141442 // channels
-  from ref 128130 z 2006 label "channels" italic xyz 311.5 64 2006 to ref 128002
+  from ref 128130 z 2006 label "channels" italic xyz 311 64 2006 to ref 128002
   no_role_a no_role_b
   multiplicity_a_pos 288 81 3000 no_multiplicity_b
 end
 relationcanvas 128514 relation_ref 141570 // events
-  from ref 128002 z 2001 label "events" italic xyz 356.5 115 2001 to ref 128386
+  from ref 128002 z 2001 label "events" italic xyz 356 115 2001 to ref 128386
   no_role_a no_role_b
   multiplicity_a_pos 361 131 3000 no_multiplicity_b
 end
@@ -39,7 +41,7 @@ relationcanvas 128642 relation_ref 141698 // suppliers
   multiplicity_a_pos 173 130 3000 no_multiplicity_b
 end
 relationcanvas 129410 relation_ref 183298 // consumers
-  from ref 128002 z 2001 label "consumers" italic xyz 281 177.5 2001 to ref 129282
+  from ref 128002 z 2001 label "consumers" italic xyz 281 177 2001 to ref 129282
   no_role_a no_role_b
   multiplicity_a_pos 288 207 3000 no_multiplicity_b
 end

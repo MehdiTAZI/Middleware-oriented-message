@@ -32,14 +32,15 @@ classcanvas 129026 class_ref 175362 // Consumer
   draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 253 182 2005
 end
-note 129410 "Mezzo Di Java - Diagramme de Package"
-  xyzwh 16 178 2000 223 37
+note 129410 "MEZZO DI JAVA - ANALYSE
+DIAGRAMME DE PACKAGE"
+  xyzwh 5 189 2000 167 45
 simplerelationcanvas 129154 simplerelation_ref 128002
   from ref 128898 z 2001 to ref 128002
 end
 simplerelationcanvas 129282 simplerelation_ref 128130
-  decenter_begin 138
-  decenter_end 941
+  decenter_begin 137
+  decenter_end 940
   from ref 128004 z 2001 to ref 128002
 end
 end

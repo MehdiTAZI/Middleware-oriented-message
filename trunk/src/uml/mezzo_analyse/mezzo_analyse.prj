@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse"
-  revision 41
-  modified_by 3 "Ordi"
+  revision 42
+  modified_by 2 "Franck"
 
 
   
@@ -488,7 +488,7 @@ ${members}}
 	  b parent class_ref 148738 // ChannelCtr
       end
 
-      operation 189186 "addProxyForConsumer"
+      operation 189186 "addProxyForPushConsumerToSubscribedList"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "consumer" type class_ref 168578 // Consumer
@@ -501,7 +501,7 @@ ${members}}
 	
       end
 
-      operation 189314 "addProxyForSupplier"
+      operation 189570 "removeProxyForPushConsumerFromSubscribedList"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "ps" type class_ref 128388 // Supplier
@@ -514,7 +514,46 @@ ${members}}
 	
       end
 
-      operation 189442 "removeProxyForConsumer"
+      operation 202626 "addProxyForPushConsumerToConnectedList"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "consumer" type class_ref 168578 // Consumer
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 202754 "removeProxyForPushConsumerFromConnectedList"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "ps" type class_ref 128388 // Supplier
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 189314 "addProxyForPushSupplierToConnectedList"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "ps" type class_ref 128388 // Supplier
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 189442 "removeProxyForPushSupplierFromConnectedList"
 	public explicit_return_type ""
 	nparams 1
 	  param in name "pc" type class_ref 168578 // Consumer
@@ -525,40 +564,6 @@ ${members}}
 	
 	
 	
-      end
-
-      operation 189570 "removeProxyForSupplier"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "ps" type class_ref 128388 // Supplier
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 196098 "deliverEvents"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 218626 // <unidirectional association>
-	relation 216834 --->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 218626 // <unidirectional association>
-	  b parent class_ref 128002 // CallbackConsumer
       end
 
       classrelation 128004 // <unidirectional association>
@@ -619,6 +624,15 @@ ${members}}
 
       classrelation 169858 // events
 	relation_ref 168450 // events
+      end
+
+      classrelation 225410 // <unidirectional association>
+	relation 223618 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 225410 // <unidirectional association>
+	  b parent class_ref 188674 // ThreadEvent
       end
     end
 
@@ -893,6 +907,15 @@ ${members}}
       classrelation 185218 // channels
 	relation_ref 183426 // channels
       end
+
+      classrelation 225282 // <unidirectional association>
+	relation 223490 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 225282 // <unidirectional association>
+	  b parent class_ref 188674 // ThreadEvent
+      end
     end
 
     class 168706 "ChannelAdmin"
@@ -1017,6 +1040,39 @@ ${members}}
 "
 	    classrelation_ref 135683 // <unidirectional association>
 	  b parent class_ref 182146 // EventClient
+      end
+    end
+
+    class 188674 "ThreadEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 202882 "deliverEvents"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 225154 // <unidirectional association>
+	relation 223362 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 225154 // <unidirectional association>
+	  b parent class_ref 128002 // CallbackConsumer
       end
     end
   end
