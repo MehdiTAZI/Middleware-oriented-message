@@ -89,7 +89,7 @@ msg 129922 synchronous
   to durationcanvas_ref 129794
   yz 178 2015 msg operation_ref 128514 // "resolve_initial_references()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  args "NameService"
+  args "\"NameService\""
   label_xy 395 165
 msg 130050 return
   from durationcanvas_ref 129794
