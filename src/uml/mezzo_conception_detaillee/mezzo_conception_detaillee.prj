@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 12
+  revision 13
   modified_by 3 "Ordi"
 
 
@@ -540,6 +540,27 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 148611 "the_POAManager().activate"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 148739 "servant_to_reference"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 129029 "POAHelper"
@@ -553,6 +574,17 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 148483 "narrow"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 134531 "ChannelAdminOperations"
@@ -1622,6 +1654,56 @@ ${members}}
       explicit_switch_type ""
       
     end
+
+    class 143235 "Supplier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 143363 "ProxyForPushSupplierPOATie"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 143491 "ProxyForPushSupplierHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 148867 "narrow"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
   end
 
   classview 128130 "CONCEPTION DETAILLEE"
@@ -1655,9 +1737,14 @@ ${members}}
       overlapping_bars size A4
     end
 
-    classdiagram 166147 "DCCD - UC03 Push d'un supplier"
+    classdiagram 166147 "DCCD - UC03 Push d'un Supplier"
       draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
+    end
+
+    sequencediagram 172675 "DSCD - UC03 Push d'un Supplier"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
     end
   end
 end
