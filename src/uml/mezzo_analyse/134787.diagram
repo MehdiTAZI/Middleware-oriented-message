@@ -4,7 +4,7 @@ classcanvas 128898 class_ref 128642 // ChannelAdminCtr
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode control drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 472 61 2000
 end
-classcanvas 129026 class_ref 161794 // ProxyPushSupplier
+classcanvas 129026 class_ref 161794 // ProxyForPushSupplier
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode boundary drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 266 280 2000
 end
@@ -36,6 +36,10 @@ classcanvas 132482 class_ref 182146 // EventClient
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode boundary drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 22 49 2000
 end
+note 132866 "MEZZO DI JAVA - ANALYSE
+DIAGRAMME DES CLASSES PARTICIPANTES
+UC03 - Envoyer un Event PUSH"
+  xyzwh 40 510 2000 263 59
 relationcanvas 128131 relation_ref 135427 // <unidirectional association>
   from ref 128898 z 2001 to ref 129026
   no_role_a no_role_b
