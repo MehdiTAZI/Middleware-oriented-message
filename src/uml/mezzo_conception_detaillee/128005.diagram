@@ -6,8 +6,8 @@ classinstance 134021 class_ref 128002 // EventClient
   name "ec"   xyz 173 16 2000 life_line_z 2000
 classinstance 134149 class_ref 128642 // ChannelAdmin
   name ""   xyz 401 19 2000 life_line_z 2000
-classinstance 134277 class_ref 128133 // ProxyPushConsumer
-  name ""   xyz 507 19 2000 life_line_z 2000
+classinstance 134277 class_ref 128133 // ProxyPushConsumerOperations
+  name ""   xyz 486 19 2000 life_line_z 2000
 classinstance 134405 class_ref 128261 // CallbackConsumerImpl
   name ""   xyz 612 830 2000 life_line_z 2000
 classinstance 134533 class_ref 128130 // ORB
@@ -37,64 +37,64 @@ classinstance 143749 class_ref 128901 // POA
 classinstance 143877 class_ref 129029 // POAHelper
   name ""   xyz 499 926 2000 life_line_z 2000
 durationcanvas 135045 classinstance_ref 133893 // :Consumer
-  xyzwh 36 94 2010 11 1079
+  xyzwh 38 94 2010 11 1079
 end
 durationcanvas 135173 classinstance_ref 134789 // :EventClient
-  xyzwh 117 82 2010 11 238
+  xyzwh 120 82 2010 11 238
 end
 durationcanvas 135429 classinstance_ref 134021 // ec:EventClient
-  xyzwh 204 96 2010 11 219
+  xyzwh 208 96 2010 11 219
 end
 durationcanvas 135685 classinstance_ref 134533 // :ORB
   xyzwh 287 115 2010 11 203
 end
 durationcanvas 136069 classinstance_ref 134661 // orb:ORB
-  xyzwh 351 164 2010 11 136
+  xyzwh 353 164 2010 11 136
 end
 durationcanvas 137861 classinstance_ref 134021 // ec:EventClient
-  xyzwh 204 333 2010 11 237
+  xyzwh 208 333 2010 11 237
 end
 durationcanvas 138117 classinstance_ref 134917 // :NamingContextExt
-  xyzwh 785 335 2010 11 152
+  xyzwh 789 335 2010 11 152
 end
 durationcanvas 139397 classinstance_ref 139141 // :ChannelAdminHelper
-  xyzwh 495 491 10 11 49
+  xyzwh 501 491 10 11 49
 end
 durationcanvas 139653 classinstance_ref 134021 // ec:EventClient
-  xyzwh 204 510 2010 11 33
+  xyzwh 208 510 2010 11 33
 end
 durationcanvas 140037 classinstance_ref 134149 // :ChannelAdmin
-  xyzwh 433 583 2010 11 256
+  xyzwh 437 583 2010 11 256
 end
 durationcanvas 140421 classinstance_ref 140293 // :ChannelAdminCtrl
-  xyzwh 609 627 2010 11 204
+  xyzwh 613 627 2010 11 204
 end
 durationcanvas 141445 classinstance_ref 141317 // :ProxyForPushConsumerImpl
-  xyzwh 717 658 2010 11 142
+  xyzwh 722 658 2010 11 142
 end
 durationcanvas 141829 classinstance_ref 141701 // :ProxyForPushConsumerHelper
-  xyzwh 802 738 2010 11 47
+  xyzwh 808 738 2010 11 47
 end
 durationcanvas 142853 classinstance_ref 134405 // :CallbackConsumerImpl
-  xyzwh 662 877 2010 11 66
+  xyzwh 667 877 2010 11 66
 end
 durationcanvas 143493 classinstance_ref 134021 // ec:EventClient
-  xyzwh 204 929 2010 11 140
+  xyzwh 208 929 2010 11 140
 end
 durationcanvas 144005 classinstance_ref 143749 // :POA
   xyzwh 391 975 2010 11 126
 end
 durationcanvas 144261 classinstance_ref 143877 // :POAHelper
-  xyzwh 524 996 2010 11 58
+  xyzwh 527 996 2010 11 58
 end
-durationcanvas 144901 classinstance_ref 134277 // :ProxyPushConsumer
-  xyzwh 553 1103 2010 11 28
+durationcanvas 144901 classinstance_ref 134277 // :ProxyPushConsumerOperations
+  xyzwh 557 1103 2010 11 28
 end
-durationcanvas 145669 classinstance_ref 134277 // :ProxyPushConsumer
-  xyzwh 553 1133 2010 11 25
+durationcanvas 145669 classinstance_ref 134277 // :ProxyPushConsumerOperations
+  xyzwh 557 1133 2010 11 25
 end
-durationcanvas 145925 classinstance_ref 134277 // :ProxyPushConsumer
-  xyzwh 553 1153 2010 11 25
+durationcanvas 145925 classinstance_ref 134277 // :ProxyPushConsumerOperations
+  xyzwh 557 1153 2010 11 25
 end
 msg 135301 synchronous
   from durationcanvas_ref 135045
