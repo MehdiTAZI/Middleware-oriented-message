@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 25
-  modified_by 5 "Administrateur"
+  revision 26
+  modified_by 2 "Franck"
 
 
   
@@ -662,15 +662,6 @@ ${members}}
 	    classrelation_ref 130309 // <aggregation>
       end
 
-      classrelation 144642 // channelCtr (<unidirectional association>)
-	relation 144514 --->
-	  a role_name "channelCtr" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 144642 // channelCtr (<unidirectional association>)
-	  b parent class_ref 135811 // Channel
-      end
-
       classrelation 144770 // callbackConsumer (<unidirectional association>)
 	relation 144642 --->
 	  a role_name "callbackConsumer" multiplicity "1" private
@@ -698,6 +689,15 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      classrelation 158722 // channelCtr (<unidirectional association>)
+	relation 158594 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158722 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
       end
     end
 
@@ -1905,13 +1905,13 @@ ${members}}
 	  b parent class_ref 135555 // ProxyForPushSupplierOperations
       end
 
-      classrelation 145026 // channelCtr (<unidirectional association>)
-	relation 144898 --->
+      classrelation 158850 // channelCtr (<unidirectional association>)
+	relation 158722 --->
 	  a role_name "channelCtr" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 145026 // channelCtr (<unidirectional association>)
-	  b parent class_ref 135811 // Channel
+	    classrelation_ref 158850 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
       end
     end
 
