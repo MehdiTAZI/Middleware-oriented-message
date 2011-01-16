@@ -102,15 +102,15 @@ public class ChannelCtr {
 		}
 	}
 
-
-	
+	//TMA : un Supplier ne s'abonne pas
+	/*
 	public void addProxyForPushSupplierToSubscribedList(
 			ProxyForPushSupplierImpl proxySupplier) throws AlreadyRegisteredException{
 		if (!channel.getSuppliersSubscribed().add(proxySupplier)) {
 			throw new AlreadyRegisteredException();
 		}
 	}
-
+	*/
 	public void addProxyForPushSupplierToConnectedList(
 			ProxyForPushSupplierImpl proxySupplier)throws fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException,MaximalConnectionReachedException{
 		if(!channel.SuppliersConnectedsListcapacityReached())
@@ -125,12 +125,14 @@ public class ChannelCtr {
 			throw new NotConnectedException();
 		}
 	}
+	//TMA : un supplier ne s'abonne/desabonne pas
+	/*
 	public void removeProxyForPushSupplierFromSubscribedList(
 			ProxyForPushSupplierOperations proxySupplier)
 			throws NotRegisteredException {
 		if (!channel.getSuppliersSubscribed().remove(proxySupplier)) 
 			throw new NotRegisteredException();
-	}
+	}*/
 
 	public void addEvent(Event e) throws ChannelNotFoundException,NotConnectedException{
 		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){

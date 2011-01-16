@@ -21,12 +21,17 @@ public class ThreadEvent implements Runnable{
 					for(Event e:channelCtr.getChannel().getConsumersSubscribed().get(consumer))
 						try {
 							consumer.receive(e);
+							//TMA : todo => supprimer les messages recu de la Queuqe  
 							
 						} catch (ConsumerNotFoundException e1) {
 							e1.printStackTrace();
+							//TMA : todo => ajouter les messages non recu de la Queuqe
+							//Sans oublier d'ajoutre dans la class qu'il faut le faite d'essyez
+							//denvoyer lensemble des messages lors de la connexion du consumer
 						}
-						
+					//TMA : je ne suis pas dacorrd
 					channelCtr.getChannel().getConsumersSubscribed().put(consumer, new ArrayList<Event>());
+
 			}
 			try {
 				Thread.sleep(60);
