@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 26
+  revision 28
   modified_by 2 "Franck"
 
 
@@ -79,7 +79,7 @@ format 76
 	size A4
       end
 
-      sequencediagram 148226 "UC02 - Scenario Exceptionnel 7 : Le Consumer s'enregistre mais déjà enregistré"
+      sequencediagram 134660 "UC02 - Scenario Nominal"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
@@ -99,6 +99,11 @@ format 76
 	overlapping_bars size A4
       end
 
+      sequencediagram 134532 "UC02 - Scenario Exceptionnel 3 : Le Channel a atteint le nombre maximal de connexions"
+	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+	overlapping_bars size A4
+      end
+
       sequencediagram 141698 "UC02 - Scenario Exceptionnel 4 - Le Consumer n'est plus accessible"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
@@ -114,12 +119,7 @@ format 76
 	overlapping_bars size A4
       end
 
-      sequencediagram 134532 "UC02 - Scenario Exceptionnel 3 : Le Channel a atteint le nombre maximal de connexions"
-	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-	overlapping_bars size A4
-      end
-
-      sequencediagram 134660 "UC02 - Scenario Nominal"
+      sequencediagram 148226 "UC02 - Scenario Exceptionnel 7 : Le Consumer s'enregistre mais déjà enregistré"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end

@@ -1,71 +1,76 @@
 format 76
 
 classinstance 128002 class_ref 141570 // Supplier
-  name ""   xyz 113 4 2000 life_line_z 2000
+  name ""   xyz 2 4 2000 life_line_z 2000
 classinstance 128130 class_ref 141698 // Framework
-  name ""   xyz 557 7 2000 life_line_z 2000
+  name ""   xyz 446 4 2000 life_line_z 2000
+note 132866 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC03 : Envoyer une Event PUSH
+US132 : Scénario Exception 4 : Le Supplier se connecte mais est deja connecte"
+  xyzwh 38 302 2025 435 73
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 130 67 2010 11 260
+  xyzwh 19 61 2010 11 260
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 585 67 2010 11 41
+  xyzwh 474 61 2010 11 41
 end
 durationcanvas 131714 classinstance_ref 128130 // :Framework
-  xyzwh 585 204 2010 11 47
+  xyzwh 474 198 2010 11 47
 end
 durationcanvas 132098 classinstance_ref 128130 // :Framework
-  xyzwh 585 273 2010 11 33
+  xyzwh 474 267 2010 11 33
 end
 durationcanvas 132482 classinstance_ref 128130 // :Framework
-  xyzwh 585 138 2010 11 39
+  xyzwh 474 132 2010 11 43
 end
 msg 130434 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 68 2015 explicitmsg "resolveChannel()"
+  yz 62 2015 explicitmsg "resolveChannel()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Topic"
-  label_xy 328 54
+  label_xy 217 48
 msg 131586 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 96 3005 explicitmsg "Channel Reference"
+  yz 90 3005 explicitmsg "Channel Reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 317 83
+  label_xy 206 77
 msg 131842 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131714
-  yz 205 2015 explicitmsg "connect()"
+  yz 199 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 303 194
+  label_xy 192 188
 msg 131970 return
   from durationcanvas_ref 131714
   to durationcanvas_ref 128258
-  yz 237 2015 explicitmsg "connected"
+  yz 231 2015 explicitmsg "connected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 342 225
+  label_xy 231 219
 msg 132226 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132098
-  yz 275 2015 explicitmsg "connect()"
+  yz 269 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 300 262
+  label_xy 189 256
 msg 132354 return
   from durationcanvas_ref 132098
   to durationcanvas_ref 128258
-  yz 294 2020 explicitmsg "EXCEPTION : AlreadyConnected"
+  yz 288 2020 explicitmsg "EXCEPTION : AlreadyConnected"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 288 281
+  label_xy 177 275
 msg 132610 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 132482
-  yz 138 2015 explicitmsg "getProxyPushSupplier"
+  yz 132 2015 explicitmsg "getProxyPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 311 125
+  label_xy 200 119
 msg 132738 return
   from durationcanvas_ref 132482
   to durationcanvas_ref 128258
-  yz 170 2015 explicitmsg "ProxyPushSupplier"
+  yz 164 2015 explicitmsg "ProxyPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 319 157
+  label_xy 208 151
 end

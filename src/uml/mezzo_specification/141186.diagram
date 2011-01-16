@@ -6,6 +6,11 @@ classinstance 128132 class_ref 141698 // Framework
   name ""   xyz 403.139 23 2000 life_line_z 2000
 textcanvas 128260 "processEvent"
   xyzwh 84 437 2000 71 15
+note 128386 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US140 : Scénario Alternatif 1 : Reconnexion"
+  xyzwh 52 727 2025 335 75
 fragment 132740 "loop"
   xyzwh 5 398 2035 463 85
 end
@@ -13,49 +18,49 @@ fragment 132868 "loop"
   xyzwh 5 598 2040 461 77
 end
 durationcanvas 128002 classinstance_ref 128132 // :Framework
-  xyzwh 428 224 2010 11 33
+  xyzwh 431 224 2010 11 33
 end
 durationcanvas 128388 classinstance_ref 128132 // :Framework
-  xyzwh 428 346 2010 11 30
+  xyzwh 431 346 2010 11 30
 end
 durationcanvas 128516 classinstance_ref 128004 // :Consumer
-  xyzwh 33 77 2010 11 1187
+  xyzwh 35 77 2010 11 1187
   overlappingdurationcanvas 128644
-    xyzwh 39 172 2020 11 26
+    xyzwh 41 172 2020 11 26
   end
   overlappingdurationcanvas 128772
-    xyzwh 39 414 2020 11 54
+    xyzwh 41 414 2020 11 54
     overlappingdurationcanvas 128900
-      xyzwh 45 437 2030 11 25
+      xyzwh 47 437 2030 11 25
     end
   end
   overlappingdurationcanvas 132228
-    xyzwh 39 613 2020 11 55
+    xyzwh 41 613 2020 11 55
     overlappingdurationcanvas 132484
-      xyzwh 45 633 2030 11 25
+      xyzwh 47 633 2030 11 25
     end
   end
 end
 durationcanvas 129028 classinstance_ref 128132 // :Framework
-  xyzwh 428 500 2010 11 34
+  xyzwh 431 500 2010 11 34
 end
 durationcanvas 129156 classinstance_ref 128132 // :Framework
-  xyzwh 428 110 2010 11 40
+  xyzwh 431 110 2010 11 40
 end
 durationcanvas 129284 classinstance_ref 128132 // :Framework
-  xyzwh 428 693 2010 11 28
+  xyzwh 431 693 2010 11 28
 end
 durationcanvas 129412 classinstance_ref 128132 // :Framework
-  xyzwh 428 288 2010 11 38
+  xyzwh 431 288 2010 11 38
 end
 durationcanvas 129540 classinstance_ref 128132 // :Framework
-  xyzwh 428 420 2010 11 50
+  xyzwh 431 420 2010 11 50
 end
 durationcanvas 131716 classinstance_ref 128132 // :Framework
-  xyzwh 428 558 2010 11 34
+  xyzwh 431 558 2010 11 34
 end
 durationcanvas 132100 classinstance_ref 128132 // :Framework
-  xyzwh 428 612 2010 11 40
+  xyzwh 431 612 2010 11 40
 end
 msg 128130 synchronous
   from durationcanvas_ref 128516

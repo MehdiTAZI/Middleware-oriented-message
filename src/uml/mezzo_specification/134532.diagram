@@ -4,61 +4,66 @@ classinstance 128002 class_ref 141698 // Framework
   name ""   xyz 425.139 5.15628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.6337 4 2000 life_line_z 2000
+note 131842 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US114 : Scénario Exception 3 : Le Channel a atteind le nombre maximal de connexions"
+  xyzwh 73 341 2000 373 85
 durationcanvas 128004 classinstance_ref 128002 // :Framework
-  xyzwh 450 305 2010 11 30
+  xyzwh 453 304 2010 11 31
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 72 2010 11 430
+  xyzwh 57 71 2010 11 271
   overlappingdurationcanvas 131074
-    xyzwh 61 132 2020 11 26
+    xyzwh 63 132 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 70 2010 11 40
+  xyzwh 453 70 2010 11 40
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 247 2010 11 38
+  xyzwh 453 247 2010 11 38
 end
 durationcanvas 131330 classinstance_ref 128002 // :Framework
-  xyzwh 450 176 2010 11 25
+  xyzwh 453 175 2010 11 32
 end
 msg 128132 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128004
-  yz 305 2015 explicitmsg "connect()"
+  yz 304 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 210 293
+  label_xy 210 292
 msg 128260 return
   from durationcanvas_ref 128004
   to durationcanvas_ref 128258
-  yz 324 2020 explicitmsg "EXCEPTION : ChannelException.MaximalConnectionReached"
+  yz 323 2020 explicitmsg "EXCEPTION : ChannelException.MaximalConnectionReached"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 133 314
+  label_xy 133 313
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 72 2015 explicitmsg "resolveChannel(Topic)"
+  yz 71 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 144 57
+  label_xy 144 56
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 98 2020 explicitmsg "Channel reference"
+  yz 97 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 213 85
+  label_xy 213 84
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 129026
-  yz 248 2015 explicitmsg "suscribe()"
+  yz 247 2015 explicitmsg "suscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "CallBack"
-  label_xy 169 235
+  label_xy 169 234
 msg 129282 return
   from durationcanvas_ref 129026
   to durationcanvas_ref 128258
-  yz 271 2015 explicitmsg "registered"
+  yz 270 2015 explicitmsg "registered"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 208 258
+  label_xy 208 257
 reflexivemsg 131202 synchronous
   to durationcanvas_ref 131074
   yz 132 2025 explicitmsg "createCallback"
@@ -67,13 +72,13 @@ reflexivemsg 131202 synchronous
 msg 131458 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 131330
-  yz 176 2015 explicitmsg "getProxyPushConsumer"
+  yz 175 2015 explicitmsg "getProxyPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 204 163
+  label_xy 204 162
 msg 131586 return
   from durationcanvas_ref 131330
   to durationcanvas_ref 128258
-  yz 196 2015 explicitmsg "ProxyPushConsumer"
+  yz 195 2015 explicitmsg "ProxyPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 212 183
+  label_xy 212 182
 end

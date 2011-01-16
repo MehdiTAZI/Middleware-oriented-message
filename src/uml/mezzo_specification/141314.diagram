@@ -4,6 +4,11 @@ classinstance 128002 class_ref 141698 // Framework
   name ""   xyz 425.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.9337 4.06488 2000 life_line_z 2000
+note 128770 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US112 : Scénario Exception 1 : Le Channel n'est pas trouve "
+  xyzwh 84 132 2000 325 73
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
   xyzwh 57 76 2010 11 57
 end

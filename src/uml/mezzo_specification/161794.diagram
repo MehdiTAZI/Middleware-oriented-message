@@ -1,56 +1,61 @@
 format 76
 
 classinstance 128002 class_ref 141570 // Supplier
-  name ""   xyz 104 5 2000 life_line_z 2000
+  name ""   xyz 2 5 2000 life_line_z 2000
 classinstance 128130 class_ref 141698 // Framework
-  name ""   xyz 508 15 2000 life_line_z 2000
+  name ""   xyz 406 9 2000 life_line_z 2000
+note 130946 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC03 : Envoyer une Event PUSH
+US131 : Scénario Exception 2 : Le Supplier n'arrive pas a se connecter"
+  xyzwh 39 218 2020 389 77
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 121 90 2010 11 134
+  xyzwh 19 84 2010 11 134
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 536 86 2010 11 33
+  xyzwh 434 80 2010 11 33
 end
 durationcanvas 130178 classinstance_ref 128130 // :Framework
-  xyzwh 536 188 2010 11 37
+  xyzwh 434 182 2010 11 37
 end
 durationcanvas 130562 classinstance_ref 128130 // :Framework
-  xyzwh 536 139 2010 11 32
+  xyzwh 434 133 2010 11 32
 end
 msg 129154 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 90 2015 explicitmsg "resolveChannel()"
+  yz 84 2015 explicitmsg "resolveChannel()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Topic"
-  label_xy 269 75
+  label_xy 167 69
 msg 129666 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 108 3005 explicitmsg "Channel Reference"
+  yz 102 3005 explicitmsg "Channel Reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 288 95
+  label_xy 186 89
 msg 130306 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 130178
-  yz 188 2015 explicitmsg "connect()"
+  yz 182 2015 explicitmsg "connect()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 314 175
+  label_xy 212 169
 msg 130434 return
   from durationcanvas_ref 130178
   to durationcanvas_ref 128258
-  yz 213 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
+  yz 207 2015 explicitmsg "EXCEPTION : ConnectionException.ChannelNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 239 200
+  label_xy 137 194
 msg 130690 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 130562
-  yz 139 2015 explicitmsg "getProxyPushSupplier"
+  yz 133 2015 explicitmsg "getProxyPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 282 126
+  label_xy 180 120
 msg 130818 return
   from durationcanvas_ref 130562
   to durationcanvas_ref 128258
-  yz 160 3005 explicitmsg "ProxyPushSupplier"
+  yz 154 3005 explicitmsg "ProxyPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 290 147
+  label_xy 188 141
 end
