@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 16
-  modified_by 5 "Administrateur"
+  revision 17
+  modified_by 3 "Ordi"
 
 
   
@@ -68,10 +68,11 @@ ${members}}
       explicit_switch_type ""
       
       operation 128002 "init"
-	public explicit_return_type ""
-	nparams 0
+	class_operation public return_type class_ref 128002 // EventClient
+	nparams 1
+	  param in name "args" explicit_type "string[]"
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -80,10 +81,11 @@ ${members}}
       end
 
       operation 128130 "resolveChannelByTopic"
-	public explicit_return_type ""
-	nparams 0
+	public return_type class_ref 128642 // ChannelAdmin
+	nparams 1
+	  param in name "topic" explicit_type "string"
 	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
@@ -155,7 +157,7 @@ ${members}}
       end
 
       operation 128642 "init"
-	public explicit_return_type ""
+	class_operation public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -164,6 +166,30 @@ ${members}}
 	
 	
 	
+      end
+
+      classrelation 135811 // <aggregation>
+	relation 135555 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135811 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135939 // <aggregation>
+      end
+
+      classrelation 135939 // <aggregation>
+	relation_ref 135555 // <aggregation>
+      end
+
+      classrelation 136195 // <aggregation>
+	relation_ref 135683 // <aggregation>
+      end
+
+      classrelation 137603 // <aggregation>
+	relation_ref 136579 // <aggregation>
       end
     end
 
@@ -300,6 +326,13 @@ ${members}}
 	  a default
 	    classrelation_ref 128133 // <dependency>
 	  b parent class_ref 128261 // CallbackConsumerImpl
+      end
+
+      classrelation 134659 // <dependency>
+	relation 134531 -_->
+	  a default
+	    classrelation_ref 134659 // <dependency>
+	  b parent class_ref 128517 // ChannelAdminImpl
       end
     end
 
@@ -461,6 +494,42 @@ ${members}}
 	  a default
 	    classrelation_ref 130565 // <dependency>
 	  b parent class_ref 128773 // ProxyForPushConsumerHelper
+      end
+
+      classrelation 134915 // <realization>
+	relation 134787 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134915 // <realization>
+	  b parent class_ref 134531 // ChannelAdminOperations
+      end
+
+      classrelation 135683 // <aggregation>
+	relation_ref 135427 // <aggregation>
+      end
+
+      classrelation 136707 // <aggregation>
+	relation_ref 136067 // <aggregation>
+      end
+
+      classrelation 136963 // <aggregation>
+	relation_ref 136195 // <aggregation>
+      end
+
+      classrelation 137091 // <aggregation>
+	relation 136323 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137091 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137219 // <aggregation>
+      end
+
+      classrelation 137859 // <aggregation>
+	relation_ref 136707 // <aggregation>
       end
     end
 
@@ -646,7 +715,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 128389 "narrow"
-	public explicit_return_type ""
+	class_operation public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -711,7 +780,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 148483 "narrow"
-	public explicit_return_type ""
+	class_operation public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -724,14 +793,18 @@ ${members}}
     end
 
     class 134531 "ChannelAdminOperations"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl ""
+      php_decl "${comment}interface ${name} {
+${members}}
+"
       python_2_2 python_decl ""
-      idl_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
     end
@@ -820,6 +893,108 @@ ${members}}
 
       classrelation 129541 // <aggregation>
 	relation_ref 129029 // <aggregation>
+      end
+
+      classrelation 135043 // <dependency>
+	relation 134915 -_->
+	  a default
+	    classrelation_ref 135043 // <dependency>
+	  b parent class_ref 129029 // POAHelper
+      end
+
+      classrelation 135171 // <dependency>
+	relation 135043 -_->
+	  a default
+	    classrelation_ref 135171 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      classrelation 135299 // <dependency>
+	relation 135171 -_->
+	  a default
+	    classrelation_ref 135299 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      classrelation 135427 // <dependency>
+	relation 135299 -_->
+	  a default
+	    classrelation_ref 135427 // <dependency>
+	  b parent class_ref 129029 // POAHelper
+      end
+
+      classrelation 136323 // <dependency>
+	relation 135811 -_->
+	  a default
+	    classrelation_ref 136323 // <dependency>
+	  b parent class_ref 128773 // ProxyForPushConsumerHelper
+      end
+
+      classrelation 136451 // <dependency>
+	relation 135939 -_->
+	  a default
+	    classrelation_ref 136451 // <dependency>
+	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
+      end
+
+      classrelation 136579 // <aggregation>
+	relation 136067 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136579 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136707 // <aggregation>
+      end
+
+      classrelation 136835 // <aggregation>
+	relation 136195 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136835 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136963 // <aggregation>
+      end
+
+      classrelation 137219 // <aggregation>
+	relation_ref 136323 // <aggregation>
+      end
+
+      classrelation 137347 // <dependency>
+	relation 136451 -_->
+	  a default
+	    classrelation_ref 137347 // <dependency>
+	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
+      end
+
+      classrelation 137475 // <aggregation>
+	relation 136579 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137475 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137603 // <aggregation>
+      end
+
+      classrelation 138243 // <aggregation>
+	relation 136963 o---
+	  stereotype "map"
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138243 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138371 // <aggregation>
       end
     end
 
@@ -933,19 +1108,6 @@ ${members}}
 	
       end
 
-      operation 135811 "addProxyForPushSupplierToSubscribedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
       operation 135939 "addProxyForPushSupplierToConnectedList"
 	public explicit_return_type "void"
 	nparams 1
@@ -963,19 +1125,6 @@ ${members}}
 	public explicit_return_type "void"
 	nparams 1
 	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 136195 "removeProxyForPushSupplierFromSubscribedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxySupplier" type class_ref 135555 // ProxyForPushSupplierOperations
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
@@ -1004,6 +1153,22 @@ ${members}}
 
       classrelation 130053 // <aggregation>
 	relation_ref 129413 // <aggregation>
+      end
+
+      classrelation 137987 // <aggregation>
+	relation 136835 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137987 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138115 // <aggregation>
+      end
+
+      classrelation 138371 // <aggregation>
+	relation_ref 136963 // <aggregation>
       end
     end
 
@@ -1215,6 +1380,7 @@ ${members}}
 
       classrelation 128517 // <aggregation>
 	relation 128517 o---
+	  stereotype "map"
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1227,6 +1393,7 @@ ${members}}
 
       classrelation 128773 // <aggregation>
 	relation 128645 o---
+	  stereotype "map"
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1239,6 +1406,7 @@ ${members}}
 
       classrelation 129029 // <aggregation>
 	relation 128773 o---
+	  stereotype "map"
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1254,6 +1422,44 @@ ${members}}
 	  a default
 	    classrelation_ref 130693 // <dependency>
 	  b parent class_ref 128130 // ORB
+      end
+
+      classrelation 135555 // <aggregation>
+	relation 135427 o---
+	  stereotype "map"
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135555 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 135683 // <aggregation>
+      end
+
+      classrelation 136067 // <aggregation>
+	relation 135683 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136067 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136195 // <aggregation>
+      end
+
+      classrelation 137731 // <aggregation>
+	relation 136707 o---
+	  stereotype "map"
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137731 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137859 // <aggregation>
       end
     end
 
@@ -1287,14 +1493,18 @@ ${members}};
     end
 
     class 135427 "ProxyForPushConsumerOperations"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl ""
+      php_decl "${comment}interface ${name} {
+${members}}
+"
       python_2_2 python_decl ""
-      idl_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
       operation 128517 "narrow"
@@ -1540,30 +1750,6 @@ ${members}}
 	
       end
 
-      operation 140675 "getSuppliersSubscribed"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 140803 "setSuppliersSubscribed"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
       operation 140931 "getTopic"
 	public explicit_return_type ""
 	nparams 0
@@ -1674,6 +1860,7 @@ ${members}}
 
       classrelation 128003 // <composition>
 	relation 128003 *---
+	  stereotype "list"
 	  a role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1686,6 +1873,10 @@ ${members}}
 
       classrelation 128645 // <aggregation>
 	relation_ref 128517 // <aggregation>
+      end
+
+      classrelation 138115 // <aggregation>
+	relation_ref 136835 // <aggregation>
       end
     end
 
@@ -1868,14 +2059,18 @@ ${members}};
     end
 
     class 136707 "CallbackConsumer"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl ""
+      php_decl "${comment}interface ${name} {
+${members}}
+"
       python_2_2 python_decl ""
-      idl_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
       classrelation 130309 // <aggregation>
@@ -1907,6 +2102,22 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 155395 "main"
+	class_operation public explicit_return_type "void"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      classrelation 134787 // <dependency>
+	relation 134659 -_->
+	  a package
+	    classrelation_ref 134787 // <dependency>
+	  b parent class_ref 128517 // ChannelAdminImpl
+      end
     end
 
     class 143363 "ProxyForPushSupplierPOATie"
@@ -1934,7 +2145,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 148867 "narrow"
-	public explicit_return_type ""
+	class_operation public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -1982,12 +2193,12 @@ ${members}}
     end
 
     classdiagram 134658 "DCCD - Event Client"
-      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A4
     end
 
     classdiagram 166147 "DCCD - UC03 Push d'un Supplier"
-      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A4
     end
 
@@ -1996,13 +2207,13 @@ ${members}}
       overlapping_bars size A4
     end
 
-    sequencediagram 134533 "DSCD-L'abonnement par un Consumer"
+    sequencediagram 134533 "DSCD - UC02 L'abonnement par un Consumer"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4
     end
 
-    classdiagram 134661 "DCCD - L'abonnement par un Consumer"
-      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    classdiagram 134661 "DCCD - UC02 L'abonnement par un Consumer"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A4
     end
   end
