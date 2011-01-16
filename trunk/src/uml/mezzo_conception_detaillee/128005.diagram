@@ -6,7 +6,7 @@ classinstance 134021 class_ref 128002 // EventClient
   name "ec"   xyz 173 16 2000 life_line_z 2000
 classinstance 134149 class_ref 128642 // ChannelAdmin
   name ""   xyz 401 19 2000 life_line_z 2000
-classinstance 134277 class_ref 128133 // ProxyPushConsumerOperations
+classinstance 134277 class_ref 128133 // ProxyPushConsumer
   name ""   xyz 486 19 2000 life_line_z 2000
 classinstance 134405 class_ref 128261 // CallbackConsumerImpl
   name ""   xyz 612 830 2000 life_line_z 2000
@@ -87,14 +87,14 @@ end
 durationcanvas 144261 classinstance_ref 143877 // :POAHelper
   xyzwh 527 996 2010 11 58
 end
-durationcanvas 144901 classinstance_ref 134277 // :ProxyPushConsumerOperations
-  xyzwh 557 1103 2010 11 28
+durationcanvas 144901 classinstance_ref 134277 // :ProxyPushConsumer
+  xyzwh 536 1103 2010 11 28
 end
-durationcanvas 145669 classinstance_ref 134277 // :ProxyPushConsumerOperations
-  xyzwh 557 1133 2010 11 25
+durationcanvas 145669 classinstance_ref 134277 // :ProxyPushConsumer
+  xyzwh 536 1133 2010 11 25
 end
-durationcanvas 145925 classinstance_ref 134277 // :ProxyPushConsumerOperations
-  xyzwh 557 1153 2010 11 25
+durationcanvas 145925 classinstance_ref 134277 // :ProxyPushConsumer
+  xyzwh 536 1153 2010 11 25
 end
 msg 135301 synchronous
   from durationcanvas_ref 135045
