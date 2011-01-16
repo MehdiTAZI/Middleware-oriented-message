@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 26
+  revision 27
   modified_by 2 "Franck"
 
 
@@ -283,6 +283,12 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 165890 // <dependency>
+	relation 165762 -_->
+	  a default
+	    classrelation_ref 165890 // <dependency>
+	  b parent class_ref 128002 // EventClient
+      end
     end
 
     class 128770 "ChannelAdminHelper"
@@ -360,6 +366,20 @@ ${members}}
 "
 	    classrelation_ref 151810 // ec (<unidirectional association>)
 	  b parent class_ref 128002 // EventClient
+      end
+
+      classrelation 165762 // <dependency>
+	relation 165634 -_->
+	  a default
+	    classrelation_ref 165762 // <dependency>
+	  b parent class_ref 128642 // ChannelAdmin
+      end
+
+      classrelation 166146 // <dependency>
+	relation 166018 -_->
+	  a default
+	    classrelation_ref 166146 // <dependency>
+	  b parent class_ref 136195 // ProxyForPushConsumer
       end
     end
 
@@ -520,6 +540,20 @@ ${members}}
 "
 	    classrelation_ref 138114 // channelAdminCtr (<unidirectional association>)
 	  b parent class_ref 134659 // ChannelAdminCtr
+      end
+
+      classrelation 165378 // <dependency>
+	relation 165250 -_->
+	  a default
+	    classrelation_ref 165378 // <dependency>
+	  b parent class_ref 136195 // ProxyForPushConsumer
+      end
+
+      classrelation 165506 // <dependency>
+	relation 165378 -_->
+	  a default
+	    classrelation_ref 165506 // <dependency>
+	  b parent class_ref 136067 // ProxyForPushSupplier
       end
     end
 
@@ -1766,7 +1800,7 @@ ${members}}
     end
 
     class 136067 "ProxyForPushSupplier"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -2064,6 +2098,20 @@ ${members}}
 	
 	
       end
+
+      classrelation 165634 // <dependency>
+	relation 165506 -_->
+	  a default
+	    classrelation_ref 165634 // <dependency>
+	  b parent class_ref 128642 // ChannelAdmin
+      end
+
+      classrelation 166018 // <dependency>
+	relation 165890 -_->
+	  a default
+	    classrelation_ref 166018 // <dependency>
+	  b parent class_ref 136067 // ProxyForPushSupplier
+      end
     end
 
     class 143363 "ProxyForPushSupplierPOATie"
@@ -2135,7 +2183,7 @@ ${members}}
     show_infonote default drawing_language default show_stereotype_properties default
     classdiagram 134658 "DCCD - mezzo-libclient"
       draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
-      size A4
+      size A4-Landscape
     end
 
     classdiagram 166147 "DCCD - mezzo-cosevent-server"
