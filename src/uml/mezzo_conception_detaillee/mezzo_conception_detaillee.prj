@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 14
+  revision 15
   modified_by 3 "Ordi"
 
 
@@ -1465,6 +1465,18 @@ ${members}}
 	
 	
       end
+
+      classrelation 128003 // <composition>
+	relation 128003 *---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128003 // <composition>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128131 // <composition>
+      end
     end
 
     class 135939 "EventServer"
@@ -1623,6 +1635,9 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 128131 // <composition>
+	relation_ref 128003 // <composition>
+      end
     end
 
     class 136579 "Runnable"
