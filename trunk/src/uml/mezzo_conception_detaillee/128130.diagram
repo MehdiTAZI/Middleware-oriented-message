@@ -57,7 +57,7 @@ end
 msg 128642 synchronous
   from durationcanvas_ref 128386
   to durationcanvas_ref 128514
-  yz 107 2015 msg operation_ref 128002 // "init()"
+  yz 107 2015 msg operation_ref 128002 // "init(in args : string[]) : EventClient"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 130 94
 msg 128770 return
@@ -118,7 +118,7 @@ msg 130690 return
 msg 130946 synchronous
   from durationcanvas_ref 128386
   to durationcanvas_ref 130818
-  yz 371 2015 msg operation_ref 128130 // "resolveChannelByTopic()"
+  yz 371 2015 msg operation_ref 128130 // "resolveChannelByTopic(in topic : string) : ChannelAdmin"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "\"topic\""
   label_xy 118 358
