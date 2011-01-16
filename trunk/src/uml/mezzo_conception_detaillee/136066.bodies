@@ -1,0 +1,19 @@
+class ProxyForPushSupplierImpl
+!!!141826.java!!!	ProxyForPushSupplierImpl(inout channelCtr : ChannelCtr)
+		this.channelCtr = channelCtr;		 		
+!!!141954.java!!!	ProxyForPushSupplierImpl(in channel : String)
+		this.channel = channel;	
+		channelCtr = BFFactory.createChannelCtr(channel);
+!!!142082.java!!!	connect() : void
+		channelCtr.addProxyForPushSupplierToConnectedList(this);	
+		connected=true;
+!!!142210.java!!!	disconnect() : void
+		channelCtr.removeProxyForPushSupplierFromConnectedList(this);
+		connected=false;
+		
+!!!142338.java!!!	push(inout evt : Event) : void
+		System.out.println("evt "+evt.toString());
+		if(!connected)
+			throw new NotConnectedException();
+		channelCtr.addEvent(evt);
+		

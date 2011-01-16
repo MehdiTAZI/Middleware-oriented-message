@@ -1,0 +1,28 @@
+class CRAPChannelctr
+!!!135298.java!!!	CRAPChannelctr(in topic : String, in capacity : int)
+		this.topic=topic;
+		this.capacity=capacity;
+		consumers = new HashMap<Consumer,Queue<Event>>();
+		suppliers = new ArrayList<Supplier>();
+!!!135426.java!!!	addConsumer(inout consumer : Consumer) : void
+		if (consumersFull())
+			throw new MaximalConnectionReachedException("capacity is: "+ capacity);
+		// priorityQueue = fifo
+		// offer() = insert  
+		// poll() = remove
+		consumers.put(consumer, new PriorityQueue<Event>());
+!!!135554.java!!!	addSupplier(inout supplier : Supplier) : void
+		if (suppliersFull())
+			throw new MaximalConnectionReachedException("capacity is: "+ capacity);
+		suppliers.add(supplier);
+!!!135682.java!!!	processEvents() : void
+		
+		
+!!!135810.java!!!	consumersFull() : boolean
+		return (capacity == consumers.size());
+!!!135938.java!!!	suppliersFull() : boolean
+		return (capacity == suppliers.size());
+!!!136066.java!!!	getTopic() : String
+		return topic;
+!!!136194.java!!!	getCapacity() : int
+		return capacity;

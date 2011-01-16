@@ -1,0 +1,28 @@
+class BFFactory
+!!!139394.java!!!	createOrb(inout args : String, inout props : Properties) : ORB
+		System.out.println(orb);
+		if(orb==null)
+			orb = ORB.init(args, props);
+		return orb;
+		
+!!!139522.java!!!	createChannel(in channel : String, in capacity : int) : Channel
+		if (mapChannel.get(channel)==null)
+			mapChannel.put(channel, new Channel(channel, capacity));
+		return mapChannel.get(channel);
+!!!139650.java!!!	createChannelCtr(in channel : String) : ChannelCtr
+		if (mapChannelCtr.get(channel)==null)
+			mapChannelCtr.put(channel, new ChannelCtr(channel));
+		return mapChannelCtr.get(channel);
+		
+!!!139778.java!!!	createChannelAdminCtr(in channel : String) : ChannelAdminCtr
+		if (mapChannelAdminCtr.get(channel)==null)
+			mapChannelAdminCtr.put(channel, new ChannelAdminCtr(channel));
+		return mapChannelAdminCtr.get(channel);
+		
+!!!139906.java!!!	createChannelAdminImpl(in channel : String) : ChannelAdminImpl
+		if (mapChannelAdminImpl.get(channel)==null)
+			mapChannelAdminImpl.put(channel, new ChannelAdminImpl(channel));
+		return mapChannelAdminImpl.get(channel);
+!!!140034.java!!!	initiateChannel(in channel : String, in capacity : int) : ChannelAdminImpl
+		createChannel(channel, capacity);
+		return createChannelAdminImpl( channel);

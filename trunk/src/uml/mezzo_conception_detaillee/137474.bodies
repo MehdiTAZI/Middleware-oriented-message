@@ -1,0 +1,77 @@
+class CosEventServer
+!!!142466.java!!!	CosEventServer(inout args : String)
+		
+		Properties props = new Properties();
+
+		try {
+			props.load(this.getClass().getClassLoader()
+					.getResourceAsStream("eventserver.properties"));
+		} catch (IOException e) {
+			// TODO log here
+			throw new EventServerException(
+					"Error in opening client property file", e);
+		}
+		orb = BFFactory.createOrb(args, props);
+		/*
+		orb = ORB.init(args, props);
+		Channel channel = new Channel(channelName);
+		
+		ChannelCtr channelCtr = new ChannelCtr(channel);
+		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
+		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
+				channelAdminCtr);*/
+		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,90);
+		
+		ThreadEvent th = new ThreadEvent(channelName);
+		Thread thread = new Thread(th);
+		thread.start();
+		
+		
+		
+
+
+			POA poa;
+			try {
+				poa = POAHelper.narrow(orb
+						.resolve_initial_references("RootPOA"));
+			} catch (InvalidName e) {
+				// TODO log here
+				throw new EventServerException(
+						"Invalid Name of RootPOA", e);
+			}
+			try {
+				poa.the_POAManager().activate();
+			} catch (AdapterInactive e) {
+				// TODO log here
+				throw new EventServerException(
+						"Inactive Adapater to activate the POA Manager", e);
+			}
+			NamingContextExt nc;
+			try {
+				nc = NamingContextExtHelper.narrow(orb
+						.resolve_initial_references("NameService"));
+			} catch (InvalidName e) {
+				// TODO log here
+				throw new EventServerException(
+						"Invalid Name of NameService", e);
+			}
+
+			try {
+				nc.rebind(nc.to_name(channelName), poa
+						.servant_to_reference(new ChannelAdminPOATie(
+								channelAdminImpl)));
+			} catch (Exception e) {
+				// TODO log here
+				throw new EventServerException(
+						"Error in binding ChannelAdmin in the Name Service : " + e.toString(), e);
+			}
+			System.out.println("Server is running...");
+			orb.run();
+
+
+
+		// ChannelAdminCtr channelCtr = new ChannelAdminCtr();
+		// ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(channelCtr);
+!!!142594.java!!!	main(inout args : String) : void
+		new CosEventServer(args);
+

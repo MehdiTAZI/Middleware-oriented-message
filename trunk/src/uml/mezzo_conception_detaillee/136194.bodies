@@ -1,0 +1,30 @@
+class ThreadEvent
+!!!138626.java!!!	ThreadEvent(in channel : String)
+		channelCtr = BFFactory.createChannelCtr(channel);
+!!!138754.java!!!	run() : void
+		while(true){
+			for(ProxyForPushConsumerImpl consumer:channelCtr.getChannel().getConsumersSubscribed().keySet()){
+				if(channelCtr.getChannel().getConsumersConnected().contains(consumer))
+					for(Event e:channelCtr.getChannel().getConsumersSubscribed().get(consumer))
+						try {
+							consumer.receive(e);
+							//TMA : todo => supprimer les messages recu de la Queuqe  
+							
+						} catch (ConsumerNotFoundException e1) {
+							e1.printStackTrace();
+							//TMA : todo => ajouter les messages non recu de la Queuqe
+							//Sans oublier d'ajoutre dans la class qu'il faut le faite d'essyez
+							//denvoyer lensemble des messages lors de la connexion du consumer
+						}
+					//TMA : je ne suis pas dacorrd
+					channelCtr.getChannel().getConsumersSubscribed().put(consumer, new ArrayList<Event>());
+
+			}
+			try {
+				Thread.sleep(60);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		
+		
