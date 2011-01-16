@@ -83,9 +83,9 @@ relationcanvas 128003 relation_ref 134531 // <dependency>
 end
 relationcanvas 128259 relation_ref 128003 // <composition>
   decenter_end 488
-  from ref 129797 z 2012 stereotype "<<list>>" xyz 651 852.5 3000 to ref 128131
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  from ref 129797 z 2012 stereotype "<<list>>" xyz 661 822 3000 to ref 128131
+  role_a_pos 689 860 3000 no_role_b
+  multiplicity_a_pos 665 860 3000 no_multiplicity_b
 end
 relationcanvas 128515 relation_ref 134915 // <dependency>
   decenter_begin 287
@@ -94,15 +94,15 @@ relationcanvas 128515 relation_ref 134915 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128643 relation_ref 135043 // <dependency>
-  decenter_end 510
+  decenter_end 509
   from ref 129285 z 2006 to ref 129029
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129155 relation_ref 135683 // <aggregation>
+relationcanvas 129155 relation_ref 135683 // <unidirectional association>
   from ref 129413 z 2011 to ref 128005
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 682 283 3000 no_role_b
+  multiplicity_a_pos 691 306 3000 no_multiplicity_b
 end
 relationcanvas 129283 relation_ref 135811 // <dependency>
   decenter_begin 632
@@ -111,35 +111,30 @@ relationcanvas 129283 relation_ref 135811 // <dependency>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 129795 relation_ref 136323 // <aggregation>
-  from ref 128645 z 2006 to ref 129285
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
 relationcanvas 130179 relation_ref 136451 // <dependency>
-  decenter_begin 676
+  decenter_begin 675
   from ref 129285 z 2006 to ref 130181
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 130307 relation_ref 136579 // <aggregation>
+relationcanvas 130307 relation_ref 136579 // <unidirectional association>
   decenter_begin 841
   from ref 129285 z 2006 to ref 128005
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 685 217 3000 no_role_b
+  multiplicity_a_pos 694 240 3000 no_multiplicity_b
 end
-relationcanvas 130691 relation_ref 136963 // <aggregation>
+relationcanvas 130691 relation_ref 136963 // <unidirectional association>
   decenter_begin 59
   from ref 129285 z 2006 to ref 131717
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  role_a_pos 426 476 3000 no_role_b
+  multiplicity_a_pos 400 476 3000 no_multiplicity_b
 end
 relationcanvas 130819 relation_ref 143491 // <aggregation>
-  decenter_begin 30
+  decenter_begin 28
   decenter_end 354
-  from ref 129413 z 2011 stereotype "<<map>>" xyz 353.5 149 3000 to ref 128645
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  from ref 129413 z 2011 stereotype "<<HashMap>>" xyz 399 203 3000 to ref 128645
+  role_a_pos 350 101 3000 no_role_b
+  multiplicity_a_pos 326 101 3000 no_multiplicity_b
 end
 relationcanvas 130821 relation_ref 128133 // <dependency>
   decenter_end 435
@@ -158,7 +153,7 @@ relationcanvas 131205 relation_ref 128261 // <realization>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131333 relation_ref 128389 // <realization>
-  decenter_end 501
+  decenter_end 500
   from ref 128773 z 2001 to ref 129669
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
@@ -168,28 +163,23 @@ relationcanvas 131459 relation_ref 143747 // <generalisation>
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 131461 relation_ref 128517 // <aggregation>
+relationcanvas 131461 relation_ref 128517 // 
   decenter_begin 569
   decenter_end 479
-  from ref 129413 z 2011 stereotype "<<map>>" xyz 622 505.5 3000 to ref 129797
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  from ref 129413 z 2011 stereotype "<<HashMap>>" xyz 610 491 3000 to ref 129797
+  role_a_pos 680 515 3000 no_role_b
+  multiplicity_a_pos 656 515 3000 no_multiplicity_b
 end
 relationcanvas 131587 relation_ref 143875 // <dependency>
   from ref 128261 z 2001 to ref 128773
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
-relationcanvas 131843 relation_ref 144003 // <dependency>
-  from ref 128261 z 3006 to ref 131715
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 131845 relation_ref 128645 // <aggregation>
+relationcanvas 131845 relation_ref 128645 // 
   decenter_begin 158
-  from ref 129413 z 2011 stereotype "<<map>>" xyz 458 415.5 3000 to ref 131717
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  from ref 129413 z 2011 stereotype "<<HashMap>>" xyz 447 413 3000 to ref 131717
+  role_a_pos 448 476 3000 no_role_b
+  multiplicity_a_pos 424 476 3000 no_multiplicity_b
 end
 relationcanvas 131971 relation_ref 144131 // <dependency>
   from ref 131717 z 2006 to ref 129797
@@ -197,14 +187,9 @@ relationcanvas 131971 relation_ref 144131 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131973 relation_ref 128773 // <aggregation>
-  from ref 129413 z 2011 stereotype "<<map>>" xyz 574.5 261.5 3000 to ref 129285
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 132101 relation_ref 128901 // <realization>
-  from ref 128389 z 2001 to ref 130053
-  no_role_a no_role_b
-  no_multiplicity_a no_multiplicity_b
+  from ref 129413 z 2011 stereotype "<<HashMap>>" xyz 562 250 3000 to ref 129285
+  role_a_pos 604 195 3000 no_role_b
+  multiplicity_a_pos 580 195 3000 no_multiplicity_b
 end
 relationcanvas 132613 relation_ref 129413 // <aggregation>
   decenter_begin 791
