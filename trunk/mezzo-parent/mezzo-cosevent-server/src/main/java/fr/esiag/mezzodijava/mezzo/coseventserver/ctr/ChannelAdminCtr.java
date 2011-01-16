@@ -54,8 +54,7 @@ public class ChannelAdminCtr {
 			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 			poa.the_POAManager().activate();											
 		    return ProxyForPushSupplierHelper.narrow(poa.servant_to_reference(new ProxyForPushSupplierPOATie(proxy)));
-		
-		
+		    
 		} catch (Exception e) {
 			return null;
 		}
