@@ -1,0 +1,8 @@
+class CRAPEventServer
+!!!136322.java!!!	CRAPEventServer(in name : String)
+		this.name=name;
+		channels = new HashMap<String,CRAPChannelctr>();
+!!!136450.java!!!	addChannel(inout channel : CRAPChannelctr) : void
+		channels.put(channel.getTopic(), channel);
+!!!136578.java!!!	removeChannel(in topic : String) : void
+		channels.remove(topic);

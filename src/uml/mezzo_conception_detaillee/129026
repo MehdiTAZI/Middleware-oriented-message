@@ -1,0 +1,598 @@
+format 76
+"impl" // fr::esiag::mezzodijava::mezzo::coseventserver::impl
+  revision 1
+  modified_by 2 "Franck"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  java_dir "c:/mezzodev/mezzo_workspace/mezzo-parent/mezzo-cosevent-server/src/main/java/fr/esiag/mezzodijava/mezzo/coseventserver/impl/"
+  java_package "fr.esiag.mezzodijava.mezzo.coseventserver.impl"
+  classview 135170 "impl"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 135938 "ProxyForPushConsumerImpl"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Classe ProxyForPushConsumerImpl
+
+Proxy for subscribing and receiving Events, acts as a Supplier 
+accessible to a client, implementation of the ProxyForPushConsumer IDL Interface
+
+UC n°: US15 (+US children)
+
+@author Mezzo-Team
+"
+      classrelation 136834 // <realization>
+	relation 136706 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136834 // <realization>
+	  b parent class_ref 137090 // MessageListener
+      end
+
+      classrelation 136962 // <realization>
+	relation 136834 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136962 // <realization>
+	  b parent class_ref 137218 // ProxyForPushConsumerOperations
+      end
+
+      classrelation 137090 // channelCtr (<unidirectional association>)
+	relation 136962 --->
+	  a role_name "channelCtr" package
+	    comment "
+The Channel Controller used by this facade
+
+"
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137090 // channelCtr (<unidirectional association>)
+	  b parent class_ref 135682 // ChannelCtr
+      end
+
+      attribute 129538 "channel"
+	package explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 129666 "callbackConsumer"
+	package explicit_type "CallbackConsumer"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 140802 "ProxyForPushConsumerImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "channelCtr" type class_ref 135682 // ChannelCtr
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140930 "ProxyForPushConsumerImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141058 "ProxyForPushConsumerImpl"
+	public explicit_return_type ""
+	nparams 0
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 141186 "subscribe"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "cc" explicit_type "CallbackConsumer"
+	nexceptions 1
+	  explicit_exception "AlreadyRegisteredException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141314 "unsubscribe"
+	public explicit_return_type "void"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "NotRegisteredException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141442 "connect"
+	public explicit_return_type "void"
+	nparams 0
+	nexceptions 4
+	  explicit_exception "AlreadyConnectedException"
+	  explicit_exception "java.nio.channels.AlreadyConnectedException"
+	  explicit_exception "NotRegisteredException"
+	  explicit_exception "MaximalConnectionReachedException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141570 "disconnect"
+	public explicit_return_type "void"
+	nparams 0
+	nexceptions 2
+	  explicit_exception "NotConnectedException"
+	  explicit_exception "NotRegisteredException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 141698 "receive"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "Event"
+	nexceptions 1
+	  explicit_exception "ConsumerNotFoundException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+	comment "pour recevoir une notification s'il y a des events envoyÃ©s par un supplier "
+      end
+    end
+
+    class 136066 "ProxyForPushSupplierImpl"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Classe ProxyForPushSupplierImpl
+
+Proxy for pushing Events, acts as a Consumer 
+accessible to a client, implementation of the ProxyForPushSupplier IDL Interface
+
+UC n°: US14 (+US children)
+
+@author Mezzo-Team
+"
+      classrelation 137218 // <realization>
+	relation 137090 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 137218 // <realization>
+	  b parent class_ref 137346 // ProxyForPushSupplierOperations
+      end
+
+      classrelation 137346 // channelCtr (<unidirectional association>)
+	relation 137218 --->
+	  a role_name "channelCtr" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137346 // channelCtr (<unidirectional association>)
+	  b parent class_ref 135682 // ChannelCtr
+      end
+
+      attribute 129794 "channel"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 129922 "connected"
+	private explicit_type "boolean"
+	init_value "false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 141826 "ProxyForPushSupplierImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "channelCtr" type class_ref 135682 // ChannelCtr
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	comment "@param channelCtr A channel Controler"
+      end
+
+      operation 141954 "ProxyForPushSupplierImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142082 "connect"
+	public explicit_return_type "void"
+	nparams 0
+	nexceptions 2
+	  explicit_exception "AlreadyConnectedException"
+	  explicit_exception "MaximalConnectionReachedException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 142210 "disconnect"
+	public explicit_return_type "void"
+	nparams 0
+	nexceptions 2
+	  explicit_exception "ChannelNotFoundException"
+	  explicit_exception "NotConnectedException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 142338 "push"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "Event"
+	nexceptions 2
+	  explicit_exception "ChannelNotFoundException"
+	  explicit_exception "NotConnectedException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 136834 "ChannelAdminImpl"
+      visibility public 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Classe ChannelAdminImpl
+
+For Proxy access to a client, implementation of the ChannelAdmin IDL Interface
+
+UC n°: US14,US15 (+US children) 
+
+@author Mezzo-Team
+"
+      classrelation 136578 // <realization>
+	relation 136450 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 136578 // <realization>
+	  b parent class_ref 136962 // ChannelAdminOperations
+      end
+
+      classrelation 136706 // channelAdminctrl (<unidirectional association>)
+	relation 136578 --->
+	  a role_name "channelAdminctrl" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 136706 // channelAdminctrl (<unidirectional association>)
+	  b parent class_ref 135554 // ChannelAdminCtr
+      end
+
+      attribute 129410 "channel"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 140162 "ChannelAdminImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param inout name "cac" type class_ref 135554 // ChannelAdminCtr
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Deprecated
+"
+	
+	
+	
+      end
+
+      operation 140290 "ChannelAdminImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "String"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${synchronized}${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 140418 "getProxyForPushSupplier"
+	public explicit_return_type "ProxyForPushSupplier"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "ChannelNotFoundException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+
+      operation 140546 "getProxyForPushConsumer"
+	public explicit_return_type "ProxyForPushConsumer"
+	nparams 0
+	nexceptions 1
+	  explicit_exception "ChannelNotFoundException"
+	
+	preserve_java_body_indent java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	java_annotation "@Override
+"
+	
+	
+	
+      end
+    end
+
+    class 137090 "MessageListener"
+      visibility public stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "Interface MessageListener
+
+To receive events, technical interface
+
+UC n°: US14,US15 (+US children) 
+
+@author Mezzo-Team
+"
+      operation 140674 "receive"
+	public explicit_return_type "void"
+	nparams 1
+	  param inout name "evt" explicit_type "Event"
+	nexceptions 1
+	  explicit_exception "ConsumerNotFoundException"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+  end
+
+  deploymentview 128514 "impl"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128898 "ChannelAdminImpl"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+${definition}"
+      associated_classes
+	class_ref 136834 // ChannelAdminImpl
+      end
+    end
+
+    artifact 129026 "MessageListener"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+${definition}"
+      associated_classes
+	class_ref 137090 // MessageListener
+      end
+    end
+
+    artifact 129154 "ProxyForPushConsumerImpl"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+${definition}"
+      associated_classes
+	class_ref 135938 // ProxyForPushConsumerImpl
+      end
+    end
+
+    artifact 129282 "ProxyForPushSupplierImpl"
+      stereotype "source"
+      java_src "${comment}
+${package}
+${imports}
+import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+${definition}"
+      associated_classes
+	class_ref 136066 // ProxyForPushSupplierImpl
+      end
+    end
+  end
+end

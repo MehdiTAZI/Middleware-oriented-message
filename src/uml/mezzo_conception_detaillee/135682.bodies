@@ -1,0 +1,46 @@
+class ChannelCtr
+!!!137218.java!!!	ChannelCtr(inout channel : Channel)
+		this.channel = channel;
+!!!137346.java!!!	ChannelCtr(in channel : String)
+		this.channel = BFFactory.createChannel(channel,0);
+		
+!!!137474.java!!!	getChannel() : Channel
+		return channel;
+!!!137602.java!!!	setChannel(inout channelModel : Channel) : void
+		this.channel = channelModel;
+!!!137730.java!!!	addProxyForPushConsumerToSubscribedList(inout proxyConsumer : ProxyForPushConsumerImpl) : void
+		if(channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throw new AlreadyRegisteredException();
+		else
+			channel.getConsumersSubscribed().put(proxyConsumer, new ArrayList<Event>());	
+!!!137858.java!!!	removeProxyForPushConsumerFromSubscribedList(inout proxyConsumer : ProxyForPushConsumerOperations) : void
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throw new NotRegisteredException();
+		else
+			channel.getConsumersSubscribed().remove(proxyConsumer);	
+!!!137986.java!!!	addProxyForPushConsumerToConnectedList(inout proxyConsumer : ProxyForPushConsumerImpl) : void
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throw new NotRegisteredException();
+		if(!channel.ConsumersConnectedListcapacityReached())
+			throw new MaximalConnectionReachedException();
+		if (!channel.getConsumersConnected().add(proxyConsumer))
+			throw new AlreadyConnectedException();
+!!!138114.java!!!	removeProxyForPushConsumerFromConnectedList(inout proxyConsumer : ProxyForPushConsumerOperations) : void
+		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throw new NotRegisteredException();
+		if (!channel.getConsumersConnected().remove(proxyConsumer)) {
+			throw new NotConnectedException();
+		}
+!!!138242.java!!!	addProxyForPushSupplierToConnectedList(inout proxySupplier : ProxyForPushSupplierImpl) : void
+		if(!channel.SuppliersConnectedsListcapacityReached())
+			throw new MaximalConnectionReachedException();
+		if (!channel.getSuppliersConnected().add(proxySupplier)) 
+			throw new AlreadyConnectedException();
+!!!138370.java!!!	removeProxyForPushSupplierFromConnectedList(inout proxySupplier : ProxyForPushSupplierOperations) : void
+		if (!channel.getSuppliersConnected().remove(proxySupplier)) {
+			throw new NotConnectedException();
+		}
+!!!138498.java!!!	addEvent(inout e : Event) : void
+		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
+			channel.getConsumersSubscribed().get(consumer).add(e);
+		}

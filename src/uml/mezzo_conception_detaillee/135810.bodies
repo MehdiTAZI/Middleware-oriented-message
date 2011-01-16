@@ -1,0 +1,40 @@
+class Channel
+!!!142722.java!!!	Channel(in topic : String, in capacity : int)
+		this.topic=topic;
+		this.capacity=capacity;
+!!!142850.java!!!	getConsumersConnected() : ProxyForPushConsumerImpl
+		return consumersConnected;
+!!!142978.java!!!	setConsumersConnected(inout consumersConnected : Set<ProxyForPushConsumerImpl>) : void
+		this.consumersConnected = consumersConnected;
+!!!143106.java!!!	getSuppliersConnected() : ProxyForPushSupplierImpl
+		return suppliersConnected;
+!!!143234.java!!!	setSuppliersConnected(inout suppliersConnected : Set<ProxyForPushSupplierImpl>) : void
+		this.suppliersConnected = suppliersConnected;
+!!!143362.java!!!	getConsumersSubscribed() : ProxyForPushConsumerImpl
+		return consumersSubscribed;
+!!!143490.java!!!	setConsumersSubscribed(inout consumersSubscribed : Map<ProxyForPushConsumerImpl, List<Event>>) : void
+		this.consumersSubscribed = consumersSubscribed;
+!!!143618.java!!!	getSuppliersSubscribed() : ProxyForPushSupplierImpl
+		return suppliersSubscribed;
+!!!143746.java!!!	setSuppliersSubscribed(inout suppliersSubscribed : Set<ProxyForPushSupplierImpl>) : void
+		this.suppliersSubscribed = suppliersSubscribed;
+!!!143874.java!!!	getTopic() : String
+		return topic;
+!!!144002.java!!!	setTopic(in topic : String) : void
+		this.topic = topic;
+!!!144130.java!!!	getCapacity() : int
+		return capacity;
+!!!144258.java!!!	ConsumersConnectedListcapacityReached() : boolean
+		return capacity>consumersConnected.size();
+!!!144386.java!!!	SuppliersConnectedsListcapacityReached() : boolean
+		return capacity>suppliersConnected.size();
+!!!144514.java!!!	setCapacity(in capacity : int) : void
+		this.capacity = capacity;
+!!!144642.java!!!	getEvents() : List<Event>
+		return events;
+!!!144770.java!!!	setEvents(inout events : List<Event>) : void
+		this.events = events;
+!!!144898.java!!!	addEvents(inout event : Event) : void
+		events.add(event);
+		for(Event e:events)
+			System.out.println("AddEvent in Channel "+e);

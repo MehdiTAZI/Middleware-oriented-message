@@ -1,0 +1,10 @@
+class ChannelAdminImpl
+!!!140162.java!!!	ChannelAdminImpl(inout cac : ChannelAdminCtr)
+		this.channelAdminctrl=cac;
+!!!140290.java!!!	ChannelAdminImpl(in channel : String)
+		this.channel=channel;
+		this.channelAdminctrl= BFFactory.createChannelAdminCtr(channel);
+!!!140418.java!!!	getProxyForPushSupplier() : ProxyForPushSupplier
+		return channelAdminctrl.createProxyForPushSupplier();
+!!!140546.java!!!	getProxyForPushConsumer() : ProxyForPushConsumer
+		return channelAdminctrl.createProxyForPushConsumer();

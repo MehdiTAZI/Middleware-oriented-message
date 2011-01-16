@@ -1,0 +1,9 @@
+class EventServerException
+!!!138882.java!!!	EventServerException()
+		super();
+!!!139010.java!!!	EventServerException(in message : String, inout cause : Throwable)
+		super(message, cause);
+!!!139138.java!!!	EventServerException(in message : String)
+		super(message);
+!!!139266.java!!!	EventServerException(inout cause : Throwable)
+		super(cause);

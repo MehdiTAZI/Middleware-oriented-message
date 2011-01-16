@@ -1,0 +1,34 @@
+class ChannelAdminCtr
+!!!136706.java!!!	ChannelAdminCtr(inout orb : ORB, inout channel : ChannelCtr)
+		this.orb=orb;
+		this.channelCtr=channel;
+!!!136834.java!!!	ChannelAdminCtr(in channel : String)
+		this.channel=channel;
+		this.orb=BFFactory.createOrb(null, null);
+		this.channelCtr=BFFactory.createChannelCtr(channel);
+!!!136962.java!!!	createProxyForPushSupplier() : ProxyForPushSupplier
+	ProxyForPushSupplierImpl proxy=null;
+		
+		try {					
+			//proxy=new ProxyForPushSupplierImpl(channelCtr);	
+			proxy= new ProxyForPushSupplierImpl(channel);
+			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+			poa.the_POAManager().activate();											
+		    return ProxyForPushSupplierHelper.narrow(poa.servant_to_reference(new ProxyForPushSupplierPOATie(proxy)));
+		    
+		} catch (Exception e) {
+			return null;
+		}
+!!!137090.java!!!	createProxyForPushConsumer() : ProxyForPushConsumer
+		ProxyForPushConsumerImpl proxy=null;
+		
+		try {
+			proxy=new ProxyForPushConsumerImpl(channel);
+			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+			poa.the_POAManager().activate();									
+		
+			return ProxyForPushConsumerHelper.narrow(poa.servant_to_reference(new ProxyForPushConsumerPOATie(proxy)));
+		
+		} catch (Exception e) {
+			return null;
+		}

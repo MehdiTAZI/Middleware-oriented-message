@@ -1,0 +1,17 @@
+class EventServer
+!!!145026.java!!!	EventServer()
+		
+!!!145154.java!!!	EventServer(inout channels : Vector<ChannelCtr>)
+		super();
+		this.channels = channels;
+!!!145282.java!!!	getChannels() : ChannelCtr
+		return channels;
+!!!145410.java!!!	setChannels(inout channels : Vector<ChannelCtr>) : void
+		this.channels = channels;
+!!!145538.java!!!	addChannel(inout ChannelCtr : ChannelCtr) : void
+		this.channels.add(ChannelCtr);
+!!!145666.java!!!	removeChannel(inout ChannelCtr : ChannelCtr) : void
+		this.channels.removeElement(ChannelCtr);
+!!!145794.java!!!	getChannelModel(inout channelCtr : ChannelCtr) : Channel
+	
+		return channelCtr.getChannel();

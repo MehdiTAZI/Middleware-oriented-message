@@ -1,0 +1,22 @@
+class ProxyForPushConsumerImpl
+!!!140802.java!!!	ProxyForPushConsumerImpl(inout channelCtr : ChannelCtr)
+		this.channelCtr = channelCtr;
+!!!140930.java!!!	ProxyForPushConsumerImpl(in channel : String)
+		this.channel = channel;	
+		channelCtr = BFFactory.createChannelCtr(channel);
+!!!141058.java!!!	ProxyForPushConsumerImpl()
+		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
+		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
+!!!141186.java!!!	subscribe(inout cc : CallbackConsumer) : void
+		this.callbackConsumer = cc;
+		channelCtr.addProxyForPushConsumerToSubscribedList(this);
+		System.out.println("Consumer Subscribed to " + channelCtr.getChannel().getTopic());
+		
+!!!141314.java!!!	unsubscribe() : void
+		channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
+!!!141442.java!!!	connect() : void
+		channelCtr.addProxyForPushConsumerToConnectedList(this);
+!!!141570.java!!!	disconnect() : void
+		channelCtr.removeProxyForPushConsumerFromConnectedList(this);
+!!!141698.java!!!	receive(inout evt : Event) : void
+			callbackConsumer.receive(evt);
