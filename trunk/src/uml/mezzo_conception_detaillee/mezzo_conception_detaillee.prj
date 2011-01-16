@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 18
-  modified_by 3 "Ordi"
+  revision 23
+  modified_by 2 "Franck"
 
 
   
@@ -93,12 +93,12 @@ ${members}}
 	
       end
 
-      classrelation 128258 // <unidirectional association>
+      classrelation 128258 // orb (<unidirectional association>)
 	relation 128130 --->
-	  a role_name "" private
+	  a role_name "orb" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128258 // <unidirectional association>
+	    classrelation_ref 128258 // orb (<unidirectional association>)
 	  b parent class_ref 128130 // ORB
       end
 
@@ -143,10 +143,33 @@ ${members}}
 	
 	
       end
+
+      classrelation 145154 // <dependency>
+	relation 145026 -_->
+	  a default
+	    classrelation_ref 145154 // <dependency>
+	  b parent class_ref 144130 // CallbackConsumerOperations
+      end
+
+      classrelation 145282 // instance (<unidirectional association>)
+	relation 145154 --->
+	  a role_name "instance" multiplicity "1" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 145282 // instance (<unidirectional association>)
+	  b parent class_ref 128002 // EventClient
+      end
+
+      classrelation 151938 // <dependency>
+	relation 151810 -_->
+	  a default
+	    classrelation_ref 151938 // <dependency>
+	  b parent class_ref 136707 // CallbackConsumer
+      end
     end
 
     class 128130 "ORB"
-      visibility package 
+      visibility package stereotype "singleton"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -178,30 +201,6 @@ ${members}}
 	
 	
 	
-      end
-
-      classrelation 135811 // <aggregation>
-	relation 135555 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 135811 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 135939 // <aggregation>
-      end
-
-      classrelation 135939 // <aggregation>
-	relation_ref 135555 // <aggregation>
-      end
-
-      classrelation 136195 // <aggregation>
-	relation_ref 135683 // <aggregation>
-      end
-
-      classrelation 137603 // <aggregation>
-	relation_ref 136579 // <aggregation>
       end
     end
 
@@ -267,7 +266,7 @@ ${members}}
     end
 
     class 128642 "ChannelAdmin"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -315,7 +314,7 @@ ${members}}
       explicit_switch_type ""
       
       operation 128005 "main"
-	public explicit_return_type ""
+	class_operation public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -324,13 +323,6 @@ ${members}}
 	
 	
 	
-      end
-
-      classrelation 128005 // <dependency>
-	relation 128005 -_->
-	  a default
-	    classrelation_ref 128005 // <dependency>
-	  b parent class_ref 128002 // EventClient
       end
 
       classrelation 128133 // <dependency>
@@ -354,10 +346,12 @@ ${members}}
 	  b parent class_ref 128645 // ProxyForPushConsumerImpl
       end
 
-      classrelation 145539 // <dependency>
-	relation 144003 -_->
-	  a default
-	    classrelation_ref 145539 // <dependency>
+      classrelation 151810 // ec (<unidirectional association>)
+	relation 151682 --->
+	  a role_name "ec" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 151810 // ec (<unidirectional association>)
 	  b parent class_ref 128002 // EventClient
       end
     end
@@ -386,14 +380,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 129285 // <realization>
-	relation 128901 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 129285 // <realization>
-	  b parent class_ref 136707 // CallbackConsumer
-      end
-
       operation 128133 "receive"
 	public explicit_return_type ""
 	nparams 1
@@ -405,6 +391,14 @@ ${members}}
 	
 	
 	
+      end
+
+      classrelation 152066 // <realization>
+	relation 151938 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 152066 // <realization>
+	  b parent class_ref 144130 // CallbackConsumerOperations
       end
     end
 
@@ -432,16 +426,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 135811 "channelAdminctrl"
-	private type class_ref 134659 // ChannelAdminCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       attribute 135939 "channel"
 	private explicit_type "string"
 	cpp_decl ""
@@ -489,18 +473,6 @@ ${members}}
 	
       end
 
-      classrelation 129413 // <aggregation>
-	relation 129029 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129413 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129541 // <aggregation>
-      end
-
       classrelation 129797 // <dependency>
 	relation 129285 -_->
 	  a default
@@ -530,36 +502,17 @@ ${members}}
 	  b parent class_ref 134531 // ChannelAdminOperations
       end
 
-      classrelation 135683 // <aggregation>
-	relation_ref 135427 // <aggregation>
-      end
-
-      classrelation 136707 // <aggregation>
-	relation_ref 136067 // <aggregation>
-      end
-
-      classrelation 136963 // <aggregation>
-	relation_ref 136195 // <aggregation>
-      end
-
-      classrelation 137091 // <aggregation>
-	relation 136323 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137091 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137219 // <aggregation>
-      end
-
-      classrelation 137859 // <aggregation>
-	relation_ref 136707 // <aggregation>
-      end
-
       classrelation 145027 // <aggregation>
 	relation_ref 143491 // <aggregation>
+      end
+
+      classrelation 138114 // channelAdminCtr (<unidirectional association>)
+	relation 137986 --->
+	  a role_name "channelAdminCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138114 // channelAdminCtr (<unidirectional association>)
+	  b parent class_ref 134659 // ChannelAdminCtr
       end
     end
 
@@ -574,36 +527,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 136067 "channelCtr"
-	private type class_ref 134787 // ChannelCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 136195 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 136323 "callbackConsumer"
-	private type class_ref 136707 // CallbackConsumer
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       operation 137987 "ProxyForPushConsumerImpl"
 	public explicit_return_type ""
 	nparams 1
@@ -731,6 +654,44 @@ ${members}}
 "
 	    classrelation_ref 130309 // <aggregation>
       end
+
+      classrelation 144642 // channelCtr (<unidirectional association>)
+	relation 144514 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144642 // channelCtr (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
+      end
+
+      classrelation 144770 // callbackConsumer (<unidirectional association>)
+	relation 144642 --->
+	  a role_name "callbackConsumer" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144770 // callbackConsumer (<unidirectional association>)
+	  b parent class_ref 136707 // CallbackConsumer
+      end
+
+      attribute 137090 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137218 "connected"
+	private explicit_type "bool"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 128773 "ProxyForPushConsumerHelper"
@@ -850,36 +811,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 134531 "orb"
-	private type class_ref 128130 // ORB
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 134659 "channelCtr"
-	private type class_ref 134787 // ChannelCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 134787 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       operation 134531 "ChannelAdminCtr"
 	public explicit_return_type ""
 	nparams 1
@@ -919,10 +850,6 @@ ${members}}
 
       classrelation 129157 // <aggregation>
 	relation_ref 128773 // <aggregation>
-      end
-
-      classrelation 129541 // <aggregation>
-	relation_ref 129029 // <aggregation>
       end
 
       classrelation 135043 // <dependency>
@@ -967,34 +894,6 @@ ${members}}
 	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
       end
 
-      classrelation 136579 // <aggregation>
-	relation 136067 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136579 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136707 // <aggregation>
-      end
-
-      classrelation 136835 // <aggregation>
-	relation 136195 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136835 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136963 // <aggregation>
-      end
-
-      classrelation 137219 // <aggregation>
-	relation_ref 136323 // <aggregation>
-      end
-
       classrelation 137347 // <dependency>
 	relation 136451 -_->
 	  a default
@@ -1002,28 +901,22 @@ ${members}}
 	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
       end
 
-      classrelation 137475 // <aggregation>
-	relation 136579 o---
-	  a role_name "" private
+      classrelation 137475 // orb (<unidirectional association>)
+	relation 136579 --->
+	  a role_name "orb" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 137475 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137603 // <aggregation>
+	    classrelation_ref 137475 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
       end
 
-      classrelation 138243 // <aggregation>
-	relation 136963 o---
-	  a role_name "" private
+      classrelation 138243 // channelCtr (<unidirectional association>)
+	relation 136963 --->
+	  a role_name "channelCtr" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 138243 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 138371 // <aggregation>
+	    classrelation_ref 138243 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
       end
 
       classrelation 145155 // <dependency>
@@ -1045,16 +938,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 134915 "channel"
-	private type class_ref 135811 // Channel
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       operation 134915 "ChannelCtr"
 	public explicit_return_type ""
 	nparams 0
@@ -1183,28 +1066,21 @@ ${members}}
 	
       end
 
-      classrelation 128901 // <aggregation>
-	relation_ref 128645 // <aggregation>
+      classrelation 128901 // 
+	relation_ref 128645 // 
       end
 
       classrelation 130053 // <aggregation>
 	relation_ref 129413 // <aggregation>
       end
 
-      classrelation 137987 // <aggregation>
-	relation 136835 o---
-	  a role_name "" private
+      classrelation 137987 // channel (<unidirectional association>)
+	relation 136835 --->
+	  a role_name "channel" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 137987 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 138115 // <aggregation>
-      end
-
-      classrelation 138371 // <aggregation>
-	relation_ref 136963 // <aggregation>
+	    classrelation_ref 137987 // channel (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
       end
 
       classrelation 145667 // <dependency>
@@ -1226,16 +1102,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 135043 "channelCtr"
-	private type class_ref 134787 // ChannelCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       operation 136451 "ThreadEvent"
 	public explicit_return_type ""
 	nparams 1
@@ -1276,7 +1142,7 @@ ${members}}
     end
 
     class 135171 "BFFactory"
-      visibility package 
+      visibility package stereotype "singleton"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -1286,60 +1152,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 135171 "orb"
-	class_attribute private type class_ref 128130 // ORB
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135299 "mapChannel"
-	class_attribute private explicit_type ""
-	stereotype "map"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135427 "mapChannelCtr"
-	class_attribute private explicit_type ""
-	stereotype "map"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135555 "mapChannelAdminCtr"
-	class_attribute private explicit_type ""
-	stereotype "map"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135683 "mapChannelAdminImpl"
-	class_attribute private explicit_type ""
-	stereotype "map"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       operation 136707 "createOrb"
 	class_operation public return_type class_ref 128130 // ORB
 	nparams 2
@@ -1421,39 +1233,39 @@ ${members}}
 	
       end
 
-      classrelation 128517 // <aggregation>
-	relation 128517 o---
-	  stereotype "map"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 128517 // mapChannel ()
+	relation 128517 o--- name ""
+	  stereotype "HashMap"
+	  a role_name "mapChannel" multiplicity "*" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 128517 // <aggregation>
+	    classrelation_ref 128517 // mapChannel ()
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128645 // <aggregation>
+	    classrelation_ref 128645 // ()
       end
 
-      classrelation 128773 // <aggregation>
-	relation 128645 o---
-	  stereotype "map"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 128773 // mapChannelCtr ()
+	relation 128645 o--- name ""
+	  stereotype "HashMap"
+	  a role_name "mapChannelCtr" multiplicity "*" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 128773 // <aggregation>
+	    classrelation_ref 128773 // mapChannelCtr ()
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128901 // <aggregation>
+	    classrelation_ref 128901 // 
       end
 
-      classrelation 129029 // <aggregation>
+      classrelation 129029 // mapChannelAdminCtr (<aggregation>)
 	relation 128773 o---
-	  stereotype "map"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+	  stereotype "HashMap"
+	  a role_name "mapChannelAdminCtr" multiplicity "*" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 129029 // <aggregation>
+	    classrelation_ref 129029 // mapChannelAdminCtr (<aggregation>)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1467,51 +1279,22 @@ ${members}}
 	  b parent class_ref 128130 // ORB
       end
 
-      classrelation 135555 // <aggregation>
-	relation 135427 o---
-	  stereotype "map"
-	  a role_name "" private
+      classrelation 136067 // orb (<unidirectional association>)
+	relation 135683 --->
+	  a role_name "orb" multiplicity "1" class_relation private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 135555 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 135683 // <aggregation>
+	    classrelation_ref 136067 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
       end
 
-      classrelation 136067 // <aggregation>
-	relation 135683 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136067 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 136195 // <aggregation>
-      end
-
-      classrelation 137731 // <aggregation>
-	relation 136707 o---
-	  stereotype "map"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137731 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137859 // <aggregation>
-      end
-
-      classrelation 144899 // <aggregation>
+      classrelation 144899 // mapChannelAdminImpl (<aggregation>)
 	relation 143491 o---
-	  stereotype "map"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+	  stereotype "HashMap"
+	  a role_name "mapChannelAdminImpl" multiplicity "*" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 144899 // <aggregation>
+	    classrelation_ref 144899 // mapChannelAdminImpl (<aggregation>)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1577,7 +1360,7 @@ ${members}};
     end
 
     class 135555 "ProxyForPushSupplierOperations"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -1670,50 +1453,6 @@ ${members}}
 
       attribute 137219 "capacity"
 	private explicit_type "int"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137347 "events"
-	private type class_ref 136451 // Event
-	stereotype "list"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137475 "consumersConnected"
-	private type class_ref 128645 // ProxyForPushConsumerImpl
-	stereotype "set"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137603 "consumersSubscribed"
-	private explicit_type ""
-	stereotype "map"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137731 "suppliersConnected"
-	private type class_ref 136323 // ProxyForPushSupplierImpl
-	stereotype "set"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1914,25 +1653,21 @@ ${members}}
 	
       end
 
-      classrelation 128003 // <composition>
+      classrelation 128003 // events (<composition>)
 	relation 128003 *---
 	  stereotype "list"
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+	  a role_name "events" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 128003 // <composition>
+	    classrelation_ref 128003 // events (<composition>)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 128131 // <composition>
       end
 
-      classrelation 128645 // <aggregation>
-	relation_ref 128517 // <aggregation>
-      end
-
-      classrelation 138115 // <aggregation>
-	relation_ref 136835 // <aggregation>
+      classrelation 128645 // ()
+	relation_ref 128517 // 
       end
     end
 
@@ -1997,16 +1732,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 136451 "channelCtr"
-	private type class_ref 134787 // ChannelCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       attribute 136579 "channel"
 	private explicit_type "string"
 	cpp_decl ""
@@ -2090,6 +1815,23 @@ ${members}}
 	
 	
       end
+
+      classrelation 144898 // <realization>
+	relation 144770 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 144898 // <realization>
+	  b parent class_ref 135555 // ProxyForPushSupplierOperations
+      end
+
+      classrelation 145026 // channelCtr (<unidirectional association>)
+	relation 144898 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 145026 // channelCtr (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
+      end
     end
 
     class 136451 "Event"
@@ -2105,6 +1847,26 @@ ${members}}
       
       classrelation 128131 // <composition>
 	relation_ref 128003 // <composition>
+      end
+
+      attribute 128002 "timestap"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128130 "content"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -2158,6 +1920,19 @@ ${members}};
       end
     end
 
+    class 144130 "CallbackConsumerOperations"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
     class 143235 "Supplier"
       visibility package 
       cpp_decl ""
@@ -2169,21 +1944,32 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 155395 "main"
-	class_operation public explicit_return_type "void"
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
       classrelation 134787 // <dependency>
 	relation 134659 -_->
 	  a package
 	    classrelation_ref 134787 // <dependency>
 	  b parent class_ref 128517 // ChannelAdminImpl
+      end
+
+      classrelation 152194 // ec (<unidirectional association>)
+	relation 152066 --->
+	  a role_name "ec" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152194 // ec (<unidirectional association>)
+	  b parent class_ref 128002 // EventClient
+      end
+
+      operation 152322 "main"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -2254,19 +2040,14 @@ ${members}}
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    sequencediagram 128130 "DSCD - Resolution de nom par le client"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4-Landscape
-    end
-
-    classdiagram 134658 "DCCD - Event Client"
+    classdiagram 134658 "DCCD - mezzo-libclient"
       draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A4
     end
 
-    classdiagram 166147 "DCCD - UC03 Push d'un Supplier"
+    classdiagram 166147 "DCCD - mezzo-cosevent-server"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition no show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
-      size A4
+      size A3-Landscape
     end
 
     sequencediagram 172675 "DSCD - UC03 Push d'un Supplier"
@@ -2279,9 +2060,40 @@ ${members}}
       overlapping_bars size A4
     end
 
-    classdiagram 134661 "DCCD - UC02 L'abonnement par un Consumer"
+    sequencediagram 128130 "DSCD - Resolution de nom par le client"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4-Landscape
+    end
+
+    classdiagram 134661 "A virer je pense - DCCD - UC02 L'abonnement par un Consumer"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition no show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A4
     end
   end
+
+  classview 134658 "test"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    classdiagram 141186 "test"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+  end
+
+  package_ref 128002 // fr
+
+  package_ref 129154 // unknown
 end

@@ -28,76 +28,76 @@ classinstance 136707 class_ref 136451 // Event
   name "evt"   xyz 210 518 2000 life_line_z 2000
 fragment 138883 "seq"
   refer sequencediagram_ref 128130 // DSCD - Resolution de nom par le client
-  xyzwh 17 37.5 2000 809 43
+  xyzwh 17 37.5 2000 809 45
 end
 durationcanvas 128259 classinstance_ref 128003 // :Supplier
-  xyzwh 24 83 2010 11 395
+  xyzwh 26 83 2010 11 395
 end
 durationcanvas 128387 classinstance_ref 128131 // caimpl:ChannelAdminImpl
-  xyzwh 141 85 2010 11 391
+  xyzwh 147 85 2010 11 391
 end
 durationcanvas 129155 classinstance_ref 129027 // cactr:ChannelAdminCtr
-  xyzwh 274 84 2010 11 390
+  xyzwh 279 84 2010 11 390
 end
 durationcanvas 129539 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 575 90 2010 11 64
+  xyzwh 581 90 2010 11 64
 end
 durationcanvas 129923 classinstance_ref 129795 // :BFFactory
-  xyzwh 688 90 2010 11 64
+  xyzwh 690 90 2010 11 64
 end
 durationcanvas 130307 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 770 95 2010 11 57
+  xyzwh 775 95 2010 11 57
 end
 durationcanvas 132995 classinstance_ref 131075 // orb:ORB
-  xyzwh 451 189 2010 11 36
+  xyzwh 453 189 2010 11 36
 end
 durationcanvas 133379 classinstance_ref 131715 // :POAHelper
-  xyzwh 497 233 2010 11 35
+  xyzwh 500 233 2010 11 35
 end
 durationcanvas 133763 classinstance_ref 131587 // rootPOA:POA
-  xyzwh 532 274 2010 11 25
+  xyzwh 536 274 2010 11 25
 end
 durationcanvas 134019 classinstance_ref 132483 // tie:ProxyForPushSupplierPOATie
-  xyzwh 612 302 2010 11 27
+  xyzwh 620 302 2010 11 27
 end
 durationcanvas 134531 classinstance_ref 131587 // rootPOA:POA
-  xyzwh 532 322 2010 11 52
+  xyzwh 536 322 2010 11 52
 end
 durationcanvas 135043 classinstance_ref 134787 // :ProxyForPushSupplierHelper
-  xyzwh 386 417 2010 11 40
+  xyzwh 393 417 2010 11 40
 end
 durationcanvas 135683 classinstance_ref 128003 // :Supplier
-  xyzwh 24 496 2010 11 174
+  xyzwh 26 496 2010 11 174
 end
 durationcanvas 135811 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 575 489 2010 11 31
+  xyzwh 581 489 2010 11 31
 end
 durationcanvas 136067 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 770 498 2010 11 28
+  xyzwh 775 498 2010 11 28
 end
 durationcanvas 136451 classinstance_ref 136323 // :Channel
-  xyzwh 812 509 2010 11 25
+  xyzwh 814 509 2010 11 25
 end
 durationcanvas 136835 classinstance_ref 136707 // evt:Event
-  xyzwh 231 566 2010 11 25
+  xyzwh 233 566 2010 11 25
 end
 durationcanvas 137091 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 575 588 2010 11 34
+  xyzwh 581 588 2010 11 34
 end
 durationcanvas 137347 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 770 588 2010 11 36
+  xyzwh 775 588 2010 11 36
 end
 durationcanvas 137603 classinstance_ref 136323 // :Channel
-  xyzwh 812 588 2010 11 29
+  xyzwh 814 588 2010 11 29
 end
 durationcanvas 138115 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 575 638 2010 11 25
+  xyzwh 581 638 2010 11 25
 end
 durationcanvas 138371 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 770 649 2010 11 38
+  xyzwh 775 649 2010 11 38
 end
 durationcanvas 138627 classinstance_ref 136323 // :Channel
-  xyzwh 812 667 2010 11 25
+  xyzwh 814 667 2010 11 25
 end
 msg 128515 synchronous
   from durationcanvas_ref 128259

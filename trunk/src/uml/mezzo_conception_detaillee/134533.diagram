@@ -33,85 +33,85 @@ classinstance 133893 class_ref 128002 // EventClient
 classinstance 135045 class_ref 135811 // Channel
   name ""   xyz 777 889 2000 life_line_z 2000
 durationcanvas 128773 classinstance_ref 128005 // :Consumer
-  xyzwh 35 118 2010 11 713
+  xyzwh 37 118 2010 11 713
 end
 durationcanvas 128901 classinstance_ref 128261 // :ChannelAdminImpl
-  xyzwh 177 118 2010 11 545
+  xyzwh 181 118 2010 11 545
 end
 durationcanvas 129157 classinstance_ref 128133 // :ChannelAdminCtrl
-  xyzwh 303 130 2010 11 508
+  xyzwh 307 130 2010 11 508
 end
 durationcanvas 129541 classinstance_ref 128389 // :ProxyForPushConsumerImpl
-  xyzwh 483 175 2010 11 109
+  xyzwh 488 175 2010 11 109
 end
 durationcanvas 129797 classinstance_ref 128517 // :BFFactory
-  xyzwh 619 194 2010 11 84
+  xyzwh 621 194 2010 11 84
 end
 durationcanvas 130053 classinstance_ref 128645 // :ChannelCtr
-  xyzwh 730 214 2010 11 59
+  xyzwh 733 214 2010 11 59
 end
 durationcanvas 130693 classinstance_ref 130565 // :ORB
   xyzwh 387 247 2010 11 49
 end
 durationcanvas 131205 classinstance_ref 131077 // :POAHelper
-  xyzwh 442 313 2010 11 53
+  xyzwh 445 313 2010 11 53
 end
 durationcanvas 131717 classinstance_ref 131589 // rootPOA:POA
-  xyzwh 533 399 2010 11 30
+  xyzwh 538 399 2010 11 30
 end
 durationcanvas 132101 classinstance_ref 131973 // :ProxyForPushConsumerPOATie
-  xyzwh 642 449 2010 11 25
+  xyzwh 649 449 2010 11 25
 end
 durationcanvas 132357 classinstance_ref 131589 // rootPOA:POA
-  xyzwh 533 478 2010 11 41
+  xyzwh 538 478 2010 11 41
 end
 durationcanvas 132869 classinstance_ref 132741 // :ProxyForPushConsumerHelper
-  xyzwh 555 575 2010 11 30
+  xyzwh 561 575 2010 11 30
 end
 durationcanvas 133637 classinstance_ref 133509 // :CallbackConsumerImpl
-  xyzwh 243 713 2010 11 34
+  xyzwh 248 713 2010 11 34
 end
 durationcanvas 134021 classinstance_ref 133893 // :EventClient
-  xyzwh 139 777 2010 11 46
+  xyzwh 142 777 2010 11 46
 end
 durationcanvas 134405 classinstance_ref 128005 // :Consumer
-  xyzwh 35 857 2010 11 310
+  xyzwh 37 857 2010 11 310
 end
 durationcanvas 134533 classinstance_ref 128389 // :ProxyForPushConsumerImpl
-  xyzwh 483 850 2010 11 121
+  xyzwh 488 850 2010 11 121
 end
 durationcanvas 134789 classinstance_ref 128645 // :ChannelCtr
-  xyzwh 730 869 2010 11 94
+  xyzwh 733 869 2010 11 94
 end
 durationcanvas 135173 classinstance_ref 135045 // :Channel
-  xyzwh 796 931 2010 11 25
+  xyzwh 798 931 2010 11 25
 end
 durationcanvas 135685 classinstance_ref 128389 // :ProxyForPushConsumerImpl
-  xyzwh 483 990 2010 11 85
+  xyzwh 488 990 2010 11 85
 end
 durationcanvas 135941 classinstance_ref 128645 // :ChannelCtr
-  xyzwh 730 1010 2010 11 59
+  xyzwh 733 1010 2010 11 59
 end
 durationcanvas 136197 classinstance_ref 135045 // :Channel
-  xyzwh 796 1039 2010 11 25
+  xyzwh 798 1039 2010 11 25
 end
 durationcanvas 136453 classinstance_ref 128389 // :ProxyForPushConsumerImpl
-  xyzwh 483 1090 2010 11 27
+  xyzwh 488 1090 2010 11 27
 end
 durationcanvas 136709 classinstance_ref 128645 // :ChannelCtr
-  xyzwh 730 1106 2010 11 27
+  xyzwh 733 1106 2010 11 27
 end
 durationcanvas 136965 classinstance_ref 135045 // :Channel
-  xyzwh 796 1122 2010 11 25
+  xyzwh 798 1122 2010 11 25
 end
 durationcanvas 137221 classinstance_ref 128389 // :ProxyForPushConsumerImpl
-  xyzwh 483 1133 2010 11 33
+  xyzwh 488 1133 2010 11 33
 end
 durationcanvas 137477 classinstance_ref 128645 // :ChannelCtr
-  xyzwh 730 1145 2010 11 29
+  xyzwh 733 1145 2010 11 29
 end
 durationcanvas 137733 classinstance_ref 135045 // :Channel
-  xyzwh 796 1155 2010 11 25
+  xyzwh 798 1155 2010 11 25
 end
 msg 129029 synchronous
   from durationcanvas_ref 128773
