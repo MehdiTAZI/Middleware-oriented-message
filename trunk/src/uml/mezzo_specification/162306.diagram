@@ -1,26 +1,31 @@
 format 76
 
 classinstance 128002 class_ref 141570 // Supplier
-  name ""   xyz 147 4 2000 life_line_z 2000
+  name ""   xyz 5 4 2000 life_line_z 2000
 classinstance 128130 class_ref 141698 // Framework
-  name ""   xyz 578 4 2000 life_line_z 2000
+  name ""   xyz 436 4 2000 life_line_z 2000
+note 129154 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC03 : Envoyer une Event PUSH
+US129 : Scénario Exception 1 : Le Channel n'est pas trouve avec son Topic"
+  xyzwh 40 121 2000 413 79
 durationcanvas 128258 classinstance_ref 128002 // :Supplier
-  xyzwh 161 85 2010 11 40
+  xyzwh 22 81 2010 11 40
 end
 durationcanvas 128386 classinstance_ref 128130 // :Framework
-  xyzwh 603 86 2010 11 30
+  xyzwh 464 82 2010 11 35
 end
 msg 128770 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 86 2015 explicitmsg "resolveChannel()"
+  yz 82 2015 explicitmsg "resolveChannel()"
   show_full_operations_definition default drawing_language default show_context_mode default
   args "Topic"
-  label_xy 350 72
+  label_xy 208 68
 msg 129026 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 110 2020 explicitmsg "EXCEPTION : ConnectionException.TopicNotFound"
+  yz 106 2020 explicitmsg "EXCEPTION : ConnectionException.TopicNotFound"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 318 97
+  label_xy 176 93
 end

@@ -6,6 +6,11 @@ classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 37.4337 4 2000 life_line_z 2000
 textcanvas 128259 "processEvent"
   xyzwh 89 351 2000 60 15
+note 132866 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US128 : Scénario Exception 5 : Le Consumer se connecte mais est déjà connecté"
+  xyzwh 74 424 2000 377 87
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
   xyzwh 58 76 2010 11 355
   overlappingdurationcanvas 131074
@@ -34,7 +39,7 @@ durationcanvas 132098 classinstance_ref 128002 // :Framework
   xyzwh 453 376 2010 11 45
 end
 durationcanvas 132482 classinstance_ref 128002 // :Framework
-  xyzwh 453 170 2010 11 30
+  xyzwh 453 170 2010 11 31
 end
 reflexivemsg 128131 synchronous
   to durationcanvas_ref 128003

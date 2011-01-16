@@ -4,37 +4,42 @@ classinstance 128002 class_ref 141698 // Framework
   name ""   xyz 425.139 5.15628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.6337 4 2000 life_line_z 2000
+note 128770 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US139 : Scénario Exception 8 : Le Consumer se desinscrit mais n'est pas inscrit"
+  xyzwh 81 151 2025 367 87
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 72 2010 11 430
+  xyzwh 57 71 2010 11 87
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 70 2010 11 40
+  xyzwh 453 70 2010 11 40
 end
 durationcanvas 128388 classinstance_ref 128002 // :Framework
-  xyzwh 450 119 2010 11 28
+  xyzwh 453 118 2010 11 29
 end
 msg 128514 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128386
-  yz 72 2015 explicitmsg "resolveChannel(Topic)"
+  yz 71 2015 explicitmsg "resolveChannel(Topic)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 144 57
+  label_xy 144 56
 msg 128516 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128388
-  yz 119 2015 explicitmsg "unsuscribe()"
+  yz 118 2015 explicitmsg "unsuscribe()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 226 107
+  label_xy 226 106
 msg 128642 return
   from durationcanvas_ref 128386
   to durationcanvas_ref 128258
-  yz 98 2020 explicitmsg "Channel reference"
+  yz 97 2020 explicitmsg "Channel reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 213 85
+  label_xy 213 84
 msg 128644 return
   from durationcanvas_ref 128388
   to durationcanvas_ref 128258
-  yz 136 2020 explicitmsg "ChannelException.NotRegister"
+  yz 135 2020 explicitmsg "ChannelException.NotRegister"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 227 124
+  label_xy 227 123
 end

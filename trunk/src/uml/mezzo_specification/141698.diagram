@@ -5,36 +5,41 @@ classinstance 128002 class_ref 141698 // Framework
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 35.9337 4.06488 2000 life_line_z 2000
 note 132098 "Le Consumer est tombe ou inaccessible"
-  xyzwh 118 406 2000 227 35
+  xyzwh 107 345 2000 227 35
 note 132610 "EXCEPTION : ConsumerException.ConsumerNotFound"
-  xyzwh 122 501 2000 317 35
+  xyzwh 112 410 2000 317 35
 note 133506 "Le Systeme journalise l'erreur"
-  xyzwh 282 553 2000 183 35
+  xyzwh 272 462 2000 183 35
+note 134146 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US115 : Scénario Exception 4 : Le Consumer n'est plus accessible"
+  xyzwh 91 521 2000 343 75
 durationcanvas 128132 classinstance_ref 128002 // :Framework
-  xyzwh 450 303 2010 11 31
+  xyzwh 453 303 2010 11 31
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 54 74 2010 11 267
+  xyzwh 56 74 2010 11 267
   overlappingdurationcanvas 131074
-    xyzwh 60 133 2020 11 26
+    xyzwh 62 133 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 72 2010 11 48
+  xyzwh 453 72 2010 11 48
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 236 2010 11 38
+  xyzwh 453 236 2010 11 38
 end
 durationcanvas 132226 classinstance_ref 128002 // :Framework
-  xyzwh 450 492 2010 11 44
+  xyzwh 453 401 2010 11 44
   overlappingdurationcanvas 133250
-    xyzwh 456 505 2020 11 25
+    xyzwh 459 414 2020 11 25
   end
 end
 durationcanvas 133762 classinstance_ref 128002 // :Framework
-  xyzwh 450 181 2010 11 36
+  xyzwh 453 181 2010 11 36
 end
-lostfoundmsgsupport 132354 xyz 87 495 2015
+lostfoundmsgsupport 132354 xyz 77 404 2015
 msg 128260 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 128132
@@ -80,14 +85,14 @@ reflexivemsg 131202 synchronous
 msg 132482 lost_synchronous
   from durationcanvas_ref 132226
   to lostfoundmsgsupport_ref 132354
-  yz 493 2015 explicitmsg "push (Event)"
+  yz 402 2015 explicitmsg "push (Event)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 250 480
+  label_xy 240 389
 reflexivemsg 133378 synchronous
   to durationcanvas_ref 133250
-  yz 505 2025 explicitmsg "errorLog"
+  yz 414 2025 explicitmsg "errorLog"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 472 492
+  label_xy 462 401
 msg 133890 synchronous
   from durationcanvas_ref 128258
   to durationcanvas_ref 133762

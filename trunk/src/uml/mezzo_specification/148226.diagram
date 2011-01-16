@@ -4,23 +4,28 @@ classinstance 128002 class_ref 141698 // Framework
   name ""   xyz 425.139 5.15628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 36.6337 4 2000 life_line_z 2000
+note 131714 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+Diagramme de Sequence Système
+UC02 : S'abonner en tant que consumer PUSH
+US138 : Scénario Exception 7 : Le Consumer s'enregistre mais est déjà enregistré"
+  xyzwh 72 321 2000 377 87
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 55 72 2010 11 430
+  xyzwh 57 72 2010 11 253
   overlappingdurationcanvas 131074
-    xyzwh 61 132 2020 11 26
+    xyzwh 63 132 2020 11 26
   end
 end
 durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 450 70 2010 11 40
+  xyzwh 453 70 2010 11 40
 end
 durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 450 221 2010 11 38
+  xyzwh 453 221 2010 11 38
 end
 durationcanvas 129028 classinstance_ref 128002 // :Framework
-  xyzwh 450 282 2010 11 35
+  xyzwh 453 282 2010 11 35
 end
 durationcanvas 131330 classinstance_ref 128002 // :Framework
-  xyzwh 450 166 2010 11 25
+  xyzwh 453 166 2010 11 29
 end
 msg 128514 synchronous
   from durationcanvas_ref 128258
