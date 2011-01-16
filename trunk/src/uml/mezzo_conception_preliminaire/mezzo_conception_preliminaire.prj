@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 35
-  modified_by 3 "Ordi"
+  revision 36
+  modified_by 2 "Franck"
 
 
   
@@ -198,15 +198,6 @@ ${members}}
 	  b multiplicity "1" parent class_ref 188674 // Channel
       end
 
-      classrelation 233346 // <unidirectional association>
-	relation 231298 --->
-	  a role_name "" multiplicity "*" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
-"
-	    classrelation_ref 233346 // <unidirectional association>
-	  b multiplicity "1" parent class_ref 190210 // CallbackConsumer
-      end
-
       classrelation 233986 // <unidirectional association>
 	relation 231682 --->
 	  a role_name "" multiplicity "*" private
@@ -225,7 +216,7 @@ ${members}}
 	  b multiplicity "1" parent class_ref 189570 // ProxyForPushConsumer
       end
 
-      operation 203266 "addCallbackConsumer"
+      operation 203522 "addProxyForPushConsumerToSubscribedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -237,7 +228,7 @@ ${members}}
 	
       end
 
-      operation 203394 "removeCallbackConsumer"
+      operation 203650 "removeProxyForConsumerFromSubscribedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -249,7 +240,7 @@ ${members}}
 	
       end
 
-      operation 203522 "addProxyForConsumer"
+      operation 217986 "addProxyForPushConsumerToConnectedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -261,7 +252,7 @@ ${members}}
 	
       end
 
-      operation 203650 "removeProxyForConsumer"
+      operation 218114 "removeProxyForConsumerFromConnectedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -273,7 +264,7 @@ ${members}}
 	
       end
 
-      operation 203778 "addProxyForSupplier"
+      operation 203778 "addProxyForSupplierToConnectedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -285,7 +276,7 @@ ${members}}
 	
       end
 
-      operation 203906 "removeProxyForSupplier"
+      operation 203906 "removeProxyForSupplierFromConnectedList"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -515,10 +506,12 @@ ${members}}
 	
       end
 
-      classrelation 234626 // <dependency>
-	relation 232322 -_->
-	  a default
-	    classrelation_ref 234626 // <dependency>
+      classrelation 241538 // callBackConsumer (<unidirectional association>)
+	relation 239234 --->
+	  a role_name "callBackConsumer" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 241538 // callBackConsumer (<unidirectional association>)
 	  b parent class_ref 190210 // CallbackConsumer
       end
     end
