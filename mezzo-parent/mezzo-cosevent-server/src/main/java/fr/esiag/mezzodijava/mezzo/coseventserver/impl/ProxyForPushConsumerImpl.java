@@ -64,7 +64,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	}
 
 	@Override
-	public void connect() throws AlreadyConnectedException, java.nio.channels.AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException{
+	public void connect() throws AlreadyConnectedException, AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException{
 		channelCtr.addProxyForPushConsumerToConnectedList(this);
 	}
 
