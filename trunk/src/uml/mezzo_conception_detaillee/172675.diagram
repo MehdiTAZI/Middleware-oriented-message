@@ -1,5 +1,10 @@
 format 76
 
+note 128002 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+DIAGRAMME DE SEQUENCE
+UC03 Envoyer un Event en PUSH
+US117 Scenario nominal : Connezxion a un Channel et envoie d'Event PUSH"
+  xyzwh 305 670 2005 391 73
 classinstance 128003 class_ref 143235 // Supplier
   name ""   xyz 5 5 2000 life_line_z 2000
 classinstance 128131 class_ref 128517 // ChannelAdminImpl
