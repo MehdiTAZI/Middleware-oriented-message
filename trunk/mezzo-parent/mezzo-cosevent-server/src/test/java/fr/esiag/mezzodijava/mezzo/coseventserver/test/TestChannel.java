@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.coseventserver.model;
+package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 import static org.junit.Assert.*;
 
@@ -13,6 +13,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestChannel {
 	
