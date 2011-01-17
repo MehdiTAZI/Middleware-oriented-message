@@ -28,6 +28,9 @@ public class BFFactory {
 	/*TMA : tout les methode static ici doivent etre synchronized 
 	en cas d'appel concurent ( remarque de Mr.Gill Giraud ) */
 	
+	
+	
+	
 	public synchronized static ORB createOrb(String[] args, Properties props){
 		System.out.println(orb);
 		if(orb==null)
@@ -40,6 +43,15 @@ public class BFFactory {
 		if (mapChannel.get(channel)==null)
 			mapChannel.put(channel, new Channel(channel, capacity));
 		return mapChannel.get(channel);
+	}
+	
+	public synchronized static Channel forceChannel(String topic, Channel channel){
+		if (mapChannel.get(channel)!=null){
+			mapChannel.remove(topic);
+		mapChannel.put(topic, channel);
+		return mapChannel.get(channel);
+		}
+		return channel;
 	}
 	
 	public synchronized static ChannelCtr createChannelCtr (String channel){
