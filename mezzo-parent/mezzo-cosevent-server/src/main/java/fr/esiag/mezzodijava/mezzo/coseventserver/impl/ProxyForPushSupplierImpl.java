@@ -63,5 +63,12 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 		channelCtr.addEvent(evt);
 		
 	}
+	
+	// ajout FDE car sinon le boolean ne sert pas...
+	public boolean isConnected() {
+		return connected;
+	}
+	
+	
 
 }
