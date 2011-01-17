@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.coseventserver.main;
+package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 import static org.junit.Assert.*;
 
