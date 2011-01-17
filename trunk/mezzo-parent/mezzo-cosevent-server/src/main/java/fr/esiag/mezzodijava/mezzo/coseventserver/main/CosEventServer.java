@@ -1,6 +1,4 @@
-/**
- * 
- */
+
 package fr.esiag.mezzodijava.mezzo.coseventserver.main;
 
 import java.io.IOException;
@@ -75,7 +73,7 @@ public class CosEventServer {
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 				channelAdminCtr);*/
-		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,90);
+		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,2);
 		
 		ThreadEvent th = new ThreadEvent(channelName);
 		Thread thread = new Thread(th);

@@ -43,6 +43,9 @@ public class ChannelAdminCtr {
 		this.orb=BFFactory.createOrb(null, null);
 		this.channelCtr=BFFactory.createChannelCtr(channel);
 	}
+	public String getTopic(){
+		return channel;
+	}
 	
 
 	public ProxyForPushSupplier createProxyForPushSupplier(){

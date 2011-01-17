@@ -43,5 +43,9 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 			throws ChannelNotFoundException {
 		return channelAdminctrl.createProxyForPushConsumer();
 	}
+	
+	public String getTopic(){
+		return channel;
+	}
 
 }
