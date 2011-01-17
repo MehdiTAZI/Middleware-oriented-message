@@ -1,8 +1,8 @@
 module cosevent {
 	
 	struct Event{
-		long timeStamp;
-		any content;
+		long long timestamp;
+		string content;
 	};
 	
 	exception AlreadyRegisteredException{
