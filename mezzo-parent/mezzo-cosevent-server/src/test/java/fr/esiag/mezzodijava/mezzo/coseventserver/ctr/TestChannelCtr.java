@@ -30,6 +30,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestChannelCtr {
 
@@ -38,6 +40,7 @@ public class TestChannelCtr {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String topic = "bla";
+		Channel channel = BFFactory.createChannel("bla", 3);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -53,19 +56,18 @@ public class TestChannelCtr {
 	public void tearDown() throws Exception {
 	}
 
-	//TODO
+	// TODO
 	@Test
 	public void testAddProxyForPushConsumerToSubscribedListNull() {
-		
-			try {
-				channelCtr.addProxyForPushConsumerToSubscribedList(null);
-				fail();
-			} catch (AlreadyRegisteredException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		
+
+		try {
+			channelCtr.addProxyForPushConsumerToSubscribedList(null);
+			fail();
+		} catch (AlreadyRegisteredException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	@Test
@@ -73,218 +75,907 @@ public class TestChannelCtr {
 		try {
 			ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
 			CallbackConsumer cb = new CallbackConsumer() {
-				
+
 				@Override
 				public Object _set_policy_override(Policy[] policies,
 						SetOverrideType set_add) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _request(String operation) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public void _release() {
 					// TODO Auto-generated method stub
-					
+
 				}
-				
+
 				@Override
 				public boolean _non_existent() {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public boolean _is_equivalent(Object other) {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public boolean _is_a(String repositoryIdentifier) {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public int _hash(int maximum) {
 					// TODO Auto-generated method stub
 					return 0;
 				}
-				
+
 				@Override
 				public Policy _get_policy(int policy_type) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Object _get_interface_def() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public DomainManager[] _get_domain_managers() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Object _duplicate() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result, ExceptionList exclist,
-						ContextList ctxlist) {
+						NVList arg_list, NamedValue result,
+						ExceptionList exclist, ContextList ctxlist) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public void receive(Event evt) throws ConsumerNotFoundException {
 					// TODO Auto-generated method stub
-					
+
 				}
 			};
 			try {
 				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 				fail();
-			} 
-			catch (AlreadyRegisteredException e) {
-			 e.printStackTrace();	
+			} catch (AlreadyRegisteredException e) {
+				e.printStackTrace();
 			}
-		}	
-		catch(Exception e){
-			
+		} catch (Exception e) {
+
 		}
-			
-			
+
 	}
-	
+
 	@Test
 	public void testAddProxyForPushConsumerToSubscribedListNormal() {
 		try {
 			ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
 			CallbackConsumer cb = new CallbackConsumer() {
-				
+
 				@Override
 				public Object _set_policy_override(Policy[] policies,
 						SetOverrideType set_add) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _request(String operation) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public void _release() {
 					// TODO Auto-generated method stub
-					
+
 				}
-				
+
 				@Override
 				public boolean _non_existent() {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public boolean _is_equivalent(Object other) {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public boolean _is_a(String repositoryIdentifier) {
 					// TODO Auto-generated method stub
 					return false;
 				}
-				
+
 				@Override
 				public int _hash(int maximum) {
 					// TODO Auto-generated method stub
 					return 0;
 				}
-				
+
 				@Override
 				public Policy _get_policy(int policy_type) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Object _get_interface_def() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public DomainManager[] _get_domain_managers() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Object _duplicate() {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result, ExceptionList exclist,
-						ContextList ctxlist) {
+						NVList arg_list, NamedValue result,
+						ExceptionList exclist, ContextList ctxlist) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result) {
 					// TODO Auto-generated method stub
 					return null;
 				}
-				
+
 				@Override
 				public void receive(Event evt) throws ConsumerNotFoundException {
 					// TODO Auto-generated method stub
-					
+
 				}
 			};
 			try {
 				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-			} 
-			catch (AlreadyRegisteredException e) {
+			} catch (AlreadyRegisteredException e) {
 				fail();
-			 e.printStackTrace();	
+				e.printStackTrace();
 			}
-		}	
-		catch(Exception e){
+		} catch (Exception e) {
+
+		}
+
+	}
+
+	public void testRemoveProxyForPushConsumerFromSubscribedListNormal()
+			throws AlreadyRegisteredException {
+
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
+
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+
+			}
+		};
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		try {
+			channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
+		} catch (NotRegisteredException e) {
+
+			e.printStackTrace();
+			fail();
+		}
+	}
+
+	@Test
+	public void testRemoveProxyForPushConsumerFromSubscribedListNotRegistered()
+			throws AlreadyRegisteredException {
+
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
+
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+
+			}
+		};
+		try {
+			channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
+			fail();
+		} catch (NotRegisteredException e) {
+
+			e.printStackTrace();
+
+		}
+	}
+	
+
+	@Test
+	public void testaddProxyForPushConsumerToConnectedListNormal() throws AlreadyRegisteredException{
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
+			
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		try {
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+		} catch (AlreadyConnectedException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NotRegisteredException e) {
+			fail();
+			e.printStackTrace();
+		} catch (MaximalConnectionReachedException e) {
+			fail();
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testaddProxyForPushConsumerToConnectedListMaximalConnectionReached() throws AlreadyRegisteredException{
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl("bla");
+		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
+			
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc2);
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc3);
+		try {
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc2);
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc3);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NotRegisteredException e) {
+			fail();
+			e.printStackTrace();
+		} catch (MaximalConnectionReachedException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testaddProxyForPushConsumerToConnectedListNotRegistered() throws AlreadyRegisteredException{
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl("bla");
+		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
+			
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+
+		try {
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			fail();
+			e.printStackTrace();
+		} catch (NotRegisteredException e) {
+			
+			e.printStackTrace();
+		} catch (MaximalConnectionReachedException e) {
+			fail();
+			e.printStackTrace();
 			
 		}
+	}
+	
+	@Test
+	public void testaddProxyForPushConsumerToConnectedListAlreadyConnected() throws AlreadyRegisteredException{
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl("bla");
+		CallbackConsumer cb = new CallbackConsumer() {
 			
+			@Override
+			public Object _set_policy_override(Policy[] policies,
+					SetOverrideType set_add) {
+				// TODO Auto-generated method stub
+				return null;
+			}
 			
+			@Override
+			public Request _request(String operation) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void _release() {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public boolean _non_existent() {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_equivalent(Object other) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public boolean _is_a(String repositoryIdentifier) {
+				// TODO Auto-generated method stub
+				return false;
+			}
+			
+			@Override
+			public int _hash(int maximum) {
+				// TODO Auto-generated method stub
+				return 0;
+			}
+			
+			@Override
+			public Policy _get_policy(int policy_type) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _get_interface_def() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public DomainManager[] _get_domain_managers() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Object _duplicate() {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result, ExceptionList exclist,
+					ContextList ctxlist) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public Request _create_request(Context ctx, String operation,
+					NVList arg_list, NamedValue result) {
+				// TODO Auto-generated method stub
+				return null;
+			}
+			
+			@Override
+			public void receive(Event evt) throws ConsumerNotFoundException {
+				// TODO Auto-generated method stub
+				
+			}
+		};
+
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		try {
+			Channel channel = BFFactory.createChannel("bla", 0);
+			channel.setCapacity(10);
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			
+			e.printStackTrace();
+		} catch (NotRegisteredException e) {
+			fail();
+			e.printStackTrace();
+		} catch (MaximalConnectionReachedException e) {
+			
+			e.printStackTrace();
+			fail();
+		}
+		
+		
+	}
+	
+	@Test
+	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected(){
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl("bla");
+		try {
+			channelCtr.addProxyForPushSupplierToConnectedList(pps);
+			channelCtr.addProxyForPushSupplierToConnectedList(pps);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			
+			e.printStackTrace();
+		} catch (MaximalConnectionReachedException e) {
+			fail();
+			e.printStackTrace();
+		}
+	}
+	@Test
+	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached(){
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl("bla");
+		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl("bla");
+		
+		Channel channel = BFFactory.createChannel("bla", 0);
+		channel.setCapacity(1);
+		try {
+			channelCtr.addProxyForPushSupplierToConnectedList(pps);
+			channelCtr.addProxyForPushSupplierToConnectedList(pps2);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			fail();
+		} catch (MaximalConnectionReachedException e) {
+			
+			e.printStackTrace();
+		}
 	}
 	
 	

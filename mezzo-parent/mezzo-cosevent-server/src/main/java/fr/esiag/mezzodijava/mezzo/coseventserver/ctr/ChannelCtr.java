@@ -112,7 +112,7 @@ public class ChannelCtr {
 	}
 	*/
 	public void addProxyForPushSupplierToConnectedList(
-			ProxyForPushSupplierImpl proxySupplier)throws fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException,MaximalConnectionReachedException{
+			ProxyForPushSupplierImpl proxySupplier)throws AlreadyConnectedException,MaximalConnectionReachedException{
 		if(!channel.SuppliersConnectedsListcapacityReached())
 			throw new MaximalConnectionReachedException();
 		if (!channel.getSuppliersConnected().add(proxySupplier)) 
