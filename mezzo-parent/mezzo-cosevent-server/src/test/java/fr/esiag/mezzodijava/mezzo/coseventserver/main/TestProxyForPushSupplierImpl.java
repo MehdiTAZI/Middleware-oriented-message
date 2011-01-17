@@ -1,6 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.main;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -13,11 +15,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
 public class TestProxyForPushSupplierImpl {
@@ -56,7 +54,7 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl(mockCtr);
 		try {
 			mockCtr.addProxyForPushSupplierToConnectedList(pfps);
-		} catch (java.nio.channels.AlreadyConnectedException e1) {
+		} catch (AlreadyConnectedException e1) {
 			fail();
 			e1.printStackTrace();
 		} catch (MaximalConnectionReachedException e1) {

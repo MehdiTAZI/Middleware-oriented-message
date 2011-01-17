@@ -59,6 +59,7 @@ public class ChannelAdminCtr {
 		    return ProxyForPushSupplierHelper.narrow(poa.servant_to_reference(new ProxyForPushSupplierPOATie(proxy)));
 		    
 		} catch (Exception e) {
+			e.printStackTrace();
 			return null;
 		}
 	}
