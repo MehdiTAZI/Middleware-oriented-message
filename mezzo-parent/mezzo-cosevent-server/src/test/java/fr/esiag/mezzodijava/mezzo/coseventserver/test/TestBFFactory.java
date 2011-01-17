@@ -19,7 +19,7 @@ public class TestBFFactory {
 	}
 	@Test
 	public void createChannel(){
-		String name = "bla";
+		String name = "createChannel";
 		int capacity = 0;
 		Channel chanOutput = BFFactory.createChannel(name, capacity);
 		assertNotNull(chanOutput);
@@ -29,7 +29,7 @@ public class TestBFFactory {
 	}
 	@Test
 	public void createChannelCtr(){
-		String name = "bla";
+		String name = "createChannelCtr";
 		ChannelCtr channelCtr = BFFactory.createChannelCtr(name);
 		assertNotNull(channelCtr);
 		assertNotNull(channelCtr.getChannel());
@@ -38,7 +38,7 @@ public class TestBFFactory {
 	
 	@Test
 	public void createChannelAdminCtr(){
-		String name = "bla";
+		String name = "createChannelAdminCtr";
 		ChannelAdminCtr channelAdminCtr = BFFactory.createChannelAdminCtr(name);
 		assertNotNull(channelAdminCtr);
 		assertEquals(name, channelAdminCtr.getTopic());
@@ -46,7 +46,7 @@ public class TestBFFactory {
 	
 	@Test
 	public void createChannelAdminImpl(){
-		String name = "bla";
+		String name = "createChannelAdminImpl";
 		ChannelAdminImpl channelAdminImpl = BFFactory.createChannelAdminImpl(name);
 		assertNotNull(channelAdminImpl);
 		assertEquals(name, channelAdminImpl.getTopic());
