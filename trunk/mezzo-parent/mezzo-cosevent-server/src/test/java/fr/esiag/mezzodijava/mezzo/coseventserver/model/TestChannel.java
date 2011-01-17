@@ -41,7 +41,7 @@ public class TestChannel {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		this.ch = new Channel("",99);
+		this.ch = new Channel("toto",99);
 	}
 
 	/**
@@ -58,12 +58,12 @@ public class TestChannel {
 	@Test
 	public void testGetTopic() {
 		
-		this.topic="toto";
-		assertNull("topic n'est pas null", ch.getTopic());
+		this.topic="sensor";
+		assertNotNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(null);
 		assertNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(this.topic);
-		assertNotNull("topic n'est pas null", ch.getTopic());
+		assertNotNull("topic est null", ch.getTopic());
 		assertEquals(this.topic, ch.getTopic());
 	}
 
@@ -73,12 +73,12 @@ public class TestChannel {
 	@Test
 	public void testSetTopic() {
 		
-		this.topic="nuclear";
-		assertNull("topic n'est pas null", ch.getTopic());
+		this.topic="sensor";
+		assertNotNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(null);
 		assertNull("topic n'est pas null", ch.getTopic());
 		ch.setTopic(this.topic);
-		assertNotNull("topic n'est pas null", ch.getTopic());
+		assertNotNull("topic est null", ch.getTopic());
 		assertEquals(this.topic, ch.getTopic());
 		ch.setTopic("foot");
 		assertEquals("foot", ch.getTopic());
@@ -91,7 +91,7 @@ public class TestChannel {
 	public void testGetCapacity() {
 		
 		this.capacity=1000;
-		assertEquals(0, ch.getCapacity());
+		assertEquals(99, ch.getCapacity());
 		ch.setCapacity(-2);
 		assertTrue("capacity est négative", ch.getCapacity()<0);
 		ch.setCapacity(this.capacity);
@@ -106,7 +106,7 @@ public class TestChannel {
 	public void testSetCapacity() {
 		
 		this.capacity=5;
-		assertEquals(0, ch.getCapacity());
+		assertEquals(99, ch.getCapacity());
 		ch.setCapacity(-2);
 		assertTrue("capacity est négative", ch.getCapacity()<0);
 		ch.setCapacity(this.capacity);
