@@ -13,6 +13,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 
 public class TestChannelAdminImpl {
@@ -35,7 +36,7 @@ public class TestChannelAdminImpl {
 
 	@Test
 	public void testChannelAdminImpl() {
-		fail("Not yet implemented"); // TODO
+		assertNotNull(BFFactory.createChannelAdminImpl("topic"));
 	}
 
 	@Test
