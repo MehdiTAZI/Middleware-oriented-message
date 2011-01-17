@@ -3,14 +3,10 @@
  */
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
-import java.nio.channels.AlreadyConnectedException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
-import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
@@ -67,7 +63,7 @@ public class ChannelCtr {
 	
 	public void addProxyForPushConsumerToSubscribedList(
 			ProxyForPushConsumerImpl proxyConsumer)throws AlreadyRegisteredException {
-		if(channel.getConsumersSubscribed().containsKey(proxyConsumer))
+		if(channel.getConsumersSubscribed().containsKey(proxyConsumer)||proxyConsumer==null)
 			throw new AlreadyRegisteredException();
 		else
 			channel.getConsumersSubscribed().put(proxyConsumer, new ArrayList<Event>());	

@@ -1,8 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
-import java.nio.channels.AlreadyConnectedException;
 import java.util.Random;
 
 import org.junit.After;
@@ -21,8 +20,7 @@ import org.omg.CORBA.Policy;
 import org.omg.CORBA.Request;
 import org.omg.CORBA.SetOverrideType;
 
-import com.mchange.util.AssertException;
-
+import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
@@ -54,7 +52,7 @@ public class TestChannelCtr {
 	@Before
 	public void setUp() throws Exception {
 		Random rm = new Random();
-		topic = rm.nextInt()+"";
+		topic = rm.nextInt() + "";
 		System.out.println(topic);
 		Channel channel = BFFactory.createChannel(topic, 2);
 		channelCtr = BFFactory.createChannelCtr(topic);
@@ -72,8 +70,7 @@ public class TestChannelCtr {
 			channelCtr.addProxyForPushConsumerToSubscribedList(null);
 			fail();
 		} catch (AlreadyRegisteredException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
 		}
 
 	}
@@ -87,67 +84,66 @@ public class TestChannelCtr {
 				@Override
 				public Object _set_policy_override(Policy[] policies,
 						SetOverrideType set_add) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Request _request(String operation) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public void _release() {
-					// TODO Auto-generated method stub
 
 				}
 
 				@Override
 				public boolean _non_existent() {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public boolean _is_equivalent(Object other) {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public boolean _is_a(String repositoryIdentifier) {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public int _hash(int maximum) {
-					// TODO Auto-generated method stub
+
 					return 0;
 				}
 
 				@Override
 				public Policy _get_policy(int policy_type) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Object _get_interface_def() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public DomainManager[] _get_domain_managers() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Object _duplicate() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
@@ -155,20 +151,19 @@ public class TestChannelCtr {
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result,
 						ExceptionList exclist, ContextList ctxlist) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public void receive(Event evt) throws ConsumerNotFoundException {
-					// TODO Auto-generated method stub
 
 				}
 			};
@@ -194,67 +189,66 @@ public class TestChannelCtr {
 				@Override
 				public Object _set_policy_override(Policy[] policies,
 						SetOverrideType set_add) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Request _request(String operation) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public void _release() {
-					// TODO Auto-generated method stub
 
 				}
 
 				@Override
 				public boolean _non_existent() {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public boolean _is_equivalent(Object other) {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public boolean _is_a(String repositoryIdentifier) {
-					// TODO Auto-generated method stub
+
 					return false;
 				}
 
 				@Override
 				public int _hash(int maximum) {
-					// TODO Auto-generated method stub
+
 					return 0;
 				}
 
 				@Override
 				public Policy _get_policy(int policy_type) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Object _get_interface_def() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public DomainManager[] _get_domain_managers() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Object _duplicate() {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
@@ -262,20 +256,19 @@ public class TestChannelCtr {
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result,
 						ExceptionList exclist, ContextList ctxlist) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public Request _create_request(Context ctx, String operation,
 						NVList arg_list, NamedValue result) {
-					// TODO Auto-generated method stub
+
 					return null;
 				}
 
 				@Override
 				public void receive(Event evt) throws ConsumerNotFoundException {
-					// TODO Auto-generated method stub
 
 				}
 			};
@@ -300,67 +293,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -368,20 +360,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -405,67 +396,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -473,20 +463,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -509,67 +498,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -577,20 +565,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -621,67 +608,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -689,20 +675,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -737,67 +722,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -805,20 +789,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -848,67 +831,66 @@ public class TestChannelCtr {
 			@Override
 			public Object _set_policy_override(Policy[] policies,
 					SetOverrideType set_add) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _request(String operation) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void _release() {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public boolean _non_existent() {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_equivalent(Object other) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public boolean _is_a(String repositoryIdentifier) {
-				// TODO Auto-generated method stub
+
 				return false;
 			}
 
 			@Override
 			public int _hash(int maximum) {
-				// TODO Auto-generated method stub
+
 				return 0;
 			}
 
 			@Override
 			public Policy _get_policy(int policy_type) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _get_interface_def() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public DomainManager[] _get_domain_managers() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Object _duplicate() {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
@@ -916,20 +898,19 @@ public class TestChannelCtr {
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result, ExceptionList exclist,
 					ContextList ctxlist) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public Request _create_request(Context ctx, String operation,
 					NVList arg_list, NamedValue result) {
-				// TODO Auto-generated method stub
+
 				return null;
 			}
 
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				// TODO Auto-generated method stub
 
 			}
 		};
@@ -1008,7 +989,8 @@ public class TestChannelCtr {
 		}
 	}
 
-	public void testRemoveProxyForPushSupplierFromConnectedListNormal() throws AlreadyConnectedException, MaximalConnectionReachedException{
+	public void testRemoveProxyForPushSupplierFromConnectedListNormal()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 		try {
@@ -1017,20 +999,19 @@ public class TestChannelCtr {
 			fail();
 			e.printStackTrace();
 		}
-		
 
 	}
-	
-	public void testRemoveProxyForPushSupplierFromConnectedListNotConnected() throws AlreadyConnectedException, MaximalConnectionReachedException{
+
+	public void testRemoveProxyForPushSupplierFromConnectedListNotConnected()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		try {
 			channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 			fail();
 		} catch (NotConnectedException e) {
-			
+
 			e.printStackTrace();
 		}
-		
 
 	}
 }

@@ -8,8 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
+
 public class TestChannelAdminCtr {
 
+	ChannelAdminCtr cac = new ChannelAdminCtr("TEST");
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -28,17 +32,17 @@ public class TestChannelAdminCtr {
 
 	@Test
 	public void testChannelAdminCtr() {
-		fail("Not yet implemented"); // TODO
+		assertEquals("TEST", cac.getTopic());
 	}
 
 	@Test
 	public void testCreateProxyForPushSupplier() {
-		fail("Not yet implemented"); // TODO
+		ProxyForPushSupplier pps = cac.createProxyForPushSupplier();
 	}
 
 	@Test
 	public void testCreateProxyForPushConsumer() {
-		fail("Not yet implemented"); // TODO
+		ProxyForPushConsumer ppc = cac.createProxyForPushConsumer();
 	}
 
 }
