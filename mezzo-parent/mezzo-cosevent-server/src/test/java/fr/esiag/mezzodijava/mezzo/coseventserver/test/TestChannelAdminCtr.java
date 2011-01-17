@@ -1,6 +1,6 @@
-package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
+package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -10,6 +10,7 @@ import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 public class TestChannelAdminCtr {
 
