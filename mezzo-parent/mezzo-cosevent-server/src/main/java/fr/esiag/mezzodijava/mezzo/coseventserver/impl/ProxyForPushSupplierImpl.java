@@ -62,11 +62,6 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 		
 	}
 	
-	// ajout FDE car sinon le boolean ne sert pas...
-	public boolean isConnected() {
-		return connected;
-	}
-	
 	
 
 }
