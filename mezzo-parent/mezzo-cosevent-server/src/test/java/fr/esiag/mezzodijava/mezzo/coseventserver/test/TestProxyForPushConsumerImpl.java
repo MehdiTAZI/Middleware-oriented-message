@@ -40,21 +40,6 @@ public class TestProxyForPushConsumerImpl {
 	}
 
 	@Test
-	public void testProxyForPushConsumerImplChannelCtr() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testProxyForPushConsumerImplString() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testProxyForPushConsumerImpl() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public void testSubscribe() {
 		fail("Not yet implemented"); // TODO
 	}

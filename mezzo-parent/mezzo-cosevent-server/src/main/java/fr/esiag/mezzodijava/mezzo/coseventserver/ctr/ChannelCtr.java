@@ -130,7 +130,7 @@ public class ChannelCtr {
 			throw new NotRegisteredException();
 	}*/
 
-	public void addEvent(Event e) throws ChannelNotFoundException,NotConnectedException{
+	public void addEvent(Event e){
 		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
 			channel.getConsumersSubscribed().get(consumer).add(e);
 		}

@@ -4,15 +4,19 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Date;
+
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.PortableInterceptor.SUCCESSFUL;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
@@ -34,16 +38,6 @@ public class TestProxyForPushSupplierImpl {
 
 	@After
 	public void tearDown() throws Exception {
-	}
-
-	@Test
-	public void testProxyForPushSupplierImplChannelCtr() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public void testProxyForPushSupplierImplString() {
-		fail("Not yet implemented"); // TODO
 	}
 
 	@Test
@@ -100,8 +94,7 @@ public class TestProxyForPushSupplierImpl {
 			try {
 				pfps.disconnect();
 			} catch (ChannelNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				//nothing to do, test ok
 			} catch (NotConnectedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -109,13 +102,44 @@ public class TestProxyForPushSupplierImpl {
 		
 		// vérification de l'appel à la méthode de suppression 
 	    EasyMock.verify(mockCtr);
-	 
 	    pfps = null;
 	}
 
 	@Test
-	public void testPush() {
-		fail("Not yet implemented"); // TODO
+	public void testPushConnected() throws NotConnectedException, AlreadyConnectedException, MaximalConnectionReachedException {
+		// création du mock pour le contrôleur 
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// nouveau proxy
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl(mockCtr);
+		// Nouvel event :
+		Event e = new Event((new Date()).getTime(),"TEST_PUSH");
+		mockCtr.addEvent(e);
+		// on fait le connect
+		pfps.connect();
+		// on rembobine le mock
+	    EasyMock.replay(mockCtr);
+		//test !
+		pfps.push(e);
+	}
+	@Test
+	public void testPushNotConnected()  {
+		// création du mock pour le contrôleur 
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// nouveau proxy
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl(mockCtr);
+		// Nouvel event :
+		Event e = new Event((new Date()).getTime(),"TEST_PUSH");
+		//enregistrement d'un appel de addevent dans le mock
+		mockCtr.addEvent(e);
+		// on rembobine le mock
+	    EasyMock.replay(mockCtr);
+		//appel a tester
+	    try {
+			pfps.push(e);
+			fail("NotConnectException was expected here");
+		} catch (NotConnectedException e1) {
+			//nothing to do, test ok
+		}
 	}
 
 }
