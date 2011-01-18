@@ -75,8 +75,6 @@ public class TestProxyForPushSupplierImpl {
 		}
 		// vérification de l'appel à la méthode d'ajout  
 	    EasyMock.verify(mockCtr);
-	    // vérification de la connexion
-	    assertTrue(pfps.isConnected());
 	    
 	    pfps = null;
 	}
@@ -111,8 +109,7 @@ public class TestProxyForPushSupplierImpl {
 		
 		// vérification de l'appel à la méthode de suppression 
 	    EasyMock.verify(mockCtr);
-	    // vérification de la déconnexion
-	    assertFalse(pfps.isConnected());
+	 
 	    pfps = null;
 	}
 

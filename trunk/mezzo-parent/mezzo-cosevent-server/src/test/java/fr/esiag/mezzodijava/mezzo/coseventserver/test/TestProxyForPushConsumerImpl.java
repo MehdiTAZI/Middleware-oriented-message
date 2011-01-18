@@ -95,8 +95,6 @@ public class TestProxyForPushConsumerImpl {
 		}
 		// vérification de l'appel à la méthode d'ajout  
 	    EasyMock.verify(mockCtr);
-	    // vérification de la connexion
-	    assertTrue(pfpc.isConnected());
 	    
 	    pfpc = null;
 	}
@@ -130,8 +128,6 @@ public class TestProxyForPushConsumerImpl {
 		}
 		// vérification de l'appel à la méthode de suppression  
 	    EasyMock.verify(mockCtr);
-	    // vérification de la connexion
-	    assertFalse(pfpc.isConnected());
 	    
 	    pfpc = null;
 	}
