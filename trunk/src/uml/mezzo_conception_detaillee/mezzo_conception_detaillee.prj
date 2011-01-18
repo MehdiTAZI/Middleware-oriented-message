@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 29
-  modified_by 2 "Franck"
+  revision 30
+  modified_by 4 "michael"
 
 
   
@@ -2193,12 +2193,12 @@ ${members}}
 
     sequencediagram 172675 "DSCD - UC03 Push d'un Supplier"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
+      overlapping_bars size A2
     end
 
     sequencediagram 134533 "DSCD - UC02 L'abonnement par un Consumer"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
+      overlapping_bars size A2
     end
 
     sequencediagram 128130 "DSCD - Resolution de nom par le client"
