@@ -41,11 +41,6 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	public ProxyForPushConsumerImpl(String topic){
 		this.channelCtr = BFFactory.createChannelCtr(topic);
 	}
-
-	public ProxyForPushConsumerImpl() {
-		//NamingContextExt nc=NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));		
-		//this.channelCtr=ChannelHelper.narrow(nc.resolve_str(topic));
-	}
 	
 	@Override
 	public void subscribe(CallbackConsumer cc)
