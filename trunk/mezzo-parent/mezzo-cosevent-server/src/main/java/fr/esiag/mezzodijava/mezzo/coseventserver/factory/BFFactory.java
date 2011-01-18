@@ -46,12 +46,11 @@ public class BFFactory {
 	}
 	
 	public synchronized static Channel forceChannel(String topic, Channel channel){
-		if (mapChannel.get(channel)!=null){
+		if (mapChannel.get(topic)!=null){
 			mapChannel.remove(topic);
-		mapChannel.put(topic, channel);
-		return mapChannel.get(channel);
 		}
-		return channel;
+		mapChannel.put(topic, channel);
+		return mapChannel.get(topic);
 	}
 	
 	public synchronized static ChannelCtr createChannelCtr (String channel){

@@ -82,7 +82,7 @@ public class ChannelCtr {
 			ProxyForPushConsumerImpl proxyConsumer) throws NotRegisteredException,AlreadyConnectedException,MaximalConnectionReachedException{
 		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
 			throw new NotRegisteredException();
-		if(!channel.ConsumersConnectedListcapacityReached())
+		if(channel.isConsumersConnectedListcapacityReached())
 			throw new MaximalConnectionReachedException();
 		if (!channel.getConsumersConnected().add(proxyConsumer))
 			throw new AlreadyConnectedException();
@@ -109,7 +109,7 @@ public class ChannelCtr {
 	*/
 	public void addProxyForPushSupplierToConnectedList(
 			ProxyForPushSupplierImpl proxySupplier)throws AlreadyConnectedException,MaximalConnectionReachedException{
-		if(!channel.SuppliersConnectedsListcapacityReached())
+		if(channel.isSuppliersConnectedsListcapacityReached())
 			throw new MaximalConnectionReachedException();
 		if (!channel.getSuppliersConnected().add(proxySupplier)) 
 			throw new AlreadyConnectedException();

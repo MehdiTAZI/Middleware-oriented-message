@@ -31,7 +31,6 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	 * The Channel Controller used by this facade
 	 */
 	ChannelCtr channelCtr;
-	String channel;
 	private boolean connected=false;
 
 	CallbackConsumer callbackConsumer;
@@ -40,9 +39,8 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	public ProxyForPushConsumerImpl(ChannelCtr channelCtr) {
 		this.channelCtr = channelCtr;
 	}
-	public ProxyForPushConsumerImpl(String channel){
-		this.channel = channel;	
-		channelCtr = BFFactory.createChannelCtr(channel);
+	public ProxyForPushConsumerImpl(String topic){
+		this.channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
 	public ProxyForPushConsumerImpl() {

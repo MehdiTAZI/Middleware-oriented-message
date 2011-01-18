@@ -93,11 +93,11 @@ public class Channel {
 	public int getCapacity() {
 		return capacity;
 	}
-	public boolean ConsumersConnectedListcapacityReached(){
-		return capacity>consumersConnected.size();
+	public boolean isConsumersConnectedListcapacityReached(){
+		return capacity==consumersConnected.size();
 	}
-	public boolean SuppliersConnectedsListcapacityReached(){
-		return capacity>suppliersConnected.size();
+	public boolean isSuppliersConnectedsListcapacityReached(){
+		return capacity==suppliersConnected.size();
 	}
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
