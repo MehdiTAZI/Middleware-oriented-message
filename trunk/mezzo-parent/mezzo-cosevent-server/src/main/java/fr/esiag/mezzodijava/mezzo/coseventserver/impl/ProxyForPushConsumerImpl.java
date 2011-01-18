@@ -31,7 +31,6 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	 * The Channel Controller used by this facade
 	 */
 	ChannelCtr channelCtr;
-	private boolean connected=false;
 
 	CallbackConsumer callbackConsumer;
 
@@ -65,13 +64,13 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	@Override
 	public void connect() throws AlreadyConnectedException, AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException{
 		channelCtr.addProxyForPushConsumerToConnectedList(this);
-		connected=true;
+		
 	}
 
 	@Override
 	public void disconnect() throws NotConnectedException, NotRegisteredException {
 		channelCtr.removeProxyForPushConsumerFromConnectedList(this);
-		connected=false;
+		
 	}
 
 	//pour recevoir une notification s'il y a des events envoyÃ©s par un supplier 
@@ -79,10 +78,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	public void receive(Event evt) throws ConsumerNotFoundException {
 			callbackConsumer.receive(evt);
 	}
-	public boolean isConnected() {
-		// TODO Auto-generated method stub
-		return connected;
-	}
+	
 
 
 }
