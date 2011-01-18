@@ -4,278 +4,340 @@ note 128002 "MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE SEQUENCE
 UC03 Envoyer un Event en PUSH
 US117 Scenario nominal : Connezxion a un Channel et envoie d'Event PUSH"
-  xyzwh 305 670 2005 391 73
+  xyzwh 304 1266 2005 391 73
 classinstance 128003 class_ref 143235 // Supplier
   name ""   xyz 5 5 2000 life_line_z 2000
+fragment 128004 "alt"
+  xyzwh 673 138 3005 131 71
+  separator 7112
+end
 classinstance 128131 class_ref 128517 // ChannelAdminImpl
   name "caimpl"   xyz 87 5 2000 life_line_z 2000
+fragment 128900 "break"
+  xyzwh 15 699 3015 788 129
+  separator 4534
+end
 classinstance 129027 class_ref 134659 // ChannelAdminCtr
   name "cactr"   xyz 225 5 2000 life_line_z 2000
 classinstance 129411 class_ref 136323 // ProxyForPushSupplierImpl
   name "pfps"   xyz 508 7 2000 life_line_z 2000
+fragment 129540 "break"
+  xyzwh 8 993 3015 770 55
+end
 classinstance 129795 class_ref 135171 // BFFactory
   name ""   xyz 664 6 2000 life_line_z 2000
+fragment 129924 "break"
+  xyzwh 11 1180 2035 763 43
+end
 classinstance 130179 class_ref 134787 // ChannelCtr
   name "channelCtr"   xyz 722 6 2000 life_line_z 2000
 classinstance 131075 class_ref 128130 // ORB
-  name "orb"   xyz 432 139 2000 life_line_z 2000
+  name "orb"   xyz 435 312 2000 life_line_z 2000
 classinstance 131587 class_ref 128901 // POA
-  name "rootPOA"   xyz 503 200 2000 life_line_z 2000
+  name "rootPOA"   xyz 501 387 2000 life_line_z 2000
 classinstance 131715 class_ref 129029 // POAHelper
-  name ""   xyz 472 172 2000 life_line_z 2000
+  name ""   xyz 470 359 2000 life_line_z 2000
 classinstance 132483 class_ref 143363 // ProxyForPushSupplierPOATie
-  name "tie"   xyz 543 234 2000 life_line_z 2000
+  name "tie"   xyz 541 421 2000 life_line_z 2000
 classinstance 134787 class_ref 143491 // ProxyForPushSupplierHelper
-  name ""   xyz 324 367 2000 life_line_z 2000
+  name ""   xyz 322 554 2000 life_line_z 2000
 classinstance 136323 class_ref 135811 // Channel
-  name ""   xyz 793 395 2000 life_line_z 2000
+  name ""   xyz 791 582 2000 life_line_z 2000
 classinstance 136707 class_ref 136451 // Event
-  name "evt"   xyz 210 518 2000 life_line_z 2000
+  name "evt"   xyz 207 881 2000 life_line_z 2000
 fragment 138883 "seq"
   refer sequencediagram_ref 128130 // DSCD - Resolution de nom par le client
   xyzwh 17 37.5 2000 809 45
 end
 durationcanvas 128259 classinstance_ref 128003 // :Supplier
-  xyzwh 26 83 2010 11 395
+  xyzwh 24 83 2010 11 565
 end
 durationcanvas 128387 classinstance_ref 128131 // caimpl:ChannelAdminImpl
-  xyzwh 147 85 2010 11 391
+  xyzwh 141 85 2010 11 563
 end
 durationcanvas 129155 classinstance_ref 129027 // cactr:ChannelAdminCtr
-  xyzwh 279 84 2010 11 390
+  xyzwh 274 84 2010 11 563
 end
 durationcanvas 129539 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 581 90 2010 11 64
+  xyzwh 575 90 2010 11 163
 end
 durationcanvas 129923 classinstance_ref 129795 // :BFFactory
-  xyzwh 690 90 2010 11 64
+  xyzwh 688 105 2010 11 141
 end
 durationcanvas 130307 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 775 95 2010 11 57
+  xyzwh 770 95 2010 11 123
 end
 durationcanvas 132995 classinstance_ref 131075 // orb:ORB
-  xyzwh 453 189 2010 11 36
+  xyzwh 454 376 2010 11 36
 end
 durationcanvas 133379 classinstance_ref 131715 // :POAHelper
-  xyzwh 500 233 2010 11 35
+  xyzwh 495 420 2010 11 35
 end
 durationcanvas 133763 classinstance_ref 131587 // rootPOA:POA
-  xyzwh 536 274 2010 11 25
+  xyzwh 530 461 2010 11 25
 end
 durationcanvas 134019 classinstance_ref 132483 // tie:ProxyForPushSupplierPOATie
-  xyzwh 620 302 2010 11 27
+  xyzwh 610 489 2010 11 27
 end
 durationcanvas 134531 classinstance_ref 131587 // rootPOA:POA
-  xyzwh 536 322 2010 11 52
+  xyzwh 530 509 2010 11 52
 end
 durationcanvas 135043 classinstance_ref 134787 // :ProxyForPushSupplierHelper
-  xyzwh 393 417 2010 11 40
+  xyzwh 384 604 2010 11 40
 end
 durationcanvas 135683 classinstance_ref 128003 // :Supplier
-  xyzwh 26 496 2010 11 174
+  xyzwh 24 672 2010 11 574
 end
 durationcanvas 135811 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 581 489 2010 11 31
+  xyzwh 575 671 2010 11 149
 end
 durationcanvas 136067 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 775 498 2010 11 28
+  xyzwh 770 685 2010 11 200
 end
 durationcanvas 136451 classinstance_ref 136323 // :Channel
-  xyzwh 814 509 2010 11 25
+  xyzwh 810 874 2010 11 25
 end
 durationcanvas 136835 classinstance_ref 136707 // evt:Event
-  xyzwh 233 566 2010 11 25
+  xyzwh 228 931 2010 11 25
 end
 durationcanvas 137091 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 581 588 2010 11 34
+  xyzwh 575 955 2010 11 84
 end
 durationcanvas 137347 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 775 588 2010 11 36
+  xyzwh 770 953 2010 11 104
 end
 durationcanvas 137603 classinstance_ref 136323 // :Channel
-  xyzwh 814 588 2010 11 29
+  xyzwh 810 953 2010 11 104
 end
 durationcanvas 138115 classinstance_ref 129411 // pfps:ProxyForPushSupplierImpl
-  xyzwh 581 638 2010 11 25
+  xyzwh 575 1161 2010 11 64
 end
 durationcanvas 138371 classinstance_ref 130179 // channelCtr:ChannelCtr
-  xyzwh 775 649 2010 11 38
+  xyzwh 770 1171 2010 11 62
 end
 durationcanvas 138627 classinstance_ref 136323 // :Channel
-  xyzwh 814 667 2010 11 25
+  xyzwh 810 1218 2010 11 25
 end
+msg 128132 return
+  from durationcanvas_ref 136067
+  to durationcanvas_ref 135811
+  yz 713 2015 explicitmsg "AlreadyConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 619 701
+msg 128260 return
+  from durationcanvas_ref 135811
+  to durationcanvas_ref 135683
+  yz 730 2020 explicitmsg "AlreadyConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 246 718
 msg 128515 synchronous
   from durationcanvas_ref 128259
   to durationcanvas_ref 128387
   yz 114 2015 msg operation_ref 137603 // "getProxyForPushSupplier() : ProxyForPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 32 100
+msg 128644 return
+  from durationcanvas_ref 136067
+  to durationcanvas_ref 135811
+  yz 795 3005 explicitmsg "MaximalConnectionReachedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 599 783
+msg 128772 return
+  from durationcanvas_ref 135811
+  to durationcanvas_ref 135683
+  yz 809 3010 explicitmsg "MaximalConnectionReachedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 226 797
 msg 129283 synchronous
   from durationcanvas_ref 128387
   to durationcanvas_ref 129155
   yz 113 2020 msg operation_ref 134659 // "createProxyForPushSupplier() : ProxyForPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 151 94
+msg 129284 return
+  from durationcanvas_ref 137347
+  to durationcanvas_ref 137091
+  yz 1012 3005 explicitmsg "NotConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 628 1000
+msg 129412 return
+  from durationcanvas_ref 137091
+  to durationcanvas_ref 135683
+  yz 1028 3010 explicitmsg "NotConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 255 1016
 msg 129667 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 129539
   yz 117 2015 explicitmsg "new(\"topic\")"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 414 104
+msg 129668 return
+  from durationcanvas_ref 138371
+  to durationcanvas_ref 138115
+  yz 1189 2025 explicitmsg "NotConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 628 1177
+msg 129796 return
+  from durationcanvas_ref 138115
+  to durationcanvas_ref 135683
+  yz 1204 2030 explicitmsg "NotConnectedException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 255 1192
 msg 130051 synchronous
   from durationcanvas_ref 129539
   to durationcanvas_ref 129923
-  yz 112 2020 explicitmsg "createChannelCtr(\"topic\")"
+  yz 127 2020 explicitmsg "createChannelCtr(\"topic\")"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 586 97
+  label_xy 586 112
 msg 130435 synchronous
   from durationcanvas_ref 129923
   to durationcanvas_ref 130307
-  yz 113 2015 explicitmsg "new(\"topic\")"
+  yz 154 2015 explicitmsg "new(\"topic\")"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 705 100
+  label_xy 705 141
 msg 130563 return
   from durationcanvas_ref 130307
   to durationcanvas_ref 129923
-  yz 141 2020 explicitmsg "channelCtr"
+  yz 177 2020 explicitmsg "channelCtr"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 713 129
+  label_xy 713 165
 msg 130947 return
   from durationcanvas_ref 129923
   to durationcanvas_ref 129539
-  yz 143 2015 explicitmsg "channelCtr"
+  yz 235 2015 explicitmsg "channelCtr"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 619 131
+  label_xy 619 223
 msg 133123 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 132995
-  yz 194 2015 explicitmsg "resolve_initial_references(\"RootPOA\")"
+  yz 381 2015 explicitmsg "resolve_initial_references(\"RootPOA\")"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 289 182
+  label_xy 287 369
 msg 133251 return
   from durationcanvas_ref 132995
   to durationcanvas_ref 129155
-  yz 214 2015 explicitmsg "IOR RootPOA"
+  yz 401 2015 explicitmsg "IOR RootPOA"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 338 202
+  label_xy 336 389
 msg 133507 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 133379
-  yz 238 2015 explicitmsg "narrow(IOR RootPOA)"
+  yz 425 2015 explicitmsg "narrow(IOR RootPOA)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 343 226
+  label_xy 341 413
 msg 133635 return
   from durationcanvas_ref 133379
   to durationcanvas_ref 129155
-  yz 257 2020 explicitmsg "rootPOA"
+  yz 444 2020 explicitmsg "rootPOA"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 371 245
+  label_xy 369 432
 msg 133891 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 133763
-  yz 279 2015 msg operation_ref 148611 // "the_POAManager().activate()"
+  yz 466 2015 msg operation_ref 148611 // "the_POAManager().activate()"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 348 267
+  label_xy 346 454
 msg 134147 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 134019
-  yz 306 2015 explicitmsg "new(pfps)"
+  yz 493 2015 explicitmsg "new(pfps)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 395 294
+  label_xy 393 481
 msg 134659 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 134531
-  yz 329 2015 explicitmsg "servant_to_reference(tie)"
+  yz 516 2015 explicitmsg "servant_to_reference(tie)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 360 317
+  label_xy 358 504
 msg 134915 return
   from durationcanvas_ref 134531
   to durationcanvas_ref 129155
-  yz 347 2020 explicitmsg "IOR tie"
+  yz 534 2020 explicitmsg "IOR tie"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 392 338
+  label_xy 390 525
 msg 135171 synchronous
   from durationcanvas_ref 129155
   to durationcanvas_ref 135043
-  yz 425 2015 explicitmsg "narrow(IOR tie)"
+  yz 612 2015 explicitmsg "narrow(IOR tie)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 302 413
+  label_xy 300 600
 msg 135299 return
   from durationcanvas_ref 135043
   to durationcanvas_ref 129155
-  yz 446 2020 explicitmsg "pfps"
+  yz 633 2020 explicitmsg "pfps"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 317 434
+  label_xy 315 621
 msg 135427 return
   from durationcanvas_ref 129155
   to durationcanvas_ref 128387
-  yz 449 2025 explicitmsg "pfps"
+  yz 636 2025 explicitmsg "pfps"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 196 437
+  label_xy 194 624
 msg 135555 return
   from durationcanvas_ref 128387
   to durationcanvas_ref 128259
-  yz 450 2015 explicitmsg "pfps"
+  yz 637 2015 explicitmsg "pfps"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 71 438
+  label_xy 69 625
 msg 135939 synchronous
   from durationcanvas_ref 135683
   to durationcanvas_ref 135811
-  yz 496 2015 msg operation_ref 139139 // "connect() : void"
+  yz 675 2015 msg operation_ref 139139 // "connect() : void"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 286 484
+  label_xy 284 663
 msg 136195 synchronous
   from durationcanvas_ref 135811
   to durationcanvas_ref 136067
-  yz 498 2020 msg operation_ref 135939 // "addProxyForPushSupplierToConnectedList(in proxySupplier : ProxyForPushSupplierImpl) : void"
+  yz 686 2020 msg operation_ref 135939 // "addProxyForPushSupplierToConnectedList(in proxySupplier : ProxyForPushSupplierImpl) : void"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 587 486
+  label_xy 585 674
 msg 136579 synchronous
   from durationcanvas_ref 136067
   to durationcanvas_ref 136451
-  yz 509 3005 explicitmsg "add(pfps)"
+  yz 874 3005 explicitmsg "add(pfps)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 777 489
+  label_xy 775 854
 msg 136963 synchronous
   from durationcanvas_ref 135683
   to durationcanvas_ref 136835
-  yz 568 2015 explicitmsg "new"
+  yz 935 2015 explicitmsg "new"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 125 556
+  label_xy 122 923
 msg 137219 synchronous
   from durationcanvas_ref 135683
   to durationcanvas_ref 137091
-  yz 599 2020 explicitmsg "push(evt)"
+  yz 968 2020 explicitmsg "push(evt)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 292 587
+  label_xy 289 956
 msg 137475 synchronous
   from durationcanvas_ref 137091
   to durationcanvas_ref 137347
-  yz 592 2025 explicitmsg "addEvent(evt)"
+  yz 976 2025 explicitmsg "addEvent(evt)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 649 580
+  label_xy 646 964
 msg 137731 synchronous
   from durationcanvas_ref 137347
   to durationcanvas_ref 137603
-  yz 588 2030 explicitmsg "add(evt)"
+  yz 1046 2030 explicitmsg "add(evt)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 780 568
+  label_xy 777 1026
 msg 138243 synchronous
   from durationcanvas_ref 135683
   to durationcanvas_ref 138115
-  yz 638 2015 msg operation_ref 139267 // "disconnect() : void"
+  yz 1163 2015 msg operation_ref 139267 // "disconnect() : void"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 280 626
+  label_xy 277 1151
 msg 138499 synchronous
   from durationcanvas_ref 138115
   to durationcanvas_ref 138371
-  yz 649 2020 msg operation_ref 136067 // "removeProxyForPushSupplierFromConnectedList(in proxySupplier : ProxyForPushSupplierImpl) : void"
+  yz 1172 2020 msg operation_ref 136067 // "removeProxyForPushSupplierFromConnectedList(in proxySupplier : ProxyForPushSupplierImpl) : void"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 585 630
+  label_xy 582 1153
 msg 138755 synchronous
   from durationcanvas_ref 138371
   to durationcanvas_ref 138627
-  yz 668 2025 explicitmsg "remove(pfps)"
+  yz 1219 2025 explicitmsg "remove(pfps)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 778 694
+  label_xy 774 1245
 end
