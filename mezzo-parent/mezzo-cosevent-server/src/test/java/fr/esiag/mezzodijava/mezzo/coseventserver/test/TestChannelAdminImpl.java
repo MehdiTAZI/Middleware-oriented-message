@@ -1,6 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -41,42 +41,52 @@ public class TestChannelAdminImpl {
 
 	@Test
 	public void testGetProxyForPushSupplier() throws ChannelNotFoundException {
-		// création du mock pour le contrôleur 
-		ChannelAdminCtr mockAdminCtr = EasyMock.createNiceMock(ChannelAdminCtr.class);
-		//création du pps mock
-		ProxyForPushSupplier mockpps = EasyMock.createNiceMock(ProxyForPushSupplier.class);
-		
+		// création du mock pour le contrôleur
+		ChannelAdminCtr mockAdminCtr = EasyMock
+				.createNiceMock(ChannelAdminCtr.class);
+		// création du pps mock
+		ProxyForPushSupplier mockpps = EasyMock
+				.createNiceMock(ProxyForPushSupplier.class);
+
 		// appel espéré : marche pas du fait de la valeur de retour
 		// mockAdminCtr.createProxyForPushSupplier();
-		
+
 		// appel et valeur de retour espérée
-		EasyMock.expect(mockAdminCtr.createProxyForPushSupplier()).andReturn(mockpps);
+		EasyMock.expect(mockAdminCtr.createProxyForPushSupplier()).andReturn(
+				mockpps);
 		// enregistrement
-	    EasyMock.replay(mockAdminCtr);
-	    ChannelAdminImpl caImp = new ChannelAdminImpl(mockAdminCtr);
-	    caImp.getProxyForPushSupplier();
-	    EasyMock.verify(mockAdminCtr);
-	    mockAdminCtr = null;
-	    mockpps = null;
-	    caImp = null;
+		EasyMock.replay(mockAdminCtr);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelAdminCtr("TEST", mockAdminCtr);
+		ChannelAdminImpl caImp = new ChannelAdminImpl("TEST");
+		caImp.getProxyForPushSupplier();
+		EasyMock.verify(mockAdminCtr);
+		mockAdminCtr = null;
+		mockpps = null;
+		caImp = null;
 	}
 
 	@Test
 	public void testGetProxyForPushConsumer() throws ChannelNotFoundException {
-		// création du mock pour le contrôleur 
-		ChannelAdminCtr mockAdminCtr = EasyMock.createNiceMock(ChannelAdminCtr.class);
-		//création du pps mock
-		ProxyForPushConsumer mockppc = EasyMock.createNiceMock(ProxyForPushConsumer.class);
+		// création du mock pour le contrôleur
+		ChannelAdminCtr mockAdminCtr = EasyMock
+				.createNiceMock(ChannelAdminCtr.class);
+		// création du pps mock
+		ProxyForPushConsumer mockppc = EasyMock
+				.createNiceMock(ProxyForPushConsumer.class);
 		// appel et valeur de retour espérée
-		EasyMock.expect(mockAdminCtr.createProxyForPushConsumer()).andReturn(mockppc);
+		EasyMock.expect(mockAdminCtr.createProxyForPushConsumer()).andReturn(
+				mockppc);
 		// enregistrement
-	    EasyMock.replay(mockAdminCtr);
-	    ChannelAdminImpl caImp = new ChannelAdminImpl(mockAdminCtr);
-	    caImp.getProxyForPushConsumer();
-	    EasyMock.verify(mockAdminCtr);
-	    mockAdminCtr = null;
-	    mockppc = null;
-	    caImp = null;
+		EasyMock.replay(mockAdminCtr);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelAdminCtr("TEST", mockAdminCtr);
+		ChannelAdminImpl caImp = new ChannelAdminImpl("TEST");
+		caImp.getProxyForPushConsumer();
+		EasyMock.verify(mockAdminCtr);
+		mockAdminCtr = null;
+		mockppc = null;
+		caImp = null;
 	}
 
 }

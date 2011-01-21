@@ -18,8 +18,10 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestProxyForPushConsumerImpl {
 
@@ -40,21 +42,66 @@ public class TestProxyForPushConsumerImpl {
 	}
 
 	@Test
-	public void testSubscribe() {
-		fail("Not yet implemented"); // TODO
+	public void testSubscribe() throws AlreadyRegisteredException {
+		// création du mock pour le contrôleur 
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
+		// nouveau proxy
+		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("TEST");
+		
+		// CallBackConsumerMock
+		CallbackConsumer ccMock = EasyMock.createNiceMock(CallbackConsumer.class);
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
+
+		mockCtr.addProxyForPushConsumerToSubscribedList(pfpc);
+		
+		// enregistrement
+	    EasyMock.replay(mockCtr);
+	    
+	    // lancement du test de la méthode
+	    pfpc.subscribe(ccMock);
+		
+		// vérification de l'appel à la méthode d'ajout  
+	    EasyMock.verify(mockCtr);
+	    
+	    pfpc = null;
 	}
 
 	@Test
-	public void testUnsubscribe() {
-		fail("Not yet implemented"); // TODO
+	public void testUnsubscribe() throws NotRegisteredException {
+		//channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
+		
+		// création du mock pour le contrôleur 
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
+		// nouveau proxy
+		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("TEST");
+
+		mockCtr.removeProxyForPushConsumerFromSubscribedList(pfpc);
+		
+		// enregistrement
+	    EasyMock.replay(mockCtr);
+	    
+	    // lancement du test de la méthode
+	    pfpc.unsubscribe();
+		
+		// vérification de l'appel à la méthode remove  
+	    EasyMock.verify(mockCtr);
+	    
+	    pfpc = null;
 	}
 
 	@Test
 	public void testConnect() throws NotRegisteredException, AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur 
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
-		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl(mockCtr);
+		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("TEST");
 		
 		mockCtr.addProxyForPushConsumerToConnectedList(pfpc);
 		
@@ -74,8 +121,10 @@ public class TestProxyForPushConsumerImpl {
 	public void testDisconnect() throws NotRegisteredException, NotConnectedException {
 		// création du mock pour le contrôleur 
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
-		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl(mockCtr);
+		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("TEST");
 		
 		mockCtr.removeProxyForPushConsumerFromConnectedList(pfpc);
 		
