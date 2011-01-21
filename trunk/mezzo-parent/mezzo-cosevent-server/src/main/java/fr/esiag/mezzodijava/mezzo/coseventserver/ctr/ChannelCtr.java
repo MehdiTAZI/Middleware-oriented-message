@@ -33,80 +33,94 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 public class ChannelCtr {
 
 	// lien vers le model
-	Channel channel;
-	
+	private Channel channel;
+
 	/**
-	 * Build instance of a ChannelCtr associated with a Channel entity fetched byhis topic.
+	 * Build instance of a ChannelCtr associated with a Channel entity fetched
+	 * byhis topic.
 	 * 
 	 * @param topic
 	 *            Channel name
 	 */
-	public ChannelCtr(String channel) {
-		this.channel = BFFactory.createChannel(channel,0);
-		
+	public ChannelCtr(String topic) {
+		this.channel = BFFactory.createChannel(topic, 0);
+
 	}
-	
+
 	public Channel getChannel() {
 		return channel;
 	}
-	
+
 	public void addProxyForPushConsumerToSubscribedList(
-			ProxyForPushConsumerImpl proxyConsumer)throws AlreadyRegisteredException {
-		if(channel.getConsumersSubscribed().containsKey(proxyConsumer)||proxyConsumer==null)
+			ProxyForPushConsumerImpl proxyConsumer)
+			throws AlreadyRegisteredException {
+		if (channel.getConsumersSubscribed().containsKey(proxyConsumer)
+				|| proxyConsumer == null) {
 			throw new AlreadyRegisteredException();
-		else
-			channel.getConsumersSubscribed().put(proxyConsumer, new ArrayList<Event>());	
+		} else {
+			channel.getConsumersSubscribed().put(proxyConsumer,
+					new ArrayList<Event>());
 		}
-	
+	}
+
 	public void removeProxyForPushConsumerFromSubscribedList(
 			ProxyForPushConsumerOperations proxyConsumer)
-			throws NotRegisteredException{
-		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throws NotRegisteredException {
+		if (channel.getConsumersSubscribed().remove(proxyConsumer) == null) {
 			throw new NotRegisteredException();
-		else
-			channel.getConsumersSubscribed().remove(proxyConsumer);	
 		}
-	
+	}
+
 	public void addProxyForPushConsumerToConnectedList(
-			ProxyForPushConsumerImpl proxyConsumer) throws NotRegisteredException,AlreadyConnectedException,MaximalConnectionReachedException{
-		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			ProxyForPushConsumerImpl proxyConsumer)
+			throws NotRegisteredException, AlreadyConnectedException,
+			MaximalConnectionReachedException {
+		if (!channel.getConsumersSubscribed().containsKey(proxyConsumer)) {
 			throw new NotRegisteredException();
-		if(channel.isConsumersConnectedListcapacityReached())
+		}
+		if (channel.isConsumersConnectedListcapacityReached()) {
 			throw new MaximalConnectionReachedException();
-		if (!channel.getConsumersConnected().add(proxyConsumer))
+		}
+		if (!channel.getConsumersConnected().add(proxyConsumer)) {
 			throw new AlreadyConnectedException();
+		}
 	}
 
 	public void removeProxyForPushConsumerFromConnectedList(
 			ProxyForPushConsumerOperations proxyConsumer)
-			throws NotRegisteredException ,NotConnectedException{
-		if(!channel.getConsumersSubscribed().containsKey(proxyConsumer))
+			throws NotRegisteredException, NotConnectedException {
+		if (!channel.getConsumersSubscribed().containsKey(proxyConsumer)) {
 			throw new NotRegisteredException();
+		}
 		if (!channel.getConsumersConnected().remove(proxyConsumer)) {
 			throw new NotConnectedException();
 		}
 	}
 
 	public void addProxyForPushSupplierToConnectedList(
-			ProxyForPushSupplierImpl proxySupplier)throws AlreadyConnectedException,MaximalConnectionReachedException{
-		if(channel.isSuppliersConnectedsListcapacityReached())
+			ProxyForPushSupplierImpl proxySupplier)
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
+		if (channel.isSuppliersConnectedsListcapacityReached()) {
 			throw new MaximalConnectionReachedException();
-		if (!channel.getSuppliersConnected().add(proxySupplier)) 
+		}
+		if (!channel.getSuppliersConnected().add(proxySupplier)) {
 			throw new AlreadyConnectedException();
+		}
 	}
+
 	public void removeProxyForPushSupplierFromConnectedList(
 			ProxyForPushSupplierOperations proxySupplier)
-			throws NotConnectedException{
+			throws NotConnectedException {
 		if (!channel.getSuppliersConnected().remove(proxySupplier)) {
 			throw new NotConnectedException();
 		}
 	}
 
-	public void addEvent(Event e){
-		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
+	public void addEvent(Event e) {
+		for (ProxyForPushConsumerImpl consumer : channel
+				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
 		}
 	}
 
-	
 }
