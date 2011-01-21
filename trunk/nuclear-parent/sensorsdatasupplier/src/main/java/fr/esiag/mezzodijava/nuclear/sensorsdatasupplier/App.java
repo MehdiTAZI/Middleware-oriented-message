@@ -1,7 +1,7 @@
-package fr.esiag.mezzodijava.nuclear.sensor;
+package fr.esiag.mezzodijava.nuclear.sensorsdatasupplier;
 
 /**
- * Hello world!
+ * Hello world!S
  *
  */
 public class App 
