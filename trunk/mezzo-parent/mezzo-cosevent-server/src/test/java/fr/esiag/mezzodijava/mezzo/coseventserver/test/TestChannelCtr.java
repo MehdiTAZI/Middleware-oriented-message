@@ -2,6 +2,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 import static org.junit.Assert.fail;
 
+import java.util.Date;
 import java.util.Random;
 
 import org.junit.After;
@@ -9,21 +10,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omg.CORBA.Context;
-import org.omg.CORBA.ContextList;
-import org.omg.CORBA.DomainManager;
-import org.omg.CORBA.ExceptionList;
-import org.omg.CORBA.NVList;
-import org.omg.CORBA.NamedValue;
-import org.omg.CORBA.Object;
-import org.omg.CORBA.Policy;
-import org.omg.CORBA.Request;
-import org.omg.CORBA.SetOverrideType;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
-import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
-import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
@@ -78,313 +67,75 @@ public class TestChannelCtr {
 
 	@Test
 	public void testAddProxyForPushConsumerToSubscribedListAlreadyRegistered() {
+
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		try {
-			ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-			CallbackConsumer cb = new CallbackConsumer() {
-
-				@Override
-				public Object _set_policy_override(Policy[] policies,
-						SetOverrideType set_add) {
-
-					return null;
-				}
-
-				@Override
-				public Request _request(String operation) {
-
-					return null;
-				}
-
-				@Override
-				public void _release() {
-
-				}
-
-				@Override
-				public boolean _non_existent() {
-
-					return false;
-				}
-
-				@Override
-				public boolean _is_equivalent(Object other) {
-
-					return false;
-				}
-
-				@Override
-				public boolean _is_a(String repositoryIdentifier) {
-
-					return false;
-				}
-
-				@Override
-				public int _hash(int maximum) {
-
-					return 0;
-				}
-
-				@Override
-				public Policy _get_policy(int policy_type) {
-
-					return null;
-				}
-
-				@Override
-				public Object _get_interface_def() {
-
-					return null;
-				}
-
-				@Override
-				public DomainManager[] _get_domain_managers() {
-
-					return null;
-				}
-
-				@Override
-				public Object _duplicate() {
-
-					return null;
-				}
-
-				@Override
-				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result,
-						ExceptionList exclist, ContextList ctxlist) {
-
-					return null;
-				}
-
-				@Override
-				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result) {
-
-					return null;
-				}
-
-				@Override
-				public void receive(Event evt) throws ConsumerNotFoundException {
-
-				}
-			};
-			try {
-				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-				fail();
-			} catch (AlreadyRegisteredException e) {
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-
+			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+			fail();
+		} catch (AlreadyRegisteredException e) {
+			// test ok, nothing to do
 		}
 
 	}
 
 	@Test
-	public void testAddProxyForPushConsumerToSubscribedListNormal() {
-		try {
-			ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-			CallbackConsumer cb = new CallbackConsumer() {
-
-				@Override
-				public Object _set_policy_override(Policy[] policies,
-						SetOverrideType set_add) {
-
-					return null;
-				}
-
-				@Override
-				public Request _request(String operation) {
-
-					return null;
-				}
-
-				@Override
-				public void _release() {
-
-				}
-
-				@Override
-				public boolean _non_existent() {
-
-					return false;
-				}
-
-				@Override
-				public boolean _is_equivalent(Object other) {
-
-					return false;
-				}
-
-				@Override
-				public boolean _is_a(String repositoryIdentifier) {
-
-					return false;
-				}
-
-				@Override
-				public int _hash(int maximum) {
-
-					return 0;
-				}
-
-				@Override
-				public Policy _get_policy(int policy_type) {
-
-					return null;
-				}
-
-				@Override
-				public Object _get_interface_def() {
-
-					return null;
-				}
-
-				@Override
-				public DomainManager[] _get_domain_managers() {
-
-					return null;
-				}
-
-				@Override
-				public Object _duplicate() {
-
-					return null;
-				}
-
-				@Override
-				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result,
-						ExceptionList exclist, ContextList ctxlist) {
-
-					return null;
-				}
-
-				@Override
-				public Request _create_request(Context ctx, String operation,
-						NVList arg_list, NamedValue result) {
-
-					return null;
-				}
-
-				@Override
-				public void receive(Event evt) throws ConsumerNotFoundException {
-
-				}
-			};
-			try {
-				channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-			} catch (AlreadyRegisteredException e) {
-				fail();
-				e.printStackTrace();
-			}
-		} catch (Exception e) {
-
-		}
+	public void testAddProxyForPushConsumerToSubscribedListNormal()
+			throws AlreadyRegisteredException {
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 
 	}
 
+	@Test
+	public void testRemoveProxyForPushConsumerFromConnectedListNormal()
+			throws AlreadyConnectedException,
+			MaximalConnectionReachedException, NotRegisteredException,
+			NotConnectedException, AlreadyRegisteredException {
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		//register
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		//connect
+		channelCtr.addProxyForPushConsumerToConnectedList(ppc);
+		//test !
+		channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
+
+	}
+
+	@Test
+	public void testRemoveProxyForPushConsumerFromConnectedListNotConnected()
+			throws NotRegisteredException, AlreadyRegisteredException {
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		try {
+			//register
+			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+			//test !
+			channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
+			fail();
+		} catch (NotConnectedException e) {
+			// test ok nothing to do
+		}
+	}
+
+	@Test
+	public void testRemoveProxyForPushConsumerFromConnectedListNotRegistered()
+			throws NotConnectedException {
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		try {
+			channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
+			fail();
+		} catch (NotRegisteredException e) {
+			// test ok nothing to do
+		}
+	}
+
+	@Test
 	public void testRemoveProxyForPushConsumerFromSubscribedListNormal()
-			throws AlreadyRegisteredException {
+			throws AlreadyRegisteredException, NotRegisteredException {
 
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		try {
-			channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
-		} catch (NotRegisteredException e) {
-
-			e.printStackTrace();
-			fail();
-		}
+		channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
 	}
 
 	@Test
@@ -392,307 +143,30 @@ public class TestChannelCtr {
 			throws AlreadyRegisteredException {
 
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
 		try {
 			channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
 			fail();
 		} catch (NotRegisteredException e) {
-
-			e.printStackTrace();
-
+			// test ok, nothing to do
 		}
 	}
 
 	@Test
 	public void testAddProxyForPushConsumerToConnectedListNormal()
-			throws AlreadyRegisteredException {
+			throws AlreadyRegisteredException, NotRegisteredException,
+			AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
-
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		try {
-			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
-		} catch (AlreadyConnectedException e) {
-			fail();
-			e.printStackTrace();
-		} catch (NotRegisteredException e) {
-			fail();
-			e.printStackTrace();
-		} catch (MaximalConnectionReachedException e) {
-			fail();
-			e.printStackTrace();
-		}
+		channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 	}
 
 	@Test
 	public void testAddProxyForPushConsumerToConnectedListMaximalConnectionReached()
-			throws AlreadyRegisteredException {
+			throws AlreadyRegisteredException, NotRegisteredException,
+			AlreadyConnectedException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic);
 		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
-
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc2);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc3);
@@ -701,221 +175,31 @@ public class TestChannelCtr {
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc2);
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc3);
 			fail();
-		} catch (AlreadyConnectedException e) {
-			fail();
-			e.printStackTrace();
-		} catch (NotRegisteredException e) {
-			fail();
-			e.printStackTrace();
 		} catch (MaximalConnectionReachedException e) {
-			e.printStackTrace();
+			// test ok, nothing to do
 		}
 	}
 
 	@Test
 	public void testAddProxyForPushConsumerToConnectedListNotRegistered()
-			throws AlreadyRegisteredException {
+			throws AlreadyRegisteredException, AlreadyConnectedException,
+			MaximalConnectionReachedException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic);
 		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
-
 		try {
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			fail();
-		} catch (AlreadyConnectedException e) {
-			fail();
-			e.printStackTrace();
 		} catch (NotRegisteredException e) {
-
-			e.printStackTrace();
-		} catch (MaximalConnectionReachedException e) {
-			fail();
-			e.printStackTrace();
-
+			// test ok, nothing to do
 		}
 	}
 
 	@Test
 	public void testAddProxyForPushConsumerToConnectedListAlreadyConnected()
-			throws AlreadyRegisteredException {
+			throws AlreadyRegisteredException, NotRegisteredException,
+			MaximalConnectionReachedException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		CallbackConsumer cb = new CallbackConsumer() {
-
-			@Override
-			public Object _set_policy_override(Policy[] policies,
-					SetOverrideType set_add) {
-
-				return null;
-			}
-
-			@Override
-			public Request _request(String operation) {
-
-				return null;
-			}
-
-			@Override
-			public void _release() {
-
-			}
-
-			@Override
-			public boolean _non_existent() {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_equivalent(Object other) {
-
-				return false;
-			}
-
-			@Override
-			public boolean _is_a(String repositoryIdentifier) {
-
-				return false;
-			}
-
-			@Override
-			public int _hash(int maximum) {
-
-				return 0;
-			}
-
-			@Override
-			public Policy _get_policy(int policy_type) {
-
-				return null;
-			}
-
-			@Override
-			public Object _get_interface_def() {
-
-				return null;
-			}
-
-			@Override
-			public DomainManager[] _get_domain_managers() {
-
-				return null;
-			}
-
-			@Override
-			public Object _duplicate() {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result, ExceptionList exclist,
-					ContextList ctxlist) {
-
-				return null;
-			}
-
-			@Override
-			public Request _create_request(Context ctx, String operation,
-					NVList arg_list, NamedValue result) {
-
-				return null;
-			}
-
-			@Override
-			public void receive(Event evt) throws ConsumerNotFoundException {
-
-			}
-		};
-
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		try {
 			Channel channel = BFFactory.createChannel(topic, 0);
@@ -924,37 +208,25 @@ public class TestChannelCtr {
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			fail();
 		} catch (AlreadyConnectedException e) {
-
-			e.printStackTrace();
-		} catch (NotRegisteredException e) {
-			fail();
-			e.printStackTrace();
-		} catch (MaximalConnectionReachedException e) {
-
-			e.printStackTrace();
-			fail();
+			// test ok nothing to do
 		}
 
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected() {
+	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected() throws MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		try {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
 			fail();
 		} catch (AlreadyConnectedException e) {
-
-			e.printStackTrace();
-		} catch (MaximalConnectionReachedException e) {
-			fail();
-			e.printStackTrace();
+			// nothing to do test ok
 		}
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached() {
+	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached() throws AlreadyConnectedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
@@ -964,45 +236,30 @@ public class TestChannelCtr {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
 			channelCtr.addProxyForPushSupplierToConnectedList(pps2);
 			fail();
-		} catch (AlreadyConnectedException e) {
-			fail();
 		} catch (MaximalConnectionReachedException e) {
-
-			e.printStackTrace();
+			// nothing to do test ok
 		}
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListNormal() {
+	public void testAddProxyForPushSupplierToConnectedListNormal() throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
 		Channel channel = BFFactory.createChannel(topic, 0);
 		channel.setCapacity(30);
-		try {
-			channelCtr.addProxyForPushSupplierToConnectedList(pps);
-
-		} catch (AlreadyConnectedException e) {
-			fail();
-		} catch (MaximalConnectionReachedException e) {
-			fail();
-			e.printStackTrace();
-		}
+		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 	}
 
+	@Test
 	public void testRemoveProxyForPushSupplierFromConnectedListNormal()
-			throws AlreadyConnectedException, MaximalConnectionReachedException {
+			throws AlreadyConnectedException, MaximalConnectionReachedException, NotConnectedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
-		try {
-			channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
-		} catch (NotConnectedException e) {
-			fail();
-			e.printStackTrace();
-		}
-
+		channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 	}
 
+	@Test
 	public void testRemoveProxyForPushSupplierFromConnectedListNotConnected()
 			throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
@@ -1010,9 +267,21 @@ public class TestChannelCtr {
 			channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 			fail();
 		} catch (NotConnectedException e) {
-
-			e.printStackTrace();
+			//test ok nothing to do
 		}
-
+	}
+	
+	@Test
+	public void testAddEvent() throws AlreadyRegisteredException{
+//		public void addEvent(Event e){
+//			for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
+//				channel.getConsumersSubscribed().get(consumer).add(e);
+//			}
+//		}
+		Channel channel = BFFactory.createChannel(topic, 0);
+		channel.setCapacity(2);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
+		channelCtr.addEvent(new Event((new Date()).getTime(),"TEST_EVENT"));
 	}
 }

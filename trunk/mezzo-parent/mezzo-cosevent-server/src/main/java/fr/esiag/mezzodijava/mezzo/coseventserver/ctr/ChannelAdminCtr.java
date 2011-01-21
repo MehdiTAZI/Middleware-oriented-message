@@ -19,7 +19,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
  * 
  * For Proxy creation : create, store in POA and return the Proxy
  * 
- * UC n°: US14,US15 (+US children) 
+ * UC n°: US14,US15 (+US children)
  * 
  * @author Mezzo-Team
  * 
@@ -30,53 +30,57 @@ public class ChannelAdminCtr {
 	private ORB orb;
 	private ChannelCtr channelCtr;
 	private String channel;
-	
 
 	// Constructor
-	@Deprecated
-	public ChannelAdminCtr(ORB orb,ChannelCtr channel) {
-		this.orb=orb;
-		this.channelCtr=channel;
-	}	
-	public ChannelAdminCtr(String channel){
-		this.channel=channel;
-		this.orb=BFFactory.createOrb(null, null);
-		this.channelCtr=BFFactory.createChannelCtr(channel);
+	public ChannelAdminCtr(String channel) {
+		this.channel = channel;
+		this.orb = BFFactory.createOrb(null, null);
+		this.channelCtr = BFFactory.createChannelCtr(channel);
 	}
-	public String getTopic(){
+
+	public String getTopic() {
 		return channel;
 	}
-	
 
-	public ProxyForPushSupplier createProxyForPushSupplier(){
-	ProxyForPushSupplierImpl proxy=null;
-		
-		try {					
-			//proxy=new ProxyForPushSupplierImpl(channelCtr);	
-			proxy= new ProxyForPushSupplierImpl(channel);
-			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-			poa.the_POAManager().activate();											
-		    return ProxyForPushSupplierHelper.narrow(poa.servant_to_reference(new ProxyForPushSupplierPOATie(proxy)));
-		    
-		} catch (Exception e) {
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public ProxyForPushConsumer createProxyForPushConsumer(){
-		ProxyForPushConsumerImpl proxy=null;
-		
+	public ProxyForPushSupplier createProxyForPushSupplier() {
+		ProxyForPushSupplier ppc = null;
+
 		try {
-			proxy=new ProxyForPushConsumerImpl(channel);
-			POA poa=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-			poa.the_POAManager().activate();									
-		
-			return ProxyForPushConsumerHelper.narrow(poa.servant_to_reference(new ProxyForPushConsumerPOATie(proxy)));
-		
-		} catch (Exception e) {
-			return null;
+			ProxyForPushSupplierImpl proxy = null;
+			proxy = new ProxyForPushSupplierImpl(channel);
+			POA poa = POAHelper.narrow(orb
+					.resolve_initial_references("RootPOA"));
+			poa.the_POAManager().activate();
+			ppc = ProxyForPushSupplierHelper
+					.narrow(poa
+							.servant_to_reference(new ProxyForPushSupplierPOATie(
+									proxy)));
+
+		} catch (org.omg.CORBA.UserException e) {
+			// TODO Log Corba error
+			e.printStackTrace();
 		}
+		return ppc;
+	}
+
+	public ProxyForPushConsumer createProxyForPushConsumer() {
+		ProxyForPushConsumer pps = null;
+		try {
+			ProxyForPushConsumerImpl proxy = null;
+			proxy = new ProxyForPushConsumerImpl(channel);
+			POA poa = POAHelper.narrow(orb
+					.resolve_initial_references("RootPOA"));
+			poa.the_POAManager().activate();
+
+			pps = ProxyForPushConsumerHelper
+					.narrow(poa
+							.servant_to_reference(new ProxyForPushConsumerPOATie(
+									proxy)));
+		} catch (org.omg.CORBA.UserException e) {
+			// TODO Log Corba error
+			e.printStackTrace();
+		}
+		return pps;
 	}
 
 }

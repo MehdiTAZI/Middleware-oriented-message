@@ -35,18 +35,12 @@ public class ChannelCtr {
 	// lien vers le model
 	Channel channel;
 	
-	// Edit FGI : Vector -> Set synchronized car moderne
-
-	
 	/**
-	 * Build instance of a ChannelCtr associated with a Channel entity
+	 * Build instance of a ChannelCtr associated with a Channel entity fetched byhis topic.
 	 * 
-	 * @param channel
-	 *            Channel entity
+	 * @param topic
+	 *            Channel name
 	 */
-	public ChannelCtr(Channel channel) {
-		this.channel = channel;
-	}
 	public ChannelCtr(String channel) {
 		this.channel = BFFactory.createChannel(channel,0);
 		
@@ -55,11 +49,6 @@ public class ChannelCtr {
 	public Channel getChannel() {
 		return channel;
 	}
-
-	public void setChannel(Channel channelModel) {
-		this.channel = channelModel;
-	}
-
 	
 	public void addProxyForPushConsumerToSubscribedList(
 			ProxyForPushConsumerImpl proxyConsumer)throws AlreadyRegisteredException {
@@ -98,15 +87,6 @@ public class ChannelCtr {
 		}
 	}
 
-	//TMA : un Supplier ne s'abonne pas
-	/*
-	public void addProxyForPushSupplierToSubscribedList(
-			ProxyForPushSupplierImpl proxySupplier) throws AlreadyRegisteredException{
-		if (!channel.getSuppliersSubscribed().add(proxySupplier)) {
-			throw new AlreadyRegisteredException();
-		}
-	}
-	*/
 	public void addProxyForPushSupplierToConnectedList(
 			ProxyForPushSupplierImpl proxySupplier)throws AlreadyConnectedException,MaximalConnectionReachedException{
 		if(channel.isSuppliersConnectedsListcapacityReached())
@@ -121,14 +101,6 @@ public class ChannelCtr {
 			throw new NotConnectedException();
 		}
 	}
-	//TMA : un supplier ne s'abonne/desabonne pas
-	/*
-	public void removeProxyForPushSupplierFromSubscribedList(
-			ProxyForPushSupplierOperations proxySupplier)
-			throws NotRegisteredException {
-		if (!channel.getSuppliersSubscribed().remove(proxySupplier)) 
-			throw new NotRegisteredException();
-	}*/
 
 	public void addEvent(Event e){
 		for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){

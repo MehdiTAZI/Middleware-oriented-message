@@ -28,13 +28,6 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations{
 	private ChannelCtr channelCtr;
 	private boolean connected=false;
 	
-	/**
-	 * @param channelCtr A channel Controler
-	 */
-	
-	public ProxyForPushSupplierImpl(ChannelCtr channelCtr){
-		this.channelCtr = channelCtr;		 		
-	}
 	public ProxyForPushSupplierImpl(String topic){
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}

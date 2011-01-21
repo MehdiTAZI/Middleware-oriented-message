@@ -15,8 +15,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 /**
  * Classe ProxyForPushConsumerImpl
  * 
- * Proxy for subscribing and receiving Events, acts as a Supplier 
- * accessible to a client, implementation of the ProxyForPushConsumer IDL Interface
+ * Proxy for subscribing and receiving Events, acts as a Supplier accessible to
+ * a client, implementation of the ProxyForPushConsumer IDL Interface
  * 
  * UC n°: US15 (+US children)
  * 
@@ -24,8 +24,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  * 
  */
 
-public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushConsumerOperations{
-
+public class ProxyForPushConsumerImpl implements MessageListener,
+		ProxyForPushConsumerOperations {
 
 	/**
 	 * The Channel Controller used by this facade
@@ -34,21 +34,18 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 
 	CallbackConsumer callbackConsumer;
 
-	
-	public ProxyForPushConsumerImpl(ChannelCtr channelCtr) {
-		this.channelCtr = channelCtr;
-	}
-	public ProxyForPushConsumerImpl(String topic){
+	public ProxyForPushConsumerImpl(String topic) {
 		this.channelCtr = BFFactory.createChannelCtr(topic);
 	}
-	
+
 	@Override
 	public void subscribe(CallbackConsumer cc)
 			throws AlreadyRegisteredException {
 		this.callbackConsumer = cc;
 		channelCtr.addProxyForPushConsumerToSubscribedList(this);
-		System.out.println("Consumer Subscribed to " + channelCtr.getChannel().getTopic());
-		
+		System.out.println("Consumer Subscribed to "
+				+ channelCtr.getChannel().getTopic());
+
 	}
 
 	@Override
@@ -57,23 +54,25 @@ public class ProxyForPushConsumerImpl implements MessageListener,ProxyForPushCon
 	}
 
 	@Override
-	public void connect() throws AlreadyConnectedException, AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException{
+	public void connect() throws AlreadyConnectedException,
+			AlreadyConnectedException, NotRegisteredException,
+			MaximalConnectionReachedException {
 		channelCtr.addProxyForPushConsumerToConnectedList(this);
-		
+
 	}
 
 	@Override
-	public void disconnect() throws NotConnectedException, NotRegisteredException {
+	public void disconnect() throws NotConnectedException,
+			NotRegisteredException {
 		channelCtr.removeProxyForPushConsumerFromConnectedList(this);
-		
+
 	}
 
-	//pour recevoir une notification s'il y a des events envoyÃ©s par un supplier 
+	// pour recevoir une notification s'il y a des events envoyÃ©s par un
+	// supplier
 	@Override
 	public void receive(Event evt) throws ConsumerNotFoundException {
-			callbackConsumer.receive(evt);
+		callbackConsumer.receive(evt);
 	}
-	
-
 
 }

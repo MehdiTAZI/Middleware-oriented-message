@@ -1,11 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.factory;
 
-
-
-
-
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -13,7 +7,6 @@ import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
@@ -24,61 +17,83 @@ public class BFFactory {
 	private static HashMap<String, ChannelCtr> mapChannelCtr = new HashMap<String, ChannelCtr>();
 	private static HashMap<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
 	private static HashMap<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();
-	
-	/*TMA : tout les methode static ici doivent etre synchronized 
-	en cas d'appel concurent ( remarque de Mr.Gill Giraud ) */
-	
-	
-	
-	
-	public synchronized static ORB createOrb(String[] args, Properties props){
+
+	public synchronized static ORB createOrb(String[] args, Properties props) {
 		System.out.println(orb);
-		if(orb==null)
+		if (orb == null)
 			orb = ORB.init(args, props);
 		return orb;
-		
+
 	}
 
-	public synchronized static Channel createChannel(String channel, int capacity){
-		if (mapChannel.get(channel)==null)
-			mapChannel.put(channel, new Channel(channel, capacity));
-		return mapChannel.get(channel);
+	public synchronized static Channel createChannel(String topic, int capacity) {
+		if (mapChannel.get(topic) == null)
+			mapChannel.put(topic, new Channel(topic, capacity));
+		return mapChannel.get(topic);
 	}
-	
-	public synchronized static Channel forceChannel(String topic, Channel channel){
-		if (mapChannel.get(topic)!=null){
+
+	public synchronized static Channel forceChannel(String topic,
+			Channel channel) {
+		if (mapChannel.get(topic) != null) {
 			mapChannel.remove(topic);
 		}
 		mapChannel.put(topic, channel);
 		return mapChannel.get(topic);
 	}
-	
-	public synchronized static ChannelCtr createChannelCtr (String channel){
-		if (mapChannelCtr.get(channel)==null)
-			mapChannelCtr.put(channel, new ChannelCtr(channel));
-		return mapChannelCtr.get(channel);
-		
-	}
-	
-	public synchronized static ChannelAdminCtr createChannelAdminCtr(String channel){
-		if (mapChannelAdminCtr.get(channel)==null)
-			mapChannelAdminCtr.put(channel, new ChannelAdminCtr(channel));
-		return mapChannelAdminCtr.get(channel);
-		
-	}
-	
-	public synchronized static ChannelAdminImpl createChannelAdminImpl(String channel){
-		if (mapChannelAdminImpl.get(channel)==null)
-			mapChannelAdminImpl.put(channel, new ChannelAdminImpl(channel));
-		return mapChannelAdminImpl.get(channel);
-	}
-	
-	public synchronized static ChannelAdminImpl initiateChannel(String channel,int capacity){
-		createChannel(channel, capacity);
-		return createChannelAdminImpl( channel);
-	}
-	
 
-	
-	
+	/**
+	 * Test purpose only. Enable to inject a mock object in the
+	 * ChannelCtrFactory
+	 * 
+	 * @param topic
+	 * @param alternateChannelCtr
+	 *            An alternative implementation of ChannelCtr typically a mock
+	 */
+	public static void setAlternateChannelCtr(String topic,
+			ChannelCtr alternateChannelCtr) {
+		mapChannelCtr.put(topic, alternateChannelCtr);
+	}
+
+	public synchronized static ChannelCtr createChannelCtr(String topic) {
+		if (mapChannelCtr.get(topic) == null)
+			mapChannelCtr.put(topic, new ChannelCtr(topic));
+		return mapChannelCtr.get(topic);
+
+	}
+
+	/**
+	 * Test purpose only. Enable to inject a mock object in the
+	 * ChannelAdminCtrFactory
+	 * 
+	 * @param topic
+	 * @param alternateChannelAdminCtr
+	 *            An alternative implementation of ChannelAdminCtr typically a
+	 *            mock
+	 */
+	public static void setAlternateChannelAdminCtr(String topic,
+			ChannelAdminCtr alternateChannelAdminCtr) {
+		mapChannelAdminCtr.put(topic, alternateChannelAdminCtr);
+	}
+
+	public synchronized static ChannelAdminCtr createChannelAdminCtr(
+			String topic) {
+		if (mapChannelAdminCtr.get(topic) == null)
+			mapChannelAdminCtr.put(topic, new ChannelAdminCtr(topic));
+		return mapChannelAdminCtr.get(topic);
+
+	}
+
+	public synchronized static ChannelAdminImpl createChannelAdminImpl(
+			String topic) {
+		if (mapChannelAdminImpl.get(topic) == null)
+			mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
+		return mapChannelAdminImpl.get(topic);
+	}
+
+	public synchronized static ChannelAdminImpl initiateChannel(String topic,
+			int capacity) {
+		createChannel(topic, capacity);
+		return createChannelAdminImpl(topic);
+	}
+
 }
