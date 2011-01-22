@@ -36,11 +36,15 @@ public class MainSupplierIT {
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
 		supplierProxy.connect();
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 10; i++)
 			try {
 				supplierProxy
 						.push(new Event((new Date()).getTime(), "TEST" + i));
+				Thread.sleep(3000);
 			} catch (NotConnectedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -52,8 +56,35 @@ public class MainSupplierIT {
 	public static void main(String[] args) throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException,
 			EventClientException, TopicNotFoundException {
-		new MainSupplierIT();
+		for (int i = 0; i < 10; i++) {
+			new Thread(i + "") {
+				{
+					start();
+				}
+				public void run(){
+					try {
+						new MainSupplierIT();
+					} catch (ChannelNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (MaximalConnectionReachedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (AlreadyConnectedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EventClientException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (TopicNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			};
+
+		}
 
 	}
-
 }

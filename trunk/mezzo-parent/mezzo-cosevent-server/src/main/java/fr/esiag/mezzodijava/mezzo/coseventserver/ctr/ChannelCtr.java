@@ -4,6 +4,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -59,7 +60,7 @@ public class ChannelCtr {
 			throw new AlreadyRegisteredException();
 		} else {
 			channel.getConsumersSubscribed().put(proxyConsumer,
-					new ArrayList<Event>());
+					Collections.synchronizedList(new ArrayList<Event>()));
 		}
 	}
 
