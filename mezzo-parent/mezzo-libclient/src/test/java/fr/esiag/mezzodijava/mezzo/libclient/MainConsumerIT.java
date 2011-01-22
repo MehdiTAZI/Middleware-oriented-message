@@ -17,13 +17,15 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 public class MainConsumerIT {
 
-	public MainConsumerIT() throws EventClientException, TopicNotFoundException, ChannelNotFoundException, AlreadyRegisteredException
-	{
+	public MainConsumerIT() throws EventClientException,
+			TopicNotFoundException, ChannelNotFoundException,
+			AlreadyRegisteredException {
 		EventClient ec = EventClient.init(null);
-		ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
-		ProxyForPushConsumer consumerProxy = channelAdmin.getProxyForPushConsumer();
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+		ProxyForPushConsumer consumerProxy = channelAdmin
+				.getProxyForPushConsumer();
 		callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
-		CallbackConsumer cbc=ec.serveCallbackConsumer(callbackImpl);
+		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		consumerProxy.subscribe(cbc);
 		try {
 			consumerProxy.connect();
@@ -37,23 +39,53 @@ public class MainConsumerIT {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("ALL DONE");
 		ORB orb = BFFactory.createOrb(null, null);
 		orb.run();
 	}
-	public static void main(String[] args) throws ChannelNotFoundException, AlreadyRegisteredException, EventClientException, TopicNotFoundException {
-		new MainConsumerIT();
+
+	public static void main(String[] args) throws ChannelNotFoundException,
+			AlreadyRegisteredException, EventClientException,
+			TopicNotFoundException {
+		for (int i = 0; i < 10; i++) {
+			new Thread(i + "") {
+				{
+					start();
+				}
+				public void run(){
+					try {
+						new MainConsumerIT();
+					} catch (ChannelNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (EventClientException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (TopicNotFoundException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (AlreadyRegisteredException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+
+			};
+
+		}
+
 
 	}
-	
+
 	@Test
-	public void testConsumerPush() throws Exception{
+	public void testConsumerPush() throws Exception {
 		EventClient ec = EventClient.init(null);
-		ChannelAdmin channelAdmin= ec.resolveChannelByTopic("MEZZO");
-		ProxyForPushConsumer consumerProxy = channelAdmin.getProxyForPushConsumer();
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+		ProxyForPushConsumer consumerProxy = channelAdmin
+				.getProxyForPushConsumer();
 		callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
-		CallbackConsumer cbc=ec.serveCallbackConsumer(callbackImpl);
+		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		consumerProxy.subscribe(cbc);
 		System.out.println("ALL DONE");
 	}

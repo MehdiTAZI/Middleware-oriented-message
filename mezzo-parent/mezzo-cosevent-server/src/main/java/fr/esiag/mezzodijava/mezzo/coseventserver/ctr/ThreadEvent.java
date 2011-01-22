@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -17,8 +18,10 @@ public class ThreadEvent implements Runnable{
 	public void run() {
 		while(true){
 			for(ProxyForPushConsumerImpl consumer:channelCtr.getChannel().getConsumersSubscribed().keySet()){
+				synchronized(channelCtr){
 				if(channelCtr.getChannel().getConsumersConnected().contains(consumer))
-					for(Event e:channelCtr.getChannel().getConsumersSubscribed().get(consumer))
+					for(Event e:channelCtr.getChannel().
+							getConsumersSubscribed().get(consumer))
 						try {
 							consumer.receive(e);
 							//TMA : todo => supprimer les messages recu de la Queuqe  
@@ -30,8 +33,9 @@ public class ThreadEvent implements Runnable{
 							//denvoyer lensemble des messages lors de la connexion du consumer
 						}
 					//TMA : je ne suis pas dacorrd
-					channelCtr.getChannel().getConsumersSubscribed().put(consumer, new ArrayList<Event>());
+					channelCtr.getChannel().getConsumersSubscribed().put(consumer, Collections.synchronizedList(new ArrayList<Event>()));
 
+				}
 			}
 			try {
 				Thread.sleep(60);

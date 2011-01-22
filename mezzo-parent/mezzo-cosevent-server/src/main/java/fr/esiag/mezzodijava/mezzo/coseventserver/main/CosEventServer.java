@@ -73,7 +73,7 @@ public class CosEventServer {
 		ChannelAdminCtr channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
 		ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 				channelAdminCtr);*/
-		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,2);
+		ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(channelName,10);
 		
 		ThreadEvent th = new ThreadEvent(channelName);
 		Thread thread = new Thread(th);
