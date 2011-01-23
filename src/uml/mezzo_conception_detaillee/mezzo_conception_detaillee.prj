@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 34
+  revision 35
   modified_by 3 "Ordi"
 
 
@@ -733,6 +733,10 @@ ${members}}
 	    classrelation_ref 158722 // channelCtr (<unidirectional association>)
 	  b parent class_ref 134787 // ChannelCtr
       end
+
+      classrelation 152963 // <aggregation>
+	relation_ref 151043 // <aggregation>
+      end
     end
 
     class 128773 "ProxyForPushConsumerHelper"
@@ -966,6 +970,16 @@ ${members}}
 	    classrelation_ref 145155 // <dependency>
 	  b parent class_ref 136195 // ProxyForPushConsumer
       end
+
+      attribute 143747 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 134787 "ChannelCtr"
@@ -1184,6 +1198,13 @@ ${members}}
 	    classrelation_ref 179202 // <realization>
 	  b parent class_ref 136579 // Runnable
       end
+
+      classrelation 152195 // <dependency>
+	relation 150659 -_->
+	  a default
+	    classrelation_ref 152195 // <dependency>
+	  b parent class_ref 128645 // ProxyForPushConsumerImpl
+      end
     end
 
     class 135043 "EventServerException"
@@ -1358,6 +1379,20 @@ ${members}}
 "
 	    classrelation_ref 145027 // <aggregation>
       end
+
+      operation 168451 "forceChannel"
+	class_operation public return_type class_ref 135811 // Channel
+	nparams 2
+	  param in name "topic" explicit_type "string"
+	  param in name "channel" type class_ref 135811 // Channel
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 135299 "MessageListener"
@@ -1404,17 +1439,6 @@ ${members}};
 "
       explicit_switch_type ""
       
-      operation 128517 "narrow"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
     end
 
     class 135555 "ProxyForPushSupplierOperations"
@@ -1428,54 +1452,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 135045 "connect"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135173 "disconnect"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135301 "subscribe"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "callbackSupplier" explicit_type "CallbackSupplier"
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135429 "unsubscribe"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
     end
 
     class 135683 "CosEventServer"
@@ -1687,7 +1663,7 @@ ${members}}
 	
       end
 
-      operation 141315 "ConsumersConnectedListcapacityReached"
+      operation 141315 "isConsumersConnectedListcapacityReached"
 	public explicit_return_type "bool"
 	nparams 0
 	
@@ -1699,7 +1675,7 @@ ${members}}
 	
       end
 
-      operation 141443 "SuppliersConnectedsListcapacityReached"
+      operation 141443 "isSuppliersConnectedsListcapacityReached"
 	public explicit_return_type "bool"
 	nparams 0
 	
@@ -1712,42 +1688,6 @@ ${members}}
       end
 
       operation 141571 "setCapacity"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 141699 "getEvents"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 141827 "setEvents"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 141955 "addEvents"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -1774,6 +1714,45 @@ ${members}}
 
       classrelation 128645 // ()
 	relation_ref 128517 // 
+      end
+
+      classrelation 152323 // consumersSubscribed (<aggregation>)
+	relation 150787 o---
+	  stereotype "HashMap"
+	  a role_name "consumersSubscribed" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152323 // consumersSubscribed (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152451 // <aggregation>
+      end
+
+      classrelation 152579 // consumersConnected (<aggregation>)
+	relation 150915 o---
+	  stereotype "set"
+	  a role_name "consumersConnected" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152579 // consumersConnected (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152707 // <aggregation>
+      end
+
+      classrelation 152835 // suppliersConnected (<aggregation>)
+	relation 151043 o---
+	  stereotype "set"
+	  a role_name "suppliersConnected" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152835 // suppliersConnected (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152963 // <aggregation>
       end
     end
 
@@ -1859,19 +1838,6 @@ ${members}}
 	idl_decl ""
       end
 
-      operation 138883 "ProxyForPushSupplierImpl"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "channelCtr" type class_ref 134787 // ChannelCtr
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
       operation 139011 "ProxyForPushSupplierImpl"
 	public explicit_return_type ""
 	nparams 1
@@ -1937,6 +1903,14 @@ ${members}}
 "
 	    classrelation_ref 158850 // channelCtr (<unidirectional association>)
 	  b parent class_ref 134787 // ChannelCtr
+      end
+
+      classrelation 152451 // <aggregation>
+	relation_ref 150787 // <aggregation>
+      end
+
+      classrelation 152707 // <aggregation>
+	relation_ref 150915 // <aggregation>
       end
     end
 
