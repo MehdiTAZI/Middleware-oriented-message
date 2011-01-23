@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 36
-  modified_by 2 "Franck"
+  revision 37
+  modified_by 3 "Ordi"
 
 
   
@@ -105,6 +105,24 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      classrelation 149123 // <unidirectional association>
+	relation 148995 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149123 // <unidirectional association>
+	  b parent class_ref 196994 // ThreadEvent
+      end
+
+      classrelation 149379 // <unidirectional association>
+	relation 149251 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149379 // <unidirectional association>
+	  b parent class_ref 141955 // ThreadEvent
       end
     end
 
@@ -288,7 +306,7 @@ ${members}}
 	
       end
 
-      operation 211458 "deliverEvents"
+      operation 211458 "addEvents"
 	public explicit_return_type ""
 	nparams 0
 	
@@ -514,6 +532,27 @@ ${members}}
 	    classrelation_ref 241538 // callBackConsumer (<unidirectional association>)
 	  b parent class_ref 190210 // CallbackConsumer
       end
+
+      classrelation 149251 // <unidirectional association>
+	relation 149123 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149251 // <unidirectional association>
+	  b parent class_ref 196994 // ThreadEvent
+      end
+
+      operation 148227 "receive"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 189954 "ChannelAdminImpl"
@@ -704,6 +743,55 @@ ${members}}
 	
 	
 	
+      end
+    end
+
+    class 141955 "ThreadEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 148355 "deliverEvents"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 149507 // <unidirectional association>
+	relation 149379 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149507 // <unidirectional association>
+	  b parent class_ref 189826 // ProxyForPushConsumerImpl
+      end
+
+      classrelation 149635 // <dependency>
+	relation 149507 -_->
+	  a package
+	    classrelation_ref 149635 // <dependency>
+	  b parent class_ref 189826 // ProxyForPushConsumerImpl
+      end
+
+      classrelation 149763 // <unidirectional association>
+	relation 149635 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149763 // <unidirectional association>
+	  b parent class_ref 188674 // Channel
       end
     end
   end

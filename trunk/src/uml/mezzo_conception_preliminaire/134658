@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse" // Lien vers projet mezzo_analyse::mezzo_analyse
   revision 1
-  modified_by 2 "Franck"
+  modified_by 3 "Ordi"
   // class settings
   //class diagram settings
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -140,8 +140,8 @@ format 76
       classrelation 141954 // (events)
 	relation 141570 *--- name "events"
 	  oid 141570
-	  a role_name "" multiplicity "[capacity]" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 141954 // (events)
 	  b role_name "" private
@@ -154,8 +154,8 @@ format 76
       classrelation 142210 // (suppliers)
 	relation 141698 *--- name "suppliers"
 	  oid 141698
-	  a role_name "" multiplicity "*" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+	  a role_name "" multiplicity "[capacity]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
 "
 	    classrelation_ref 142210 // (suppliers)
 	  b role_name "" private
@@ -168,8 +168,8 @@ format 76
       classrelation 184834 // (consumers)
 	relation 183298 *--- name "consumers"
 	  oid 183298
-	  a role_name "" multiplicity "*" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+	  a role_name "" multiplicity "[capacity]" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
 "
 	    classrelation_ref 184834 // (consumers)
 	  b role_name "" private
@@ -481,20 +481,6 @@ ${members}}
 	oid 177922
       end
 
-      operation 182658 "addCallbackConsumer"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "cb" type class_ref 128002 // CallbackConsumer
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	oid 134787
-      end
-
       classrelation 198914 // <unidirectional association>
 	relation 197122 --->
 	  oid 134915
@@ -504,20 +490,6 @@ ${members}}
 	    classrelation_ref 198914 // <unidirectional association>
 	  b parent class_ref 128514 // ProxyForPushConsumer
 	oid 134915
-      end
-
-      operation 182914 "removeCallbackConsumer"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "cb" type class_ref 128002 // CallbackConsumer
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-	oid 135043
       end
 
       operation 183042 "addEvent"
@@ -638,6 +610,31 @@ ${members}}
 	    classrelation_ref 225154 // <unidirectional association>
 	  b parent class_ref 128386 // Event
 	oid 128004
+      end
+
+      classrelation 142211 // <aggregation>
+	relation 142211 o---
+	  oid 142211
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142211 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142339 // <aggregation>
+	oid 142211
+      end
+
+      classrelation 142467 // <unidirectional association>
+	relation 142339 --->
+	  oid 142339
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142467 // <unidirectional association>
+	  b parent class_ref 161922 // Channel
+	oid 142467
       end
     end
 
@@ -838,6 +835,19 @@ ${members}}
 	  b parent class_ref 148738 // ChannelCtr
 	oid 135043
       end
+
+      operation 141699 "receive"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+	oid 141699
+      end
     end
 
     class 128642 "ChannelAdminCtr"
@@ -1000,8 +1010,8 @@ ${members}}
       classrelation 169730 // (events)
 	relation 168450 *--- name "events"
 	  oid 168450
-	  a role_name "" multiplicity "[capacity]" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type}${multiplicity} ${name}${value};
+	  a role_name "" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
 	    classrelation_ref 169730 // (events)
 	  b role_name "" private
@@ -1025,6 +1035,11 @@ ${members}}
 	    classrelation_ref 225282 // <unidirectional association>
 	  b parent class_ref 196994 // ThreadEvent
 	oid 225282
+      end
+
+      classrelation 142339 // <aggregation>
+	relation_ref 142211 // <aggregation>
+	oid 142339
       end
     end
 
@@ -1201,6 +1216,17 @@ ${members}}
 	    classrelation_ref 248066 // <unidirectional association>
 	  b parent class_ref 128002 // CallbackConsumer
 	oid 225154
+      end
+
+      classrelation 142595 // <unidirectional association>
+	relation 142467 --->
+	  oid 142467
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142595 // <unidirectional association>
+	  b parent class_ref 128514 // ProxyForPushConsumer
+	oid 142595
       end
     end
   end
