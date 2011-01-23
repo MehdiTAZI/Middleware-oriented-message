@@ -1,0 +1,45 @@
+format 76
+
+classinstance 128002 class_ref 148226 // Channel_admin_agent_process
+  name ""   xyz 8 4 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // FrameworkMezzo
+  name ""   xyz 597 5 2000 life_line_z 2000
+note 130178 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE SEQUENCE SYSTEME
+UC07 : Administrer un Channel
+US159 : Scénario Exception 1 :  Creer un channel dont le TOPIC existe deja"
+  xyzwh 207 189 2000 299 75
+durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
+  xyzwh 80 60 2010 11 137
+end
+durationcanvas 128770 classinstance_ref 128130 // :FrameworkMezzo
+  xyzwh 640 59 2010 11 43
+end
+durationcanvas 129154 classinstance_ref 128130 // :FrameworkMezzo
+  xyzwh 640 139 2010 11 50
+end
+msg 128898 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 128770
+  yz 60 2015 explicitmsg "resolveEventServerChannelAdminInterface(event server channel admin interface name)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 166 48
+msg 129026 return
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128642
+  yz 90 2020 explicitmsg "event server channel admin interface reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 254 79
+msg 129282 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 129154
+  yz 139 2015 explicitmsg "createChannel (topic, capacity)"
+  show_full_operations_definition yes drawing_language uml show_context_mode default
+  label_xy 280 128
+msg 129410 return
+  from durationcanvas_ref 129154
+  to durationcanvas_ref 128642
+  yz 177 2015 explicitmsg "EXCEPTION : ChannelAlreadyExists"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 269 165
+end

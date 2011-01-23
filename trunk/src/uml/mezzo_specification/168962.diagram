@@ -1,10 +1,10 @@
 format 76
 
-subject 128002 "EventServer"
+subject 128002 "FrameworkMezzo"
   xyzwh 113 9 2000 312 138
 classcanvas 128642 class_ref 134658 // Consumer
   class_drawing_mode default show_context_mode default show_stereotype_properties default
-  xyz -328 123 2000
+  xyz -327 123 2000
 end
 usecasecanvas 129282 usecase_ref 128002 // UC03 : Donner un Event (push)
   xyzwh 238 54 3005 64 32 label_xy 196 86
