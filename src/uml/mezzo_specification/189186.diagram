@@ -1,0 +1,54 @@
+format 76
+
+classinstance 128002 class_ref 148226 // Channel_admin_agent_process
+  name ""   xyz 8 4 2000 life_line_z 2000
+classinstance 128130 class_ref 141698 // FrameworkMezzo
+  name ""   xyz 597 5 2000 life_line_z 2000
+note 130178 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE SEQUENCE SYSTEME
+UC07 : Administrer un Channel
+US161 : Scénario Exception 2 : Channel n'existe pas"
+  xyzwh 201 273 2000 299 75
+fragment 130306 "opt"
+  xyzwh 48 60 2025 630 82
+end
+textcanvas 130434 "[si le Channel admin agent process n'a plus la reference vers l'event serveur]"
+  xyzwh 89 62 2030 360 13
+note 130562 "The CAAP must have saved the unique id of a channel to delete it."
+  xyzwh 465 153 2000 177 49
+durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
+  xyzwh 80 94 2010 11 216
+end
+durationcanvas 128770 classinstance_ref 128130 // :FrameworkMezzo
+  xyzwh 640 92 2010 11 43
+end
+durationcanvas 129154 classinstance_ref 128130 // :FrameworkMezzo
+  xyzwh 640 218 2010 11 49
+end
+msg 128898 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 128770
+  yz 94 2015 explicitmsg "resolveEventServerChannelAdminInterface(event server channel admin interface name)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 166 82
+msg 129026 return
+  from durationcanvas_ref 128770
+  to durationcanvas_ref 128642
+  yz 124 2020 explicitmsg "event server channel admin interface reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 254 113
+msg 129282 synchronous
+  from durationcanvas_ref 128642
+  to durationcanvas_ref 129154
+  yz 218 2015 explicitmsg "destroyChannel (channel unique identifier)"
+  show_full_operations_definition yes drawing_language uml show_context_mode default
+  label_xy 248 208
+msg 129410 return
+  from durationcanvas_ref 129154
+  to durationcanvas_ref 128642
+  yz 256 2015 explicitmsg "EXCEPTION : ChannelNotFound"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 299 243
+line 131074 -_-_
+  from ref 130562 z 2016 to ref 129282
+end
