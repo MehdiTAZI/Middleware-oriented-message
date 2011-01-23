@@ -17,6 +17,10 @@ module cosevent {
 		string message;
 	};
 	
+	exception ChannelAlreadyExistsException{
+		string message;
+	};
+	
 	exception NotConnectedException{
 		string message;
 	};
@@ -61,5 +65,11 @@ module cosevent {
 	interface ChannelAdmin{
 		ProxyForPushConsumer getProxyForPushConsumer() raises (ChannelNotFoundException);
 		ProxyForPushSupplier getProxyForPushSupplier() raises (ChannelNotFoundException);
+	};
+	
+	interface EventServerChannelAdmin{
+		long long createChannel(in string topic) raises (ChannelAlreadyExistsException);
+		ChannelAdmin getChannel(in long long uniqueServerChannelId) raises (ChannelNotFoundException);
+		void destroyChannel(in long long uniqueServerChannelId) raises (ChannelNotFoundException);
 	};
 };
