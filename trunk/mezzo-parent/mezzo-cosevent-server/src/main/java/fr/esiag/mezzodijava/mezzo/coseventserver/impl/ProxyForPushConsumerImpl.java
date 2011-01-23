@@ -72,7 +72,11 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 	// supplier
 	@Override
 	public void receive(Event evt) throws ConsumerNotFoundException {
-		callbackConsumer.receive(evt);
+		try {
+			callbackConsumer.receive(evt);
+		} catch (org.omg.CORBA.COMM_FAILURE ex) {
+			throw new ConsumerNotFoundException(ex.toString());
+		}
 	}
 
 }
