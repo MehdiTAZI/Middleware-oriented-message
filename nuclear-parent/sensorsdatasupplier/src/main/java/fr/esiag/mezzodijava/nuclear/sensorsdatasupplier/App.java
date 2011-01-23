@@ -34,7 +34,6 @@ public class App
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
 		supplierProxy.connect();
-		Any data=orb.create_any();
 		
 		ServerSocket socketServer = new ServerSocket(8080);
 		Socket socketClient = socketServer.accept();
@@ -45,8 +44,7 @@ public class App
 		while (true) {
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
-			data.insert_string(str);
-			supplierProxy.push(new Event(0,data));   
+			supplierProxy.push(new Event((new Date()).getTime(),str));   
 		}
 		reader.close();
 		socketClient.close();
