@@ -13,6 +13,26 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
+/**
+ * Classe ThreadEvent to process event in queues and send them to consumers
+ * 
+ * In a infinite loop each 0.5s : 
+ * for each subscribed consumer
+ *   if it is connected
+ *     for each event in its list
+ *       consumer.receive()
+ *       if unreachable
+ *         consumer.disconnect()
+ *       end if
+ *     end for
+ *   end if
+ * end for
+ * 
+ * UC n°: US15 (+US children)
+ * 
+ * @author Mezzo-Team
+ * 
+ */
 public class ThreadEvent implements Runnable {
 	private Channel channel;
 
