@@ -3,6 +3,8 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.derby.tools.sysinfo;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
@@ -21,61 +23,75 @@ public class ThreadEvent implements Runnable {
 	@Override
 	public void run() {
 		while (true) {
-			// For all Subscribed Consumer to the Channel
-			for (ProxyForPushConsumerImpl consumer : channel
-					.getConsumersSubscribed().keySet()) {
-				// if the consumer is connected
-
-				if (channel.getConsumersConnected().contains(consumer)) {
-					// for all events of the consumer
-					List<Event> le = channel.getConsumersSubscribed().get(
-							consumer);
-					synchronized (le) {
-						Iterator<Event> i = le.iterator(); // Must be in
-															// synchronized
-															// block
-						while (i.hasNext()) {
-							Event e = i.next();
-							// for (Event e : le) {
-							try {
-								// TODO : here manage life of the events.
-								// send event to the consumer
-								consumer.receive(e);
-								// remove event from the list
-								i.remove();
-
-							} catch (ConsumerNotFoundException e1) {
-								// TODO log here
-								e1.printStackTrace();
-								// Consumer seems to be unreachable so it's time
-								// to disconnect it
-								try {
-									consumer.disconnect();
-								} catch (NotConnectedException e2) {
-									e2.printStackTrace();
-								} catch (NotRegisteredException e2) {
-									e2.printStackTrace();
-								}
-
-								// TMA : todo => ajouter les messages non recu
-								// de la Queuqe
-								// Sans oublier d'ajoutre dans la class qu'il
-								// faut le faite d'essyez
-								// denvoyer lensemble des messages lors de la
-								// connexion du consumer
-							}
-						}
-					}
-				}
-
-			}
+			processSubscribedConsumers();
 			try {
-				Thread.sleep(60);
+				Thread.sleep(500);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
 		}
 
+	}
+
+	/**
+	 * process subscribed consumer list of the channel to find
+	 * ProxyForPushConsumerImpl with Event to send. If the consumer is connected
+	 * et it has Event in his list (in Channel), processSubscribedConsumers()
+	 * call <code>ppfc.receive(Event)</code> on it.
+	 * 
+	 * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
+	 * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
+	 */
+	public void processSubscribedConsumers() {
+		// For all Subscribed Consumer to the Channel
+		for (ProxyForPushConsumerImpl consumer : channel
+				.getConsumersSubscribed().keySet()) {
+			// if the consumer is connected
+			// System.out.println("on passe a un autre " + consumer.toString());
+			if (channel.getConsumersConnected().contains(consumer)) {
+				// for all events of the consumer
+				// System.out.println("on passe a un autre connecte " +
+				// consumer.toString());
+				List<Event> le = channel.getConsumersSubscribed().get(consumer);
+				synchronized (le) {
+					Iterator<Event> i = le.iterator(); // Must be in
+														// synchronized
+														// block
+					while (i.hasNext()
+							&& channel.getConsumersConnected().contains(
+									consumer)) {
+						Event e = i.next();
+						try {
+							// TODO : here manage life of the events.
+							// send event to the consumer
+							consumer.receive(e);
+							// remove event from the list
+							i.remove();
+
+						} catch (ConsumerNotFoundException e1) {
+							// TODO log here
+							e1.printStackTrace();
+							// Consumer seems to be unreachable so it's time
+							// to disconnect it
+							try {
+								consumer.disconnect();
+							} catch (NotConnectedException e2) {
+								e2.printStackTrace();
+							} catch (NotRegisteredException e2) {
+								e2.printStackTrace();
+							}
+							// TMA : todo => ajouter les messages non recu
+							// de la Queuqe
+							// Sans oublier d'ajoutre dans la class qu'il
+							// faut le faite d'essyez
+							// denvoyer lensemble des messages lors de la
+							// connexion du consumer
+						}
+					}
+				}
+			}
+
+		}
 	}
 
 }

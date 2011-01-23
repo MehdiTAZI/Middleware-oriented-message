@@ -31,13 +31,16 @@ public class BFFactory {
 		return mapChannel.get(topic);
 	}
 
-	public synchronized static Channel forceChannel(String topic,
+	/**
+	 * Test purpose only. Enable to inject a mock object in the ChannelFactory.
+	 * 
+	 * @param topic
+	 * @param alternateChannel
+	 *            An alternative implementation of Channel typically a mock
+	 */
+	public synchronized static void setAlternateChannel(String topic,
 			Channel channel) {
-		if (mapChannel.get(topic) != null) {
-			mapChannel.remove(topic);
-		}
 		mapChannel.put(topic, channel);
-		return mapChannel.get(topic);
 	}
 
 	/**
