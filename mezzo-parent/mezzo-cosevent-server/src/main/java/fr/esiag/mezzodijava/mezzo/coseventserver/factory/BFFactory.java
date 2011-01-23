@@ -19,7 +19,6 @@ public class BFFactory {
 	private static HashMap<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();
 
 	public synchronized static ORB createOrb(String[] args, Properties props) {
-		System.out.println(orb);
 		if (orb == null)
 			orb = ORB.init(args, props);
 		return orb;
@@ -58,7 +57,18 @@ public class BFFactory {
 		if (mapChannelCtr.get(topic) == null)
 			mapChannelCtr.put(topic, new ChannelCtr(topic));
 		return mapChannelCtr.get(topic);
+	}
 
+	/**
+	 * Return current instance of Channel Bean associated with this topic or
+	 * <code>null</null> if not channel exists.
+	 * 
+	 * @param topic
+	 *            The Topic of the wanted channel.
+	 * @return Channel with the specified topic or <code>null</null>
+	 */
+	public static Channel getChannel(String topic) {
+		return mapChannel.get(topic);
 	}
 
 	/**

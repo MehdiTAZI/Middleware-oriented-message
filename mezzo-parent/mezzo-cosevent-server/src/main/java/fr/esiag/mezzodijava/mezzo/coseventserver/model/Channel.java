@@ -10,6 +10,8 @@ import java.util.Set;
 
 import javax.security.auth.callback.Callback;
 
+import org.apache.derby.tools.sysinfo;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
@@ -20,7 +22,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
  * 
  * The Channel model
  * 
- * UC n°: US14,US15 (+US children) 
+ * UC n°: US14,US15 (+US children)
  * 
  * @author Mezzo-Team
  * 
@@ -28,20 +30,20 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
 public class Channel {
 
-	private String topic;	
-	private int capacity;	
-	List<Event> events = Collections.synchronizedList(new ArrayList<Event>());
-	// private Vector<Event> events = new Vector<Event>();	
-	private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections.synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
-	private Set<ProxyForPushConsumerImpl> consumersConnected=new HashSet<ProxyForPushConsumerImpl>();
-	private Set<ProxyForPushSupplierImpl> suppliersConnected=new HashSet<ProxyForPushSupplierImpl>();
-	private Set<ProxyForPushSupplierImpl> suppliersSubscribed=new HashSet<ProxyForPushSupplierImpl>();
-	
-	public Channel(String topic, int capacity){
-		this.topic=topic;
-		this.capacity=capacity;
+	private String topic;
+	private int capacity;
+
+	private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections
+			.synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
+	private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
+	private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
+	private Set<ProxyForPushSupplierImpl> suppliersSubscribed = new HashSet<ProxyForPushSupplierImpl>();
+
+	public Channel(String topic, int capacity) {
+		this.topic = topic;
+		this.capacity = capacity;
 	}
-	
+
 	public Set<ProxyForPushConsumerImpl> getConsumersConnected() {
 		return consumersConnected;
 	}
@@ -60,9 +62,10 @@ public class Channel {
 		this.suppliersConnected = suppliersConnected;
 	}
 
-
-
-
+	public void addSubscribedConsumer(ProxyForPushConsumerImpl ppc) {
+		this.consumersSubscribed.put(ppc,
+				Collections.synchronizedList(new ArrayList<Event>()));
+	}
 
 	public Map<ProxyForPushConsumerImpl, List<Event>> getConsumersSubscribed() {
 		return consumersSubscribed;
@@ -93,28 +96,17 @@ public class Channel {
 	public int getCapacity() {
 		return capacity;
 	}
-	public boolean isConsumersConnectedListcapacityReached(){
-		return capacity==consumersConnected.size();
+
+	public boolean isConsumersConnectedListcapacityReached() {
+		return capacity == consumersConnected.size();
 	}
-	public boolean isSuppliersConnectedsListcapacityReached(){
-		return capacity==suppliersConnected.size();
+
+	public boolean isSuppliersConnectedsListcapacityReached() {
+		return capacity == suppliersConnected.size();
 	}
+
 	public void setCapacity(int capacity) {
 		this.capacity = capacity;
-	}
-
-	public List<Event> getEvents() {
-		return events;
-	}
-
-	public void setEvents(List<Event> events) {
-		this.events = events;
-	}
-	
-	public void addEvents(Event event){
-		events.add(event);
-		for(Event e:events)
-			System.out.println("AddEvent in Channel "+e);
 	}
 
 }
