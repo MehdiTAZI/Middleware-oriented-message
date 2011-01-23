@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 31
+  revision 33
   modified_by 2 "Franck"
 
 
@@ -1130,10 +1130,6 @@ ${members}}
 	    classrelation_ref 145667 // <dependency>
 	  b parent class_ref 135811 // Channel
       end
-
-      classrelation 137349 // <aggregation>
-	relation_ref 136453 // <aggregation>
-      end
     end
 
     class 134915 "ThreadEvent"
@@ -1150,7 +1146,7 @@ ${members}}
       operation 136451 "ThreadEvent"
 	public explicit_return_type ""
 	nparams 1
-	  param in name "channel" explicit_type "string"
+	  param in name "topic" explicit_type "string"
 	
 	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
   ${body}}
@@ -1172,26 +1168,21 @@ ${members}}
 	
       end
 
-      classrelation 137221 // <aggregation>
-	relation 136453 o---
-	  a role_name "" private
+      classrelation 172674 // channel (<unidirectional association>)
+	relation 172546 --->
+	  a role_name "channel" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 137221 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137349 // <aggregation>
+	    classrelation_ref 172674 // channel (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
       end
 
-      attribute 134533 "channelCtr"
-	private type class_ref 134787 // ChannelCtr
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
+      classrelation 179202 // <realization>
+	relation 179074 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 179202 // <realization>
+	  b parent class_ref 136579 // Runnable
       end
     end
 
@@ -2163,6 +2154,43 @@ ${members}}
       explicit_switch_type ""
       
     end
+
+    class 150658 "Thread"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 158850 "Thread"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "runnable" type class_ref 136579 // Runnable
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 158978 "start"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
   end
 
   classview 128130 "CONCEPTION DETAILLEE"
@@ -2202,6 +2230,11 @@ ${members}}
     end
 
     sequencediagram 128130 "DSCD - Resolution de nom par le client"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4-Landscape
+    end
+
+    sequencediagram 141186 "DSCD - UC02.1 Le Channel envoie les Events aux Consumers PUSH abonnes"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4-Landscape
     end
