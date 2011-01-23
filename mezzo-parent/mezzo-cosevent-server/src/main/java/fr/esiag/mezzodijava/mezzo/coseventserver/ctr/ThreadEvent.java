@@ -5,6 +5,8 @@ import java.util.List;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
@@ -36,16 +38,25 @@ public class ThreadEvent implements Runnable {
 							Event e = i.next();
 							// for (Event e : le) {
 							try {
-								// TODO : here manage life of the events
+								// TODO : here manage life of the events.
 								// send event to the consumer
 								consumer.receive(e);
 								// remove event from the list
 								i.remove();
-								// TMA : todo => supprimer les messages recu de
-								// la Queuqe
 
 							} catch (ConsumerNotFoundException e1) {
+								// TODO log here
 								e1.printStackTrace();
+								// Consumer seems to be unreachable so it's time
+								// to disconnect it
+								try {
+									consumer.disconnect();
+								} catch (NotConnectedException e2) {
+									e2.printStackTrace();
+								} catch (NotRegisteredException e2) {
+									e2.printStackTrace();
+								}
+
 								// TMA : todo => ajouter les messages non recu
 								// de la Queuqe
 								// Sans oublier d'ajoutre dans la class qu'il
@@ -55,13 +66,7 @@ public class ThreadEvent implements Runnable {
 							}
 						}
 					}
-					//TMA : je ne suis pas dacorrd
-					//channel.getConsumersSubscribed().get(consumer).clear();
 				}
-				// channel.getConsumersSubscribed().put(
-				// consumer,
-				// Collections
-				// .synchronizedList(new ArrayList<Event>()));
 
 			}
 			try {
