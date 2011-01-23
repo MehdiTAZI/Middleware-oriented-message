@@ -6,7 +6,7 @@ UC03 Envoyer un Event en PUSH
 US117 Scenario nominal : Connezxion a un Channel et envoie d'Event PUSH"
   xyzwh 304 1266 2005 391 73
 classinstance 128003 class_ref 143235 // Supplier
-  name ""   xyz 5 5 2000 life_line_z 2000
+  drawing_mode actor  name ""   xyz 9 5 2000 life_line_z 2000
 fragment 128004 "alt"
   xyzwh 673 138 3005 131 71
   separator 7112
@@ -47,7 +47,7 @@ classinstance 136707 class_ref 136451 // Event
   name "evt"   xyz 207 881 2000 life_line_z 2000
 fragment 138883 "seq"
   refer sequencediagram_ref 128130 // DSCD - Resolution de nom par le client
-  xyzwh 17 37.5 3005 809 45
+  xyzwh 17 39.5 3005 809 45
 end
 durationcanvas 128387 classinstance_ref 128131 // caimpl:ChannelAdminImpl
   xyzwh 147 85 2010 11 563
