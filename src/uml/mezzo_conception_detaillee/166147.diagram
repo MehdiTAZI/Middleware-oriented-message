@@ -38,7 +38,7 @@ classcanvas 129027 class_ref 128901 // POA
 end
 classcanvas 129411 class_ref 136451 // Event
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 753 659 2000
+  xyz 829 726 2000
 end
 classcanvas 129538 class_ref 128645 // ProxyForPushConsumerImpl
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -83,10 +83,6 @@ end
 classcanvas 132482 class_ref 136579 // Runnable
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 1114 721 2016
-end
-classcanvas 132994 class_ref 157186 // HashMap
-  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 639 751 2000
 end
 classcanvas 134658 class_ref 135683 // CosEventServer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -186,7 +182,7 @@ relationcanvas 131331 relation_ref 129285 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131458 relation_ref 158594 // <unidirectional association>
-  decenter_end 838
+  decenter_end 837
   from ref 129538 z 2006 to ref 128643
   role_a_pos 1074 447 3000 no_role_b
   multiplicity_a_pos 1074 470 3000 no_multiplicity_b
@@ -254,33 +250,17 @@ relationcanvas 132611 relation_ref 150659 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132867 relation_ref 150915 // <aggregation>
-  decenter_begin 241
+  decenter_begin 240
   decenter_end 773
   from ref 129539 z 2001 stereotype "<<set>>" xyz 555 579 3000 to ref 128387
-  role_a_pos 584 565 3000 no_role_b
+  role_a_pos 577 574 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132995 relation_ref 151043 // <aggregation>
-  decenter_begin 433
-  decenter_end 626
-  from ref 129539 z 2006 stereotype "<<set>>" xyz 795 618 3000 to ref 129538
-  role_a_pos 1047 609 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 133250 relation_ref 185730 // <aggregation>
-  from ref 132994 z 2001 stereotype "<<Set<ArrayList>>>" xyz 641 718.5 3000 to ref 129411
-  role_a_pos 711 692 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 133378 relation_ref 185858 // <unidirectional association>
-  decenter_begin 833
-  from ref 129539 z 2001 to ref 132994
-  role_a_pos 527 762 3000 no_role_b
-  no_multiplicity_a no_multiplicity_b
-end
-relationcanvas 134530 relation_ref 185986 // <aggregation>
-  from ref 132994 z 2006 stereotype "<<set>>" xyz 921 697.5 3000 to ref 129538
-  role_a_pos 1116 630 3000 no_role_b
+  decenter_begin 432
+  decenter_end 681
+  from ref 129539 z 2006 stereotype "<<set>>" xyz 795 622 3000 to ref 129538
+  role_a_pos 1047 617 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 134786 relation_ref 186114 // <unidirectional association>
@@ -288,4 +268,11 @@ relationcanvas 134786 relation_ref 186114 // <unidirectional association>
   role_a_pos 239 263 3000 no_role_b
   multiplicity_a_pos 248 286 3000 no_multiplicity_b
 end
+relationcanvas 134914 relation_ref 192642 // <unidirectional association>
+  from ref 129539 z 2001 stereotype "<<HashMap>>" xyz 621 717 3000 to ref 129411
+  role_a_pos 709 741 3000 no_role_b
+  multiplicity_a_pos 814 753 3000 no_multiplicity_b
+end
+line 135042 -_-_ decenter_begin 800
+  from ref 129538 z 2006 to ref 134914
 end
