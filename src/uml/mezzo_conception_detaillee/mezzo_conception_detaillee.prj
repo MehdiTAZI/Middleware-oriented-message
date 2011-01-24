@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 35
-  modified_by 3 "Ordi"
+  revision 37
+  modified_by 2 "Franck"
 
 
   
@@ -568,19 +568,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 137987 "ProxyForPushConsumerImpl"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "channelCtr" type class_ref 134787 // ChannelCtr
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
       operation 138115 "ProxyForPushConsumerImpl"
 	public explicit_return_type ""
 	nparams 1
@@ -736,6 +723,10 @@ ${members}}
 
       classrelation 152963 // <aggregation>
 	relation_ref 151043 // <aggregation>
+      end
+
+      classrelation 186498 // <aggregation>
+	relation_ref 185986 // <aggregation>
       end
     end
 
@@ -1205,6 +1196,18 @@ ${members}}
 	    classrelation_ref 152195 // <dependency>
 	  b parent class_ref 128645 // ProxyForPushConsumerImpl
       end
+
+      operation 165506 "processSubscribedConsumers"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 135043 "EventServerException"
@@ -1491,24 +1494,13 @@ ${members}}
 	
       end
 
-      attribute 136835 "orb"
-	private type class_ref 128130 // ORB
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 186626 // orb (<unidirectional association>)
+	relation 186114 --->
+	  a role_name "orb" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 136963 "channelName"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
+	    classrelation_ref 186626 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
       end
     end
 
@@ -1699,60 +1691,43 @@ ${members}}
 	
       end
 
-      classrelation 128003 // events (<composition>)
-	relation 128003 *---
-	  stereotype "list"
-	  a role_name "events" multiplicity "*" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
-"
-	    classrelation_ref 128003 // events (<composition>)
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 128131 // <composition>
-      end
-
       classrelation 128645 // ()
 	relation_ref 128517 // 
       end
 
-      classrelation 152323 // consumersSubscribed (<aggregation>)
-	relation 150787 o---
-	  stereotype "HashMap"
-	  a role_name "consumersSubscribed" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 152323 // consumersSubscribed (<aggregation>)
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 152451 // <aggregation>
-      end
-
-      classrelation 152579 // consumersConnected (<aggregation>)
+      classrelation 152579 // suppliersConnected (<aggregation>)
 	relation 150915 o---
 	  stereotype "set"
-	  a role_name "consumersConnected" private
+	  a role_name "suppliersConnected" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 152579 // consumersConnected (<aggregation>)
+	    classrelation_ref 152579 // suppliersConnected (<aggregation>)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 152707 // <aggregation>
       end
 
-      classrelation 152835 // suppliersConnected (<aggregation>)
+      classrelation 152835 // consumersConnected (<aggregation>)
 	relation 151043 o---
 	  stereotype "set"
-	  a role_name "suppliersConnected" private
+	  a role_name "consumersConnected" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 152835 // suppliersConnected (<aggregation>)
+	    classrelation_ref 152835 // consumersConnected (<aggregation>)
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 152963 // <aggregation>
+      end
+
+      classrelation 186242 // consumersSubscribed (<unidirectional association>)
+	relation 185858 --->
+	  a role_name "consumersSubscribed" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 186242 // consumersSubscribed (<unidirectional association>)
+	  b parent class_ref 157186 // HashMap
       end
     end
 
@@ -1905,10 +1880,6 @@ ${members}}
 	  b parent class_ref 134787 // ChannelCtr
       end
 
-      classrelation 152451 // <aggregation>
-	relation_ref 150787 // <aggregation>
-      end
-
       classrelation 152707 // <aggregation>
 	relation_ref 150915 // <aggregation>
       end
@@ -1925,10 +1896,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      classrelation 128131 // <composition>
-	relation_ref 128003 // <composition>
-      end
-
       attribute 128002 "timestap"
 	private explicit_type "long"
 	cpp_decl ""
@@ -1947,6 +1914,10 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      classrelation 186114 // <aggregation>
+	relation_ref 185730 // <aggregation>
       end
     end
 
@@ -2163,6 +2134,44 @@ ${members}}
 	
 	
 	
+      end
+    end
+
+    class 157186 "HashMap"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 185986 // values (<aggregation>)
+	relation 185730 o---
+	  stereotype "Set<ArrayList>"
+	  a role_name "values" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 185986 // values (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 186114 // <aggregation>
+      end
+
+      classrelation 186370 // keys (<aggregation>)
+	relation 185986 o---
+	  stereotype "set"
+	  a role_name "keys" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 186370 // keys (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 186498 // <aggregation>
       end
     end
   end
