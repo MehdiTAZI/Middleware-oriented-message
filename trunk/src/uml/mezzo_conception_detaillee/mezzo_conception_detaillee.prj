@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 37
+  revision 38
   modified_by 2 "Franck"
 
 
@@ -725,9 +725,6 @@ ${members}}
 	relation_ref 151043 // <aggregation>
       end
 
-      classrelation 186498 // <aggregation>
-	relation_ref 185986 // <aggregation>
-      end
     end
 
     class 128773 "ProxyForPushConsumerHelper"
@@ -1721,13 +1718,15 @@ ${members}}
 	    classrelation_ref 152963 // <aggregation>
       end
 
-      classrelation 186242 // consumersSubscribed (<unidirectional association>)
-	relation 185858 --->
-	  a role_name "consumersSubscribed" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 193154 // consumersSubscribed (<unidirectional association>)
+	relation 192642 --->
+	  stereotype "HashMap"
+	  a role_name "consumersSubscribed" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
 "
-	    classrelation_ref 186242 // consumersSubscribed (<unidirectional association>)
-	  b parent class_ref 157186 // HashMap
+	    classrelation_ref 193154 // consumersSubscribed (<unidirectional association>)
+	  b parent class_ref 136451 // Event
+	  association_type class_ref 128645 // ProxyForPushConsumerImpl
       end
     end
 
@@ -1916,9 +1915,6 @@ ${members}}
 	idl_decl ""
       end
 
-      classrelation 186114 // <aggregation>
-	relation_ref 185730 // <aggregation>
-      end
     end
 
     class 136579 "Runnable"
@@ -2137,43 +2133,6 @@ ${members}}
       end
     end
 
-    class 157186 "HashMap"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      classrelation 185986 // values (<aggregation>)
-	relation 185730 o---
-	  stereotype "Set<ArrayList>"
-	  a role_name "values" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 185986 // values (<aggregation>)
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 186114 // <aggregation>
-      end
-
-      classrelation 186370 // keys (<aggregation>)
-	relation 185986 o---
-	  stereotype "set"
-	  a role_name "keys" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 186370 // keys (<aggregation>)
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 186498 // <aggregation>
-      end
-    end
   end
 
   classview 128130 "CONCEPTION DETAILLEE"
