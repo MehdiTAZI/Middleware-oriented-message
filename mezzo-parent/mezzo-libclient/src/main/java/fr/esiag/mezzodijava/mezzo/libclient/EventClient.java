@@ -1,7 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
@@ -47,7 +47,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
  * 
  * @author Mezzo-Team
  */
-public class EventClient {
+public final class EventClient {
 
 	/**
 	 * Default Event Client Property File.
@@ -56,60 +56,10 @@ public class EventClient {
 
 	private static EventClient instance;
 
-	private ORB orb;
-
-	private NamingContextExt nce;
-
-	private POA callbacksPOA;
-
-	/**
-	 * Event Client private Constructor. Use EventClient.init
-	 * 
-	 * @param args
-	 * @param props
-	 * @throws EventClientException
-	 *             Initialization failure
-	 */
-	private EventClient(String[] args, Properties props)
-			throws EventClientException {
-		if (props == null) {
-			props = new Properties();
-			try {
-				props.load(this.getClass().getClassLoader()
-						.getResourceAsStream(EventClient.CLIENT_PROPERTIES));
-			} catch (IOException e) {
-				// TODO log here
-				throw new EventClientException(
-						"Error in opening client property file", e);
-			}
-		}
-		orb = ORB.init(args, props);
-		Object nceObj = null;
-		try {
-			nceObj = orb.resolve_initial_references("NameService");
-		} catch (InvalidName e) {
-			// TODO log here
-			throw new EventClientException("Cannot resolve NameService", e);
-		}
-		nce = NamingContextExtHelper.narrow(nceObj);
-	}
-
 	/**
 	 * ORB Properties
 	 */
-	public static Properties props;
-
-	// Properties à externaliser
-	{
-
-	}
-
-	//
-	// private String[] args = { "-ORBInitRef",
-	// "NameService=corbaloc::127.0.0.1:1050/NameService",
-	// "-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
-	// "-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
-	// "-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton" };
+	private static Properties props;
 
 	/**
 	 * Give a singleton instance of EventClient with his orb and his nameservice
@@ -136,10 +86,68 @@ public class EventClient {
 			// "org.jacorb.orb.ORBSingleton");
 			// // props.setProperty("java.endorsed.dirs",
 			// // System.getenv("JACORB_HOME") + "/lib");
-
-			instance = new EventClient(args, props);
+			String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
+					args.length);
+			instance = new EventClient(cmdArgs, props);
 		}
 		return instance;
+	}
+
+	private POA callbacksPOA;
+
+	private NamingContextExt nce;
+
+	private ORB orb;
+
+	// Properties à externaliser
+	{
+
+	}
+
+	//
+	// private String[] args = { "-ORBInitRef",
+	// "NameService=corbaloc::127.0.0.1:1050/NameService",
+	// "-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
+	// "-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
+	// "-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton" };
+
+	/**
+	 * Event Client private Constructor. Use EventClient.init
+	 * 
+	 * @param args
+	 *            Program Arguments
+	 * @param properties
+	 *            optional properties
+	 * @throws EventClientException
+	 *             Initialization failure
+	 */
+	private EventClient(String[] args, Properties properties)
+			throws EventClientException {
+		props = properties;
+		if (props == null) {
+			props = new Properties();
+			try {
+				props.load(this.getClass().getClassLoader()
+						.getResourceAsStream(EventClient.CLIENT_PROPERTIES));
+			} catch (IOException e) {
+				// TODO log here
+				throw new EventClientException(
+						"Error in opening client property file", e);
+			}
+		}
+		orb = ORB.init(args, props);
+		Object nceObj = null;
+		try {
+			nceObj = orb.resolve_initial_references("NameService");
+		} catch (InvalidName e) {
+			// TODO log here
+			throw new EventClientException("Cannot resolve NameService", e);
+		}
+		nce = NamingContextExtHelper.narrow(nceObj);
+	}
+
+	public ORB getOrb() {
+		return orb;
 	}
 
 	/**
@@ -208,10 +216,6 @@ public class EventClient {
 		CallbackConsumer href = tie._this(orb);
 		// return the object and
 		return href;
-	}
-
-	public ORB getOrb() {
-		return orb;
 	}
 
 }
