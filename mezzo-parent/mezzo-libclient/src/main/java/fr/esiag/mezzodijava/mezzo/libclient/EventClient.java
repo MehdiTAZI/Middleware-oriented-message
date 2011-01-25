@@ -59,7 +59,7 @@ public final class EventClient {
 	/**
 	 * ORB Properties
 	 */
-	private static Properties props;
+	private Properties props;
 
 	/**
 	 * Give a singleton instance of EventClient with his orb and his nameservice
@@ -88,7 +88,7 @@ public final class EventClient {
 			// // System.getenv("JACORB_HOME") + "/lib");
 			String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
 					args.length);
-			instance = new EventClient(cmdArgs, props);
+			instance = new EventClient(cmdArgs, null);
 		}
 		return instance;
 	}
@@ -98,11 +98,6 @@ public final class EventClient {
 	private NamingContextExt nce;
 
 	private ORB orb;
-
-	// Properties à externaliser
-	{
-
-	}
 
 	//
 	// private String[] args = { "-ORBInitRef",
