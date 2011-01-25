@@ -1,43 +1,36 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
-import java.util.Vector;
-
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EventServer {
 	/*
 	 * Auteur : MTA
 	 */
-	private Vector<ChannelCtr> channels;
-	
-	public EventServer()
-	{
-		
+	private List<Channel> channels = new ArrayList<Channel>();
+
+	public EventServer() {
+
 	}
-	public EventServer(Vector<ChannelCtr> channels) {
+
+	public EventServer(List<Channel> channels) {
 		super();
 		this.channels = channels;
 	}
-	public Vector<ChannelCtr> getChannels() {
+
+	public void addChannel(Channel channel) {
+		this.channels.add(channel);
+	}
+
+	public List<Channel> getChannels() {
 		return channels;
 	}
 
-	public void setChannels(Vector<ChannelCtr> channels) {
+	public void removeChannel(Channel channel) {
+		this.channels.remove(channel);
+	}
+
+	public void setChannels(List<Channel> channels) {
 		this.channels = channels;
-	}
-	
-	public void addChannel(ChannelCtr ChannelCtr)
-	{
-		this.channels.add(ChannelCtr);
-	}
-	
-	public void removeChannel(ChannelCtr ChannelCtr)
-	{
-		this.channels.removeElement(ChannelCtr);
-	}
-	
-	public static Channel getChannelModel(ChannelCtr channelCtr)
-	{	
-		return channelCtr.getChannel();
 	}
 }
