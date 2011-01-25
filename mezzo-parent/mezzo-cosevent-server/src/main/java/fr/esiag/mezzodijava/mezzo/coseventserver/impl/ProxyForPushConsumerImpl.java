@@ -25,58 +25,112 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  */
 
 public class ProxyForPushConsumerImpl implements MessageListener,
-		ProxyForPushConsumerOperations {
+	ProxyForPushConsumerOperations {
 
-	/**
-	 * The Channel Controller used by this facade
-	 */
-	ChannelCtr channelCtr;
+    /**
+     * The Callback Consumer Interface to the consumer.
+     */
+    private CallbackConsumer callbackConsumer;
 
-	CallbackConsumer callbackConsumer;
+    /**
+     * The Channel Controller used by this facade
+     */
+    private ChannelCtr channelCtr;
 
-	public ProxyForPushConsumerImpl(String topic) {
-		this.channelCtr = BFFactory.createChannelCtr(topic);
+    /**
+     * Build a ProxyForPushSupplier instance associated with the given topic and
+     * build the underlying Channel Controller.
+     * 
+     * @param topic
+     *            Channel Topic.
+     */
+    public ProxyForPushConsumerImpl(String topic) {
+	this.channelCtr = BFFactory.createChannelCtr(topic);
+    }
+
+    /**
+     * Connect this consumer the the channel.
+     * 
+     * The consumer must be registerd first. It will be able to push events.
+     * 
+     * @throws NotRegisteredException
+     *             If The consumer is not registered.
+     * @throws AlreadyConnectedException
+     *             If already present in the list.
+     * @throws MaximalConnectionReachedException
+     *             If Channel Connection Capaciy is reached.
+     */
+    @Override
+    public void connect() throws AlreadyConnectedException,
+	    NotRegisteredException, MaximalConnectionReachedException {
+	channelCtr.addProxyForPushConsumerToConnectedList(this);
+
+    }
+
+    /**
+     * Disconnect this Consumer from the channel.
+     * 
+     * the consumer will not be able to recevie events.
+     * 
+     * @throws NotRegisteredException
+     *             If The consumer is not registered.
+     * @throws NotConnectedException
+     *             If The consumer was not connected.
+     */
+    @Override
+    public void disconnect() throws NotConnectedException,
+	    NotRegisteredException {
+	channelCtr.removeProxyForPushConsumerFromConnectedList(this);
+
+    }
+
+    /**
+     * To allow consumer reveice Events from the Channel.
+     * 
+     * Call the callback interface of the consumer client to PUSH the Event.
+     * 
+     * @throws ConsumerNotFoundException
+     *             If The consumer is not reachable.
+     */
+    @Override
+    public void receive(Event evt) throws ConsumerNotFoundException {
+	try {
+	    callbackConsumer.receive(evt);
+	} catch (org.omg.CORBA.SystemException ex) {
+	    throw new ConsumerNotFoundException(ex.getClass().getName() + ":"
+		    + ex.getMessage());
 	}
+    }
 
-	@Override
-	public void subscribe(CallbackConsumer cc)
-			throws AlreadyRegisteredException {
-		this.callbackConsumer = cc;
-		channelCtr.addProxyForPushConsumerToSubscribedList(this);
-		System.out.println("Consumer Subscribed to "
-				+ channelCtr.getChannel().getTopic());
+    /**
+     * Subscribe this consumer to the channel.
+     * 
+     * The channel will store events for this consumer til it can push to it.
+     * 
+     * @throws AlreadyRegisteredException
+     *             If already present in the list.
+     */
+    @Override
+    public void subscribe(CallbackConsumer cc)
+	    throws AlreadyRegisteredException {
+	this.callbackConsumer = cc;
+	channelCtr.addProxyForPushConsumerToSubscribedList(this);
+	System.out.println("Consumer Subscribed to "
+		+ channelCtr.getChannel().getTopic());
 
-	}
+    }
 
-	@Override
-	public void unsubscribe() throws NotRegisteredException {
-		channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
-	}
-
-	@Override
-	public void connect() throws AlreadyConnectedException,
-			AlreadyConnectedException, NotRegisteredException,
-			MaximalConnectionReachedException {
-		channelCtr.addProxyForPushConsumerToConnectedList(this);
-
-	}
-
-	@Override
-	public void disconnect() throws NotConnectedException,
-			NotRegisteredException {
-		channelCtr.removeProxyForPushConsumerFromConnectedList(this);
-
-	}
-
-	// pour recevoir une notification s'il y a des events envoyÃ©s par un
-	// supplier
-	@Override
-	public void receive(Event evt) throws ConsumerNotFoundException {
-		try {
-			callbackConsumer.receive(evt);
-		} catch (org.omg.CORBA.SystemException ex) {
-			throw new ConsumerNotFoundException(ex.getClass().getName() + ":" +ex.getMessage());
-		}
-	}
+    /**
+     * Unsubscribe this consumer from the channel.
+     * 
+     * The channel will store no more events for this consumer.
+     * 
+     * @throws NotRegisteredException
+     *             If The consumer is not registered.
+     */
+    @Override
+    public void unsubscribe() throws NotRegisteredException {
+	channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
+    }
 
 }

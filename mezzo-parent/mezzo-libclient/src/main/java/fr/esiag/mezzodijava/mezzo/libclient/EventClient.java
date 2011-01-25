@@ -57,11 +57,6 @@ public final class EventClient {
 	private static EventClient instance;
 
 	/**
-	 * ORB Properties
-	 */
-	private Properties props;
-
-	/**
 	 * Give a singleton instance of EventClient with his orb and his nameservice
 	 * initialized.
 	 * 
@@ -98,6 +93,11 @@ public final class EventClient {
 	private NamingContextExt nce;
 
 	private ORB orb;
+
+	/**
+	 * ORB Properties
+	 */
+	private Properties props;
 
 	//
 	// private String[] args = { "-ORBInitRef",

@@ -5,17 +5,17 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 /**
  * Interface MessageListener
- * 
+ *
  * To receive events, technical interface
- * 
- * UC n°: US14,US15 (+US children) 
- * 
+ *
+ * UC n°: US14,US15 (+US children)
+ *
  * @author Mezzo-Team
- * 
+ *
  */
 
 public interface MessageListener {
-	
-	public void receive(Event evt) throws ConsumerNotFoundException;
-	
+
+    public void receive(Event evt) throws ConsumerNotFoundException;
+
 }

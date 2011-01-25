@@ -7,7 +7,7 @@ package fr.esiag.mezzodijava.mezzo.libclient.exception;
  * @author Franck
  * 
  */
-//MTA : depreced utilisé plutot EventClientException Definie dans l'IDL
+// MTA : depreced utilisé plutot EventClientException Definie dans l'IDL
 public class EventClientException extends Exception {
 
 	/**
