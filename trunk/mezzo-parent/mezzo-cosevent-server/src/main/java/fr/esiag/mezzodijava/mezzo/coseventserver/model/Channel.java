@@ -13,7 +13,11 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
 /**
- * Classe Channel
+ * Classe Channel : contain subscribed and connected list of consumer and
+ * supplier.
+ *
+ * Events are stored with each subscribed consumers in the channel and stay
+ * until they are delivered.
  *
  * The Channel model
  *
@@ -31,7 +35,7 @@ public class Channel {
     private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections
 	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
     private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
-    private Set<ProxyForPushSupplierImpl> suppliersSubscribed = new HashSet<ProxyForPushSupplierImpl>();
+
     private String topic;
 
     public Channel(String topic, int capacity) {
@@ -39,67 +43,134 @@ public class Channel {
 	this.capacity = capacity;
     }
 
+    /**
+     * Add a Push Consumer to the connected list.
+     *
+     * @param ppc
+     *            the push consumer to add.
+     */
     public void addSubscribedConsumer(ProxyForPushConsumerImpl ppc) {
 	this.consumersSubscribed.put(ppc,
 		Collections.synchronizedList(new ArrayList<Event>()));
     }
 
+    /**
+     * Get Channel Maximal Connection number.
+     *
+     * @return Maximal Connection number
+     */
     public int getCapacity() {
 	return capacity;
     }
 
+    /**
+     * Push Consumers connected.
+     *
+     * @return set of ProxyPushConsumerImpl
+     */
     public Set<ProxyForPushConsumerImpl> getConsumersConnected() {
 	return consumersConnected;
     }
 
+    /**
+     * Map with key as ProxyPushConsumer and valu a List of events.
+     *
+     * While nnot delivered to its consumer, an event stay in its list.
+     *
+     * @return.
+     */
     public Map<ProxyForPushConsumerImpl, List<Event>> getConsumersSubscribed() {
 	return consumersSubscribed;
     }
 
+    /**
+     * Push Suppliers connected.
+     *
+     * @return set of ProxyForPushSupplierImpl
+     */
     public Set<ProxyForPushSupplierImpl> getSuppliersConnected() {
 	return suppliersConnected;
     }
 
-    public Set<ProxyForPushSupplierImpl> getSuppliersSubscribed() {
-	return suppliersSubscribed;
-    }
-
+    /**
+     * Character string unique identifier of the Channel.
+     *
+     * @return topic
+     */
     public String getTopic() {
 	return topic;
     }
 
+    /**
+     * is connection capacity reached for connected consumers ?
+     *
+     * @return true if the list is full.
+     */
     public boolean isConsumersConnectedListcapacityReached() {
 	return capacity == consumersConnected.size();
     }
 
+    /**
+     * is connection capacity reached for connected suppliers ?
+     *
+     * @return true if the list is full.
+     */
     public boolean isSuppliersConnectedsListcapacityReached() {
 	return capacity == suppliersConnected.size();
     }
 
+    /**
+     * Define Channel Max connection number.
+     *
+     * @param capacity
+     *            max nb of connected consumer and suppliers.
+     */
     public void setCapacity(int capacity) {
 	this.capacity = capacity;
     }
 
+    /**
+     * Getter of the set of connected push consumer.
+     *
+     * For persistance purpose only.
+     *
+     * @param consumersConnected
+     */
     public void setConsumersConnected(
 	    Set<ProxyForPushConsumerImpl> consumersConnected) {
 	this.consumersConnected = consumersConnected;
     }
 
+    /**
+     * Getter of the map of subscribed push consumer.
+     *
+     * For persistance purpose only.
+     *
+     * @param consumersSubscribed
+     */
     public void setConsumersSubscribed(
 	    Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed) {
 	this.consumersSubscribed = consumersSubscribed;
     }
 
+    /**
+     * Getter of the set of connected push supplier.
+     *
+     * For persistance purpose only.
+     *
+     * @param suppliersConnected
+     */
     public void setSuppliersConnected(
 	    Set<ProxyForPushSupplierImpl> suppliersConnected) {
 	this.suppliersConnected = suppliersConnected;
     }
 
-    public void setSuppliersSubscribed(
-	    Set<ProxyForPushSupplierImpl> suppliersSubscribed) {
-	this.suppliersSubscribed = suppliersSubscribed;
-    }
-
+    /**
+     * Set the Channel Topic.
+     *
+     * @param topic
+     *            the topic.
+     */
     public void setTopic(String topic) {
 	this.topic = topic;
     }

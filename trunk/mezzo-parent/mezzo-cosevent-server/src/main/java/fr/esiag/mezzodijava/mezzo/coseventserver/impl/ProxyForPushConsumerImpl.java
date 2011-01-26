@@ -14,14 +14,14 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushConsumerImpl
- * 
+ *
  * Proxy for subscribing and receiving Events, acts as a Supplier accessible to
  * a client, implementation of the ProxyForPushConsumer IDL Interface
- * 
+ *
  * UC n°: US15 (+US children)
- * 
+ *
  * @author Mezzo-Team
- * 
+ *
  */
 
 public class ProxyForPushConsumerImpl implements MessageListener,
@@ -38,9 +38,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
     private ChannelCtr channelCtr;
 
     /**
-     * Build a ProxyForPushSupplier instance associated with the given topic and
+     * Build a ProxyForPushConsumer instance associated with the given topic and
      * build the underlying Channel Controller.
-     * 
+     *
      * @param topic
      *            Channel Topic.
      */
@@ -50,9 +50,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Connect this consumer the the channel.
-     * 
+     *
      * The consumer must be registerd first. It will be able to push events.
-     * 
+     *
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      * @throws AlreadyConnectedException
@@ -69,9 +69,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Disconnect this Consumer from the channel.
-     * 
+     *
      * the consumer will not be able to recevie events.
-     * 
+     *
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      * @throws NotConnectedException
@@ -86,9 +86,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * To allow consumer reveice Events from the Channel.
-     * 
+     *
      * Call the callback interface of the consumer client to PUSH the Event.
-     * 
+     *
      * @throws ConsumerNotFoundException
      *             If The consumer is not reachable.
      */
@@ -104,9 +104,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Subscribe this consumer to the channel.
-     * 
+     *
      * The channel will store events for this consumer til it can push to it.
-     * 
+     *
      * @throws AlreadyRegisteredException
      *             If already present in the list.
      */
@@ -122,9 +122,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Unsubscribe this consumer from the channel.
-     * 
+     *
      * The channel will store no more events for this consumer.
-     * 
+     *
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      */

@@ -31,13 +31,23 @@ public class ChannelAdminCtr {
     private ChannelCtr channelCtr;
     private ORB orb;
 
-    // Constructor
-    public ChannelAdminCtr(String channel) {
-	this.channel = channel;
+    /**
+     * Build a Channel Admin Controler associated with a channelCtr.
+     *
+     * @param topic
+     *            Channel topic.
+     */
+    public ChannelAdminCtr(String topic) {
+	this.channel = topic;
 	this.orb = BFFactory.createOrb(null, null);
-	this.channelCtr = BFFactory.createChannelCtr(channel);
+	this.channelCtr = BFFactory.createChannelCtr(topic);
     }
 
+    /**
+     * Create the Proxy For PUSH Consumer and serve it with te CORBA POA.
+     *
+     * @return A Corba Object.
+     */
     public ProxyForPushConsumer createProxyForPushConsumer() {
 	ProxyForPushConsumer pps = null;
 	try {
@@ -58,6 +68,11 @@ public class ChannelAdminCtr {
 	return pps;
     }
 
+    /**
+     * Create the Proxy For PUSH Supplier and serve it with te CORBA POA.
+     *
+     * @return A Corba Object.
+     */
     public ProxyForPushSupplier createProxyForPushSupplier() {
 	ProxyForPushSupplier ppc = null;
 
@@ -79,6 +94,11 @@ public class ChannelAdminCtr {
 	return ppc;
     }
 
+    /**
+     * Get the Channel topic.
+     *
+     * @return topic
+     */
     public String getTopic() {
 	return channel;
     }
