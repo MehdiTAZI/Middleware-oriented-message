@@ -23,10 +23,10 @@ end
 fragment 136194 "loop - pour chaque consumer abonne"
   xyzwh 144 402 3030 902 342
 end
-note 136322 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+note 136322 "CD5 - MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE SEQUENCE
 US : Le Channel envoie des events aux Consumers PUSH abonnes"
-  xyzwh 540 120 2005 339 61
+  xyzwh 541 120 2005 341 59
 durationcanvas 129026 classinstance_ref 128514 // :CosEventServer
   xyzwh 42 70 2010 11 694
 end

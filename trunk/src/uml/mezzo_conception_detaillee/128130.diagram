@@ -27,10 +27,10 @@ end
 fragment 134402 "break"
   xyzwh 10 481 2015 985 51
 end
-note 134530 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+note 134530 "CD3 - MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE SEQUENCE
 TOUTE UC : Resolution du channel a partir de son topic"
-  xyzwh 411 623 2030 295 61
+  xyzwh 412 613 2030 299 63
 durationcanvas 128386 classinstance_ref 128002 // :Client
   xyzwh 35 67 2010 11 574
 end
