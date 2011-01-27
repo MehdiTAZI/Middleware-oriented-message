@@ -1,10 +1,11 @@
 format 76
 
-note 128002 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+note 128002 "CD4
+MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE SEQUENCE
 UC02 S'abonner en tant que consumer
 US111 S'abonner a un Channel et recevoir des Event PUSH"
-  xyzwh 427 655 2005 325 75
+  xyzwh 427 657 2005 327 85
 classinstance 128005 class_ref 128005 // Consumer
   drawing_mode actor  name ""   xyz 16 5 2000 life_line_z 2000
 classinstance 128133 class_ref 128389 // ChannelAdminCtrl

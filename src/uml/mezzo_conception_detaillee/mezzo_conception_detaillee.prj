@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 38
+  revision 39
   modified_by 2 "Franck"
 
 
@@ -724,7 +724,6 @@ ${members}}
       classrelation 152963 // <aggregation>
 	relation_ref 151043 // <aggregation>
       end
-
     end
 
     class 128773 "ProxyForPushConsumerHelper"
@@ -1914,7 +1913,6 @@ ${members}}
 	python_decl ""
 	idl_decl ""
       end
-
     end
 
     class 136579 "Runnable"
@@ -2132,7 +2130,6 @@ ${members}}
 	
       end
     end
-
   end
 
   classview 128130 "CONCEPTION DETAILLEE"

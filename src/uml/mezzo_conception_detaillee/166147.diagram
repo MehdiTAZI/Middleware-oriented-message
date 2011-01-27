@@ -68,10 +68,10 @@ classcanvas 130306 class_ref 135427 // ProxyForPushConsumerOperations
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 1078 183 2005
 end
-note 131330 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+note 131330 "CD1 - MEZZO DI JAVA - CONCEPTION DETAILLEE 
 DIAGRAMME DE CLASSES
 Composant : mezzo-cosevent-server"
-  xyzwh 763 48 2000 267 59
+  xyzwh 761 44 2000 283 61
 classcanvas 131842 class_ref 136067 // ProxyForPushSupplier
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode interface drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 4 41 2000
@@ -250,7 +250,7 @@ relationcanvas 132611 relation_ref 150659 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 132867 relation_ref 150915 // <aggregation>
-  decenter_begin 240
+  decenter_begin 239
   decenter_end 773
   from ref 129539 z 2001 stereotype "<<set>>" xyz 555 579 3000 to ref 128387
   role_a_pos 577 574 3000 no_role_b
@@ -258,7 +258,7 @@ relationcanvas 132867 relation_ref 150915 // <aggregation>
 end
 relationcanvas 132995 relation_ref 151043 // <aggregation>
   decenter_begin 432
-  decenter_end 681
+  decenter_end 680
   from ref 129539 z 2006 stereotype "<<set>>" xyz 795 622 3000 to ref 129538
   role_a_pos 1047 617 3000 no_role_b
   no_multiplicity_a no_multiplicity_b

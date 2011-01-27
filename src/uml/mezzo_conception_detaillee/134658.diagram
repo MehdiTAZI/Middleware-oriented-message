@@ -40,10 +40,10 @@ classcanvas 130306 class_ref 144130 // CallbackConsumerOperations
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   xyz 396 313 2005
 end
-note 130946 "MEZZO DI JAVA - CONCEPTION DETAILLEE
+note 130946 "CD2 - MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE CLASSES
 Composant : mezzo-libclient"
-  xyzwh 421 434 2000 255 57
+  xyzwh 286 402 2000 277 59
 classcanvas 131202 class_ref 128005 // Consumer
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
   color white
@@ -172,6 +172,11 @@ relationcanvas 133762 relation_ref 165890 // <dependency>
 end
 relationcanvas 133890 relation_ref 166018 // <dependency>
   from ref 131202 z 2019 to ref 133634
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 134274 relation_ref 165762 // <dependency>
+  from ref 128770 z 2001 to ref 128002
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
