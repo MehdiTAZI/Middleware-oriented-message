@@ -44,6 +44,7 @@ public class App
 		while (true) {
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
+			System.out.println(str);
 			supplierProxy.push(new Event((new Date()).getTime(),str));   
 		}
 		reader.close();
