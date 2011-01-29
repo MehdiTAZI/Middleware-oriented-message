@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>nuclear-parent</artifactId>
+		<groupId>fr.esiag.mezzodijava</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>fr.esiag.mezzodijava</groupId>
+	<artifactId>systemstatemonitor</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<name>Nuclear System State Monitor (Mock Component)</name>
+	<dependencies>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>mezzo-libclient</artifactId>
+		</dependency>
+		<!-- HIBERNATE -->
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId> hibernate-core </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId> hibernate-annotations</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate </groupId>
+			<artifactId>hibernate-entitymanager </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate.javax.persistence </groupId>
+			<artifactId>hibernate-jpa-2.0-api </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12 </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>c3p0 </groupId>
+			<artifactId>c3p0 </artifactId>
+		</dependency>
+		<!-- DERBY -->
+		<dependency>
+			<groupId>org.apache.derby</groupId>
+			<artifactId>derby</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
