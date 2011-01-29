@@ -29,7 +29,7 @@ public class App
 	{
 		EventClient ec = EventClient.init(null);
 		orb = ec.getOrb();
-		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
 
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
