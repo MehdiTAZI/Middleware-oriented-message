@@ -81,7 +81,10 @@ public class CosEventServer {
     public CosEventServer(String[] args) throws EventServerException {
 
 	Properties props = new Properties();
-
+	
+	if ( args!=null)
+		channelName= args[0];
+	
 	try {
 	    props.load(this.getClass().getClassLoader()
 		    .getResourceAsStream("eventserver.properties"));
