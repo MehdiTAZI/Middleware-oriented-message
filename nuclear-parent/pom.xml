@@ -23,6 +23,43 @@
 				<artifactId>mezzo-libclient</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<!-- HIBERNATE -->
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId> hibernate-core </artifactId>
+				<version> ${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId> hibernate-annotations</artifactId>
+				<version> ${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate </groupId>
+				<artifactId>hibernate-entitymanager </artifactId>
+				<version>${org.hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate.javax.persistence </groupId>
+				<artifactId>hibernate-jpa-2.0-api </artifactId>
+				<version> 1.0.0.Final</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-log4j12 </artifactId>
+				<version>1.5.8</version>
+			</dependency>
+			<dependency>
+				<groupId>c3p0 </groupId>
+				<artifactId>c3p0 </artifactId>
+				<version>0.9.1.2</version>
+			</dependency>
+			<!-- DERBY -->
+			<dependency>
+				<groupId>org.apache.derby</groupId>
+				<artifactId>derby</artifactId>
+				<version>${derby.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -41,5 +78,13 @@
 	<modules>
 	    <module>sensor</module>
 		<module>sensorsdatasupplier</module>
+		<module>systemstatemonitor</module>
 	</modules>
+	<repositories>
+		<repository>
+			<id>jboss</id>
+			<name>JBoss Maven2 Repository</name>
+			<url>http://repository.jboss.org/maven2/</url>
+		</repository>
+	</repositories>
 </project>
