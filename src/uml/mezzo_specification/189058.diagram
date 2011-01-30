@@ -10,13 +10,13 @@ UC07 : Administrer un Channel
 US159 : Scénario Exception 1 :  Creer un channel dont le TOPIC existe deja"
   xyzwh 207 189 2000 299 75
 durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
-  xyzwh 80 60 2010 11 137
+  xyzwh 71 60 2010 11 137
 end
 durationcanvas 128770 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 59 2010 11 43
+  xyzwh 634 59 2010 11 43
 end
 durationcanvas 129154 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 139 2010 11 50
+  xyzwh 634 139 2010 11 50
 end
 msg 128898 synchronous
   from durationcanvas_ref 128642

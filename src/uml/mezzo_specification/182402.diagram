@@ -10,28 +10,28 @@ UC07 : Administrer un Channel
 US76 : Scénario nominal : Créer un Channel"
   xyzwh 204 302 2000 299 75
 fragment 130306 "opt"
-  form "[uniquement si le Channel admin agent process est aussi un supplier/consumer]" xyzwh 37 190 2020 633 92
+  form "[uniquement si le Channel admin agent process est aussi un supplier/consumer]" xyzwh 37 190 2020 643 107
 end
 textcanvas 130434 "[uniquement si le Channel admin agent process est aussi un supplier/consumer]"
   xyzwh 92 192 2025 374 13
 durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
-  xyzwh 80 61 2010 11 234
+  xyzwh 71 61 2010 11 234
 end
 durationcanvas 128770 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 59 2010 11 43
+  xyzwh 634 59 2010 11 43
 end
 durationcanvas 129154 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 140 2010 11 49
+  xyzwh 634 140 2010 11 49
 end
 durationcanvas 129538 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 224 2010 11 48
+  xyzwh 634 224 2010 11 48
 end
 msg 128898 synchronous
   from durationcanvas_ref 128642
   to durationcanvas_ref 128770
-  yz 61 2015 explicitmsg "resolveEventServerChannelAdminInterface(event server channel admin interface name)"
+  yz 62 2015 explicitmsg "resolveEventServerChannelAdminInterface(event server channel admin interface name)"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 166 49
+  label_xy 166 50
 msg 129026 return
   from durationcanvas_ref 128770
   to durationcanvas_ref 128642
@@ -61,5 +61,5 @@ msg 130050 return
   to durationcanvas_ref 128642
   yz 261 2015 explicitmsg "Channel Object Reference"
   show_full_operations_definition default drawing_language default show_context_mode default
-  label_xy 304 248
+  label_xy 304 251
 end

@@ -1,7 +1,7 @@
 format 76
 "mezzo_specification"
-  revision 30
-  modified_by 2 "Franck"
+  revision 31
+  modified_by 4 "Administrateur"
 
 
   
@@ -221,6 +221,11 @@ format 76
       end
 
       sequencediagram 189186 "UC07 : Scenario Exception 2 : Aucun Channel sur ce serveur avec cet ID Channel"
+	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+	overlapping_bars size A4
+      end
+
+      sequencediagram 141444 "UC07 : Scenario Alternatif 2 : Modifier la capacite d'un channel"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
