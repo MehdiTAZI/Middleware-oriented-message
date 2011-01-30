@@ -1,13 +1,25 @@
 package fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools;
 
+import java.io.Serializable;
 import java.util.StringTokenizer;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
-public class EventInfo {
+@Entity (name = "Events")
+@IdClass(EventInfoPK.class)
+public class EventInfo implements Serializable{
+
+	private static final long serialVersionUID = 1L;
 	
 	private int code;
 	private String type;
+	
+	@Column(name = "data")
 	private String data;
 	
 	StringTokenizer  st;
@@ -37,10 +49,12 @@ public class EventInfo {
 		
 	}
 
+	@Id
 	public int getCode() {
 		return this.code;
 	}
 	
+	@Id
 	public String getType() {
 		return this.type;
 	}
