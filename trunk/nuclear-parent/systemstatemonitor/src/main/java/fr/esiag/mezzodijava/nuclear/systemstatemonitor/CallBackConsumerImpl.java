@@ -4,6 +4,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnector;
+import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnectorImpl;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfoPK;
 
@@ -12,7 +13,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	private InjectorSystemStateSupplier supplier;
 	public CallBackConsumerImpl(InjectorSystemStateSupplier supplier)
 	{
-		//dbConnector= new dbConnectorImpl();/*DONT FORGET TO INSTANCIATE THIS ! */
+		dbConnector= new DbEventConnectorImpl();/*DONT FORGET TO INSTANCIATE THIS ! */
 		this.supplier=supplier;
 		
 	}
