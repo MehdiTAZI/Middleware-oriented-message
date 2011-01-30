@@ -17,13 +17,13 @@ textcanvas 130434 "[si le Channel admin agent process n'a plus la reference vers
 note 130562 "The CAAP must have saved the unique id of a channel to delete it."
   xyzwh 465 153 2000 177 49
 durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
-  xyzwh 80 94 2010 11 216
+  xyzwh 71 94 2010 11 216
 end
 durationcanvas 128770 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 92 2010 11 43
+  xyzwh 634 92 2010 11 43
 end
 durationcanvas 129154 classinstance_ref 128130 // :FrameworkMezzo
-  xyzwh 640 218 2010 11 49
+  xyzwh 634 218 2010 11 49
 end
 msg 128898 synchronous
   from durationcanvas_ref 128642
