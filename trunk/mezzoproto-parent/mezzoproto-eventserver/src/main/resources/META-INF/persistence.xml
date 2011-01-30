@@ -7,13 +7,14 @@
 	
 <!--	  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
-	  <!-- Classes du model pris en charge par l'ORM -->
-	  <class>fr.esiag.mezzodijava.mezzoproto.eventserver.model.EventString</class>
+	  <!-- Classes prises en charge par l'ORM -->
+	  <class>fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo</class>
+	  <class>fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfoPK</class>
 	
  	  <properties>
  	    <!-- Propriétés de connexion -->
 		<property name="javax.persistence.jdbc.driver"   value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:/home/ubuntu/EventDB;create=true" />
+		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:C:\mezzodev\SystemStateDb\Base;create=true" />
 		<property name="javax.persistence.jdbc.user"     value="test" />
 		<property name="javax.persistence.jdbc.password" value="test" />
 
