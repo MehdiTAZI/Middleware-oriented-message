@@ -5,6 +5,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnector;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo;
+import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfoPK;
 
 public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	private DbEventConnector dbConnector;
@@ -29,12 +30,12 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		
 		int eventCode = eventInfo.getCode();
 		String eventType = eventInfo.getType();
+		EventInfoPK pk = new EventInfoPK(eventCode,eventType);
 		
-		Event stortedEvent= dbConnector.find(eventCode,eventType);
+		EventInfo storedEventInfo= dbConnector.find(pk);
 		
-		if (stortedEvent!=null)
+		if (storedEventInfo!=null)
 		{
-			EventInfo storedEventInfo = new EventInfo(stortedEvent);
 			if(! storedEventInfo.getData().equals(eventInfo.getData()))
 			{
 				supplier.PushEvent(e);
@@ -47,7 +48,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		}
 			
 		//persist the event on the database
-		dbConnector.persist(e);
+		dbConnector.persist(eventInfo);
 		
 		System.out.println("Message archivé timestamp:" + e.timestamp
 				+ ", contenu" + e.content);
