@@ -12,13 +12,15 @@ public class GenerateMessage {
 	}
 	
 	public String normalMessage(){
-		return random.nextInt(900)+"/"+type[random.nextInt(3)]+"/"+generateData();
+		int code = random.nextInt(900);
+		
+		return code+"/"+generateCode()+"/"+generateData();
 	
 	}
 	public String alertMessage(){
 		int code = 900+random.nextInt(100);
 		
-		return code+"/"+type[random.nextInt(3)]+"/"+generateData();
+		return code+"/"+generateCode()+"/"+generateData();
 	}
 	public String randomMessage(){
 		if(random.nextBoolean())
@@ -32,6 +34,10 @@ public class GenerateMessage {
 			return 0-data;
 		else
 			return data;
+	}
+	private String generateCode(){
+		int typeC = random.nextInt(3);
+		return type[typeC];
 	}
 	public static void main(String[] args) {
 		GenerateMessage gm = new GenerateMessage();
