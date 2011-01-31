@@ -7,7 +7,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
@@ -15,18 +17,35 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
+
+
 public class MainConsumerIT {
 
+	
+	private String channelName="MEZZO";
+	private String eventServerName="MEZZO-SERVER";
+	
 	public MainConsumerIT() throws EventClientException,
 			TopicNotFoundException, ChannelNotFoundException,
-			AlreadyRegisteredException {
+			AlreadyRegisteredException, ChannelAlreadyExistsException {
+		
 		EventClient ec = EventClient.init(null);
-		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-		ProxyForPushConsumer consumerProxy = channelAdmin
-				.getProxyForPushConsumer();
+		
+		
+		//creation du channel 
+		EventServerChannelAdmin eventServerChannelAdmin=ec.resolveEventServerChannelAdminByEventServerName(eventServerName);
+		eventServerChannelAdmin.createChannel(channelName, 10);
+		
+		
+		//l'abonnement et la connexion du consumer au channel crée
+		
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic(channelName);
+		ProxyForPushConsumer consumerProxy = channelAdmin.getProxyForPushConsumer();
 		callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
 		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		consumerProxy.subscribe(cbc);
+		
+		
 		try {
 			consumerProxy.connect();
 		} catch (NotRegisteredException e) {
@@ -66,6 +85,9 @@ public class MainConsumerIT {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					} catch (AlreadyRegisteredException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (ChannelAlreadyExistsException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}

@@ -10,6 +10,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 /**
@@ -23,190 +24,203 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
  */
 public final class BFFactory {
 
-    private static Map<String, Channel> mapChannel = new HashMap<String, Channel>();
+	private static Map<String, Channel> mapChannel = new HashMap<String, Channel>();
 
-    private static Map<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
-    private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();    
-    private static Map<String, ChannelCtr> mapChannelCtr = new HashMap<String, ChannelCtr>();
-   
-    // ----------
-    private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
-    private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();               
-    // ----------    
-    
-    private static ORB orb;
+	private static Map<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
+	private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();    
+	private static Map<String, ChannelCtr> mapChannelCtr = new HashMap<String, ChannelCtr>();
 
-    /**
-     * Create a Channel Entity associated with the given topic.
-     *
-     * @param topic
-     *            Channel topic
-     * @param capacity
-     *            Maximal connection allowed
-     * @return existing or new Channel for this topic.
-     */
-    public static synchronized Channel createChannel(String topic, int capacity) {
-	if (mapChannel.get(topic) == null) {
-	    mapChannel.put(topic, new Channel(topic, capacity));
+	// ----------
+	private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
+	private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();               
+	// ----------    
+
+	private static ORB orb;
+
+	/**
+	 * Create a Channel Entity associated with the given topic.
+	 *
+	 * @param topic
+	 *            Channel topic
+	 * @param capacity
+	 *            Maximal connection allowed
+	 * @return existing or new Channel for this topic.
+	 */
+	public static synchronized Channel crap(String topic, int capacity) {
+		if (mapChannel.get(topic) == null) {
+			mapChannel.put(topic, new Channel(topic, capacity));
+		}
+		return mapChannel.get(topic);
 	}
-	return mapChannel.get(topic);
-    }
 
-    /**
-     * Create a Channel Admin Controller associated with the given topic.
-     *
-     * @param topic
-     *            Channel topic
-     * @return existing or new ChannelAdminCtr for this topic.
-     */
-    public static synchronized ChannelAdminCtr createChannelAdminCtr(
-	    String topic) {
-	if (mapChannelAdminCtr.get(topic) == null) {
-	    mapChannelAdminCtr.put(topic, new ChannelAdminCtr(topic));
+	
+	public static synchronized long createChannel(String topic, int capacity) {
+		Channel channel=null;
+		if (mapChannel.get(topic) == null) {
+			channel=new Channel(topic, capacity);
+			mapChannel.put(topic, channel);
+		}
+		
+		return channel.getIdentifier();
 	}
-	return mapChannelAdminCtr.get(topic);
+	
+	/**
+	 * Create a Channel Admin Controller associated with the given topic.
+	 *
+	 * @param topic
+	 *            Channel topic
+	 * @return existing or new ChannelAdminCtr for this topic.
+	 */
+	public static synchronized ChannelAdminCtr createChannelAdminCtr
+	(
+			String topic) {
+		if (mapChannelAdminCtr.get(topic) == null) {
+			mapChannelAdminCtr.put(topic, new ChannelAdminCtr(topic));
+		}
+		return mapChannelAdminCtr.get(topic);
 
-    }
-
-    /**
-     * Create a Channel Admin Implementation associated with the given topic.
-     *
-     * @param topic
-     *            Channel topic
-     * @return existing or new ChannelAdminImpl for this topic.
-     */
-    public static synchronized ChannelAdminImpl createChannelAdminImpl(String topic)
-    {
-	if (mapChannelAdminImpl.get(topic) == null) {
-	    mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
 	}
-	return mapChannelAdminImpl.get(topic);
-    }
 
-    /**
-     * Create a Channel Controller associated with the given topic.
-     *
-     * @param topic
-     *            Channel topic
-     * @return existing or new ChannelCtr for this topic.
-     */
-    public static synchronized ChannelCtr createChannelCtr(String topic) {
-	if (mapChannelCtr.get(topic) == null) {
-	    mapChannelCtr.put(topic, new ChannelCtr(topic));
+	/**
+	 * Create a Channel Admin Implementation associated with the given topic.
+	 *
+	 * @param topic
+	 *            Channel topic
+	 * @return existing or new ChannelAdminImpl for this topic.
+	 */
+	public static synchronized ChannelAdminImpl createChannelAdminImpl(String topic)
+	{
+		if (mapChannelAdminImpl.get(topic) == null) {
+			mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
+		}
+		return mapChannelAdminImpl.get(topic);
 	}
-	return mapChannelCtr.get(topic);
-    }
 
-    
-    //--------------------------------EventServerChannelAdmin-----------------------------------------
-    
-    
-    public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
-    	    String topic) {
-    	if (mapEventServerChannelAdminCtr.get(topic) == null) {
-    	    mapEventServerChannelAdminCtr.put(topic, new EventServerChannelAdminCtr(topic));
-    	}
-    	return mapEventServerChannelAdminCtr.get(topic);
-
-        }
-    public static synchronized EventServerChannelAdminImpl createEventServerChannelAdminImpl(String topic)
-    {
-	if (mapEventServerChannelAdminImpl.get(topic) == null) {
-	    mapEventServerChannelAdminImpl.put(topic, new EventServerChannelAdminImpl(topic));
+	/**
+	 * Create a Channel Controller associated with the given topic.
+	 *
+	 * @param topic
+	 *            Channel topic
+	 * @return existing or new ChannelCtr for this topic.
+	 */
+	public static synchronized ChannelCtr createChannelCtr(String topic) {
+		if (mapChannelCtr.get(topic) == null) {
+			mapChannelCtr.put(topic, new ChannelCtr(topic));
+		}
+		return mapChannelCtr.get(topic);
 	}
-	return mapEventServerChannelAdminImpl.get(topic);
-    }    
-    //----------------------------------------------------------------------------------------------
 
-    /**
-     * Return the singleton instance of the ORB.
-     *
-     * @param args
-     *            command lines argument to the ORB
-     * @param props
-     *            Properties structure to the ORB.
-     * @return singleton instance of the ORB.
-     */
-    public static synchronized ORB createOrb(String[] args, Properties props) {
-	if (orb == null) {
-	    orb = ORB.init(args, props);
+
+	//--------------------------------EventServerChannelAdmin-----------------------------------------
+
+
+	public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
+			String eventServerName) {
+		if (mapEventServerChannelAdminCtr.get(eventServerName) == null) {
+			mapEventServerChannelAdminCtr.put(eventServerName, new EventServerChannelAdminCtr(eventServerName));
+		}
+		return mapEventServerChannelAdminCtr.get(eventServerName);
+
 	}
-	return orb;
 
-    }
+	public static synchronized EventServerChannelAdminImpl createEventServerChannelAdminImpl(String eventServerName)
+	{
+		if (mapEventServerChannelAdminImpl.get(eventServerName) == null) {
+			//mapEventServerChannelAdminImpl.put(topic, new EventServerChannelAdminImpl());
+		}
+		return mapEventServerChannelAdminImpl.get(eventServerName);
+	}    
+	//----------------------------------------------------------------------------------------------
 
-    /**
-     * Return current instance of Channel Bean associated with this topic or
-     * <code>null</null> if not channel exists.
-     *
-     * @param topic
-     *            The Topic of the wanted channel.
-     * @return Channel with the specified topic or <code>null</null>
-     */
-    public static Channel getChannel(String topic) {
-	return mapChannel.get(topic);
-    }
+	/**
+	 * Return the singleton instance of the ORB.
+	 *
+	 * @param args
+	 *            command lines argument to the ORB
+	 * @param props
+	 *            Properties structure to the ORB.
+	 * @return singleton instance of the ORB.
+	 */
+	public static synchronized ORB createOrb(String[] args, Properties props) {
+		if (orb == null) {
+			orb = ORB.init(args, props);
+		}
+		return orb;
 
-    /**
-     * Build a Channel Admin Implementation (to use with CORBA) and underlying
-     * Channel given the topic argument.
-     *
-     * @param topic
-     *            Channel topic
-     * @param capacity
-     *            Channel's Maximal Connection Capacity
-     * @return existing or new ChannelAdminImpl
-     */
-    public static synchronized ChannelAdminImpl initiateChannel(String topic,
-	    int capacity) {
-	createChannel(topic, capacity);
-	return createChannelAdminImpl(topic);
-    }
+	}
 
-    /**
-     * Test purpose only. Enable to inject a mock object in the ChannelFactory.
-     *
-     * @param topic
-     * @param alternateChannel
-     *            An alternative implementation of Channel typically a mock
-     */
-    public static synchronized void setAlternateChannel(String topic,
-	    Channel channel) {
-	mapChannel.put(topic, channel);
-    }
+	/**
+	 * Return current instance of Channel Bean associated with this topic or
+	 * <code>null</null> if not channel exists.
+	 *
+	 * @param topic
+	 *            The Topic of the wanted channel.
+	 * @return Channel with the specified topic or <code>null</null>
+	 */
+	public static Channel getChannel(String topic) {
+		return mapChannel.get(topic);
+	}
 
-    /**
-     * Test purpose only. Enable to inject a mock object in the
-     * ChannelAdminCtrFactory
-     *
-     * @param topic
-     * @param alternateChannelAdminCtr
-     *            An alternative implementation of ChannelAdminCtr typically a
-     *            mock
-     */
-    public static void setAlternateChannelAdminCtr(String topic,
-	    ChannelAdminCtr alternateChannelAdminCtr) {
-	mapChannelAdminCtr.put(topic, alternateChannelAdminCtr);
-    }
+	/**
+	 * Build a Channel Admin Implementation (to use with CORBA) and underlying
+	 * Channel given the topic argument.
+	 *
+	 * @param topic
+	 *            Channel topic
+	 * @param capacity
+	 *            Channel's Maximal Connection Capacity
+	 * @return existing or new ChannelAdminImpl
+	 */
+	public static synchronized ChannelAdminImpl initiateChannel(String topic,
+			int capacity) {
+		crap(topic, capacity);
+		return createChannelAdminImpl(topic);
+	}
 
-    /**
-     * Test purpose only. Enable to inject a mock object in the
-     * ChannelCtrFactory
-     *
-     * @param topic
-     * @param alternateChannelCtr
-     *            An alternative implementation of ChannelCtr typically a mock
-     */
-    public static void setAlternateChannelCtr(String topic,
-	    ChannelCtr alternateChannelCtr) {
-	mapChannelCtr.put(topic, alternateChannelCtr);
-    }
+	/**
+	 * Test purpose only. Enable to inject a mock object in the ChannelFactory.
+	 *
+	 * @param topic
+	 * @param alternateChannel
+	 *            An alternative implementation of Channel typically a mock
+	 */
+	public static synchronized void setAlternateChannel(String topic,
+			Channel channel) {
+		mapChannel.put(topic, channel);
+	}
 
-    /**
-     * Hiding public constructor.
-     */
-    private BFFactory() {
-	super();
-    }
+	/**
+	 * Test purpose only. Enable to inject a mock object in the
+	 * ChannelAdminCtrFactory
+	 *
+	 * @param topic
+	 * @param alternateChannelAdminCtr
+	 *            An alternative implementation of ChannelAdminCtr typically a
+	 *            mock
+	 */
+	public static void setAlternateChannelAdminCtr(String topic,
+			ChannelAdminCtr alternateChannelAdminCtr) {
+		mapChannelAdminCtr.put(topic, alternateChannelAdminCtr);
+	}
+
+	/**
+	 * Test purpose only. Enable to inject a mock object in the
+	 * ChannelCtrFactory
+	 *
+	 * @param topic
+	 * @param alternateChannelCtr
+	 *            An alternative implementation of ChannelCtr typically a mock
+	 */
+	public static void setAlternateChannelCtr(String topic,
+			ChannelCtr alternateChannelCtr) {
+		mapChannelCtr.put(topic, alternateChannelCtr);
+	}
+
+	/**
+	 * Hiding public constructor.
+	 */
+	private BFFactory() {
+		super();
+	}
 
 }

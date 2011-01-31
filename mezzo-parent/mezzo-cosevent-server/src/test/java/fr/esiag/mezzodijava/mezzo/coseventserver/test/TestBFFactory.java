@@ -21,7 +21,7 @@ public class TestBFFactory {
 	public void createChannel(){
 		String name = "createChannel";
 		int capacity = 0;
-		Channel chanOutput = BFFactory.createChannel(name, capacity);
+		Channel chanOutput = BFFactory.crap(name, capacity);
 		assertNotNull(chanOutput);
 		assertEquals(name, chanOutput.getTopic());
 		assertEquals(capacity, chanOutput.getCapacity());
