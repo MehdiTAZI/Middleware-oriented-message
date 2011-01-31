@@ -29,6 +29,7 @@ public class InjectorSystemStateSupplier {
 		
 		try {
 			supplierProxy.connect();
+			System.out.println("supplier injector connecté");
 		} catch (MaximalConnectionReachedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -37,9 +38,9 @@ public class InjectorSystemStateSupplier {
 			e.printStackTrace();
 		}
 
-		System.out.println("ALL DONE");
-		ORB orb = BFFactory.createOrb(null, null);
-		orb.run();
+		System.out.println("ALL DONE for supplier injector");
+		/*ORB orb = BFFactory.createOrb(null, null);
+		orb.run();*/
 	}
 
 	public void PushEvent(Event e)

@@ -15,6 +15,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	{
 		dbConnector= new DbEventConnectorImpl();/*DONT FORGET TO INSTANCIATE THIS ! */
 		this.supplier=supplier;
+		System.out.println("callback initialisé");
 		
 	}
 	@Override
