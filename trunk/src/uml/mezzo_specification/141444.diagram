@@ -1,0 +1,90 @@
+format 76
+
+classinstance 128004 class_ref 148226 // Channel_admin_agent_process
+  name ""   xyz 38 4 2000 life_line_z 2000
+classinstance 128132 class_ref 141698 // FrameworkMezzo
+  name ""   xyz 504 4 2000 life_line_z 2000
+fragment 129668 "opt"
+  xyzwh 65 73 2020 532 132
+end
+textcanvas 131076 "[if nouvelle capacite > = ancienne capacite ]"
+  xyzwh 114 292 2025 392 92
+fragment 131204 "alt"
+  xyzwh 66 284 2020 534 133
+  separator 4148
+end
+textcanvas 131460 "[else]"
+  xyzwh 115 346 2030 360 13
+durationcanvas 128260 classinstance_ref 128004 // :Channel_admin_agent_process
+  xyzwh 101 94 2010 11 342
+end
+durationcanvas 128388 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 541 91 2010 11 51
+end
+durationcanvas 129796 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 541 152 2010 11 42
+end
+durationcanvas 130180 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 541 229 2010 11 57
+end
+durationcanvas 130564 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 541 306 2010 11 41
+end
+durationcanvas 132100 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 541 362 2010 11 46
+end
+msg 128516 synchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 128388
+  yz 95 2015 explicitmsg "resolveEventServerChannelAdminInterface(event server channel admin interface name)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 141 83
+msg 129540 return
+  from durationcanvas_ref 128388
+  to durationcanvas_ref 128260
+  yz 126 2015 explicitmsg "event server channel admin interface reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 226 114
+msg 129924 synchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 129796
+  yz 155 2015 explicitmsg "createChannel (topic, capacity)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 261 143
+msg 130052 return
+  from durationcanvas_ref 129796
+  to durationcanvas_ref 128260
+  yz 180 2015 explicitmsg "channel unique id"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 290 168
+msg 130308 synchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 130180
+  yz 231 2015 explicitmsg "getChannel(channel unique id)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 264 219
+msg 130436 return
+  from durationcanvas_ref 130180
+  to durationcanvas_ref 128260
+  yz 260 2015 explicitmsg "Channel Object Reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 271 248
+msg 130692 asynchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 130564
+  yz 319 2015 explicitmsg "changeCapacity(nouvelle capacite)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 257 308
+msg 132228 asynchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 132100
+  yz 362 2035 explicitmsg "changeCapacity(nouvelle capacite)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 261 350
+msg 132356 return
+  from durationcanvas_ref 132100
+  to durationcanvas_ref 128260
+  yz 386 2030 explicitmsg "EXCEPTION : Cannot Reduce Capacity"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 243 374
+end
