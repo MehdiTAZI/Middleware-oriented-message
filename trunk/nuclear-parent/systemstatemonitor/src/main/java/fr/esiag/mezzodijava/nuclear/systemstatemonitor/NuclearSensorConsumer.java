@@ -24,11 +24,14 @@ public class NuclearSensorConsumer {
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
 		ProxyForPushConsumer consumerProxy = channelAdmin
 				.getProxyForPushConsumer();
+		System.out.println("creation callback");
 		CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl(supplier);
 		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
+		System.out.println("subscribe du consumer");
 		consumerProxy.subscribe(cbc);
 		try {
 			consumerProxy.connect();
+			System.out.println("connexion nuclear sensor");
 		} catch (NotRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +43,7 @@ public class NuclearSensorConsumer {
 			e.printStackTrace();
 		}
 
-		System.out.println("ALL DONE");
+		System.out.println("ALL DONE for consumer nuclear");
 		ORB orb = BFFactory.createOrb(null, null);
 		orb.run();
 	}

@@ -15,8 +15,9 @@ public class Main {
 			InjectorSystemStateSupplier supplier;
 			try {
 				supplier = new InjectorSystemStateSupplier();
+				System.out.println("creation supplier injector");
 				NuclearSensorConsumer consumer = new NuclearSensorConsumer(supplier);
-				
+				System.out.println("creation consumer nuclear");
 			} catch (ChannelNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
