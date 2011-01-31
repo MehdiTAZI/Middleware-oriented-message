@@ -8,6 +8,7 @@ import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
@@ -25,8 +26,14 @@ public final class BFFactory {
     private static Map<String, Channel> mapChannel = new HashMap<String, Channel>();
 
     private static Map<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
-    private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();
+    private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();    
     private static Map<String, ChannelCtr> mapChannelCtr = new HashMap<String, ChannelCtr>();
+   
+    // ----------
+    private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
+    private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();               
+    // ----------    
+    
     private static ORB orb;
 
     /**
@@ -68,8 +75,8 @@ public final class BFFactory {
      *            Channel topic
      * @return existing or new ChannelAdminImpl for this topic.
      */
-    public static synchronized ChannelAdminImpl createChannelAdminImpl(
-	    String topic) {
+    public static synchronized ChannelAdminImpl createChannelAdminImpl(String topic)
+    {
 	if (mapChannelAdminImpl.get(topic) == null) {
 	    mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
 	}
@@ -89,6 +96,27 @@ public final class BFFactory {
 	}
 	return mapChannelCtr.get(topic);
     }
+
+    
+    //--------------------------------EventServerChannelAdmin-----------------------------------------
+    
+    
+    public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
+    	    String topic) {
+    	if (mapEventServerChannelAdminCtr.get(topic) == null) {
+    	    mapEventServerChannelAdminCtr.put(topic, new EventServerChannelAdminCtr(topic));
+    	}
+    	return mapEventServerChannelAdminCtr.get(topic);
+
+        }
+    public static synchronized EventServerChannelAdminImpl createEventServerChannelAdminImpl(String topic)
+    {
+	if (mapEventServerChannelAdminImpl.get(topic) == null) {
+	    mapEventServerChannelAdminImpl.put(topic, new EventServerChannelAdminImpl(topic));
+	}
+	return mapEventServerChannelAdminImpl.get(topic);
+    }    
+    //----------------------------------------------------------------------------------------------
 
     /**
      * Return the singleton instance of the ORB.
