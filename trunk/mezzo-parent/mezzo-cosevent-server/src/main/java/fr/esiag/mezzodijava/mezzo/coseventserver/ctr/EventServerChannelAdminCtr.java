@@ -9,27 +9,27 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 public class EventServerChannelAdminCtr
 {
-	private String topic;
-	private Channel channel;
+	private String eventServerName;
+	
 	private ORB orb;
 
  
-	public EventServerChannelAdminCtr(String topic) 
+	public EventServerChannelAdminCtr(String eventServerName) 
 	{
-		this.topic = topic;
+		this.eventServerName = eventServerName;
 		this.orb = BFFactory.createOrb(null, null);
-		this.channel = BFFactory.createChannelCtr(topic);
+		 
 	}
 	
-	// a verifier -----------;
-	public Channel createChannel(String topic,int capacity)
+	
+	public long createChannel(String topic,int capacity)
 	{
-		this.topic=topic;
+		this.eventServerName=topic;
 		this.orb = BFFactory.createOrb(null, null);
-		this.channel=(Channel) BFFactory.createChannel(topic, capacity)
-		 
-		return  channel;		
+				
+		return  BFFactory.createChannel(topic, capacity);		
 	}
 
 
+	
 }

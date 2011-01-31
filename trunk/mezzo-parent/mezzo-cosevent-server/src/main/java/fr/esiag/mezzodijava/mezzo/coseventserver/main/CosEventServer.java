@@ -16,18 +16,20 @@ import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
-import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
+
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 
 /**
  * Class CosEventServer
  * 
  * Main class for the Mezzo di Java's COS Event Server
  * 
- * UC n°: US14,US15 (+US children)
- * 
+ * UC n°: US14,US15 (+US children) * 
  * Program argmuments:
  * 
  * -ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService
@@ -46,10 +48,7 @@ public class CosEventServer {
      * @param args
      * @throws EventServerException
      */
-    public static void main(String[] args) throws EventServerException {
-	new CosEventServer(args);
-
-    }
+   
 
     //TODO Test Channel to remove asap.
     private String channelName = "MEZZO";
@@ -58,6 +57,7 @@ public class CosEventServer {
 	 *
 	 */
     private ORB orb;
+    private String eventServerName="MEZZO-SERVER";
 
     /**
      * Constructor of a COS Event Server.
@@ -78,20 +78,22 @@ public class CosEventServer {
      *            Command min arguments
      * @throws EventServerException
      */
-    public CosEventServer(String[] args) throws EventServerException {
+    public CosEventServer(String[] args){
 
 	Properties props = new Properties();
 	
-	if ( args!=null)
-		channelName= args[0];
+	if ( args!=null){
+		//channelName= args[0];
+		//eventServerName=args[1];
+		
+	}
 	
 	try {
 	    props.load(this.getClass().getClassLoader()
 		    .getResourceAsStream("eventserver.properties"));
 	} catch (IOException e) {
 	    // TODO log here
-	    throw new EventServerException(
-		    "Error in opening client property file", e);
+	    
 	}
 	orb = BFFactory.createOrb(args, props);
 	/*
@@ -105,6 +107,9 @@ public class CosEventServer {
 	 */
 	ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
 		channelName, 10);
+	
+	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl("MEZZO-SERVER");
+	
 
 	ThreadEvent th = new ThreadEvent(channelName);
 	Thread thread = new Thread(th);
@@ -117,9 +122,13 @@ public class CosEventServer {
 	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
 		    .resolve_initial_references("NameService"));
 
-	    nc.rebind(nc.to_name(channelName), poa
-		    .servant_to_reference(new ChannelAdminPOATie(
-			    channelAdminImpl)));
+	    //nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
+	    
+	    
+	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
+	    
+	    
+	    
 	    System.out.println("Server is running...");
 	    orb.run();
 
@@ -145,6 +154,10 @@ public class CosEventServer {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
+    }
+    
+    public static void main(String[] args){
+    	new CosEventServer(args);
     }
 
 }

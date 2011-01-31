@@ -11,6 +11,7 @@ import java.util.Set;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
 
 /**
  * Classe Channel : contain subscribed and connected list of consumer and
@@ -30,6 +31,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 public class Channel {
 
     private int capacity;
+    private long identifier;
     private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
 
     private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections
@@ -41,6 +43,7 @@ public class Channel {
     public Channel(String topic, int capacity) {
 	this.topic = topic;
 	this.capacity = capacity;
+	this.identifier=RandomChannelIdentifier.getUniqueIdentifier();
     }
 
     /**
@@ -175,4 +178,13 @@ public class Channel {
 	this.topic = topic;
     }
 
+	public long getIdentifier() {
+		return identifier;
+	}
+
+	public void setIdentifier(long identifier) {
+		this.identifier = identifier;
+	}
+
+    
 }

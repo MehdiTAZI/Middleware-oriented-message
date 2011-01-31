@@ -20,6 +20,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
@@ -68,7 +70,7 @@ public final class EventClient {
 	 *             configuration
 	 */
 	public static synchronized EventClient init(String[] args)
-			throws EventClientException {
+	throws EventClientException {
 		if (instance == null) {
 			// // Properties à externaliser
 			// props = new Properties();
@@ -117,7 +119,7 @@ public final class EventClient {
 	 *             Initialization failure
 	 */
 	private EventClient(String[] args, Properties properties)
-			throws EventClientException {
+	throws EventClientException {
 		props = properties;
 		if (props == null) {
 			props = new Properties();
@@ -157,7 +159,7 @@ public final class EventClient {
 	 * @throws TopicNotFoundException
 	 */
 	public ChannelAdmin resolveChannelByTopic(String topic)
-			throws EventClientException, TopicNotFoundException {
+	throws EventClientException, TopicNotFoundException {
 		Object channelObj = null;
 		try {
 			channelObj = nce.resolve_str(topic);
@@ -177,6 +179,27 @@ public final class EventClient {
 		return ChannelAdminHelper.narrow(channelObj);
 	}
 
+	public EventServerChannelAdmin resolveEventServerChannelAdminByEventServerName(String eventServerName)
+	{
+		Object channelObj = null;
+		try {
+			channelObj = nce.resolve_str(eventServerName);
+			// TODO Design a fail-over to switch between several NameService
+			// before throwing exception
+		} catch (NotFound e) {
+			// TODO log here
+
+		} catch (CannotProceed e) {
+			// TODO log here
+
+		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
+			// TODO log here
+
+		}
+		return EventServerChannelAdminHelper.narrow(channelObj);
+	}
+
+
 	/**
 	 * Server a CallBackConsumer and return its IOR.
 	 * 
@@ -187,7 +210,7 @@ public final class EventClient {
 	 */
 	public CallbackConsumer serveCallbackConsumer(
 			CallbackConsumerOperations callbackConsumerImplementation)
-			throws EventClientException {
+	throws EventClientException {
 		Object rootPOAObj = null;
 		try {
 			rootPOAObj = orb.resolve_initial_references("RootPOA");
