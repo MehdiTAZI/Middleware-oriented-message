@@ -12,7 +12,7 @@ public class EventServerChannelAdminCtr
 	private String eventServerName;
 	
 	private ORB orb;
-
+  
  
 	public EventServerChannelAdminCtr(String eventServerName) 
 	{
