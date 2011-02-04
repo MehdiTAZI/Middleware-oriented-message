@@ -19,7 +19,11 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 public class EventInfo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
+	private static final int max_pression = 155;
+	private static final int max_temperature = 323;
 	
+	//fauderais choisir une autre unité ! ou on aura un nombre plus petit
+	private static final double max_radioactivite = 100000000000000000000.0 ;
 	@Id
 	private int code;
 	@Id
@@ -86,7 +90,30 @@ public class EventInfo implements Serializable{
 
 	public boolean isAlerte()
 	{
-		return (this.code>900);
+		//return (this.code>900);
+		
+		
+		
+		
+		if ("pression".equalsIgnoreCase(this.type) )
+		{
+			int value = Integer.parseInt(this.data);	
+			if (value>max_pression+5)
+				return true;
+		}
+		else if ("temperature".equalsIgnoreCase(this.type) )
+		{
+			int value = Integer.parseInt(this.data);	
+			if (value>max_temperature+5)
+				return true;
+		}
+		else if ("radioactivite".equalsIgnoreCase(this.type) )
+		{
+			double value = Double.parseDouble(this.data);	
+			if (value>max_temperature+100)
+				return true;
+		}
+		return false;
 	}
 
 }
