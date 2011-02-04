@@ -12,7 +12,7 @@ public class GenerateMessage {
 	}
 	
 	public String normalMessage(){
-		int code = random.nextInt(900);
+		int code = random.nextInt(1000);
 		
 		return code+"/"+generateCode()+"/"+generateData();
 	
@@ -40,8 +40,10 @@ public class GenerateMessage {
 		return type[typeC];
 	}
 	public static void main(String[] args) {
+		for(int i =0;i<15;i++){
 		GenerateMessage gm = new GenerateMessage();
-		System.out.println(gm.randomMessage());
+		System.out.println(gm.normalMessage());
+		}
 	}
 
 }

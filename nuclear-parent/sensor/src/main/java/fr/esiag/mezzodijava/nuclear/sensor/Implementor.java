@@ -4,5 +4,5 @@ import java.util.Vector;
 
 public interface Implementor {
 	
-	public Vector<String> getData();
+	public Vector<String> getData(String file);
 }

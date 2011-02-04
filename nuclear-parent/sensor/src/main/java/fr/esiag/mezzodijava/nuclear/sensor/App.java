@@ -8,23 +8,29 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Vector;
 
-
+/*
+ *  Mettre en program arguments :
+ *  pression.txt radioactivite.txt temperature.txt
+ */
 public class App 
 {
 	public static void main( String[] args ) throws UnknownHostException, IOException
 	{
-		GenerateMessage gm= new GenerateMessage();
+		
 		Socket socket = new Socket("127.0.0.1",8080);
 		PrintWriter writer = new PrintWriter(
 				new BufferedWriter(
 						new OutputStreamWriter(socket.getOutputStream())),
 						true);
 		Capteur capteur=new Capteur(new TextFile());
-		Vector<String> data=capteur.getData();
+		Vector<String> data = new Vector<String>();
+		for (String arg : args){
+			System.out.println("CHARGEMENT DE : "+ arg);
+			data.addAll(capteur.getData(arg));
+		}
 		for(String message:data){
-			writer.println(gm.randomMessage());
-			
-			//writer.println(message);//envoie de Message au Sensorsdatasupplier     
+			System.out.println(message);
+			writer.println(message);//envoie de Message au Sensorsdatasupplier     
 		}
 		System.out.println("END");     // message de terminaison 
 		writer.println("END") ;
