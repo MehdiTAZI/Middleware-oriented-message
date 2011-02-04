@@ -14,12 +14,11 @@ public class TextFile implements Implementor{
 	
 	public void loadFile(String file){
 		try {
-			
+		list= new Vector<String>();
 		FileReader fr=new FileReader(file);
 		BufferedReader in=new BufferedReader(fr);
-		String data="";				
+		String data="";	
 		while((data=in.readLine())!=null){
-				
 			list.add(data);
 		}
 		in.close();
@@ -29,8 +28,8 @@ public class TextFile implements Implementor{
 		
 	}
 	
-	public Vector<String> getData() {
-		loadFile("data.txt");
+	public Vector<String> getData(String file) {
+		loadFile(file);
 		return list;
 	}
 

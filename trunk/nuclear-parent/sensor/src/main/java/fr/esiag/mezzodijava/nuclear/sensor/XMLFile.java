@@ -56,9 +56,9 @@ public class XMLFile implements Implementor{
 		}
 	}
 	
-	public Vector<String> getData() {
+	public Vector<String> getData(String file) {
 			
-		parserXML("data.xml");
+		parserXML(file);
 		return data;
 	}
 	

@@ -4,13 +4,15 @@ import java.util.Vector;
 
 public class Capteur {
 	private Vector<String> data;
+	private Implementor imp;
 	
 	public Capteur(Implementor imp) {
-		data=imp.getData();		
+		this.imp=imp;
+		//data=imp.getData();		
 	}
 	
-	public Vector<String> getData(){
-		return data;
+	public Vector<String> getData(String file){
+		return imp.getData(file);
 	}
 	
 	
