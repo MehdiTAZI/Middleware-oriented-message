@@ -37,10 +37,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 
 	@Override
 	public long createChannel(String topic, int capacity)
-			throws ChannelAlreadyExistsException {
-		
-		
-		
+			throws ChannelAlreadyExistsException {	
 		return eventServerChannelAdminctrl.createChannel(topic, capacity);
 	}
 
@@ -54,7 +51,6 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 	@Override
 	public void destroyChannel(long uniqueServerChannelId)
 			throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-		// TODO Auto-generated method stub
 		
 	}
 

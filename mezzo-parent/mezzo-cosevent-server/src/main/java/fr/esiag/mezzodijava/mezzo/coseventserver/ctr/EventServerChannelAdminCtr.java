@@ -5,6 +5,7 @@ import org.omg.CORBA.ORB;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 public class EventServerChannelAdminCtr
@@ -22,7 +23,7 @@ public class EventServerChannelAdminCtr
 	}
 	
 	
-	public long createChannel(String topic,int capacity)
+	public long createChannel(String topic,int capacity) throws ChannelAlreadyExistsException
 	{
 		this.eventServerName=topic;
 		this.orb = BFFactory.createOrb(null, null);

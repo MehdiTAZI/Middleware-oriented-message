@@ -6,6 +6,7 @@ import java.util.Properties;
 
 import org.omg.CORBA.ORB;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
@@ -54,12 +55,14 @@ public final class BFFactory {
 	}
 
 	
-	public static synchronized long createChannel(String topic, int capacity) {
+	public static synchronized long createChannel(String topic, int capacity) throws ChannelAlreadyExistsException {
 		Channel channel=null;
 		if (mapChannel.get(topic) == null) {
 			channel=new Channel(topic, capacity);
 			mapChannel.put(topic, channel);
 		}
+		else
+			throw new ChannelAlreadyExistsException();
 		
 		return channel.getIdentifier();
 	}
