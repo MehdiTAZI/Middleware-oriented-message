@@ -96,6 +96,9 @@ public class CosEventServer {
 	    // TODO log here
 	    
 	}
+//	for(String arg:args)
+//		System.out.println(arg);
+			
 	orb = BFFactory.createOrb(args, props);
 	/*
 	 * orb = ORB.init(args, props); Channel channel = new
@@ -106,37 +109,37 @@ public class CosEventServer {
 	 * ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 	 * channelAdminCtr);
 	 */
-	ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
-		channelName, 10);
+	//ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
+		//channelName, 10);
 	
 	//ChannelPublisher publisher=new ChannelPublisher();
 	//publisher.publish(channelAdminImpl, orb);
-	ChannelPublisher.publish(channelAdminImpl, orb);
-	//EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl("MEZZO-SERVER");
+	//ChannelPublisher.publish(channelAdminImpl, orb);
+	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl("MEZZO-SERVER");
 	
 
 	//ThreadEvent th = new ThreadEvent(channelName);
 	//Thread thread = new Thread(th);
 	//thread.start();
 
-	//try {
-	  //  POA poa = POAHelper.narrow(orb
-		//    .resolve_initial_references("RootPOA"));
-	    //poa.the_POAManager().activate();
-	    //NamingContextExt nc = NamingContextExtHelper.narrow(orb
-		  //  .resolve_initial_references("NameService"));
+	try {
+	    POA poa = POAHelper.narrow(orb
+		    .resolve_initial_references("RootPOA"));
+	    poa.the_POAManager().activate();
+	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
+		    .resolve_initial_references("NameService"));
 
-	    //nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
+	   // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
 	    
 	    
-	    //nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
+	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
 	    
 	    
 	    
 	    System.out.println("Server is running...");
 	    orb.run();
 
-	/*} catch (InvalidName e) {
+	} catch (InvalidName e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	} catch (NotFound e) {
@@ -157,7 +160,7 @@ public class CosEventServer {
 	} catch (AdapterInactive e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
-	}*/
+	}
     }
     
     public static void main(String[] args){
