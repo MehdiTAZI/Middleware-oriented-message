@@ -12,7 +12,6 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
-import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 public class EventServerChannelAdminCtr
@@ -76,6 +75,11 @@ public class EventServerChannelAdminCtr
 	public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
+		if(BFFactory.getChannel(uniqueServerChannelId)==null)
+			throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
+		if(BFFactory.getChannel(uniqueServerChannelId).getCapacity()>capacity)
+			throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
+		BFFactory.setChannelCapacity(BFFactory.getChannel(uniqueServerChannelId), capacity);
 		
 	}
 }

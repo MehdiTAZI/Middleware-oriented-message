@@ -7,7 +7,6 @@ import java.util.Properties;
 import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
-import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
@@ -73,6 +72,10 @@ public final class BFFactory {
 		ChannelPublisher.publish(BFFactory.initiateChannel(topic, capacity), orb);
 		mapChannelId.put(channel.getIdentifier(), channel);
 		return channel.getIdentifier();
+	}
+	public static void setChannelCapacity(Channel channel,int capacity){
+		channel.setCapacity(capacity);
+		mapChannel.put(channel.getTopic(), channel);
 	}
 	
 	/**
