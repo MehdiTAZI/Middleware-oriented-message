@@ -47,7 +47,6 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
     @Override
     public ProxyForPushConsumer getProxyForPushConsumer()
 	    throws ChannelNotFoundException {
-    	System.out.println("APPEL PRoxy FOR PUSH Consumer !!!!!!");
 	return channelAdminctrl.createProxyForPushConsumer();
     }
 
