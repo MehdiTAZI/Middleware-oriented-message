@@ -11,7 +11,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 
 public class ChannelPublisher {
 
-	public void publish(ChannelAdminImpl channelAdminImpl,ORB orb){
+	public static void publish(ChannelAdminImpl channelAdminImpl,ORB orb){
 
 		ThreadEvent th = new ThreadEvent(channelAdminImpl.getTopic());
 		Thread thread = new Thread(th);
