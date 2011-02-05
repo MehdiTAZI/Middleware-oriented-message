@@ -172,6 +172,10 @@ public final class BFFactory {
 		return mapChannel.get(topic);
 	}
 	
+	public static Channel getChannel(long id) {
+		return mapChannelId.get(id);
+	}
+	
 	public static ChannelAdmin getChannelAdmin(long uniqueServerChannelId) {
 		ChannelAdminPOATie tie=new ChannelAdminPOATie(mapChannelAdminImpl.get(mapChannelId.get(uniqueServerChannelId).getTopic()));
 		return tie._this(orb);
@@ -229,6 +233,15 @@ public final class BFFactory {
 	public static void setAlternateChannelCtr(String topic,
 			ChannelCtr alternateChannelCtr) {
 		mapChannelCtr.put(topic, alternateChannelCtr);
+	}
+	
+	public static void destroy(long idChannel){
+		String channelName=mapChannelId.get(idChannel).getTopic();
+		mapChannel.remove(channelName);
+		mapChannelAdminCtr.remove(channelName);
+		mapChannelAdminImpl.remove(channelName);
+		mapChannelCtr.remove(channelName);
+		mapChannelId.remove(idChannel);
 	}
 
 	/**

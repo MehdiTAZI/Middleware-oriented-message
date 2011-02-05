@@ -77,9 +77,10 @@ public class CosEventServer {
      * 
      * @param args
      *            Command min arguments
+     * @throws InterruptedException 
      * @throws EventServerException
      */
-    public CosEventServer(String[] args){
+    public CosEventServer(String[] args) throws InterruptedException{
 
 	Properties props = new Properties();
 	
@@ -130,11 +131,7 @@ public class CosEventServer {
 		    .resolve_initial_references("NameService"));
 
 	   // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
-	    
-	    
 	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
-	    
-	    
 	    
 	    System.out.println("Server is running...");
 	    orb.run();
@@ -163,7 +160,7 @@ public class CosEventServer {
 	}
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws InterruptedException{
     	new CosEventServer(args);
     }
 
