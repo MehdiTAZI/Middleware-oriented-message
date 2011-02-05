@@ -10,6 +10,7 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
 
@@ -33,7 +34,9 @@ public class Test {
 			EventServerChannelAdmin channelAdmin=EventServerChannelAdminHelper.narrow(ncRef.resolve_str("MEZZO-SERVER"));
 			long id=channelAdmin.createChannel("MEZZO", 30);
 			System.out.println("IDENTIFIANT = "+id);
-			
+			Thread.sleep(10000);
+			ChannelAdmin admin=channelAdmin.getChannel(id);
+			admin.getProxyForPushConsumer();
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
