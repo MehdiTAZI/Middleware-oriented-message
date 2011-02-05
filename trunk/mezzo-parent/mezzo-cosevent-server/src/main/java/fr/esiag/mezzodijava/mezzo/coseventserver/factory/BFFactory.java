@@ -6,6 +6,9 @@ import java.util.Properties;
 
 import org.omg.CORBA.ORB;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
@@ -34,7 +37,9 @@ public final class BFFactory {
 
 	// ----------
 	private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
-	private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();               
+	private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();
+	private static Map<Long, Channel> mapChannelId = new HashMap<Long, Channel>();
+	
 	// ----------    
 
 	private static ORB orb;
@@ -67,6 +72,7 @@ public final class BFFactory {
 			throw new ChannelAlreadyExistsException();
 		}
 		ChannelPublisher.publish(BFFactory.initiateChannel(topic, capacity), orb);
+		mapChannelId.put(channel.getIdentifier(), channel);
 		return channel.getIdentifier();
 	}
 	
@@ -166,7 +172,11 @@ public final class BFFactory {
 	public static Channel getChannel(String topic) {
 		return mapChannel.get(topic);
 	}
-
+	
+	public static ChannelAdmin getChannelAdmin(long uniqueServerChannelId) {
+		ChannelAdminPOATie tie=new ChannelAdminPOATie(mapChannelAdminImpl.get(mapChannelId.get(uniqueServerChannelId).getTopic()));
+		return tie._this(orb);
+	}
 	/**
 	 * Build a Channel Admin Implementation (to use with CORBA) and underlying
 	 * Channel given the topic argument.
