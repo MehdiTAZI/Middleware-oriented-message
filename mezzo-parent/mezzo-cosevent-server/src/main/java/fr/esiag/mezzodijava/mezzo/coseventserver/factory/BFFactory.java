@@ -68,7 +68,6 @@ public final class BFFactory {
 			mapChannel.put(topic, channel);
 		}
 		else{
-			System.out.println("Le channel n existe pas !!!");
 			throw new ChannelAlreadyExistsException();
 		}
 		ChannelPublisher.publish(BFFactory.initiateChannel(topic, capacity), orb);

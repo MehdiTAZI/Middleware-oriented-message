@@ -44,7 +44,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 	@Override
 	public ChannelAdmin getChannel(long uniqueServerChannelId)
 	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-		return BFFactory.getChannelAdmin(uniqueServerChannelId);
+		return eventServerChannelAdminctrl.getChannel(uniqueServerChannelId);
 	}
 
 	@Override

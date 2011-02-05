@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
+
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
@@ -37,5 +39,10 @@ public class EventServerChannelAdminCtr
 	{
 		this.eventServerName=topic;
 		return  BFFactory.createChannel(topic, capacity);		
+	}
+	
+	public ChannelAdmin getChannel(long uniqueServerChannelId)
+	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
+		return BFFactory.getChannelAdmin(uniqueServerChannelId);
 	}
 }
