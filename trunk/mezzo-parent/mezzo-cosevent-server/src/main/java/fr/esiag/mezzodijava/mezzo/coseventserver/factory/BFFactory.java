@@ -13,6 +13,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
  * BFFactory : allow to get instances of Channel, ChannelCtr,ChannelAdminImpl
@@ -53,17 +54,19 @@ public final class BFFactory {
 		}
 		return mapChannel.get(topic);
 	}
-
 	
 	public static synchronized long createChannel(String topic, int capacity) throws ChannelAlreadyExistsException {
 		Channel channel=null;
 		if (mapChannel.get(topic) == null) {
+			
 			channel=new Channel(topic, capacity);
 			mapChannel.put(topic, channel);
 		}
-		else
+		else{
+			System.out.println("Le channel n existe pas !!!");
 			throw new ChannelAlreadyExistsException();
-		
+		}
+		ChannelPublisher.publish(BFFactory.initiateChannel(topic, capacity), orb);
 		return channel.getIdentifier();
 	}
 	

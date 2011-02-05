@@ -45,7 +45,6 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 */
 	public ChannelCtr(String topic) {
 		this.channel = BFFactory.crap(topic, 0);
-
 	}
 
 	/**
