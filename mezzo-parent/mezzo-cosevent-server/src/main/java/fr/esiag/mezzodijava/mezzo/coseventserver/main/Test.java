@@ -35,9 +35,9 @@ public class Test {
 			NamingContextExt ncRef =NamingContextExtHelper.narrow(objRef);
 			EventServerChannelAdmin channelAdmin=EventServerChannelAdminHelper.narrow(ncRef.resolve_str("MEZZO-SERVER"));
 			long id=channelAdmin.createChannel("MEZZO", 30);
-			ChannelAdmin admin=channelAdmin.getChannel(id);
-			ProxyForPushConsumer proxy=admin.getProxyForPushConsumer();
 			Thread.sleep(10000);
+			channelAdmin.destroyChannel(id);
+			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}

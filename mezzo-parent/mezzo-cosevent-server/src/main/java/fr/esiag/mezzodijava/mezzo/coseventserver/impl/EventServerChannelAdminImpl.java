@@ -50,7 +50,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 	@Override
 	public void destroyChannel(long uniqueServerChannelId)
 	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-
+		eventServerChannelAdminctrl.destroyChannel(uniqueServerChannelId);
 	}
 
 	@Override

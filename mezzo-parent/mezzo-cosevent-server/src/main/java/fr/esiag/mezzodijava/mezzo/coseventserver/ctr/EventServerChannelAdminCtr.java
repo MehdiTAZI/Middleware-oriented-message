@@ -4,11 +4,16 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
+import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NamingContextExt;
+import org.omg.CosNaming.NamingContextExtHelper;
+import org.omg.CosNaming.NamingContextPackage.CannotProceed;
+import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
-import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 public class EventServerChannelAdminCtr
 {
@@ -40,9 +45,37 @@ public class EventServerChannelAdminCtr
 		this.eventServerName=topic;
 		return  BFFactory.createChannel(topic, capacity);		
 	}
-	
+
 	public ChannelAdmin getChannel(long uniqueServerChannelId)
 	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
 		return BFFactory.getChannelAdmin(uniqueServerChannelId);
+	}
+	public void destroyChannel(long uniqueServerChannelId)
+	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
+		try {
+			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+					.resolve_initial_references("NameService"));
+			try {
+				if(BFFactory.getChannel(uniqueServerChannelId)!=null){
+					nc.unbind(nc.to_name(BFFactory.getChannel(uniqueServerChannelId).getTopic()));
+					BFFactory.destroy(uniqueServerChannelId);
+				}
+				else throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
+			} catch (NotFound e) {
+				e.printStackTrace();
+			} catch (CannotProceed e) {
+				e.printStackTrace();
+			} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
+				e.printStackTrace();
+			}
+		} catch (InvalidName e) {
+			e.printStackTrace();
+		}
+
+	}
+	public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
+	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
+	fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
+		
 	}
 }
