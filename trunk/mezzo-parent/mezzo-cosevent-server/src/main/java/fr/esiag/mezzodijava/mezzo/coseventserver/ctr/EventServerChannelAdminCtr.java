@@ -21,6 +21,12 @@ public class EventServerChannelAdminCtr
 	private ORB orb;
 
 
+	public ORB getOrb() {
+		return orb;
+	}
+	public void setOrb(ORB orb) {
+		this.orb = orb;
+	}
 	public EventServerChannelAdminCtr(String eventServerName) 
 	{
 		this.eventServerName = eventServerName;
@@ -36,6 +42,8 @@ public class EventServerChannelAdminCtr
 			e.printStackTrace();
 		}
 		this.orb = BFFactory.createOrb(args, props);		
+	}
+	public EventServerChannelAdminCtr(){
 	}
 
 
@@ -79,7 +87,7 @@ public class EventServerChannelAdminCtr
 			throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 		if(BFFactory.getChannel(uniqueServerChannelId).getCapacity()>capacity)
 			throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
-		BFFactory.setChannelCapacity(BFFactory.getChannel(uniqueServerChannelId), capacity);
+		BFFactory.changeChannelCapacity(BFFactory.getChannel(uniqueServerChannelId), capacity);
 		
 	}
 }

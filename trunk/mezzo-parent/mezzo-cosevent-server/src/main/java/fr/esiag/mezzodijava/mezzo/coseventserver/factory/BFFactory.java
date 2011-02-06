@@ -26,7 +26,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
  * @author Mezzo-Team
  *
  */
-public final class BFFactory {
+public  class BFFactory {
 
 	private static Map<String, Channel> mapChannel = new HashMap<String, Channel>();
 
@@ -42,6 +42,10 @@ public final class BFFactory {
 	// ----------    
 
 	private static ORB orb;
+
+	public static void setOrb(ORB orb) {
+		BFFactory.orb = orb;
+	}
 
 	/**
 	 * Create a Channel Entity associated with the given topic.
@@ -73,7 +77,8 @@ public final class BFFactory {
 		mapChannelId.put(channel.getIdentifier(), channel);
 		return channel.getIdentifier();
 	}
-	public static void setChannelCapacity(Channel channel,int capacity){
+	
+	public static void changeChannelCapacity(Channel channel,int capacity){
 		channel.setCapacity(capacity);
 		mapChannel.put(channel.getTopic(), channel);
 	}
