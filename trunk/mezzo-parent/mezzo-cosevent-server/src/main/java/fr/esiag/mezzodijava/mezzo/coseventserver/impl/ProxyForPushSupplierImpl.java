@@ -82,7 +82,6 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
      */
     @Override
     public void push(Event evt) throws NotConnectedException {
-	System.out.println("evt " + evt.toString());
 	if (!connected) {
 	    throw new NotConnectedException();
 	}
