@@ -37,7 +37,7 @@ public class Test {
 			long id=channelAdmin.createChannel("MEZZO", 3);
 			Thread.sleep(30000);
 			System.out.println("ChangeCapacity");
-			channelAdmin.changeChannelCapacity(id, 4);
+			channelAdmin.destroyChannel(id);
 			
 		}catch(Exception e){
 			System.out.println(e.getMessage());

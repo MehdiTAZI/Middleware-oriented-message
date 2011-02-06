@@ -13,6 +13,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
@@ -190,7 +191,20 @@ public class ChannelCtr implements java.nio.channels.Channel {
 			throw new NotRegisteredException();
 		}
 	}
+	
+	public void removeAllProxiesForPushConsumerFromSubscribedList(){
+		for(ProxyForPushConsumerImpl proxy:channel.getConsumersSubscribed().keySet())
+			channel.getConsumersSubscribed().remove(proxy);
+	}
 
+	public void removeAllProxiesForPushConsumerFromConnectedList(){
+		for(ProxyForPushConsumerImpl proxy:channel.getConsumersConnected())
+			channel.getConsumersConnected().remove(proxy);
+	}
+	public void removeAllProxiesForPushSupplierFromConnectedList(){
+		for(ProxyForPushSupplierImpl proxy:channel.getSuppliersConnected())
+			channel.getSuppliersConnected().remove(proxy);
+	}
 	/**
 	 * Remove a Proxy PUSH Supplier from the connected list.
 	 *

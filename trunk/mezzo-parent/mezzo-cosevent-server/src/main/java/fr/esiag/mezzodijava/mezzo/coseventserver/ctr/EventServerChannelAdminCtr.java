@@ -12,7 +12,9 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 public class EventServerChannelAdminCtr
 {
@@ -64,8 +66,15 @@ public class EventServerChannelAdminCtr
 					.resolve_initial_references("NameService"));
 			try {
 				if(BFFactory.getChannel(uniqueServerChannelId)!=null){
+					ChannelCtr channelCtr=BFFactory.getChannelctr(BFFactory.getChannel(uniqueServerChannelId).getTopic());
+					ChannelPublisher.destroy();
+					channelCtr.removeAllProxiesForPushConsumerFromSubscribedList();
+					channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
+					channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
 					nc.unbind(nc.to_name(BFFactory.getChannel(uniqueServerChannelId).getTopic()));
+					System.out.println("Le nombre de consommateur Inscrit apres REMOVE = "+channelCtr.getChannel().getConsumersSubscribed().size());
 					BFFactory.destroy(uniqueServerChannelId);
+					
 				}
 				else throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 			} catch (NotFound e) {

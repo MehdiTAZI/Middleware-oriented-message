@@ -179,7 +179,9 @@ public  class BFFactory {
 	public static Channel getChannel(String topic) {
 		return mapChannel.get(topic);
 	}
-	
+	public static ChannelCtr getChannelctr(String topic) {
+		return mapChannelCtr.get(topic);
+	}
 	public static Channel getChannel(long id) {
 		return mapChannelId.get(id);
 	}
