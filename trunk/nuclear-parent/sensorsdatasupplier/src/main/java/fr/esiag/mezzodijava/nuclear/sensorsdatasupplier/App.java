@@ -49,14 +49,16 @@ public class App
 			Event e = new Event((new Date()).getTime(),str);
 			EventInfo eventInfo = new EventInfo(e);
 			
+			//si c'est une alerte on le marque puis on l'envoie
 			if (eventInfo.isAlerte()){ 
 				eventInfo.setCode(923);
 			}else{
 				eventInfo.setCode(42);
 			}
+			String data = eventInfo.getCode()+"/"+eventInfo.getType()+"/"+eventInfo.getData();
+			Event event = new Event((new Date()).getTime(),data);
 			
-			//si c'est une alerte on le marque puis on l'envoie
-			supplierProxy.push(e);   
+			supplierProxy.push(event);   
 		}
 		reader.close();
 		socketClient.close();
