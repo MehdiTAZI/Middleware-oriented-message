@@ -22,6 +22,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 
+
 public class App 
 {
 	private static ORB orb;
@@ -45,7 +46,17 @@ public class App
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
 			System.out.println(str);
-			supplierProxy.push(new Event((new Date()).getTime(),str));   
+			Event e = new Event((new Date()).getTime(),str);
+			EventInfo eventInfo = new EventInfo(e);
+			
+			if (eventInfo.isAlerte()){ 
+				eventInfo.setCode(923);
+			}else{
+				eventInfo.setCode(42);
+			}
+			
+			//si c'est une alerte on le marque puis on l'envoie
+			supplierProxy.push(e);   
 		}
 		reader.close();
 		socketClient.close();
