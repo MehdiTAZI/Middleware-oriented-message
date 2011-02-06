@@ -10,11 +10,11 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 
 public class ChannelPublisher {
-
+	private static  Thread thread;
 	public static void publish(ChannelAdminImpl channelAdminImpl,ORB orb){
 
-		ThreadEvent th = new ThreadEvent(channelAdminImpl.getTopic());
-		Thread thread = new Thread(th);
+		ThreadEvent te = new ThreadEvent(channelAdminImpl.getTopic());
+		thread = new Thread(te);
 		thread.start();
 		try{
 			POA poa = POAHelper.narrow(orb
@@ -26,4 +26,9 @@ public class ChannelPublisher {
 			System.out.println(e.getMessage());
 		}
 	}
+	public static void destroy(){
+		System.out.println("THREAD DESTROYED !!!!!!");
+		thread.stop();
+	}
+	
 }
