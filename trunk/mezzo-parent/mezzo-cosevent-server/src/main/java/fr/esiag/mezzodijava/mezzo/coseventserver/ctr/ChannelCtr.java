@@ -5,7 +5,14 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -193,17 +200,15 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	}
 	
 	public void removeAllProxiesForPushConsumerFromSubscribedList(){
-		for(ProxyForPushConsumerImpl proxy:channel.getConsumersSubscribed().keySet())
-			channel.getConsumersSubscribed().remove(proxy);
+		channel.setConsumersSubscribed(Collections
+			    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>()));
 	}
 
 	public void removeAllProxiesForPushConsumerFromConnectedList(){
-		for(ProxyForPushConsumerImpl proxy:channel.getConsumersConnected())
-			channel.getConsumersConnected().remove(proxy);
+		channel.setConsumersConnected(new HashSet<ProxyForPushConsumerImpl>());
 	}
 	public void removeAllProxiesForPushSupplierFromConnectedList(){
-		for(ProxyForPushSupplierImpl proxy:channel.getSuppliersConnected())
-			channel.getSuppliersConnected().remove(proxy);
+		channel.setSuppliersConnected(new HashSet<ProxyForPushSupplierImpl>());
 	}
 	/**
 	 * Remove a Proxy PUSH Supplier from the connected list.
