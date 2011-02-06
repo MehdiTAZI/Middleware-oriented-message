@@ -57,6 +57,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 	public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
+		eventServerChannelAdminctrl.changeChannelCapacity(uniqueServerChannelId, capacity);
 	}
 
 }

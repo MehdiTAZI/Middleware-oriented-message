@@ -34,9 +34,10 @@ public class Test {
 			Object objRef= orb.resolve_initial_references("NameService");
 			NamingContextExt ncRef =NamingContextExtHelper.narrow(objRef);
 			EventServerChannelAdmin channelAdmin=EventServerChannelAdminHelper.narrow(ncRef.resolve_str("MEZZO-SERVER"));
-			long id=channelAdmin.createChannel("MEZZO", 30);
-			Thread.sleep(10000);
-			channelAdmin.destroyChannel(id);
+			long id=channelAdmin.createChannel("MEZZO", 3);
+			Thread.sleep(30000);
+			System.out.println("ChangeCapacity");
+			channelAdmin.changeChannelCapacity(id, 4);
 			
 		}catch(Exception e){
 			System.out.println(e.getMessage());
@@ -48,5 +49,4 @@ public class Test {
 	public static void main(String[] args) {
 		new Test(args);
 	}
-
 }
