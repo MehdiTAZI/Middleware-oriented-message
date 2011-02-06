@@ -27,8 +27,6 @@ public class ChannelPublisher {
 		}
 	}
 	public static void destroy(){
-		System.out.println("THREAD DESTROYED !!!!!!");
 		thread.stop();
 	}
-	
 }

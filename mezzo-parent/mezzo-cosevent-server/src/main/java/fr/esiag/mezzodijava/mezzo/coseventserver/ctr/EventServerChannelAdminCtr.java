@@ -72,7 +72,6 @@ public class EventServerChannelAdminCtr
 					channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
 					channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
 					nc.unbind(nc.to_name(BFFactory.getChannel(uniqueServerChannelId).getTopic()));
-					System.out.println("Le nombre de consommateur Inscrit apres REMOVE = "+channelCtr.getChannel().getConsumersSubscribed().size());
 					BFFactory.destroy(uniqueServerChannelId);
 					
 				}
