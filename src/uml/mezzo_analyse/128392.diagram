@@ -1,0 +1,29 @@
+format 76
+
+classcanvas 128648 class_ref 135426 // Channel_Admin_Agent_Process
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 66 55 2005
+end
+classcanvas 128776 class_ref 135170 // EventServer
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 112 165 2000
+end
+classcanvas 128904 class_ref 142210 // Event
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 258 172 2000
+end
+note 129032 "MEZZO DI JAVA - ANALYSE
+DIAGRAMME DE CLASSES METIERS
+UC 07 -  Administrer un channel"
+  xyzwh 308 46 2000 257 77
+relationcanvas 129160 relation_ref 141442 // channels
+  from ref 128648 z 2006 label "channels" italic xyz 126.5 118.5 2006 to ref 128776
+  no_role_a no_role_b
+  multiplicity_a_pos 130 148 3000 no_multiplicity_b
+end
+relationcanvas 129288 relation_ref 141570 // events
+  from ref 128776 z 2001 label "events" italic xyz 195.5 182 2001 to ref 128904
+  no_role_a no_role_b
+  multiplicity_a_pos 243 198 3000 no_multiplicity_b
+end
+end

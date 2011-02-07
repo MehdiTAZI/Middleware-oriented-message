@@ -1,0 +1,53 @@
+format 76
+
+classcanvas 128008 class_ref 128008 // Channel_Admin_agent_process
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode actor drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz -8 177 2000
+end
+classcanvas 128264 class_ref 128136 // EventServerChannelAdmin
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 191 29 2000
+end
+classcanvas 128776 class_ref 128392 // EventServerChannelAdminCtr
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode control drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 460 22 2000
+end
+classcanvas 129032 class_ref 161922 // Channel
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 726 219 2000
+end
+classcanvas 129160 class_ref 175490 // EventServer
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 719 44 2006
+end
+note 130312 "MEZZO DI JAVA - ANALYSE
+DIAGRAMME DES CLASSES PARTICIPANTES
+UC07 - Administrer un channel"
+  xyzwh 275.5 202.5 2000 263 59
+relationcanvas 128392 relation_ref 128008 // <unidirectional association>
+  decenter_begin 601
+  decenter_end 412
+  from ref 128008 z 2001 to ref 128264
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128904 relation_ref 128136 // <unidirectional association>
+  decenter_begin 412
+  decenter_end 456
+  from ref 128264 z 2001 to ref 128776
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129288 relation_ref 183426 // channels
+  from ref 129160 z 2007 label "channels" italic xyz 738 154.5 2007 to ref 129032
+  no_role_a no_role_b
+  multiplicity_a_pos 735 202 3000 no_multiplicity_b
+end
+relationcanvas 130056 relation_ref 128392 // <unidirectional association>
+  decenter_begin 446
+  decenter_end 745
+  from ref 128776 z 2007 to ref 129160
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end
