@@ -1,15 +1,12 @@
 package fr.esiag.mezzodijava.nuclear.sensorsdatasupplier;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.StringTokenizer;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,6 +20,7 @@ public class EventInfo implements Serializable{
 	private static final long serialVersionUID = 1L;
 	private static final int max_pression = 155;
 	private static final int max_temperature = 323;
+	private static final double max_radioactivite = 1000.0 ;
 	
 	@Id
 	@GeneratedValue
@@ -30,9 +28,6 @@ public class EventInfo implements Serializable{
 	
 	@Column(name = "time")
 	private Long time;
-	
-	//fauderais choisir une autre unité ! ou on aura un nombre plus petit
-	private static final double max_radioactivite = 1000.0 ;
 	
 	@Column(name = "code")
 	private int code;
@@ -117,19 +112,19 @@ public class EventInfo implements Serializable{
 		if ("pression".equalsIgnoreCase(this.type) )
 		{
 			int value = Integer.parseInt(this.data);	
-			if (value>max_pression+5)
+			if (value>max_pression)
 				return true;
 		}
 		else if ("temperature".equalsIgnoreCase(this.type) )
 		{
 			int value = Integer.parseInt(this.data);	
-			if (value>max_temperature+5)
+			if (value>max_temperature)
 				return true;
 		}
 		else if ("radioactivite".equalsIgnoreCase(this.type) )
 		{
 			double value = Double.parseDouble(this.data);	
-			if (value>max_temperature+100)
+			if (value>max_radioactivite)
 				return true;
 		}
 		return false;
