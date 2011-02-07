@@ -11,6 +11,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
@@ -27,38 +28,59 @@ public class MainConsumerIT {
 	
 	public MainConsumerIT() throws EventClientException,
 			TopicNotFoundException, ChannelNotFoundException,
-			AlreadyRegisteredException, ChannelAlreadyExistsException {
+			AlreadyRegisteredException, ChannelAlreadyExistsException, NotRegisteredException, InterruptedException, MaximalConnectionReachedException, AlreadyConnectedException, NotConnectedException {
 		
 		EventClient ec = EventClient.init(null);
 		
 		
 		//creation du channel 
-		EventServerChannelAdmin eventServerChannelAdmin=ec.resolveEventServerChannelAdminByEventServerName(eventServerName);
+	/*	EventServerChannelAdmin eventServerChannelAdmin=ec.resolveEventServerChannelAdminByEventServerName(eventServerName);
 		long id=eventServerChannelAdmin.createChannel(channelName, 10);
-		
-		
+		System.out.println("Creation du channel "+channelName);
+		System.out.println("UID "+ id);
+		*/
 		//l'abonnement et la connexion du consumer au channel crée
 		
-		ChannelAdmin channelAdmin =eventServerChannelAdmin.getChannel(id);
+		ChannelAdmin channelAdmin =ec.resolveChannelByTopic(channelName);
 		ProxyForPushConsumer consumerProxy = channelAdmin.getProxyForPushConsumer();
 		callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
 		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		consumerProxy.subscribe(cbc);
+		Thread.sleep(10000);
+		consumerProxy.connect();
 		
 		
-//		try {
-////			consumerProxy.connect();
-//		} catch (NotRegisteredException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (MaximalConnectionReachedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (AlreadyConnectedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
+		ProxyForPushConsumer consumerProxy1 = channelAdmin.getProxyForPushConsumer();
+		callBackConsumerImpl callbackImpl1 = new callBackConsumerImpl();
+		CallbackConsumer cbc1 = ec.serveCallbackConsumer(callbackImpl);
+		consumerProxy1.subscribe(cbc);
+		Thread.sleep(15000);
+		consumerProxy1.connect();
+		
+		
+		
+		ProxyForPushConsumer consumerProxy2 = channelAdmin.getProxyForPushConsumer();
+		callBackConsumerImpl callbackImpl12 = new callBackConsumerImpl();
+		CallbackConsumer cbc2 = ec.serveCallbackConsumer(callbackImpl);
+		consumerProxy2.subscribe(cbc);
+		Thread.sleep(10000);
+		consumerProxy2.connect();
+		
+		
+		
+		consumerProxy.disconnect();
+		consumerProxy.unsubscribe();
+		
+		consumerProxy1.disconnect();
+		consumerProxy1.unsubscribe();
+		
+		consumerProxy2.disconnect();
+		consumerProxy2.unsubscribe();
+		Thread.sleep(10000);
+		
+		
+		
+		
 		System.out.println("ALL DONE");
 		ORB orb = BFFactory.createOrb(null, null);
 		orb.run();
@@ -66,7 +88,7 @@ public class MainConsumerIT {
 
 	public static void main(String[] args) throws ChannelNotFoundException,
 			AlreadyRegisteredException, EventClientException,
-			TopicNotFoundException, ChannelAlreadyExistsException {
+			TopicNotFoundException, ChannelAlreadyExistsException, NotRegisteredException, InterruptedException, MaximalConnectionReachedException, AlreadyConnectedException, NotConnectedException {
 						new MainConsumerIT();
 		}
 

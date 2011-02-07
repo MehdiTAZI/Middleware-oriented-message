@@ -4,8 +4,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
-
-
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**

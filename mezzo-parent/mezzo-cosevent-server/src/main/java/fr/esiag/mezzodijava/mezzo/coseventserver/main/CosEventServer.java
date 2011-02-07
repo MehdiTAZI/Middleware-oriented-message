@@ -15,15 +15,10 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
-import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
-import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
-
+import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
-import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
  * Class CosEventServer
