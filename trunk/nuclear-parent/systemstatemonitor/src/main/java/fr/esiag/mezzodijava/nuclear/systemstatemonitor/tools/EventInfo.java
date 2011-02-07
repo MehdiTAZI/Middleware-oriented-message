@@ -17,7 +17,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 @Entity (name = "Events")
 @Table(name = "EVENTS")
-@IdClass(EventInfoPK.class)
+//@IdClass(EventInfoPK.class)
 public class EventInfo implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -25,14 +25,18 @@ public class EventInfo implements Serializable{
 	private static final int max_temperature = 323;
 	
 	@Id
+	@GeneratedValue
+	private int id;
+	
+	@Column(name = "time")
 	private Long time;
 	
 	//fauderais choisir une autre unité ! ou on aura un nombre plus petit
 	private static final double max_radioactivite = 1000.0 ;
 	
-	@Id
+	@Column(name = "code")
 	private int code;
-	@Id
+	@Column(name = "type")
 	private String type;
 	
 	
