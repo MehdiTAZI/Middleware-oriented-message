@@ -5,7 +5,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
-public class Main {
+public class MainMonitor {
 
 	/**
 	 * @param args
