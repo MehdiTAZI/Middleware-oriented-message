@@ -32,7 +32,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		
 		int eventCode = eventInfo.getCode();
 		String eventType = eventInfo.getType();
-		EventInfoPK pk = new EventInfoPK(eventCode,eventType);
+		EventInfoPK pk = new EventInfoPK(e.timestamp,eventCode,eventType);
 		
 		EventInfo storedEventInfo= dbConnector.find(pk);
 		

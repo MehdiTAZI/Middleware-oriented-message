@@ -1,11 +1,13 @@
 package fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.StringTokenizer;
 
 import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.Table;
@@ -22,8 +24,12 @@ public class EventInfo implements Serializable{
 	private static final int max_pression = 155;
 	private static final int max_temperature = 323;
 	
+	@Id
+	private Long time;
+	
 	//fauderais choisir une autre unité ! ou on aura un nombre plus petit
-	private static final double max_radioactivite = 100000000000000000000.0 ;
+	private static final double max_radioactivite = 1000.0 ;
+	
 	@Id
 	private int code;
 	@Id
@@ -38,6 +44,7 @@ public class EventInfo implements Serializable{
 	
 	public EventInfo(Event e)
 	{	
+		this.time = e.timestamp;
 		st= new StringTokenizer(e.content,"/");
 		if(st.hasMoreElements())
 			this.code =Integer.parseInt(st.nextToken());
@@ -87,13 +94,21 @@ public class EventInfo implements Serializable{
 	public void setData(String data) {
 		this.data = data;
 	}
+	
+
+	public Long getTime() {
+		return time;
+	}
+
+
+	public void setTime(Long time) {
+		this.time = time;
+	}
+
 
 	public boolean isAlerte()
 	{
 		//return (this.code>900);
-		
-		
-		
 		
 		if ("pression".equalsIgnoreCase(this.type) )
 		{
