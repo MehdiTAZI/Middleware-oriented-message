@@ -23,7 +23,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 
 
-public class App 
+public class AppSensorSupplier 
 {
 	private static ORB orb;
 	public static void main( String[] args ) throws NumberFormatException, IOException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException, EventClientException, TopicNotFoundException, NotConnectedException
@@ -36,7 +36,7 @@ public class App
 				.getProxyForPushSupplier();
 		supplierProxy.connect();
 		
-		ServerSocket socketServer = new ServerSocket(8080);
+		ServerSocket socketServer = new ServerSocket(9191);
 		Socket socketClient = socketServer.accept();
 		System.out.println("Sensor Connecté !!!!!");
 		//accept permet d'accepter les connexions client

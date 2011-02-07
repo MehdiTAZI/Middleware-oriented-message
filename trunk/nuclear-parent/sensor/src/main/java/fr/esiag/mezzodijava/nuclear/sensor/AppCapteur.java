@@ -12,12 +12,12 @@ import java.util.Vector;
  *  Mettre en program arguments :
  *  pression.txt radioactivite.txt temperature.txt
  */
-public class App 
+public class AppCapteur 
 {
 	public static void main( String[] args ) throws UnknownHostException, IOException
 	{
 		
-		Socket socket = new Socket("127.0.0.1",8080);
+		Socket socket = new Socket("127.0.0.1",9191);
 		PrintWriter writer = new PrintWriter(
 				new BufferedWriter(
 						new OutputStreamWriter(socket.getOutputStream())),
