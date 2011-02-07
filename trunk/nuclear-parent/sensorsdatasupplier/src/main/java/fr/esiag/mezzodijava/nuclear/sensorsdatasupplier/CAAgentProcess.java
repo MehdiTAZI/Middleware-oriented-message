@@ -32,12 +32,20 @@ public class CAAgentProcess {
 			rootPOA.the_POAManager().activate();
 			Object objRef = orb.resolve_initial_references("NameService");
 			NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
+			
+			String nuclearChannelName = "nuclear sensor";
+			System.out.println("Asking creation of Channel \""+nuclearChannelName+"\" on server \""+args[0]+"\"...");
 			EventServerChannelAdmin channelAdmin = EventServerChannelAdminHelper
 					.narrow(ncRef.resolve_str(args[0]));
-			long id = channelAdmin.createChannel("nuclear sensor", 3);
+			long id = channelAdmin.createChannel(nuclearChannelName, 3);
+			System.out.println("Done.");
+			
+			String injectorSystemChannelName = "injector system state";
+			System.out.println("Asking creation of Channel \""+injectorSystemChannelName+"\" on server \""+args[1]+"\"...");
 			EventServerChannelAdmin channelAdmin2 = EventServerChannelAdminHelper
 					.narrow(ncRef.resolve_str(args[1]));
-			long id2 = channelAdmin2.createChannel("injector system state", 3);
+			long id2 = channelAdmin2.createChannel(injectorSystemChannelName, 3);
+			System.out.println("Done.");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}

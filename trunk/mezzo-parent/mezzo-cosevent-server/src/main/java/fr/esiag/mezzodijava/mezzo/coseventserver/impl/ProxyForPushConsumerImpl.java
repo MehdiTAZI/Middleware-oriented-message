@@ -14,14 +14,14 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushConsumerImpl
- *
+ * 
  * Proxy for subscribing and receiving Events, acts as a Supplier accessible to
  * a client, implementation of the ProxyForPushConsumer IDL Interface
- *
+ * 
  * UC n°: US15 (+US children)
- *
+ * 
  * @author Mezzo-Team
- *
+ * 
  */
 
 public class ProxyForPushConsumerImpl implements MessageListener,
@@ -40,7 +40,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,
     /**
      * Build a ProxyForPushConsumer instance associated with the given topic and
      * build the underlying Channel Controller.
-     *
+     * 
      * @param topic
      *            Channel Topic.
      */
@@ -50,9 +50,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Connect this consumer the the channel.
-     *
+     * 
      * The consumer must be registerd first. It will be able to push events.
-     *
+     * 
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      * @throws AlreadyConnectedException
@@ -64,14 +64,15 @@ public class ProxyForPushConsumerImpl implements MessageListener,
     public void connect() throws AlreadyConnectedException,
 	    NotRegisteredException, MaximalConnectionReachedException {
 	channelCtr.addProxyForPushConsumerToConnectedList(this);
-
+	System.out.println("Connect of a PUSH Consumer to \""
+		+ channelCtr.getChannel().getTopic() + "\".");
     }
 
     /**
      * Disconnect this Consumer from the channel.
-     *
+     * 
      * the consumer will not be able to recevie events.
-     *
+     * 
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      * @throws NotConnectedException
@@ -81,14 +82,15 @@ public class ProxyForPushConsumerImpl implements MessageListener,
     public void disconnect() throws NotConnectedException,
 	    NotRegisteredException {
 	channelCtr.removeProxyForPushConsumerFromConnectedList(this);
-
+	System.out.println("Disconnect of a PUSH Consumer from \""
+		+ channelCtr.getChannel().getTopic() + "\".");
     }
 
     /**
      * To allow consumer reveice Events from the Channel.
-     *
+     * 
      * Call the callback interface of the consumer client to PUSH the Event.
-     *
+     * 
      * @throws ConsumerNotFoundException
      *             If The consumer is not reachable.
      */
@@ -104,9 +106,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 
     /**
      * Subscribe this consumer to the channel.
-     *
+     * 
      * The channel will store events for this consumer til it can push to it.
-     *
+     * 
      * @throws AlreadyRegisteredException
      *             If already present in the list.
      */
@@ -115,24 +117,26 @@ public class ProxyForPushConsumerImpl implements MessageListener,
 	    throws AlreadyRegisteredException {
 	this.callbackConsumer = cc;
 	channelCtr.addProxyForPushConsumerToSubscribedList(this);
-	System.out.println("Consumer Subscribed to "
-		+ channelCtr.getChannel().getTopic());
+	System.out.println("Subscribe of a PUSH Consumer to \""
+		+ channelCtr.getChannel().getTopic() + "\".");
 
     }
 
     /**
      * Unsubscribe this consumer from the channel.
-     *
+     * 
      * The channel will store no more events for this consumer.
-     *
+     * 
      * @throws NotRegisteredException
      *             If The consumer is not registered.
      */
     @Override
     public void unsubscribe() throws NotRegisteredException {
-    	System.out.println("Consumer Subscribed to "
-    			+ channelCtr.getChannel().getTopic());
+	System.out.println("Consumer Subscribed to "
+		+ channelCtr.getChannel().getTopic());
 	channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
+	System.out.println("Unsubscribe of a PUSH Consumer from \""
+		+ channelCtr.getChannel().getTopic() + "\".");
     }
 
 }

@@ -28,17 +28,21 @@ public class AppSensorSupplier
 	private static ORB orb;
 	public static void main( String[] args ) throws NumberFormatException, IOException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException, EventClientException, TopicNotFoundException, NotConnectedException
 	{
+	    	System.out.println("Nuclear Sensors Data Supplier creation...");
 		EventClient ec = EventClient.init(null);
 		orb = ec.getOrb();
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
-
+		System.out.println("Nuclear Sensors Data Supplier creation...");
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
+		System.out.println("Done.");
+		System.out.println("Nuclear Sensors Data Supplier connection...");
 		supplierProxy.connect();
-		
+		System.out.println("Done.");
 		ServerSocket socketServer = new ServerSocket(9191);
+		System.out.println("Waiting for sensor...");
 		Socket socketClient = socketServer.accept();
-		System.out.println("Sensor Connecté !!!!!");
+		System.out.println("Connected sensor !!!!!");
 		//accept permet d'accepter les connexions client
 		// Un BufferedReader permet de lire les message envoyer par le client.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
