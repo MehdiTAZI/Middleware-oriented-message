@@ -119,7 +119,7 @@ public class CosEventServer {
 	   // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
 	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
 	    
-	    System.out.println("Server is running...");
+	    System.out.println("Mezzo COS Event Server \""+eventServerName+"\" is running...");
 	    orb.run();
 
 	} catch (InvalidName e) {

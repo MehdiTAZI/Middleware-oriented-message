@@ -10,14 +10,14 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushSupplierImpl
- *
+ * 
  * Proxy for pushing Events, acts as a Consumer accessible to a client,
  * implementation of the ProxyForPushSupplier IDL Interface
- *
+ * 
  * UC n°: US14 (+US children)
- *
+ * 
  * @author Mezzo-Team
- *
+ * 
  */
 
 public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations {
@@ -32,7 +32,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
     /**
      * Build a ProxyForPushSupplier instance associated with the given topic and
      * build the underlying Channel Controller.
-     *
+     * 
      * @param topic
      *            Channel Topic.
      */
@@ -42,9 +42,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 
     /**
      * Connect this supplier to the the channel.
-     *
+     * 
      * It will be able to push events.
-     *
+     * 
      * @throws AlreadyConnectedException
      *             If already present in the list.
      * @throws MaximalConnectionReachedException
@@ -55,13 +55,15 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	    MaximalConnectionReachedException {
 	channelCtr.addProxyForPushSupplierToConnectedList(this);
 	connected = true;
+	System.out.println("Connect of a PUSH Supplier to \""
+		+ channelCtr.getChannel().getTopic() + "\".");
     }
 
     /**
      * Disconnect this Supplier from the channel.
-     *
+     * 
      * It will no more be able to push events.
-     *
+     * 
      * @throws NotConnectedException
      *             If The Supplier was not connected.
      */
@@ -69,12 +71,13 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
     public void disconnect() throws NotConnectedException {
 	channelCtr.removeProxyForPushSupplierFromConnectedList(this);
 	connected = false;
-
+	System.out.println("Disconnect of a PUSH Consumer from \""
+		+ channelCtr.getChannel().getTopic() + "\".");
     }
 
     /**
      * To allow supplier to push Events to the Channel.
-     *
+     * 
      * @param evt
      *            Event to PUSH.
      * @throws NotConnectedException
