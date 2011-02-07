@@ -6,16 +6,18 @@ public class EventInfoPK implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	private Long time;
 	private int code;
 	private String type;
 	
 	public EventInfoPK() {
 		super();
 	}
-	public EventInfoPK(int code, String type) {
+	public EventInfoPK(Long time, int code, String type) {
 		super();
 		this.code = code;
 		this.type = type;
+		this.time = time;
 	}
 	public int getCode() {
 		return code;
@@ -30,11 +32,18 @@ public class EventInfoPK implements Serializable{
 		this.type = type;
 	}
 	
+	public Long getTime() {
+		return time;
+	}
+	public void setTime(Long time) {
+		this.time = time;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + code;
+		result = prime * result + ((time == null) ? 0 : time.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -49,6 +58,11 @@ public class EventInfoPK implements Serializable{
 		EventInfoPK other = (EventInfoPK) obj;
 		if (code != other.code)
 			return false;
+		if (time == null) {
+			if (other.time != null)
+				return false;
+		} else if (!time.equals(other.time))
+			return false;
 		if (type == null) {
 			if (other.type != null)
 				return false;
@@ -56,13 +70,5 @@ public class EventInfoPK implements Serializable{
 			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
