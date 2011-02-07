@@ -28,6 +28,7 @@ public class Test {
 			    // TODO log here
 			    
 			}
+			
 			ORB orb=ORB.init(args,props);
 			POA rootPOA=POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
 			rootPOA.the_POAManager().activate();
