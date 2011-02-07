@@ -129,7 +129,7 @@ msg 128260 return
 msg 128515 synchronous
   from durationcanvas_ref 135683
   to durationcanvas_ref 128387
-  yz 114 2015 msg operation_ref 137603 // "getProxyForPushSupplier() : ProxyForPushSupplier"
+  yz 114 2015 msg operation_ref 137603 // "createProxyForPushSupplier() : ProxyForPushSupplier"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 32 100
 msg 128644 return
