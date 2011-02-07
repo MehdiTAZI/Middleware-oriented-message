@@ -30,7 +30,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		if (eventInfo.isAlerte())
 			supplier.PushEvent(e);
 		
-		int eventCode = eventInfo.getCode();
+		/*int eventCode = eventInfo.getCode();
 		String eventType = eventInfo.getType();
 		EventInfoPK pk = new EventInfoPK(e.timestamp,eventCode,eventType);
 		
@@ -39,15 +39,15 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		if (storedEventInfo!=null)
 		{
 			if(! storedEventInfo.getData().equals(eventInfo.getData()))
-			{
+			{*/
 				supplier.PushEvent(e);
-			}
+			/*}
 		}
 		else//if it's the first time that we receive this event
 		{
 			//So Push this event !
 			supplier.PushEvent(e);
-		}
+		}*/
 			
 		//persist the event on the database
 		dbConnector.persist(eventInfo);
