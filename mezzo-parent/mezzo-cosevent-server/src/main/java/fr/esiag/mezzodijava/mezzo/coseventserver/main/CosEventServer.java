@@ -41,19 +41,9 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImp
 public class CosEventServer {
 
     /**
-     * @param args
-     * @throws EventServerException
-     */
-   
-
-    //TODO Test Channel to remove asap.
-    private String channelName = "MEZZO";
-
-    /**
-	 *
+	 * argument : eventServerName
 	 */
     private ORB orb;
-    private String eventServerName="MEZZO-SERVER";
 
     /**
      * Constructor of a COS Event Server.
@@ -77,6 +67,7 @@ public class CosEventServer {
      */
     public CosEventServer(String[] args) throws InterruptedException{
 
+    String eventServerName = args[0];
 	Properties props = new Properties();
 	
 	if ( args!=null){
@@ -111,7 +102,7 @@ public class CosEventServer {
 	//ChannelPublisher publisher=new ChannelPublisher();
 	//publisher.publish(channelAdminImpl, orb);
 	//ChannelPublisher.publish(channelAdminImpl, orb);
-	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl("MEZZO-SERVER");
+	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl(eventServerName);
 	
 
 	//ThreadEvent th = new ThreadEvent(channelName);
