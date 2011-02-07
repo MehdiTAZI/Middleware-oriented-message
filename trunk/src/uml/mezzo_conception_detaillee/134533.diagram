@@ -180,7 +180,7 @@ msg 129028 return
 msg 129029 synchronous
   from durationcanvas_ref 134405
   to durationcanvas_ref 128901
-  yz 142 2015 msg operation_ref 137731 // "getProxyForPushConsumer() : ProxyForPushConsumer"
+  yz 142 2015 msg operation_ref 137731 // "createProxyForPushConsumer() : ProxyForPushConsumer"
   show_full_operations_definition default drawing_language default show_context_mode default
   label_xy 39 129
 msg 129156 return
