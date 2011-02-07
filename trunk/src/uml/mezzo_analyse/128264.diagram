@@ -1,0 +1,29 @@
+format 76
+
+packagecanvas 128008 
+  package_ref 134530 // EventServer
+    xyzwh 22.5 34.5 2000 195 145
+end
+classcanvas 128904 class_ref 135170 // EventServer
+  draw_all_relations default hide_attributes yes hide_operations yes hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 32.5 92.5 2011
+end
+classcanvas 130056 class_ref 161922 // Channel
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 144 81 2005
+end
+packagecanvas 130184 
+  package_ref 128008 // Channel_Admin_Agent_process
+    xyzwh 286 47 2000 171 133
+end
+classcanvas 130312 class_ref 135426 // Channel_Admin_Agent_Process
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  xyz 295 107 2005
+end
+note 130568 "MEZZO DI JAVA - ANALYSE
+UC 07 - DIAGRAMME DE PACKAGE"
+  xyzwh 63.5 224.5 2000 167 45
+simplerelationcanvas 130440 simplerelation_ref 128008
+  from ref 130184 z 2001 to ref 128008
+end
+end

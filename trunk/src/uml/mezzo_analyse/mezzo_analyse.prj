@@ -1,7 +1,7 @@
 format 76
 "mezzo_analyse"
-  revision 44
-  modified_by 3 "Ordi"
+  revision 45
+  modified_by 8 "Administrateur"
 
 
   
@@ -40,6 +40,8 @@ format 76
   
   ncouples 1
   key "html dir" value "c:/mezzodev/MEZ-20101213-ANA-DOMAINE-DCP/"
+  package_ref 128008 // Channel_Admin_Agent_process
+
   classview 128004 "Classes du Domaine"
     //class diagram settings
     draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -56,7 +58,7 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    class 135426 "EventServer"
+    class 135426 "Channel_Admin_Agent_Process"
       visibility package 
       cpp_decl ""
       java_decl ""
@@ -69,7 +71,7 @@ format 76
 	relation 134786 -_->
 	  a default
 	    classrelation_ref 135042 // <dependency>
-	  b parent class_ref 135170 // Channel
+	  b parent class_ref 135170 // EventServer
       end
 
       classrelation 141698 // (channels)
@@ -102,7 +104,7 @@ format 76
       end
     end
 
-    class 135170 "Channel"
+    class 135170 "EventServer"
       visibility package 
       cpp_decl ""
       java_decl ""
@@ -617,7 +619,7 @@ ${members}}
 	idl_decl ""
       end
 
-      classrelation 169858 // (events)
+      classrelation 169858 // events
 	relation_ref 168450 // events
       end
 
@@ -908,7 +910,7 @@ ${members}}
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 169858 // (events)
+	    classrelation_ref 169858 // events
       end
 
       classrelation 185218 // channels
@@ -1006,6 +1008,15 @@ ${members}}
 "
 	    classrelation_ref 185218 // channels
       end
+
+      classrelation 128264 // <unidirectional association>
+	relation 128264 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128264 // <unidirectional association>
+	  b parent class_ref 175490 // EventServer
+      end
     end
 
     class 175618 "CallbackSupplier"
@@ -1095,6 +1106,163 @@ ${members}}
 	  b parent class_ref 128514 // ProxyForPushConsumer
       end
     end
+
+    class 128008 "Channel_Admin_agent_process"
+      visibility package stereotype "actor"
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128008 // <unidirectional association>
+	relation 128008 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128008 // <unidirectional association>
+	  b parent class_ref 128136 // EventServerChannelAdmin
+      end
+    end
+
+    class 128136 "EventServerChannelAdmin"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128008 "createChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128136 "getChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128264 "destroyChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128392 "changeChannelCapacity"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128136 // <unidirectional association>
+	relation 128136 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128136 // <unidirectional association>
+	  b parent class_ref 128392 // EventServerChannelAdminCtr
+      end
+    end
+
+    class 128392 "EventServerChannelAdminCtr"
+      visibility package stereotype "control"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128520 "createChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128648 "getChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128776 "destroyChannel"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128904 "changeChannelCapacity"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128392 // <unidirectional association>
+	relation 128392 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 128392 // <unidirectional association>
+	  b parent class_ref 175490 // EventServer
+      end
+    end
   end
 
   classview 141058 "ANALYSE : DIAGRAMME DU DOMAINE ET CLASSES PARTICIPANTES"
@@ -1128,7 +1296,22 @@ ${members}}
       size A4
     end
 
+    classdiagram 128008 "UC07 - Classes Participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
     classdiagram 134787 "UC03 - Envoyer un Event PUSH - classes participantes"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    classdiagram 128264 "UC07 - Packages"
+      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    classdiagram 128392 "UC - 07 Classes du Domaine"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
