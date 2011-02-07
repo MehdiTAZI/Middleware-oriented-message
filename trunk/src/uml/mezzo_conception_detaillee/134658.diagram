@@ -2,7 +2,7 @@ format 76
 
 classcanvas 128002 class_ref 128002 // EventClient
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 379 32 2000
+  xyz 383 29 2000
 end
 classcanvas 128130 class_ref 128130 // ORB
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -75,8 +75,8 @@ note 134018 "En blanc, les classes codées par le développeur des clients"
   color white  xyzwh 16 381 2000 213 47
 relationcanvas 128386 relation_ref 128130 // <unidirectional association>
   from ref 128002 z 2001 to ref 128130
-  role_a_pos 774 60 3000 no_role_b
-  multiplicity_a_pos 783 83 3000 no_multiplicity_b
+  role_a_pos 776 57 3000 no_role_b
+  multiplicity_a_pos 784 79 3000 no_multiplicity_b
 end
 relationcanvas 128389 relation_ref 129157 // <dependency>
   from ref 128133 z 2007 to ref 128261
@@ -113,21 +113,22 @@ relationcanvas 129666 relation_ref 128642 // <dependency>
 end
 relationcanvas 130434 relation_ref 145026 // <dependency>
   decenter_begin 388
-  from ref 128002 z 2006 to ref 130306
+  from ref 128002 z 2006 to point 484 204
+  line 128773 z 2006 to ref 130306
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130562 relation_ref 145154 // <unidirectional association>
-  from ref 128002 z 2001 to point 694 36
-  line 130690 z 2001 to point 671 20
+  from ref 128002 z 2001 to point 708 23
+  line 130690 z 2001 to point 675 17
   line 130818 z 2001 to ref 128002
-  role_a_pos 653 11 3000 no_role_b
-  multiplicity_a_pos 653 34 3000 no_multiplicity_b
+  role_a_pos 661 9 3000 no_role_b
+  multiplicity_a_pos 661 31 3000 no_multiplicity_b
 end
 relationcanvas 131586 relation_ref 151682 // <unidirectional association>
   from ref 131202 z 2007 to ref 128002
-  role_a_pos 370 103 3000 no_role_b
-  multiplicity_a_pos 376 126 3000 no_multiplicity_b
+  role_a_pos 388 106 3000 no_role_b
+  multiplicity_a_pos 393 128 3000 no_multiplicity_b
 end
 relationcanvas 132098 relation_ref 128133 // <dependency>
   from ref 131202 z 2013 to ref 131842
@@ -142,8 +143,8 @@ relationcanvas 132610 relation_ref 151938 // <realization>
 end
 relationcanvas 132738 relation_ref 152066 // <unidirectional association>
   from ref 131714 z 2001 to ref 128002
-  role_a_pos 356 47 3000 no_role_b
-  multiplicity_a_pos 362 70 3000 no_multiplicity_b
+  role_a_pos 362 44 3000 no_role_b
+  multiplicity_a_pos 367 66 3000 no_multiplicity_b
 end
 relationcanvas 132866 relation_ref 151810 // <dependency>
   from ref 128002 z 2001 to ref 130178

@@ -1,0 +1,165 @@
+format 76
+
+classinstance 128517 class_ref 128389 // Client
+  name ""   xyz 48 4 2000 life_line_z 2000
+classinstancecanvas 128645 classinstance_ref 128005 // 
+  xyz 158 5 2000 life_line_z 2000
+end
+classinstancecanvas 128773 classinstance_ref 128261 // eSCA
+  xyz 238 4 2000 life_line_z 2000
+end
+classinstancecanvas 128901 classinstance_ref 128389 // eCACCtr
+  xyz 486 6 2000 life_line_z 2000
+end
+fragment 130309 "sc: Excp 1"
+  xyzwh 39 188 3005 591 54
+end
+fragment 132485 ""
+  xyzwh 34 391 2015 601 51
+end
+fragment 132613 "sc : Alt 1"
+  xyzwh 13 353 2020 656 111
+end
+fragment 133509 "sc : Excp 2"
+  xyzwh 42 541 2015 593 51
+end
+fragment 133637 "sc : Alt2"
+  xyzwh 18 477 2020 649 132
+end
+durationcanvas 129029 classinstance_ref 128517 // :Client
+  xyzwh 58 69 2010 11 536
+  overlappingdurationcanvas 131333
+    xyzwh 64 324 2020 11 25
+  end
+end
+durationcanvas 129157 classinstance_ref 128645 // :EventClient
+  xyzwh 184 65 2010 11 74
+end
+durationcanvas 129541 classinstance_ref 128773 // eSCA:EventServerChannelAdmin
+  xyzwh 352 131 2010 11 192
+end
+durationcanvas 129797 classinstance_ref 128901 // eCACCtr:EventServerChannelAdminCtr
+  xyzwh 613 175 2010 11 99
+end
+durationcanvas 131589 classinstance_ref 128773 // eSCA:EventServerChannelAdmin
+  xyzwh 352 368 2010 11 101
+end
+durationcanvas 131845 classinstance_ref 128901 // eCACCtr:EventServerChannelAdminCtr
+  xyzwh 613 375 2010 11 123
+end
+durationcanvas 132741 classinstance_ref 128773 // eSCA:EventServerChannelAdmin
+  xyzwh 352 483 2010 11 107
+end
+durationcanvas 132997 classinstance_ref 128901 // eCACCtr:EventServerChannelAdminCtr
+  xyzwh 613 514 2010 11 83
+end
+msg 129285 asynchronous
+  from durationcanvas_ref 129029
+  to durationcanvas_ref 129157
+  yz 72 2015 explicitmsg "resolveEventServerChannelAdminByServerName()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"serverName\""
+  label_xy 8 56
+msg 129413 return
+  from durationcanvas_ref 129157
+  to durationcanvas_ref 129029
+  yz 106 2020 explicitmsg "eventServerChannelAdmin"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 72 97
+msg 129669 asynchronous
+  from durationcanvas_ref 129029
+  to durationcanvas_ref 129541
+  yz 167 2015 explicitmsg "createChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"topic\",\"capacity\""
+  label_xy 136 155
+msg 129925 asynchronous
+  from durationcanvas_ref 129541
+  to durationcanvas_ref 129797
+  yz 175 2020 explicitmsg "createChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"topic\",\"capacity\""
+  label_xy 421 163
+msg 130053 return
+  from durationcanvas_ref 129797
+  to durationcanvas_ref 129541
+  yz 203 2015 explicitmsg "result"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 478 191
+msg 130181 return
+  from durationcanvas_ref 129541
+  to durationcanvas_ref 129029
+  yz 223 2020 explicitmsg "ConnexionException.ChannelAlreadyExistsException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 102 209
+msg 130693 return
+  from durationcanvas_ref 129541
+  to durationcanvas_ref 129029
+  yz 290 2020 explicitmsg "uniqueServerChannelId"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 156 278
+reflexivemsg 131461 synchronous
+  to durationcanvas_ref 131333
+  yz 324 2025 explicitmsg "persist()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"uniqueServerChannelId\""
+  label_xy 33 311
+msg 131717 asynchronous
+  from durationcanvas_ref 129029
+  to durationcanvas_ref 131589
+  yz 369 2015 explicitmsg "destroyChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"uniqueServerChannelId\""
+  label_xy 117 357
+msg 131973 asynchronous
+  from durationcanvas_ref 131589
+  to durationcanvas_ref 131845
+  yz 380 2020 explicitmsg "destoryChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uniqueServerChannelId"
+  label_xy 402 368
+msg 132101 return
+  from durationcanvas_ref 129797
+  to durationcanvas_ref 129541
+  yz 263 3010 explicitmsg "uniqueServerChannelId"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 441 251
+msg 132229 return
+  from durationcanvas_ref 131845
+  to durationcanvas_ref 131589
+  yz 408 2015 explicitmsg "result"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 478 396
+msg 132357 return
+  from durationcanvas_ref 131589
+  to durationcanvas_ref 129029
+  yz 421 2015 explicitmsg "ChannelNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 146 409
+msg 132869 asynchronous
+  from durationcanvas_ref 129029
+  to durationcanvas_ref 132741
+  yz 502 2015 explicitmsg "changeChannelCapacity()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uniqueServerChannelId,newCapacity"
+  label_xy 75 487
+msg 133125 asynchronous
+  from durationcanvas_ref 132741
+  to durationcanvas_ref 132997
+  yz 527 2020 explicitmsg "changeChannelCapacity()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uniqueServerChannelId,newCapacity"
+  label_xy 358 515
+msg 133253 return
+  from durationcanvas_ref 132997
+  to durationcanvas_ref 132741
+  yz 555 2015 explicitmsg "result"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 478 543
+msg 133381 return
+  from durationcanvas_ref 132741
+  to durationcanvas_ref 129029
+  yz 568 2020 explicitmsg "CannotReduceCapacityException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 134 556
+end

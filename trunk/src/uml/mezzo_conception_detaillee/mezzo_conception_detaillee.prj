@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 39
-  modified_by 2 "Franck"
+  revision 40
+  modified_by 5 "reda"
 
 
   
@@ -172,6 +172,19 @@ ${members}}
 	  a default
 	    classrelation_ref 137477 // <dependency>
 	  b parent class_ref 128901 // POA
+      end
+
+      operation 142085 "resolveEventServerChannelAdminByServerName"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "serverName" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -1392,6 +1405,19 @@ ${members}}
 	
 	
       end
+
+      classrelation 144773 // mapEventServerChannelAdminCtr (<aggregation>)
+	relation 143877 o---
+	  stereotype "HashMap"
+	  a role_name "mapEventServerChannelAdminCtr" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144773 // mapEventServerChannelAdminCtr (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144901 // <aggregation>
+      end
     end
 
     class 135299 "MessageListener"
@@ -2130,6 +2156,189 @@ ${members}}
 	
       end
     end
+
+    class 142085 "EventServerChannelAdmin"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 142213 "EventServerChannelAdminImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 144005 // <realization>
+	relation 143109 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 144005 // <realization>
+	  b parent class_ref 142085 // EventServerChannelAdmin
+      end
+
+      classrelation 144133 // <realization>
+	relation 143237 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 144133 // <realization>
+	  b parent class_ref 142469 // EventChannelAdminOperations
+      end
+
+      classrelation 144261 // <dependency>
+	relation 143365 -_->
+	  a default
+	    classrelation_ref 144261 // <dependency>
+	  b parent class_ref 142085 // EventServerChannelAdmin
+      end
+
+      classrelation 144389 // <unidirectional association>
+	relation 143493 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144389 // <unidirectional association>
+	  b parent class_ref 142341 // EventServerChannelAdminCtr
+      end
+
+      classrelation 144517 // <dependency>
+	relation 143621 -_->
+	  a default
+	    classrelation_ref 144517 // <dependency>
+	  b parent class_ref 142085 // EventServerChannelAdmin
+      end
+
+      attribute 134789 "eventServerChannelAdminctrl"
+	private type class_ref 142341 // EventServerChannelAdminCtr
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134917 "eventServerName"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 142213 "createChannel"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "topic" explicit_type "string"
+	  param in name "capacity" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142341 "destroyChannel"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "uniqueID" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142469 "changeChannelCapacity"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "uniqueID" explicit_type "long"
+	  param in name "newCapacity" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 142341 "EventServerChannelAdminCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 134661 "eventServerName"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135045 "orb"
+	private type class_ref 128130 // ORB
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 144645 // <unidirectional association>
+	relation 143749 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144645 // <unidirectional association>
+	  b parent class_ref 128130 // ORB
+      end
+
+      classrelation 144901 // <aggregation>
+	relation_ref 143877 // <aggregation>
+      end
+    end
+
+    class 142469 "EventChannelAdminOperations"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
   end
 
   classview 128130 "CONCEPTION DETAILLEE"
@@ -2180,6 +2389,11 @@ ${members}}
 
     classdiagram 134661 "A virer je pense - DCCD - UC02 L'abonnement par un Consumer"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition no show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
+      size A4
+    end
+
+    classdiagram 141189 "DSCD - UC07 Administration d'un Channel"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4
     end
   end

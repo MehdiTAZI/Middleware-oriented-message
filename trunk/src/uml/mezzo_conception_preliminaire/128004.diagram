@@ -51,52 +51,52 @@ fragment 149764 "break ScEc 5 Le supplier n'est pas connecte"
   xyzwh 45 995 2015 779 47
 end
 durationcanvas 128258 classinstance_ref 128002 // :ChannelAdmin
-  xyzwh 342 228 2010 11 98
+  xyzwh 338 228 2010 11 98
 end
 durationcanvas 128770 classinstance_ref 128900 // :ChannelAdminCtr
-  xyzwh 473 246 2010 11 55
+  xyzwh 469 246 2010 11 55
 end
 durationcanvas 129026 classinstance_ref 141700 // :ProxyForPushSupplier
-  xyzwh 539 255 2010 11 27
+  xyzwh 534 255 2010 11 27
 end
 durationcanvas 129412 classinstance_ref 128003 // :Supplier
-  xyzwh 65 78 2010 11 119
+  xyzwh 62 78 2010 11 119
 end
 durationcanvas 130306 classinstance_ref 129794 // :Channel
-  xyzwh 897 813 2010 11 31
+  xyzwh 896 813 2010 11 31
 end
 durationcanvas 138500 classinstance_ref 128003 // :Supplier
-  xyzwh 65 622 2010 11 252
+  xyzwh 62 622 2010 11 252
   overlappingdurationcanvas 138756
-    xyzwh 71 635 2020 11 25
+    xyzwh 68 635 2020 11 25
   end
 end
 durationcanvas 140548 classinstance_ref 140420 // :EventClient
-  xyzwh 254 86 2010 11 111
+  xyzwh 251 86 2010 11 111
 end
 durationcanvas 142212 classinstance_ref 128003 // :Supplier
-  xyzwh 65 229 2010 11 360
+  xyzwh 62 229 2010 11 360
 end
 durationcanvas 142340 classinstance_ref 141700 // :ProxyForPushSupplier
-  xyzwh 539 354 2010 11 221
+  xyzwh 534 354 2010 11 221
 end
 durationcanvas 143492 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 803 372 2010 11 200
+  xyzwh 800 372 2010 11 200
 end
 durationcanvas 143748 classinstance_ref 141700 // :ProxyForPushSupplier
-  xyzwh 539 675 2010 11 199
+  xyzwh 534 675 2010 11 199
 end
 durationcanvas 144772 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 803 680 2010 11 188
+  xyzwh 800 680 2010 11 188
 end
 durationcanvas 145284 classinstance_ref 128003 // :Supplier
-  xyzwh 65 915 2010 11 175
+  xyzwh 62 915 2010 11 175
 end
 durationcanvas 145412 classinstance_ref 141700 // :ProxyForPushSupplier
-  xyzwh 539 915 2010 11 170
+  xyzwh 534 915 2010 11 170
 end
 durationcanvas 148996 classinstance_ref 129284 // :ChannelCtr
-  xyzwh 803 926 2010 11 131
+  xyzwh 800 926 2010 11 131
 end
 msg 128386 synchronous
   from durationcanvas_ref 142212
