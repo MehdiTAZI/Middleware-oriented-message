@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 37
-  modified_by 3 "Ordi"
+  revision 39
+  modified_by 5 "reda"
 
 
   
@@ -123,6 +123,16 @@ ${members}}
 "
 	    classrelation_ref 149379 // <unidirectional association>
 	  b parent class_ref 141955 // ThreadEvent
+      end
+
+      attribute 134533 "uniqueServerChannelId"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
@@ -445,6 +455,26 @@ ${members}}
 	
 	
 	
+      end
+
+      operation 128005 "resolveEventServerChannelAdminByServerName"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "serverName" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128133 // <dependency>
+	relation 128133 -_->
+	  a default
+	    classrelation_ref 128133 // <dependency>
+	  b parent class_ref 128005 // EventServerChannelAdmin
       end
     end
 
@@ -792,6 +822,140 @@ ${members}}
 "
 	    classrelation_ref 149763 // <unidirectional association>
 	  b parent class_ref 188674 // Channel
+      end
+    end
+
+    class 128005 "EventServerChannelAdmin"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 128133 "EventServerChannelAdminImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128005 // <realization>
+	relation 128005 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128005 // <realization>
+	  b parent class_ref 128005 // EventServerChannelAdmin
+      end
+
+      classrelation 128261 // <dependency>
+	relation 128261 -_->
+	  a default
+	    classrelation_ref 128261 // <dependency>
+	  b parent class_ref 128261 // EventServerChannelAdminCtr
+      end
+
+      operation 128645 "geChannel(long uniqueServerChannelId)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128773 "createChannel(String topic,int capacity)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128901 "destoryChannel(long uniqueServerChannelId)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 129029 "changeChannelCapacity(long uniqueServerChannelId,int newCapacity)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+    end
+
+    class 128261 "EventServerChannelAdminCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128133 "geChannel(long uniqueServerChannelId)"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128261 "createChannel(String topic,int capacity)"
+	public explicit_return_type "long"
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128389 "destoryChannel(long uniqueServerChannelId)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 128517 "changeChannelCapacity(long uniqueServerChannelId,int newCapacity)"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
       end
     end
   end
