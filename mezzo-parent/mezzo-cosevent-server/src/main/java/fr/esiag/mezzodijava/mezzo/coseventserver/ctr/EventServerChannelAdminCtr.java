@@ -15,8 +15,20 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
+/**
+ * Classe EventServerChannelAdminCtr
+ *
+ * For controlling channel creation and destruction
+ *
+ * UC n°: US10 (+US children)
+ *
+ * @author Mezzo-Team
+ *
+ */
+
 public class EventServerChannelAdminCtr {
-    private String eventServerName;
+    
+	private String eventServerName;
     private Properties props = new Properties();
     private ORB orb;
 
@@ -27,7 +39,7 @@ public class EventServerChannelAdminCtr {
     public void setOrb(ORB orb) {
 	this.orb = orb;
     }
-
+    
     public EventServerChannelAdminCtr(String eventServerName) {
 	this.eventServerName = eventServerName;
 	String[] args = new String[] {
