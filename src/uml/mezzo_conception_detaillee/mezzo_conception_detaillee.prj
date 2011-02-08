@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 41
-  modified_by 4 "michael"
+  revision 42
+  modified_by 5 "reda"
 
 
   
@@ -2582,6 +2582,11 @@ ${members}}
 	    classrelation_ref 134788 // <unidirectional association>
 	  b parent class_ref 134915 // ThreadEvent
       end
+    end
+
+    sequencediagram 147717 "DSCD - UC07 Administration d'un Channel 0b"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4
     end
   end
 end

@@ -1,0 +1,270 @@
+format 76
+
+classinstance 128005 class_ref 128514 // Client
+  name ""   xyz 47 7 2000 life_line_z 2000
+classinstance 128133 class_ref 128002 // EventClient
+  name ""   xyz 147 9 2000 life_line_z 2000
+classinstance 128261 class_ref 128002 // EventClient
+  name "ec"   xyz 247 8 2000 life_line_z 2000
+classinstance 128517 class_ref 142213 // EventServerChannelAdminImpl
+  name ""   xyz 343 7 2000 life_line_z 2000
+classinstance 128645 class_ref 142341 // EventServerChannelAdminCtr
+  name ""   xyz 447 40 2000 life_line_z 2000
+classinstance 128773 class_ref 135171 // BFFactory
+  name ""   xyz 600 43 2000 life_line_z 2000
+classinstance 129029 class_ref 135811 // Channel
+  name ""   xyz 695 41 2000 life_line_z 2000
+fragment 129157 "seq"
+  refer sequencediagram_ref 128130 // DSCD - Resolution de nom par le client
+  xyzwh 49 80.5 2015 777 45
+end
+fragment 130565 ""
+  xyzwh 41 244 2015 618 60
+end
+classinstance 131461 class_ref 134532 // RandomChannelIdentifier
+  name ""   xyz 722 199 2000 life_line_z 2000
+fragment 132741 "Sc : alt 1"
+  xyzwh 12 519 2015 813 268
+end
+fragment 134149 "sc : Excep"
+  xyzwh 39 608 3005 614 86
+end
+fragment 136709 "sc : Excep 2"
+  xyzwh 33 725 2020 616 58
+end
+fragment 136837 "Sc : Alt 2"
+  xyzwh 15 818 2000 686 152
+end
+durationcanvas 129669 classinstance_ref 128005 // :Client
+  xyzwh 66 184 2010 11 313
+end
+durationcanvas 129797 classinstance_ref 128517 // :EventServerChannelAdminImpl
+  xyzwh 410 180 2010 11 323
+end
+durationcanvas 130053 classinstance_ref 128645 // :EventServerChannelAdminCtr
+  xyzwh 512 206 2010 11 267
+end
+durationcanvas 130309 classinstance_ref 128773 // :BFFactory
+  xyzwh 624 231 2010 11 221
+end
+durationcanvas 131205 classinstance_ref 129029 // :Channel
+  xyzwh 714 303 2010 11 144
+end
+durationcanvas 131589 classinstance_ref 131461 // :RandomChannelIdentifier
+  xyzwh 777 329 2010 11 79
+  overlappingdurationcanvas 131845
+    xyzwh 783 363 2020 11 25
+  end
+end
+durationcanvas 132869 classinstance_ref 128005 // :Client
+  xyzwh 66 527 2010 11 253
+end
+durationcanvas 132997 classinstance_ref 128517 // :EventServerChannelAdminImpl
+  xyzwh 410 529 2010 11 257
+end
+durationcanvas 133253 classinstance_ref 128645 // :EventServerChannelAdminCtr
+  xyzwh 512 552 2010 11 221
+end
+durationcanvas 133509 classinstance_ref 128773 // :BFFactory
+  xyzwh 624 583 2010 11 187
+end
+durationcanvas 134277 classinstance_ref 129029 // :Channel
+  xyzwh 714 677 2010 11 83
+end
+durationcanvas 135173 classinstance_ref 128005 // :Client
+  xyzwh 66 849 2010 11 92
+end
+durationcanvas 135301 classinstance_ref 128517 // :EventServerChannelAdminImpl
+  xyzwh 410 850 2010 11 103
+end
+durationcanvas 135557 classinstance_ref 128645 // :EventServerChannelAdminCtr
+  xyzwh 512 823 2010 11 89
+end
+durationcanvas 135813 classinstance_ref 128773 // :BFFactory
+  xyzwh 624 892 2010 11 61
+  overlappingdurationcanvas 136069
+    xyzwh 630 909 2020 11 25
+  end
+end
+msg 129925 asynchronous
+  from durationcanvas_ref 129669
+  to durationcanvas_ref 129797
+  yz 186 2015 msg operation_ref 142213 // "createChannel(in topic : string, in capacity : int)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"topic\",capacity"
+  label_xy 178 174
+msg 130181 asynchronous
+  from durationcanvas_ref 129797
+  to durationcanvas_ref 130053
+  yz 213 2015 explicitmsg "createChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "'topic',capacity"
+  label_xy 401 197
+msg 130437 asynchronous
+  from durationcanvas_ref 130053
+  to durationcanvas_ref 130309
+  yz 235 2020 msg operation_ref 136835 // "createChannel(in channel : string, in capacity : int) : Channel"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"topic\",capacity"
+  label_xy 526 222
+msg 130693 return
+  from durationcanvas_ref 130309
+  to durationcanvas_ref 130053
+  yz 257 2015 explicitmsg "ChannelAlreadyExistsException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 507 245
+msg 131333 asynchronous
+  from durationcanvas_ref 130309
+  to durationcanvas_ref 131205
+  yz 316 2015 explicitmsg "new ()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "\"channelName\",capacity"
+  label_xy 611 304
+msg 131717 asynchronous
+  from durationcanvas_ref 131205
+  to durationcanvas_ref 131589
+  yz 336 2015 msg operation_ref 134532 // "getUniqueIdentifier()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 709 324
+reflexivemsg 131973 synchronous
+  to durationcanvas_ref 131845
+  yz 363 2025 explicitmsg "random()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 785 351
+msg 132101 return
+  from durationcanvas_ref 131589
+  to durationcanvas_ref 131205
+  yz 394 2025 explicitmsg "uid"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 745 382
+msg 132229 return
+  from durationcanvas_ref 131205
+  to durationcanvas_ref 130309
+  yz 416 2015 explicitmsg "uid"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 668 404
+msg 132357 return
+  from durationcanvas_ref 130309
+  to durationcanvas_ref 130053
+  yz 438 2015 explicitmsg "uid"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 567 426
+msg 132485 return
+  from durationcanvas_ref 130053
+  to durationcanvas_ref 129797
+  yz 455 2020 explicitmsg "uid"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 460 443
+msg 132613 return
+  from durationcanvas_ref 129797
+  to durationcanvas_ref 129669
+  yz 474 2015 explicitmsg "uniqueServerChannelId"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 195 462
+msg 133125 asynchronous
+  from durationcanvas_ref 132869
+  to durationcanvas_ref 132997
+  yz 536 2015 msg operation_ref 142469 // "changeChannelCapacity(in uniqueID : long, in newCapacity : int)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid,newCapacity"
+  label_xy 155 524
+msg 133381 asynchronous
+  from durationcanvas_ref 132997
+  to durationcanvas_ref 133253
+  yz 556 2015 explicitmsg "changeChannelCapacity()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid,newCapacity"
+  label_xy 378 544
+msg 133637 asynchronous
+  from durationcanvas_ref 133253
+  to durationcanvas_ref 133509
+  yz 589 2020 explicitmsg "changeChannelCapacity()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid,newCapacity"
+  label_xy 485 577
+msg 134021 return
+  from durationcanvas_ref 133509
+  to durationcanvas_ref 133253
+  yz 627 2015 explicitmsg "ChanneNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 516 615
+msg 134405 asynchronous
+  from durationcanvas_ref 133509
+  to durationcanvas_ref 134277
+  yz 703 3010 explicitmsg "getChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid"
+  label_xy 642 691
+msg 134533 return
+  from durationcanvas_ref 134277
+  to durationcanvas_ref 133509
+  yz 725 3015 explicitmsg "channel"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 658 713
+msg 134661 return
+  from durationcanvas_ref 133253
+  to durationcanvas_ref 132997
+  yz 653 2015 explicitmsg "ChanneNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 409 641
+msg 134789 return
+  from durationcanvas_ref 132997
+  to durationcanvas_ref 132869
+  yz 682 2015 explicitmsg "ChanneNotFoundException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 186 670
+msg 134917 return
+  from durationcanvas_ref 130053
+  to durationcanvas_ref 129797
+  yz 275 2015 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 135045 return
+  from durationcanvas_ref 129797
+  to durationcanvas_ref 129669
+  yz 292 2020 explicitmsg "ChannelAlreadyExistsException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 177 280
+msg 135429 asynchronous
+  from durationcanvas_ref 135173
+  to durationcanvas_ref 135301
+  yz 856 2015 msg operation_ref 142341 // "destroyChannel(in uniqueID : long)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid"
+  label_xy 201 844
+msg 135685 asynchronous
+  from durationcanvas_ref 135301
+  to durationcanvas_ref 135557
+  yz 877 2015 explicitmsg "destroyChannel()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid"
+  label_xy 431 865
+msg 135941 asynchronous
+  from durationcanvas_ref 135557
+  to durationcanvas_ref 135813
+  yz 893 2020 msg operation_ref 135300 // "destroy(in idChannel : long)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "uid"
+  label_xy 555 881
+reflexivemsg 136197 synchronous
+  to durationcanvas_ref 136069
+  yz 909 2025 explicitmsg "remove()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 638 897
+msg 136325 return
+  from durationcanvas_ref 133509
+  to durationcanvas_ref 133253
+  yz 751 3020 explicitmsg "cannotReduceCapacityException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 504 739
+msg 136453 return
+  from durationcanvas_ref 133253
+  to durationcanvas_ref 132997
+  yz 762 3025 unspecifiedmsg
+  show_full_operations_definition default drawing_language default show_context_mode default
+msg 136581 return
+  from durationcanvas_ref 132997
+  to durationcanvas_ref 132869
+  yz 769 2015 explicitmsg "cannotReduceCapacityException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 174 757
+end
