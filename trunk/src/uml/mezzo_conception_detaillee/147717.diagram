@@ -1,7 +1,17 @@
 format 76
 
+note 128003 "CD7- MEZZO DI JAVA - CONCEPTION DETAILLEE
+DIAGRAMME DE SEQUENCE
+UC07 Administrer un channel
+US76 : scénario nominal créer un channel
+US160 : scénario alternatif 1 : supprimer un channel
+US166 : scénario alternatif 2 : modifier la capacité d'un channel
+US159 : scénario exceptionnel 1 : créer channel dont topic existe déjà
+US161 : scénario exceptionnel 2 : supprimer un channel qui n'existe pas
+US167 : scénario exceptionnel 3 : réduire la capacité du channel"
+  xyzwh 151.5 991.5 2005 345 131
 classinstance 128005 class_ref 128514 // Client
-  name ""   xyz 47 7 2000 life_line_z 2000
+  drawing_mode actor  name ""   xyz 56 7 2000 life_line_z 2000
 classinstance 128133 class_ref 128002 // EventClient
   name ""   xyz 147 9 2000 life_line_z 2000
 classinstance 128261 class_ref 128002 // EventClient
