@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<artifactId>mezzo-parent</artifactId>
+		<groupId>fr.esiag.mezzodijava</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	<groupId>fr.esiag.mezzodijava</groupId>
+	<artifactId>mezzo-costime</artifactId>
+	<name>Mezzo di Java COS Time Interfaces</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>idlj-maven-plugin</artifactId>
+				<version>1.1</version>
+				<dependencies>
+					<dependency>
+						<groupId>jacorb</groupId>
+						<artifactId>idl</artifactId>
+						<version>2.3.1jboss.patch01-brew</version>
+					</dependency>
+					<dependency>
+						<groupId>logkit</groupId>
+						<artifactId>logkit</artifactId>
+						<version>1.2</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+					</execution>
+				</executions>
+<!--				<configuration>-->
+<!--					<compiler>idlj</compiler>-->
+<!--					<sources>-->
+<!--						<source>-->
+<!--							<additionalArguments>-->
+<!--								<additionalArgument>-fall</additionalArgument>-->
+<!--								<additionalArgument>-pkgTranslate</additionalArgument>-->
+<!--								<additionalArgument>cosevent</additionalArgument>-->
+<!--								<additionalArgument>fr.esiag.mezzodijava.mezzo.cosevent</additionalArgument>-->
+<!--							</additionalArguments>-->
+<!---->
+<!--						</source>-->
+<!--					</sources>-->
+<!--				</configuration>-->
+				<configuration>
+					<compiler>jacorb</compiler>
+					<sources>
+						<source>
+							<packagePrefix>fr.esiag.mezzodijava.mezzo</packagePrefix>
+						</source>
+					</sources>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
+</project>
