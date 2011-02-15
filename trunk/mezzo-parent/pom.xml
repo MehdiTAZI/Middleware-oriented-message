@@ -35,6 +35,11 @@
 			</dependency>
 			<dependency>
 				<groupId>fr.esiag.mezzodijava</groupId>
+				<artifactId>mezzo-costime</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>fr.esiag.mezzodijava</groupId>
 				<artifactId>mezzo-libclient</artifactId>
 				<version>${project.version}</version>
 			</dependency>
