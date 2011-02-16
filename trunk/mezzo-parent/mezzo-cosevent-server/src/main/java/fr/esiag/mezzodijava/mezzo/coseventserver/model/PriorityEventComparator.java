@@ -7,7 +7,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 public class PriorityEventComparator implements Comparator<Event> {
 
 	@Override
-	public int compare(Event evt1, Event evt2) {
+	public synchronized int compare(Event evt1, Event evt2) {
 		
 		if (evt1.priority < evt2.priority)
         {

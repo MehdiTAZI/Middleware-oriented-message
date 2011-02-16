@@ -10,6 +10,8 @@ import java.util.Random;
 
 import org.omg.CORBA.Any;
 import org.omg.CORBA.ORB;
+import org.omg.PortableServer.POA;
+import org.omg.PortableServer.POAHelper;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
@@ -17,7 +19,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -67,6 +71,8 @@ public class AppSensorSupplier
 			
 			supplierProxy.push(event);   
 		}
+		
+		supplierProxy.afficher();
 		reader.close();
 		socketClient.close();
 		ec.getOrb().run();
