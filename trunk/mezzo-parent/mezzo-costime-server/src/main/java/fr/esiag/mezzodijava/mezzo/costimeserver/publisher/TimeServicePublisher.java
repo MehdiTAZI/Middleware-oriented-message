@@ -9,7 +9,7 @@ import fr.esiag.mezzodijava.mezzo.costime.TimeServicePOATie;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 
-public class ChannelPublisher {
+public class TimeServicePublisher {
 	private static  Thread thread;
 	
 	public static void publish(String name,TimeServiceImpl timeService,ORB orb){
