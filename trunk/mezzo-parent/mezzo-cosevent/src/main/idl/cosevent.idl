@@ -96,10 +96,6 @@ module costime{
 	interface Synchronizable{
 		attribute DateTime date;
 	};
-	interface  ProxySynchronizableComponent:Synchronizable{
-		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
-		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
-	};
 	interface CosTime{
 		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
 		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
