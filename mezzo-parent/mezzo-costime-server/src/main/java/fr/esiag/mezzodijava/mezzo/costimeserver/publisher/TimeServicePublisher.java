@@ -13,7 +13,6 @@ public class TimeServicePublisher {
 	private static  Thread thread;
 	
 	public static void publish(String name,TimeServiceImpl timeService,ORB orb){
-
 		ThreadTime tt=new ThreadTime(timeService.getCtr().getModel());
 		thread = new Thread(tt);
 		thread.start();
