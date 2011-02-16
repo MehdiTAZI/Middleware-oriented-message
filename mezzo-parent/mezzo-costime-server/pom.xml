@@ -9,7 +9,7 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>fr.esiag.mezzodijava</groupId>
-	<artifactId>mezzo-cosstime-server</artifactId>
+	<artifactId>mezzo-costime-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Mezzo di Java COS Time Server (Main)</name>
 	<url>http://maven.apache.org</url>
