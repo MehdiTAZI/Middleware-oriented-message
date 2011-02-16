@@ -1,5 +1,5 @@
 module costime{
-	typedef unsigned long DateTime;
+	typedef unsigned long long DateTime;
 	exception AlreadyRegisteredException{
 		string message;
 	};
@@ -14,7 +14,7 @@ module costime{
 	};
 	interface TimeService{
 		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException,UnreachableException);
-		void unsubscribe() raises (UnreachableException,NotRegisteredException);
+		void unsubscribe(in Synchronizable cc) raises (UnreachableException,NotRegisteredException);
 	};
 };
 
