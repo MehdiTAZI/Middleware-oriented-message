@@ -10,8 +10,7 @@ module costime{
 		string message;
 	};
 	interface Synchronizable{
-		attribute DateTime date;
-		void setDate(in DateTime date);
+		 attribute DateTime date;
 	};
 	interface TimeService{
 		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException,UnreachableException);
