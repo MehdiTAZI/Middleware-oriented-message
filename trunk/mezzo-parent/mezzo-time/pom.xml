@@ -49,8 +49,8 @@
 <!--							<additionalArguments>-->
 <!--								<additionalArgument>-fall</additionalArgument>-->
 <!--								<additionalArgument>-pkgTranslate</additionalArgument>-->
-<!--								<additionalArgument>cosevent</additionalArgument>-->
-<!--								<additionalArgument>fr.esiag.mezzodijava.mezzo.cosevent</additionalArgument>-->
+<!--								<additionalArgument>costime</additionalArgument>-->
+<!--								<additionalArgument>fr.esiag.mezzodijava.mezzo.costime</additionalArgument>-->
 <!--							</additionalArguments>-->
 <!---->
 <!--						</source>-->
