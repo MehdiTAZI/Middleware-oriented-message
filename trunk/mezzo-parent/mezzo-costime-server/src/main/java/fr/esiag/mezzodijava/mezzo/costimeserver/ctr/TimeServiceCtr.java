@@ -15,13 +15,11 @@ public class TimeServiceCtr {
 	public TimeServiceCtr(TimeServiceModel model){
 		this.model=model;
 	}
-	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
-	UnreachableException {
+	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
 		if(!model.getComponentSubscribed().add(cc))
 			throw new AlreadyRegisteredException();
 	}
-	public void unsubscribe(Synchronizable cc) throws UnreachableException,
-	NotRegisteredException {
+	public void unsubscribe(Synchronizable cc) throws NotRegisteredException {
 		if(!model.getComponentSubscribed().contains(cc))
 			throw new NotRegisteredException();
 		model.getComponentSubscribed().remove(cc);

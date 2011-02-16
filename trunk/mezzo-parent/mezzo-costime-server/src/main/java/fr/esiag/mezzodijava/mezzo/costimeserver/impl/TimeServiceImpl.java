@@ -18,13 +18,11 @@ public class TimeServiceImpl implements TimeServiceOperations{
 		return ctr;
 	}
 	@Override
-	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
-	UnreachableException {
+	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
 		ctr.subscribe(cc);
 	}
 	@Override
-	public void unsubscribe(Synchronizable cc) throws UnreachableException,
-	NotRegisteredException {
+	public void unsubscribe(Synchronizable cc) throws NotRegisteredException {
 		ctr.unsubscribe(cc);
 	}
 }
