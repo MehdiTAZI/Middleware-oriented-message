@@ -1,25 +1,25 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 
 /**
  * Generated from IDL interface "CallbackSynchronizableComponent".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public class _CallbackSynchronizableComponentStub
 	extends org.omg.CORBA.portable.ObjectImpl
-	implements fr.esiag.mezzodijava.mezzo.cosevent.CallbackSynchronizableComponent
+	implements fr.esiag.mezzodijava.mezzo.costime.CallbackSynchronizableComponent
 {
-	private String[] ids = {"IDL:cosevent/CallbackSynchronizableComponent:1.0"};
+	private String[] ids = {"IDL:costime/CallbackSynchronizableComponent:1.0"};
 	public String[] _ids()
 	{
 		return ids;
 	}
 
-	public final static java.lang.Class _opsClass = fr.esiag.mezzodijava.mezzo.cosevent.CallbackSynchronizableComponentOperations.class;
-	public void receive(long dateTime) throws fr.esiag.mezzodijava.mezzo.cosevent.UnreachableException
+	public final static java.lang.Class _opsClass = fr.esiag.mezzodijava.mezzo.costime.CallbackSynchronizableComponentOperations.class;
+	public void receive(long dateTime) throws fr.esiag.mezzodijava.mezzo.costime.UnreachableException
 	{
 		while(true)
 		{
@@ -40,9 +40,9 @@ public class _CallbackSynchronizableComponentStub
 				String _id = _ax.getId();
 				try
 				{
-					if( _id.equals("IDL:cosevent/UnreachableException:1.0"))
+					if( _id.equals("IDL:costime/UnreachableException:1.0"))
 					{
-						throw fr.esiag.mezzodijava.mezzo.cosevent.UnreachableExceptionHelper.read(_ax.getInputStream());
+						throw fr.esiag.mezzodijava.mezzo.costime.UnreachableExceptionHelper.read(_ax.getInputStream());
 					}
 					else 
 					{

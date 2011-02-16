@@ -1,10 +1,10 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 /**
  * Generated from IDL alias "tDateTime".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public final class tDateTimeHelper
@@ -25,14 +25,14 @@ public final class tDateTimeHelper
 	{
 		if (_type == null)
 		{
-			_type = org.omg.CORBA.ORB.init().create_alias_tc(fr.esiag.mezzodijava.mezzo.cosevent.tDateTimeHelper.id(), "tDateTime",org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.from_int(24)));
+			_type = org.omg.CORBA.ORB.init().create_alias_tc(fr.esiag.mezzodijava.mezzo.costime.tDateTimeHelper.id(), "tDateTime",org.omg.CORBA.ORB.init().get_primitive_tc(org.omg.CORBA.TCKind.from_int(24)));
 		}
 		return _type;
 	}
 
 	public static String id()
 	{
-		return "IDL:cosevent/tDateTime:1.0";
+		return "IDL:costime/tDateTime:1.0";
 	}
 	public static long read (final org.omg.CORBA.portable.InputStream _in)
 	{

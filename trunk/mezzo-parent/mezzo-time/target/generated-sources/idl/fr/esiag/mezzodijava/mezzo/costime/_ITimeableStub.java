@@ -1,24 +1,24 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 
 /**
  * Generated from IDL interface "ITimeable".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public class _ITimeableStub
 	extends org.omg.CORBA.portable.ObjectImpl
-	implements fr.esiag.mezzodijava.mezzo.cosevent.ITimeable
+	implements fr.esiag.mezzodijava.mezzo.costime.ITimeable
 {
-	private String[] ids = {"IDL:cosevent/ITimeable:1.0"};
+	private String[] ids = {"IDL:costime/ITimeable:1.0"};
 	public String[] _ids()
 	{
 		return ids;
 	}
 
-	public final static java.lang.Class _opsClass = fr.esiag.mezzodijava.mezzo.cosevent.ITimeableOperations.class;
+	public final static java.lang.Class _opsClass = fr.esiag.mezzodijava.mezzo.costime.ITimeableOperations.class;
 	public void synchroValue(long a)
 	{
 		while(true)

@@ -1,4 +1,4 @@
-module cosevent {
+module costime {
 	typedef unsigned long long tDateTime;
 	
 	interface ITimeable
