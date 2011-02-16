@@ -4,7 +4,7 @@ package fr.esiag.mezzodijava.mezzo.costimeserver.main;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 
 public class Component implements SynchronizableOperations{
-
+	long date;
 	@Override
 	public long date() {
 		return 0;
@@ -12,8 +12,7 @@ public class Component implements SynchronizableOperations{
 
 	@Override
 	public void date(long arg) {
-		System.out.println("La date Est "+arg);
-		
+		this.date=arg;
 	}
 
 }

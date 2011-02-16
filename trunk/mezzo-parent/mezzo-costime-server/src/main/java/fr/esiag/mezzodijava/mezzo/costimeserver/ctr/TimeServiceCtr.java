@@ -17,7 +17,7 @@ public class TimeServiceCtr {
 	}
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
 	UnreachableException {
-		if(model.getComponentSubscribed().contains(cc))
+		if(!model.getComponentSubscribed().add(cc))
 			throw new AlreadyRegisteredException();
 	}
 	public void unsubscribe(Synchronizable cc) throws UnreachableException,
