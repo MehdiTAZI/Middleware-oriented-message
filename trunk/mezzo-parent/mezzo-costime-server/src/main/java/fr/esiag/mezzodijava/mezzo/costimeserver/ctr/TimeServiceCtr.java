@@ -9,14 +9,16 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 public class TimeServiceCtr {
 
 	private TimeServiceModel model;
-	
+
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
 	UnreachableException {
-		
+		if(model.getComponentSubscribed().contains(cc))
+			throw new AlreadyRegisteredException();
 	}
 	public void unsubscribe(Synchronizable cc) throws UnreachableException,
 	NotRegisteredException {
-
+		if(!model.getComponentSubscribed().contains(cc))
+			throw new NotRegisteredException();
+		model.getComponentSubscribed().remove(cc);
 	} 
-
 }
