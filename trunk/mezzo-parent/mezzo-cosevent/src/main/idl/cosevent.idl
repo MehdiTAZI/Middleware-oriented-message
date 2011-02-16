@@ -82,24 +82,3 @@ module cosevent {
 		void changeChannelCapacity(in long long uniqueServerChannelId, in long capacity) raises (ChannelNotFoundException,CannotReduceCapacityException);
 	};
 };
-module costime{
-	typedef unsigned long DateTime;
-	exception AlreadyRegisteredException{
-		string message;
-	};
-	exception NotRegisteredException{
-		string message;
-	};
-	exception UnreachableException{
-		string message;
-	};
-	interface Synchronizable{
-		attribute DateTime date;
-	};
-	interface CosTime{
-		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
-		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
-	};
-
-};
-
