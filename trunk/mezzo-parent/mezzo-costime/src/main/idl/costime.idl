@@ -13,8 +13,8 @@ module costime{
 		 attribute DateTime date;
 	};
 	interface TimeService{
-		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException,UnreachableException);
-		void unsubscribe(in Synchronizable cc) raises (UnreachableException,NotRegisteredException);
+		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException);
+		void unsubscribe(in Synchronizable cc) raises (NotRegisteredException);
 	};
 };
 
