@@ -14,8 +14,8 @@ module costime{
 		void setDate(in DateTime date);
 	};
 	interface TimeService{
-		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
-		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
+		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException,UnreachableException);
+		void unsubscribe() raises (UnreachableException,NotRegisteredException);
 	};
 };
 
