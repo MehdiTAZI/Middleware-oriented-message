@@ -27,5 +27,4 @@ public class TimeServiceImpl implements TimeServiceOperations{
 	NotRegisteredException {
 		ctr.unsubscribe(cc);
 	}
-
 }

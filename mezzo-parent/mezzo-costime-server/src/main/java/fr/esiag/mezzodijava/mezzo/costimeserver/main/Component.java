@@ -1,18 +1,20 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.main;
 
 
+import java.util.Date;
+
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 
 public class Component implements SynchronizableOperations{
-	long date;
+	private Date date;
 	@Override
 	public long date() {
-		return 0;
+		return date.getTime();
 	}
 
 	@Override
-	public void date(long arg) {
-		this.date=arg;
+	public void date(long date) {
+		this.date=new Date(date);
 	}
 
 }
