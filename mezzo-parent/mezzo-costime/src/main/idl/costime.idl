@@ -1,34 +1,21 @@
-module costime {
-	typedef unsigned long long tDateTime;
-	
-	interface ITimeable
-	{
-		attribute tDateTime synchroValue ;
-	};
+module costime{
+	typedef unsigned long DateTime;
 	exception AlreadyRegisteredException{
-	
 		string message;
-		
 	};
 	exception NotRegisteredException{
-	
 		string message;
-		
 	};
 	exception UnreachableException{
-	
 		string message;
-		
 	};
-	interface CallbackSynchronizableComponent{
-	
-		void receive(in tDateTime dateTime) raises (UnreachableException);
-		
+	interface Synchronizable{
+		attribute DateTime date;
 	};
-	interface ProxySynchronizableComponent : ITimeable{
-			
-		void subscribe(in CallbackSynchronizableComponent csc) raises (UnreachableException,AlreadyRegisteredException);
-		void unsubscribe() raises (UnreachableException,NotRegisteredException);
-		
+	interface TimeService{
+		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
+		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
 	};
+
 };
+
