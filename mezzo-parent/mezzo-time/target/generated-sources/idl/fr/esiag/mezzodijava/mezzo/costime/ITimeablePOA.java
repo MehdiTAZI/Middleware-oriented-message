@@ -1,16 +1,16 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 
 /**
  * Generated from IDL interface "ITimeable".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public abstract class ITimeablePOA
 	extends org.omg.PortableServer.Servant
-	implements org.omg.CORBA.portable.InvokeHandler, fr.esiag.mezzodijava.mezzo.cosevent.ITimeableOperations
+	implements org.omg.CORBA.portable.InvokeHandler, fr.esiag.mezzodijava.mezzo.costime.ITimeableOperations
 {
 	static private final java.util.Hashtable m_opsHash = new java.util.Hashtable();
 	static
@@ -18,14 +18,14 @@ public abstract class ITimeablePOA
 		m_opsHash.put ( "_set_synchroValue", new java.lang.Integer(0));
 		m_opsHash.put ( "_get_synchroValue", new java.lang.Integer(1));
 	}
-	private String[] ids = {"IDL:cosevent/ITimeable:1.0"};
-	public fr.esiag.mezzodijava.mezzo.cosevent.ITimeable _this()
+	private String[] ids = {"IDL:costime/ITimeable:1.0"};
+	public fr.esiag.mezzodijava.mezzo.costime.ITimeable _this()
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ITimeableHelper.narrow(_this_object());
+		return fr.esiag.mezzodijava.mezzo.costime.ITimeableHelper.narrow(_this_object());
 	}
-	public fr.esiag.mezzodijava.mezzo.cosevent.ITimeable _this(org.omg.CORBA.ORB orb)
+	public fr.esiag.mezzodijava.mezzo.costime.ITimeable _this(org.omg.CORBA.ORB orb)
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ITimeableHelper.narrow(_this_object(orb));
+		return fr.esiag.mezzodijava.mezzo.costime.ITimeableHelper.narrow(_this_object(orb));
 	}
 	public org.omg.CORBA.portable.OutputStream _invoke(String method, org.omg.CORBA.portable.InputStream _input, org.omg.CORBA.portable.ResponseHandler handler)
 		throws org.omg.CORBA.SystemException

@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 import org.omg.PortableServer.POA;
 
@@ -6,7 +6,7 @@ import org.omg.PortableServer.POA;
  * Generated from IDL interface "ITimeable".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public class ITimeablePOATie
@@ -24,13 +24,13 @@ public class ITimeablePOATie
 		_delegate = delegate;
 		_poa = poa;
 	}
-	public fr.esiag.mezzodijava.mezzo.cosevent.ITimeable _this()
+	public fr.esiag.mezzodijava.mezzo.costime.ITimeable _this()
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ITimeableHelper.narrow(_this_object());
+		return fr.esiag.mezzodijava.mezzo.costime.ITimeableHelper.narrow(_this_object());
 	}
-	public fr.esiag.mezzodijava.mezzo.cosevent.ITimeable _this(org.omg.CORBA.ORB orb)
+	public fr.esiag.mezzodijava.mezzo.costime.ITimeable _this(org.omg.CORBA.ORB orb)
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ITimeableHelper.narrow(_this_object(orb));
+		return fr.esiag.mezzodijava.mezzo.costime.ITimeableHelper.narrow(_this_object(orb));
 	}
 	public ITimeableOperations _delegate()
 	{

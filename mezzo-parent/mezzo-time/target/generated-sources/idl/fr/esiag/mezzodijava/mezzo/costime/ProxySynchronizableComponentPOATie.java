@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.cosevent;
+package fr.esiag.mezzodijava.mezzo.costime;
 
 import org.omg.PortableServer.POA;
 
@@ -6,7 +6,7 @@ import org.omg.PortableServer.POA;
  * Generated from IDL interface "ProxySynchronizableComponent".
  *
  * @author JacORB IDL compiler V 2.3.1 (JBoss patch01), 29-Jul-2009
- * @version generated at 16 févr. 2011 00:17:04
+ * @version generated at 16 févr. 2011 00:48:13
  */
 
 public class ProxySynchronizableComponentPOATie
@@ -24,13 +24,13 @@ public class ProxySynchronizableComponentPOATie
 		_delegate = delegate;
 		_poa = poa;
 	}
-	public fr.esiag.mezzodijava.mezzo.cosevent.ProxySynchronizableComponent _this()
+	public fr.esiag.mezzodijava.mezzo.costime.ProxySynchronizableComponent _this()
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ProxySynchronizableComponentHelper.narrow(_this_object());
+		return fr.esiag.mezzodijava.mezzo.costime.ProxySynchronizableComponentHelper.narrow(_this_object());
 	}
-	public fr.esiag.mezzodijava.mezzo.cosevent.ProxySynchronizableComponent _this(org.omg.CORBA.ORB orb)
+	public fr.esiag.mezzodijava.mezzo.costime.ProxySynchronizableComponent _this(org.omg.CORBA.ORB orb)
 	{
-		return fr.esiag.mezzodijava.mezzo.cosevent.ProxySynchronizableComponentHelper.narrow(_this_object(orb));
+		return fr.esiag.mezzodijava.mezzo.costime.ProxySynchronizableComponentHelper.narrow(_this_object(orb));
 	}
 	public ProxySynchronizableComponentOperations _delegate()
 	{
@@ -48,6 +48,11 @@ public class ProxySynchronizableComponentPOATie
 		}
 		return super._default_POA();
 	}
+	public void subscribe(fr.esiag.mezzodijava.mezzo.costime.CallbackSynchronizableComponent csc) throws fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException,fr.esiag.mezzodijava.mezzo.costime.UnreachableException
+	{
+_delegate.subscribe(csc);
+	}
+
 	public long synchroValue()
 	{
 		return _delegate.synchroValue();
@@ -58,12 +63,7 @@ public class ProxySynchronizableComponentPOATie
 		_delegate.synchroValue(a);
 	}
 
-	public void subscribe(fr.esiag.mezzodijava.mezzo.cosevent.CallbackSynchronizableComponent csc) throws fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException,fr.esiag.mezzodijava.mezzo.cosevent.UnreachableException
-	{
-_delegate.subscribe(csc);
-	}
-
-	public void unsubscribe() throws fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException,fr.esiag.mezzodijava.mezzo.cosevent.UnreachableException
+	public void unsubscribe() throws fr.esiag.mezzodijava.mezzo.costime.UnreachableException,fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException
 	{
 _delegate.unsubscribe();
 	}
