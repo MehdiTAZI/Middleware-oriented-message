@@ -1,6 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.impl;
 
-import java.util.Date;
 
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
@@ -14,13 +13,13 @@ public class TimeServiceImpl implements TimeServiceOperations{
 	private TimeServiceCtr ctr;
 	@Override
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
-			UnreachableException {
-		
+	UnreachableException {
+		ctr.subscribe(cc);
 	}
 	@Override
 	public void unsubscribe(Synchronizable cc) throws UnreachableException,
-			NotRegisteredException {
-				
+	NotRegisteredException {
+		ctr.unsubscribe(cc);
 	}
 
 }
