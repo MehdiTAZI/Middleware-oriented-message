@@ -37,4 +37,5 @@ public class AppCapteur
 		writer.close();
 		socket.close();
 	}
+	
 }

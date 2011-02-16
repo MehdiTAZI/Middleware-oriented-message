@@ -282,6 +282,6 @@ public class TestChannelCtr {
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		channelCtr.addEvent(new Event((new Date()).getTime(),"TEST_EVENT"));
+		channelCtr.addEvent(new Event((new Date()).getTime(),"TEST_EVENT",0,4567));
 	}
 }

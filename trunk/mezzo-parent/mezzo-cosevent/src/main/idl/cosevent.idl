@@ -3,6 +3,9 @@ module cosevent {
 	struct Event{
 		long long timestamp;
 		string content;
+		long priority;
+		long long datePreomption;
+		
 	};
 	
 	exception AlreadyRegisteredException{

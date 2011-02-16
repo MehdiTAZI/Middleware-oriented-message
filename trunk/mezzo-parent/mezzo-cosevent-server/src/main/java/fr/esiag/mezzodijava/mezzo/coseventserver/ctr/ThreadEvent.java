@@ -73,9 +73,9 @@ public class ThreadEvent implements Runnable {
 			    try {
 				consumer.disconnect();
 			    } catch (NotConnectedException e2) {
-				e2.printStackTrace();
+			    	e2.printStackTrace();
 			    } catch (NotRegisteredException e2) {
-				e2.printStackTrace();
+			    	e2.printStackTrace();
 			    }
 			    // TMA : todo => ajouter les messages non recu
 			    // de la Queuqe

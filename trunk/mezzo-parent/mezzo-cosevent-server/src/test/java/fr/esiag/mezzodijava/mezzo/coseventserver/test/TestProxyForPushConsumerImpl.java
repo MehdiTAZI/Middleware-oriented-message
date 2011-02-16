@@ -149,7 +149,7 @@ public class TestProxyForPushConsumerImpl {
 		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("toto");
 		
 		// nouvel event
-		Event evt = new Event(23,"toto");
+		Event evt = new Event(23,"toto",1,82567);
 		
 		mockCall.receive(evt);
 		

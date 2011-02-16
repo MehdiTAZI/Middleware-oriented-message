@@ -39,9 +39,9 @@ public class ChannelAdminAgentProcess {
 		System.out.println("la modification du capacity");
 		
 		
-		
+		System.out.println("la Suppression du Channel dans 20s...");
 		Thread.sleep(30000);
-		System.out.println("la Suppression du Channel dans 20s...");		
+				
 						
 		
 		eventServerChannelAdmin.destroyChannel(id);

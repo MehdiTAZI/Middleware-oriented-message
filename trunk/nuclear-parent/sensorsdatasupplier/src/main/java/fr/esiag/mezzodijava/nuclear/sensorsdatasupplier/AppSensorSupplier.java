@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
+import java.util.Random;
 
 import org.omg.CORBA.Any;
 import org.omg.CORBA.ORB;
@@ -46,25 +47,28 @@ public class AppSensorSupplier
 		//accept permet d'accepter les connexions client
 		// Un BufferedReader permet de lire les message envoyer par le client.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
+		Random r=new Random();
 		while (true) {
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
 			System.out.println(str);
-			Event e = new Event((new Date()).getTime(),str);
+			Event e = new Event((new Date()).getTime(),str,0,6565);
 			EventInfo eventInfo = new EventInfo(e);
 			
 			//si c'est une alerte on le marque puis on l'envoie
 			if (eventInfo.isAlerte()){ 
-				eventInfo.setCode(923);
+				eventInfo.setCode(923);				
 			}else{
 				eventInfo.setCode(42);
 			}
 			String data = eventInfo.getCode()+"/"+eventInfo.getType()+"/"+eventInfo.getData();
-			Event event = new Event((new Date()).getTime(),data);
+			
+			Event event = new Event((new Date()).getTime(),data,r.nextInt(10),64663);
 			
 			supplierProxy.push(event);   
 		}
 		reader.close();
 		socketClient.close();
+		ec.getOrb().run();
 	}
 }

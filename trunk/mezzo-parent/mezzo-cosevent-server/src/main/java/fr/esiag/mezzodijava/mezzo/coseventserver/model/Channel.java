@@ -2,11 +2,16 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.concurrent.PriorityBlockingQueue;
+
+
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
@@ -29,21 +34,31 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
  */
 
 public class Channel {
-
+	
+	private final int CAPACITY_QUEUE=100;
+	
     private int capacity;
     private long identifier;
     private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
 
     private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections
 	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
+    
     private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
 
     private String topic;
-
+    
+    private Comparator<Event> comparator=new PriorityEventComparator();
+    
+    private PriorityQueue<Event> queueEvents;
+    
     public Channel(String topic, int capacity) {
-	this.topic = topic;
-	this.capacity = capacity;
-	this.identifier=RandomChannelIdentifier.getUniqueIdentifier();
+		this.topic = topic;
+		this.capacity = capacity;
+		this.identifier=RandomChannelIdentifier.getUniqueIdentifier();
+		//listeEvents=new PriorityQueue<Event>();
+		queueEvents=new PriorityQueue<Event>(CAPACITY_QUEUE,comparator);
+		
     }
 
     /**
@@ -186,5 +201,18 @@ public class Channel {
 		this.identifier = identifier;
 	}
 
+    /*public void addEvent(Event event){
+    	queueEvents.add(event);
+    	
+    }*/
+
+	public PriorityQueue<Event> getQueueEvents() {
+		return queueEvents;
+	}
+
+	public void setQueueEvents(PriorityQueue<Event> listeEvents) {
+		this.queueEvents = listeEvents;
+	}
+    
     
 }
