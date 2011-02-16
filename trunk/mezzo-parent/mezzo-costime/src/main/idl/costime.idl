@@ -11,11 +11,11 @@ module costime{
 	};
 	interface Synchronizable{
 		attribute DateTime date;
+		void setDate(in DateTime date);
 	};
 	interface TimeService{
 		void subscribe(in Synchronizable cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
 		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
 	};
-
 };
 
