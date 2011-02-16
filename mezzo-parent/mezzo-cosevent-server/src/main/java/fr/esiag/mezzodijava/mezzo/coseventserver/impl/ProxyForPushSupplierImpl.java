@@ -93,8 +93,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 channelCtr.getChannel().getQueueEvents().add(evt);
 
 	 if(channelCtr.getChannel().getQueueEvents().size() > 10)
-		 while(channelCtr.getChannel().getQueueEvents().size() > 0)
-		       System.out.println("QUEUE CAPACITY --> " + channelCtr.getChannel().getQueueEvents().remove().content + "  "+ channelCtr.getChannel().getQueueEvents().remove().priority);
+		 while(channelCtr.getChannel().getQueueEvents().size() > 0){
+		       System.out.println("QUEUE CAPACITY --> " + channelCtr.getChannel().getQueueEvents().remove().content +  " " + channelCtr.getChannel().getQueueEvents().size());
+		 }
 
     }
 
