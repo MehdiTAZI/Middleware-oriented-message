@@ -11,6 +11,12 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 public class TimeServiceImpl implements TimeServiceOperations{
 
 	private TimeServiceCtr ctr;
+	public TimeServiceImpl(TimeServiceCtr ctr){
+		this.ctr=ctr;
+	}
+	public TimeServiceCtr getCtr() {
+		return ctr;
+	}
 	@Override
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException,
 	UnreachableException {
