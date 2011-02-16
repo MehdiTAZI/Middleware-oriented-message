@@ -110,6 +110,7 @@ public class EventServerChannelAdminCtr {
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	    fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
+    	
 	if (BFFactory.getChannel(uniqueServerChannelId) == null)
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 	if (BFFactory.getChannel(uniqueServerChannelId).getCapacity() > capacity)

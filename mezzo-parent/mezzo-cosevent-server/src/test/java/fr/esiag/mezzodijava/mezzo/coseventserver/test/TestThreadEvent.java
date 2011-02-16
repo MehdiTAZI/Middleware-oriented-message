@@ -42,7 +42,7 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT");
+		Event e = new Event(0, "TEST_EVENT",0,4567);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
@@ -76,7 +76,7 @@ public class TestThreadEvent {
 		// adding the mock as subscribed consumer
 		channel.addSubscribedConsumer(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT");
+		Event e = new Event(0, "TEST_EVENT",0,456789);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
@@ -105,7 +105,7 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT");
+		Event e = new Event(0, "TEST_EVENT",0,45452);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);

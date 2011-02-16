@@ -62,10 +62,23 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 *            an Event
 	 */
 	public void addEvent(Event e) {
+		
+		channel.getQueueEvents().add(e);
+		
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
 		}
+		
+		if(channel.getQueueEvents().size() > 8){
+			while(channel.getQueueEvents().size() > 0)
+			       System.out.println("QUEUE PRIORITY --> " + channel.getQueueEvents().remove());
+		}
+
+		       
+						
+		
+
 	}
 
 	/**

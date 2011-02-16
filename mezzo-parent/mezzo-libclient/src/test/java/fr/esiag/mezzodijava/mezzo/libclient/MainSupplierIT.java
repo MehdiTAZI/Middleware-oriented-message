@@ -39,7 +39,7 @@ public class MainSupplierIT {
 		for (int i = 0; i < 10; i++)
 			try {
 				supplierProxy
-						.push(new Event((new Date()).getTime(), "TEST" + i));
+						.push(new Event((new Date()).getTime(), "TEST" + i,0,757));
 				Thread.sleep(3000);
 			} catch (NotConnectedException e) {
 				// TODO Auto-generated catch block
