@@ -9,7 +9,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
-import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;

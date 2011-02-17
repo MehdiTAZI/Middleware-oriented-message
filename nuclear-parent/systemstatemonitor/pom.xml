@@ -18,27 +18,11 @@
 		<!-- HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate </groupId>
-			<artifactId> hibernate-core </artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate </groupId>
-			<artifactId> hibernate-annotations</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate </groupId>
 			<artifactId>hibernate-entitymanager </artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence </groupId>
 			<artifactId>hibernate-jpa-2.0-api </artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12 </artifactId>
-		</dependency>
-		<dependency>
-			<groupId>c3p0 </groupId>
-			<artifactId>c3p0 </artifactId>
 		</dependency>
 		<!-- DERBY -->
 		<dependency>
@@ -46,5 +30,34 @@
 			<artifactId>derby</artifactId>
 		</dependency>
 	</dependencies>
-
+<profiles>
+		<profile>
+			<id>shade</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-shade-plugin</artifactId>
+						<version>1.4</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>shade</goal>
+								</goals>
+								<configuration>
+									<transformers>
+										<transformer
+											implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+											<mainClass>fr.esiag.mezzodijava.nuclear.systemstatemonitor.MainMonitor</mainClass>
+										</transformer>
+									</transformers>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

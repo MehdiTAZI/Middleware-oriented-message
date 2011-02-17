@@ -1,7 +1,5 @@
 package fr.esiag.mezzodijava.nuclear.systemstatemonitor;
 
-import org.omg.CORBA.ORB;
-
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
@@ -10,7 +8,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -23,7 +20,7 @@ public class InjectorSystemStateSupplier {
 	TopicNotFoundException, ChannelNotFoundException,
 	AlreadyRegisteredException {
 		EventClient ec = EventClient.init(null);
-		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
 		supplierProxy = channelAdmin
 		.getProxyForPushSupplier();
 		

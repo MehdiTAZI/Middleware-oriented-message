@@ -12,7 +12,6 @@ import org.omg.PortableServer.POAHelper;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
-import fr.esiag.mezzodijava.mezzo.coseventserver.main.Test;
 
 public class CAAgentProcess {
 
@@ -21,9 +20,9 @@ public class CAAgentProcess {
 			Properties props = new Properties();
 			try {
 				props.load(this.getClass().getClassLoader()
-						.getResourceAsStream("eventserver.properties"));
+						.getResourceAsStream("eventclient.properties"));
 			} catch (IOException e) {
-				// TODO log here
+				e.printStackTrace();
 
 			}
 			ORB orb = ORB.init(args, props);
@@ -47,7 +46,7 @@ public class CAAgentProcess {
 			long id2 = channelAdmin2.createChannel(injectorSystemChannelName, 3);
 			System.out.println("Done.");
 		} catch (Exception e) {
-			System.out.println(e.getMessage());
+		    e.printStackTrace();
 		}
 	}
 

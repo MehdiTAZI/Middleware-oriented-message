@@ -10,7 +10,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -44,7 +43,7 @@ public class NuclearSensorConsumer {
 		}
 
 		System.out.println("ALL DONE for consumer nuclear");
-		ORB orb = BFFactory.createOrb(null, null);
+		ORB orb = ec.getOrb();
 		orb.run();
 	}
 
