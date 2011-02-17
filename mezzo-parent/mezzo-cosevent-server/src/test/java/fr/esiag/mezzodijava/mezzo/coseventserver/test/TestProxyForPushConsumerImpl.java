@@ -77,6 +77,9 @@ public class TestProxyForPushConsumerImpl {
 		
 		// création du mock pour le contrôleur 
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
@@ -100,6 +103,9 @@ public class TestProxyForPushConsumerImpl {
 	public void testConnect() throws NotRegisteredException, AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur 
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
@@ -128,8 +134,11 @@ public class TestProxyForPushConsumerImpl {
 		// nouveau proxy
 		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("TEST");
 		
+		//cette methode doit etre appelee
 		mockCtr.removeProxyForPushConsumerFromConnectedList(pfpc);
-		
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// enregistrement
 	    EasyMock.replay(mockCtr);
 	   

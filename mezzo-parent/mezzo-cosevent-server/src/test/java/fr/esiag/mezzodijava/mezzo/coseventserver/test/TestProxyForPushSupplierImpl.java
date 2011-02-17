@@ -21,6 +21,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestProxyForPushSupplierImpl {
 
@@ -44,6 +45,9 @@ public class TestProxyForPushSupplierImpl {
 	public void testConnect() throws AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
@@ -68,6 +72,9 @@ public class TestProxyForPushSupplierImpl {
 			NotConnectedException {
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
@@ -91,6 +98,9 @@ public class TestProxyForPushSupplierImpl {
 			AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
@@ -100,10 +110,10 @@ public class TestProxyForPushSupplierImpl {
 		Body body=new Body("Test_PUSH");
 		Event e = new Event(header,body);
 		mockCtr.addEvent(e);
-		// on fait le connect
-		pfps.connect();
 		// on rembobine le mock
 		EasyMock.replay(mockCtr);
+		// on fait le connect
+		pfps.connect();
 		// test !
 		pfps.push(e);
 	}
