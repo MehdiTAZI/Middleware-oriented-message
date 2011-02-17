@@ -11,9 +11,11 @@ import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
@@ -149,7 +151,9 @@ public class TestProxyForPushConsumerImpl {
 		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("toto");
 		
 		// nouvel event
-		Event evt = new Event(23,"toto",1,82567);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
+		Event evt = new Event(header,body);
 		
 		mockCall.receive(evt);
 		

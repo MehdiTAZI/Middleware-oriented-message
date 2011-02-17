@@ -5,8 +5,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
@@ -42,7 +44,9 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT",0,4567);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
+		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
@@ -76,7 +80,9 @@ public class TestThreadEvent {
 		// adding the mock as subscribed consumer
 		channel.addSubscribedConsumer(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT",0,456789);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
+		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
@@ -105,7 +111,9 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Event e = new Event(0, "TEST_EVENT",0,45452);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
+		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);

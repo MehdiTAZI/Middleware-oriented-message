@@ -12,8 +12,10 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
@@ -94,7 +96,9 @@ public class TestProxyForPushSupplierImpl {
 		// nouveau proxy
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
 		// Nouvel event :
-		Event e = new Event((new Date()).getTime(), "TEST_PUSH",0,345678);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_PUSH");
+		Event e = new Event(header,body);
 		mockCtr.addEvent(e);
 		// on fait le connect
 		pfps.connect();
@@ -113,7 +117,9 @@ public class TestProxyForPushSupplierImpl {
 		// nouveau proxy
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
 		// Nouvel event :
-		Event e = new Event((new Date()).getTime(), "TEST_PUSH",0,45678);
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_PUSH");
+		Event e = new Event(header,body);
 		// enregistrement d'un appel de addevent dans le mock
 		mockCtr.addEvent(e);
 		// on rembobine le mock

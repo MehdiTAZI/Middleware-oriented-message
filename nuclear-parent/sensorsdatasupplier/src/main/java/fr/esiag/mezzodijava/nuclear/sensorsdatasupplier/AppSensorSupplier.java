@@ -14,9 +14,11 @@ import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerPOATie;
@@ -52,11 +54,16 @@ public class AppSensorSupplier
 		// Un BufferedReader permet de lire les message envoyer par le client.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 		Random r=new Random();
+		Header header=null;
+		Body body=null;
 		while (true) {
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
 			System.out.println(str);
-			Event e = new Event((new Date()).getTime(),str,0,6565);
+			header=new Header(123, 1, new Date().getTime(), 120);
+			body=new Body(str);
+			
+			Event e = new Event(header,body);
 			EventInfo eventInfo = new EventInfo(e);
 			
 			//si c'est une alerte on le marque puis on l'envoie
@@ -65,16 +72,21 @@ public class AppSensorSupplier
 			}else{
 				eventInfo.setCode(42);
 			}
+			
 			String data = eventInfo.getCode()+"/"+eventInfo.getType()+"/"+eventInfo.getData();
 			
-			Event event = new Event((new Date()).getTime(),data,r.nextInt(10),64663);
+			header=new Header(64663, (int)(Math.random()*100)+1, new Date().getTime(), 120);
 			
+			System.out.println("RANDOM:  "+header.priority);
+			body=new Body(data);
+			Event event = new Event(header,body);			
 			supplierProxy.push(event);   
 		}
 		
-		supplierProxy.afficher();
+		
 		reader.close();
 		socketClient.close();
+		supplierProxy.afficher();
 		ec.getOrb().run();
 	}
 }

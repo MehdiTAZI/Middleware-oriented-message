@@ -1,11 +1,19 @@
 module cosevent {
 	
-	struct Event{
-		long long timestamp;
-		string content;
+	struct Header{
+		long long code;
 		long priority;
-		long long datePreomption;
-		
+		long long date;
+		long long timestamp;
+	};
+	
+	struct Body{
+		string content;
+	};
+	
+	struct Event{		
+		Header header;
+		Body body;
 	};
 	
 	exception AlreadyRegisteredException{

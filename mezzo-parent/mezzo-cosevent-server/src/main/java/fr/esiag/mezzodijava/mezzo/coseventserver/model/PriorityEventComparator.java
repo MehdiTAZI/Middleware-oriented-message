@@ -9,11 +9,11 @@ public class PriorityEventComparator implements Comparator<Event> {
 	@Override
 	public synchronized int compare(Event evt1, Event evt2) {
 		
-		if (evt1.priority < evt2.priority)
+		if (evt1.header.priority < evt2.header.priority)
         {
             return -1;
         }
-        if (evt1.priority > evt2.priority)
+        if (evt1.header.priority > evt2.header.priority)
         {
             return 1;
         }

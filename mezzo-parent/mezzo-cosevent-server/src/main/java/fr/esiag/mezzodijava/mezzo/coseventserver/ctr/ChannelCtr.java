@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -43,7 +44,14 @@ public class ChannelCtr implements java.nio.channels.Channel {
 
 	// lien vers le model
 	private Channel channel;
-
+	
+	
+	//REDA: a voir
+//	private Date synchronizedDate=new Date();		
+//	private ThreadRemoveExpiredEvent threadRemoveExpiredEvent;
+//	private ThreadTimestampingEvent threadTimestampingEvent;
+	
+	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity fetched
 	 * byhis topic.
@@ -53,6 +61,12 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 */
 	public ChannelCtr(String topic) {
 		this.channel = BFFactory.crap(topic, 0);
+		
+		//REDA :a voir
+		/*threadRemoveExpiredEvent=new ThreadRemoveExpiredEvent();
+		threadTimestampingEvent=new ThreadTimestampingEvent();
+		threadRemoveExpiredEvent.setDate(synchronizedDate);
+		threadTimestampingEvent.setDate(synchronizedDate);*/
 	}
 
 	/**
@@ -68,16 +82,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			channel.getConsumersSubscribed().get(consumer).add(e);
-		}
-		
-		if(channel.getQueueEvents().size() > 8){
-			while(channel.getQueueEvents().size() > 0)
-			       System.out.println("QUEUE PRIORITY --> " + channel.getQueueEvents().remove());
-		}
-
-		       
-						
-		
+		}					       								
 
 	}
 
@@ -251,6 +256,18 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	public boolean isOpen() {
 		// TODO Auto-generated method stub
 		return false;
+	}
+	
+	// REDA : a voir 
+	synchronized public void QueueGarbageCollector(){
+		
+		
+		/*while(true){
+			threadRemoveExpiredEvent.setQueue(channel.getQueueEvents());			
+			threadRemoveExpiredEvent.run();
+			threadTimestampingEvent.setQueue(channel.getQueueEvents());			
+			threadTimestampingEvent.run();
+		}*/
 	}
 
 }
