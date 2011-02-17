@@ -1,0 +1,32 @@
+format 76
+
+classcanvas 128004 class_ref 134532 // Composant
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 98 67 2000
+end
+classcanvas 128132 class_ref 134658 // Consumer
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 43 178 2000
+end
+classcanvas 128260 class_ref 141570 // Supplier
+  class_drawing_mode default show_context_mode default show_stereotype_properties default
+  xyz 159 177 2000
+end
+usecasecanvas 128644 usecase_ref 134532 // S'abonner au cosTime
+  xyzwh 386 82 3005 64 32 label_xy 372 114
+end
+subject 128772 "FrameworkMezzo"
+  xyzwh 320 45 2000 181 113
+relationcanvas 128388 relation_ref 134532 // <generalisation>
+  from ref 128260 z 2001 to ref 128004
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 128516 relation_ref 134660 // <generalisation>
+  from ref 128132 z 2001 to ref 128004
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+line 128900 ----
+  from ref 128004 z 3006 to ref 128644
+end

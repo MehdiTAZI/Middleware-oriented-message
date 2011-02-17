@@ -1,6 +1,6 @@
 format 76
 
-classinstance 128002 class_ref 141698 // Framework
+classinstance 128002 class_ref 141698 // FrameworkMezzo
   name ""   xyz 425.939 4.95628 2000 life_line_z 2000
 classinstance 128130 class_ref 134658 // Consumer
   name ""   xyz 35.9337 4.06488 2000 life_line_z 2000
@@ -15,29 +15,29 @@ Diagramme de Sequence Système
 UC02 : S'abonner en tant que consumer PUSH
 US115 : Scénario Exception 4 : Le Consumer n'est plus accessible"
   xyzwh 91 521 2000 343 75
-durationcanvas 128132 classinstance_ref 128002 // :Framework
-  xyzwh 453 303 2010 11 31
+durationcanvas 128132 classinstance_ref 128002 // :FrameworkMezzo
+  xyzwh 462 303 2010 11 31
 end
 durationcanvas 128258 classinstance_ref 128130 // :Consumer
-  xyzwh 56 74 2010 11 267
+  xyzwh 54 74 2010 11 267
   overlappingdurationcanvas 131074
-    xyzwh 62 133 2020 11 26
+    xyzwh 60 133 2020 11 26
   end
 end
-durationcanvas 128386 classinstance_ref 128002 // :Framework
-  xyzwh 453 72 2010 11 48
+durationcanvas 128386 classinstance_ref 128002 // :FrameworkMezzo
+  xyzwh 462 72 2010 11 48
 end
-durationcanvas 129026 classinstance_ref 128002 // :Framework
-  xyzwh 453 236 2010 11 38
+durationcanvas 129026 classinstance_ref 128002 // :FrameworkMezzo
+  xyzwh 462 236 2010 11 38
 end
-durationcanvas 132226 classinstance_ref 128002 // :Framework
-  xyzwh 453 401 2010 11 44
+durationcanvas 132226 classinstance_ref 128002 // :FrameworkMezzo
+  xyzwh 462 401 2010 11 44
   overlappingdurationcanvas 133250
-    xyzwh 459 414 2020 11 25
+    xyzwh 468 414 2020 11 25
   end
 end
-durationcanvas 133762 classinstance_ref 128002 // :Framework
-  xyzwh 453 181 2010 11 36
+durationcanvas 133762 classinstance_ref 128002 // :FrameworkMezzo
+  xyzwh 462 181 2010 11 36
 end
 lostfoundmsgsupport 132354 xyz 77 404 2015
 msg 128260 synchronous
@@ -109,6 +109,6 @@ line 132738 -_-_
   from ref 132610 z 2011 to ref 132226
 line 133122 -_-_ decenter_begin 39 decenter_end 921
   from ref 132098 z 2011 to ref 128258
-line 133634 -_-_
+line 133634 -_-_ decenter_end 360
   from ref 133506 z 2021 to ref 133250
 end

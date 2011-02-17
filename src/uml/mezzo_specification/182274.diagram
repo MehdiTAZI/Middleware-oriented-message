@@ -13,7 +13,7 @@ classcanvas 128258 class_ref 134658 // Consumer
   xyz 118 130 2000
 end
 usecasecanvas 128642 usecase_ref 141058 // UC07 : Administrer un Channel
-  xyzwh 335 47 3005 64 32 label_xy 295 79
+  xyzwh 335 49 3005 64 32 label_xy 295 81
 end
 subject 128898 "FrameworkMezzo"
   xyzwh 243 10 2000 242 123
