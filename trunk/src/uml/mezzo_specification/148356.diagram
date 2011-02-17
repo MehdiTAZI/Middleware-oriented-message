@@ -1,0 +1,42 @@
+format 76
+
+classinstance 128004 class_ref 134532 // Composant
+  name ""   xyz 57 4 2000 life_line_z 2000
+classinstance 128132 class_ref 141698 // FrameworkMezzo
+  name ""   xyz 406 5 2000 life_line_z 2000
+durationcanvas 128260 classinstance_ref 128004 // :Composant
+  xyzwh 79 70 2010 11 882
+end
+durationcanvas 128388 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 443 70 2010 11 47
+end
+durationcanvas 128772 classinstance_ref 128132 // :FrameworkMezzo
+  xyzwh 443 135 2010 11 48
+end
+msg 128516 synchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 128388
+  yz 70 2015 explicitmsg "resolveReference()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "name"
+  label_xy 197 58
+msg 128644 return
+  from durationcanvas_ref 128388
+  to durationcanvas_ref 128260
+  yz 100 2015 explicitmsg "TimeService reference"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 219 88
+msg 128900 asynchronous
+  from durationcanvas_ref 128260
+  to durationcanvas_ref 128772
+  yz 135 2015 explicitmsg "unsuscribe()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "Synchronizable"
+  label_xy 209 123
+msg 129028 return
+  from durationcanvas_ref 128772
+  to durationcanvas_ref 128260
+  yz 168 2015 explicitmsg "TimeServiceException : NotRegisteredException"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 163 156
+end
