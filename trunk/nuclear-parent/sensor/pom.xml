@@ -13,4 +13,17 @@
   </parent>
 
   <name>Nuclear Sensor (Mock Component)</name>
+  <build>
+  <plugins><plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <configuration>
+        <archive>
+          <manifest>
+            <mainClass>fr.esiag.mezzodijava.nuclear.sensor.AppCapteur</mainClass>
+          </manifest>
+        </archive>
+          </configuration>
+      </plugin>
+  </plugins></build>
 </project>
