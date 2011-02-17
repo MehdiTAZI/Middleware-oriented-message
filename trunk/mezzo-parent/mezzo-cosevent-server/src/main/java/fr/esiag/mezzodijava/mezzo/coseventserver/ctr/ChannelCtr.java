@@ -60,7 +60,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 *            Channel name
 	 */
 	public ChannelCtr(String topic) {
-		this.channel = BFFactory.crap(topic, 0);
+		this.channel = BFFactory.createChannelEntity(topic, 0);
 		
 		//REDA :a voir
 		/*threadRemoveExpiredEvent=new ThreadRemoveExpiredEvent();

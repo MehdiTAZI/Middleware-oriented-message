@@ -17,18 +17,18 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
  * Classe EventServerChannelAdminCtr
- *
+ * 
  * For controlling channel creation and destruction
- *
+ * 
  * UC n°: US10 (+US children)
- *
+ * 
  * @author Mezzo-Team
- *
+ * 
  */
 
 public class EventServerChannelAdminCtr {
-    
-	private String eventServerName;
+
+    private String eventServerName;
     private Properties props = new Properties();
     private ORB orb;
 
@@ -39,7 +39,7 @@ public class EventServerChannelAdminCtr {
     public void setOrb(ORB orb) {
 	this.orb = orb;
     }
-    
+
     public EventServerChannelAdminCtr(String eventServerName) {
 	this.eventServerName = eventServerName;
 	String[] args = new String[] {
@@ -75,8 +75,6 @@ public class EventServerChannelAdminCtr {
     public void destroyChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
 	try {
-	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
-		    .resolve_initial_references("NameService"));
 	    try {
 		if (BFFactory.getChannel(uniqueServerChannelId) != null) {
 		    ChannelCtr channelCtr = BFFactory.getChannelctr(BFFactory
@@ -88,8 +86,12 @@ public class EventServerChannelAdminCtr {
 			    .removeAllProxiesForPushConsumerFromConnectedList();
 		    channelCtr
 			    .removeAllProxiesForPushSupplierFromConnectedList();
-		    nc.unbind(nc.to_name(BFFactory.getChannel(
-			    uniqueServerChannelId).getTopic()));
+		    if (orb != null) {//we are managed by an orb so we must unbind the channel
+			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+				    .resolve_initial_references("NameService"));
+			nc.unbind(nc.to_name(BFFactory.getChannel(
+				uniqueServerChannelId).getTopic()));
+		    }
 		    BFFactory.destroy(uniqueServerChannelId);
 
 		} else
@@ -110,7 +112,7 @@ public class EventServerChannelAdminCtr {
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	    fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
-    	
+
 	if (BFFactory.getChannel(uniqueServerChannelId) == null)
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 	if (BFFactory.getChannel(uniqueServerChannelId).getCapacity() > capacity)

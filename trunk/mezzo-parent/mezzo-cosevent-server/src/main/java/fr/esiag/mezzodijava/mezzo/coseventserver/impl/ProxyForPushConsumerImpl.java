@@ -132,8 +132,6 @@ public class ProxyForPushConsumerImpl implements MessageListener,
      */
     @Override
     public void unsubscribe() throws NotRegisteredException {
-	System.out.println("Consumer Subscribed to "
-		+ channelCtr.getChannel().getTopic());
 	channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
 	System.out.println("Unsubscribe of a PUSH Consumer from \""
 		+ channelCtr.getChannel().getTopic() + "\".");

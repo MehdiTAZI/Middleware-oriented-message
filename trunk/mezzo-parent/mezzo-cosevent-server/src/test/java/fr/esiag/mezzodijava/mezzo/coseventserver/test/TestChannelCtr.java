@@ -33,7 +33,7 @@ public class TestChannelCtr {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String topic = "bla";
-		Channel channel = BFFactory.crap(topic, 3);
+		Channel channel = BFFactory.createChannelEntity(topic, 3);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -46,7 +46,7 @@ public class TestChannelCtr {
 		Random rm = new Random();
 		topic = rm.nextInt() + "";
 		System.out.println(topic);
-		Channel channel = BFFactory.crap(topic, 2);
+		Channel channel = BFFactory.createChannelEntity(topic, 2);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -204,7 +204,7 @@ public class TestChannelCtr {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		try {
-			Channel channel = BFFactory.crap(topic, 0);
+			Channel channel = BFFactory.createChannelEntity(topic, 0);
 			channel.setCapacity(10);
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
@@ -232,7 +232,7 @@ public class TestChannelCtr {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
-		Channel channel = BFFactory.crap(topic, 0);
+		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(1);
 		try {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
@@ -248,7 +248,7 @@ public class TestChannelCtr {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
-		Channel channel = BFFactory.crap(topic, 0);
+		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(30);
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 	}
@@ -280,7 +280,7 @@ public class TestChannelCtr {
 //				channel.getConsumersSubscribed().get(consumer).add(e);
 //			}
 //		}
-		Channel channel = BFFactory.crap(topic, 0);
+		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
