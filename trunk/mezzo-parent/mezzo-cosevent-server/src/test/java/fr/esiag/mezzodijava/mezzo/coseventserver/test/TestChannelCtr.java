@@ -13,7 +13,9 @@ import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
@@ -282,6 +284,8 @@ public class TestChannelCtr {
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		channelCtr.addEvent(new Event((new Date()).getTime(),"TEST_EVENT",0,4567));
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
+		channelCtr.addEvent(new Event(header,body));
 	}
 }

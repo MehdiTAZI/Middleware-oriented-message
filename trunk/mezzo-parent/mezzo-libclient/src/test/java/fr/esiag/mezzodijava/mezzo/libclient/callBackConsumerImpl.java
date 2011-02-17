@@ -9,8 +9,8 @@ public class callBackConsumerImpl implements CallbackConsumerOperations {
 	@Override
 	public void receive(Event evt) throws ConsumerNotFoundException {
 		// TODO Auto-generated method stub
-		System.out.println("Message recu timestamp:" + evt.timestamp
-				+ ", contenu" + evt.content);
+		System.out.println("Message recu timestamp:" + evt.header.timestamp
+				+ ", contenu" + evt.body.content);
 	}
 
 }

@@ -5,9 +5,11 @@ import java.util.Date;
 import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
@@ -36,10 +38,12 @@ public class MainSupplierIT {
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
 		supplierProxy.connect();
+		Header header=new Header(123, 1, 01012011, 120);
+		Body body=new Body("Test_EVENT");
 		for (int i = 0; i < 10; i++)
 			try {
 				supplierProxy
-						.push(new Event((new Date()).getTime(), "TEST" + i,0,757));
+						.push(new Event(header,body));
 				Thread.sleep(3000);
 			} catch (NotConnectedException e) {
 				// TODO Auto-generated catch block

@@ -94,8 +94,8 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 		//channelCtr.addEvent(evt);
 		channelCtr.getChannel().getQueueEvents().add(evt);
 		
-		Event ev=null;
-		int nbr=channelCtr.getChannel().getQueueEvents().size();
+		//Event ev=null;
+		//int nbr=channelCtr.getChannel().getQueueEvents().size();
 //		if(channelCtr.getChannel().getQueueEvents().size() > 10){
 //			PriorityQueue<Event> tmp=channelCtr.getChannel().getQueueEvents();	
 //		 while(--nbr==0){
@@ -108,19 +108,12 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 
 	}
 
+	// cette methode juste pour afficher la queue trier et apres on peut la supprimer
+	
 	public void afficher(){
-		
-
-		
-			while(channelCtr.getChannel().getQueueEvents().size() > 0){
 				
-				System.out.println("QUEUE CAPACITY --> " + channelCtr.getChannel().getQueueEvents().remove().content +  " " + channelCtr.getChannel().getQueueEvents().element().priority);
-
-				
-				
-
-			}
-
+			for(int i=0;i<20;i++)				
+				System.out.println("QUEUE CAPACITY --> " + channelCtr.getChannel().getQueueEvents().remove().body.content +  "        priority : " + channelCtr.getChannel().getQueueEvents().element().header.priority);								
 
 	}
 }

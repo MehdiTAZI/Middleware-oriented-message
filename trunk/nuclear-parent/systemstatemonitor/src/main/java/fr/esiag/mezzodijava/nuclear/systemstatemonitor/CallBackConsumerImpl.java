@@ -21,8 +21,8 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	@Override
 	public void receive(Event e) throws ConsumerNotFoundException {
 		
-		System.out.println("Message recu timestamp:" + e.timestamp
-				+ ", contenu" + e.content);
+		System.out.println("Message recu timestamp:" + e.header.timestamp
+				+ ", contenu" + e.body.content);
 				
 		EventInfo eventInfo = new EventInfo(e);
 		
@@ -52,8 +52,8 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		//persist the event on the database
 		dbConnector.persist(eventInfo);
 		
-		System.out.println("Message archivé timestamp:" + e.timestamp
-				+ ", contenu" + e.content);
+		System.out.println("Message archivé timestamp:" + e.header.timestamp
+				+ ", contenu" + e.body.content);
 
 		
 	}
