@@ -1,3 +1,4 @@
+
 module costime{
 	typedef unsigned long long DateTime;
 	exception AlreadyRegisteredException{
