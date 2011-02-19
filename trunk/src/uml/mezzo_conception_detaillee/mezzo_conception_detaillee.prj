@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 43
+  revision 46
   modified_by 3 "Fabrice"
 
 
@@ -56,1206 +56,6 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    class 134532 "RandomChannelIdentifier"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 134532 "getUniqueIdentifier"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128002 "EventClient"
-      visibility package stereotype "singleton"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128002 "init"
-	class_operation public return_type class_ref 128002 // EventClient
-	nparams 1
-	  param in name "args" explicit_type "string[]"
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 128130 "resolveChannelByTopic"
-	public return_type class_ref 128642 // ChannelAdmin
-	nparams 1
-	  param in name "topic" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 128258 // orb (<unidirectional association>)
-	relation 128130 --->
-	  a role_name "orb" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 128258 // orb (<unidirectional association>)
-	  b parent class_ref 128130 // ORB
-      end
-
-      classrelation 128386 // <unidirectional association>
-	relation 128258 --->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 128386 // <unidirectional association>
-	  b parent class_ref 128258 // NamingContextExt
-      end
-
-      classrelation 128514 // <dependency>
-	relation 128386 -_->
-	  a default
-	    classrelation_ref 128514 // <dependency>
-	  b parent class_ref 128642 // ChannelAdmin
-      end
-
-      classrelation 128642 // <dependency>
-	relation 128514 -_->
-	  a default
-	    classrelation_ref 128642 // <dependency>
-	  b parent class_ref 128770 // ChannelAdminHelper
-      end
-
-      classrelation 128770 // <dependency>
-	relation 128642 -_->
-	  a default
-	    classrelation_ref 128770 // <dependency>
-	  b parent class_ref 128386 // NamingContextExtHelper
-      end
-
-      operation 161923 "serveCallbackConsumer"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 145154 // <dependency>
-	relation 145026 -_->
-	  a default
-	    classrelation_ref 145154 // <dependency>
-	  b parent class_ref 144130 // CallbackConsumerOperations
-      end
-
-      classrelation 145282 // instance (<unidirectional association>)
-	relation 145154 --->
-	  a role_name "instance" multiplicity "1" class_relation private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 145282 // instance (<unidirectional association>)
-	  b parent class_ref 128002 // EventClient
-      end
-
-      classrelation 151938 // <dependency>
-	relation 151810 -_->
-	  a default
-	    classrelation_ref 151938 // <dependency>
-	  b parent class_ref 136707 // CallbackConsumer
-      end
-
-      classrelation 137477 // <dependency>
-	relation 136581 -_->
-	  a default
-	    classrelation_ref 137477 // <dependency>
-	  b parent class_ref 128901 // POA
-      end
-
-      operation 142085 "resolveEventServerChannelAdminByServerName"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "serverName" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128130 "ORB"
-      visibility package stereotype "singleton"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128514 "resolve_initial_references"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 128642 "init"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128258 "NamingContextExt"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128386 "resolve_str"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128386 "NamingContextExtHelper"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128258 "_narrow"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128514 "Client"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
-
-    class 128642 "ChannelAdmin"
-      visibility package stereotype "interface"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      classrelation 165890 // <dependency>
-	relation 165762 -_->
-	  a default
-	    classrelation_ref 165890 // <dependency>
-	  b parent class_ref 128002 // EventClient
-      end
-    end
-
-    class 128770 "ChannelAdminHelper"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128770 "_narrow"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128005 "Consumer"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128005 "main"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 128133 // <dependency>
-	relation 128133 -_->
-	  a default
-	    classrelation_ref 128133 // <dependency>
-	  b parent class_ref 128261 // CallbackConsumerImpl
-      end
-
-      classrelation 134659 // <dependency>
-	relation 134531 -_->
-	  a default
-	    classrelation_ref 134659 // <dependency>
-	  b parent class_ref 128517 // ChannelAdminImpl
-      end
-
-      classrelation 145411 // <dependency>
-	relation 143875 -_->
-	  a default
-	    classrelation_ref 145411 // <dependency>
-	  b parent class_ref 128645 // ProxyForPushConsumerImpl
-      end
-
-      classrelation 151810 // ec (<unidirectional association>)
-	relation 151682 --->
-	  a role_name "ec" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 151810 // ec (<unidirectional association>)
-	  b parent class_ref 128002 // EventClient
-      end
-
-      classrelation 165762 // <dependency>
-	relation 165634 -_->
-	  a default
-	    classrelation_ref 165762 // <dependency>
-	  b parent class_ref 128642 // ChannelAdmin
-      end
-
-      classrelation 166146 // <dependency>
-	relation 166018 -_->
-	  a default
-	    classrelation_ref 166146 // <dependency>
-	  b parent class_ref 136195 // ProxyForPushConsumer
-      end
-    end
-
-    class 128133 "ProxyPushConsumer"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
-
-    class 128261 "CallbackConsumerImpl"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128133 "receive"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "evt" type class_ref 136451 // Event
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 152066 // <realization>
-	relation 151938 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 152066 // <realization>
-	  b parent class_ref 144130 // CallbackConsumerOperations
-      end
-    end
-
-    class 128389 "ChannelAdminCtrl"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
-
-    class 128517 "ChannelAdminImpl"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      attribute 135939 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      operation 137475 "ChannelAdminImpl"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "channel" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 137603 "createProxyForPushSupplier"
-	public return_type class_ref 136067 // ProxyForPushSupplier
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 137731 "createProxyForPushConsumer"
-	public return_type class_ref 136195 // ProxyForPushConsumer
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 129797 // <dependency>
-	relation 129285 -_->
-	  a default
-	    classrelation_ref 129797 // <dependency>
-	  b parent class_ref 128901 // POA
-      end
-
-      classrelation 130437 // <dependency>
-	relation 129669 -_->
-	  a default
-	    classrelation_ref 130437 // <dependency>
-	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
-      end
-
-      classrelation 130565 // <dependency>
-	relation 129797 -_->
-	  a default
-	    classrelation_ref 130565 // <dependency>
-	  b parent class_ref 128773 // ProxyForPushConsumerHelper
-      end
-
-      classrelation 134915 // <realization>
-	relation 134787 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 134915 // <realization>
-	  b parent class_ref 134531 // ChannelAdminOperations
-      end
-
-      classrelation 145027 // <aggregation>
-	relation_ref 143491 // <aggregation>
-      end
-
-      classrelation 138114 // channelAdminCtr (<unidirectional association>)
-	relation 137986 --->
-	  a role_name "channelAdminCtr" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 138114 // channelAdminCtr (<unidirectional association>)
-	  b parent class_ref 134659 // ChannelAdminCtr
-      end
-
-      classrelation 165378 // <dependency>
-	relation 165250 -_->
-	  a default
-	    classrelation_ref 165378 // <dependency>
-	  b parent class_ref 136195 // ProxyForPushConsumer
-      end
-
-      classrelation 165506 // <dependency>
-	relation 165378 -_->
-	  a default
-	    classrelation_ref 165506 // <dependency>
-	  b parent class_ref 136067 // ProxyForPushSupplier
-      end
-    end
-
-    class 128645 "ProxyForPushConsumerImpl"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 138115 "ProxyForPushConsumerImpl"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "channel" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 138243 "subscribe"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "cc" type class_ref 136707 // CallbackConsumer
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 138371 "unsubscribe"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 138499 "connect"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 138627 "disconnect"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 138755 "receive"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "evt" type class_ref 136451 // Event
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 128261 // <realization>
-	relation 128261 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 128261 // <realization>
-	  b parent class_ref 135299 // MessageListener
-      end
-
-      classrelation 128389 // <realization>
-	relation 128389 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 128389 // <realization>
-	  b parent class_ref 135427 // ProxyForPushConsumerOperations
-      end
-
-      classrelation 129925 // <aggregation>
-	relation 129413 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 129925 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 130053 // <aggregation>
-      end
-
-      classrelation 130181 // <aggregation>
-	relation 129541 o---
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 130181 // <aggregation>
-	  b role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 130309 // <aggregation>
-      end
-
-      classrelation 144770 // callbackConsumer (<unidirectional association>)
-	relation 144642 --->
-	  a role_name "callbackConsumer" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 144770 // callbackConsumer (<unidirectional association>)
-	  b parent class_ref 136707 // CallbackConsumer
-      end
-
-      attribute 137090 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137218 "connected"
-	private explicit_type "bool"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      classrelation 158722 // channelCtr (<unidirectional association>)
-	relation 158594 --->
-	  a role_name "channelCtr" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 158722 // channelCtr (<unidirectional association>)
-	  b parent class_ref 134787 // ChannelCtr
-      end
-
-      classrelation 152963 // <aggregation>
-	relation_ref 151043 // <aggregation>
-      end
-    end
-
-    class 128773 "ProxyForPushConsumerHelper"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 128389 "narrow"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 128901 "POA"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 148611 "the_POAManager().activate"
-	public explicit_return_type ""
-	nparams 0
-	
-	
-	
-	
-	
-      end
-
-      operation 148739 "servant_to_reference"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 129669 // <dependency>
-	relation 129157 -_->
-	  a default
-	    classrelation_ref 129669 // <dependency>
-	  b parent class_ref 129029 // POAHelper
-      end
-    end
-
-    class 129029 "POAHelper"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 148483 "narrow"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 134531 "ChannelAdminOperations"
-      visibility package stereotype "interface"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
-${members}}
-"
-      php_decl "${comment}interface ${name} {
-${members}}
-"
-      python_2_2 python_decl ""
-      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
-${members}};
-"
-      explicit_switch_type ""
-      
-    end
-
-    class 134659 "ChannelAdminCtr"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 134531 "ChannelAdminCtr"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "channel" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 134659 "createProxyForPushSupplier"
-	public return_type class_ref 136067 // ProxyForPushSupplier
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 134787 "createProxyForPushConsumer"
-	public return_type class_ref 136195 // ProxyForPushConsumer
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 129157 // <aggregation>
-	relation_ref 128773 // <aggregation>
-      end
-
-      classrelation 135043 // <dependency>
-	relation 134915 -_->
-	  a default
-	    classrelation_ref 135043 // <dependency>
-	  b parent class_ref 129029 // POAHelper
-      end
-
-      classrelation 135171 // <dependency>
-	relation 135043 -_->
-	  a default
-	    classrelation_ref 135171 // <dependency>
-	  b parent class_ref 128901 // POA
-      end
-
-      classrelation 135299 // <dependency>
-	relation 135171 -_->
-	  a default
-	    classrelation_ref 135299 // <dependency>
-	  b parent class_ref 128901 // POA
-      end
-
-      classrelation 135427 // <dependency>
-	relation 135299 -_->
-	  a default
-	    classrelation_ref 135427 // <dependency>
-	  b parent class_ref 129029 // POAHelper
-      end
-
-      classrelation 136323 // <dependency>
-	relation 135811 -_->
-	  a default
-	    classrelation_ref 136323 // <dependency>
-	  b parent class_ref 128773 // ProxyForPushConsumerHelper
-      end
-
-      classrelation 136451 // <dependency>
-	relation 135939 -_->
-	  a default
-	    classrelation_ref 136451 // <dependency>
-	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
-      end
-
-      classrelation 137347 // <dependency>
-	relation 136451 -_->
-	  a default
-	    classrelation_ref 137347 // <dependency>
-	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
-      end
-
-      classrelation 137475 // orb (<unidirectional association>)
-	relation 136579 --->
-	  a role_name "orb" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137475 // orb (<unidirectional association>)
-	  b parent class_ref 128130 // ORB
-      end
-
-      classrelation 138243 // channelCtr (<unidirectional association>)
-	relation 136963 --->
-	  a role_name "channelCtr" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 138243 // channelCtr (<unidirectional association>)
-	  b parent class_ref 134787 // ChannelCtr
-      end
-
-      classrelation 145155 // <dependency>
-	relation 143619 -_->
-	  a default
-	    classrelation_ref 145155 // <dependency>
-	  b parent class_ref 136195 // ProxyForPushConsumer
-      end
-
-      attribute 143747 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-    end
-
-    class 134787 "ChannelCtr"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 134915 "ChannelCtr"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135043 "getChannel"
-	public return_type class_ref 135811 // Channel
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135171 "setChannel"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "channelModel" type class_ref 135811 // Channel
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135299 "addProxyForPushConsumerToSubscribedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxyConsumer" type class_ref 128645 // ProxyForPushConsumerImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135427 "removeProxyForPushConsumerFromSubscribedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxyConsumer" type class_ref 135427 // ProxyForPushConsumerOperations
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135555 "addProxyForPushConsumerToConnectedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxyConsumer" type class_ref 128645 // ProxyForPushConsumerImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135683 "removeProxyForPushConsumerFromConnectedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxyConsumer" type class_ref 135427 // ProxyForPushConsumerOperations
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135939 "addProxyForPushSupplierToConnectedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 136067 "removeProxyForPushSupplierFromConnectedList"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 136323 "addEvent"
-	public explicit_return_type "void"
-	nparams 1
-	  param in name "e" type class_ref 136451 // Event
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 128901 // 
-	relation_ref 128645 // 
-      end
-
-      classrelation 130053 // <aggregation>
-	relation_ref 129413 // <aggregation>
-      end
-
-      classrelation 137987 // channel (<unidirectional association>)
-	relation 136835 --->
-	  a role_name "channel" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 137987 // channel (<unidirectional association>)
-	  b parent class_ref 135811 // Channel
-      end
-
-      classrelation 145667 // <dependency>
-	relation 144131 -_->
-	  a default
-	    classrelation_ref 145667 // <dependency>
-	  b parent class_ref 135811 // Channel
-      end
-    end
-
-    class 134915 "ThreadEvent"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 136451 "ThreadEvent"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "topic" explicit_type "string"
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 136579 "run"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 172674 // channel (<unidirectional association>)
-	relation 172546 --->
-	  a role_name "channel" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 172674 // channel (<unidirectional association>)
-	  b parent class_ref 135811 // Channel
-      end
-
-      classrelation 179202 // <realization>
-	relation 179074 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 179202 // <realization>
-	  b parent class_ref 136579 // Runnable
-      end
-
-      classrelation 152195 // <dependency>
-	relation 150659 -_->
-	  a default
-	    classrelation_ref 152195 // <dependency>
-	  b parent class_ref 128645 // ProxyForPushConsumerImpl
-      end
-
-      operation 165506 "processSubscribedConsumers"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 135043 "EventServerException"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
-
     class 135171 "BFFactory"
       visibility package stereotype "singleton"
       cpp_decl ""
@@ -1525,7 +325,7 @@ ${members}}
       end
     end
 
-    class 135299 "MessageListener"
+    class 136707 "CallbackConsumer"
       visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}interface ${name}${extends} {
@@ -1540,8 +340,12 @@ ${members}};
 "
       explicit_switch_type ""
       
-      operation 137859 "receive"
-	public explicit_return_type "void"
+      classrelation 130309 // <aggregation>
+	relation_ref 129541 // <aggregation>
+      end
+
+      operation 128261 "receive"
+	public explicit_return_type ""
 	nparams 1
 	  param in name "evt" type class_ref 136451 // Event
 	
@@ -1554,24 +358,7 @@ ${members}};
       end
     end
 
-    class 135427 "ProxyForPushConsumerOperations"
-      visibility package stereotype "interface"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
-${members}}
-"
-      php_decl "${comment}interface ${name} {
-${members}}
-"
-      python_2_2 python_decl ""
-      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
-${members}};
-"
-      explicit_switch_type ""
-      
-    end
-
-    class 135555 "ProxyForPushSupplierOperations"
+    class 144130 "CallbackConsumerOperations"
       visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -1582,9 +369,21 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 135557 "receive"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "evt" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
-    class 135683 "CosEventServer"
+    class 128261 "CallbackConsumerImpl"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -1595,23 +394,10 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 139523 "CosEventServer"
+      operation 128133 "receive"
 	public explicit_return_type ""
 	nparams 1
-	  param in name "args" explicit_type "string[]"
-	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 139651 "main"
-	class_operation public explicit_return_type "void"
-	nparams 1
-	  param in name "args" explicit_type "string[]"
+	  param in name "evt" type class_ref 136451 // Event
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
@@ -1621,13 +407,12 @@ ${members}}
 	
       end
 
-      classrelation 186626 // orb (<unidirectional association>)
-	relation 186114 --->
-	  a role_name "orb" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 186626 // orb (<unidirectional association>)
-	  b parent class_ref 128130 // ORB
+      classrelation 152066 // <realization>
+	relation 151938 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 152066 // <realization>
+	  b parent class_ref 144130 // CallbackConsumerOperations
       end
     end
 
@@ -1886,7 +671,163 @@ ${members}}
       end
     end
 
-    class 135939 "EventServer"
+    class 128642 "ChannelAdmin"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 165890 // <dependency>
+	relation 165762 -_->
+	  a default
+	    classrelation_ref 165890 // <dependency>
+	  b parent class_ref 128002 // EventClient
+      end
+    end
+
+    class 134659 "ChannelAdminCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 134531 "ChannelAdminCtr"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134659 "createProxyForPushSupplier"
+	public return_type class_ref 136067 // ProxyForPushSupplier
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 134787 "createProxyForPushConsumer"
+	public return_type class_ref 136195 // ProxyForPushConsumer
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 129157 // <aggregation>
+	relation_ref 128773 // <aggregation>
+      end
+
+      classrelation 135043 // <dependency>
+	relation 134915 -_->
+	  a default
+	    classrelation_ref 135043 // <dependency>
+	  b parent class_ref 129029 // POAHelper
+      end
+
+      classrelation 135171 // <dependency>
+	relation 135043 -_->
+	  a default
+	    classrelation_ref 135171 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      classrelation 135299 // <dependency>
+	relation 135171 -_->
+	  a default
+	    classrelation_ref 135299 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      classrelation 135427 // <dependency>
+	relation 135299 -_->
+	  a default
+	    classrelation_ref 135427 // <dependency>
+	  b parent class_ref 129029 // POAHelper
+      end
+
+      classrelation 136323 // <dependency>
+	relation 135811 -_->
+	  a default
+	    classrelation_ref 136323 // <dependency>
+	  b parent class_ref 128773 // ProxyForPushConsumerHelper
+      end
+
+      classrelation 136451 // <dependency>
+	relation 135939 -_->
+	  a default
+	    classrelation_ref 136451 // <dependency>
+	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
+      end
+
+      classrelation 137347 // <dependency>
+	relation 136451 -_->
+	  a default
+	    classrelation_ref 137347 // <dependency>
+	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
+      end
+
+      classrelation 137475 // orb (<unidirectional association>)
+	relation 136579 --->
+	  a role_name "orb" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 137475 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
+      end
+
+      classrelation 138243 // channelCtr (<unidirectional association>)
+	relation 136963 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138243 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
+      end
+
+      classrelation 145155 // <dependency>
+	relation 143619 -_->
+	  a default
+	    classrelation_ref 145155 // <dependency>
+	  b parent class_ref 136195 // ProxyForPushConsumer
+      end
+
+      attribute 143747 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 128389 "ChannelAdminCtrl"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -1899,8 +840,8 @@ ${members}}
       
     end
 
-    class 136067 "ProxyForPushSupplier"
-      visibility package stereotype "interface"
+    class 128770 "ChannelAdminHelper"
+      visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -1910,9 +851,135 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      operation 128770 "_narrow"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
-    class 136195 "ProxyForPushConsumer"
+    class 128517 "ChannelAdminImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 135939 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 137475 "ChannelAdminImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137603 "createProxyForPushSupplier"
+	public return_type class_ref 136067 // ProxyForPushSupplier
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 137731 "createProxyForPushConsumer"
+	public return_type class_ref 136195 // ProxyForPushConsumer
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 129797 // <dependency>
+	relation 129285 -_->
+	  a default
+	    classrelation_ref 129797 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      classrelation 130437 // <dependency>
+	relation 129669 -_->
+	  a default
+	    classrelation_ref 130437 // <dependency>
+	  b parent class_ref 135557 // ProxyForPushConsumerPOATie
+      end
+
+      classrelation 130565 // <dependency>
+	relation 129797 -_->
+	  a default
+	    classrelation_ref 130565 // <dependency>
+	  b parent class_ref 128773 // ProxyForPushConsumerHelper
+      end
+
+      classrelation 134915 // <realization>
+	relation 134787 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 134915 // <realization>
+	  b parent class_ref 134531 // ChannelAdminOperations
+      end
+
+      classrelation 145027 // <aggregation>
+	relation_ref 143491 // <aggregation>
+      end
+
+      classrelation 138114 // channelAdminCtr (<unidirectional association>)
+	relation 137986 --->
+	  a role_name "channelAdminCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 138114 // channelAdminCtr (<unidirectional association>)
+	  b parent class_ref 134659 // ChannelAdminCtr
+      end
+
+      classrelation 165378 // <dependency>
+	relation 165250 -_->
+	  a default
+	    classrelation_ref 165378 // <dependency>
+	  b parent class_ref 136195 // ProxyForPushConsumer
+      end
+
+      classrelation 165506 // <dependency>
+	relation 165378 -_->
+	  a default
+	    classrelation_ref 165506 // <dependency>
+	  b parent class_ref 136067 // ProxyForPushSupplier
+      end
+    end
+
+    class 134531 "ChannelAdminOperations"
       visibility package stereotype "interface"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}interface ${name}${extends} {
@@ -1927,16 +994,9 @@ ${members}};
 "
       explicit_switch_type ""
       
-      classrelation 145283 // <generalisation>
-	relation 143747 ---|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 145283 // <generalisation>
-	  b parent class_ref 135427 // ProxyForPushConsumerOperations
-      end
     end
 
-    class 136323 "ProxyForPushSupplierImpl"
+    class 134787 "ChannelCtr"
       visibility package 
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
@@ -1947,33 +1007,11 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 136579 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 136707 "connected"
-	private explicit_type "bool"
-	init_value "false"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      operation 139011 "ProxyForPushSupplierImpl"
+      operation 134915 "ChannelCtr"
 	public explicit_return_type ""
-	nparams 1
-	  param in name "channel" explicit_type "string"
+	nparams 0
 	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${)}${throws} {
   ${body}}
 "
 	
@@ -1981,8 +1019,8 @@ ${members}}
 	
       end
 
-      operation 139139 "connect"
-	public explicit_return_type "void"
+      operation 135043 "getChannel"
+	public return_type class_ref 135811 // Channel
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -1993,22 +1031,10 @@ ${members}}
 	
       end
 
-      operation 139267 "disconnect"
-	public explicit_return_type "void"
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 139395 "push"
+      operation 135171 "setChannel"
 	public explicit_return_type "void"
 	nparams 1
-	  param in name "evt" type class_ref 136451 // Event
+	  param in name "channelModel" type class_ref 135811 // Channel
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
@@ -2018,25 +1044,294 @@ ${members}}
 	
       end
 
-      classrelation 144898 // <realization>
-	relation 144770 -_-|>
-	  a public
-	    java "${type}"
-	    classrelation_ref 144898 // <realization>
-	  b parent class_ref 135555 // ProxyForPushSupplierOperations
+      operation 135299 "addProxyForPushConsumerToSubscribedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxyConsumer" type class_ref 128645 // ProxyForPushConsumerImpl
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
 
-      classrelation 158850 // channelCtr (<unidirectional association>)
-	relation 158722 --->
-	  a role_name "channelCtr" multiplicity "1" private
+      operation 135427 "removeProxyForPushConsumerFromSubscribedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxyConsumer" type class_ref 135427 // ProxyForPushConsumerOperations
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135555 "addProxyForPushConsumerToConnectedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxyConsumer" type class_ref 128645 // ProxyForPushConsumerImpl
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135683 "removeProxyForPushConsumerFromConnectedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxyConsumer" type class_ref 135427 // ProxyForPushConsumerOperations
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135939 "addProxyForPushSupplierToConnectedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136067 "removeProxyForPushSupplierFromConnectedList"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "proxySupplier" type class_ref 136323 // ProxyForPushSupplierImpl
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136323 "addEvent"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "e" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128901 // 
+	relation_ref 128645 // 
+      end
+
+      classrelation 130053 // <aggregation>
+	relation_ref 129413 // <aggregation>
+      end
+
+      classrelation 137987 // channel (<unidirectional association>)
+	relation 136835 --->
+	  a role_name "channel" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 158850 // channelCtr (<unidirectional association>)
-	  b parent class_ref 134787 // ChannelCtr
+	    classrelation_ref 137987 // channel (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
       end
 
-      classrelation 152707 // <aggregation>
-	relation_ref 150915 // <aggregation>
+      classrelation 145667 // <dependency>
+	relation 144131 -_->
+	  a default
+	    classrelation_ref 145667 // <dependency>
+	  b parent class_ref 135811 // Channel
+      end
+    end
+
+    class 134660 "ChannelPublisher"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 135428 "publish"
+	class_operation public explicit_return_type ""
+	nparams 2
+	  param in name "channelAdminImpl" type class_ref 128517 // ChannelAdminImpl
+	  param in name "orb" type class_ref 128130 // ORB
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 135556 "destroy"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 134788 // <unidirectional association>
+	relation 134788 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134788 // <unidirectional association>
+	  b parent class_ref 134915 // ThreadEvent
+      end
+    end
+
+    class 128514 "Client"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 128005 "Consumer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128005 "main"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128133 // <dependency>
+	relation 128133 -_->
+	  a default
+	    classrelation_ref 128133 // <dependency>
+	  b parent class_ref 128261 // CallbackConsumerImpl
+      end
+
+      classrelation 134659 // <dependency>
+	relation 134531 -_->
+	  a default
+	    classrelation_ref 134659 // <dependency>
+	  b parent class_ref 128517 // ChannelAdminImpl
+      end
+
+      classrelation 145411 // <dependency>
+	relation 143875 -_->
+	  a default
+	    classrelation_ref 145411 // <dependency>
+	  b parent class_ref 128645 // ProxyForPushConsumerImpl
+      end
+
+      classrelation 151810 // ec (<unidirectional association>)
+	relation 151682 --->
+	  a role_name "ec" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 151810 // ec (<unidirectional association>)
+	  b parent class_ref 128002 // EventClient
+      end
+
+      classrelation 165762 // <dependency>
+	relation 165634 -_->
+	  a default
+	    classrelation_ref 165762 // <dependency>
+	  b parent class_ref 128642 // ChannelAdmin
+      end
+
+      classrelation 166146 // <dependency>
+	relation 166018 -_->
+	  a default
+	    classrelation_ref 166146 // <dependency>
+	  b parent class_ref 136195 // ProxyForPushConsumer
+      end
+    end
+
+    class 135683 "CosEventServer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 139523 "CosEventServer"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "args" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139651 "main"
+	class_operation public explicit_return_type "void"
+	nparams 1
+	  param in name "args" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 186626 // orb (<unidirectional association>)
+	relation 186114 --->
+	  a role_name "orb" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 186626 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
       end
     end
 
@@ -2072,58 +1367,8 @@ ${members}}
       end
     end
 
-    class 136579 "Runnable"
-      visibility package stereotype "interface"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
-${members}}
-"
-      php_decl "${comment}interface ${name} {
-${members}}
-"
-      python_2_2 python_decl ""
-      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
-${members}};
-"
-      explicit_switch_type ""
-      
-    end
-
-    class 136707 "CallbackConsumer"
-      visibility package stereotype "interface"
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
-${members}}
-"
-      php_decl "${comment}interface ${name} {
-${members}}
-"
-      python_2_2 python_decl ""
-      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
-${members}};
-"
-      explicit_switch_type ""
-      
-      classrelation 130309 // <aggregation>
-	relation_ref 129541 // <aggregation>
-      end
-
-      operation 128261 "receive"
-	public explicit_return_type ""
-	nparams 1
-	  param in name "evt" type class_ref 136451 // Event
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-    end
-
-    class 144130 "CallbackConsumerOperations"
-      visibility package stereotype "interface"
+    class 128002 "EventClient"
+      visibility package stereotype "singleton"
       cpp_decl ""
       java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
 ${members}}
@@ -2133,10 +1378,10 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      operation 135557 "receive"
-	public explicit_return_type ""
+      operation 128002 "init"
+	class_operation public return_type class_ref 128002 // EventClient
 	nparams 1
-	  param in name "evt" type class_ref 136451 // Event
+	  param in name "args" explicit_type "string[]"
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
@@ -2145,88 +1390,61 @@ ${members}}
 	
 	
       end
-    end
 
-    class 143235 "Supplier"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
+      operation 128130 "resolveChannelByTopic"
+	public return_type class_ref 128642 // ChannelAdmin
+	nparams 1
+	  param in name "topic" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
 "
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      classrelation 134787 // <dependency>
-	relation 134659 -_->
-	  a package
-	    classrelation_ref 134787 // <dependency>
-	  b parent class_ref 128517 // ChannelAdminImpl
+	
+	
+	
       end
 
-      classrelation 152194 // ec (<unidirectional association>)
-	relation 152066 --->
-	  a role_name "ec" multiplicity "1" private
+      classrelation 128258 // orb (<unidirectional association>)
+	relation 128130 --->
+	  a role_name "orb" multiplicity "1" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 152194 // ec (<unidirectional association>)
-	  b parent class_ref 128002 // EventClient
+	    classrelation_ref 128258 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
       end
 
-      operation 152322 "main"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
+      classrelation 128386 // <unidirectional association>
+	relation 128258 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	
-	
-	
+	    classrelation_ref 128386 // <unidirectional association>
+	  b parent class_ref 128258 // NamingContextExt
       end
 
-      classrelation 165634 // <dependency>
-	relation 165506 -_->
+      classrelation 128514 // <dependency>
+	relation 128386 -_->
 	  a default
-	    classrelation_ref 165634 // <dependency>
+	    classrelation_ref 128514 // <dependency>
 	  b parent class_ref 128642 // ChannelAdmin
       end
 
-      classrelation 166018 // <dependency>
-	relation 165890 -_->
+      classrelation 128642 // <dependency>
+	relation 128514 -_->
 	  a default
-	    classrelation_ref 166018 // <dependency>
-	  b parent class_ref 136067 // ProxyForPushSupplier
+	    classrelation_ref 128642 // <dependency>
+	  b parent class_ref 128770 // ChannelAdminHelper
       end
-    end
 
-    class 143363 "ProxyForPushSupplierPOATie"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
+      classrelation 128770 // <dependency>
+	relation 128642 -_->
+	  a default
+	    classrelation_ref 128770 // <dependency>
+	  b parent class_ref 128386 // NamingContextExtHelper
+      end
 
-    class 143491 "ProxyForPushSupplierHelper"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 148867 "narrow"
-	class_operation public explicit_return_type ""
+      operation 161923 "serveCallbackConsumer"
+	public explicit_return_type ""
 	nparams 0
 	
 	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
@@ -2236,56 +1454,62 @@ ${members}}
 	
 	
       end
-    end
 
-    class 135557 "ProxyForPushConsumerPOATie"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-    end
+      classrelation 145154 // <dependency>
+	relation 145026 -_->
+	  a default
+	    classrelation_ref 145154 // <dependency>
+	  b parent class_ref 144130 // CallbackConsumerOperations
+      end
 
-    class 150658 "Thread"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
+      classrelation 145282 // instance (<unidirectional association>)
+	relation 145154 --->
+	  a role_name "instance" multiplicity "1" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 158850 "Thread"
+	    classrelation_ref 145282 // instance (<unidirectional association>)
+	  b parent class_ref 128002 // EventClient
+      end
+
+      classrelation 151938 // <dependency>
+	relation 151810 -_->
+	  a default
+	    classrelation_ref 151938 // <dependency>
+	  b parent class_ref 136707 // CallbackConsumer
+      end
+
+      classrelation 137477 // <dependency>
+	relation 136581 -_->
+	  a default
+	    classrelation_ref 137477 // <dependency>
+	  b parent class_ref 128901 // POA
+      end
+
+      operation 142085 "resolveEventServerChannelAdminByServerName"
 	public explicit_return_type ""
 	nparams 1
-	  param in name "runnable" type class_ref 136579 // Runnable
+	  param in name "serverName" explicit_type "string"
 	
-	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
   ${body}}
 "
 	
 	
 	
       end
+    end
 
-      operation 158978 "start"
-	public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
+    class 135939 "EventServer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
 "
-	
-	
-	
-      end
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
     end
 
     class 142085 "EventServerChannelAdmin"
@@ -2299,6 +1523,84 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 142341 "EventServerChannelAdminCtr"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 134661 "eventServerName"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135045 "orb"
+	private type class_ref 128130 // ORB
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 144645 // <unidirectional association>
+	relation 143749 --->
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144645 // <unidirectional association>
+	  b parent class_ref 128130 // ORB
+      end
+
+      classrelation 144901 // <aggregation>
+	relation_ref 143877 // <aggregation>
+      end
+
+      classrelation 134916 // <unidirectional association>
+	relation 134916 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134916 // <unidirectional association>
+	  b parent class_ref 134660 // ChannelPublisher
+      end
+    end
+
+    class 150019 "EventServerChannelAdminHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 174979 "_narrow"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 142213 "EventServerChannelAdminImpl"
@@ -2413,60 +1715,6 @@ ${members}}
       end
     end
 
-    class 142341 "EventServerChannelAdminCtr"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      attribute 134661 "eventServerName"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135045 "orb"
-	private type class_ref 128130 // ORB
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      classrelation 144645 // <unidirectional association>
-	relation 143749 --->
-	  a role_name "" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 144645 // <unidirectional association>
-	  b parent class_ref 128130 // ORB
-      end
-
-      classrelation 144901 // <aggregation>
-	relation_ref 143877 // <aggregation>
-      end
-
-      classrelation 134916 // <unidirectional association>
-	relation 134916 --->
-	  a role_name "" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 134916 // <unidirectional association>
-	  b parent class_ref 134660 // ChannelPublisher
-      end
-    end
-
     class 142469 "EventChannelAdminOperations"
       visibility package 
       cpp_decl ""
@@ -2478,6 +1726,829 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 135043 "EventServerException"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 135299 "MessageListener"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      operation 137859 "receive"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "evt" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128258 "NamingContextExt"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128386 "resolve_str"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128386 "NamingContextExtHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128258 "_narrow"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128130 "ORB"
+      visibility package stereotype "singleton"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128514 "resolve_initial_references"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 128642 "init"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128901 "POA"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 148611 "the_POAManager().activate"
+	public explicit_return_type ""
+	nparams 0
+	
+	
+	
+	
+	
+      end
+
+      operation 148739 "servant_to_reference"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 129669 // <dependency>
+	relation 129157 -_->
+	  a default
+	    classrelation_ref 129669 // <dependency>
+	  b parent class_ref 129029 // POAHelper
+      end
+    end
+
+    class 129029 "POAHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 148483 "narrow"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 128133 "ProxyPushConsumer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 136195 "ProxyForPushConsumer"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      classrelation 145283 // <generalisation>
+	relation 143747 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 145283 // <generalisation>
+	  b parent class_ref 135427 // ProxyForPushConsumerOperations
+      end
+    end
+
+    class 128645 "ProxyForPushConsumerImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 138115 "ProxyForPushConsumerImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138243 "subscribe"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "cc" type class_ref 136707 // CallbackConsumer
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138371 "unsubscribe"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138499 "connect"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138627 "disconnect"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 138755 "receive"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "evt" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 128261 // <realization>
+	relation 128261 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128261 // <realization>
+	  b parent class_ref 135299 // MessageListener
+      end
+
+      classrelation 128389 // <realization>
+	relation 128389 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 128389 // <realization>
+	  b parent class_ref 135427 // ProxyForPushConsumerOperations
+      end
+
+      classrelation 129925 // <aggregation>
+	relation 129413 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 129925 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130053 // <aggregation>
+      end
+
+      classrelation 130181 // <aggregation>
+	relation 129541 o---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130181 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 130309 // <aggregation>
+      end
+
+      classrelation 144770 // callbackConsumer (<unidirectional association>)
+	relation 144642 --->
+	  a role_name "callbackConsumer" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 144770 // callbackConsumer (<unidirectional association>)
+	  b parent class_ref 136707 // CallbackConsumer
+      end
+
+      attribute 137090 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 137218 "connected"
+	private explicit_type "bool"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 158722 // channelCtr (<unidirectional association>)
+	relation 158594 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158722 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
+      end
+
+      classrelation 152963 // <aggregation>
+	relation_ref 151043 // <aggregation>
+      end
+    end
+
+    class 128773 "ProxyForPushConsumerHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 128389 "narrow"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 135427 "ProxyForPushConsumerOperations"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 135557 "ProxyForPushConsumerPOATie"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 136067 "ProxyForPushSupplier"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 143491 "ProxyForPushSupplierHelper"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 148867 "narrow"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136323 "ProxyForPushSupplierImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 136579 "channel"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 136707 "connected"
+	private explicit_type "bool"
+	init_value "false"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 139011 "ProxyForPushSupplierImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "channel" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139139 "connect"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139267 "disconnect"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 139395 "push"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "evt" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 144898 // <realization>
+	relation 144770 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 144898 // <realization>
+	  b parent class_ref 135555 // ProxyForPushSupplierOperations
+      end
+
+      classrelation 158850 // channelCtr (<unidirectional association>)
+	relation 158722 --->
+	  a role_name "channelCtr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 158850 // channelCtr (<unidirectional association>)
+	  b parent class_ref 134787 // ChannelCtr
+      end
+
+      classrelation 152707 // <aggregation>
+	relation_ref 150915 // <aggregation>
+      end
+    end
+
+    class 135555 "ProxyForPushSupplierOperations"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 143363 "ProxyForPushSupplierPOATie"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+
+    class 134532 "RandomChannelIdentifier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 134532 "getUniqueIdentifier"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 136579 "Runnable"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 143235 "Supplier"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 134787 // <dependency>
+	relation 134659 -_->
+	  a package
+	    classrelation_ref 134787 // <dependency>
+	  b parent class_ref 128517 // ChannelAdminImpl
+      end
+
+      classrelation 152194 // ec (<unidirectional association>)
+	relation 152066 --->
+	  a role_name "ec" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 152194 // ec (<unidirectional association>)
+	  b parent class_ref 128002 // EventClient
+      end
+
+      operation 152322 "main"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 165634 // <dependency>
+	relation 165506 -_->
+	  a default
+	    classrelation_ref 165634 // <dependency>
+	  b parent class_ref 128642 // ChannelAdmin
+      end
+
+      classrelation 166018 // <dependency>
+	relation 165890 -_->
+	  a default
+	    classrelation_ref 166018 // <dependency>
+	  b parent class_ref 136067 // ProxyForPushSupplier
+      end
+    end
+
+    class 150658 "Thread"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 158850 "Thread"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "runnable" type class_ref 136579 // Runnable
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 158978 "start"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 134915 "ThreadEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 136451 "ThreadEvent"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "topic" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 136579 "run"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 172674 // channel (<unidirectional association>)
+	relation 172546 --->
+	  a role_name "channel" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 172674 // channel (<unidirectional association>)
+	  b parent class_ref 135811 // Channel
+      end
+
+      classrelation 179202 // <realization>
+	relation 179074 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 179202 // <realization>
+	  b parent class_ref 136579 // Runnable
+      end
+
+      classrelation 152195 // <dependency>
+	relation 150659 -_->
+	  a default
+	    classrelation_ref 152195 // <dependency>
+	  b parent class_ref 128645 // ProxyForPushConsumerImpl
+      end
+
+      operation 165506 "processSubscribedConsumers"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
   end
 
@@ -2527,59 +2598,7 @@ ${members}}
       overlapping_bars size A4-Landscape
     end
 
-    classdiagram 134661 "A virer je pense - DCCD - UC02 L'abonnement par un Consumer"
-      draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition no show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
-      size A4
-    end
-
-    class 134660 "ChannelPublisher"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      operation 135428 "publish"
-	class_operation public explicit_return_type ""
-	nparams 2
-	  param in name "channelAdminImpl" type class_ref 128517 // ChannelAdminImpl
-	  param in name "orb" type class_ref 128130 // ORB
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      operation 135556 "destroy"
-	class_operation public explicit_return_type ""
-	nparams 0
-	
-	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
-  ${body}}
-"
-	
-	
-	
-      end
-
-      classrelation 134788 // <unidirectional association>
-	relation 134788 --->
-	  a role_name "" multiplicity "1" private
-	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	    classrelation_ref 134788 // <unidirectional association>
-	  b parent class_ref 134915 // ThreadEvent
-      end
-    end
-
-    sequencediagram 147717 "DSCD - UC07 Administration d'un Channel 0b"
+    sequencediagram 147717 "DSCD - UC07 Administration d'un Channel"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4
     end
