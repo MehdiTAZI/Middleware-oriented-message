@@ -19,7 +19,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
  * BFFactory : allow to get instances of Channel, ChannelCtr,ChannelAdminImpl
- * and ChannelCtr identified by the channel topic.
+ * and ChannelAdminCtr identified by the channel topic.
  * 
  * UC n°: US14,US15 (+US children)
  * 
@@ -65,7 +65,7 @@ public class BFFactory {
     }
 
     /**
-     * Create and publich a ChannelImpl and associated ChannelCtr et Channel
+     * Create and publish a ChannelImpl and associated ChannelCtr and Channel
      * entity from the channel topic.
      * 
      * @param topic
