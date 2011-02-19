@@ -2,10 +2,27 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.Comparator;
 
+/**
+ * Utility Class for priority comparison between events
+ * 
+ * Override a compare method
+ * 
+ * UC n°: CI14 (FURPS)
+ * 
+ * @author Mezzo-Team
+ * 
+ */
+
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 public class PriorityEventComparator implements Comparator<Event> {
 
+	/**
+     * Compare two events.
+     * 
+     * @param Event 1 and Event 2
+     *            Events to compare.
+     */
 	@Override
 	public synchronized int compare(Event evt1, Event evt2) {
 		

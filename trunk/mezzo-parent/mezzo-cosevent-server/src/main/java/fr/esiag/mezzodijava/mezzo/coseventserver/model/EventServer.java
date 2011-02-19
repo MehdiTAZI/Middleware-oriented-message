@@ -6,7 +6,7 @@ import java.util.List;
 /**
  * Entity Class EventServer
  * 
- * For storign server level datas and Channels list.
+ * For storing server level datas and Channels list.
  * 
  * UC n°: US10
  * 
@@ -14,9 +14,7 @@ import java.util.List;
  * 
  */
 public class EventServer {
-    /*
-     * Auteur : MTA
-     */
+    
     private List<Channel> channels = new ArrayList<Channel>();
 
     /**
