@@ -55,7 +55,7 @@ public class AppSensorSupplier
 			String str = reader.readLine();          // lecture du message ligne par ligne
 			if (str.equals("END")) break;
 			System.out.println(str);
-			header=new Header(123, 1, new Date().getTime(), 120);
+			header=new Header(123, 1, new Date().getTime(), (int)(Math.random()*1000)+500);
 			body=new Body(str);
 			
 			Event e = new Event(header,body);
@@ -70,7 +70,7 @@ public class AppSensorSupplier
 			
 			String data = eventInfo.getCode()+"/"+eventInfo.getType()+"/"+eventInfo.getData();
 			
-			header=new Header(64663, (int)(Math.random()*100)+1, new Date().getTime(), 120);
+			header=new Header(64663, (int)(Math.random()*100)+1, new Date().getTime(), (int)(Math.random()*1000)+500);
 			
 			System.out.println("RANDOM:  "+header.priority);
 			body=new Body(data);

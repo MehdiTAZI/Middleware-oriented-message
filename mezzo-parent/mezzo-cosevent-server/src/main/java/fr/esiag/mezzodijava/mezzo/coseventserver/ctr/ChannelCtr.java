@@ -14,6 +14,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.SortedSet;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -46,10 +47,10 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	private Channel channel;
 	
 	
-	//REDA: a voir
-//	private Date synchronizedDate=new Date();		
-//	private ThreadRemoveExpiredEvent threadRemoveExpiredEvent;
-//	private ThreadTimestampingEvent threadTimestampingEvent;
+	
+	private Date synchronizedDate=new Date();		
+	private ThreadRemoveExpiredEvent threadRemoveExpiredEvent;
+	private ThreadTimestampingEvent threadTimestampingEvent;
 	
 	
 	/**
@@ -60,13 +61,13 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 *            Channel name
 	 */
 	public ChannelCtr(String topic) {
-		this.channel = BFFactory.createChannelEntity(topic, 0);
+		this.channel = BFFactory.createChannelEntity(topic, 0);					
+		//threadRemoveExpiredEvent=new ThreadRemoveExpiredEvent(channel.getQueueEvents(),this.synchronizedDate);
 		
-		//REDA :a voir
-		/*threadRemoveExpiredEvent=new ThreadRemoveExpiredEvent();
-		threadTimestampingEvent=new ThreadTimestampingEvent();
-		threadRemoveExpiredEvent.setDate(synchronizedDate);
-		threadTimestampingEvent.setDate(synchronizedDate);*/
+		//threadTimestampingEvent=new ThreadTimestampingEvent();
+	
+		//threadTimestampingEvent.setDate(synchronizedDate);
+		//QueueGarbageCollector();
 	}
 
 	/**
@@ -262,12 +263,23 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	synchronized public void QueueGarbageCollector(){
 		
 		
-		/*while(true){
-			threadRemoveExpiredEvent.setQueue(channel.getQueueEvents());			
-			threadRemoveExpiredEvent.run();
-			threadTimestampingEvent.setQueue(channel.getQueueEvents());			
-			threadTimestampingEvent.run();
-		}*/
+		
+			threadRemoveExpiredEvent.setQueue(channel.getQueueEvents());
+			Thread th=new Thread(threadRemoveExpiredEvent);
+			
+			th.start();
+			//threadTimestampingEvent.setQueue(channel.getQueueEvents());			
+			//threadTimestampingEvent.run();
+		
 	}
 
+	public Date getSynchronizedDate() {
+		return synchronizedDate;
+	}
+
+	public void setSynchronizedDate(Date synchronizedDate) {
+		this.synchronizedDate = synchronizedDate;
+	}
+
+	
 }

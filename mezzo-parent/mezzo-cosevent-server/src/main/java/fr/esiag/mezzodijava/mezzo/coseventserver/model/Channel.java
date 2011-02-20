@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.concurrent.PriorityBlockingQueue;
 
 
@@ -50,14 +52,13 @@ public class Channel {
     
     private Comparator<Event> comparator=new PriorityEventComparator();
     
-    private PriorityQueue<Event> queueEvents;
-    
+    private SortedSet<Event> queueEvents;
+   
     public Channel(String topic, int capacity) {
 		this.topic = topic;
 		this.capacity = capacity;
-		this.identifier=RandomChannelIdentifier.getUniqueIdentifier();
-		//listeEvents=new PriorityQueue<Event>();
-		queueEvents=new PriorityQueue<Event>(CAPACITY_QUEUE,comparator);
+		this.identifier=RandomChannelIdentifier.getUniqueIdentifier();		
+		queueEvents=new TreeSet<Event>(comparator);
 		
     }
 
@@ -206,11 +207,11 @@ public class Channel {
     	
     }*/
 
-	public PriorityQueue<Event> getQueueEvents() {
+	public SortedSet<Event> getQueueEvents() {
 		return queueEvents;
 	}
 
-	public void setQueueEvents(PriorityQueue<Event> listeEvents) {
+	public void setQueueEvents(SortedSet<Event> listeEvents) {
 		this.queueEvents = listeEvents;
 	}
     

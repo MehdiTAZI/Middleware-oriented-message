@@ -87,6 +87,7 @@ public class CosEventServer {
 //		System.out.println(arg);
 			
 	orb = BFFactory.createOrb(args, props);
+	
 	/*
 	 * orb = ORB.init(args, props); Channel channel = new
 	 * Channel(channelName);
@@ -104,7 +105,7 @@ public class CosEventServer {
 	//ChannelPublisher.publish(channelAdminImpl, orb);
 	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl(eventServerName);
 	
-
+	
 	//ThreadEvent th = new ThreadEvent(channelName);
 	//Thread thread = new Thread(th);
 	//thread.start();
