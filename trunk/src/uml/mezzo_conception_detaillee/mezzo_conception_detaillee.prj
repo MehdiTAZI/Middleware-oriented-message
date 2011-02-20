@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 46
-  modified_by 3 "Fabrice"
+  revision 47
+  modified_by 4 "michael"
 
 
   
@@ -56,6 +56,88 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    class 141188 "Header"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 141700 // <composition>
+	relation_ref 141572 // <composition>
+      end
+
+      attribute 134660 "code"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134788 "priority"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134916 "timeStamp"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135044 "date"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+    end
+
+    class 141316 "Body"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 134532 "content"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 141956 // <composition>
+	relation_ref 141700 // <composition>
+      end
+    end
+
     class 135171 "BFFactory"
       visibility package stereotype "singleton"
       cpp_decl ""
@@ -171,7 +253,7 @@ ${members}}
 	  b role_name "" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	    classrelation_ref 128901 // 
+	    classrelation_ref 128901 // ()
       end
 
       classrelation 129029 // mapChannelAdminCtr (<aggregation>)
@@ -669,6 +751,51 @@ ${members}}
 	    classrelation_ref 135044 // <unidirectional association>
 	  b parent class_ref 134660 // ChannelPublisher
       end
+
+      attribute 135172 "identifier"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 142084 // <aggregation>
+	relation 141828 o---
+	  stereotype "set"
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142084 // <aggregation>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142212 // <aggregation>
+      end
+
+      classrelation 142340 // <unidirectional association>
+	relation 141956 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142340 // <unidirectional association>
+	  b parent class_ref 136451 // Event
+      end
+
+      classrelation 142468 // queueEvents (<association>)
+	relation 142084 ----
+	  stereotype "PriorityQueue"
+	  a role_name "queueEvents" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142468 // queueEvents (<association>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 142596 // <association>
+      end
     end
 
     class 128642 "ChannelAdmin"
@@ -1135,7 +1262,7 @@ ${members}}
 	
       end
 
-      classrelation 128901 // 
+      classrelation 128901 // ()
 	relation_ref 128645 // 
       end
 
@@ -1346,24 +1473,32 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 128002 "timestap"
-	private explicit_type "long"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 141572 // <composition>
+	relation 141572 *---
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
+	    classrelation_ref 141572 // <composition>
+	  b role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 141700 // <composition>
       end
 
-      attribute 128130 "content"
-	private explicit_type ""
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+      classrelation 141828 // <composition>
+	relation 141700 *---
+	  a role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
-	php_decl ""
-	python_decl ""
-	idl_decl ""
+	    classrelation_ref 141828 // <composition>
+	  b role_name "" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 141956 // <composition>
+      end
+
+      classrelation 142596 // <association>
+	relation_ref 142084 // <association>
       end
     end
 
@@ -2122,6 +2257,10 @@ ${members}}
 
       classrelation 152963 // <aggregation>
 	relation_ref 151043 // <aggregation>
+      end
+
+      classrelation 142212 // <aggregation>
+	relation_ref 141828 // <aggregation>
       end
     end
 
