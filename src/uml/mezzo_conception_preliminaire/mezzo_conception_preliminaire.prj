@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_preliminaire"
-  revision 39
-  modified_by 5 "reda"
+  revision 40
+  modified_by 4 "michael"
 
 
   
@@ -169,6 +169,30 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      classrelation 134532 // <composition>
+	relation 134532 *---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134532 // <composition>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134660 // <composition>
+      end
+
+      classrelation 134788 // <composition>
+	relation 134660 *---
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134788 // <composition>
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 134916 // <composition>
       end
     end
 
