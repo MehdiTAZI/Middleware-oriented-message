@@ -8,6 +8,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadRemoveExpiredEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
@@ -40,6 +41,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 */
 	public ProxyForPushSupplierImpl(String topic) {
 		channelCtr = BFFactory.createChannelCtr(topic);
+		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
+		Thread thread=new Thread(th);
+		thread.start();
 	}
 
 	/**
@@ -87,24 +91,16 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 */
 	@Override
 	public void push(Event evt) throws NotConnectedException {
+		
 		if (!connected) {
 			throw new NotConnectedException();
 		}
 
-		//channelCtr.addEvent(evt);
-		channelCtr.getChannel().getQueueEvents().add(evt);
-		
-		//Event ev=null;
-		//int nbr=channelCtr.getChannel().getQueueEvents().size();
-//		if(channelCtr.getChannel().getQueueEvents().size() > 10){
-//			PriorityQueue<Event> tmp=channelCtr.getChannel().getQueueEvents();	
-//		 while(--nbr==0){
-//			 ev=tmp.element();
-//		       System.out.println("QUEUE CAPACITY --> " + ev.content + " "+ev.priority );
-//		 }
-//		}
-
-
+		channelCtr.addEvent(evt);
+		if(evt.header.date  <= channelCtr.getSynchronizedDate().getTime() && evt.header.date  >= channelCtr.getSynchronizedDate().getTime()+20){
+			evt.header.date=channelCtr.getSynchronizedDate().getTime();
+			channelCtr.getChannel().getQueueEvents().add(evt);
+		}
 
 	}
 
@@ -112,8 +108,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	
 	public void afficher(){
 				
-			for(int i=0;i<20;i++)				
-				System.out.println("QUEUE CAPACITY --> " + channelCtr.getChannel().getQueueEvents().remove().body.content +  "        priority : " + channelCtr.getChannel().getQueueEvents().element().header.priority);								
+			for(Event e: channelCtr.getChannel().getQueueEvents()){				
+				System.out.println("QUEUE CAPACITY --> " + e.body.content +  "        priority : " + e.header.priority);				
+			}
 
 	}
 }

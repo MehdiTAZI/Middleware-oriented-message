@@ -45,7 +45,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,
      *            Channel Topic.
      */
     public ProxyForPushConsumerImpl(String topic) {
-	this.channelCtr = BFFactory.createChannelCtr(topic);
+	this.channelCtr = BFFactory.createChannelCtr(topic);	
     }
 
     /**
