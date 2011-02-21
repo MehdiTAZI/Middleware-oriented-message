@@ -12,8 +12,8 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 public class TimeServicePublisher {
 	private static  Thread thread;
 	
-	public static void publish(String name,TimeServiceImpl timeService,ORB orb){
-		ThreadTime tt=new ThreadTime(timeService.getCtr().getModel());
+	public static void publish(String name,TimeServiceImpl timeService,ORB orb,long TimeSpan){
+		ThreadTime tt=new ThreadTime(timeService.getCtr().getModel(),TimeSpan);
 		thread = new Thread(tt);
 		thread.start();
 		try{
@@ -25,6 +25,9 @@ public class TimeServicePublisher {
 		}catch(Exception e){
 			System.out.println(e.getMessage());
 		}
+	}
+	public static void publish(String name,TimeServiceImpl timeService,ORB orb){
+		publish(name,timeService,orb,1000);
 	}
 	public static void destroy(){
 		thread.stop();
