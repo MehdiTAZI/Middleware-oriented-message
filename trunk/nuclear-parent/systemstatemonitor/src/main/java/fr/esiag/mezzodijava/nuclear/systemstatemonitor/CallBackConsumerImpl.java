@@ -30,32 +30,11 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		if (eventInfo.isAlerte())
 			supplier.PushEvent(e);
 		
-		/*int eventCode = eventInfo.getCode();
-		String eventType = eventInfo.getType();
-		EventInfoPK pk = new EventInfoPK(e.timestamp,eventCode,eventType);
-		
-		EventInfo storedEventInfo= dbConnector.find(pk);
-		
-		if (storedEventInfo!=null)
-		{
-			if(! storedEventInfo.getData().equals(eventInfo.getData()))
-			{*/
-				supplier.PushEvent(e);
-			/*}
-		}
-		else//if it's the first time that we receive this event
-		{
-			//So Push this event !
-			supplier.PushEvent(e);
-		}*/
-			
 		//persist the event on the database
 		//dbConnector.persist(eventInfo);
 		
-		System.out.println("Message archivé timestamp:" + e.header.timestamp
-				+ ", contenu" + e.body.content);
-
-		
+		/*System.out.println("Message archivé timestamp:" + e.header.timestamp
+				+ ", contenu" + e.body.content);	*/
 	}
 
 }

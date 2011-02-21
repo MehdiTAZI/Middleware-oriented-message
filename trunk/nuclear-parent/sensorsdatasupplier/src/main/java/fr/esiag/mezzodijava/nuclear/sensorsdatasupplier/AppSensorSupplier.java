@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
-import java.util.Random;
+import java.util.StringTokenizer;
 
 import org.omg.CORBA.ORB;
 
@@ -23,14 +23,38 @@ import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
-
-
 public class AppSensorSupplier 
 {
 	private static ORB orb;
+	
+	private static Event createMessage (String s){
+		Header head = null;
+		Body body = new Body(""); 
+		long code = 0;
+		
+		StringTokenizer st= new StringTokenizer(s,"/");
+		
+		if(st.hasMoreElements())
+			code = Long.parseLong(st.nextToken());
+		else
+			System.err.println("miss-formed Event Structure : can't find code element");
+		if(st.hasMoreElements())
+			body.content = st.nextToken()+"|";
+		else
+			System.err.println("miss-formed Event Structure : can't find type element");
+		if(st.hasMoreElements())
+			body.content += st.nextToken();
+		else
+			System.err.println("miss-formed Event Structure : can't find data element");
+		
+		head=new Header(42, 1, new Date().getTime(), (int)(Math.random()*1000)+500);
+		Event e = new Event(head,body);
+		return e;
+	}
+	
 	public static void main( String[] args ) throws NumberFormatException, IOException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException, EventClientException, TopicNotFoundException, NotConnectedException
 	{
-	    	System.out.println("Nuclear Sensors Data Supplier creation...");
+	    
 		EventClient ec = EventClient.init(null);
 		orb = ec.getOrb();
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
@@ -38,46 +62,27 @@ public class AppSensorSupplier
 		ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier();
 		System.out.println("Done.");
+		
 		System.out.println("Nuclear Sensors Data Supplier connection...");
 		supplierProxy.connect();
 		System.out.println("Done.");
 		ServerSocket socketServer = new ServerSocket(9191);
 		System.out.println("Waiting for sensor...");
+		//accept permet d'accepter les connexions client
 		Socket socketClient = socketServer.accept();
 		System.out.println("Connected sensor !!!!!");
-		//accept permet d'accepter les connexions client
 		// Un BufferedReader permet de lire les message envoyer par le client.
 		BufferedReader reader = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-		Random r=new Random();
-		Header header=null;
-		Body body=null;
+		
 		while (true) {
-			String str = reader.readLine();          // lecture du message ligne par ligne
+			// lecture du message ligne par ligne
+			String str = reader.readLine();   
 			if (str.equals("END")) break;
 			System.out.println(str);
-			header=new Header(123, 1, new Date().getTime(), (int)(Math.random()*1000)+500);
-			body=new Body(str);
 			
-			Event e = new Event(header,body);
-			EventInfo eventInfo = new EventInfo(e);
-			
-			//si c'est une alerte on le marque puis on l'envoie
-			if (eventInfo.isAlerte()){ 
-				eventInfo.setCode(923);				
-			}else{
-				eventInfo.setCode(42);
-			}
-			
-			String data = eventInfo.getCode()+"/"+eventInfo.getType()+"/"+eventInfo.getData();
-			
-			header=new Header(64663, (int)(Math.random()*100)+1, new Date().getTime(), (int)(Math.random()*1000)+500);
-			
-			System.out.println("RANDOM:  "+header.priority);
-			body=new Body(data);
-			Event event = new Event(header,body);			
-			supplierProxy.push(event);   
+			Event e = createMessage(str);		
+			supplierProxy.push(e);
 		}
-		
 		
 		reader.close();
 		socketClient.close();
