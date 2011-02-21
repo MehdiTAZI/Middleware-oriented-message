@@ -16,6 +16,7 @@ public class TimeServicePublisher {
 		ThreadTime tt=new ThreadTime(timeService.getCtr().getModel(),TimeSpan);
 		thread = new Thread(tt);
 		thread.start(); 
+		
 		try{
 			POA poa = POAHelper.narrow(orb
 					.resolve_initial_references("RootPOA"));
