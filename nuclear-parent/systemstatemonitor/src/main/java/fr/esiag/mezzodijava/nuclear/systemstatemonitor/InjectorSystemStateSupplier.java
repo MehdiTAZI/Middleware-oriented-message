@@ -20,7 +20,7 @@ public class InjectorSystemStateSupplier {
 	TopicNotFoundException, ChannelNotFoundException,
 	AlreadyRegisteredException {
 		EventClient ec = EventClient.init(null);
-		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
+		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
 		supplierProxy = channelAdmin
 		.getProxyForPushSupplier();
 		
