@@ -31,12 +31,17 @@ public class EventInfo implements Serializable{
 	
 	@Column(name = "code")
 	private int code;
+	
 	@Column(name = "type")
 	private String type;
 	
-	
 	@Column(name = "data")
 	private String data;
+	
+	/*public long code;
+	public int priority;
+	public long date;
+	public long timestamp;*/
 	
 	@Transient
 	private StringTokenizer  st;
