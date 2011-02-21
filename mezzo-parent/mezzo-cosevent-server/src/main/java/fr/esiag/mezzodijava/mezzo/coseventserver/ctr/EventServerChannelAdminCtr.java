@@ -13,6 +13,7 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
@@ -30,30 +31,10 @@ public class EventServerChannelAdminCtr {
 
     private String eventServerName;
     private Properties props = new Properties();
-    private ORB orb;
-
-    public ORB getOrb() {
-	return orb;
-    }
-
-    public void setOrb(ORB orb) {
-	this.orb = orb;
-    }
 
     public EventServerChannelAdminCtr(String eventServerName) {
 	this.eventServerName = eventServerName;
-	String[] args = new String[] {
-		"-ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService",
-		"-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
-		"-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
-		"-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton" };
-	try {
-	    props.load(this.getClass().getClassLoader()
-		    .getResourceAsStream("eventserver.properties"));
-	} catch (IOException e) {
-	    e.printStackTrace();
-	}
-	this.orb = BFFactory.createOrb(args, props);
+	
     }
 
     public EventServerChannelAdminCtr() {
@@ -76,9 +57,10 @@ public class EventServerChannelAdminCtr {
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
 	try {
 	    try {
-		if (BFFactory.getChannel(uniqueServerChannelId) != null) {
-		    ChannelCtr channelCtr = BFFactory.getChannelctr(BFFactory
-			    .getChannel(uniqueServerChannelId).getTopic());
+		Channel channel = BFFactory.getChannel(uniqueServerChannelId);
+		if (channel != null) {
+		    String topic = channel.getTopic();
+		    ChannelCtr channelCtr = BFFactory.getChannelctr(topic);
 		    ChannelPublisher.destroy();
 		    channelCtr
 			    .removeAllProxiesForPushConsumerFromSubscribedList();
@@ -86,14 +68,13 @@ public class EventServerChannelAdminCtr {
 			    .removeAllProxiesForPushConsumerFromConnectedList();
 		    channelCtr
 			    .removeAllProxiesForPushSupplierFromConnectedList();
-		    if (orb != null) {//we are managed by an orb so we must unbind the channel
-			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+		    if (BFFactory.getOrb() != null) {//we are managed by an orb so we must unbind the channel
+			NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory.getOrb()
 				    .resolve_initial_references("NameService"));
-			nc.unbind(nc.to_name(BFFactory.getChannel(
-				uniqueServerChannelId).getTopic()));
+			nc.unbind(nc.to_name(channel.getTopic()));
 		    }
 		    BFFactory.destroy(uniqueServerChannelId);
-
+		    System.out.println("Event Channel \"" + topic + "\" destroyed.");
 		} else
 		    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 	    } catch (NotFound e) {
@@ -113,12 +94,14 @@ public class EventServerChannelAdminCtr {
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	    fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
 
-	if (BFFactory.getChannel(uniqueServerChannelId) == null)
+	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
+	if (channel == null)
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
-	if (BFFactory.getChannel(uniqueServerChannelId).getCapacity() > capacity)
+	if (channel.getCapacity() > capacity)
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
 	BFFactory.changeChannelCapacity(
-		BFFactory.getChannel(uniqueServerChannelId), capacity);
+		channel, capacity);
+	System.out.println("Event Channel \"" + channel.getTopic() + "\" capacity updated to \"" + capacity + "\".");
 
     }
 }
