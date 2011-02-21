@@ -155,7 +155,7 @@ public class BFFactory {
     // ----------------------------------------------------------------------------------------------
 
     /**
-     * Return the singleton instance of the ORB.
+     * Create and return the singleton instance of the ORB.
      * 
      * @param args
      *            command lines argument to the ORB
@@ -167,6 +167,16 @@ public class BFFactory {
 	if (orb == null) {
 	    orb = ORB.init(args, props);
 	}
+	return orb;
+
+    }
+    
+    /**
+     * Return the singleton instance of the ORB.
+     * 
+     * @return singleton instance of the ORB.
+     */
+    public static synchronized ORB getOrb() {
 	return orb;
 
     }
