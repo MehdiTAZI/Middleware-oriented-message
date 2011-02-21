@@ -39,11 +39,11 @@ public class CAAgentProcess {
 			long id = channelAdmin.createChannel(nuclearChannelName, 3);
 			System.out.println("Done.");
 			
-			/*String injectorSystemChannelName = "injector system state";
+			String injectorSystemChannelName = "injector system state";
 			System.out.println("Asking creation of Channel \""+injectorSystemChannelName+"\" on server \""+args[0]+"\"...");
 			EventServerChannelAdmin channelAdmin2 = EventServerChannelAdminHelper
 					.narrow(ncRef.resolve_str(args[0]));
-			long id2 = channelAdmin2.createChannel(injectorSystemChannelName, 3);*/
+			long id2 = channelAdmin2.createChannel(injectorSystemChannelName, 3);
 			System.out.println("Done.");
 		} catch (Exception e) {
 		    e.printStackTrace();
