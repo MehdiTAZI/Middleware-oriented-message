@@ -43,9 +43,6 @@ public class Test {
 		orb.run();
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
 		new Test(args);
 	}
