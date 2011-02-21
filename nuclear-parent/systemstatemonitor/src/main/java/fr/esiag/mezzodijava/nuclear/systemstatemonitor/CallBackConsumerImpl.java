@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.nuclear.systemstatemonitor;
 
+import java.util.List;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -9,8 +11,10 @@ import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfoPK;
 
 public class CallBackConsumerImpl implements CallbackConsumerOperations {
+	
 	private DbEventConnector dbConnector;
 	private InjectorSystemStateSupplier supplier;
+	
 	public CallBackConsumerImpl(InjectorSystemStateSupplier supplier)
 	{
 		dbConnector= new DbEventConnectorImpl();/*DONT FORGET TO INSTANCIATE THIS ! */
@@ -22,7 +26,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	public void receive(Event e) throws ConsumerNotFoundException {
 		
 		System.out.println("Message recu timestamp:" + e.header.timestamp
-				+ ", contenu" + e.body.content);
+				+ ", contenu " + e.body.content);
 				
 		EventInfo eventInfo = new EventInfo(e);
 		
@@ -33,8 +37,10 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		//persist the event on the database
 		dbConnector.persist(eventInfo);
 		
-		/*System.out.println("Message archivé timestamp:" + e.header.timestamp
-				+ ", contenu" + e.body.content);	*/
+		List<EventInfo> list = dbConnector.findLastFive("pression");
+		for (EventInfo event : list) {
+			System.out.println("event = "+event.getType()+event.getData());
+		}
 	}
 
 }

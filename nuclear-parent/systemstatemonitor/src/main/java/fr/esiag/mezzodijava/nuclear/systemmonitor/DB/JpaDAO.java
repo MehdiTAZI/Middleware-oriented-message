@@ -1,12 +1,14 @@
 package fr.esiag.mezzodijava.nuclear.systemmonitor.DB;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 
-// LGE - Classe mere de tous les DAO
+// Classe mere de tous les DAO
 // Toutes les methodes sont synchronized...
 public abstract class JpaDAO<K, E> implements DAO<K, E> {
 	
@@ -46,12 +48,21 @@ public abstract class JpaDAO<K, E> implements DAO<K, E> {
 	 * @see fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DAO#findById(K)
 	 */
 	@Override
-	public synchronized E find(K id) {
-		return entityManager.find(entityClass, id);
+	public synchronized E find(K type) {
+		return entityManager.find(entityClass, type);
 	}
 
+	@Override
 	public synchronized boolean exist(E entity){
 		return entityManager.contains(entity);
 	}
-
+	
+	@Override
+	public synchronized List<E> findLastFive(K type) {
+		Query query = entityManager.createQuery("select e from Events e where e.type = :types");
+		query.setParameter("types", type);
+		//query.setMaxResults(5);
+		List<E> liste = query.getResultList();
+		return liste;
+	}
 }
