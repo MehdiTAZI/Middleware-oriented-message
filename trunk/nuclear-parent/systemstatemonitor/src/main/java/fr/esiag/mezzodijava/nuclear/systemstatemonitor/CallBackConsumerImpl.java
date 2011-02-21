@@ -31,7 +31,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 			supplier.PushEvent(e);
 		
 		//persist the event on the database
-		//dbConnector.persist(eventInfo);
+		dbConnector.persist(eventInfo);
 		
 		/*System.out.println("Message archivé timestamp:" + e.header.timestamp
 				+ ", contenu" + e.body.content);	*/
