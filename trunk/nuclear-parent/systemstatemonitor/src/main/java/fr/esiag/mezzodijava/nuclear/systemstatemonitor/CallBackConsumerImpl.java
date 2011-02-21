@@ -8,7 +8,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnector;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnectorImpl;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo;
-import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfoPK;
 
 public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	
@@ -29,18 +28,34 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 				+ ", contenu " + e.body.content);
 				
 		EventInfo eventInfo = new EventInfo(e);
+		int sum=0;
+		int average=0;
 		
-		//if Event is an alert so push it.
-		if (eventInfo.isAlerte())
+		//if Event is an alert so push it, code 333 for value exceeded
+		if (eventInfo.isAlerte()){
+			e.header.code = 333;
 			supplier.PushEvent(e);
+		}
 		
 		//persist the event on the database
 		dbConnector.persist(eventInfo);
 		
-		List<EventInfo> list = dbConnector.findLastFive("pression");
+		// take the 5 last events of this type
+		List<EventInfo> list = dbConnector.findLastFive(eventInfo.getType());
 		for (EventInfo event : list) {
-			System.out.println("event = "+event.getType()+event.getData());
+			int value = Integer.valueOf(event.getData());
+			sum += value;
 		}
+		// make the average of the 5 values
+		average = sum / 5;
+		
+		// if the state has changed over 10% since last 5 events, alert! code 999
+		boolean state = (average - Integer.valueOf(eventInfo.getData()))>(average * 10/100) ;
+		if (state){
+			e.header.code = 999;
+			supplier.PushEvent(e);
+		}
+
 	}
 
 }
