@@ -41,9 +41,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 */
 	public ProxyForPushSupplierImpl(String topic) {
 		channelCtr = BFFactory.createChannelCtr(topic);
-		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
-		Thread thread=new Thread(th);
-		thread.start();
+//		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
+//		Thread thread=new Thread(th);
+//		thread.start();
 	}
 
 	/**
@@ -97,10 +97,10 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 		}
 
 		channelCtr.addEvent(evt);
-		if(evt.header.date  <= channelCtr.getSynchronizedDate().getTime() && evt.header.date  >= channelCtr.getSynchronizedDate().getTime()+20){
-			evt.header.date=channelCtr.getSynchronizedDate().getTime();
-			channelCtr.getChannel().getQueueEvents().add(evt);
-		}
+//		if(evt.header.date  <= channelCtr.getSynchronizedDate().getTime() && evt.header.date  >= channelCtr.getSynchronizedDate().getTime()+20){
+//			evt.header.date=channelCtr.getSynchronizedDate().getTime();
+//			channelCtr.getChannel().getQueueEvents().add(evt);
+//		}
 
 	}
 

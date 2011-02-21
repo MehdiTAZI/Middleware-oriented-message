@@ -78,7 +78,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 */
 	public void addEvent(Event e) {
 		
-		channel.getQueueEvents().add(e);
+		//channel.getQueueEvents().add(e);
 		
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
