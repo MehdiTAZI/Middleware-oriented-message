@@ -46,7 +46,7 @@ relationcanvas 128131 relation_ref 135427 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 129666 relation_ref 168450 // events
-  from ref 129538 z 2001 label "events" italic xyz 759.5 358 2001 to ref 129410
+  from ref 129538 z 2001 label "events" italic xyz 759 358 2001 to ref 129410
   no_role_a no_role_b
   multiplicity_a_pos 737 408 3000 no_multiplicity_b
 end

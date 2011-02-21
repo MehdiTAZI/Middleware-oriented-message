@@ -48,7 +48,7 @@ relationcanvas 129666 relation_ref 168450 // events
   decenter_end 512
   from ref 129538 z 2001 label "events" italic xyz 788 273 2001 to ref 129410
   no_role_a no_role_b
-  multiplicity_a_pos 727 307 3000 no_multiplicity_b
+  multiplicity_a_pos 765 307 3000 no_multiplicity_b
 end
 relationcanvas 130050 relation_ref 168578 // <unidirectional association>
   decenter_begin 365
