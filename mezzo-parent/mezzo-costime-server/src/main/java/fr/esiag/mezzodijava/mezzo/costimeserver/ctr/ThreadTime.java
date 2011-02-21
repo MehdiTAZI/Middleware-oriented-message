@@ -11,12 +11,20 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 public class ThreadTime implements Runnable{
     private TimeServiceModel model;
+    private long timeSpan = 1000;
 
-    public ThreadTime(TimeServiceModel model) {
+
+	public ThreadTime(TimeServiceModel model) {
 	this.model=model;
     }
+	
+    public ThreadTime(TimeServiceModel model, long timeSpan) {
+		super();
+		this.model = model;
+		this.timeSpan = timeSpan;
+	}
 
-    public void synchronizeComponent() {
+	public void synchronizeComponent() {
 	for (Synchronizable component : model.getComponentSubscribed()) {
 		Date date=new Date();
 		component.date(date.getTime());
@@ -27,10 +35,18 @@ public class ThreadTime implements Runnable{
 	while (true) {
 	    synchronizeComponent();
 	    try {
-		Thread.sleep(500);
+		Thread.sleep(this.timeSpan);
 	    } catch (InterruptedException e) {
 		e.printStackTrace();
 	    }
 	}
     }
+    
+    public long getTimeSpan() {
+		return timeSpan;
+	}
+
+	public void setTimeSpan(long timeSpan) {
+		this.timeSpan = timeSpan;
+	}
 }

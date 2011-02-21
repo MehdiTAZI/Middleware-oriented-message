@@ -25,7 +25,9 @@ public class CosTimeServer {
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
 		TimeServiceImpl timeService=new TimeServiceImpl(ctr);
 		ORB orb = ORB.init(args, props);
-		publisher.publish("cosTime", timeService, orb);
+	    String timeServerName = args[0];
+		long timeServerLifeSpan =  Long.parseLong(args[1]);
+		publisher.publish(timeServerName, timeService, orb,timeServerLifeSpan);
 	}
 
 	/**
