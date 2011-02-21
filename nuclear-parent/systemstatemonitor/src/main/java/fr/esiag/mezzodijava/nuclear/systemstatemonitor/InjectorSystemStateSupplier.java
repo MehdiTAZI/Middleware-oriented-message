@@ -44,7 +44,7 @@ public class InjectorSystemStateSupplier {
 	{
 		try {
 			supplierProxy.push(e);
-			System.out.println("!!ALERTE : Message envoyé timestamp:" + e.header.timestamp
+			System.out.println("!!ALERTE envoyee : Code("+e.header.code+"), Timestamp:" + e.header.timestamp
 					+ ", contenu " + e.body.content);
 			
 		} catch (ChannelNotFoundException e1) {

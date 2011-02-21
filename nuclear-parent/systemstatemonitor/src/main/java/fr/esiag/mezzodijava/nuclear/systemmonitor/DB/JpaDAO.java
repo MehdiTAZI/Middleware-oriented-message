@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.nuclear.systemmonitor.DB;
 
 import java.lang.reflect.ParameterizedType;
+import java.util.Collection;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
@@ -11,7 +12,7 @@ import javax.persistence.Query;
 // Classe mere de tous les DAO
 // Toutes les methodes sont synchronized...
 public abstract class JpaDAO<K, E> implements DAO<K, E> {
-	
+
 	protected Class<E> entityClass;
 
 	protected EntityManager entityManager;
@@ -26,7 +27,9 @@ public abstract class JpaDAO<K, E> implements DAO<K, E> {
 		entityManager = EntityManagerUtil.getEntityManager();
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DAO#persist(E)
 	 */
 	@Override
@@ -36,7 +39,7 @@ public abstract class JpaDAO<K, E> implements DAO<K, E> {
 		tx.begin();
 		try {
 			entityManager.persist(entity);
-		}catch (EntityExistsException err){
+		} catch (EntityExistsException err) {
 			return false;
 		}
 		tx.commit();
@@ -44,7 +47,9 @@ public abstract class JpaDAO<K, E> implements DAO<K, E> {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DAO#findById(K)
 	 */
 	@Override
@@ -53,16 +58,15 @@ public abstract class JpaDAO<K, E> implements DAO<K, E> {
 	}
 
 	@Override
-	public synchronized boolean exist(E entity){
+	public synchronized boolean exist(E entity) {
 		return entityManager.contains(entity);
 	}
-	
+
 	@Override
 	public synchronized List<E> findLastFive(K type) {
-		Query query = entityManager.createQuery("select e from Events e where e.type = :types");
-		query.setParameter("types", type);
-		//query.setMaxResults(5);
-		List<E> liste = query.getResultList();
-		return liste;
+		Query q = entityManager.createQuery("SELECT h FROM " + entityClass.getSimpleName() + " h WHERE h.type = :types ORDER BY id DESC");
+		q.setParameter("types", type);
+		q.setMaxResults(5);
+		return q.getResultList();
 	}
 }

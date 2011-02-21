@@ -9,7 +9,7 @@ public interface DAO<K,E> {
 	public abstract E find(K type);
 
 	public abstract boolean exist(E entity);
-	
+
 	public abstract List<E> findLastFive(K type);
 
 }

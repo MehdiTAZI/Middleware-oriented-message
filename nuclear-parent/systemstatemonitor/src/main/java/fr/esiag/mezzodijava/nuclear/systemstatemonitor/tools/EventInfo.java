@@ -10,8 +10,8 @@ import javax.persistence.Table;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
-@Entity (name = "Events")
-@Table(name = "EVENTS")
+@Entity (name = "EventInfo")
+@Table(name = "EventInfo")
 //@IdClass(EventInfoPK.class)
 public class EventInfo implements Serializable{
 
