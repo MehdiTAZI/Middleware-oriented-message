@@ -97,10 +97,10 @@ public class TestProxyForPushSupplierImpl {
 	public void testPushConnected() throws NotConnectedException,
 			AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur
-		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
 		// appel et valeur de retour espérée
-		//EasyMock.expect(mockCtr.getChannel()).andReturn(
-		//		new Channel("TEST",3));
+		EasyMock.expect(mockCtr.getChannel()).andReturn(
+				new Channel("TEST",3));
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy

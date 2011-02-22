@@ -1,9 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
-import java.io.IOException;
 import java.util.Properties;
 
-import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
@@ -34,7 +32,7 @@ public class EventServerChannelAdminCtr {
 
     public EventServerChannelAdminCtr(String eventServerName) {
 	this.eventServerName = eventServerName;
-	
+
     }
 
     public EventServerChannelAdminCtr() {
@@ -55,39 +53,33 @@ public class EventServerChannelAdminCtr {
 
     public void destroyChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-	try {
+	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
+	if (channel != null) {
+	    String topic = channel.getTopic();
+	    ChannelCtr channelCtr = BFFactory.getChannelctr(topic);
+	    ChannelPublisher.destroy();
+	    channelCtr.removeAllProxiesForPushConsumerFromSubscribedList();
+	    channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
+	    channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
 	    try {
-		Channel channel = BFFactory.getChannel(uniqueServerChannelId);
-		if (channel != null) {
-		    String topic = channel.getTopic();
-		    ChannelCtr channelCtr = BFFactory.getChannelctr(topic);
-		    ChannelPublisher.destroy();
-		    channelCtr
-			    .removeAllProxiesForPushConsumerFromSubscribedList();
-		    channelCtr
-			    .removeAllProxiesForPushConsumerFromConnectedList();
-		    channelCtr
-			    .removeAllProxiesForPushSupplierFromConnectedList();
-		    if (BFFactory.getOrb() != null) {//we are managed by an orb so we must unbind the channel
-			NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory.getOrb()
-				    .resolve_initial_references("NameService"));
-			nc.unbind(nc.to_name(channel.getTopic()));
-		    }
-		    BFFactory.destroy(uniqueServerChannelId);
-		    System.out.println("Event Channel \"" + topic + "\" destroyed.");
-		} else
-		    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
+		NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
+			.getOrb().resolve_initial_references("NameService"));
+		nc.unbind(nc.to_name(channel.getTopic()));
+	    } catch (InvalidName e) {
+		e.printStackTrace();
 	    } catch (NotFound e) {
 		e.printStackTrace();
 	    } catch (CannotProceed e) {
 		e.printStackTrace();
 	    } catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 		e.printStackTrace();
+	    } catch (Exception e) {
+		;
 	    }
-	} catch (InvalidName e) {
-	    e.printStackTrace();
-	}
-
+	    BFFactory.destroy(uniqueServerChannelId);
+	    System.out.println("Event Channel \"" + topic + "\" destroyed.");
+	} else
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
     }
 
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
@@ -99,9 +91,9 @@ public class EventServerChannelAdminCtr {
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 	if (channel.getCapacity() > capacity)
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
-	BFFactory.changeChannelCapacity(
-		channel, capacity);
-	System.out.println("Event Channel \"" + channel.getTopic() + "\" capacity updated to \"" + capacity + "\".");
+	BFFactory.changeChannelCapacity(channel, capacity);
+	System.out.println("Event Channel \"" + channel.getTopic()
+		+ "\" capacity updated to \"" + capacity + "\".");
 
     }
 }
