@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 47
-  modified_by 4 "michael"
+  revision 48
+  modified_by 3 "Fabrice"
 
 
   
@@ -56,88 +56,6 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    class 141188 "Header"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      classrelation 141700 // <composition>
-	relation_ref 141572 // <composition>
-      end
-
-      attribute 134660 "code"
-	private explicit_type "long"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 134788 "priority"
-	private explicit_type "int"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 134916 "timeStamp"
-	private explicit_type "long"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 135044 "date"
-	private explicit_type "long"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-    end
-
-    class 141316 "Body"
-      visibility package 
-      cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
-${members}}
-"
-      php_decl ""
-      python_2_2 python_decl ""
-      idl_decl ""
-      explicit_switch_type ""
-      
-      attribute 134532 "content"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      classrelation 141956 // <composition>
-	relation_ref 141700 // <composition>
-      end
-    end
-
     class 135171 "BFFactory"
       visibility package stereotype "singleton"
       cpp_decl ""
@@ -404,6 +322,32 @@ ${members}}
 	
 	
 	
+      end
+    end
+
+    class 141316 "Body"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 134532 "content"
+	private explicit_type "string"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 141956 // <composition>
+	relation_ref 141700 // <composition>
       end
     end
 
@@ -1632,6 +1576,20 @@ ${members}}
 	
 	
       end
+
+      classrelation 159491 // <dependency>
+	relation 157571 -_->
+	  a default
+	    classrelation_ref 159491 // <dependency>
+	  b parent class_ref 142085 // EventServerChannelAdmin
+      end
+
+      classrelation 159619 // <dependency>
+	relation 157699 -_->
+	  a default
+	    classrelation_ref 159619 // <dependency>
+	  b parent class_ref 150019 // EventServerChannelAdminHelper
+      end
     end
 
     class 135939 "EventServer"
@@ -1648,14 +1606,18 @@ ${members}}
     end
 
     class 142085 "EventServerChannelAdmin"
-      visibility package 
+      visibility package stereotype "interface"
       cpp_decl ""
-      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
 ${members}}
 "
-      php_decl ""
+      php_decl "${comment}interface ${name} {
+${members}}
+"
       python_2_2 python_decl ""
-      idl_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
       explicit_switch_type ""
       
     end
@@ -1874,6 +1836,62 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+    end
+
+    class 141188 "Header"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 141700 // <composition>
+	relation_ref 141572 // <composition>
+      end
+
+      attribute 134660 "code"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134788 "priority"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 134916 "timeStamp"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 135044 "date"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
     end
 
     class 135299 "MessageListener"
@@ -2707,39 +2725,44 @@ ${members}}
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
-    classdiagram 134658 "DCCD - mezzo-libclient"
-      draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
-      size A4-Landscape
-    end
-
-    classdiagram 166147 "DCCD - mezzo-cosevent-server"
+    classdiagram 166147 "DCCD1 - mezzo-cosevent-server"
       draw_all_relations no hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition no show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
       size A3-Landscape
     end
 
-    sequencediagram 172675 "DSCD - UC03 Push d'un Supplier"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A2
+    classdiagram 134658 "DCCD2 - mezzo-libclient"
+      draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
+      size A4-Landscape
     end
 
-    sequencediagram 134533 "DSCD - UC02 L'abonnement par un Consumer"
-      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A2
-    end
-
-    sequencediagram 128130 "DSCD - Resolution de nom par le client"
+    sequencediagram 128130 "DSCD3 - Resolution de nom par le client"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4-Landscape
     end
 
-    sequencediagram 141186 "DSCD - UC02.1 Le Channel envoie les Events aux Consumers PUSH abonnes"
+    sequencediagram 134533 "DSCD4 - UC02 L'abonnement par un Consumer"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A2
+    end
+
+    sequencediagram 141186 "DSCD5 - UC02.1 Le Channel envoie les Events aux Consumers PUSH abonnes"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4-Landscape
     end
 
-    sequencediagram 147717 "DSCD - UC07 Administration d'un Channel"
+    sequencediagram 172675 "DSCD6 - UC03 Push d'un Supplier"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A2
+    end
+
+    sequencediagram 147717 "DSCD7 - UC07 Administration d'un Channel"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
       overlapping_bars size A4
+    end
+
+    sequencediagram 179203 "DSCD8 - Resolution de nom par un channelAdmin"
+      show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+      overlapping_bars size A4-Landscape
     end
   end
 end
