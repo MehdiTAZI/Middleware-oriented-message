@@ -108,7 +108,7 @@ relationcanvas 128517 relation_ref 136581 // <dependency>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 128642 relation_ref 128258 // <unidirectional association>
-  decenter_end 580
+  decenter_end 579
   from ref 128002 z 2001 to point 739 151
   line 128005 z 2001 to ref 128514
   no_role_a no_role_b

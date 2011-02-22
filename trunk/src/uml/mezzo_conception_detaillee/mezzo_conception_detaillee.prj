@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 48
-  modified_by 3 "Fabrice"
+  revision 49
+  modified_by 4 "michael"
 
 
   
@@ -56,6 +56,130 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    class 148100 "Comparator"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 147972 "ThreadRemoveExpiredEvent"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 142468 "run"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142596 "removeEvents"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "tmp" explicit_type "list<Event>"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142724 "setQueue"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "queue" explicit_type "sortedSet<Event>"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 142852 "setDate"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "date" explicit_type "date"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 149380 // <generalisation>
+	relation 148868 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 149380 // <generalisation>
+	  b parent class_ref 136579 // Runnable
+      end
+    end
+
+    class 147844 "PriorityEventComparator"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 142084 "compare"
+	public explicit_return_type "int"
+	nparams 2
+	  param in name "evt1" type class_ref 136451 // Event
+	multiplicity "1"
+	  param in name "evt2" type class_ref 136451 // Event
+	multiplicity "1"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 149508 // <realization>
+	relation 148996 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 149508 // <realization>
+	  b parent class_ref 148100 // Comparator
+      end
+    end
+
     class 135171 "BFFactory"
       visibility package stereotype "singleton"
       cpp_decl ""
@@ -337,7 +461,7 @@ ${members}}
       explicit_switch_type ""
       
       attribute 134532 "content"
-	private explicit_type "string"
+	public explicit_type "string"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -730,7 +854,7 @@ ${members}}
 
       classrelation 142468 // queueEvents (<association>)
 	relation 142084 ----
-	  stereotype "PriorityQueue"
+	  stereotype "set"
 	  a role_name "queueEvents" private
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -739,6 +863,15 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 142596 // <association>
+      end
+
+      classrelation 149124 // comparator (<unidirectional association>)
+	relation 148612 --->
+	  a role_name "comparator" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149124 // comparator (<unidirectional association>)
+	  b parent class_ref 147844 // PriorityEventComparator
       end
     end
 
@@ -1228,6 +1361,27 @@ ${members}}
 	  a default
 	    classrelation_ref 145667 // <dependency>
 	  b parent class_ref 135811 // Channel
+      end
+
+      operation 142212 "QueueGarbageCollector"
+	public explicit_return_type "void"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 149252 // <unidirectional association>
+	relation 148740 --->
+	  a role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 149252 // <unidirectional association>
+	  b parent class_ref 147972 // ThreadRemoveExpiredEvent
       end
     end
 
@@ -1854,7 +2008,7 @@ ${members}}
       end
 
       attribute 134660 "code"
-	private explicit_type "long"
+	public explicit_type "long"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1864,7 +2018,7 @@ ${members}}
       end
 
       attribute 134788 "priority"
-	private explicit_type "int"
+	public explicit_type "int"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1874,7 +2028,7 @@ ${members}}
       end
 
       attribute 134916 "timeStamp"
-	private explicit_type "long"
+	public explicit_type "long"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
@@ -1884,7 +2038,7 @@ ${members}}
       end
 
       attribute 135044 "date"
-	private explicit_type "long"
+	public explicit_type "long"
 	cpp_decl ""
 	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "

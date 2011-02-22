@@ -45,7 +45,7 @@ classinstance 136323 class_ref 135811 // Channel
 classinstance 136707 class_ref 136451 // Event
   name "evt"   xyz 207 881 2000 life_line_z 2000
 fragment 138883 "seq"
-  refer sequencediagram_ref 128130 // DSCD - Resolution de nom par le client
+  refer sequencediagram_ref 128130 // DSCD3 - Resolution de nom par le client
   xyzwh 17 39.5 3005 809 45
 end
 durationcanvas 128387 classinstance_ref 128131 // caimpl:ChannelAdminImpl
