@@ -1,4 +1,4 @@
-set "DEMO_DIR=C:\mezzodev\demo"
+set "DEMO_DIR=C:\mezzodev\mezzo-demo"
 set "M2_REPO=C:\mezzodev\maven_repository\fr\esiag\mezzodijava"
 set "WORK_DIR=C:\mezzodev\mezzo_workspace"
 
