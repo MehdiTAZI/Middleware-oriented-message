@@ -81,7 +81,7 @@ public class Channel {
      */
     public void addSubscribedConsumer(ProxyForPushConsumerImpl ppc) {
 	this.consumersSubscribed.put(ppc,
-		Collections.synchronizedSortedSet(new TreeSet<Event>()));
+		Collections.synchronizedSortedSet(new TreeSet<Event>(comparator)));
     }
 
     /**

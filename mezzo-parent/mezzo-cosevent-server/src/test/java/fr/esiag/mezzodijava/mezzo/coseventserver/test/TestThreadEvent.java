@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
+import java.util.Calendar;
+
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
@@ -44,7 +46,7 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Header header=new Header(123, 1, 01012011, 120);
+		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
 		Body body=new Body("Test_EVENT");
 		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
@@ -111,7 +113,7 @@ public class TestThreadEvent {
 		// adding the mock as connected consumer
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
-		Header header=new Header(123, 1, 01012011, 120);
+		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
 		Body body=new Body("Test_EVENT");
 		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel

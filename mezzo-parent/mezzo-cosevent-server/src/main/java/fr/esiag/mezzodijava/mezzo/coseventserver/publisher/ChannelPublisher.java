@@ -24,7 +24,7 @@ public class ChannelPublisher {
 			NamingContextExt nc = NamingContextExtHelper.narrow(orb.resolve_initial_references("NameService"));
 			nc.rebind(nc.to_name(channelAdminImpl.getTopic()), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
 		}catch(Exception e){
-			System.out.println(e.getMessage());
+			System.out.println("Impossible de contacter le name service");
 		}
 	}
 	public static void destroy(){
