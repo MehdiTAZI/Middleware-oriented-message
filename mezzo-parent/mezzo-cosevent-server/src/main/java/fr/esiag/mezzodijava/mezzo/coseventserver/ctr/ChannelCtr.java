@@ -3,18 +3,24 @@
  */
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
+import java.awt.EventQueue;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.apache.commons.collections.SynchronizedPriorityQueue;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -29,6 +35,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
 
 /**
  * Classe ChannelCtr
@@ -44,14 +51,10 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 public class ChannelCtr implements java.nio.channels.Channel {
 
 	// lien vers le model
-	private Channel channel;
-	
-	
-	
-	private Date synchronizedDate=new Date();		
-	private ThreadRemoveExpiredEvent threadRemoveExpiredEvent;
-	private ThreadTimestampingEvent threadTimestampingEvent;
-	
+	private Channel channel;	
+	private Date synchronizedDate=new Date();
+	private long delta;
+	private Comparator<Event> comparator=new PriorityEventComparator();
 	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity fetched
@@ -61,13 +64,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 *            Channel name
 	 */
 	public ChannelCtr(String topic) {
-		this.channel = BFFactory.createChannelEntity(topic, 0);					
-		//threadRemoveExpiredEvent=new ThreadRemoveExpiredEvent(channel.getQueueEvents(),this.synchronizedDate);
-		
-		//threadTimestampingEvent=new ThreadTimestampingEvent();
-	
-		//threadTimestampingEvent.setDate(synchronizedDate);
-		//QueueGarbageCollector();
+		this.channel = BFFactory.createChannelEntity(topic, 0);							
 	}
 
 	/**
@@ -78,7 +75,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 */
 	public void addEvent(Event e) {
 		
-		//channel.getQueueEvents().add(e);
+		channel.getQueueEvents().add(e);
 		
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
@@ -138,7 +135,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 			throw new AlreadyRegisteredException();
 		} else {
 			channel.getConsumersSubscribed().put(proxyConsumer,
-					Collections.synchronizedList(new ArrayList<Event>()));
+				Collections.synchronizedSortedSet(new TreeSet<Event>(comparator)));
 		}
 	}
 
@@ -220,7 +217,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	
 	public void removeAllProxiesForPushConsumerFromSubscribedList(){
 		channel.setConsumersSubscribed(Collections
-			    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>()));
+			    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, SortedSet<Event>>()));
 	}
 
 	public void removeAllProxiesForPushConsumerFromConnectedList(){
@@ -259,20 +256,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		return false;
 	}
 	
-	// REDA : a voir 
-	synchronized public void QueueGarbageCollector(){
-		
-		
-		
-			threadRemoveExpiredEvent.setQueue(channel.getQueueEvents());
-			Thread th=new Thread(threadRemoveExpiredEvent);
-			
-			th.start();
-			//threadTimestampingEvent.setQueue(channel.getQueueEvents());			
-			//threadTimestampingEvent.run();
-		
-	}
-
+	
 	public Date getSynchronizedDate() {
 		return synchronizedDate;
 	}
@@ -281,5 +265,15 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		this.synchronizedDate = synchronizedDate;
 	}
 
+	public long getDelta() {
+		return delta;
+	}
+
+	public void setDelta(long delta) {
+		this.delta = delta;
+	}
+
+	
+	
 	
 }

@@ -2,6 +2,8 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.PriorityQueue;
+import java.util.SortedSet;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -49,7 +51,7 @@ public class ThreadEvent implements Runnable {
 		// for all events of the consumer
 		// System.out.println("on passe a un autre connecte " +
 		// consumer.toString());
-		List<Event> le = channel.getConsumersSubscribed().get(consumer);
+		SortedSet<Event> le = channel.getConsumersSubscribed().get(consumer);
 		synchronized (le) {
 		    Iterator<Event> i = le.iterator(); // Must be in
 						       // synchronized

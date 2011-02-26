@@ -47,7 +47,7 @@ public class AppSensorSupplier
 		else
 			System.err.println("miss-formed Event Structure : can't find data element");
 		
-		head=new Header(42, 1, new Date().getTime(), (int)(Math.random()*1000)+500);
+		head=new Header(42, (int)(Math.random()*100)+10, new Date().getTime(), (int)(Math.random()*1000)+500);
 		Event e = new Event(head,body);
 		return e;
 	}
@@ -78,7 +78,7 @@ public class AppSensorSupplier
 			// lecture du message ligne par ligne
 			String str = reader.readLine();   
 			if (str.equals("END")) break;
-			System.out.println(str);
+			//System.out.println(str);
 			
 			Event e = createMessage(str);		
 			supplierProxy.push(e);

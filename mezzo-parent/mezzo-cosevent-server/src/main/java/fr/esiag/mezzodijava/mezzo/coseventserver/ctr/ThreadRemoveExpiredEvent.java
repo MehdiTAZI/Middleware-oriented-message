@@ -14,12 +14,12 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 public class ThreadRemoveExpiredEvent implements Runnable{
 
-	private SortedSet<Event> queue;
+	private PriorityQueue<Event> queue;
 	private Date date;
 	private List<Event> tmp=new ArrayList<Event>();
 	
 	
-	public ThreadRemoveExpiredEvent(SortedSet<Event> queue,Date date ) {
+	public ThreadRemoveExpiredEvent(PriorityQueue<Event> queue,Date date ) {
 		// TODO Auto-generated constructor stub
 		this.queue=queue;
 		this.date=date;
@@ -33,7 +33,8 @@ public class ThreadRemoveExpiredEvent implements Runnable{
 			synchronized (this) {
 				for (Event e: queue) {					
 					System.out.println("evt --> "+ e.header.date +" "+ e.header.timestamp + " == " + new Date().getTime());
-					if(e.header.date + e.header.timestamp < new Date().getTime()){
+					long delta=new Date().getTime()-date.getTime();
+					if(e.header.date + e.header.timestamp < new Date().getTime()+delta){
 						System.out.println("REMOVE "+e.body.content );
 						//queue.remove(e);
 						tmp.add(e);
@@ -64,7 +65,7 @@ public class ThreadRemoveExpiredEvent implements Runnable{
 		
 	}
 	
-	public void setQueue(SortedSet<Event> queue){
+	public void setQueue(PriorityQueue<Event> queue){
 		this.queue=queue;
 	}
 

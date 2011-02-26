@@ -15,7 +15,9 @@ import java.util.concurrent.PriorityBlockingQueue;
 
 
 
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
@@ -43,8 +45,8 @@ public class Channel {
     private long identifier;
     private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
 
-    private Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed = Collections
-	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, List<Event>>());
+    private Map<ProxyForPushConsumerImpl, SortedSet<Event>> consumersSubscribed = Collections
+	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, SortedSet<Event>>());
     
     private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
 
@@ -52,14 +54,23 @@ public class Channel {
     
     private Comparator<Event> comparator=new PriorityEventComparator();
     
-    private SortedSet<Event> queueEvents;
+    private static PriorityQueue<Event> queueEvents;
    
     public Channel(String topic, int capacity) {
 		this.topic = topic;
 		this.capacity = capacity;
 		this.identifier=RandomChannelIdentifier.getUniqueIdentifier();		
-		queueEvents=new TreeSet<Event>(comparator);
+		queueEvents=new PriorityQueue(CAPACITY_QUEUE,comparator);
 		
+//		Header header = new Header(1, 2, 43, 2);
+//		Body body = new Body("test1");
+//		queueEvents.add(new Event(header, body));
+//		Header header2 = new Header(1, 1, 43, 2);
+//		Body body2 = new Body("test2");
+//		queueEvents.add(new Event(header2, body2));
+//		
+//		for(Event e: getQueueEvents())
+//			System.out.println(e.body.content);
     }
 
     /**
@@ -70,7 +81,7 @@ public class Channel {
      */
     public void addSubscribedConsumer(ProxyForPushConsumerImpl ppc) {
 	this.consumersSubscribed.put(ppc,
-		Collections.synchronizedList(new ArrayList<Event>()));
+		Collections.synchronizedSortedSet(new TreeSet<Event>()));
     }
 
     /**
@@ -98,7 +109,7 @@ public class Channel {
      *
      * @return.
      */
-    public Map<ProxyForPushConsumerImpl, List<Event>> getConsumersSubscribed() {
+    public Map<ProxyForPushConsumerImpl, SortedSet<Event>> getConsumersSubscribed() {
 	return consumersSubscribed;
     }
 
@@ -168,7 +179,7 @@ public class Channel {
      * @param consumersSubscribed
      */
     public void setConsumersSubscribed(
-	    Map<ProxyForPushConsumerImpl, List<Event>> consumersSubscribed) {
+	    Map<ProxyForPushConsumerImpl, SortedSet<Event>> consumersSubscribed) {
 	this.consumersSubscribed = consumersSubscribed;
     }
 
@@ -202,16 +213,17 @@ public class Channel {
 		this.identifier = identifier;
 	}
 
-    /*public void addEvent(Event event){
+    public void addEvent(Event event){
     	queueEvents.add(event);
     	
-    }*/
+    }
 
-	public SortedSet<Event> getQueueEvents() {
+	public PriorityQueue<Event> getQueueEvents() {
+		//System.out.println("N getQueueEvents "+queueEvents.size());
 		return queueEvents;
 	}
 
-	public void setQueueEvents(SortedSet<Event> listeEvents) {
+	public void setQueueEvents(PriorityQueue<Event> listeEvents) {
 		this.queueEvents = listeEvents;
 	}
     
