@@ -43,9 +43,12 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 */
 	public ProxyForPushSupplierImpl(String topic) {
 		channelCtr = BFFactory.createChannelCtr(topic);
+		//TODO : remove after working test.
+		if (channelCtr.getChannel() != null){
 		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
 		Thread thread=new Thread(th);
 		thread.start();
+		}
 	}
 
 	/**
