@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import java.util.Date;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
@@ -41,9 +43,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	 */
 	public ProxyForPushSupplierImpl(String topic) {
 		channelCtr = BFFactory.createChannelCtr(topic);
-//		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
-//		Thread thread=new Thread(th);
-//		thread.start();
+		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
+		Thread thread=new Thread(th);
+		thread.start();
 	}
 
 	/**
@@ -95,22 +97,34 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 		if (!connected) {
 			throw new NotConnectedException();
 		}
-
+		
+		//System.out.println("Event PUSH "+ evt.body.content);
+		long delta=channelCtr.getSynchronizedDate().getTime()- new Date().getTime();
+		if(delta + new Date().getTime() > evt.header.date + evt.header.timestamp)
+			channelCtr.getChannel().getQueueEvents().remove(evt);
+		else
 		channelCtr.addEvent(evt);
-//		if(evt.header.date  <= channelCtr.getSynchronizedDate().getTime() && evt.header.date  >= channelCtr.getSynchronizedDate().getTime()+20){
-//			evt.header.date=channelCtr.getSynchronizedDate().getTime();
-//			channelCtr.getChannel().getQueueEvents().add(evt);
-//		}
+		
+		//channelCtr.getChannel().getQueueEvents().add(evt);
+		
 
 	}
 
-	// cette methode juste pour afficher la queue trier et apres on peut la supprimer
+	
 	
 	public void afficher(){
-				
-			for(Event e: channelCtr.getChannel().getQueueEvents()){				
-				System.out.println("QUEUE CAPACITY --> " + e.body.content +  "        priority : " + e.header.priority);				
-			}
+				//System.out.println("In Afficher "+channelCtr.getChannel().getQueueEvents().size());
+			
+//				Iterator<Event> iterator=channelCtr.getChannel().getQueueEvents().iterator();
+//				while(iterator.hasNext()){
+//					Event e=iterator.next();
+//					System.out.println("QUEUE CAPACITY --> " + e.body.content +  "        priority : " + e.header.priority);
+//				}
+			
+		for (int i = 0; i <channelCtr.getChannel().getQueueEvents().size(); i++) {
+			Event e=channelCtr.getChannel().getQueueEvents().remove();
+			System.out.println("QUEUE CAPACITY --> " + e.body.content +  "        priority : " + e.header.priority);
+		}
 
 	}
 }

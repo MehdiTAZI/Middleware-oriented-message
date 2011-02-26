@@ -97,6 +97,7 @@ public class ProxyForPushConsumerImpl implements MessageListener,
     @Override
     public void receive(Event evt) throws ConsumerNotFoundException {
 	try {
+		//System.out.println("IN RECEIVE");
 	    callbackConsumer.receive(evt);
 	} catch (org.omg.CORBA.SystemException ex) {
 	    throw new ConsumerNotFoundException(ex.getClass().getName() + ":"
