@@ -44,11 +44,11 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	public ProxyForPushSupplierImpl(String topic) {
 		channelCtr = BFFactory.createChannelCtr(topic);
 		//TODO : remove after working test.
-		if (channelCtr.getChannel() != null){
-		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
-		Thread thread=new Thread(th);
-		thread.start();
-		}
+//		if (channelCtr.getChannel() != null){
+//		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
+//		Thread thread=new Thread(th);
+//		thread.start();
+//		}
 	}
 
 	/**
@@ -66,8 +66,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	MaximalConnectionReachedException {
 		channelCtr.addProxyForPushSupplierToConnectedList(this);
 		connected = true;
-		System.out.println("Connect of a PUSH Supplier to \""
-				+ channelCtr.getChannel().getTopic() + "\".");
+		
 	}
 
 	/**
@@ -82,8 +81,7 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	public void disconnect() throws NotConnectedException {
 		channelCtr.removeProxyForPushSupplierFromConnectedList(this);
 		connected = false;
-		System.out.println("Disconnect of a PUSH Consumer from \""
-				+ channelCtr.getChannel().getTopic() + "\".");
+		
 	}
 
 	/**
@@ -101,14 +99,8 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 			throw new NotConnectedException();
 		}
 		
-		//System.out.println("Event PUSH "+ evt.body.content);
-		long delta=channelCtr.getSynchronizedDate().getTime()- new Date().getTime();
-		if(delta + new Date().getTime() > evt.header.date + evt.header.timestamp)
-			channelCtr.getChannel().getQueueEvents().remove(evt);
-		else
 		channelCtr.addEvent(evt);
-		
-		//channelCtr.getChannel().getQueueEvents().add(evt);
+
 		
 
 	}

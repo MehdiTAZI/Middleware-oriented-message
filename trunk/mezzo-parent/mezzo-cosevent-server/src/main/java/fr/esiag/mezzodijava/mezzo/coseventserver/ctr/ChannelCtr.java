@@ -75,12 +75,20 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	 */
 	public void addEvent(Event e) {
 		
-		channel.getQueueEvents().add(e);
+	  //System.out.println("Event PUSH "+ evt.body.content);
+		long delta=synchronizedDate.getTime()- new Date().getTime();
+		if(delta + new Date().getTime() < e.header.date + e.header.timestamp){
 		
-		for (ProxyForPushConsumerImpl consumer : channel
+		    //ajout dans les liste des consummer PUSH
+		    for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
+			System.out.println("Event PUSH "+ e.body.content);
 			channel.getConsumersSubscribed().get(consumer).add(e);
-		}					       								
+			System.out.println("Event PUSH "+e.toString()+ " "+ e.body.content +" nb evt ="+channel.getConsumersSubscribed().get(consumer).size());
+		    }
+		    //ajout dans la liste nécessaire pour les consummer PULL
+		    channel.getQueueEvents().add(e);
+		}
 
 	}
 
@@ -162,6 +170,8 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		if (!channel.getSuppliersConnected().add(proxySupplier)) {
 			throw new AlreadyConnectedException();
 		}
+		System.out.println("Connect of a PUSH Supplier to \""
+			+ channel.getTopic() + "\".");
 	}
 
 	/**
@@ -242,6 +252,8 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		if (!channel.getSuppliersConnected().remove(proxySupplier)) {
 			throw new NotConnectedException();
 		}
+		System.out.println("Disconnect of a PUSH Consumer from \""
+			+ channel.getTopic() + "\".");
 	}
 
 	@Override

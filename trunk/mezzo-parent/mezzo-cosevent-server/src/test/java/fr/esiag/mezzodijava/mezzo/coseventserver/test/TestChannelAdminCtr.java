@@ -14,7 +14,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 public class TestChannelAdminCtr {
 
-	ChannelAdminCtr cac = new ChannelAdminCtr("TEST");
+	ChannelAdminCtr cac = new ChannelAdminCtr("TEST_ADMIN");
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -33,7 +33,7 @@ public class TestChannelAdminCtr {
 
 	@Test
 	public void testChannelAdminCtr() {
-		assertEquals("TEST", cac.getTopic());
+		assertEquals("TEST_ADMIN", cac.getTopic());
 	}
 
 	@Test

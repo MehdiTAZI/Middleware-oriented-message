@@ -44,20 +44,20 @@ public class TestProxyForPushSupplierImpl {
 	@Test
 	public void testConnect() throws AlreadyConnectedException, MaximalConnectionReachedException {
 		// création du mock pour le contrôleur
-		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
-		// appel et valeur de retour espérée
-		EasyMock.expect(mockCtr.getChannel()).andReturn(
-				new Channel("TEST",3));
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
 		// inject mock in Factory
-		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
+		BFFactory.setAlternateChannelCtr("TEST_CONNECT", mockCtr);
 		// nouveau proxy
-		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
-
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST_CONNECT");
 		mockCtr.addProxyForPushSupplierToConnectedList(pfps);
 
+		//mockCtr.getChannel();
 		// enregistrement
 		EasyMock.replay(mockCtr);
+		
+		//mockCtr.addProxyForPushSupplierToConnectedList(pfps);
 
+		
 		// lancement du test de la méthode
 		pfps.connect();
 
@@ -71,10 +71,8 @@ public class TestProxyForPushSupplierImpl {
 	public void testDisconnect() throws ChannelNotFoundException,
 			NotConnectedException {
 		// création du mock pour le contrôleur
-		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
-		// appel et valeur de retour espérée
-		EasyMock.expect(mockCtr.getChannel()).andReturn(
-				new Channel("TEST",3));
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy

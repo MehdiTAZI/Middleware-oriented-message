@@ -1,5 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
@@ -46,11 +47,11 @@ public class ThreadEvent implements Runnable {
 	for (ProxyForPushConsumerImpl consumer : channel
 		.getConsumersSubscribed().keySet()) {
 	    // if the consumer is connected
-	    // System.out.println("on passe a un autre " + consumer.toString());
+	    System.out.println("on passe a un autre " + consumer.toString());
 	    if (channel.getConsumersConnected().contains(consumer)) {
 		// for all events of the consumer
-		// System.out.println("on passe a un autre connecte " +
-		// consumer.toString());
+		System.out.println("on passe a un autre connecte " +
+		 consumer.toString() + " qui contient nb evt = "+channel.getConsumersSubscribed().get(consumer).size());
 		SortedSet<Event> le = channel.getConsumersSubscribed().get(consumer);
 		synchronized (le) {
 		    Iterator<Event> i = le.iterator(); // Must be in
@@ -62,8 +63,14 @@ public class ThreadEvent implements Runnable {
 			Event e = i.next();
 			try {
 			    // TODO : here manage life of the events.
+			    long delta=0;//TODO remplacer ici par du COSTime
+			    if(e.header.date + e.header.timestamp > new Date().getTime()+delta){
 			    // send event to the consumer
-			    consumer.receive(e);
+				System.out.println(e.header.code+" receive appel");
+				consumer.receive(e);
+			    }else{
+				System.out.println(e.header.code+" expire");
+			    }
 			    // remove event from the list
 			    i.remove();
 
