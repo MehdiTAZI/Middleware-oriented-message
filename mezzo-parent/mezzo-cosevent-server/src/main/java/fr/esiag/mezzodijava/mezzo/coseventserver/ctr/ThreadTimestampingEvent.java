@@ -24,12 +24,24 @@ public class ThreadTimestampingEvent implements Runnable{
 		
 	}
 
-	
+	/**
+	 * Set the SortedSet queue
+	 *
+	 * @param queue
+	 * 			a sortedset of Events
+	 *
+	 */
 	public void setQueue(SortedSet<Event> queue){
 		this.queue=queue;
 	}
 
-
+	/**
+	 * Set the date
+	 *
+	 * @param date
+	 * 			the date from COS Time
+	 *
+	 */
 	public void setDate(Date date) {
 		this.date = date;
 	}

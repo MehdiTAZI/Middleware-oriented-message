@@ -58,7 +58,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	
 	/**
 	 * Build instance of a ChannelCtr associated with a Channel entity fetched
-	 * byhis topic.
+	 * by this topic.
 	 *
 	 * @param topic
 	 *            Channel name
@@ -79,7 +79,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		long delta=synchronizedDate.getTime()- new Date().getTime();
 		if(delta + new Date().getTime() < e.header.date + e.header.timestamp){
 		
-		    //ajout dans les liste des consummer PUSH
+		    //ajout dans les liste des consummers PUSH
 		    for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			System.out.println("Event PUSH "+ e.body.content);
@@ -187,7 +187,7 @@ public class ChannelCtr implements java.nio.channels.Channel {
 	/**
 	 * Remove a connected Consumer from the connected list.
 	 *
-	 * the consumer will not be able to recevie events.
+	 * the consumer will not be able to receive events.
 	 *
 	 * @param proxyConsumer
 	 *            Proxy For Push Consumer
@@ -225,14 +225,33 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		}
 	}
 	
+	/**
+	 * Remove all proxies for push Consumers from the subscribed list.
+	 *
+	 * No further events will be stored for it.
+	 *
+	 */
 	public void removeAllProxiesForPushConsumerFromSubscribedList(){
 		channel.setConsumersSubscribed(Collections
 			    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, SortedSet<Event>>()));
 	}
-
+	
+	/**
+	 * Remove all proxies push for Consumer from the connected list.
+	 *
+	 * the consumers will not be able to receive events
+	 *
+	 */
 	public void removeAllProxiesForPushConsumerFromConnectedList(){
 		channel.setConsumersConnected(new HashSet<ProxyForPushConsumerImpl>());
 	}
+	
+	/**
+	 * Remove all proxies push for Supplier from the connected list.
+	 *
+	 * the suppliers will not be able to push events
+	 *
+	 */
 	public void removeAllProxiesForPushSupplierFromConnectedList(){
 		channel.setSuppliersConnected(new HashSet<ProxyForPushSupplierImpl>());
 	}
@@ -268,24 +287,43 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		return false;
 	}
 	
-	
+	/**
+	 * Get the synchronised Date
+	 *
+	 * @return the synchronised Date
+	 *
+	 */
 	public Date getSynchronizedDate() {
 		return synchronizedDate;
 	}
 
+	/**
+	 * Set the synchronised Date
+	 *
+	 * @param Synchronised Date
+	 *
+	 */
 	public void setSynchronizedDate(Date synchronizedDate) {
 		this.synchronizedDate = synchronizedDate;
 	}
 
+	/**
+	 * Get the delta time between system and time COS
+	 *
+	 * @return the delta
+	 *
+	 */
 	public long getDelta() {
 		return delta;
 	}
 
+	/**
+	 * Set the delta time
+	 *
+	 * @param Delta
+	 *
+	 */
 	public void setDelta(long delta) {
 		this.delta = delta;
 	}
-
-	
-	
-	
 }
