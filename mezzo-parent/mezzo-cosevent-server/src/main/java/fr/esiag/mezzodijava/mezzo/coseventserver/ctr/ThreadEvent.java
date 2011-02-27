@@ -102,6 +102,10 @@ public class ThreadEvent implements Runnable {
 	}
     }
 
+    /**
+     * Run the thread to process events
+     *
+     */
     @Override
     public void run() {
 	while (true) {

@@ -122,7 +122,7 @@ public class EventServerChannelAdminCtr {
     }
 
     /**
-	 * Change the number of composants to connect at the same time
+	 * Change the maximum number of composants connected at the same time
 	 *
 	 * @param uniqueServerChannelId
 	 *            The uid of the channel to find     
@@ -130,6 +130,8 @@ public class EventServerChannelAdminCtr {
 	 * 			  The new capacity to apply
 	 * @throws ChannelNotFoundException
 	 *             If the channel doesn't exist 
+	 * @throws CannotReduceCapacityException
+	 *             If the channel is full
 	 */
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,

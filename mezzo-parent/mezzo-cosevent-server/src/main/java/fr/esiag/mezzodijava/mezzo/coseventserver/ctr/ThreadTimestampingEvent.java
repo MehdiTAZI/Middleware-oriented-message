@@ -10,7 +10,10 @@ public class ThreadTimestampingEvent implements Runnable{
 	private SortedSet<Event> queue;
 	private Date date;
 	
-	
+	/**
+     * Run the thread to timestamp events
+     *
+     */
 	@Override
 	public void run() {
 		Event[] tmp=queue.toArray(new Event[queue.size()]);
