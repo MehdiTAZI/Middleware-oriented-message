@@ -15,7 +15,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 /**
- * Classe ThreadEvent to process event in queues and send them to consumers
+ * Class ThreadEvent to process event in queues and send them to consumers
  *
  * In a infinite loop each 0.5s : for each subscribed consumer if it is
  * connected for each event in its list consumer.receive() if unreachable
@@ -30,7 +30,7 @@ public class ThreadEvent implements Runnable {
     private Channel channel;
 
     public ThreadEvent(String topic) {
-	channel = BFFactory.getChannel(topic);
+    	channel = BFFactory.getChannel(topic);
     }
 
     /**
@@ -41,6 +41,8 @@ public class ThreadEvent implements Runnable {
      *
      * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
      * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
+     * 
+     * 
      */
     public void processSubscribedConsumers() {
 	// For all Subscribed Consumer to the Channel
@@ -87,10 +89,10 @@ public class ThreadEvent implements Runnable {
 			    	e2.printStackTrace();
 			    }
 			    // TMA : todo => ajouter les messages non recu
-			    // de la Queuqe
-			    // Sans oublier d'ajoutre dans la class qu'il
-			    // faut le faite d'essyez
-			    // denvoyer lensemble des messages lors de la
+			    // de la Queue
+			    // Sans oublier d'ajouter dans la class qu'il
+			    // faut le faite d'essayez
+			    // d envoyer l ensemble des messages lors de la
 			    // connexion du consumer
 			}
 		    }
