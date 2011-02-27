@@ -14,6 +14,16 @@ import java.util.Comparator;
  */
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+/**
+ * Class PriorityEventComparator 
+ * 
+ * To compare events with priority and date
+ * 
+ * UC n°: FURPS CI14
+ * 
+ * @author Mezzo-Team
+ * 
+ */
 
 public class PriorityEventComparator implements Comparator<Event> {
 
