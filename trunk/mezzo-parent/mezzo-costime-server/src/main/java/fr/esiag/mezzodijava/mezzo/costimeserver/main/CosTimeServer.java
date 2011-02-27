@@ -10,6 +10,15 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 import fr.esiag.mezzodijava.mezzo.costimeserver.publisher.TimeServicePublisher;
 
+/**
+ * Class CosTimeServer
+ * 
+ * Main class for the Mezzo di Java's COS Time Server
+ * 
+ * UC n°06: US18 (+ children)
+ * 
+ * @author Mezzo-Team
+ */
 public class CosTimeServer {
 
 	public CosTimeServer(String[] args) {

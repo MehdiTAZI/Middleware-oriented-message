@@ -9,6 +9,14 @@ import fr.esiag.mezzodijava.mezzo.costime.TimeServicePOATie;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 
+/**
+ * TimeServicePublisher : to publish and start the thread for time service
+ * 
+ * UC n°06: US18 (+ children)
+ * 
+ * @author Mezzo-Team
+ * 
+ */
 public class TimeServicePublisher {
 	private static  Thread thread;
 	
