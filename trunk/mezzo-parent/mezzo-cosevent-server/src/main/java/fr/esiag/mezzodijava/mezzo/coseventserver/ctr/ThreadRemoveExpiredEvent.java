@@ -41,6 +41,10 @@ public class ThreadRemoveExpiredEvent implements Runnable{
 		this.date=date;
 	}
 	
+	/**
+     * Run the thread to process events and destroy the expired ones
+     *
+     */
 	@Override
 	public void run() {
 		while(true){
