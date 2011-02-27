@@ -106,7 +106,9 @@ public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations 
 	}
 
 	
-	
+	/**
+	 * To print capacity and priority
+	 */
 	public void afficher(){
 				//System.out.println("In Afficher "+channelCtr.getChannel().getQueueEvents().size());
 			
