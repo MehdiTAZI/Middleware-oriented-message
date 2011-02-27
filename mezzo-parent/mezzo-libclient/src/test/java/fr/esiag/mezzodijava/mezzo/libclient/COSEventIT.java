@@ -7,10 +7,7 @@ import java.util.Calendar;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.slf4j.LoggerFactory;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.core.util.StatusPrinter;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
