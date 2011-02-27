@@ -27,7 +27,7 @@ public class ChannelAdminAgentProcess {
 
 		//creation du channel 
 		EventServerChannelAdmin eventServerChannelAdmin=ec.resolveEventServerChannelAdminByEventServerName(eventServerName);
-		long id=eventServerChannelAdmin.createChannel(channelName, 2);
+		long id=eventServerChannelAdmin.createChannel(channelName, 20);
 		System.out.println("Creation du channel "+channelName);
 		System.out.println("UID "+ id);
 
@@ -35,12 +35,12 @@ public class ChannelAdminAgentProcess {
 
 		
 		Thread.sleep(20000);
-		eventServerChannelAdmin.changeChannelCapacity(id, 3);
+		eventServerChannelAdmin.changeChannelCapacity(id, 30);
 		System.out.println("la modification du capacity");
 		
 		
 		System.out.println("la Suppression du Channel dans 20s...");
-		Thread.sleep(30000);
+		Thread.sleep(300000);
 				
 						
 		

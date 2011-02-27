@@ -16,7 +16,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
-public class MainSupplierIT {
+public class MainSupplierITcrap {
 
 	/**
 	 * @param args
@@ -28,7 +28,7 @@ public class MainSupplierIT {
 	 */
 	private ORB orb;
 
-	public MainSupplierIT() throws EventClientException,
+	public MainSupplierITcrap() throws EventClientException,
 			TopicNotFoundException, ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
 		EventClient ec = EventClient.init(null);
@@ -67,7 +67,7 @@ public class MainSupplierIT {
 				}
 				public void run(){
 					try {
-						new MainSupplierIT();
+						new MainSupplierITcrap();
 					} catch (ChannelNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
