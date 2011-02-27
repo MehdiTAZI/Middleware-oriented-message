@@ -8,7 +8,7 @@ import java.util.List;
  * 
  * For storing server level datas and Channels list.
  * 
- * UC n°: US10
+ * UC n°07: US10
  * 
  * @author Mezzo-Team
  * 
