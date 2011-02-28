@@ -18,7 +18,10 @@ import org.omg.PortableServer.POAPackage.WrongPolicy;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 
 /**
  * Class CosEventServer
@@ -44,6 +47,7 @@ public class CosEventServer {
 	 * argument : eventServerName
 	 */
     private ORB orb;
+    public static long delta=0; 
 
     /**
      * Constructor of a COS Event Server.
@@ -63,9 +67,10 @@ public class CosEventServer {
      * @param args
      *            Command min arguments
      * @throws InterruptedException 
+     * @throws EventClientException 
      * @throws EventServerException
      */
-    public CosEventServer(String[] args) throws InterruptedException{
+    public CosEventServer(String[] args) throws InterruptedException, EventClientException{
 
     String eventServerName = args[0];
 	Properties props = new Properties();
@@ -120,7 +125,13 @@ public class CosEventServer {
 	   // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
 	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
 	    
+	    //Subscribe to COSTime
+	    TimeClient.init(null).subscribeToTimeService("MEZZO-COSTIME", new CallbackTimeImpl());
+	    
+	    
 	    System.out.println("Mezzo COS Event Server \""+eventServerName+"\" is running...");
+	    System.out.println("Mezzo COS Event Server \""+eventServerName+"\" is subscribing to COS Time "+" MEZZO-COSTIME");
+	 
 	    orb.run();
 
 	} catch (InvalidName e) {
@@ -147,8 +158,19 @@ public class CosEventServer {
 	}
     }
     
-    public static void main(String[] args) throws InterruptedException{
+    public static void main(String[] args) throws InterruptedException, EventClientException{
     	new CosEventServer(args);
     }
 
+	public static long getDelta() {
+		return delta;
+	}
+
+	public static void setDelta(long delta) {
+		CosEventServer.delta = delta;
+	}
+
+	
+
+    
 }

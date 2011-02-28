@@ -34,7 +34,7 @@ public class Test {
 		rootPOA.the_POAManager().activate();
 		Object objRef= orb.resolve_initial_references("NameService");
 		NamingContextExt ncRef =NamingContextExtHelper.narrow(objRef);
-		TimeService service=TimeServiceHelper.narrow(ncRef.resolve_str("cosTime"));
+		TimeService service=TimeServiceHelper.narrow(ncRef.resolve_str("MEZZO-COSTIME"));
 		SynchronizablePOATie tie=new SynchronizablePOATie(new Component());
 		service.subscribe(tie._this(orb));
 		}catch(Exception e){

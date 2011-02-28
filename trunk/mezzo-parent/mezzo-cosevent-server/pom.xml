@@ -25,6 +25,14 @@
 			<groupId>fr.esiag.mezzodijava</groupId>
 			<artifactId>mezzo-server-commons</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>mezzo-costime</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>mezzo-libclient</artifactId>
+		</dependency>
 		<!-- HIBERNATE -->
 		<dependency>
 			<groupId>org.hibernate </groupId>
