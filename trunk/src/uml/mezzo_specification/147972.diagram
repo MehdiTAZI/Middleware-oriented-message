@@ -5,7 +5,7 @@ classinstance 128004 class_ref 134532 // Composant
 note 128008 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
 DIAGRAMME DE SEQUENCE SYSTEM
 UC06: gerer son abonement au CosTime
-- Scenario nominal"
+US176: Scenario nominal - S'abonner au COS Time"
   xyzwh 180 362 2000 353 77
 classinstance 128132 class_ref 141698 // FrameworkMezzo
   name ""   xyz 500 4 2000 life_line_z 2000

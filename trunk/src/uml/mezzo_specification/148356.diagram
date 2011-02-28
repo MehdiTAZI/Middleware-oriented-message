@@ -5,18 +5,18 @@ classinstance 128004 class_ref 134532 // Composant
 classinstance 128132 class_ref 141698 // FrameworkMezzo
   name ""   xyz 406 5 2000 life_line_z 2000
 note 128136 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
-DIAGRAMME DE SEQUENCE SYSTEM
-UC06: gérer son abonement au CosTime
-- Scénario d'exception"
-  xyzwh 155 205 2000 201 85
+DIAGRAMME DE SEQUENCE SYSTEME
+UC06: Gerer son abonement au CosTime.
+US182 : Scenario exceptionnel 2 : Le composant se desabonne mais est deja desabonne."
+  xyzwh 103 189 2000 447 71
 durationcanvas 128260 classinstance_ref 128004 // :Composant
-  xyzwh 79 70 2010 11 882
+  xyzwh 81 70 2010 11 882
 end
 durationcanvas 128388 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 443 70 2010 11 47
+  xyzwh 449 70 2010 11 47
 end
 durationcanvas 128772 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 443 135 2010 11 48
+  xyzwh 449 135 2010 11 48
 end
 msg 128516 synchronous
   from durationcanvas_ref 128260
