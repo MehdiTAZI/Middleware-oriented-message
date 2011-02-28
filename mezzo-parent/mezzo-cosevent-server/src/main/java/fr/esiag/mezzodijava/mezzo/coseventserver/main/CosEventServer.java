@@ -15,14 +15,12 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
-import fr.esiag.mezzodijava.mezzo.commons.MezzoException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 /**
