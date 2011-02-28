@@ -52,6 +52,7 @@ public class TimeServiceCtr {
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
 		if(!model.getComponentSubscribed().add(cc))
 			throw new AlreadyRegisteredException();
+		System.out.println("Component subscribed : " + cc);
 	}
 	
 	/**
@@ -68,5 +69,6 @@ public class TimeServiceCtr {
 		if(!model.getComponentSubscribed().contains(cc))
 			throw new NotRegisteredException();
 		model.getComponentSubscribed().remove(cc);
+		System.out.println("Component unsubscribed : " + cc);
 	} 
 }
