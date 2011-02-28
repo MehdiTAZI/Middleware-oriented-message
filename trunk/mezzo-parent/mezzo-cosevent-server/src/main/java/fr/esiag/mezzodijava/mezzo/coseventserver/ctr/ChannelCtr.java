@@ -48,7 +48,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
  *
  */
 
-public class ChannelCtr implements java.nio.channels.Channel {
+public class ChannelCtr {
 
 	// lien vers le model
 	private Channel channel;	
@@ -273,18 +273,6 @@ public class ChannelCtr implements java.nio.channels.Channel {
 		}
 		System.out.println("Disconnect of a PUSH Consumer from \""
 			+ channel.getTopic() + "\".");
-	}
-
-	@Override
-	public void close() throws IOException {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public boolean isOpen() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 	
 	/**
