@@ -17,12 +17,12 @@ DIAGRAMME DE CLASSES METIERS
 UC 07 -  Administrer un channel"
   xyzwh 308 46 2000 257 77
 relationcanvas 129160 relation_ref 141442 // channels
-  from ref 128648 z 2006 label "channels" italic xyz 126.5 118.5 2006 to ref 128776
+  from ref 128648 z 2006 label "channels" italic xyz 126 118 2006 to ref 128776
   no_role_a no_role_b
   multiplicity_a_pos 130 148 3000 no_multiplicity_b
 end
 relationcanvas 129288 relation_ref 141570 // events
-  from ref 128776 z 2001 label "events" italic xyz 195.5 182 2001 to ref 128904
+  from ref 128776 z 2001 label "events" italic xyz 195 182 2001 to ref 128904
   no_role_a no_role_b
   multiplicity_a_pos 243 198 3000 no_multiplicity_b
 end

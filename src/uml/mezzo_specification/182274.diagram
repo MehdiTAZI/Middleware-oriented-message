@@ -4,6 +4,11 @@ classcanvas 128002 class_ref 148226 // Channel_admin_agent_process
   class_drawing_mode default show_context_mode default show_stereotype_properties default
   xyz 23 33 2000
 end
+note 128008 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE USES  CASES
+UC07: Administrer un un Channel
+"
+  xyzwh 32 208 2000 257 77
 classcanvas 128130 class_ref 141570 // Supplier
   class_drawing_mode default show_context_mode default show_stereotype_properties default
   xyz 22 130 2000
