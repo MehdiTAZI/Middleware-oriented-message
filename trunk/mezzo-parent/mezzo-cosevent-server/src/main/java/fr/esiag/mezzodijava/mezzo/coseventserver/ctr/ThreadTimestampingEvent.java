@@ -1,7 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.Date;
-import java.util.PriorityQueue;
 import java.util.SortedSet;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
