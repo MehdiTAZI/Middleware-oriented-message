@@ -1,6 +1,6 @@
 format 76
 "mezzo_specification"
-  revision 36
+  revision 37
   modified_by 2 "Franck"
 
 
@@ -253,27 +253,27 @@ format 76
 	size A4
       end
 
-      sequencediagram 147972 "Scenario Nominal"
+      sequencediagram 147972 "UC07 - Scenario Nominal : Le Composant s'abonne au COS Time"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 148228 "Scenario Exceptionnel 1 - Le time Service est injoignable"
+      sequencediagram 148228 "UC07 - Scenario Exceptionnel 1 - Le time Service est injoignable"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 148356 "Scenario Exceptionnel 2 - Le Composant se desabonne mais n'est pas abonné"
+      sequencediagram 148356 "UC07 - Scenario Exceptionnel 2 - Le Composant se desabonne mais n'est pas abonne"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 148484 "Scenario Exceptionnel 3 - Le Composant s'abonne mais deja abonné"
+      sequencediagram 148484 "UC07 - Scenario Exceptionnel 3 - Le Composant s'abonne mais deja abonne"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end
 
-      sequencediagram 148612 "Scenario Exceptionnel 4 - Le Composant est injoignable"
+      sequencediagram 148612 "UC07 - Scenario Exceptionnel 4 - Le Composant est injoignable"
 	show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
 	overlapping_bars size A4
       end

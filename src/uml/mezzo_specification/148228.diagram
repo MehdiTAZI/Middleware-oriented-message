@@ -1,13 +1,18 @@
 format 76
 
+note 128002 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE SEQUENCE SYSTEME
+UC06: Gerer son abonement au CosTime.
+US181 : Scenario exceptionnel 1 : Le COS Time est injoignable."
+  xyzwh 79 160 2000 381 75
 classinstance 128004 class_ref 134532 // Composant
   name ""   xyz 34 4 2000 life_line_z 2000
 classinstance 128132 class_ref 141698 // FrameworkMezzo
   name ""   xyz 417 4 2000 life_line_z 2000
 note 129028 "EXCEPTION : TimeServiceException.UnreachableException"
-  xyzwh 84.5 133.5 2000 317 35
+  xyzwh 115.5 119.5 2000 317 35
 durationcanvas 128260 classinstance_ref 128004 // :Composant
-  xyzwh 56 83 2010 11 65
+  xyzwh 58 83 2010 11 65
 end
 lostfoundmsgsupport 128772 xyz 340 92 3005
 msg 128900 lost_synchronous

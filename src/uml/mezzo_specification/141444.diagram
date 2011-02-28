@@ -5,8 +5,8 @@ classinstance 128004 class_ref 148226 // Channel_admin_agent_process
 note 128008 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
 DIAGRAMME DE SEQUENCE SYSTEM
 UC06: Le Channel Admin Agent Process cree un Channel
-- Scénario Alternatif 2"
-  xyzwh 191 439 2000 291 65
+- Scï¿½ario Alternatif 2"
+  xyzwh 191 441 2000 349 75
 classinstance 128132 class_ref 141698 // FrameworkMezzo
   name ""   xyz 504 4 2000 life_line_z 2000
 fragment 129668 "opt"
@@ -21,22 +21,22 @@ end
 textcanvas 131460 "[else]"
   xyzwh 115 346 2030 360 13
 durationcanvas 128260 classinstance_ref 128004 // :Channel_admin_agent_process
-  xyzwh 101 94 2010 11 342
+  xyzwh 110 94 2010 11 342
 end
 durationcanvas 128388 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 541 91 2010 11 51
+  xyzwh 547 91 2010 11 51
 end
 durationcanvas 129796 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 541 152 2010 11 42
+  xyzwh 547 152 2010 11 42
 end
 durationcanvas 130180 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 541 229 2010 11 57
+  xyzwh 547 229 2010 11 57
 end
 durationcanvas 130564 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 541 306 2010 11 41
+  xyzwh 547 306 2010 11 41
 end
 durationcanvas 132100 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 541 362 2010 11 46
+  xyzwh 547 362 2010 11 46
 end
 msg 128516 synchronous
   from durationcanvas_ref 128260

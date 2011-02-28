@@ -1,5 +1,10 @@
 format 76
 
+note 128002 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE SEQUENCE SYSTEME
+UC06: Gerer son abonement au CosTime.
+US184 : Scenario exceptionnel 4 : Le Composant est injognable."
+  xyzwh 576 43 2000 223 99
 classinstance 128004 class_ref 134532 // Composant
   name ""   xyz 64 4 2000 life_line_z 2000
 classinstance 128132 class_ref 141698 // FrameworkMezzo
@@ -12,18 +17,18 @@ note 130308 "EXCEPTION : ComponentUnreachable"
 note 130692 "Le Systeme journalise l'erreur"
   xyzwh 289.5 326.5 2000 183 35
 durationcanvas 128260 classinstance_ref 128004 // :Composant
-  xyzwh 86 83 2010 11 818
+  xyzwh 88 83 2010 11 818
 end
 durationcanvas 128388 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 535 83 2010 11 45
+  xyzwh 541 83 2010 11 45
 end
 durationcanvas 129028 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 535 159 2010 11 56
+  xyzwh 541 159 2010 11 56
 end
 durationcanvas 129924 classinstance_ref 128132 // :FrameworkMezzo
-  xyzwh 535 242 2010 11 42
+  xyzwh 541 242 2010 11 42
   overlappingdurationcanvas 130436
-    xyzwh 541 249 2020 11 25
+    xyzwh 547 249 2020 11 25
   end
 end
 lostfoundmsgsupport 130052 xyz 187 244 2015
