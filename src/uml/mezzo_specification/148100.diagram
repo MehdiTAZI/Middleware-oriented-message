@@ -14,7 +14,7 @@ classcanvas 128260 class_ref 141570 // Supplier
 end
 note 128264 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
 DIAGRAMME DE USES CASES
-UC06: gérer son abonement au CosTime
+UC06: gerer son abonement au CosTime
 "
   xyzwh 316 210 2000 239 73
 usecasecanvas 128644 usecase_ref 134532 // S'abonner au cosTime
