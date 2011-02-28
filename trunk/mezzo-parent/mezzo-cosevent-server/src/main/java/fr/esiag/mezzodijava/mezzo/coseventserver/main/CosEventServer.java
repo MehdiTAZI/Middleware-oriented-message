@@ -15,6 +15,7 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
+import fr.esiag.mezzodijava.mezzo.commons.MezzoException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
@@ -22,14 +23,14 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 /**
  * Class CosEventServer
  * 
  * Main class for the Mezzo di Java's COS Event Server
  * 
- * UC n°: US14,US15 (+US children) * 
- * Program argmuments:
+ * UC n°: US14,US15 (+US children) * Program argmuments:
  * 
  * -ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService
  * -Djacorb.home=C:\\mezzodev\\jacorb-2.3.1
@@ -44,10 +45,10 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 public class CosEventServer {
 
     /**
-	 * argument : eventServerName
-	 */
+     * argument : eventServerName
+     */
     private ORB orb;
-    public static long delta=0; 
+    public static long delta = 0;
 
     /**
      * Constructor of a COS Event Server.
@@ -66,33 +67,34 @@ public class CosEventServer {
      * 
      * @param args
      *            Command min arguments
-     * @throws InterruptedException 
-     * @throws EventClientException 
+     * @throws InterruptedException
+     * @throws TimeClientException
      * @throws EventServerException
      */
-    public CosEventServer(String[] args) throws InterruptedException, EventClientException{
+    public CosEventServer(String[] args) throws InterruptedException,
+	    TimeClientException {
 
-    String eventServerName = args[0];
+	String eventServerName = args[0];
 	Properties props = new Properties();
-	
-	if ( args!=null){
-		//channelName= args[0];
-		//eventServerName=args[1];
-		
+
+	if (args != null) {
+	    // channelName= args[0];
+	    // eventServerName=args[1];
+
 	}
-	
+
 	try {
 	    props.load(this.getClass().getClassLoader()
 		    .getResourceAsStream("eventserver.properties"));
 	} catch (IOException e) {
 	    // TODO log here
-	    
+
 	}
-//	for(String arg:args)
-//		System.out.println(arg);
-			
+	// for(String arg:args)
+	// System.out.println(arg);
+
 	orb = BFFactory.createOrb(args, props);
-	
+
 	/*
 	 * orb = ORB.init(args, props); Channel channel = new
 	 * Channel(channelName);
@@ -102,18 +104,18 @@ public class CosEventServer {
 	 * ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
 	 * channelAdminCtr);
 	 */
-	//ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
-		//channelName, 10);
-	
-	//ChannelPublisher publisher=new ChannelPublisher();
-	//publisher.publish(channelAdminImpl, orb);
-	//ChannelPublisher.publish(channelAdminImpl, orb);
-	EventServerChannelAdminImpl eventServerChannelAdmin =new EventServerChannelAdminImpl(eventServerName);
-	
-	
-	//ThreadEvent th = new ThreadEvent(channelName);
-	//Thread thread = new Thread(th);
-	//thread.start();
+	// ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
+	// channelName, 10);
+
+	// ChannelPublisher publisher=new ChannelPublisher();
+	// publisher.publish(channelAdminImpl, orb);
+	// ChannelPublisher.publish(channelAdminImpl, orb);
+	EventServerChannelAdminImpl eventServerChannelAdmin = new EventServerChannelAdminImpl(
+		eventServerName);
+
+	// ThreadEvent th = new ThreadEvent(channelName);
+	// Thread thread = new Thread(th);
+	// thread.start();
 
 	try {
 	    POA poa = POAHelper.narrow(orb
@@ -122,16 +124,23 @@ public class CosEventServer {
 	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
 		    .resolve_initial_references("NameService"));
 
-	   // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new ChannelAdminPOATie(channelAdminImpl)));
-	    nc.rebind(nc.to_name(eventServerName),poa.servant_to_reference( new EventServerChannelAdminPOATie(eventServerChannelAdmin)));
-	    
-	    //Subscribe to COSTime
-	    TimeClient.init(null).subscribeToTimeService("MEZZO-COSTIME", new CallbackTimeImpl());
-	    
-	    
-	    System.out.println("Mezzo COS Event Server \""+eventServerName+"\" is running...");
-	    System.out.println("Mezzo COS Event Server \""+eventServerName+"\" is subscribing to COS Time "+" MEZZO-COSTIME");
-	 
+	    // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new
+	    // ChannelAdminPOATie(channelAdminImpl)));
+	    nc.rebind(nc.to_name(eventServerName), poa
+		    .servant_to_reference(new EventServerChannelAdminPOATie(
+			    eventServerChannelAdmin)));
+
+	    // Subscribe to COSTime
+	    // TODO Externalize this :
+	    String cosTimeName = "MEZZO-COSTIME";
+	    System.out.println("Mezzo COS Event Server \"" + eventServerName
+		    + "\" is subscribing to COS Time " + cosTimeName);
+	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
+		    new CallbackTimeImpl());
+
+	    System.out.println("Mezzo COS Event Server \"" + eventServerName
+		    + "\" is running...");
+
 	    orb.run();
 
 	} catch (InvalidName e) {
@@ -157,20 +166,18 @@ public class CosEventServer {
 	    e.printStackTrace();
 	}
     }
-    
-    public static void main(String[] args) throws InterruptedException, EventClientException{
-    	new CosEventServer(args);
+
+    public static void main(String[] args) throws InterruptedException,
+	    TimeClientException {
+	new CosEventServer(args);
     }
 
-	public static long getDelta() {
-		return delta;
-	}
+    public static long getDelta() {
+	return delta;
+    }
 
-	public static void setDelta(long delta) {
-		CosEventServer.delta = delta;
-	}
+    public static void setDelta(long delta) {
+	CosEventServer.delta = delta;
+    }
 
-	
-
-    
 }

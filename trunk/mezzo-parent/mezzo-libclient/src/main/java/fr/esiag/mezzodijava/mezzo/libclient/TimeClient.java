@@ -23,7 +23,7 @@ import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizablePOATie;
 import fr.esiag.mezzodijava.mezzo.costime.TimeService;
 import fr.esiag.mezzodijava.mezzo.costime.TimeServiceHelper;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 /**
  * Class EventClient.
@@ -66,12 +66,12 @@ public final class TimeClient {
      * @param args
      *            Command line parameters
      * @return a initialized singleton instance of EventClient
-     * @throws EventClientException
+     * @throws TimeClientException
      *             Cannot init a resource (ORB or NameService) with this
      *             configuration
      */
     public static synchronized TimeClient init(String[] args)
-	    throws EventClientException {
+	    throws TimeClientException {
 	if (instance == null) {
 	    // // Properties à externaliser
 	    // props = new Properties();
@@ -116,11 +116,11 @@ public final class TimeClient {
      *            Program Arguments
      * @param properties
      *            optional properties
-     * @throws EventClientException
+     * @throws TimeClientException
      *             Initialization failure
      */
     private TimeClient(String[] args, Properties properties)
-	    throws EventClientException {
+	    throws TimeClientException {
 	System.out.println("Initilazing Mezzo Time Client...");
 	props = properties;
 	if (props == null) {
@@ -130,7 +130,7 @@ public final class TimeClient {
 			.getResourceAsStream(TimeClient.CLIENT_PROPERTIES));
 	    } catch (IOException e) {
 		// TODO log here
-		throw new EventClientException(
+		throw new TimeClientException(
 			"Error in opening time client property file", e);
 	    }
 	}
@@ -140,7 +140,7 @@ public final class TimeClient {
 	    nceObj = orb.resolve_initial_references("NameService");
 	} catch (InvalidName e) {
 	    // TODO log here
-	    throw new EventClientException("Cannot resolve NameService", e);
+	    throw new TimeClientException("Cannot resolve NameService", e);
 	}
 	nce = NamingContextExtHelper.narrow(nceObj);
 	System.out.println("Mezzo Time Client initialized.");
@@ -150,10 +150,14 @@ public final class TimeClient {
 	return orb;
     }
 
-   
-
-    private TimeService resolveTimeService(
-	    String timeServerName) {
+    /**
+     * Return a Time Service instance by its name from the name service.
+     * 
+     * @param timeServerName
+     *            Name of the Time Service in the Name Service
+     * @return time service instance
+     */
+    public TimeService resolveTimeService(String timeServerName) {
 	Object channelObj = null;
 	try {
 	    channelObj = nce.resolve_str(timeServerName);
@@ -172,45 +176,59 @@ public final class TimeClient {
 	return TimeServiceHelper.narrow(channelObj);
     }
 
-    public void subscribeToTimeService(String timeServiceName, SynchronizableOperations callbackTimeImplementation) throws EventClientException{
-    	TimeService service = resolveTimeService(timeServiceName);
-    	Synchronizable callbackIOR = serveCallbackTime(callbackTimeImplementation);
-    	try {
-			service.subscribe(callbackIOR);
-		} catch (AlreadyRegisteredException e) {
-			new EventClientException("Deja abonne au COS Time " + timeServiceName, e);
-		}   	
-    }
-    
     /**
-     * Server a CallbackTime and return its IOR.
+     * Convenient method to resove a Time service by its name (fist aguments),
+     * serve a time callback (second argument) et subscribe it in the time
+     * service.
+     * 
+     * @param timeServerName
+     *            Name of the Time Service in the Name Service
+     * @param callbackConsumerImplementation
+     *            implementation of callbackConsumerOperation
+     * @throws TimeClientException
+     */
+    public void subscribeToTimeService(String timeServiceName,
+	    SynchronizableOperations callbackTimeImplementation)
+	    throws TimeClientException {
+	TimeService service = resolveTimeService(timeServiceName);
+	Synchronizable callbackIOR = serveCallbackTime(callbackTimeImplementation);
+	try {
+	    service.subscribe(callbackIOR);
+	} catch (AlreadyRegisteredException e) {
+	    new TimeClientException("Deja abonne au COS Time "
+		    + timeServiceName, e);
+	}
+    }
+
+    /**
+     * Serve a CallbackTime and return its IOR.
      * 
      * @param callbackConsumerImplementation
      *            implementation of callbackConsumerOperation
      * @return IOR CallbackConsumer
-     * @throws EventClientException
+     * @throws TimeClientException
      */
-    private Synchronizable serveCallbackTime(
+    public Synchronizable serveCallbackTime(
 	    SynchronizableOperations callbackTimeImplementation)
-	    throws EventClientException {
+	    throws TimeClientException {
 	Object rootPOAObj = null;
 	try {
 	    rootPOAObj = orb.resolve_initial_references("RootPOA");
 	} catch (InvalidName e) {
 	    // TODO log here
-	    throw new EventClientException("Cannot resolve RootPOA", e);
+	    throw new TimeClientException("Cannot resolve RootPOA", e);
 	}
 	// TODO make a child POA to handle callbacks
 	callbacksPOA = POAHelper.narrow(rootPOAObj);
 	try {
 	    callbacksPOA.the_POAManager().activate();
 	} catch (AdapterInactive e) {
-	    throw new EventClientException(
+	    throw new TimeClientException(
 		    "Cannot activate the RootPOAManager", e);
 	}
 	// create a tie, with servant being the delegate.
 	SynchronizablePOATie tie = new SynchronizablePOATie(
-			callbackTimeImplementation, callbacksPOA);
+		callbackTimeImplementation, callbacksPOA);
 
 	// obtain the objectRef for the tie
 	Synchronizable href = tie._this(orb);
