@@ -2,6 +2,11 @@ format 76
 
 classinstance 128004 class_ref 134532 // Composant
   name ""   xyz 30 4 2000 life_line_z 2000
+note 128008 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
+DIAGRAMME DE SEQUENCE SYSTEM
+UC06: gérer son abonement au CosTime
+- Scénario d'exception'AlreadyRegistredException'"
+  xyzwh 165 287 2000 279 73
 classinstance 128132 class_ref 141698 // FrameworkMezzo
   name ""   xyz 489 5 2000 life_line_z 2000
 durationcanvas 128260 classinstance_ref 128004 // :Composant

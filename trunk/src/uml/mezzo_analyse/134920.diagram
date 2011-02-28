@@ -2,7 +2,7 @@ format 76
 
 classcanvas 128520 class_ref 135176 // Component
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 52 355 2000
+  xyz 43 324 2000
 end
 classcanvas 128648 class_ref 135048 // TimeServiceCtr
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
@@ -22,12 +22,12 @@ classcanvas 130056 class_ref 135432 // ThreadTime
 end
 classcanvas 130184 class_ref 135560 // TimeServicePublisher
   draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
-  xyz 231 399 2000
+  xyz 224 401 2000
 end
 note 130952 "MEZZO DI JAVA - ANALYSE
 DIAGRAMME DE CLASSES PARTICIPANTES
-COSTIME"
-  xyzwh 17.5 131.5 2000 257 77
+UC 06 - gérer l'abonnement au CosTime"
+  xyzwh 17.5 130.5 2000 253 65
 relationcanvas 128904 relation_ref 134920 // <unidirectional association>
   from ref 128520 z 2011 to ref 128776
   no_role_a no_role_b
@@ -50,6 +50,7 @@ relationcanvas 130696 relation_ref 135688 // <unidirectional association>
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 130824 relation_ref 135816 // <unidirectional association>
+  decenter_begin 469
   from ref 130056 z 2001 to ref 129160
   no_role_a no_role_b
   no_multiplicity_a no_multiplicity_b

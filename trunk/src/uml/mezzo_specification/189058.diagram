@@ -8,7 +8,7 @@ note 130178 "MEZZO DI JAVA - SPECIFICATIONS FONCTIONNELLES
 DIAGRAMME DE SEQUENCE SYSTEME
 UC07 : Administrer un Channel
 US159 : Scénario Exception 1 :  Creer un channel dont le TOPIC existe deja"
-  xyzwh 207 189 2000 299 75
+  xyzwh 201 190 2000 305 79
 durationcanvas 128642 classinstance_ref 128002 // :Channel_admin_agent_process
   xyzwh 71 60 2010 11 137
 end
