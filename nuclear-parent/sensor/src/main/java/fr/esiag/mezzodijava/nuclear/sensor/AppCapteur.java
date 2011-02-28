@@ -31,6 +31,11 @@ public class AppCapteur
 		for(String message:data){
 			System.out.println(message);
 			writer.println(message);//envoie de Message au Sensorsdatasupplier     
+			try {
+			    Thread.sleep(2000);
+			} catch (InterruptedException e) {
+			    e.printStackTrace();
+			}
 		}
 		System.out.println("END");     // message de terminaison 
 		writer.println("END") ;
