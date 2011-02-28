@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.PriorityQueue;
-import java.util.SortedSet;
-import javassist.expr.NewArray;
-import org.apache.commons.collections.list.SynchronizedList;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+
 
 /**
  * Class ThreadRemoveExpiredEvent to find expired event in queues 
