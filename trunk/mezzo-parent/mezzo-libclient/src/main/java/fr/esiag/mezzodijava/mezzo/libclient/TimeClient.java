@@ -157,6 +157,7 @@ public final class TimeClient {
      *            Name of the Time Service in the Name Service
      * @return time service instance
      * @throws TimeClientException
+     *             In case of failure of resolving Time Service.
      */
     public TimeService resolveTimeService(String timeServerName)
 	    throws TimeClientException {
@@ -170,7 +171,7 @@ public final class TimeClient {
 	    throw new TimeClientException("Cannot find the Time Service '"
 		    + timeServerName + "'", e);
 	} catch (CannotProceed e) {
-	    // TODO log here
+	    //log.error("Cannot resolve the Time Service", e);
 	    throw new TimeClientException("Cannot resolve the Time Service", e);
 	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 	    // TODO log here
