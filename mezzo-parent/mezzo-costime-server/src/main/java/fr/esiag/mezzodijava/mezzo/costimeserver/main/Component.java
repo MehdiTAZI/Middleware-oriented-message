@@ -39,7 +39,9 @@ public class Component implements SynchronizableOperations{
 	 */
 	@Override
 	public void date(long date) {
+		
 		this.date=new Date(date);
+		System.out.println("LA date syncronisé "+ date);
 	}
 
 }

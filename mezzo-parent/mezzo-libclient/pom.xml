@@ -23,15 +23,20 @@
 		</dependency>
 		<dependency>
 			<groupId>fr.esiag.mezzodijava</groupId>
-			<artifactId>mezzo-commons</artifactId>
+			<artifactId>mezzo-costime</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>mezzo-commons</artifactId>
+		</dependency><!--
 		<dependency>
 			<groupId>fr.esiag.mezzodijava</groupId>
 			<artifactId>mezzo-cosevent-server</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	--></dependencies>
 	<build>
 		<plugins>
 

@@ -122,6 +122,6 @@
 		<module>mezzo-cosevent-server</module>
 		<module>mezzo-libclient</module>
 		<module>mezzo-costime</module>
-		<module>mezzo-costime-server</module>
+		<module>mezzo-costime-server</module>		
 	</modules>
 </project>
