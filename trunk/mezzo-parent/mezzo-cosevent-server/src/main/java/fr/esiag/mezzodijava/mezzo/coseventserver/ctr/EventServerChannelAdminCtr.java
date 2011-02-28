@@ -10,7 +10,6 @@ import org.omg.CosNaming.NamingContextPackage.NotFound;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
-import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
@@ -140,8 +139,22 @@ public class EventServerChannelAdminCtr {
     	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
     	if (channel == null)
     		throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
-    	if (channel.getCapacity() > capacity)
-    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
+    	
+    	/*if (channel.getCapacity() > capacity)
+    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();*/
+    		
+    	int channelCapacity = channel.getCapacity();
+    	int nbConnectedSuppliers=channel.getSuppliersConnected().size();
+    	int nbConnectedConsumers=channel.getConsumersConnected().size();
+    	int nbMaxConnected = (nbConnectedSuppliers>nbConnectedConsumers)?
+    										nbConnectedSuppliers:nbConnectedConsumers;
+    	
+    	//impossible a se produire sauf en cas de modification du code de channel ...
+    	if (capacity<nbMaxConnected)
+    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException("Cannot reduce current channel capacity : verify that's the number of consumers/suppliers is lower than the capacity you want to apply !");
+    	else if (channelCapacity<nbMaxConnected)
+    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException("Internal channel configuration error !");
+    	
     	BFFactory.changeChannelCapacity(channel, capacity);
     	System.out.println("Event Channel \"" + channel.getTopic()
 		+ "\" capacity updated to \"" + capacity + "\".");
