@@ -1,0 +1,165 @@
+format 76
+
+classinstance 128008 class_ref 134536 // component
+  drawing_mode actor  name ""   xyz 25.0657 22.6005 2000 life_line_z 2000
+classinstance 128136 class_ref 141064 // TimeServiceImpl
+  name "tmSrv"   xyz 108.347 22.7105 2000 life_line_z 2000
+classinstance 128392 class_ref 141192 // TimeServiceCtr
+  name "tmSrvCtr"   xyz 232.669 24.0255 2000 life_line_z 2000
+classinstance 128520 class_ref 141320 // TimeServiceModel
+  name "tmSrvMdl"   xyz 358.251 22.7105 2000 life_line_z 2000
+classinstance 128648 class_ref 141448 // AlreadyRegisteredException
+  name ""   xyz 530.673 26.3204 2000 life_line_z 2000
+classinstance 128776 class_ref 141576 // NotRegisteredException
+  name ""   xyz 677.909 20.2805 2000 life_line_z 2000
+classinstance 132488 class_ref 141704 // ThreadTime
+  name ""   xyz 515.25 192.63 2000 life_line_z 2000
+fragment 133512 "SC:Exp1"
+  xyzwh 3.38 115.29 2015 752 69
+end
+fragment 134920 "loop"
+  xyzwh 1.96 264.2 2015 750 114
+end
+fragment 137608 "SC:exp2"
+  xyzwh -3.36 468.42 2020 777 69
+end
+durationcanvas 128904 classinstance_ref 128008 // :component
+  xyzwh 45 95.4215 2010 11 506
+  overlappingdurationcanvas 135944
+    xyzwh 51 341.76 2020 11 31
+  end
+end
+durationcanvas 129032 classinstance_ref 128136 // tmSrv:TimeServiceImpl
+  xyzwh 158 95.0916 2010 11 147
+end
+durationcanvas 129288 classinstance_ref 128392 // tmSrvCtr:TimeServiceCtr
+  xyzwh 286 96.2323 2010 11 166
+end
+durationcanvas 133640 classinstance_ref 128648 // :AlreadyRegisteredException
+  xyzwh 587 119.4 2010 11 43
+end
+durationcanvas 134664 classinstance_ref 128520 // tmSrvMdl:TimeServiceModel
+  xyzwh 418 217.51 2010 11 28
+end
+durationcanvas 135432 classinstance_ref 132488 // :ThreadTime
+  xyzwh 540 277.51 2010 11 109
+end
+durationcanvas 135560 classinstance_ref 128520 // tmSrvMdl:TimeServiceModel
+  xyzwh 418 278 2010 11 45
+end
+durationcanvas 136200 classinstance_ref 128136 // tmSrv:TimeServiceImpl
+  xyzwh 158 418.84 2010 11 173
+end
+durationcanvas 136456 classinstance_ref 128392 // tmSrvCtr:TimeServiceCtr
+  xyzwh 286 426.47 2010 11 164
+end
+durationcanvas 136968 classinstance_ref 128776 // :NotRegisteredException
+  xyzwh 729 471.58 2010 11 54
+end
+durationcanvas 137736 classinstance_ref 128520 // tmSrvMdl:TimeServiceModel
+  xyzwh 418 552.44 2010 11 25
+end
+msg 129160 asynchronous
+  from durationcanvas_ref 128904
+  to durationcanvas_ref 129032
+  yz 97 2015 explicitmsg "subscribe(c)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 92 86
+msg 129416 asynchronous
+  from durationcanvas_ref 129032
+  to durationcanvas_ref 129288
+  yz 102 2020 explicitmsg "subscribe(c)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 211 89
+msg 133768 synchronous
+  from durationcanvas_ref 129288
+  to durationcanvas_ref 133640
+  yz 126 2015 explicitmsg "new()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 431 116
+msg 133896 return
+  from durationcanvas_ref 133640
+  to durationcanvas_ref 129288
+  yz 145 2015 explicitmsg "AlreadyRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 404 134
+msg 134152 return
+  from durationcanvas_ref 129288
+  to durationcanvas_ref 129032
+  yz 158 2015 explicitmsg "AlreadyRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 190 147
+msg 134280 return
+  from durationcanvas_ref 129032
+  to durationcanvas_ref 128904
+  yz 172 2020 explicitmsg "AlreadyRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 70 161
+msg 134792 asynchronous
+  from durationcanvas_ref 129288
+  to durationcanvas_ref 134664
+  yz 216 2015 explicitmsg "subscribe(c)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 331 206
+msg 135688 synchronous
+  from durationcanvas_ref 135432
+  to durationcanvas_ref 135560
+  yz 279 2015 explicitmsg "getComponentSubscribed()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 427 269
+msg 135816 return
+  from durationcanvas_ref 135560
+  to durationcanvas_ref 135432
+  yz 305 2015 explicitmsg "componentSubscribedList"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 431 294
+msg 136072 asynchronous
+  from durationcanvas_ref 135432
+  to durationcanvas_ref 135944
+  yz 345 2025 explicitmsg "setDate()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  args "date"
+  label_xy 272 335
+msg 136328 asynchronous
+  from durationcanvas_ref 128904
+  to durationcanvas_ref 136200
+  yz 424 2015 explicitmsg "unsubscribe(c)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 78 413
+msg 136584 asynchronous
+  from durationcanvas_ref 136200
+  to durationcanvas_ref 136456
+  yz 459 2020 explicitmsg "unsubscribe(c)"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 199 445
+msg 137096 synchronous
+  from durationcanvas_ref 136456
+  to durationcanvas_ref 136968
+  yz 484 2015 explicitmsg "new()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 506 474
+msg 137224 return
+  from durationcanvas_ref 136968
+  to durationcanvas_ref 136456
+  yz 500 2020 explicitmsg "NotRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 485 489
+msg 137352 return
+  from durationcanvas_ref 136456
+  to durationcanvas_ref 136200
+  yz 506 2015 explicitmsg "NotRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 199 493
+msg 137480 return
+  from durationcanvas_ref 136200
+  to durationcanvas_ref 128904
+  yz 513 2020 explicitmsg "NotRegistred"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 80 504
+msg 137864 asynchronous
+  from durationcanvas_ref 136456
+  to durationcanvas_ref 137736
+  yz 551 2015 explicitmsg "unsubscribe()"
+  show_full_operations_definition default drawing_language default show_context_mode default
+  label_xy 329 540
+end
