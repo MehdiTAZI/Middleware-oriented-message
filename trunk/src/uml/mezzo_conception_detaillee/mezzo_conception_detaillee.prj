@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 52
-  modified_by 8 "Administrateur"
+  revision 53
+  modified_by 2 "Franck"
 
 
   
@@ -3010,9 +3010,9 @@ ${members}}
       overlapping_bars size A4-Landscape
     end
 
-    sequencediagram 134536 "DSCD CosTime"
+    sequencediagram 134536 "DSCD9 - UC06 Gerer abonnement avec le COS time PUSH"
       show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
-      overlapping_bars size A4
+      overlapping_bars size A4-Landscape
     end
   end
 end
