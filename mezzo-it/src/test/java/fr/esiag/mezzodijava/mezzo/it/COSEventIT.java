@@ -27,9 +27,13 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
+import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
+import fr.esiag.mezzodijava.mezzo.costime.TimeService;
 import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 public class COSEventIT {
@@ -38,58 +42,6 @@ public class COSEventIT {
     public static void beforeClass() {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// PropertyConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.properties"));
-
-    }
-
-    public class MainServerLauncher implements Runnable {
-
-	Method mainMethod;
-
-	long delay;
-
-	String[] args;
-
-	public MainServerLauncher(Class<?> mainClass, long delay,
-		String... args) {
-	    this.delay = delay;
-	    this.args = args;
-	    try {
-
-		// Create the array of Argument Types
-		Class<?>[] argTypes = { String[].class };
-
-		// Now find the method
-		mainMethod = mainClass.getMethod("main", argTypes);
-		// System.out.println(mainMethod);
-
-	    } catch (Exception e) {
-		e.printStackTrace();
-	    }
-	}
-
-	public void go() throws InterruptedException {
-	    Thread t = new Thread(this);
-	    t.setDaemon(true);
-	    t.start();
-	    Thread.sleep(this.delay);
-	}
-
-	@Override
-	public void run() {
-	    // Create the actual argument array
-	    Object passedArgv[] = { args };
-
-	    // Now invoke the method.
-	    try {
-		mainMethod.invoke(null, passedArgv);
-	    } catch (IllegalArgumentException e) {
-		e.printStackTrace();
-	    } catch (IllegalAccessException e) {
-		e.printStackTrace();
-	    } catch (InvocationTargetException e) {
-		e.printStackTrace();
-	    }
-	}
 
     }
 
@@ -114,7 +66,7 @@ public class COSEventIT {
 	    TopicNotFoundException, ChannelAlreadyExistsException,
 	    NotRegisteredException, InterruptedException,
 	    MaximalConnectionReachedException, AlreadyConnectedException,
-	    NotConnectedException {
+	    NotConnectedException, TimeClientException {
 	EventClient ec = EventClient.init(null);
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	ProxyForPushConsumer consumerProxy = channelAdmin
@@ -129,6 +81,8 @@ public class COSEventIT {
 
     @Before
     public void beforeTest() throws InterruptedException{
+	//mise a zero du compteur de message
+	recu= 0;
 	// le time serveur
 	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
 		3000, "MEZZO-COSTIME", "1000");
@@ -169,8 +123,6 @@ public class COSEventIT {
 		.getProxyForPushSupplier();
 	supplierProxy.connect();
 
-	System.out.println("test3");
-	recu = 0;
 	for (int i = 0; i < 10; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
@@ -209,7 +161,6 @@ public class COSEventIT {
 		(String[]) null);
 	s2.go();
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-	recu = 0;
 	for (int i = 0; i < 10; i++) {
 	    Thread t = new Thread(i + "") {
 		public void run() {
@@ -221,7 +172,6 @@ public class COSEventIT {
 				.getProxyForPushSupplier();
 			supplierProxy.connect();
 
-			System.out.println("test3");
 			for (int i = 0; i < 10; i++) {
 			    Header header = new Header(123, 1, Calendar
 				    .getInstance().getTimeInMillis(), 10120);
@@ -288,7 +238,6 @@ public class COSEventIT {
 	    s2.go();
 	}
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-	recu = 0;
 	for (int i = 0; i < 10; i++) {
 	    Thread t = new Thread(i + "") {
 		public void run() {
@@ -300,7 +249,6 @@ public class COSEventIT {
 				.getProxyForPushSupplier();
 			supplierProxy.connect();
 
-			System.out.println("test3");
 			for (int i = 0; i < 10; i++) {
 			    Header header = new Header(123, 1, Calendar
 				    .getInstance().getTimeInMillis(), 10120);

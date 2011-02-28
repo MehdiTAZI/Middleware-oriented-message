@@ -156,8 +156,10 @@ public final class TimeClient {
      * @param timeServerName
      *            Name of the Time Service in the Name Service
      * @return time service instance
+     * @throws TimeClientException
      */
-    public TimeService resolveTimeService(String timeServerName) {
+    public TimeService resolveTimeService(String timeServerName)
+	    throws TimeClientException {
 	Object channelObj = null;
 	try {
 	    channelObj = nce.resolve_str(timeServerName);
@@ -165,13 +167,14 @@ public final class TimeClient {
 	    // before throwing exception
 	} catch (NotFound e) {
 	    // TODO log here
-
+	    throw new TimeClientException("Cannot find the Time Service '"
+		    + timeServerName + "'", e);
 	} catch (CannotProceed e) {
 	    // TODO log here
-
+	    throw new TimeClientException("Cannot resolve the Time Service", e);
 	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
 	    // TODO log here
-
+	    throw new TimeClientException("Invalid topic name", e);
 	}
 	return TimeServiceHelper.narrow(channelObj);
     }
@@ -223,8 +226,8 @@ public final class TimeClient {
 	try {
 	    callbacksPOA.the_POAManager().activate();
 	} catch (AdapterInactive e) {
-	    throw new TimeClientException(
-		    "Cannot activate the RootPOAManager", e);
+	    throw new TimeClientException("Cannot activate the RootPOAManager",
+		    e);
 	}
 	// create a tie, with servant being the delegate.
 	SynchronizablePOATie tie = new SynchronizablePOATie(
