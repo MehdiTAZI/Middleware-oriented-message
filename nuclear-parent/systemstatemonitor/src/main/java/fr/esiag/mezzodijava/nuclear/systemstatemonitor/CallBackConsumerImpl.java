@@ -32,8 +32,10 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 		int average=0;
 		
 		//if Event is an alert so push it, code 333 for value exceeded
+		// alerts priority = 3
 		if (eventInfo.isAlerte()){
 			e.header.code = 333;
+			e.header.priority=3;
 			supplier.PushEvent(e);
 		}
 		
@@ -47,12 +49,14 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 			sum += value;
 		}
 		// make the average of the 5 values
-		average = sum / 5;
+		average = sum / list.size();
 		
 		// if the state has changed over 10% since last 5 events, alert! code 999
+		// state change priority = 2
 		boolean state = (average - Integer.valueOf(eventInfo.getData()))>(average * 10/100) ;
 		if (state){
 			e.header.code = 999;
+			e.header.priority=2;
 			supplier.PushEvent(e);
 		}
 
