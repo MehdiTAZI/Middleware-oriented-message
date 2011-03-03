@@ -130,7 +130,7 @@ public class CosEventServer {
 
 	    // Subscribe to COSTime
 	    // TODO Externalize this :
-	    String cosTimeName = "MEZZO-COSTIME";
+	    String cosTimeName = "MEZZO-TIME";
 	    System.out.println("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
