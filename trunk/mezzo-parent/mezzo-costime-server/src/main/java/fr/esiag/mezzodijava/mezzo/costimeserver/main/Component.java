@@ -41,7 +41,7 @@ public class Component implements SynchronizableOperations{
 	public void date(long date) {
 		
 		this.date=new Date(date);
-		System.out.println("LA date syncronisé "+ date);
+		System.out.println("La date synchronisé "+ date);
 	}
 
 }
