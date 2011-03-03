@@ -1,8 +1,0 @@
-----------------------------------------------------------------
-2011-02-21 21:27:05.470 GMT:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.2.1 - (999685): instance a816c00e-012e-4a1e-541a-000000cc2850 
-on database directory C:\mezzodev\SystemStateDb\Base  with class loader sun.misc.Launcher$AppClassLoader@1ba34f2 
-Loaded from file:/C:/mezzodev/demo/systemstatemonitor.jar
-java.vendor=Sun Microsystems Inc.
-java.runtime.version=1.6.0_22-b04
-Database Class Loader started - derby.database.classpath=''
