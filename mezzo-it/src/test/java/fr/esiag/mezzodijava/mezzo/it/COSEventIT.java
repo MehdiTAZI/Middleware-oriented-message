@@ -80,7 +80,7 @@ public class COSEventIT {
 	callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
 	CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 	consumerProxy.subscribe(cbc);
-	if ((args!= null) && (args.length >= 1)) {
+	if ((args != null) && (args.length >= 1)) {
 	    Thread.sleep(new Long(args[0]).longValue());
 	}
 	consumerProxy.connect();
@@ -300,8 +300,26 @@ public class COSEventIT {
 	System.out.println("fini");
     }
 
+    /**
+     * Test Automatique - CI14 - US165 - Cycle de vie des Event.
+     * 
+     * Teste la priorite : si plusieur event dans la Queue d'un consummer, ils
+     * doivent lui être délivré dans l'ordre inverse du niveau de priorité.
+     * 
+     * Teste la duré de vie : seul ne sont envoyé au consumer les event dont 
+     * (date synchronisee de creation + TTL) >= (date synchronisée courante).
+     * 
+     * @throws InterruptedException
+     * @throws EventClientException
+     * @throws ChannelAlreadyExistsException
+     * @throws TopicNotFoundException
+     * @throws ChannelNotFoundException
+     * @throws NotConnectedException
+     * @throws MaximalConnectionReachedException
+     * @throws AlreadyConnectedException
+     */
     @Test
-    public void testUC14_CycleDeVieDesMessages() throws InterruptedException,
+    public void testCI14_CycleDeVieDesMessages() throws InterruptedException,
 	    EventClientException, ChannelAlreadyExistsException,
 	    TopicNotFoundException, ChannelNotFoundException,
 	    NotConnectedException, MaximalConnectionReachedException,
@@ -322,35 +340,40 @@ public class COSEventIT {
 		.getProxyForPushSupplier();
 	supplierProxy.connect();
 
-	// envoie de 12 messages avec les priorités suivantes 4 2 5 3 1 4 2 4 5 1 5 5
-	// qui expirent au bout de 10 seconde pour les 2 premiers et 1s pour les 2 derniers
+	// envoie de 12 messages avec les priorités suivantes 4 2 5 3 1 4 2 4 5
+	// 1 5 5
+	// qui expirent au bout de 10 seconde pour les 2 premiers et 1s pour les
+	// 2 derniers
 	int[] inputPriorities = { 4, 2, 5, 3, 1, 4, 2, 4, 5, 1, 5, 5 };
-	long[] inputTimeToLive = { 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 1000, 1000 };
-	//on s'attend à n'en recevoir que 10
-	int[] expectedPriorities = { 5, 5,4, 4, 4, 3, 2, 2, 1, 1 };
+	long[] inputTimeToLive = { 10000, 10000, 10000, 10000, 10000, 10000,
+		10000, 10000, 10000, 10000, 1000, 1000 };
+	// on s'attend à n'en recevoir que 10
+	int[] expectedPriorities = { 5, 5, 4, 4, 4, 3, 2, 2, 1, 1 };
 	for (int i = 0; i < 12; i++) {
-	    Header header = new Header(i, inputPriorities[i], Calendar.getInstance()
-		    .getTimeInMillis(), inputTimeToLive[i]);
+	    Header header = new Header(i, inputPriorities[i], Calendar
+		    .getInstance().getTimeInMillis(), inputTimeToLive[i]);
 	    Body body = new Body("Test_EVENT_" + i);
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
 	}
-	//envoie de 2 message 
+	// envoie de 2 message
 	// On attend que le consumer s'active cf les 4000 en paremetre de son
 	// main donc 5000 ici.
 	Thread.sleep(5000);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
-	//lecture de la liste reçu
-	int[] receivedPriorities = new int[10];;
+	// lecture de la liste reçu
+	int[] receivedPriorities = new int[10];
+	;
 	int j = 0;
-	    for (Event event : messagesRecu) {
-		receivedPriorities[j++] = event.header.priority;
-	    }
-	//comparaison
-	assertArrayEquals("Ordre des priorites", expectedPriorities, receivedPriorities);
+	for (Event event : messagesRecu) {
+	    receivedPriorities[j++] = event.header.priority;
+	}
+	// comparaison
+	assertArrayEquals("Ordre des priorites", expectedPriorities,
+		receivedPriorities);
 	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
