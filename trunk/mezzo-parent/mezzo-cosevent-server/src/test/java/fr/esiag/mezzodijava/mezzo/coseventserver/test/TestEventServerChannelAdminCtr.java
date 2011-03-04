@@ -62,7 +62,13 @@ public class TestEventServerChannelAdminCtr{
 		assertEquals(factory.getChannel("MEZZO3").getIdentifier(),id);
 		assertEquals(factory.getChannel("MEZZO3").getCapacity(),30);
 		ctr.destroyChannel(id);
-		assertNull(ctr.getChannel(id));
+		try {
+		    ctr.getChannel(id);
+		    fail("Channel still exist");
+		} catch (ChannelNotFoundException e) {
+		    ;// OK Nothing to do
+		}
+
 	}
 	@Test 
 	public void changeChannelCapacity() throws ChannelAlreadyExistsException, ChannelNotFoundException, CannotReduceCapacityException{
