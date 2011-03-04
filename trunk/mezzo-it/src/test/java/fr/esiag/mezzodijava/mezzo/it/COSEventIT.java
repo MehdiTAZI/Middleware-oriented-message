@@ -1,9 +1,14 @@
 package fr.esiag.mezzodijava.mezzo.it;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,6 +50,9 @@ public class COSEventIT {
 
     public static Integer recu = 0;
 
+    public static List<Event> messagesRecu = Collections
+	    .synchronizedList(new ArrayList<Event>());
+
     public static class callBackConsumerImpl implements
 	    CallbackConsumerOperations {
 
@@ -54,7 +62,7 @@ public class COSEventIT {
 	    synchronized (recu) {
 		recu++;
 	    }
-
+	    messagesRecu.add(evt);
 	}
 
     }
@@ -72,6 +80,9 @@ public class COSEventIT {
 	callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
 	CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 	consumerProxy.subscribe(cbc);
+	if ((args!= null) && (args.length >= 1)) {
+	    Thread.sleep(new Long(args[0]).longValue());
+	}
 	consumerProxy.connect();
 	ec.getOrb().run();
 	System.out.println("ALL DONE");
@@ -81,9 +92,11 @@ public class COSEventIT {
     public void beforeTest() throws InterruptedException {
 	// mise a zero du compteur de message
 	recu = 0;
+	// mise blanc de la liste des messages reçus
+	messagesRecu = Collections.synchronizedList(new ArrayList<Event>());
 	// le time serveur
 	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
-		1000, "MEZZO-TIME", "1000");
+		1000, "MEZZO-COSTIME", "1000");
 	sl.go();
 	// le event serveur
 	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
@@ -128,7 +141,7 @@ public class COSEventIT {
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
 	}
-	Thread.sleep(10000);
+	Thread.sleep(5000);
 	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
@@ -203,7 +216,7 @@ public class COSEventIT {
 	    };
 	    t.start();
 	}
-	Thread.sleep(10000);
+	Thread.sleep(5000);
 	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 100,
 		recu.intValue());
@@ -280,7 +293,7 @@ public class COSEventIT {
 	    };
 	    t.start();
 	}
-	Thread.sleep(10000);
+	Thread.sleep(5000);
 	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		recu.intValue());
@@ -288,7 +301,64 @@ public class COSEventIT {
     }
 
     @Test
-    public void testUC07NominalCreerUnEventChannel()
+    public void testUC14_CycleDeVieDesMessages() throws InterruptedException,
+	    EventClientException, ChannelAlreadyExistsException,
+	    TopicNotFoundException, ChannelNotFoundException,
+	    NotConnectedException, MaximalConnectionReachedException,
+	    AlreadyConnectedException {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	long idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer qui attendra 3000 ms entre le subscribe et le connnect de
+	// son callback
+	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
+		"4000");
+	s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	supplierProxy.connect();
+
+	// envoie de 12 messages avec les priorités suivantes 4 2 5 3 1 4 2 4 5 1 5 5
+	// qui expirent au bout de 10 seconde pour les 2 premiers et 1s pour les 2 derniers
+	int[] inputPriorities = { 4, 2, 5, 3, 1, 4, 2, 4, 5, 1, 5, 5 };
+	long[] inputTimeToLive = { 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 1000, 1000 };
+	//on s'attend à n'en recevoir que 10
+	int[] expectedPriorities = { 5, 5,4, 4, 4, 3, 2, 2, 1, 1 };
+	for (int i = 0; i < 12; i++) {
+	    Header header = new Header(i, inputPriorities[i], Calendar.getInstance()
+		    .getTimeInMillis(), inputTimeToLive[i]);
+	    Body body = new Body("Test_EVENT_" + i);
+	    Event evt = new Event(header, body);
+	    supplierProxy.push(evt);
+	    System.out.println("envoye " + evt);
+	    Thread.sleep(100);
+	}
+	//envoie de 2 message 
+	// On attend que le consumer s'active cf les 4000 en paremetre de son
+	// main donc 5000 ici.
+	Thread.sleep(5000);
+	Assert.assertEquals("nombre d'event envoyes et recus", 10,
+		recu.intValue());
+	//lecture de la liste reçu
+	int[] receivedPriorities = new int[10];;
+	int j = 0;
+	    for (Event event : messagesRecu) {
+		receivedPriorities[j++] = event.header.priority;
+	    }
+	//comparaison
+	assertArrayEquals("Ordre des priorites", expectedPriorities, receivedPriorities);
+	esca.destroyChannel(idChannel);
+	Assert.assertEquals("nombre d'event envoyes et recus", 10,
+		recu.intValue());
+	System.out.println("fini");
+    }
+
+    @Test
+    public void testUC07_Nominal_CreerUnEventChannel()
 	    throws InterruptedException, EventClientException,
 	    ChannelAlreadyExistsException, TopicNotFoundException,
 	    ChannelNotFoundException, NotConnectedException,
@@ -308,7 +378,7 @@ public class COSEventIT {
     }
 
     @Test
-    public void testUC07Alt1SupprimerUnChannel() throws InterruptedException,
+    public void testUC07_Alt1_SupprimerUnChannel() throws InterruptedException,
 	    ChannelAlreadyExistsException, TopicNotFoundException,
 	    NotConnectedException, MaximalConnectionReachedException,
 	    AlreadyConnectedException, EventClientException,
