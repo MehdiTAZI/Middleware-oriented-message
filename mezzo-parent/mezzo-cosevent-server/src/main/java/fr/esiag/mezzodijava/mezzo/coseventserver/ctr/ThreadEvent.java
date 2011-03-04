@@ -50,15 +50,15 @@ public class ThreadEvent implements Runnable {
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			// if the consumer is connected
-			System.out.println("on passe a un autre " + consumer.toString());
+			//System.out.println("on passe a un autre " + consumer.toString());
 			if (channel.getConsumersConnected().contains(consumer)) {
 				// for all events of the consumer
-				System.out
-						.println("on passe a un autre connecte "
-								+ consumer.toString()
-								+ " qui contient nb evt = "
-								+ channel.getConsumersSubscribed()
-										.get(consumer).size());
+//				System.out
+//						.println("on passe a un autre connecte "
+//								+ consumer.toString()
+//								+ " qui contient nb evt = "
+//								+ channel.getConsumersSubscribed()
+//										.get(consumer).size());
 				SortedSet<Event> le = channel.getConsumersSubscribed().get(
 						consumer);
 				synchronized (le) {
@@ -75,8 +75,8 @@ public class ThreadEvent implements Runnable {
 							if (e.header.date + e.header.timestamp > new Date()
 									.getTime() + delta) {
 								// send event to the consumer
-								System.out.println(e.header.code
-										+ " receive appel");
+								//System.out.println(e.header.code
+								//		+ " receive appel");
 								consumer.receive(e);
 							} else {
 								System.out.println(e.header.code + " expire");
