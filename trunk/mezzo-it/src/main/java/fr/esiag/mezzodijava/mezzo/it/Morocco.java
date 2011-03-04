@@ -19,7 +19,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
-public class Launch {
+public class Morocco {
 
 	/**
 	 * @param args
@@ -27,15 +27,15 @@ public class Launch {
 	public static void main(String[] args) {
 		try {
 			EventClient ec = EventClient.init(args);
-			ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
+			ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
 			ProxyForPushConsumer consumerProxy = channelAdmin
 					.getProxyForPushConsumer();
 			System.out.println("creation callback");
-			CallbackNotConnected callback = new CallbackNotConnected();
+			Callback callback = new Callback();
 			CallbackConsumer cbc = ec.serveCallbackConsumer(callback);
 			System.out.println("subscribe du consumer");
 			consumerProxy.subscribe(cbc);
-			Thread.sleep(20000);
+			Thread.sleep(30000);
 			consumerProxy.connect();
 			ORB orb = ec.getOrb();
 			orb.run();
@@ -51,9 +51,6 @@ public class Launch {
 		} catch (AlreadyRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (NotRegisteredException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -63,18 +60,21 @@ public class Launch {
 		} catch (AlreadyConnectedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
 
 	}
 
-	public static class CallbackNotConnected implements CallbackConsumerOperations {
+	public static class Callback implements CallbackConsumerOperations {
 
 		@Override
 		public void receive(Event evt) throws ConsumerNotFoundException {
 			System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.date)).toGMTString()+" content:"+evt.body.content);
 
 		}
-
 	}
+
 }

@@ -69,7 +69,7 @@ public class CAAgentProcess {
 		System.out.println("Error : " + e.toString());
 	    }
 	    
-	    pause("Appuyer sur une touche pour creer une deuxieme fois le canal nuclear sensors");
+	    /*pause("Appuyer sur une touche pour creer une deuxieme fois le canal nuclear sensors");
 	    System.out.println("\n***** UC07 - US159 - Exceptionnel 1 - Creation d'Event Channel deja existant *****");
 	    System.out.println("Asking creation of Channel \""
 		    + nuclearChannelName + "\" on server \"" + args[0]
@@ -79,9 +79,9 @@ public class CAAgentProcess {
 		System.out.println("Done.");
 	    } catch (ChannelAlreadyExistsException e) {
 		System.out.println("Error : " + e.toString());
-	    }
+	    }*/
 	    
-	    pause("Appuyer sur une touche pour modifier le canal nuclear sensors");
+	    /*pause("Appuyer sur une touche pour modifier le canal nuclear sensors");
 	    
 	    System.out.println("\n***** UC07 - US166 - alternatif 2 - modifier la capacite d'un canal *****");
 	    
@@ -95,7 +95,7 @@ public class CAAgentProcess {
 		System.out.println(e.toString());
 	    } catch (CannotReduceCapacityException e) {
 		System.out.println("Error : " + e.toString());
-	    }
+	    }*/
 	    
 	    pause("Appuyer sur une touche pour reduire la capacite du canal injector");
 	    System.out.println("\n***** UC07 - US167 - exceptionnnel 3 - reduire la capacite d'un canal *****");
@@ -111,7 +111,7 @@ public class CAAgentProcess {
 		System.out.println("Error : " + e.toString());
 	    }
 	    
-	    pause("Appuyer sur une touche pour supprimer le canal soudan");
+	    /*pause("Appuyer sur une touche pour supprimer le canal soudan");
 	    System.out.println("\n***** UC07 - US160 - alternatif 1 - supprimer un canal *****");
 	    
 	    try {
@@ -134,7 +134,7 @@ public class CAAgentProcess {
 		System.out.println("Done.");
 	    } catch (ChannelNotFoundException e) {
 		System.out.println("Error : " + e.toString());
-	    }
+	    }*/
 
 	    System.out.println("ALL DONE");
 	} catch (InvalidName e) {
