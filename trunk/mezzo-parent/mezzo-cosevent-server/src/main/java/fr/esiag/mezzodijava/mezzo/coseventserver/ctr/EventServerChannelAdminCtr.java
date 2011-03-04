@@ -31,32 +31,32 @@ public class EventServerChannelAdminCtr {
     private Properties props = new Properties();
 
     /**
-	 * Fill the property eventServerName
-	 *
-	 * @param eventServerName
-	 *            Name of the server
-	 */
+     * Fill the property eventServerName
+     * 
+     * @param eventServerName
+     *            Name of the server
+     */
     public EventServerChannelAdminCtr(String eventServerName) {
-    	this.eventServerName = eventServerName;
+	this.eventServerName = eventServerName;
 
     }
 
     /**
-	 * Empty constructor
-	 *
-	 */
+     * Empty constructor
+     * 
+     */
     public EventServerChannelAdminCtr() {
     }
 
     /**
-	 * Build a Channel with an initial capacity and topic
-	 *
-	 * @param topic
-	 *            Channel Name      
-	 * @param capacity
-	 *            Number of composants connected    
-	 * @return the unique identifier of the channel
-	 */
+     * Build a Channel with an initial capacity and topic
+     * 
+     * @param topic
+     *            Channel Name
+     * @param capacity
+     *            Number of composants connected
+     * @return the unique identifier of the channel
+     */
     public long createChannel(String topic, int capacity)
 	    throws ChannelAlreadyExistsException {
 	this.eventServerName = topic;
@@ -66,29 +66,34 @@ public class EventServerChannelAdminCtr {
     }
 
     /**
-	 * Find the Channel identified with an uid
-	 *
-	 * @param uniqueServerChannelId
-	 *            The uid of the channel to find  
-	 * @throws ChannelNotFoundException
-	 *             If the channel doesn't exist   
-	 * @return the Channel's Administrator
-	 * 
-	 */
+     * Find the Channel identified with an uid
+     * 
+     * @param uniqueServerChannelId
+     *            The uid of the channel to find
+     * @throws ChannelNotFoundException
+     *             If the channel doesn't exist
+     * @return the Channel's Administrator
+     * 
+     */
     public ChannelAdmin getChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-	return BFFactory.getChannelAdmin(uniqueServerChannelId);
+	ChannelAdmin ca = BFFactory.getChannelAdmin(uniqueServerChannelId);
+	if (ca == null) {
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException(
+		    "Channel doesn't exist : id=" + uniqueServerChannelId);
+	}
+	return ca;
     }
 
     /**
-	 * Destroy the Channel identified with an uid; delete the channel and
-	 * all the list of events and proxies
-	 *
-	 * @param uniqueServerChannelId
-	 *            The uid of the channel to destroy
-	 * @throws ChannelNotFoundException
-	 *             If the channel doesn't exist 
-	 */
+     * Destroy the Channel identified with an uid; delete the channel and all
+     * the list of events and proxies
+     * 
+     * @param uniqueServerChannelId
+     *            The uid of the channel to destroy
+     * @throws ChannelNotFoundException
+     *             If the channel doesn't exist
+     */
     public void destroyChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
 	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
@@ -117,46 +122,52 @@ public class EventServerChannelAdminCtr {
 	    BFFactory.destroy(uniqueServerChannelId);
 	    System.out.println("Event Channel \"" + topic + "\" destroyed.");
 	} else
-	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException(
+		    "Channel doesn't exist : id=" + uniqueServerChannelId);
     }
 
     /**
-	 * Change the maximum number of composants connected at the same time
-	 *
-	 * @param uniqueServerChannelId
-	 *            The uid of the channel to find     
-	 * @param capacity
-	 * 			  The new capacity to apply
-	 * @throws ChannelNotFoundException
-	 *             If the channel doesn't exist 
-	 * @throws CannotReduceCapacityException
-	 *             If the channel is full
-	 */
+     * Change the maximum number of composants connected at the same time
+     * 
+     * @param uniqueServerChannelId
+     *            The uid of the channel to find
+     * @param capacity
+     *            The new capacity to apply
+     * @throws ChannelNotFoundException
+     *             If the channel doesn't exist
+     * @throws CannotReduceCapacityException
+     *             If the channel is full
+     */
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	    fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
 
-    	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
-    	if (channel == null)
-    		throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
-    	
-    	/*if (channel.getCapacity() > capacity)
-    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();*/
-    		
-    	int channelCapacity = channel.getCapacity();
-    	int nbConnectedSuppliers=channel.getSuppliersConnected().size();
-    	int nbConnectedConsumers=channel.getConsumersConnected().size();
-    	int nbMaxConnected = (nbConnectedSuppliers>nbConnectedConsumers)?
-    										nbConnectedSuppliers:nbConnectedConsumers;
-    	
-    	//impossible a se produire sauf en cas de modification du code de channel ...
-    	if (capacity<nbMaxConnected)
-    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException("Cannot reduce current channel capacity : verify that's the number of consumers/suppliers is lower than the capacity you want to apply !");
-    	else if (channelCapacity<nbMaxConnected)
-    		throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException("Internal channel configuration error !");
-    	
-    	BFFactory.changeChannelCapacity(channel, capacity);
-    	System.out.println("Event Channel \"" + channel.getTopic()
+	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
+	if (channel == null)
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
+
+	/*
+	 * if (channel.getCapacity() > capacity) throw new
+	 * fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException();
+	 */
+
+	int channelCapacity = channel.getCapacity();
+	int nbConnectedSuppliers = channel.getSuppliersConnected().size();
+	int nbConnectedConsumers = channel.getConsumersConnected().size();
+	int nbMaxConnected = (nbConnectedSuppliers > nbConnectedConsumers) ? nbConnectedSuppliers
+		: nbConnectedConsumers;
+
+	// impossible a se produire sauf en cas de modification du code de
+	// channel ...
+	if (capacity < nbMaxConnected)
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException(
+		    "Cannot reduce current channel capacity : verify that's the number of consumers/suppliers is lower than the capacity you want to apply !");
+	else if (channelCapacity < nbMaxConnected)
+	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException(
+		    "Internal channel configuration error !");
+
+	BFFactory.changeChannelCapacity(channel, capacity);
+	System.out.println("Event Channel \"" + channel.getTopic()
 		+ "\" capacity updated to \"" + capacity + "\".");
     }
 }

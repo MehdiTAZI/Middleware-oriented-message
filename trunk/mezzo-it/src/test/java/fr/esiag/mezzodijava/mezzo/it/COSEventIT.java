@@ -1,7 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.it;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.fail;
+
 import java.util.Calendar;
 
 import org.junit.Assert;
@@ -27,11 +28,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
-import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
-import fr.esiag.mezzodijava.mezzo.costime.TimeService;
 import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
-import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -80,21 +78,20 @@ public class COSEventIT {
     }
 
     @Before
-    public void beforeTest() throws InterruptedException{
-	//mise a zero du compteur de message
-	recu= 0;
+    public void beforeTest() throws InterruptedException {
+	// mise a zero du compteur de message
+	recu = 0;
 	// le time serveur
 	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
-		3000, "MEZZO-COSTIME", "1000");
+		1000, "MEZZO-TIME", "1000");
 	sl.go();
 	// le event serveur
 	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
 		2000, "MEZZO-SERVER");
 	s2.go();
-	
-	
+
     }
-    
+
     @Test
     public void testSupplier() throws InterruptedException,
 	    EventClientException, ChannelAlreadyExistsException,
@@ -107,11 +104,10 @@ public class COSEventIT {
 	// print logback's internal status
 	// StatusPrinter.print(lc);
 
-
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
 		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel =  esca.createChannel("MEZZO", 20);
+	long idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
@@ -290,59 +286,55 @@ public class COSEventIT {
 		recu.intValue());
 	System.out.println("fini");
     }
-    //
-    // @Test
-    // public void testMultiSupplier() throws InterruptedException,
-    // EventClientException, ChannelAlreadyExistsException {
-    // recu = 0;
-    // MainServerLauncher sl = new MainServerLauncher(CosEventServer.class,
-    // 2000, "MEZZO-SERVER");
-    // sl.go();
-    // Thread.sleep(1000);
-    // // le consumer ici present
-    // MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-    // (String[])null);
-    // EventClient ec = EventClient.init(null);
-    // EventServerChannelAdmin esca = ec
-    // .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-    // esca.createChannel("MEZZO", 20);
 
-    // System.out.println("test");
-    // for (int i = 0; i < 10; i++) {
-    // Thread t = new Thread(i + "") {
-    // public void run() {
-    // try {
-    // System.out.println("test2");
-    // EventClient ec = EventClient.init(null);
-    // // orb = ec.getOrb();
-    // ChannelAdmin channelAdmin = ec
-    // .resolveChannelByTopic("MEZZO");
-    //
-    // ProxyForPushSupplier supplierProxy = channelAdmin
-    // .getProxyForPushSupplier();
-    // supplierProxy.connect();
-    // System.out.println("test3");
-    // for (int i = 0; i < 10; i++) {
-    // Header header = new Header(123, 1, 01012011, 10120);
-    // Body body = new Body("Test_EVENT_"+i);
-    // Event evt = new Event(header, body);
-    // supplierProxy.push(evt);
-    // System.out.println("envoye " + evt);
-    // Thread.sleep(100);
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // Assert.fail();
-    // }
-    // }
-    //
-    // };
-    // t.setDaemon(false);
-    // t.start();
-    // }
-    // Thread.sleep(10000);
-    // Assert.assertEquals("nombre d'event envoyes et recus", 100,
-    // recu.intValue());
-    // System.out.println("fini");
-    // }
+    @Test
+    public void testUC07NominalCreerUnEventChannel()
+	    throws InterruptedException, EventClientException,
+	    ChannelAlreadyExistsException, TopicNotFoundException,
+	    ChannelNotFoundException, NotConnectedException,
+	    MaximalConnectionReachedException, AlreadyConnectedException {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	long idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+	// check by id
+	ChannelAdmin ca = esca.getChannel(idChannel);
+	assertNotNull("getChannel returned null", ca);
+	// check by CosNaming
+	ChannelAdmin ca2 = ec.resolveChannelByTopic("MEZZO");
+	assertNotNull("resolveChannelByTopic returned null", ca2);
+	esca.destroyChannel(idChannel);
+    }
+
+    @Test
+    public void testUC07Alt1SupprimerUnChannel() throws InterruptedException,
+	    ChannelAlreadyExistsException, TopicNotFoundException,
+	    NotConnectedException, MaximalConnectionReachedException,
+	    AlreadyConnectedException, EventClientException,
+	    ChannelNotFoundException {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	long idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+	// drop it
+	esca.destroyChannel(idChannel);
+
+	ChannelAdmin ca2;
+	try {
+	    // check by id
+	    ca2 = esca.getChannel(idChannel);
+	    fail("Channel still reachable by id !");
+	} catch (ChannelNotFoundException e) {
+	    // check by CosNaming
+	    try {
+		ChannelAdmin ca3 = ec.resolveChannelByTopic("MEZZO");
+		fail("Channel still referenced in Name Service !");
+	    } catch (TopicNotFoundException e1) {
+		;// Ok
+	    }
+	}
+
+    }
 }
