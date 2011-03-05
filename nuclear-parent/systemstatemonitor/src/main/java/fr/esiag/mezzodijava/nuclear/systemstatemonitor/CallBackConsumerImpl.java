@@ -27,7 +27,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
     @Override
     public void receive(Event e) throws ConsumerNotFoundException {
 
-	System.out.println("Message recu timestamp:" + e.header.timestamp
+	System.out.println("Message recu timestamp:" + e.header.timetolive
 		+ ", contenu " + e.body.content);
 
 	EventInfo eventInfo = new EventInfo(e);

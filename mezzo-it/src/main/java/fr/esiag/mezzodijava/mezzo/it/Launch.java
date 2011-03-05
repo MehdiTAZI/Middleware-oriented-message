@@ -72,7 +72,7 @@ public class Launch {
 
 		@Override
 		public void receive(Event evt) throws ConsumerNotFoundException {
-			System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.date)).toGMTString()+" content:"+evt.body.content);
+			System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()+" content:"+evt.body.content);
 
 		}
 

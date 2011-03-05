@@ -25,10 +25,10 @@ public class PriorityEventComparator implements Comparator<Event> {
 	if (evt1.header.priority < evt2.header.priority) {
 	    return 1;
 	}
-	if (evt1.header.date < evt2.header.date) {
+	if (evt1.header.creationdate < evt2.header.creationdate) {
 	    return -1;
 	}
-	if (evt1.header.date >= evt2.header.date) {
+	if (evt1.header.creationdate >= evt2.header.creationdate) {
 	    return 1;
 	}
 	return 0;

@@ -48,7 +48,7 @@ public class EventInfo implements Serializable{
 	
 	public EventInfo(Event e)
 	{	
-		this.time = e.header.timestamp;
+		this.time = e.header.timetolive;
 		st= new StringTokenizer(e.body.content,"/");
 		if(st.hasMoreElements())
 			this.code =Integer.parseInt(st.nextToken());

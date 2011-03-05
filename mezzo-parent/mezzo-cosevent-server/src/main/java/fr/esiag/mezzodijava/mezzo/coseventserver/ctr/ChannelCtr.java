@@ -77,7 +77,7 @@ public class ChannelCtr {
 		
 	  //System.out.println("Event PUSH "+ evt.body.content);
 		long delta=synchronizedDate.getTime()- new Date().getTime();
-		if(delta + new Date().getTime() < e.header.date + e.header.timestamp){
+		if(delta + new Date().getTime() < e.header.creationdate + e.header.timetolive){
 		
 		    //ajout dans les liste des consummers PUSH
 		    for (ProxyForPushConsumerImpl consumer : channel

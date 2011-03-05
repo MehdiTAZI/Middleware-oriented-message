@@ -57,8 +57,8 @@ public class EventInfo implements Serializable{
 		
 		this.priority = e.header.priority;
 		this.code = e.header.code;
-		this.date = e.header.date;
-		this.timestamp = e.header.timestamp;
+		this.date = e.header.creationdate;
+		this.timestamp = e.header.timetolive;
 	}
 
 	public boolean isAlerte()

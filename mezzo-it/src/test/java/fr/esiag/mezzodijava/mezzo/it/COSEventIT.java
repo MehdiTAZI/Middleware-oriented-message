@@ -346,7 +346,7 @@ public class COSEventIT {
 	// 2 derniers
 	int[] inputPriorities = { 4, 2, 5, 3, 1, 4, 2, 4, 5, 1, 5, 5 };
 	long[] inputTimeToLive = { 10000, 10000, 10000, 10000, 10000, 10000,
-		10000, 10000, 10000, 10000, 1000, 1000 };
+		10000, 10000, 10000, 10000, 500, 500 };
 	// on s'attend à n'en recevoir que 10
 	int[] expectedPriorities = { 5, 5, 4, 4, 4, 3, 2, 2, 1, 1 };
 	for (int i = 0; i < 12; i++) {

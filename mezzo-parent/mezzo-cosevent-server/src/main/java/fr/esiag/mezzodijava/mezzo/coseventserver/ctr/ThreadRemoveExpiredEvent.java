@@ -49,9 +49,9 @@ public class ThreadRemoveExpiredEvent implements Runnable{
 			System.out.println("size "+ queue.size());
 			synchronized (this) {
 				for (Event e: queue) {					
-					System.out.println("evt --> "+ e.header.date +" "+ e.header.timestamp + " == " + new Date().getTime());
+					System.out.println("evt --> "+ e.header.creationdate +" "+ e.header.timetolive + " == " + new Date().getTime());
 					long delta=new Date().getTime()-date.getTime();
-					if(e.header.date + e.header.timestamp < new Date().getTime()+delta){
+					if(e.header.creationdate + e.header.timetolive< new Date().getTime()+delta){
 						System.out.println("REMOVE "+e.body.content );
 						//queue.remove(e);
 						tmp.add(e);

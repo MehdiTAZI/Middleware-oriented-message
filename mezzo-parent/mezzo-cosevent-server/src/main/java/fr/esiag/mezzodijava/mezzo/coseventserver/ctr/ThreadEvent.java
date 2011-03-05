@@ -72,7 +72,7 @@ public class ThreadEvent implements Runnable {
 						try {
 							// TODO : here manage life of the events.
 							long delta = CosEventServer.getDelta();
-							if (e.header.date + e.header.timestamp > new Date()
+							if (e.header.creationdate + e.header.timetolive > new Date()
 									.getTime() + delta) {
 								// send event to the consumer
 								//System.out.println(e.header.code
