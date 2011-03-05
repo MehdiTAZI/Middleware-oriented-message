@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 54
-  modified_by 8 "Administrateur"
+  revision 56
+  modified_by 4 "michael"
 
 
   
@@ -241,6 +241,7 @@ ${members}}
 	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
 "
 	    classrelation_ref 144901 // <aggregation>
+	  association_explicit_type "string"
       end
 
       operation 134660 "createEventServerChannelAdminCtr"
@@ -322,6 +323,20 @@ ${members}}
 	
 	
 	
+      end
+
+      classrelation 156164 // mapEventServerChannelAdminImpl (<aggregation>)
+	relation 155652 o---
+	  stereotype "HashMap"
+	  a role_name "mapEventServerChannelAdminImpl" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 156164 // mapEventServerChannelAdminImpl (<aggregation>)
+	  b role_name "" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 156292 // <aggregation>
+	  association_explicit_type "string"
       end
     end
 
@@ -749,6 +764,44 @@ ${members}}
 	    classrelation_ref 149124 // comparator (<unidirectional association>)
 	  b parent class_ref 147844 // PriorityEventComparator
       end
+
+      operation 149380 "getQueueEvents"
+	public explicit_return_type "PriorityQueue<Event>"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149636 "addEvent"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "event" type class_ref 136451 // Event
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 149764 "setQueueEvents"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "listeEvents" explicit_type "PriorityQueue<Event>"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 128642 "ChannelAdmin"
@@ -904,6 +957,18 @@ ${members}}
 	php_decl ""
 	python_decl ""
 	idl_decl ""
+      end
+
+      operation 156292 "getTopic"
+	public explicit_return_type "string"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -1258,6 +1323,35 @@ ${members}}
 "
 	    classrelation_ref 149252 // <unidirectional association>
 	  b parent class_ref 147972 // ThreadRemoveExpiredEvent
+      end
+
+      attribute 141700 "delta"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 141828 "synchronizedDate"
+	private explicit_type "date"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      classrelation 156036 // comparator (<unidirectional association>)
+	relation 155524 --->
+	  a role_name "comparator" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 156036 // comparator (<unidirectional association>)
+	  b parent class_ref 147844 // PriorityEventComparator
       end
     end
 
@@ -1690,16 +1784,6 @@ ${members}}
 	idl_decl ""
       end
 
-      attribute 135045 "orb"
-	private type class_ref 128130 // ORB
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       classrelation 144645 // <unidirectional association>
 	relation 143749 --->
 	  a role_name "" multiplicity "1" private
@@ -1720,6 +1804,70 @@ ${members}}
 "
 	    classrelation_ref 134916 // <unidirectional association>
 	  b parent class_ref 134660 // ChannelPublisher
+      end
+
+      attribute 142084 "props"
+	private explicit_type "Properties"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 156420 "createChannel"
+	public explicit_return_type "long"
+	nparams 2
+	  param in name "topic" explicit_type "string"
+	  param in name "capacity" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156548 "getChannel"
+	public return_type class_ref 128642 // ChannelAdmin
+	nparams 1
+	  param in name "uniqueServerChannelId" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156676 "destroyChannel"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "uniqueServerChannelId" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 156804 "changeChannelCapacity"
+	public explicit_return_type "void"
+	nparams 2
+	  param in name "uniqueServerChannelId" explicit_type "long"
+	  param in name "capacity" explicit_type "int"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
       end
     end
 
@@ -1856,6 +2004,10 @@ ${members}}
 	
 	
 	
+      end
+
+      classrelation 156292 // <aggregation>
+	relation_ref 155652 // <aggregation>
       end
     end
 
@@ -2327,26 +2479,6 @@ ${members}}
 	  b parent class_ref 136707 // CallbackConsumer
       end
 
-      attribute 137090 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
-      attribute 137218 "connected"
-	private explicit_type "bool"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       classrelation 158722 // channelCtr (<unidirectional association>)
 	relation 158594 --->
 	  a role_name "channelCtr" multiplicity "1" private
@@ -2467,16 +2599,6 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
-      attribute 136579 "channel"
-	private explicit_type "string"
-	cpp_decl ""
-	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
-"
-	php_decl ""
-	python_decl ""
-	idl_decl ""
-      end
-
       attribute 136707 "connected"
 	private explicit_type "bool"
 	init_value "false"
@@ -2607,6 +2729,16 @@ ${members}}
 	
 	
 	
+      end
+
+      attribute 141956 "id"
+	private explicit_type ""
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
       end
     end
 
