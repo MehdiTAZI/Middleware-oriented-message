@@ -87,7 +87,6 @@ public class AppSensorSupplier
 		
 		reader.close();
 		socketClient.close();
-		supplierProxy.afficher();
 		ec.getOrb().run();
 	}
 }

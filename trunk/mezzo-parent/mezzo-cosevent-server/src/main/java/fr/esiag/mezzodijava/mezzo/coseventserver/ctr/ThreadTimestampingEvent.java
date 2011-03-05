@@ -17,9 +17,9 @@ public class ThreadTimestampingEvent implements Runnable{
 	public void run() {
 		Event[] tmp=queue.toArray(new Event[queue.size()]);
 		for (int i = 0; i < tmp.length; i++) {
-			if(tmp[i].header.date  <= date.getTime() && tmp[i].header.date  >= date.getTime()+20){
+			if(tmp[i].header.creationdate  <= date.getTime() && tmp[i].header.creationdate  >= date.getTime()+20){
 				queue.remove(tmp[i]);
-				tmp[i].header.date=date.getTime();
+				tmp[i].header.creationdate=date.getTime();
 				queue.add(tmp[i]);
 			}
 		}

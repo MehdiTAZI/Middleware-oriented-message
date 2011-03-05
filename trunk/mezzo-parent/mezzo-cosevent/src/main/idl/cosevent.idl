@@ -3,8 +3,8 @@ module cosevent {
 	struct Header{
 		long long code;
 		long priority;
-		long long date;
-		long long timestamp;
+		long long creationdate;
+		long long timetolive;
 	};
 	
 	struct Body{
@@ -52,18 +52,11 @@ module cosevent {
 		string message;
 	};
 	
-	interface Consumer{
-	};
-	
-	interface Supplier{
-		void afficher();
-	};
-	
 	interface CallbackConsumer{
 		void receive(in Event evt) raises (ConsumerNotFoundException);
 	};
 		
-	interface ProxyForPushConsumer : Consumer{
+	interface ProxyForPushConsumer{
 			
 		void subscribe(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
 		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
@@ -72,7 +65,7 @@ module cosevent {
 		
 	};
 	
-	interface ProxyForPushSupplier : Supplier{
+	interface ProxyForPushSupplier{
 		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
 		void push(in Event evt) raises (ChannelNotFoundException, NotConnectedException);
 		void disconnect() raises (ChannelNotFoundException,NotConnectedException);
