@@ -27,7 +27,7 @@ public class CosTimeServer {
 		    props.load(this.getClass().getClassLoader()
 			    .getResourceAsStream("eventserver.properties"));
 		} catch (IOException e) {
-		    // TODO log here
+		
 		    
 		}
 		TimeServicePublisher publisher=new TimeServicePublisher();
