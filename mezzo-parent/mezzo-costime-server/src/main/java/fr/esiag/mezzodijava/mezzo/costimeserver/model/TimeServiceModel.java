@@ -27,5 +27,5 @@ public class TimeServiceModel {
 	 */
 	public List<Synchronizable> getComponentSubscribed() {
 		return componentSubscribed;
-	}	
+	}	 
 }
