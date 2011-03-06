@@ -11,7 +11,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 /**
  * TimeServiceImpl : implementation of the TimeService IDL Interface
  * 
- * UC n°06: US18 (+ children)
+ * UC n°06: US18 (+ children).
  * 
  * @author Mezzo-Team
  * 
