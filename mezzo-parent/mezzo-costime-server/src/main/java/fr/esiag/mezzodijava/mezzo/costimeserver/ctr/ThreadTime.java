@@ -15,7 +15,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
  * 
  * @author Mezzo-Team
  * 
- */
+ */  
 
 public class ThreadTime implements Runnable{
     private TimeServiceModel model;
