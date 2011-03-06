@@ -14,7 +14,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
  * 
  * UC n°06: US18 (+ children)
  * 
- * @author Mezzo-Team
+ * @author cosTime-Team
  * 
  */
 public class TimeServicePublisher {
