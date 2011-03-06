@@ -3,15 +3,15 @@ package fr.esiag.mezzodijava.mezzo.libclient.exception;
 /**
  * EventClientException are thrown by the Client when a local operation goes
  * wrong (ressource init error,...)
- * 
+ * UC n°: US14,US15 Exception.
  * @author Franck
  * 
  */
-// MTA : depreced utilisé plutot EventClientException Definie dans l'IDL
+
 public class EventClientException extends Exception {
 
 	/**
-	 * Build a Client Exception
+	  * Build a Client Exception
 	 * 
 	 * @param message
 	 *            Information message of the exception
