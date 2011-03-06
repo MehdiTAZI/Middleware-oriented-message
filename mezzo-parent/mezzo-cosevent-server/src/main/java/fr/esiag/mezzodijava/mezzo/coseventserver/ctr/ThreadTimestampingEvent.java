@@ -10,6 +10,7 @@ public class ThreadTimestampingEvent implements Runnable{
 	private Date date;
 	
 	/**
+	 *
      * Run the thread to timestamp events
      *
      */
