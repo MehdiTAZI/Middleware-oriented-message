@@ -73,17 +73,7 @@ public final class TimeClient {
     public static synchronized TimeClient init(String[] args)
 	    throws TimeClientException {
 	if (instance == null) {
-	    // // Properties à externaliser
-	    // props = new Properties();
-	    // props.setProperty("ORBInitRef.NameService",
-	    // "corbaloc::127.0.0.1:1050/NameService");
-	    // props.setProperty("jacorb.home", System.getenv("JACORB_HOME"));
-	    // props.setProperty("org.omg.CORBA.ORBClass",
-	    // "org.jacorb.orb.ORB");
-	    // props.setProperty("org.omg.CORBA.ORBSingletonClass",
-	    // "org.jacorb.orb.ORBSingleton");
-	    // // props.setProperty("java.endorsed.dirs",
-	    // // System.getenv("JACORB_HOME") + "/lib");
+
 	    String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
 		    args.length);
 	    instance = new TimeClient(cmdArgs, null);
@@ -101,13 +91,6 @@ public final class TimeClient {
      * ORB Properties
      */
     private Properties props;
-
-    //
-    // private String[] args = { "-ORBInitRef",
-    // "NameService=corbaloc::127.0.0.1:1050/NameService",
-    // "-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
-    // "-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
-    // "-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton" };
 
     /**
      * Event Client private Constructor. Use EventClient.init
@@ -164,17 +147,15 @@ public final class TimeClient {
 	Object channelObj = null;
 	try {
 	    channelObj = nce.resolve_str(timeServerName);
-	    // TODO Design a fail-over to switch between several NameService
-	    // before throwing exception
 	} catch (NotFound e) {
-	    // TODO log here
+	    
 	    throw new TimeClientException("Cannot find the Time Service '"
 		    + timeServerName + "'", e);
 	} catch (CannotProceed e) {
-	    //log.error("Cannot resolve the Time Service", e);
+	   
 	    throw new TimeClientException("Cannot resolve the Time Service", e);
 	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-	    // TODO log here
+	   
 	    throw new TimeClientException("Invalid topic name", e);
 	}
 	return TimeServiceHelper.narrow(channelObj);
