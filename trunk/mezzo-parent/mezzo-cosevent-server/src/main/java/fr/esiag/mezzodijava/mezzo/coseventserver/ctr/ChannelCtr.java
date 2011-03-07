@@ -79,7 +79,7 @@ public class ChannelCtr {
 		long delta=synchronizedDate.getTime()- new Date().getTime();
 		if(delta + new Date().getTime() < e.header.creationdate + e.header.timetolive){
 		
-		    //ajout dans les liste des consummers PUSH
+		    //ajout dans les listes des consumers PUSH
 		    for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			System.out.println("Event PUSH "+ e.body.content);

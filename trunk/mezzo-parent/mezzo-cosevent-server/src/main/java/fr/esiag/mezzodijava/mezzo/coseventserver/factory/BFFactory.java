@@ -77,7 +77,7 @@ public class BFFactory {
     public static synchronized long createChannel(String topic, int capacity)
 	    throws ChannelAlreadyExistsException {
 	Channel channel = null;
-	// Error if Channel Allready Exists
+	// Error if Channel Already Exists
 	if (mapChannel.get(topic) != null) {
 	    throw new ChannelAlreadyExistsException();
 	}
@@ -142,6 +142,13 @@ public class BFFactory {
 
     // --------------------------------EventServerChannelAdmin-----------------------------------------
 
+    /**
+     * Create a Event Server Channel Admin Controller associated with the given topic.
+     * 
+     * @param seventServerName
+     *            name of the COS event server
+     * @return existing or new EventServerChannelAdminCtr for this name.
+     */
     public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
 	    String eventServerName) {
 	if (mapEventServerChannelAdminCtr.get(eventServerName) == null) {
@@ -193,14 +200,38 @@ public class BFFactory {
 	return mapChannel.get(topic);
     }
 
+    /**
+     * Return current ChannelCtr associated with this topic or
+     * <code>null</null> if topic not exists.
+     * 
+     * @param topic
+     *            The Topic of the wanted channel.
+     * @return ChannelCtr with the specified topic or <code>null</null>
+     */
     public static ChannelCtr getChannelctr(String topic) {
 	return mapChannelCtr.get(topic);
     }
 
+    /**
+     * Return current instance of Channel Bean associated with this unique id 
+     * or <code>null</null> if id not exists.
+     * 
+     * @param id
+     *            The unique id of the wanted channel.
+     * @return Channel with the specified id or <code>null</null>
+     */
     public static Channel getChannel(long id) {
 	return mapChannelId.get(id);
     }
 
+    /**
+     * Return current ChannelAdmin associated with this unique id
+     *  or <code>null</null> if id not exists.
+     * 
+     * @param uniqueServerChannelId
+     *            The id of the wanted channel.
+     * @return ChannelAdmin with the specified id or <code>null</null>
+     */
     public static ChannelAdmin getChannelAdmin(long uniqueServerChannelId) {
 	Channel channelEntity = getChannel(uniqueServerChannelId);
 	if (channelEntity != null) {
@@ -263,6 +294,13 @@ public class BFFactory {
 		mapEventServerChannelAdminCtr.put(servername, alternateCtr);
 	}
 
+	/**
+     * Destroy Channel, ChannelAdminCtr, ChannelAdminImpl, ChannelCtr, 
+     * ChannelId associated with this unique id
+     * 
+     * @param uniqueServerChannelId
+     *            The id of the wanted channel to destroy.
+     */
     public static void destroy(long idChannel) {
 	String channelName = mapChannelId.get(idChannel).getTopic();
 	mapChannel.remove(channelName);

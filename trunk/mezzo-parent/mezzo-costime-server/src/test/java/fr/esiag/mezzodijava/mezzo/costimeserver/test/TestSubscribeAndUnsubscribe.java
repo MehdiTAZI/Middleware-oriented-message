@@ -1,13 +1,18 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.test;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import org.easymock.EasyMock;
-import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
@@ -33,6 +38,7 @@ public class TestSubscribeAndUnsubscribe {
 	@After
 	public void tearDown() throws Exception {
 	}
+	
 	@Test
 	public void testSubscrib() throws AlreadyRegisteredException{
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
@@ -41,6 +47,7 @@ public class TestSubscribeAndUnsubscribe {
 		test.subscribe(mockSync);
 		assertEquals(mockSync,test.getCtr().getModel().getComponentSubscribed().get(0));
 	}
+	
 	@Test
 	public void testUnsubscrib() throws NotRegisteredException, AlreadyRegisteredException{
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
@@ -50,6 +57,33 @@ public class TestSubscribeAndUnsubscribe {
 		assertTrue(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
 		test.unsubscribe(mockSync);
 		assertFalse(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
+	}
+	
+	/*@Test
+	public void testSubscribException() {
+		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
+		TimeServiceImpl test=new TimeServiceImpl(ctr);
+		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
+		try {
+			test.subscribe(mockSync);
+			test.subscribe(mockSync);
+			fail("exception non levée");
+		} catch (AlreadyRegisteredException e) {
+			assertTrue(true);
+		}
+	}*/
+	
+	@Test
+	public void testUnsubscribException() {
+		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
+		TimeServiceImpl test=new TimeServiceImpl(ctr);
+		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
+		try {
+			test.unsubscribe(mockSync);
+			fail("exception non levée");
+		} catch (NotRegisteredException e) {
+			assertTrue(true);
+		}
 	}
 	
 }
