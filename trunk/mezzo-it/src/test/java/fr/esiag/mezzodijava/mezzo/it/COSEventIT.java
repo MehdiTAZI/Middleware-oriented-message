@@ -1,12 +1,11 @@
 package fr.esiag.mezzodijava.mezzo.it;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -421,12 +420,15 @@ public class COSEventIT {
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	// destruction anticipee du Channel
 	esca.destroyChannel(idChannel);
-	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
-	supplierProxy.connect();
-
-	Thread.sleep(2000);
-	esca.destroyChannel(idChannel);
+	try {
+	    ProxyForPushSupplier supplierProxy = channelAdmin
+		    .getProxyForPushSupplier();
+	    supplierProxy.connect();
+	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
+	    ; // ok
+	}
+	//Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
 	System.out.println("fini");
     }
 
@@ -535,46 +537,44 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+	// on recupere un proxy...
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
 	// drop it
 	esca.destroyChannel(idChannel);
 
-	ChannelAdmin ca2;
 	try {
 	    // check by id
-	    ca2 = esca.getChannel(idChannel);
+	    ChannelAdmin ca2 = esca.getChannel(idChannel);
 	    fail("ChannelAdmin still reachable by id !");
 	} catch (ChannelNotFoundException e) {
-	    // check by CosNaming
-	    try {
-		ChannelAdmin ca3 = ec.resolveChannelByTopic("MEZZO");
-		fail("ChannelAdmin still referenced in Name Service !");
-	    } catch (TopicNotFoundException e1) {
-		;// Ok
-	    }
+	    ;// OK
 	}
+	// check by CosNaming
+	try {
+	    ChannelAdmin ca3 = ec.resolveChannelByTopic("MEZZO");
+	    fail("ChannelAdmin still referenced in Name Service !");
+	} catch (TopicNotFoundException e1) {
+	    ;// Ok
+	}
+
+	// tentative de manipulation du channel admin
 	try {
 	    ca.getProxyForPushSupplier();
 	    fail("ChannelAdmin still active ?");
 	} catch (org.omg.CORBA.UserException e) {
 	    fail("ChannelAdmin still active ?");
 	    ;
+	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
+	    ; // ok
 	}
-
-	// lets recreating the channel and getting au new channeladmin on it
-	long idChannel2 = esca.createChannel("MEZZO", 2);
-	// on recupere un supplier dessus
-	ChannelAdmin ca3 = ec.resolveChannelByTopic("MEZZO");
-	// on recupere un proxy...
-	ProxyForPushSupplier pps = ca3.getProxyForPushSupplier();
-	// destroy du channel ! !
-	esca.getChannel(idChannel2);
 	// tentative de manipulation du proxy
 	try {
 	    pps.connect();
 	    fail("Proxy still active!");
 	} catch (org.omg.CORBA.UserException e) {
 	    fail("Proxy still active ?");
-	    ;
+	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
+	    ; // ok
 	}
     }
 }
