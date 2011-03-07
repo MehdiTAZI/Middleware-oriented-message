@@ -63,7 +63,7 @@ public class BFFactory {
 	}
 	return mapChannel.get(topic);
     }
-
+   
     /**
      * Create and publish a ChannelImpl and associated ChannelCtr and Channel
      * entity from the channel topic.
