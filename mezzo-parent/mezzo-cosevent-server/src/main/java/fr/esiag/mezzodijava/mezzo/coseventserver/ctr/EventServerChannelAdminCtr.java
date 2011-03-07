@@ -100,25 +100,10 @@ public class EventServerChannelAdminCtr {
 	if (channel != null) {
 	    String topic = channel.getTopic();
 	    ChannelCtr channelCtr = BFFactory.getChannelctr(topic);
-	    ChannelPublisher.destroy();
+	    ChannelPublisher.destroy(BFFactory.createChannelAdminImpl(topic));
 	    channelCtr.removeAllProxiesForPushConsumerFromSubscribedList();
 	    channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
 	    channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
-	    try {
-		NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
-			.getOrb().resolve_initial_references("NameService"));
-		nc.unbind(nc.to_name(channel.getTopic()));
-	    } catch (InvalidName e) {
-		e.printStackTrace();
-	    } catch (NotFound e) {
-		e.printStackTrace();
-	    } catch (CannotProceed e) {
-		e.printStackTrace();
-	    } catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-		e.printStackTrace();
-	    } catch (Exception e) {
-		;
-	    }
 	    BFFactory.destroy(uniqueServerChannelId);
 	    System.out.println("Event Channel \"" + topic + "\" destroyed.");
 	} else

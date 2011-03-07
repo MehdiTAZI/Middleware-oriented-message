@@ -63,7 +63,7 @@ public class BFFactory {
 	}
 	return mapChannel.get(topic);
     }
-   
+
     /**
      * Create and publish a ChannelImpl and associated ChannelCtr and Channel
      * entity from the channel topic.
@@ -84,7 +84,7 @@ public class BFFactory {
 	channel = createChannelEntity(topic, capacity);
 	ChannelAdminImpl cai = createChannelAdminImpl(topic);
 	// Publish the ChannelAdminImpl with Corba
-	ChannelPublisher.publish(cai, orb);
+	ChannelPublisher.publish(cai);
 	// Register the channel entity in id map
 	mapChannelId.put(channel.getIdentifier(), channel);
 	return channel.getIdentifier();
