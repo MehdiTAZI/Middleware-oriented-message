@@ -6,6 +6,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.util.Iterator;
+
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,7 +47,10 @@ public class TestSubscribeAndUnsubscribe {
 		TimeServiceImpl test=new TimeServiceImpl(ctr);
 		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
 		test.subscribe(mockSync);
-		assertEquals(mockSync,test.getCtr().getModel().getComponentSubscribed().get(0));
+		//passage par iterator vue qu'on utilise les set mainteant. 
+		Iterator<Synchronizable> iterator=  test.getCtr().getModel().getComponentSubscribed().iterator();
+		Synchronizable firstElem= iterator.next();
+		assertEquals(mockSync,firstElem);
 	}
 	
 	@Test
