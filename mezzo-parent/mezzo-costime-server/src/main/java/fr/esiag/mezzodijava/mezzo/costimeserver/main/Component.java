@@ -28,7 +28,7 @@ public class Component implements SynchronizableOperations{
 	public long date() {
 		return date.getTime();
 	}
-
+ 
 	/**
 	 * Set the date
 	 *
