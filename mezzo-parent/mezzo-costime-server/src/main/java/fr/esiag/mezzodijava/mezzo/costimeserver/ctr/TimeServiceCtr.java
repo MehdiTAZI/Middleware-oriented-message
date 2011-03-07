@@ -55,11 +55,12 @@ public class TimeServiceCtr {
      */
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
 
-	/*	if(!model.getComponentSubscribed().add(cc))
+		if(!model.getComponentSubscribed().add(cc))
 			throw new AlreadyRegisteredException();
-		System.out.println("Component subscribed : " + cc);*/
+		System.out.println("Component subscribed : " + cc);
 		
-			if (model.getComponentSubscribed().contains(cc)
+			/*FOR VECTOR VERSION
+			 * if (model.getComponentSubscribed().contains(cc)
 					|| cc == null) {
 				System.out.println("Component allready subscribed : " + cc);
 				throw new AlreadyRegisteredException("Component allready subscribed ");
@@ -67,7 +68,7 @@ public class TimeServiceCtr {
 			} else {
 				model.getComponentSubscribed().add(cc);
 				System.out.println("Component subscribed : " + cc);
-			}
+			}*/
 	}
 	
 	/**
