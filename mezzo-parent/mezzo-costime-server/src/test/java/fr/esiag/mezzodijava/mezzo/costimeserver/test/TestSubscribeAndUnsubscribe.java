@@ -59,7 +59,7 @@ public class TestSubscribeAndUnsubscribe {
 		assertFalse(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
 	}
 	
-	/*@Test
+	@Test
 	public void testSubscribException() {
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
 		TimeServiceImpl test=new TimeServiceImpl(ctr);
@@ -68,10 +68,11 @@ public class TestSubscribeAndUnsubscribe {
 			test.subscribe(mockSync);
 			test.subscribe(mockSync);
 			fail("exception non levée");
-		} catch (AlreadyRegisteredException e) {
+		} 
+		catch (AlreadyRegisteredException e) {
 			assertTrue(true);
 		}
-	}*/
+	}
 	
 	@Test
 	public void testUnsubscribException() {
