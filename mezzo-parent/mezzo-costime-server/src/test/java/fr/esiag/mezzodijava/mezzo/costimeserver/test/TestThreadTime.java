@@ -1,9 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.test;
 
 
-import java.util.Calendar;
-import java.util.Date;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;

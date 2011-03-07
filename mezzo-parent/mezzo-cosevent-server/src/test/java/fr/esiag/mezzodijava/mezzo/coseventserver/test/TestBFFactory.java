@@ -1,10 +1,12 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
@@ -27,6 +29,21 @@ public class TestBFFactory {
 		assertEquals(capacity, chanOutput.getCapacity());
 		
 	}
+	
+	@Test
+	public void testCreateChannelAlreadyExist(){
+		String name = "createChannel";
+		int capacity = 0;
+		try{
+			long chanOutput = BFFactory.createChannel(name, capacity);
+			long chanOutput2 = BFFactory.createChannel(name, capacity);
+			fail("exception non levée");
+		}catch (ChannelAlreadyExistsException e){
+			assertTrue(true);
+		}
+		
+	}
+	
 	@Test
 	public void createChannelCtr(){
 		String name = "createChannelCtr";

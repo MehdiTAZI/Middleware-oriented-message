@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
+import static org.junit.Assert.fail;
+
 import java.util.Calendar;
 
 import org.easymock.EasyMock;
@@ -57,8 +59,7 @@ public class TestThreadEvent {
 		try {
 			ppfc.receive(e);
 		} catch (ConsumerNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			fail("exception levée");
 		}
 		// Passage du mock en mode de test
 		EasyMock.replay(ppfc);

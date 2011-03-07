@@ -2,7 +2,6 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
 import java.util.Random;
 
 import org.junit.After;
@@ -95,11 +94,11 @@ public class TestChannelCtr {
 			MaximalConnectionReachedException, NotRegisteredException,
 			NotConnectedException, AlreadyRegisteredException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		//register
+		// register
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		//connect
+		// connect
 		channelCtr.addProxyForPushConsumerToConnectedList(ppc);
-		//test !
+		// test !
 		channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
 
 	}
@@ -109,9 +108,9 @@ public class TestChannelCtr {
 			throws NotRegisteredException, AlreadyRegisteredException {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		try {
-			//register
+			// register
 			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-			//test !
+			// test !
 			channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
 			fail();
 		} catch (NotConnectedException e) {
@@ -216,7 +215,8 @@ public class TestChannelCtr {
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected() throws MaximalConnectionReachedException {
+	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected()
+			throws MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		try {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
@@ -228,7 +228,8 @@ public class TestChannelCtr {
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached() throws AlreadyConnectedException {
+	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached()
+			throws AlreadyConnectedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
@@ -244,7 +245,8 @@ public class TestChannelCtr {
 	}
 
 	@Test
-	public void testAddProxyForPushSupplierToConnectedListNormal() throws AlreadyConnectedException, MaximalConnectionReachedException {
+	public void testAddProxyForPushSupplierToConnectedListNormal()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
 
@@ -255,7 +257,8 @@ public class TestChannelCtr {
 
 	@Test
 	public void testRemoveProxyForPushSupplierFromConnectedListNormal()
-			throws AlreadyConnectedException, MaximalConnectionReachedException, NotConnectedException {
+			throws AlreadyConnectedException,
+			MaximalConnectionReachedException, NotConnectedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 		channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
@@ -269,23 +272,24 @@ public class TestChannelCtr {
 			channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 			fail();
 		} catch (NotConnectedException e) {
-			//test ok nothing to do
+			// test ok nothing to do
 		}
 	}
-	
+
 	@Test
-	public void testAddEvent() throws AlreadyRegisteredException{
-//		public void addEvent(Event e){
-//			for(ProxyForPushConsumerImpl consumer :channel.getConsumersSubscribed().keySet()){
-//				channel.getConsumersSubscribed().get(consumer).add(e);
-//			}
-//		}
+	public void testAddEvent() throws AlreadyRegisteredException {
+		// public void addEvent(Event e){
+		// for(ProxyForPushConsumerImpl consumer
+		// :channel.getConsumersSubscribed().keySet()){
+		// channel.getConsumersSubscribed().get(consumer).add(e);
+		// }
+		// }
 		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
-		Header header=new Header(123, 1, 01012011, 120);
-		Body body=new Body("Test_EVENT");
-		channelCtr.addEvent(new Event(header,body));
+		Header header = new Header(123, 1, 01012011, 120);
+		Body body = new Body("Test_EVENT");
+		channelCtr.addEvent(new Event(header, body));
 	}
 }
