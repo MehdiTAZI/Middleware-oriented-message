@@ -1,5 +1,9 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.ctr;
 
+import java.util.Collections;
+import java.util.TreeSet;
+
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
@@ -50,9 +54,20 @@ public class TimeServiceCtr {
      *             If already present in the list.
      */
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
-		if(!model.getComponentSubscribed().add(cc))
+
+	/*	if(!model.getComponentSubscribed().add(cc))
 			throw new AlreadyRegisteredException();
-		System.out.println("Component subscribed : " + cc);
+		System.out.println("Component subscribed : " + cc);*/
+		
+			if (model.getComponentSubscribed().contains(cc)
+					|| cc == null) {
+				System.out.println("Component allready subscribed : " + cc);
+				throw new AlreadyRegisteredException("Component allready subscribed ");
+				
+			} else {
+				model.getComponentSubscribed().add(cc);
+				System.out.println("Component subscribed : " + cc);
+			}
 	}
 	
 	/**
