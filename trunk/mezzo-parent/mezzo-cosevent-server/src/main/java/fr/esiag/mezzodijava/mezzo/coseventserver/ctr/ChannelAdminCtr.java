@@ -26,7 +26,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
  */
 
 public class ChannelAdminCtr {
-
+ 
     private String channel;
     private ChannelCtr channelCtr;
     private ORB orb;
