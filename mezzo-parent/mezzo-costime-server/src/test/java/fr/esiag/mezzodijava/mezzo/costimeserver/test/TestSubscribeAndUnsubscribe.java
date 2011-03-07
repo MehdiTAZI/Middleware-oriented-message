@@ -16,7 +16,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 
-public class TestTimeService {
+public class TestSubscribeAndUnsubscribe {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -51,4 +51,5 @@ public class TestTimeService {
 		test.unsubscribe(mockSync);
 		assertFalse(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
 	}
+	
 }
