@@ -1,7 +1,9 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.model;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Vector;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 
@@ -15,8 +17,8 @@ import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
  */
 public class TimeServiceModel {
 
-	private List<Synchronizable> componentSubscribed = Collections
-    .synchronizedList((new Vector <Synchronizable>()));
+	private Set<Synchronizable> componentSubscribed = Collections
+    .synchronizedSet((new HashSet<Synchronizable>()));
 	
 	/**
 	 * Get the list of subscribed components
@@ -25,7 +27,7 @@ public class TimeServiceModel {
 	 * 				list of subscribed components
 	 *
 	 */
-	public List<Synchronizable> getComponentSubscribed() {
+	public Set<Synchronizable> getComponentSubscribed() {
 		return componentSubscribed;
 	}	 
 }
