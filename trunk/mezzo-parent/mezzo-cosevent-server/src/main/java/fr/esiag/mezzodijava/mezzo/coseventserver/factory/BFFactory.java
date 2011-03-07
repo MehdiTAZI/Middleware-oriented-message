@@ -250,6 +250,18 @@ public class BFFactory {
 	    ChannelCtr alternateChannelCtr) {
 	mapChannelCtr.put(topic, alternateChannelCtr);
     }
+    
+    /**
+	 * Test purpose only. Enable to inject a mock object in the ChannelFactory.
+	 * 
+	 * @param topic
+	 * @param alternateChannel
+	 *            An alternative implementation of ServerChannelCtr typically a mock
+	 */
+	public static synchronized void setAlternateServerChannelAdminCtr(
+			String servername, EventServerChannelAdminCtr alternateCtr) {
+		mapEventServerChannelAdminCtr.put(servername, alternateCtr);
+	}
 
     public static void destroy(long idChannel) {
 	String channelName = mapChannelId.get(idChannel).getTopic();

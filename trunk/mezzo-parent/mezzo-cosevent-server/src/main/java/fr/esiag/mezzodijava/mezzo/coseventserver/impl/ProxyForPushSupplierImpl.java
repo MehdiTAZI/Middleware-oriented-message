@@ -1,16 +1,11 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.PriorityQueue;
-
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadRemoveExpiredEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
