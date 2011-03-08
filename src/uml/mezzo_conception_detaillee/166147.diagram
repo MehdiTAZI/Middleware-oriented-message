@@ -130,24 +130,24 @@ classcanvas 134658 class_ref 135683 // CosEventServer
 end
 relationcanvas 128005 relation_ref 128517 // 
   decenter_begin 479
-  from ref 128515 z 2001 stereotype "<<HashMap>>" xyz 342.5 570 3000 to ref 129539
+  from ref 128515 z 2001 stereotype "<<HashMap>>" xyz 342 570 3000 to ref 129539
   role_a_pos 411 561 3000 no_role_b
   multiplicity_a_pos 387 561 3000 no_multiplicity_b
 end
 relationcanvas 128133 relation_ref 128645 // 
   decenter_end 689
-  from ref 128515 z 2006 stereotype "<<HashMap>>" xyz 635.5 352.5 3000 to ref 128643
+  from ref 128515 z 2006 stereotype "<<HashMap>>" xyz 635 352 3000 to ref 128643
   role_a_pos 643 281 3000 no_role_b
   multiplicity_a_pos 704 303 3000 no_multiplicity_b
 end
 relationcanvas 128261 relation_ref 128773 // <aggregation>
   geometry VHV
   decenter_begin 888
-  from ref 128515 z 2001 to point 577 256
-  line 129282 z 2001 stereotype "<<HashMap>>" xyz 554 265 3000 to point 514 256
+  from ref 128515 z 2001 to point 621 262
+  line 129282 z 2001 stereotype "<<HashMap>>" xyz 582 271 3000 to point 527 262
   line 129410 z 2001 to ref 128259
-  role_a_pos 526 205 3000 no_role_b
-  multiplicity_a_pos 502 205 3000 no_multiplicity_b
+  role_a_pos 539 217 3000 no_role_b
+  multiplicity_a_pos 515 217 3000 no_multiplicity_b
 end
 relationcanvas 128516 relation_ref 134788 // <unidirectional association>
   decenter_end 140
@@ -173,10 +173,10 @@ relationcanvas 129669 relation_ref 143237 // <realization>
 end
 relationcanvas 129922 relation_ref 144642 // <unidirectional association>
   geometry HV
-  from ref 129538 z 2006 to point 1354 534
+  from ref 129538 z 2006 to point 1360 534
   line 131586 z 2006 to ref 129794
-  role_a_pos 1366 433 3000 no_role_b
-  multiplicity_a_pos 1341 433 3000 no_multiplicity_b
+  role_a_pos 1372 437 3000 no_role_b
+  multiplicity_a_pos 1346 437 3000 no_multiplicity_b
 end
 relationcanvas 129924 relation_ref 141572 // <composition>
   from ref 129411 z 2001 to ref 129668
@@ -252,7 +252,7 @@ end
 relationcanvas 131203 relation_ref 143491 // <aggregation>
   decenter_begin 43
   decenter_end 734
-  from ref 128515 z 2001 stereotype "<<HashMap>>" xyz 140.5 260.5 3000 to ref 128131
+  from ref 128515 z 2001 stereotype "<<HashMap>>" xyz 140 260 3000 to ref 128131
   role_a_pos 206 185 3000 no_role_b
   multiplicity_a_pos 182 185 3000 no_multiplicity_b
 end
@@ -269,12 +269,12 @@ relationcanvas 131458 relation_ref 158594 // <unidirectional association>
 end
 relationcanvas 131460 relation_ref 142084 // <association>
   decenter_begin 550
-  from ref 129539 z 2001 stereotype "<<set>>" xyz 654.5 718.5 3000 to ref 129411
+  from ref 129539 z 2001 stereotype "<<set>>" xyz 654 718 3000 to ref 129411
   role_a_pos 755 703 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
 relationcanvas 131587 relation_ref 136835 // <unidirectional association>
-  from ref 128643 z 2006 to point 607.9 539.1
+  from ref 128643 z 2006 to point 607 539
   line 132740 z 2006 to ref 129539
   role_a_pos 533 581 3000 no_role_b
   multiplicity_a_pos 533 603 3000 no_multiplicity_b
@@ -319,10 +319,10 @@ end
 relationcanvas 132354 relation_ref 172546 // <unidirectional association>
   geometry VHr
   decenter_begin 722
-  from ref 128901 z 2012 to point 379 846
+  from ref 128901 z 2012 to point 325 852
   line 133634 z 2012 to ref 129539
-  role_a_pos 391 840 3000 no_role_b
-  multiplicity_a_pos 366 840 3000 no_multiplicity_b
+  role_a_pos 328 855 3000 no_role_b
+  multiplicity_a_pos 302 855 3000 no_multiplicity_b
 end
 relationcanvas 132355 relation_ref 136963 // <unidirectional association>
   decenter_begin 910
@@ -355,7 +355,7 @@ end
 relationcanvas 132867 relation_ref 150915 // <aggregation>
   decenter_begin 238
   decenter_end 773
-  from ref 129539 z 2001 stereotype "<<set>>" xyz 660.5 578 3000 to ref 128387
+  from ref 129539 z 2001 stereotype "<<set>>" xyz 660 578 3000 to ref 128387
   role_a_pos 821 487 3000 no_role_b
   no_multiplicity_a no_multiplicity_b
 end
@@ -379,7 +379,7 @@ relationcanvas 134786 relation_ref 186114 // <unidirectional association>
 end
 relationcanvas 134914 relation_ref 192642 // <unidirectional association>
   decenter_end 256
-  from ref 129539 z 2001 stereotype "<<HashMap>>" xyz 640.5 698 3000 to ref 129411
+  from ref 129539 z 2001 stereotype "<<HashMap>>" xyz 640 698 3000 to ref 129411
   role_a_pos 718 694 3000 no_role_b
   multiplicity_a_pos 806 716 3000 no_multiplicity_b
 end

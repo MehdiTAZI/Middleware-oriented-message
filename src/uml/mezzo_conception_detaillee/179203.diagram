@@ -35,28 +35,28 @@ durationcanvas 128386 classinstance_ref 128002 // :Client
   xyzwh 35 67 2010 11 574
 end
 durationcanvas 128514 classinstance_ref 128258 // :EventClient
-  xyzwh 209 103 2010 11 244
+  xyzwh 212 103 2010 11 244
 end
 durationcanvas 129026 classinstance_ref 128898 // ec:EventClient
-  xyzwh 339 117 2010 11 212
+  xyzwh 343 117 2010 11 212
 end
 durationcanvas 129282 classinstance_ref 128130 // :ORB
   xyzwh 520 124 2010 11 29
 end
 durationcanvas 129794 classinstance_ref 129666 // orb:ORB
-  xyzwh 605 176 2010 11 96
+  xyzwh 607 176 2010 11 96
 end
 durationcanvas 130306 classinstance_ref 130178 // :NamingContextExtHelper
-  xyzwh 698 287 2010 11 33
+  xyzwh 704 287 2010 11 33
 end
 durationcanvas 130818 classinstance_ref 128898 // ec:EventClient
-  xyzwh 339 369 2010 11 272
+  xyzwh 343 369 2010 11 272
 end
 durationcanvas 131458 classinstance_ref 131330 // nce:NamingContextExt
-  xyzwh 976 369 2010 11 193
+  xyzwh 981 369 2010 11 193
 end
 durationcanvas 131970 classinstance_ref 131842 // :EventServerChannelAdminHelper
-  xyzwh 839 566 2010 11 48
+  xyzwh 848 566 2010 11 48
 end
 msg 128642 synchronous
   from durationcanvas_ref 128386
