@@ -7,8 +7,10 @@ import static org.junit.Assert.fail;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
+import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,6 +21,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
@@ -32,19 +35,42 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
+import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
+import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
+import fr.esiag.mezzodijava.mezzo.costime.TimeService;
 import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
+/**
+ * Mezzo Test Suite.
+ * 
+ * Launch first a name service Launch test with vm args (eclipse) :
+ * -Djava.endorsed.dirs=${env_var:JACORB_HOME}/lib
+ * 
+ * Launch test with vm args (unix) : -Djava.endorsed.dirs=$JACORB_HOME/lib
+ * 
+ * Launch test with vm args (windows) : -Djava.endorsed.dirs=%JACORB_HOME%/lib
+ * 
+ * @author Mezzo-Team
+ * 
+ */
 public class COSEventIT {
 
     @BeforeClass
-    public static void beforeClass() {
+    public static void beforeClass() throws InterruptedException {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// PropertyConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.properties"));
-
+	// le time serveur
+	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
+		1000, "MEZZO-COSTIME", "1000");
+	sl.go();
+	// le event serveur
+	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
+		2000, "MEZZO-SERVER");
+	s2.go();
     }
 
     public static Integer recu = 0;
@@ -52,7 +78,7 @@ public class COSEventIT {
     public static List<Event> messagesRecu = Collections
 	    .synchronizedList(new ArrayList<Event>());
 
-    public static class callBackConsumerImpl implements
+    public static class CallBackConsumerImpl implements
 	    CallbackConsumerOperations {
 
 	@Override
@@ -66,17 +92,43 @@ public class COSEventIT {
 
     }
 
-    public static void main(String[] args) throws ChannelNotFoundException,
-	    AlreadyRegisteredException, EventClientException,
-	    TopicNotFoundException, ChannelAlreadyExistsException,
-	    NotRegisteredException, InterruptedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException,
-	    NotConnectedException, TimeClientException {
+    public static long date;
+
+    public static class CallBackTimeImpl implements SynchronizableOperations {
+
+	@Override
+	public long date() {
+	    // TODO Auto-generated method stub
+	    return 0;
+	}
+
+	@Override
+	public void date(long arg) {
+	    COSEventIT.date = arg;
+	}
+
+    }
+
+    public static class CallBackConsumerImpl2 implements
+	    CallbackConsumerOperations {
+
+	@Override
+	public void receive(Event evt) throws ConsumerNotFoundException {
+	    System.out.println("recu " + evt);
+	    synchronized (recu) {
+		recu++;
+	    }
+	    messagesRecu.add(evt);
+	}
+
+    }
+
+    public static void main(String[] args) throws Exception {
 	EventClient ec = EventClient.init(null);
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	ProxyForPushConsumer consumerProxy = channelAdmin
 		.getProxyForPushConsumer();
-	callBackConsumerImpl callbackImpl = new callBackConsumerImpl();
+	CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
 	CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 	consumerProxy.subscribe(cbc);
 	if ((args != null) && (args.length >= 1)) {
@@ -87,20 +139,128 @@ public class COSEventIT {
 	System.out.println("ALL DONE");
     }
 
+    /**
+     * Ce server de consummer deconnecte apres 1s et se reconnecte apres 1s.
+     * Pour le test
+     */
+    private static class ConsumerServer2 {
+	public static void main(String[] args) throws Exception {
+	    EventClient ec = EventClient.init(null);
+	    Thread to = new Thread(new ThreadOrb());
+	    to.setDaemon(true);
+	    to.start();
+	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	    ProxyForPushConsumer consumerProxy = channelAdmin
+		    .getProxyForPushConsumer();
+	    CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
+	    CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
+	    consumerProxy.subscribe(cbc);
+	    if ((args != null) && (args.length >= 1)) {
+		Thread.sleep(new Long(args[0]).longValue());
+	    }
+	    consumerProxy.connect();
+	    Thread.sleep(1000);
+	    consumerProxy.disconnect();
+	    System.out.println("***** " + recu);
+	    Thread.sleep(1000);
+	    consumerProxy.connect();
+
+	    System.out.println("ALL DONE");
+	}
+    }
+
+    /**
+     * Ce server de consummer deconnecte apres 1s et se reconnecte apres 1s.
+     * Pour le test
+     */
+    private static class TimeConsumerServer {
+	public static void main(String[] args) throws Exception {
+	    TimeClient tc = TimeClient.init(null);
+	    Thread to = new Thread(new ThreadOrb());
+	    to.setDaemon(true);
+	    to.start();
+	    TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	    Synchronizable cc = tc.serveCallbackTime(new CallBackTimeImpl());
+	    ts.subscribe(cc);
+	    if ((args != null) && (args.length >= 1)) {
+		Thread.sleep(new Long(args[0]).longValue());
+	    }
+	    ts.unsubscribe(cc);
+	    System.out.println("ALL DONE");
+	}
+    }
+
+    /**
+     * Ce server de consummer destroy lo'b endant un certani temps rendan les
+     * consumer innaccessible et le remet en run. Pour le test
+     */
+    private static class ConsumerServer3 {
+	public static void main(String[] args) throws Exception {
+	    EventClient ec = EventClient.init(null);
+	    Thread to = new Thread(new ThreadOrb());
+	    to.setDaemon(true);
+	    to.start();
+	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	    ProxyForPushConsumer consumerProxy = channelAdmin
+		    .getProxyForPushConsumer();
+	    CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
+	    CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
+	    consumerProxy.subscribe(cbc);
+	    if ((args != null) && (args.length >= 1)) {
+		Thread.sleep(new Long(args[0]).longValue());
+	    }
+	    consumerProxy.connect();
+	    Thread.sleep(1000);
+	    ec.getOrb().destroy();
+	    Thread.sleep(1000);
+	    ec.getOrb().run();
+
+	    System.out.println("ALL DONE");
+	}
+    }
+
+    private static class ThreadOrb implements Runnable {
+
+	@Override
+	public void run() {
+	    try {
+		EventClient.init(null).getOrb().run();
+	    } catch (EventClientException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	    }
+	}
+    }
+
+    EventServerChannelAdmin esca;
+    long idChannel;
+
     @Before
-    public void beforeTest() throws InterruptedException {
+    public void beforeTest() throws InterruptedException, EventClientException {
 	// mise a zero du compteur de message
 	recu = 0;
 	// mise blanc de la liste des messages reçus
 	messagesRecu = Collections.synchronizedList(new ArrayList<Event>());
-	// le time serveur
-	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
-		1000, "MEZZO-COSTIME", "1000");
-	sl.go();
-	// le event serveur
-	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
-		2000, "MEZZO-SERVER");
-	s2.go();
+
+	esca = EventClient
+		.init(null)
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+
+    }
+
+    @After
+    public void afterTest() {
+	System.out.println("coucou");
+	try {
+	    System.out.println(esca + "after = " + idChannel);
+	    EventClient.shutdown();
+	    EventClient
+		    .init(null)
+		    .resolveEventServerChannelAdminByEventServerName(
+			    "MEZZO-SERVER").destroyChannel(idChannel);
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
 
     }
 
@@ -117,9 +277,10 @@ public class COSEventIT {
 	// StatusPrinter.print(lc);
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
+	System.out.println("after = " + idChannel);
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
@@ -141,7 +302,7 @@ public class COSEventIT {
 	    Thread.sleep(100);
 	}
 	Thread.sleep(5000);
-	esca.destroyChannel(idChannel);
+	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
 	System.out.println("fini");
@@ -160,9 +321,9 @@ public class COSEventIT {
 	// StatusPrinter.print(lc);
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
@@ -216,7 +377,7 @@ public class COSEventIT {
 	    t.start();
 	}
 	Thread.sleep(5000);
-	esca.destroyChannel(idChannel);
+	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 100,
 		recu.intValue());
 	System.out.println("fini");
@@ -235,9 +396,9 @@ public class COSEventIT {
 	// StatusPrinter.print(lc);
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
 	for (int i = 0; i < 10; i++) {
@@ -293,30 +454,356 @@ public class COSEventIT {
 	    t.start();
 	}
 	Thread.sleep(5000);
-	esca.destroyChannel(idChannel);
+	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		recu.intValue());
 	System.out.println("fini");
     }
 
     /**
-     * Test Automatique - UC02 - US111 - Alt1 : Reconnexion du Supplier.
+     * Test Automatique - UC02 - US140 - Alt1 : Reconnexion du Consummer.
+     * 
+     * Un cosummer se connecte, reçoie des event, se déconnecte, se reconnecte
+     * et reçoie des event.
+     * 
+     */
+    @Test
+    public void testUC02_Alt1_ReconnexionDuConsumer() throws Exception {
+	EventClient ec = EventClient.init(null);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	MainServerLauncher s2 = new MainServerLauncher(
+		COSEventIT.ConsumerServer2.class, 500, (String[]) null);
+	s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	supplierProxy.connect();
+
+	for (int i = 0; i < 50; i++) {
+	    Header header = new Header(123, 1, Calendar.getInstance()
+		    .getTimeInMillis(), 10120);
+	    Body body = new Body("Test_EVENT_" + i);
+	    Event evt = new Event(header, body);
+	    supplierProxy.push(evt);
+	    System.out.println("envoye " + evt);
+	    Thread.sleep(100);
+	}
+	Thread.sleep(5000);
+	// esca.destroyChannel(idChannel);
+	Assert.assertEquals("nombre d'event envoyes et recus", 50,
+		recu.intValue());
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US112 - Exc1 : LE Channel n'est pas toruve avec
+     * son topic.
+     * 
+     * Un server de consumer demande un Channel au Name Service.
+     * 
+     */
+    @Test
+    public void testUC02_Exc1_ChannelNonTrouve() throws Exception {
+	EventClient ec = EventClient.init(null);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	try {
+	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO_CRAP");
+	    fail("Should have thrown TopicNotFoundException !");
+	} catch (TopicNotFoundException e) {
+	    ;// OK nothing to do.
+	}
+
+	Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US113 - Exc2 : Le Consumer n'arrive pas à se
+     * connecter avec sa reference.
+     * 
+     * Un server de consumer demande un Channel au Name Service et essaye de s'y
+     * connecter.
+     * 
+     */
+    @Test
+    public void testUC02_Exc2_CannotConnect() throws Exception {
+	EventClient ec = EventClient.init(null);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	// destruction anticipee du Channel
+	esca.destroyChannel(idChannel);
+
+	try {
+	    ProxyForPushConsumer consumerProxy = channelAdmin
+		    .getProxyForPushConsumer();
+	    consumerProxy.subscribe(ec
+		    .serveCallbackConsumer(new CallBackConsumerImpl()));
+	    consumerProxy.connect();
+	    fail("Should have exit");
+	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US114 - Exc4 : Le Channel a atteind le nombre
+     * maximal de connexion.
+     * 
+     * Un Channel de 2 connexion est créé. Un server de consumer demande un
+     * Channel au Name Service, s'y connecter. Un dexuième essaye. Gestion de
+     * l'exception
+     * 
+     */
+    @Test
+    public void testUC02_Exc3_MaximalConnexionReached() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 1);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	ProxyForPushConsumer consumerProxy = channelAdmin
+		.getProxyForPushConsumer();
+	// premiere connexion ok
+	consumerProxy.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+	consumerProxy.connect();
+
+	ProxyForPushConsumer consumerProxy2 = channelAdmin
+		.getProxyForPushConsumer();
+	consumerProxy2.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+
+	try {
+	    consumerProxy2.connect();
+	    fail("No MaximalConnectionReachedException thrown!");
+	} catch (MaximalConnectionReachedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US115 - Exc4 : Le consumer est inaccessible par
+     * l'event server.
+     * 
+     * CE TEST N'EST PAS ENCORE BON
+     */
+    @Test
+    public void testUC02_Exc4_ConsumerInaccessible() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 20);
+	System.out.println(esca + " t4 " + idChannel);
+	Thread.sleep(1000);
+	// le consumer ici present
+	MainServerLauncher s2 = new MainServerLauncher(
+		COSEventIT.ConsumerServer3.class, 500, (String[]) null);
+	s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	supplierProxy.connect();
+
+	for (int i = 0; i < 50; i++) {
+	    Header header = new Header(123, 1, Calendar.getInstance()
+		    .getTimeInMillis(), 10120);
+	    Body body = new Body("Test_EVENT_" + i);
+	    Event evt = new Event(header, body);
+	    supplierProxy.push(evt);
+	    System.out.println("envoye " + evt);
+	    Thread.sleep(100);
+	}
+	Thread.sleep(5000);
+	// esca.destroyChannel(idChannel);
+	Assert.assertEquals("nombre d'event envoyes et recus", 50,
+		recu.intValue());
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US128 - Exc5 : Le Consumer se connecte mais est
+     * deja connecte.
+     * 
+     * Un server de consumer demande un Channel au Name Service, y souscrit et
+     * veut s'y connecter 2 fois.
+     * 
+     */
+    @Test
+    public void testUC02_Exc5_AlreadyConnected() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushConsumer consumerProxy = channelAdmin
+		.getProxyForPushConsumer();
+	consumerProxy.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+	consumerProxy.connect();
+	try {
+	    consumerProxy.connect();
+	    fail("Expected AlreadyConnectedException !");
+	} catch (AlreadyConnectedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US137 - Exc6 : Le Consumer se déconnecte mais
+     * déjà déconnecté.
+     * 
+     * Un server de consumer demande un Channel au Name Service, y souscrit et
+     * s'y connecte, s'y déconnecte 2 fois.
+     */
+    @Test
+    public void testUC02_Exc6_NotConnected() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushConsumer consumerProxy = channelAdmin
+		.getProxyForPushConsumer();
+	consumerProxy.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+	consumerProxy.connect();
+	consumerProxy.disconnect();
+	try {
+	    consumerProxy.disconnect();
+	    fail("Expected NotConnectedException !");
+	} catch (NotConnectedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US138 - Exc7 : Le Consumer s’enregistre mais
+     * déjà enregistré.
+     * 
+     * Un server de consumer demande un Channel au Name Service, y souscrit 2
+     * fois.
+     */
+    @Test
+    public void testUC02_Exc7_AlreadyRegistered() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushConsumer consumerProxy = channelAdmin
+		.getProxyForPushConsumer();
+	consumerProxy.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+	consumerProxy.connect();
+	try {
+	    consumerProxy.subscribe(ec
+		    .serveCallbackConsumer(new CallBackConsumerImpl()));
+	    fail("Expected AlreadyRegisteredException !");
+	} catch (AlreadyRegisteredException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC02 - US139 - Exc8 : Le Consumer se désinscrit mais
+     * il n’est pas inscrit.
+     * 
+     * Un server de consumer demande un Channel au Name Service, y souscrit puis
+     * s'en desinscrit 2 fois.
+     */
+    @Test
+    public void testUC02_Exc8_NotRegistered() throws Exception {
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+
+	ProxyForPushConsumer consumerProxy = channelAdmin
+		.getProxyForPushConsumer();
+	consumerProxy.subscribe(ec
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
+	consumerProxy.connect();
+	consumerProxy.disconnect();
+	consumerProxy.unsubscribe();
+	try {
+	    consumerProxy.unsubscribe();
+	    fail("Expected NotRegisteredException !");
+	} catch (NotRegisteredException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	// esca.destroyChannel(idChannel);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC03 - US129 - Alt1 : Reconnexion du Supplier.
      * 
      * Un supplier se connecte , envoie des event, se déconnecte, se reconnecte
      * et envoie des event.
      * 
      */
     @Test
-    public void testUC02_Alt1_ReconnexionDuSupplier()
-	    throws InterruptedException, EventClientException,
-	    ChannelAlreadyExistsException, TopicNotFoundException,
-	    ChannelNotFoundException, NotConnectedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException {
+    public void testUC03_Alt1_ReconnexionDuSupplier() throws Exception {
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
@@ -354,7 +841,6 @@ public class COSEventIT {
 	    Thread.sleep(100);
 	}
 	Thread.sleep(5000);
-	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
 	System.out.println("fini");
@@ -369,20 +855,16 @@ public class COSEventIT {
      * 
      */
     @Test
-    public void testUC03_Exc1_ChannelNonTrouve() throws InterruptedException,
-	    EventClientException, ChannelAlreadyExistsException,
-	    NotConnectedException, MaximalConnectionReachedException,
-	    AlreadyConnectedException, ChannelNotFoundException {
+    public void testUC03_Exc1_ChannelNonTrouve() throws Exception {
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
-	s2.go();
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
 	try {
 	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO_CRAP");
 	    fail("Should have thrown TopicNotFoundException !");
@@ -391,32 +873,27 @@ public class COSEventIT {
 	}
 
 	Thread.sleep(2000);
-	esca.destroyChannel(idChannel);
 	System.out.println("fini");
     }
 
     /**
-     * Test Automatique - UC02 - US131 - Exc2 : LE Supplier n'arrive pas à se
+     * Test Automatique - UC03 - US131 - Exc2 : LE Supplier n'arrive pas à se
      * connecter avec la reference.
      * 
      * Un supplier se connecte , recherche un canal, et tente de s'y connecter
      */
     @Test
-    public void testUC02_Exc2_ImpossibleDeSeConnecterAuChannel()
-	    throws InterruptedException, EventClientException,
-	    ChannelAlreadyExistsException, NotConnectedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException,
-	    ChannelNotFoundException, TopicNotFoundException {
+    public void testUC03_Exc2_ImpossibleDeSeConnecterAuChannel()
+	    throws Exception {
 
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
-	s2.go();
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	// destruction anticipee du Channel
 	esca.destroyChannel(idChannel);
@@ -427,9 +904,200 @@ public class COSEventIT {
 	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
 	    ; // ok
 	}
-	//Thread.sleep(2000);
+	// Thread.sleep(2000);
 	// esca.destroyChannel(idChannel);
 	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC03 - US133 - Exc3 : Le Channel a atteind le nombre
+     * maximal de connexion.
+     * 
+     * Un canal est créé avec une limite de une connexion. Un supplier se
+     * connecte , puis un deuxième tente de s'y connecter.
+     * 
+     * @throws MaximalConnectionReachedException
+     */
+    @Test
+    public void testUC03_Exc3_MaximalConnectionReached() throws Exception {
+
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 1);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	// premiere connexion ok
+	supplierProxy.connect();
+
+	try {
+	    ProxyForPushSupplier supplierProxy2 = channelAdmin
+		    .getProxyForPushSupplier();
+	    supplierProxy2.connect();
+	    fail("No MaximalConnectionReachedException raided !");
+	} catch (MaximalConnectionReachedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC03 - US132 - Exc4 : Le Supplier se connecte mais est
+     * deja connecte.
+     * 
+     * Un supplier recupere un proxy, se connecte , puis tente de s'y connecte
+     * une deuxieme fois. Gestion de l'exception.
+     * 
+     * @throws MaximalConnectionReachedException
+     */
+    @Test
+    public void testUC03_Exc4_SupplierDejaConnecte() throws Exception {
+
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 4);
+	Thread.sleep(1000);
+	// le consumer ici present
+	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// 2000,
+	// (String[]) null);
+	// s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	// premiere connexion ok
+	supplierProxy.connect();
+
+	try {
+	    supplierProxy.connect();
+	    fail("No AlreadyConnectedException raised !");
+	} catch (AlreadyConnectedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC03 - US126 - Exc5 : Le Supplier veut push un Event
+     * ou se deconnecter mais n'est pas connecte.
+     * 
+     * Un supplier recupere un proxy, tente de push un event et tente de se
+     * disconnect. Gestion de l'exception.
+     */
+    @Test
+    public void testUC03_Exc5_SupplierPasConnecte() throws Exception {
+
+	EventClient ec = EventClient.init(null);
+	idChannel = esca.createChannel("MEZZO", 4);
+	Thread.sleep(1000);
+	// le consumer ici present
+	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
+		(String[]) null);
+	s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier();
+	// connection, envoie d'event, deconnection
+	supplierProxy.connect();
+	supplierProxy.push(new Event(new Header(232, 1, (new Date()).getTime(),
+		1000), new Body("contenu")));
+	supplierProxy.disconnect();
+	// proxy recupere mais pas de connexion
+	// tentative de push
+
+	try {
+	    supplierProxy.push(new Event(new Header(232, 1, (new Date())
+		    .getTime(), 1000), new Body("contenu")));
+	    fail("push() didn't rose NotConnectedExcepetion !");
+	} catch (NotConnectedException e) {
+	    ; // ok
+	}
+
+	try {
+	    supplierProxy.disconnect();
+	    fail("disconnect() didn't rose NotConnectedExcepetion !");
+	} catch (NotConnectedException e) {
+	    ; // ok
+	}
+	// Thread.sleep(2000);
+	System.out.println("fini");
+    }
+
+    /**
+     * Test Automatique - UC06 - US176 - Nominal : S’abonner au CosTime.
+     * 
+     * LE time service envoie l'heure toute les seconde. Connexion d'un
+     * consommateur de temps (synchronizable) et vérification que l'heure est
+     * reçu.
+     */
+    @Test
+    public void testUC06_Nominal_SubscribeToTimeService() throws Exception {
+	// TimeConsumer
+	MainServerLauncher s = new MainServerLauncher(
+		COSEventIT.TimeConsumerServer.class, 500, "11000");
+	s.go();
+	// boucle qui vérifi que la variable temps est bien mise à jour.
+	long prev = date;
+	for (int i = 0; i < 10; i++) {
+	    Thread.sleep(1010);
+	    Assert.assertTrue("reception ok toutes les secondes ",
+		    date > prev + 1000);
+	}
+
+    }
+
+    /**
+     * Test Automatique - UC06 - US183 - Exc1 : Le callback est deja enregistré.
+     * 
+     * Connexion d'un consommateur de temps (synchronizable) et tentative de
+     * connexion d'un deuxième.
+     */
+    @Test
+    public void testUC06_Exc1_AlreadyRegistered() throws Exception {
+	TimeClient tc = TimeClient.init(null);
+	TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
+	ts.subscribe(s);
+	try {
+	    ts.subscribe(s);
+	    fail("expected AlreadyRegisteredException !");
+	} catch (fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException e) {
+	    ;// ok
+	}
+
+	System.out.println("ALL DONE");
+
+    }
+
+    /**
+     * Test Automatique - UC06 - US182 - Exc2 : Le callback n'etait pas
+     * enregistré.
+     * 
+     * Connexion d'un consommateur de temps (synchronizable), desabonnement et
+     * tentative d'un deuxième désabonnement.
+     */
+    @Test
+    public void testUC06_Exc2_NotRegistered() throws Exception {
+	TimeClient tc = TimeClient.init(null);
+	TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
+	ts.subscribe(s);
+	ts.unsubscribe(s);
+	try {
+	    ts.unsubscribe(s);
+	    fail("expected NotRegisteredException !");
+	} catch (fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException e) {
+	    ;// ok
+	}
+
+	System.out.println("ALL DONE");
+
     }
 
     /**
@@ -449,9 +1117,7 @@ public class COSEventIT {
 	    NotConnectedException, MaximalConnectionReachedException,
 	    AlreadyConnectedException {
 	EventClient ec = EventClient.init(null);
-	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 20);
+	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer qui attendra 3000 ms entre le subscribe et le connnect de
 	// son callback
@@ -498,12 +1164,19 @@ public class COSEventIT {
 	// comparaison
 	assertArrayEquals("Ordre des priorites", expectedPriorities,
 		receivedPriorities);
-	esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 10,
 		recu.intValue());
 	System.out.println("fini");
     }
 
+    /**
+     * Test Automatique - UC07 - US76 - Nominal : Création d’un Event Channel
+     * sur un Event Server.
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions.
+     * 
+     */
     @Test
     public void testUC07_Nominal_CreerUnEventChannel()
 	    throws InterruptedException, EventClientException,
@@ -513,7 +1186,7 @@ public class COSEventIT {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
 		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-	long idChannel = esca.createChannel("MEZZO", 2);
+	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// check by id
 	ChannelAdmin ca = esca.getChannel(idChannel);
@@ -521,9 +1194,22 @@ public class COSEventIT {
 	// check by CosNaming
 	ChannelAdmin ca2 = ec.resolveChannelByTopic("MEZZO");
 	assertNotNull("resolveChannelByTopic returned null", ca2);
-	esca.destroyChannel(idChannel);
     }
 
+    /**
+     * Test Automatique - UC07 - US160 - Alt1 : Suppression d’un Event Channel
+     * sur un Event Server.
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions. et le supprime. Test si :
+     * 
+     * - il n'est plus reference dans le name service
+     * 
+     * - son interface n'est plus publie
+     * 
+     * - les proxy eventuellement recupere ne son plus publie
+     * 
+     */
     @Test
     public void testUC07_Alt1_SupprimerUnChannel() throws InterruptedException,
 	    ChannelAlreadyExistsException, TopicNotFoundException,
@@ -575,6 +1261,160 @@ public class COSEventIT {
 	    fail("Proxy still active ?");
 	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
 	    ; // ok
+	}
+    }
+
+    /**
+     * Test Automatique - UC07 - US166 - Alt2 : Modification de la capacité du
+     * channel sur un Event Server.
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions. Puis le montre à 3. Connecte 3 supplier dessus. Deconnecte 2
+     * supplier et repasse à 1.
+     * 
+     */
+    @Test
+    public void testUC07_Alt2_ModifierCapacite() throws Exception {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+	// on recupere un supplier dessus
+	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+	// 2 supplier
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
+	pps.connect();
+	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier();
+	pps2.connect();
+
+	// 2 consumer
+	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer();
+	ppc.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
+	ppc.connect();
+
+	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer();
+	ppc2.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
+	ppc2.connect();
+
+	// on augmente à 3
+	esca.changeChannelCapacity(idChannel, 3);
+
+	// 3 ieme supplier
+	ProxyForPushSupplier pps3 = ca.getProxyForPushSupplier();
+	pps3.connect();
+
+	// 3 ieme consumer
+	ProxyForPushConsumer ppc3 = ca.getProxyForPushConsumer();
+	ppc3.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
+	ppc3.connect();
+
+	// disconnect de 2 supplier
+	pps2.disconnect();
+	pps3.disconnect();
+	// disconnecte de 2 consumer
+	ppc2.disconnect();
+	ppc3.disconnect();
+
+	// on reduit à 1
+	esca.changeChannelCapacity(idChannel, 1);
+    }
+
+    /**
+     * Test Automatique - UC07 - US2159 - Exc1 : Créer un channel dont le topic
+     * existe déjà.
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions. Tente de creer un 2ieme canal MEZZO.
+     * 
+     */
+    @Test
+    public void testUC07_Exc1_ChannelAlreadyExists() throws Exception {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+	// check by id
+	ChannelAdmin ca = esca.getChannel(idChannel);
+	assertNotNull("getChannel returned null", ca);
+	// check by CosNaming
+	ChannelAdmin ca2 = ec.resolveChannelByTopic("MEZZO");
+	assertNotNull("resolveChannelByTopic returned null", ca2);
+
+	// 2 ieme tentative
+	try {
+	    idChannel = esca.createChannel("MEZZO", 2);
+	    fail("expected ChannelAlreadyExistsException");
+	} catch (ChannelAlreadyExistsException e) {
+	    ; // ok
+	}
+    }
+
+    /**
+     * Test Automatique - UC07 - US2161 - Exc2 : A.ceder à un Channel qui
+     * n’existe pas
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions. Essaye de supprimer une canal en donnant un faux id.
+     * 
+     */
+    @Test
+    public void testUC07_Exc2_ChannelNotFound() throws Exception {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+
+	// on va supprimer un channel qui n'existe pas
+	try {
+	    esca.destroyChannel(99999999);
+	    fail("expected ChannelNotFoundException");
+	} catch (ChannelNotFoundException e) {
+	    ; // ok
+	}
+    }
+
+    /**
+     * Test Automatique - UC07 - US167 - Exc3 : Reduire la capacité du channel
+     * sur un Event Server.
+     * 
+     * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
+     * connexions. On y met 2 supplier et 2 consummer. Puis le réduit à 3.
+     * Gestion de l'exception. supplier et repasse à 1.
+     * 
+     */
+    @Test
+    public void testUC07_Exc3_CannotReduceCapacity() throws Exception {
+	EventClient ec = EventClient.init(null);
+	EventServerChannelAdmin esca = ec
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 2);
+	Thread.sleep(1000);
+	// on recupere un supplier dessus
+	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+	// 2 supplier
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
+	pps.connect();
+	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier();
+	pps2.connect();
+
+	// 2 consumer
+	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer();
+	ppc.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
+	ppc.connect();
+
+	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer();
+	ppc2.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
+	ppc2.connect();
+
+	// on tente de reduire à 1
+	try {
+	    esca.changeChannelCapacity(idChannel, 1);
+	    fail("expected CannotReduceCapacityException !");
+	} catch (CannotReduceCapacityException e) {
+	    ;// ok
 	}
     }
 }

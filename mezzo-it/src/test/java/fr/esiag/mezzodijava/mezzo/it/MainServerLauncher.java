@@ -13,6 +13,11 @@ public class MainServerLauncher implements Runnable {
 
 	public MainServerLauncher(Class<?> mainClass, long delay,
 		String... args) {
+	    this(mainClass,"main",delay, args);
+	}
+	
+	public MainServerLauncher(Class<?> mainClass,String method, long delay,
+		String... args) {
 	    this.delay = delay;
 	    this.args = args;
 	    try {
@@ -21,7 +26,7 @@ public class MainServerLauncher implements Runnable {
 		Class<?>[] argTypes = { String[].class };
 
 		// Now find the method
-		mainMethod = mainClass.getMethod("main", argTypes);
+		mainMethod = mainClass.getMethod(method, argTypes);
 		// System.out.println(mainMethod);
 
 	    } catch (Exception e) {
