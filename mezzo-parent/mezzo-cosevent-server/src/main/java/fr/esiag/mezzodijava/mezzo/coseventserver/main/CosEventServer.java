@@ -46,7 +46,7 @@ public class CosEventServer {
      * argument : eventServerName
      */
     private ORB orb;
-    public static long delta = 0;
+    private static long delta = 0;
 
     /**
      * Constructor of a COS Event Server.
@@ -170,10 +170,21 @@ public class CosEventServer {
 	new CosEventServer(args);
     }
 
+    /**
+     * Time difference in millis between system time and time service.
+     * 
+     * @return difference in millis
+     */
     public static long getDelta() {
 	return delta;
     }
 
+    /**
+     * Set the time difference in millis between system time and time service.
+     * 
+     * @param delta
+     *            difference in millis
+     */
     public static void setDelta(long delta) {
 	CosEventServer.delta = delta;
     }

@@ -13,7 +13,6 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
@@ -36,16 +35,11 @@ public class BFFactory {
 
     // ----------
     private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
-    private static Map<String, EventServerChannelAdminImpl> mapEventServerChannelAdminImpl = new HashMap<String, EventServerChannelAdminImpl>();
     private static Map<Long, Channel> mapChannelId = new HashMap<Long, Channel>();
 
     // ----------
 
     private static ORB orb;
-
-    public static void setOrb(ORB orb) {
-	BFFactory.orb = orb;
-    }
 
     /**
      * Create a Channel Entity associated with the given topic.
@@ -90,6 +84,14 @@ public class BFFactory {
 	return channel.getIdentifier();
     }
 
+    /**
+     * Change the Channel Model connection capacity.
+     * 
+     * @param channel
+     *            Channel entity
+     * @param capacity
+     *            new capacity.
+     */
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
 	mapChannel.put(channel.getTopic(), channel);
@@ -143,7 +145,8 @@ public class BFFactory {
     // --------------------------------EventServerChannelAdmin-----------------------------------------
 
     /**
-     * Create a Event Server Channel Admin Controller associated with the given topic.
+     * Create a Event Server Channel Admin Controller associated with the given
+     * topic.
      * 
      * @param seventServerName
      *            name of the COS event server
@@ -177,7 +180,7 @@ public class BFFactory {
 	return orb;
 
     }
-    
+
     /**
      * Return the singleton instance of the ORB.
      * 
@@ -213,8 +216,8 @@ public class BFFactory {
     }
 
     /**
-     * Return current instance of Channel Bean associated with this unique id 
-     * or <code>null</null> if id not exists.
+     * Return current instance of Channel Bean associated with this unique id or
+     * <code>null</null> if id not exists.
      * 
      * @param id
      *            The unique id of the wanted channel.
@@ -225,8 +228,8 @@ public class BFFactory {
     }
 
     /**
-     * Return current ChannelAdmin associated with this unique id
-     *  or <code>null</null> if id not exists.
+     * Return current ChannelAdmin associated with this unique id or
+     * <code>null</null> if id not exists.
      * 
      * @param uniqueServerChannelId
      *            The id of the wanted channel.
@@ -281,22 +284,23 @@ public class BFFactory {
 	    ChannelCtr alternateChannelCtr) {
 	mapChannelCtr.put(topic, alternateChannelCtr);
     }
-    
-    /**
-	 * Test purpose only. Enable to inject a mock object in the ChannelFactory.
-	 * 
-	 * @param topic
-	 * @param alternateChannel
-	 *            An alternative implementation of ServerChannelCtr typically a mock
-	 */
-	public static synchronized void setAlternateServerChannelAdminCtr(
-			String servername, EventServerChannelAdminCtr alternateCtr) {
-		mapEventServerChannelAdminCtr.put(servername, alternateCtr);
-	}
 
-	/**
-     * Destroy Channel, ChannelAdminCtr, ChannelAdminImpl, ChannelCtr, 
-     * ChannelId associated with this unique id
+    /**
+     * Test purpose only. Enable to inject a mock object in the ChannelFactory.
+     * 
+     * @param topic
+     * @param alternateChannel
+     *            An alternative implementation of ServerChannelCtr typically a
+     *            mock
+     */
+    public static synchronized void setAlternateServerChannelAdminCtr(
+	    String servername, EventServerChannelAdminCtr alternateCtr) {
+	mapEventServerChannelAdminCtr.put(servername, alternateCtr);
+    }
+
+    /**
+     * Destroy Channel, ChannelAdminCtr, ChannelAdminImpl, ChannelCtr, ChannelId
+     * associated with this unique id
      * 
      * @param uniqueServerChannelId
      *            The id of the wanted channel to destroy.

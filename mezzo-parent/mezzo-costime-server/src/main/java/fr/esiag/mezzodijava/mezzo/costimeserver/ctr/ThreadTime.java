@@ -71,25 +71,4 @@ public class ThreadTime implements Runnable{
 	    }
 	}
     }
-    
-    /**
-	 * Get the timespan
-	 *
-	 * @return a timeSpan
-	 *
-	 */
-    public long getTimeSpan() {
-		return timeSpan;
-	}
-
-    /**
-	 * Set the timespan
-	 *
-	 * @param timeSpan
-	 * 			a timespan to give time
-	 *
-	 */
-	public void setTimeSpan(long timeSpan) {
-		this.timeSpan = timeSpan;
-	}
 }
