@@ -239,5 +239,16 @@ public final class EventClient {
 	// return the object and
 	return href;
     }
+    
+    /**
+     * Destroy attached ORB instance and remove singleton instance.
+     */
+    public static void shutdown(){
+	try {
+	    instance.getOrb().destroy();
+	} catch (Exception e) {
+	}
+	instance = null;
+    }
 
 }
