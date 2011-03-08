@@ -1,7 +1,7 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 57
-  modified_by 7 "Mehdi"
+  revision 58
+  modified_by 2 "Franck"
 
 
   
@@ -3018,6 +3018,61 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 199938 // ctr (<unidirectional association>)
+	relation 199426 --->
+	  a role_name "ctr" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199938 // ctr (<unidirectional association>)
+	  b multiplicity "1" parent class_ref 141192 // TimeServiceCtr
+      end
+
+      operation 173058 "TimeServiceImpl"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "ctr" type class_ref 141192 // TimeServiceCtr
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 173186 "subscribe"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cc" type class_ref 157186 // Synchronizable
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 173314 "unsubscribe"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cc" type class_ref 157186 // Synchronizable
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 201090 // <realization>
+	relation 200578 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 201090 // <realization>
+	  b parent class_ref 157570 // TimeServiceOperations
+      end
     end
 
     class 141192 "TimeServiceCtr"
@@ -3031,6 +3086,65 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 199810 // model (<unidirectional association>)
+	relation 199298 --->
+	  a role_name "model" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199810 // model (<unidirectional association>)
+	  b parent class_ref 141320 // TimeServiceModel
+      end
+
+      operation 172546 "TimeServiceCtr"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "model" type class_ref 141320 // TimeServiceModel
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172674 "getModel"
+	public return_type class_ref 141320 // TimeServiceModel
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172802 "subscribe"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cc" type class_ref 157186 // Synchronizable
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172930 "unsubscribe"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "cc" type class_ref 157186 // Synchronizable
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 141320 "TimeServiceModel"
@@ -3044,6 +3158,15 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 200066 // componentSubscribed (<directional aggregation>)
+	relation 199554 o-->
+	  stereotype "set"
+	  a role_name "componentSubscribed" multiplicity "*" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 200066 // componentSubscribed (<directional aggregation>)
+	  b multiplicity "1" parent class_ref 157186 // Synchronizable
+      end
     end
 
     class 141448 "AlreadyRegisteredException"
@@ -3083,6 +3206,262 @@ ${members}}
       idl_decl ""
       explicit_switch_type ""
       
+      classrelation 199682 // model (<unidirectional association>)
+	relation 199170 --->
+	  a role_name "model" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 199682 // model (<unidirectional association>)
+	  b parent class_ref 141320 // TimeServiceModel
+      end
+
+      attribute 128130 "timeSpan"
+	private explicit_type "long"
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 172034 "ThreadTime"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "model" type class_ref 141320 // TimeServiceModel
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172162 "ThreadTime"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "model" type class_ref 141320 // TimeServiceModel
+	  param in name "timeSpan" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172290 "run"
+	public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 172418 "synchronizeComponent"
+	protected explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 200194 // <realization>
+	relation 199682 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 200194 // <realization>
+	  b parent class_ref 136579 // Runnable
+      end
+    end
+
+    class 157186 "Synchronizable"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 157570 "TimeServiceOperations"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+    end
+
+    class 157442 "TimeServicePublisher"
+      abstract visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      attribute 128258 "thread"
+	class_attribute private type class_ref 150658 // Thread
+	cpp_decl ""
+	java_decl "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 173698 "destroy"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 173826 "publish"
+	class_operation public explicit_return_type ""
+	nparams 3
+	  param in name "name" explicit_type "string"
+	  param in name "timeService" type class_ref 141064 // TimeServiceImpl
+	  param in name "orb" type class_ref 128130 // ORB
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 200322 // <dependency>
+	relation 199810 -_->
+	  a default
+	    classrelation_ref 200322 // <dependency>
+	  b parent class_ref 136579 // Runnable
+      end
+
+      classrelation 200450 // <dependency>
+	relation 199938 -_->
+	  a default
+	    classrelation_ref 200450 // <dependency>
+	  b parent class_ref 141704 // ThreadTime
+      end
+
+      operation 173954 "publish"
+	class_operation public explicit_return_type ""
+	nparams 4
+	  param in name "name" explicit_type "string"
+	  param in name "timeService" type class_ref 141064 // TimeServiceImpl
+	  param in name "orb" type class_ref 128130 // ORB
+	  param in name "timeSpan" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}, ${t2} ${p2}, ${t3} ${p3}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 157314 "CosTimeServer"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 173442 "main"
+	class_operation public explicit_return_type ""
+	nparams 1
+	  param in name "args" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 173570 "CosTimeServerargs"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "args" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 200578 // <dependency>
+	relation 200066 -_->
+	  a default
+	    classrelation_ref 200578 // <dependency>
+	  b parent class_ref 141320 // TimeServiceModel
+      end
+
+      classrelation 200706 // <dependency>
+	relation 200194 -_->
+	  a default
+	    classrelation_ref 200706 // <dependency>
+	  b parent class_ref 141704 // ThreadTime
+      end
+
+      classrelation 200834 // <dependency>
+	relation 200322 -_->
+	  a default
+	    classrelation_ref 200834 // <dependency>
+	  b parent class_ref 141064 // TimeServiceImpl
+      end
+
+      classrelation 200962 // <dependency>
+	relation 200450 -_->
+	  a default
+	    classrelation_ref 200962 // <dependency>
+	  b parent class_ref 141192 // TimeServiceCtr
+      end
     end
   end
 
@@ -3109,6 +3488,11 @@ ${members}}
 
     classdiagram 134658 "DCCD2 - mezzo-libclient"
       draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype yes show_members_context default show_members_multiplicity default show_members_initialization yes show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language java show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties yes
+      size A4-Landscape
+    end
+
+    classdiagram 147714 "DCCD3 - mezzo-costime-server"
+      draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition yes show_members_visibility yes show_members_stereotype default show_members_context default show_members_multiplicity yes show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
       size A4-Landscape
     end
 

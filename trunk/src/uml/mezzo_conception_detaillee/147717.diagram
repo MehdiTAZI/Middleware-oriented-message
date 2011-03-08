@@ -3,12 +3,11 @@ format 76
 note 128003 "CD7- MEZZO DI JAVA - CONCEPTION DETAILLEE
 DIAGRAMME DE SEQUENCE
 UC07 Administrer un channel
-US76 : scénario nominal créer un channel
-US160 : scénario alternatif 1 : supprimer un channel
-US166 : scénario alternatif 2 : modifier la capacité d'un channel
-US159 : scénario exceptionnel 1 : créer channel dont topic existe déjà
-US161 : scénario exceptionnel 2 : supprimer un channel qui n'existe pas
-US167 : scénario exceptionnel 3 : réduire la capacité du channel"
+US76 : scï¿½ario nominal crï¿½r un channel
+US160 : scï¿½ario alternatif 1 : supprimer un channel
+US166 : scï¿½ario alternatif 2 : modifier la capacitï¿½d'un channel
+US159 : scï¿½ario exceptionnel 1 : crï¿½r channel dont topic existe dï¿½ï¿½US161 : scï¿½ario exceptionnel 2 : supprimer un channel qui n'existe pas
+US167 : scï¿½ario exceptionnel 3 : rï¿½uire la capacitï¿½du channel"
   xyzwh 468.5 9.5 2005 345 131
 classinstance 128005 class_ref 128514 // Client
   drawing_mode actor  name ""   xyz 2 7 2000 life_line_z 2000
@@ -42,54 +41,54 @@ fragment 136837 "Sc : Alt 2"
   xyzwh 4 817 2000 727 149
 end
 durationcanvas 129669 classinstance_ref 128005 // :Client
-  xyzwh 12 187 2010 11 302
+  xyzwh 13 187 2010 11 302
 end
 durationcanvas 129797 classinstance_ref 128517 // evtserv:EventServerChannelAdminImpl
-  xyzwh 301 239 2010 11 249
+  xyzwh 309 239 2010 11 249
 end
 durationcanvas 130053 classinstance_ref 128645 // :EventServerChannelAdminCtr
-  xyzwh 474 238 2010 11 239
+  xyzwh 481 238 2010 11 239
 end
 durationcanvas 130309 classinstance_ref 128773 // :BFFactory
-  xyzwh 620 255 2010 11 221
+  xyzwh 622 255 2010 11 221
 end
 durationcanvas 131205 classinstance_ref 129029 // :Channel
-  xyzwh 706 286 2010 11 169
+  xyzwh 708 286 2010 11 169
 end
 durationcanvas 131589 classinstance_ref 131461 // :RandomChannelIdentifier
-  xyzwh 773 340 2010 11 116
+  xyzwh 779 340 2010 11 116
   overlappingdurationcanvas 131845
-    xyzwh 779 404 2020 11 32
+    xyzwh 785 404 2020 11 32
   end
 end
 durationcanvas 132869 classinstance_ref 128005 // :Client
-  xyzwh 12 527 2010 11 253
+  xyzwh 13 527 2010 11 253
 end
 durationcanvas 132997 classinstance_ref 128517 // evtserv:EventServerChannelAdminImpl
-  xyzwh 301 529 2010 11 257
+  xyzwh 309 529 2010 11 257
 end
 durationcanvas 133253 classinstance_ref 128645 // :EventServerChannelAdminCtr
-  xyzwh 474 552 2010 11 230
+  xyzwh 481 552 2010 11 230
 end
 durationcanvas 133509 classinstance_ref 128773 // :BFFactory
-  xyzwh 620 584 2010 11 196
+  xyzwh 622 584 2010 11 196
 end
 durationcanvas 134277 classinstance_ref 129029 // :Channel
-  xyzwh 706 677 2010 11 83
+  xyzwh 708 677 2010 11 83
 end
 durationcanvas 135173 classinstance_ref 128005 // :Client
-  xyzwh 12 849 2010 11 92
+  xyzwh 13 849 2010 11 92
 end
 durationcanvas 135301 classinstance_ref 128517 // evtserv:EventServerChannelAdminImpl
-  xyzwh 301 850 2010 11 103
+  xyzwh 309 850 2010 11 103
 end
 durationcanvas 135557 classinstance_ref 128645 // :EventServerChannelAdminCtr
-  xyzwh 474 823 2010 11 89
+  xyzwh 481 823 2010 11 89
 end
 durationcanvas 135813 classinstance_ref 128773 // :BFFactory
-  xyzwh 620 892 2010 11 61
+  xyzwh 622 892 2010 11 61
   overlappingdurationcanvas 136069
-    xyzwh 626 909 2020 11 25
+    xyzwh 628 909 2020 11 25
   end
 end
 msg 129925 asynchronous
