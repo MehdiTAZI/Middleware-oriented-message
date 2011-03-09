@@ -5,10 +5,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
@@ -47,7 +47,7 @@ public class Channel {
 
     private Comparator<Event> comparator = new PriorityEventComparator();
 
-    private static PriorityQueue<Event> queueEvents;
+    private PriorityBlockingQueue<Event> queueEvents;
 
     /**
      * Guive a Channel entity with <code>topic</code> and Connection
@@ -62,7 +62,8 @@ public class Channel {
 	this.topic = topic;
 	this.capacity = capacity;
 	this.identifier = RandomChannelIdentifier.getUniqueIdentifier();
-	queueEvents = new PriorityQueue(CAPACITY_QUEUE, comparator);
+	queueEvents = new PriorityBlockingQueue<Event>(CAPACITY_QUEUE,
+		comparator);
 
     }
 
@@ -217,12 +218,12 @@ public class Channel {
 
     }
 
-    public PriorityQueue<Event> getQueueEvents() {
+    public PriorityBlockingQueue<Event> getQueueEvents() {
 	// System.out.println("N getQueueEvents "+queueEvents.size());
 	return queueEvents;
     }
 
-    public void setQueueEvents(PriorityQueue<Event> listeEvents) {
+    public void setQueueEvents(PriorityBlockingQueue<Event> listeEvents) {
 	this.queueEvents = listeEvents;
     }
 

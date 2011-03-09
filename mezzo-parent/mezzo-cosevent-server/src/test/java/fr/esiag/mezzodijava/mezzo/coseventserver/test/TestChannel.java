@@ -1,12 +1,12 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Vector;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -158,7 +158,7 @@ public class TestChannel {
 				Long.MAX_VALUE);
 		Body body = new Body("test");
 		Event testevent = new Event(header, body);
-		PriorityQueue<Event> queue = new PriorityQueue<Event>();
+		PriorityBlockingQueue<Event> queue = new PriorityBlockingQueue<Event>();
 		queue.add(testevent);
 		ch.setQueueEvents(queue);
 		assertEquals(queue, ch.getQueueEvents());
