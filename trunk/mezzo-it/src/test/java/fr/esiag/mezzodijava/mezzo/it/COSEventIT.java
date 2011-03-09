@@ -265,10 +265,7 @@ public class COSEventIT {
 
     @Test
     public void testUC0203_Nominal_UniqueSupplier()
-	    throws InterruptedException, EventClientException,
-	    ChannelAlreadyExistsException, TopicNotFoundException,
-	    ChannelNotFoundException, NotConnectedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException {
+	    throws Exception {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// assume SLF4J is bound to logback in the current environment
 	// LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -308,11 +305,7 @@ public class COSEventIT {
     }
 
     @Test
-    public void testUC0203_Nominal_MultiSupplier() throws InterruptedException,
-	    EventClientException, ChannelAlreadyExistsException,
-	    TopicNotFoundException, ChannelNotFoundException,
-	    NotConnectedException, MaximalConnectionReachedException,
-	    AlreadyConnectedException {
+    public void testUC0203_Nominal_MultiSupplier() throws Exception {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// assume SLF4J is bound to logback in the current environment
 	// LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -384,10 +377,7 @@ public class COSEventIT {
 
     @Test
     public void testUC0203_Nominal_MultiSupplierMultiConsumer()
-	    throws InterruptedException, EventClientException,
-	    ChannelAlreadyExistsException, TopicNotFoundException,
-	    ChannelNotFoundException, NotConnectedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException {
+	    throws Exception {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// assume SLF4J is bound to logback in the current environment
 	// LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -1111,11 +1101,7 @@ public class COSEventIT {
      * 
      */
     @Test
-    public void testCI14_CycleDeVieDesMessages() throws InterruptedException,
-	    EventClientException, ChannelAlreadyExistsException,
-	    TopicNotFoundException, ChannelNotFoundException,
-	    NotConnectedException, MaximalConnectionReachedException,
-	    AlreadyConnectedException {
+    public void testCI14_CycleDeVieDesMessages() throws Exception {
 	EventClient ec = EventClient.init(null);
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
@@ -1179,10 +1165,7 @@ public class COSEventIT {
      */
     @Test
     public void testUC07_Nominal_CreerUnEventChannel()
-	    throws InterruptedException, EventClientException,
-	    ChannelAlreadyExistsException, TopicNotFoundException,
-	    ChannelNotFoundException, NotConnectedException,
-	    MaximalConnectionReachedException, AlreadyConnectedException {
+	    throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
 		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
@@ -1201,21 +1184,17 @@ public class COSEventIT {
      * sur un Event Server.
      * 
      * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
-     * connexions. et le supprime. Test si :
+     * connexions, connecte 1 supplier. et supprime le canal. Test si :
      * 
      * - il n'est plus reference dans le name service
      * 
      * - son interface n'est plus publie
      * 
-     * - les proxy eventuellement recupere ne son plus publie
+     * - les proxy eventuellement recuperes ne sont plus publies
      * 
      */
     @Test
-    public void testUC07_Alt1_SupprimerUnChannel() throws InterruptedException,
-	    ChannelAlreadyExistsException, TopicNotFoundException,
-	    NotConnectedException, MaximalConnectionReachedException,
-	    AlreadyConnectedException, EventClientException,
-	    ChannelNotFoundException {
+    public void testUC07_Alt1_SupprimerUnChannel() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
 		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
