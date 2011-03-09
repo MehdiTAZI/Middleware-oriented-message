@@ -250,7 +250,6 @@ public class COSEventIT {
 
     @After
     public void afterTest() {
-	System.out.println("coucou");
 	try {
 	    System.out.println(esca + "after = " + idChannel);
 	    EventClient.shutdown();
@@ -259,7 +258,7 @@ public class COSEventIT {
 		    .resolveEventServerChannelAdminByEventServerName(
 			    "MEZZO-SERVER").destroyChannel(idChannel);
 	} catch (Exception e) {
-	    e.printStackTrace();
+	    ;
 	}
 
     }
@@ -1282,6 +1281,7 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+
 	// 2 supplier
 	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
 	pps.connect();
@@ -1318,6 +1318,7 @@ public class COSEventIT {
 
 	// on reduit à 1
 	esca.changeChannelCapacity(idChannel, 1);
+
     }
 
     /**
@@ -1381,7 +1382,9 @@ public class COSEventIT {
      * sur un Event Server.
      * 
      * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
-     * connexions. On y met 2 supplier et 2 consummer. Puis le réduit à 3.
+     * connexions.
+     * D'abord on essaye de reduire a -1 et on s'attend a CannotRedcuCapacityException.
+     * Puis on y met 2 supplier et 2 consummer. Puis le réduit à 3.
      * Gestion de l'exception. supplier et repasse à 1.
      * 
      */
@@ -1394,6 +1397,15 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+
+	// test si on reduit a un nombre negatif
+	try {
+	    esca.changeChannelCapacity(idChannel, -1);
+	    fail("expected CannotReduceCapacityException !");
+	} catch (CannotReduceCapacityException e) {
+	    ;// ok
+	}
+
 	// 2 supplier
 	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
 	pps.connect();
