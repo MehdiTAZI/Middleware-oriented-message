@@ -616,6 +616,7 @@ public class COSEventIT {
      */
     @Test
     public void testUC02_Exc4_ConsumerInaccessible() throws Exception {
+	fail("Not implemented test");
 	EventClient ec = EventClient.init(null);
 	idChannel = esca.createChannel("MEZZO", 20);
 	System.out.println(esca + " t4 " + idChannel);
