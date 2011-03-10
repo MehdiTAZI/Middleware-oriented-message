@@ -1,6 +1,6 @@
 format 76
 "mezzo_conception_detaillee"
-  revision 58
+  revision 60
   modified_by 2 "Franck"
 
 
@@ -56,6 +56,26 @@ format 76
     //activity diagram settings
     package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
     show_infonote default drawing_language default show_stereotype_properties default
+    class 164482 "CallbackTimeImpl"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 208386 // <realization>
+	relation 207874 -_-|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 208386 // <realization>
+	  b parent class_ref 157186 // Synchronizable
+      end
+    end
+
     class 135171 "BFFactory"
       visibility package stereotype "singleton"
       cpp_decl ""
@@ -1731,6 +1751,18 @@ ${members}}
 	    classrelation_ref 159619 // <dependency>
 	  b parent class_ref 150019 // EventServerChannelAdminHelper
       end
+
+      operation 180482 "shutdown"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
     end
 
     class 135939 "EventServer"
@@ -3285,6 +3317,128 @@ ${members}}
       end
     end
 
+    class 164098 "TimeClient"
+      visibility package stereotype "singleton"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 180866 "init"
+	class_operation public return_type class_ref 164098 // TimeClient
+	nparams 1
+	  param in name "" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 180738 "TimeClient"
+	private explicit_return_type ""
+	nparams 1
+	  param in name "args" explicit_type "string[]"
+	
+	java_def "  ${comment}${@}${visibility}${final}${synchronized}${name}${(}${t0} ${p0}${)}${throws} {
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 180610 "getOrb"
+	public return_type class_ref 128130 // ORB
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 207618 // instance (<unidirectional association>)
+	relation 207106 --->
+	  a role_name "instance" class_relation private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 207618 // instance (<unidirectional association>)
+	  b parent class_ref 164098 // TimeClient
+      end
+
+      classrelation 207746 // orb (<unidirectional association>)
+	relation 207234 --->
+	  a role_name "orb" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 207746 // orb (<unidirectional association>)
+	  b parent class_ref 128130 // ORB
+      end
+
+      operation 180994 "resolveTimeServicenalename"
+	public explicit_return_type "TimeService"
+	nparams 1
+	  param in name "name" explicit_type "string"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 181122 "serveCallbackTime"
+	public return_type class_ref 157186 // Synchronizable
+	nparams 1
+	  param in name "callbackTimeImplementation" type class_ref 164226 // SynchronizableOperations
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 207874 // <dependency>
+	relation 207362 -_->
+	  a default
+	    classrelation_ref 207874 // <dependency>
+	  b parent class_ref 164226 // SynchronizableOperations
+      end
+
+      classrelation 208258 // <dependency>
+	relation 207746 -_->
+	  a default
+	    classrelation_ref 208258 // <dependency>
+	  b parent class_ref 157186 // Synchronizable
+      end
+
+      operation 181506 "subscribeToTimeService"
+	public explicit_return_type ""
+	nparams 2
+	  param in name "timeServiceName" explicit_type "string"
+	  param in name "callbackTimeImplementation" type class_ref 164226 // SynchronizableOperations
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}, ${t1} ${p1}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
     class 157186 "Synchronizable"
       visibility package stereotype "interface"
       cpp_decl ""
@@ -3300,6 +3454,13 @@ ${members}};
 "
       explicit_switch_type ""
       
+      classrelation 208130 // <generalisation>
+	relation 207618 ---|>
+	  a public
+	    java "${type}"
+	    classrelation_ref 208130 // <generalisation>
+	  b parent class_ref 164226 // SynchronizableOperations
+      end
     end
 
     class 157570 "TimeServiceOperations"
@@ -3461,6 +3622,87 @@ ${members}}
 	  a default
 	    classrelation_ref 200962 // <dependency>
 	  b parent class_ref 141192 // TimeServiceCtr
+      end
+    end
+
+    class 164226 "SynchronizableOperations"
+      visibility package stereotype "interface"
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}interface ${name}${extends} {
+${members}}
+"
+      php_decl "${comment}interface ${name} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl "${comment}${abstract}${local}interface ${name}${inherit} {
+${members}};
+"
+      explicit_switch_type ""
+      
+      operation 181250 "date"
+	public explicit_return_type ""
+	nparams 1
+	  param in name "date" explicit_type "long"
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${t0} ${p0}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      operation 181378 "date"
+	public explicit_return_type "long"
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+    end
+
+    class 164354 "Component"
+      visibility package 
+      cpp_decl ""
+      java_decl "${comment}${@}${visibility}${final}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 181634 "main"
+	class_operation public explicit_return_type ""
+	nparams 0
+	
+	java_def "  ${comment}${@}${visibility}${final}${static}${abstract}${synchronized}${type} ${name}${(}${)}${throws}${staticnl}{
+  ${body}}
+"
+	
+	
+	
+      end
+
+      classrelation 208514 // <dependency>
+	relation 208002 -_->
+	  a default
+	    classrelation_ref 208514 // <dependency>
+	  b parent class_ref 164482 // CallbackTimeImpl
+      end
+
+      classrelation 208642 // tc (<unidirectional association>)
+	relation 208130 --->
+	  a role_name "tc" multiplicity "1" private
+	    java "  ${comment}${@}${visibility}${static}${final}${transient}${volatile}${type} ${name}${value};
+"
+	    classrelation_ref 208642 // tc (<unidirectional association>)
+	  b parent class_ref 164098 // TimeClient
       end
     end
   end
