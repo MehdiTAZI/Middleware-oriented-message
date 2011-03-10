@@ -104,7 +104,13 @@ public class CAAgentProcess {
 			    + injectorSystemChannelName + "\" on server \"" + args[1]
 			    + "\"...");
 		channelAdmin2.changeChannelCapacity(id2, 2);
+		
 		System.out.println("Done.");
+		
+		pause("Appuyer sur une touche pour detruire un canal nuclear sensor");
+	    System.out.println("\n***** UC07 - US161 - exceptionnnel 2 - detruire un canal *****");
+		channelAdmin.destroyChannel(id);
+		
 	    } catch (ChannelNotFoundException e) {
 		System.out.println("Error : " + e.toString());
 	    } catch (CannotReduceCapacityException e) {
