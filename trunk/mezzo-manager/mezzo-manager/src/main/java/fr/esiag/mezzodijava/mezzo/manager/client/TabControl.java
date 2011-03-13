@@ -57,7 +57,7 @@ public class TabControl {
 	    // Add a tab
 	    HTML moreInfo = new HTML("Stat from file , thx to ->>");
 	    
-	    tabPanel.add(moreInfo, tabTitles[3]);	    
+	    tabPanel.add(moreInfo, tabTitles[2]);	    
 	    
 
 
