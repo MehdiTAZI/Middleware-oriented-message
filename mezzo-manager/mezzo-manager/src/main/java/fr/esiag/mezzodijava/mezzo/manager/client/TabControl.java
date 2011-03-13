@@ -18,13 +18,15 @@ public class TabControl {
 	   */
 	  @SuppressWarnings("deprecation")
 	  public Widget onInitialize() {
+		  
+		String[] tabTitles = new String[]{"Start","Stop","Status"};
+		  
 	    // Create a tab panel
 	    DecoratedTabPanel tabPanel = new DecoratedTabPanel();
 	    tabPanel.setWidth("400px");
 	    tabPanel.setAnimationEnabled(true);
 
 	    // Add a home tab
-	    String[] tabTitles = new String[]{"Start","Stop","Status"};
 	    
 	    Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 				public void onClick(ClickEvent arg0) {
@@ -37,6 +39,7 @@ public class TabControl {
 				System.out.println("ARRETER");
 			}
             });
+	    
 	    stopButton.ensureDebugId("cwBasicButton-stop");
 	    
 	    Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
@@ -44,7 +47,8 @@ public class TabControl {
 				System.out.println("ETAT");
 			}
             });
-	    stopButton.ensureDebugId("cwBasicButton-stat");
+	    
+	    statButton.ensureDebugId("cwBasicButton-stat");
 	    
 	    tabPanel.add(startButton, tabTitles[0]);
 	    tabPanel.add(stopButton, tabTitles[1]);
