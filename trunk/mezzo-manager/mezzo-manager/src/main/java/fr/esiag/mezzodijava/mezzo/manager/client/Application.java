@@ -15,9 +15,14 @@ public class Application
   /**
    * This is the entry point method.
    */
+	
   public void onModuleLoad()
   {
+	  
+	  
      final Label label = new Label ( "gwt-maven-plugin Archetype :: Project org.codehaus.mojo.gwt-maven-plugin" );
-     RootPanel.get().add( label );
+     TabControl control = new TabControl();
+     RootPanel.get().add( control.onInitialize());
+     
   }
 }
