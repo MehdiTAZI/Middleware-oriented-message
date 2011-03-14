@@ -9,18 +9,14 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import fr.esiag.mezzodijava.mezzo.manager.client.ShellExecuter;
 
 public class ShellExecuterImpl extends RemoteServiceServlet implements ShellExecuter {
-	private String cmd;
-	public ShellExecuterImpl(String command)
-	{
-		this.cmd=command;
-	}
-	public String execute()
+
+	public String execute(String command)
 	{
 		Runtime run = Runtime.getRuntime();
 		Process pr = null;
 		String line = "";
 		try {
-			pr = run.exec(cmd);
+			pr = run.exec(command);
 			pr.waitFor();
 			BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
 			

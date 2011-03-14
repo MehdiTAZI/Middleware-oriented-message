@@ -1,7 +1,9 @@
 package fr.esiag.mezzodijava.mezzo.manager.client;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.HTML;
@@ -22,6 +24,18 @@ public class TabControl {
 	@SuppressWarnings("deprecation")
 	public Widget onInitialize() {
 
+		  // (1) Create the client proxy
+		  final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
+		  // (2) Create an asynchronous callback to handle the result.
+		  final AsyncCallback<String> callback = new AsyncCallback<String>() {
+			public void onFailure(Throwable arg0) {
+			}
+			public void onSuccess(String arg0) {	
+			}
+		  };
+
+		
+		
 		String[] tabTitles = new String[]{"Start","Stop","Status"};
 
 		// Create a tab panel
@@ -33,16 +47,16 @@ public class TabControl {
 
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuterImpl shell = new ShellExecuterImpl("calc");
-				shell.execute();
+				  // (3) Make the call
+				  defaultShellExectuer.execute("calc", callback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
 
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuterImpl shell = new ShellExecuterImpl("mspaint");
-				shell.execute();
+				 // (3) Make the call
+				  defaultShellExectuer.execute("mspaint", callback);
 			}
 		});
 
@@ -54,8 +68,19 @@ public class TabControl {
 		// Add a tab
 		Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuterImpl shell = new ShellExecuterImpl("dir");
-				moreInfo.setText(shell.execute());
+				  // (1) Create the client proxy
+				  final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
+				  // (2) Create an asynchronous callback to handle the result.
+				  final AsyncCallback<String> callback = new AsyncCallback<String>() {
+					public void onFailure(Throwable arg0) {
+						moreInfo.setText("Error RPC CALL");
+					}
+					public void onSuccess(String arg0) {
+						moreInfo.setText(arg0);
+					}
+				  };
+				defaultShellExectuer.execute("dir", callback);
+				
 			}
 		});
 
