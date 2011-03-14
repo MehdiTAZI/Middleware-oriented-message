@@ -42,6 +42,10 @@ public class TabControl {
 	    
 	    stopButton.ensureDebugId("cwBasicButton-stop");
 	    
+	    tabPanel.add(startButton, tabTitles[0]);
+	    tabPanel.add(stopButton, tabTitles[1]);
+	    
+	    // Add a tab
 	    Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				System.out.println("ETAT");
@@ -50,17 +54,13 @@ public class TabControl {
 	    
 	    statButton.ensureDebugId("cwBasicButton-stat");
 	    
-	    tabPanel.add(startButton, tabTitles[0]);
-	    tabPanel.add(stopButton, tabTitles[1]);
-
 	    
-	    // Add a tab
 	    HTML moreInfo = new HTML("Stat from file , thx to ->>");
-	    
-	    tabPanel.add(moreInfo, tabTitles[2]);	    
-	    tabPanel.add(statButton,tabTitles[2]);
-
-
+	   
+	    VerticalPanel vPanel = new VerticalPanel();
+	    vPanel.add(statButton);
+	    vPanel.add(moreInfo);
+	    tabPanel.add(vPanel, tabTitles[2]);	    
 
 	    // Return the content
 	    tabPanel.selectTab(0);
