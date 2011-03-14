@@ -25,34 +25,20 @@ public class Application
 	
   public void onModuleLoad()
   {
-	  final Label label = new Label ( "Bienvenu sur la console d'administration de mezzo");
+	  	final Label label = new Label ( "Bienvenu sur la console d'administration de mezzo");
 	 
-	    FlexTable layout = new FlexTable();
-	    layout.setCellSpacing(6);
-	    layout.setWidth("300px");
-	    FlexCellFormatter cellFormatter = layout.getFlexCellFormatter();
-
-	    // Add a title to the form
-	    layout.setHTML(0, 0, "Administration");
-	    cellFormatter.setColSpan(0, 0, 2);
-	    cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
-	    
-	    
-	    Widget wiPanel = control.onInitialize();
-	    layout.add(wiPanel);
-     
+	  	Widget wiPanel = control.onInitialize();
+	  	
+		DisclosurePanel advancedDisclosure = new DisclosurePanel("Administration");
+		advancedDisclosure.setAnimationEnabled(true);
+	    advancedDisclosure.ensureDebugId("cwDisclosurePanel");
+	    advancedDisclosure.setContent(wiPanel);
+	   
 	    VerticalPanel vPanel = new VerticalPanel();
 		vPanel.add(label);
-		vPanel.add(layout); 
-	    
-		DisclosurePanel advancedDisclosure = new DisclosurePanel("Critere");
-		    advancedDisclosure.setAnimationEnabled(true);
-		    advancedDisclosure.ensureDebugId("cwDisclosurePanel");
-		    advancedDisclosure.setContent(vPanel);
-		    layout.setWidget(3, 0, advancedDisclosure);
-		    cellFormatter.setColSpan(3, 0, 2);
+		vPanel.add(advancedDisclosure);
 
-		    // Wrap the contents in a DecoratorPanel
+			// Wrap the contents in a DecoratorPanel
 		    DecoratorPanel decPanel = new DecoratorPanel();
 		    decPanel.setWidget(vPanel);
 		    
