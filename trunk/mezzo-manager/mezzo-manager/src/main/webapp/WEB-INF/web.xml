@@ -5,7 +5,21 @@
 <web-app>
 	<display-name>GWT-Maven-Archetype</display-name>	
 	
+	<!-- servlet loaded into servlet container -->
+	<servlet>
+  		<servlet-name>shellExecuterImpl</servlet-name>
+  		<servlet-class>
+  			fr.esiag.mezzodijava.mezzo.manager.server.ShellExecuterImpl
+  		</servlet-class>
+	</servlet>
+	<servlet-mapping>
+  		<servlet-name>shellExecuterImpl</servlet-name>
+  		<url-pattern>/fr.esiag.mezzodijava.mezzo.manager.Application/shellExecuter</url-pattern>
+	</servlet-mapping>
+
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
+	
 </web-app>
+
