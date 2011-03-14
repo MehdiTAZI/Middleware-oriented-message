@@ -10,32 +10,27 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.esiag.mezzodijava.mezzo.manager.server.ShellExecuterImpl;
 
 
 public class TabControl {
 	private HTML moreInfo;
-	TabControl()
+	// (1) Create the client proxy
+	private final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);	
+	private final ShellExecuterAsync ShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
+	public TabControl()
 	{
 
 	}
-
-
 	@SuppressWarnings("deprecation")
 	public Widget onInitialize() {
-
-		  // (1) Create the client proxy
-		  final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
 		  // (2) Create an asynchronous callback to handle the result.
-		  final AsyncCallback<String> callback = new AsyncCallback<String>() {
+		    final AsyncCallback<String> defaultCallback = new AsyncCallback<String>() {
 			public void onFailure(Throwable arg0) {
 			}
 			public void onSuccess(String arg0) {	
 			}
 		  };
 
-		
-		
 		String[] tabTitles = new String[]{"Start","Stop","Status"};
 
 		// Create a tab panel
@@ -48,7 +43,7 @@ public class TabControl {
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (3) Make the call
-				  defaultShellExectuer.execute("calc", callback);
+				  defaultShellExectuer.execute("calc", defaultCallback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
@@ -56,7 +51,7 @@ public class TabControl {
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				 // (3) Make the call
-				  defaultShellExectuer.execute("mspaint", callback);
+				  defaultShellExectuer.execute("mspaint", defaultCallback);
 			}
 		});
 
@@ -68,8 +63,6 @@ public class TabControl {
 		// Add a tab
 		Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				  // (1) Create the client proxy
-				  final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
 				  // (2) Create an asynchronous callback to handle the result.
 				  final AsyncCallback<String> callback = new AsyncCallback<String>() {
 					public void onFailure(Throwable arg0) {
@@ -79,8 +72,7 @@ public class TabControl {
 						moreInfo.setText(arg0);
 					}
 				  };
-				defaultShellExectuer.execute("dir", callback);
-				
+				ShellExectuer.execute("dir", callback);
 			}
 		});
 
