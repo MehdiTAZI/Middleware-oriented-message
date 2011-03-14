@@ -1,5 +1,10 @@
 /** Add css rules here for your application. */
 
+
+body {
+	margin:50px 0px; padding:0px;
+	text-align:center;
+	}
 button {
   display: block;
   font-size: 16pt
@@ -12,3 +17,11 @@ button {
 img {
   margin-top: 20px;
 }
+.gwt-DecoratorPanel .middleCenter {
+	width:500px;
+	margin:0px auto;
+	text-align:left;
+	padding:15px;
+ }
+ 
+ 
