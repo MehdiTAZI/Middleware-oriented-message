@@ -94,6 +94,8 @@ public class ChannelPublisher {
 	    NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
 		    .getOrb().resolve_initial_references("NameService"));
 	    nc.unbind(nc.to_name(channelAdminImpl.getTopic()));
+	    //remove from map
+	    oidMap.remove(channelAdminImpl);
 	} catch (Exception e) {
 	    System.out.println("Impossible de contacter le name service");
 	}
