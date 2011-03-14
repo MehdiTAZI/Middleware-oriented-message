@@ -25,7 +25,7 @@ public class Application
 	
   public void onModuleLoad()
   {
-	  	final Label label = new Label ( "Bienvenu sur la console d'administration de mezzo");
+	  	final Label label = new Label ( "Bienvenue sur la console d'administration de mezzo");
 	 
 	  	Widget wiPanel = control.onInitialize();
 	  	
@@ -40,6 +40,7 @@ public class Application
 
 			// Wrap the contents in a DecoratorPanel
 		    DecoratorPanel decPanel = new DecoratorPanel();
+		    decPanel.setTitle("Console d'administration");
 		    decPanel.setWidget(vPanel);
 		    
 		
