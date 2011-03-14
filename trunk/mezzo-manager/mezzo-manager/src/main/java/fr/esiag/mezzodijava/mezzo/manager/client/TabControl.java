@@ -8,6 +8,8 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+import fr.esiag.mezzodijava.mezzo.manager.server.ShellExecuterImpl;
+
 
 public class TabControl {
 	private HTML moreInfo;
@@ -31,7 +33,7 @@ public class TabControl {
 
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuter shell = new ShellExecuter("calc");
+				ShellExecuterImpl shell = new ShellExecuterImpl("calc");
 				shell.execute();
 			}});
 
@@ -39,7 +41,7 @@ public class TabControl {
 
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuter shell = new ShellExecuter("mspaint");
+				ShellExecuterImpl shell = new ShellExecuterImpl("mspaint");
 				shell.execute();
 			}
 		});
@@ -52,7 +54,7 @@ public class TabControl {
 		// Add a tab
 		Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
-				ShellExecuter shell = new ShellExecuter("dir");
+				ShellExecuterImpl shell = new ShellExecuterImpl("dir");
 				moreInfo.setText(shell.execute());
 			}
 		});
