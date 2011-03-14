@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import fr.esiag.mezzodijava.mezzo.manager.client.shell.ShellExecuter;
 
 public class TabControl {
 	private HTML moreInfo;
