@@ -18,7 +18,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class Application
     implements EntryPoint
 {
-
+	private TabControl control = new TabControl();
   /**
    * This is the entry point method.
    */
@@ -37,7 +37,7 @@ public class Application
 	    cellFormatter.setColSpan(0, 0, 2);
 	    cellFormatter.setHorizontalAlignment(0, 0, HasHorizontalAlignment.ALIGN_CENTER);
 	    
-	    TabControl control = new TabControl();
+	    
 	    Widget wiPanel = control.onInitialize();
 	    layout.add(wiPanel);
      
