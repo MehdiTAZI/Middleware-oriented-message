@@ -12,24 +12,32 @@ import com.google.gwt.user.client.ui.Widget;
 
 
 
-public class TabControl {
+public class AdminPanel {
 	private HTML moreInfo;
 	// (1) Create the client proxy
 	private final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);	
 	private final ShellExecuterAsync ShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
-	public TabControl()
+	public AdminPanel()
 	{
 
 	}
 	@SuppressWarnings("deprecation")
 	public Widget onInitialize() {
 		  // (2) Create an asynchronous callback to handle the result.
-		    final AsyncCallback<String> defaultCallback = new AsyncCallback<String>() {
+		  final AsyncCallback<String> defaultCallback = new AsyncCallback<String>() {
 			public void onFailure(Throwable arg0) {
 			}
 			public void onSuccess(String arg0) {	
 			}
 		  };
+		  final AsyncCallback<String> callback = new AsyncCallback<String>() {
+				public void onFailure(Throwable arg0) {
+					moreInfo.setText("Error RPC CALL");
+				}
+				public void onSuccess(String arg0) {
+					moreInfo.setText(arg0);
+				}
+			  };
 
 		String[] tabTitles = new String[]{"Start","Stop","Status"};
 
@@ -64,14 +72,7 @@ public class TabControl {
 		Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (2) Create an asynchronous callback to handle the result.
-				  final AsyncCallback<String> callback = new AsyncCallback<String>() {
-					public void onFailure(Throwable arg0) {
-						moreInfo.setText("Error RPC CALL");
-					}
-					public void onSuccess(String arg0) {
-						moreInfo.setText(arg0);
-					}
-				  };
+				  
 				ShellExectuer.execute("dir", callback);
 			}
 		});
