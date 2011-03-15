@@ -10,19 +10,26 @@ import fr.esiag.mezzodijava.mezzo.manager.client.ShellExecuter;
 
 public class ShellExecuterImpl extends RemoteServiceServlet implements ShellExecuter {
 
-	public String execute(String command)
+	public String execute(String[] command)
 	{
 		Runtime run = Runtime.getRuntime();
-		Process pr = null;
+		Process proc = null;
 		String line = "";
 		try {
-			pr = run.exec(command);
-			pr.waitFor();
-			BufferedReader buf = new BufferedReader(new InputStreamReader(pr.getInputStream()));
+			proc = run.exec(command);
+			// error mesage;
+			//StreamCatcher errorCatcher = new 	StreamCatcher(proc.getErrorStream());            
+            
+            // output mesage
+			StreamCatcher outputCatcher = new 	StreamCatcher(proc.getInputStream());
+                
+           
+			//errorCatcher.read();
+           line= outputCatcher.read();
+            
+			int exitValue = proc.waitFor();
+			System.out.println("Exit Code : "+exitValue);
 			
-			while ((line=buf.readLine())!=null) {
-				System.out.println(line);
-			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {

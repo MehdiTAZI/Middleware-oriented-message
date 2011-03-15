@@ -51,7 +51,7 @@ public class AdminPanel {
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (3) Make the call
-				  defaultShellExectuer.execute("calc", defaultCallback);
+				  defaultShellExectuer.execute(new String[]{"calc"}, defaultCallback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
@@ -59,7 +59,7 @@ public class AdminPanel {
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				 // (3) Make the call
-				  defaultShellExectuer.execute("mspaint", defaultCallback);
+				  defaultShellExectuer.execute(new String[]{"mspaint"}, defaultCallback);
 			}
 		});
 
@@ -73,7 +73,7 @@ public class AdminPanel {
 			public void onClick(ClickEvent arg0) {
 				  // (2) Create an asynchronous callback to handle the result.
 				  
-				ShellExectuer.execute("dir", callback);
+				ShellExectuer.execute(new String[]{"cmd.exe","/C","dir"}, callback);
 			}
 		});
 
