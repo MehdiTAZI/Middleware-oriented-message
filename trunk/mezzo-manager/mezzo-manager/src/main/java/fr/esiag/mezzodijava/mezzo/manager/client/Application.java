@@ -17,7 +17,7 @@ import com.google.gwt.user.client.ui.Widget;
 public class Application
     implements EntryPoint
 {
-	private TabControl control = new TabControl();
+	private AdminPanel control = new AdminPanel();
   /**
    * This is the entry point method.
    */
