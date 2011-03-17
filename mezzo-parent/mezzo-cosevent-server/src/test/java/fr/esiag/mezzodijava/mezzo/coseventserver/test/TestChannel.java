@@ -13,6 +13,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -139,7 +141,11 @@ public class TestChannel {
 
 		Header header = new Header(Long.MAX_VALUE, 1, new Date().getTime(),
 				Long.MAX_VALUE);
-		Body body = new Body("test");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test");
+		Body body = new Body(any,"String");
+		
 		Event testevent = new Event(header, body);
 		assertTrue(ch.getQueueEvents().isEmpty());
 		ch.getQueueEvents().add(testevent);
@@ -156,7 +162,11 @@ public class TestChannel {
 
 		Header header = new Header(Long.MAX_VALUE, 1, new Date().getTime(),
 				Long.MAX_VALUE);
-		Body body = new Body("test");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test");
+		Body body = new Body(any,"String");
+		
 		Event testevent = new Event(header, body);
 		PriorityBlockingQueue<Event> queue = new PriorityBlockingQueue<Event>();
 		queue.add(testevent);
@@ -174,7 +184,12 @@ public class TestChannel {
 
 		Header header = new Header(Long.MAX_VALUE, 1, new Date().getTime(),
 				Long.MAX_VALUE);
-		Body body = new Body("test");
+		
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test");
+		Body body = new Body(any,"String");
+		
 		Event testevent = new Event(header, body);
 		ch.addEvent(testevent);
 		assertTrue(ch.getQueueEvents().contains(testevent));

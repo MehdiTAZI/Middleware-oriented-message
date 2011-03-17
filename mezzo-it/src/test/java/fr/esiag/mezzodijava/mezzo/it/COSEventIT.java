@@ -15,6 +15,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -291,7 +293,12 @@ public class COSEventIT {
 	for (int i = 0; i < 10; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -336,7 +343,12 @@ public class COSEventIT {
 			for (int i = 0; i < 10; i++) {
 			    Header header = new Header(123, 1, Calendar
 				    .getInstance().getTimeInMillis(), 10120);
-			    Body body = new Body("Test_EVENT_" + i);
+			    
+			    ORB orb=ORB.init();
+				Any any=orb.create_any();
+				any.insert_string("Test_EVENT"+i);
+				Body body = new Body(any,"String");
+			    
 			    Event evt = new Event(header, body);
 			    supplierProxy.push(evt);
 			    System.out.println("envoye " + evt);
@@ -410,7 +422,12 @@ public class COSEventIT {
 			for (int i = 0; i < 10; i++) {
 			    Header header = new Header(123, 1, Calendar
 				    .getInstance().getTimeInMillis(), 10120);
-			    Body body = new Body("Test_EVENT_" + i);
+			    
+			    ORB orb=ORB.init();
+				Any any=orb.create_any();
+				any.insert_string("Test_EVENT"+i);
+				Body body = new Body(any,"String");
+			    
 			    Event evt = new Event(header, body);
 			    supplierProxy.push(evt);
 			    System.out.println("envoye " + evt);
@@ -476,7 +493,12 @@ public class COSEventIT {
 	for (int i = 0; i < 50; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -624,7 +646,13 @@ public class COSEventIT {
 	for (int i = 0; i < 50; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -809,7 +837,12 @@ public class COSEventIT {
 	for (int i = 0; i < 5; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -824,7 +857,12 @@ public class COSEventIT {
 	for (int i = 5; i < 10; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -995,15 +1033,22 @@ public class COSEventIT {
 		.getProxyForPushSupplier();
 	// connection, envoie d'event, deconnection
 	supplierProxy.connect();
+	ORB orb=ORB.init();
+	Any any=orb.create_any();
+	any.insert_string("contenu");
+	
+	
 	supplierProxy.push(new Event(new Header(232, 1, (new Date()).getTime(),
-		1000), new Body("contenu")));
+		1000), new Body(any,"String")));
 	supplierProxy.disconnect();
 	// proxy recupere mais pas de connexion
 	// tentative de push
 
 	try {
 	    supplierProxy.push(new Event(new Header(232, 1, (new Date())
-		    .getTime(), 1000), new Body("contenu")));
+	    		
+	    		
+		    .getTime(), 1000), new Body(any,"String")));
 	    fail("push() didn't rose NotConnectedExcepetion !");
 	} catch (NotConnectedException e) {
 	    ; // ok
@@ -1128,7 +1173,13 @@ public class COSEventIT {
 	for (int i = 0; i < 12; i++) {
 	    Header header = new Header(i, inputPriorities[i], Calendar
 		    .getInstance().getTimeInMillis(), inputTimeToLive[i]);
-	    Body body = new Body("Test_EVENT_" + i);
+	    
+	    
+	    ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT"+i);
+		Body body = new Body(any,"String");
+	    
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);

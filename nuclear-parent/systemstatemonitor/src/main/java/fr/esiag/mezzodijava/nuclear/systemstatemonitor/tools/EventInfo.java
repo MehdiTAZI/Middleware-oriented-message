@@ -44,7 +44,7 @@ public class EventInfo implements Serializable{
 	
 	public EventInfo(Event e)
 	{	
-		StringTokenizer st= new StringTokenizer(e.body.content,"|");
+		StringTokenizer st= new StringTokenizer(e.body.content.extract_string(),"|");
 		if(st.hasMoreElements())
 			this.type = st.nextToken();
 		else

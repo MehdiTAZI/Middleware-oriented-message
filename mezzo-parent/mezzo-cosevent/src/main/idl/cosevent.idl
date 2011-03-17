@@ -8,7 +8,8 @@ module cosevent {
 	};
 	
 	struct Body{
-		string content;
+		any content;
+		string type;
 	};
 	
 	struct Event{		

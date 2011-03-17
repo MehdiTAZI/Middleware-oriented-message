@@ -113,6 +113,7 @@ public final class TimeClient {
 			.getResourceAsStream(TimeClient.CLIENT_PROPERTIES));
 	    } catch (IOException e) {
 		// TODO log here
+	    	log.debug("Error in opening time client property file");
 		throw new TimeClientException(
 			"Error in opening time client property file", e);
 	    }
@@ -123,6 +124,7 @@ public final class TimeClient {
 	    nceObj = orb.resolve_initial_references("NameService");
 	} catch (InvalidName e) {
 	    // TODO log here
+		log.debug("Cannot resolve NameService");
 	    throw new TimeClientException("Cannot resolve NameService", e);
 	}
 	nce = NamingContextExtHelper.narrow(nceObj);

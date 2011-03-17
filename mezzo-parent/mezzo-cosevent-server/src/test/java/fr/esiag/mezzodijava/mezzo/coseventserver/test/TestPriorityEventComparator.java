@@ -8,6 +8,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
@@ -35,7 +37,11 @@ public class TestPriorityEventComparator {
 	@Test
 	public void testCompare(){
 		PriorityEventComparator p = new PriorityEventComparator();
-		Body body = new Body("nothing");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("nothing");
+		Body body = new Body(any,"String");
+		
 		// on compare sur les dates de création
 		Header h1 = new Header(1, 1, 15111982, 10);
 		Header h2 = new Header(1, 1, 15111981, 10);

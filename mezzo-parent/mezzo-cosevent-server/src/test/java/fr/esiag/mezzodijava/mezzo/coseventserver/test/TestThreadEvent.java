@@ -8,6 +8,8 @@ import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
@@ -49,7 +51,11 @@ public class TestThreadEvent {
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
 		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
-		Body body=new Body("Test_EVENT");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT");
+		Body body = new Body(any,"String");
+		
 		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
@@ -84,7 +90,11 @@ public class TestThreadEvent {
 		channel.addSubscribedConsumer(ppfc);
 		// adding an event
 		Header header=new Header(123, 1, 01012011, 120);
-		Body body=new Body("Test_EVENT");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT");
+		Body body = new Body(any,"String");
+		
 		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
@@ -115,7 +125,11 @@ public class TestThreadEvent {
 		channel.getConsumersConnected().add(ppfc);
 		// adding an event
 		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
-		Body body=new Body("Test_EVENT");
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT");
+		Body body = new Body(any,"String");
+		
 		Event e = new Event(header,body);
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {

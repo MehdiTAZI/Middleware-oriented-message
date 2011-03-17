@@ -8,6 +8,7 @@ import java.net.Socket;
 import java.util.Date;
 import java.util.StringTokenizer;
 
+import org.omg.CORBA.Any;
 import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
@@ -29,7 +30,11 @@ public class AppSensorSupplier
 	
 	private static Event createMessage (String s){
 		Header head = null;
-		Body body = new Body(""); 
+		orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT");
+		Body body = new Body(any,"String");
+		 
 		long code = 0;
 		
 		StringTokenizer st= new StringTokenizer(s,"/");
@@ -39,11 +44,11 @@ public class AppSensorSupplier
 		else
 			System.err.println("miss-formed Event Structure : can't find code element");
 		if(st.hasMoreElements())
-			body.content = st.nextToken()+"|";
+			body.content.insert_string( st.nextToken()+"|");
 		else
 			System.err.println("miss-formed Event Structure : can't find type element");
 		if(st.hasMoreElements())
-			body.content += st.nextToken();
+			body.content.insert_string(body.content.extract_string()+ st.nextToken());
 		else
 			System.err.println("miss-formed Event Structure : can't find data element");
 		

@@ -49,7 +49,7 @@ public class EventInfo implements Serializable{
 	public EventInfo(Event e)
 	{	
 		this.time = e.header.timetolive;
-		st= new StringTokenizer(e.body.content,"/");
+		st= new StringTokenizer(e.body.content.extract_string(),"/");
 		if(st.hasMoreElements())
 			this.code =Integer.parseInt(st.nextToken());
 		else
