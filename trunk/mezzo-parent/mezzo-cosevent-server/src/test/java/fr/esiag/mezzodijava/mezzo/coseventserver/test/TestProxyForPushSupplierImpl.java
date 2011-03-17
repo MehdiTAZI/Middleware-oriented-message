@@ -10,6 +10,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
@@ -105,7 +107,12 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
-		Body body=new Body("Test_PUSH");
+		
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_PUSH");
+		Body body = new Body(any,"String");
+		
 		Event e = new Event(header,body);
 		mockCtr.addEvent(e);
 		// on rembobine le mock
@@ -126,7 +133,12 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
-		Body body=new Body("Test_PUSH");
+		
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_PUSH");
+		Body body = new Body(any,"String");
+		
 		Event e = new Event(header,body);
 		// enregistrement d'un appel de addevent dans le mock
 		mockCtr.addEvent(e);

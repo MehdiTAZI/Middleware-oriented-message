@@ -15,7 +15,8 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
     private InjectorSystemStateSupplier supplier;
 
     public CallBackConsumerImpl(InjectorSystemStateSupplier supplier) {
-	dbConnector = new DbEventConnectorImpl();/*
+	dbConnector = new DbEventConnectorImpl();
+	/*
 						  * DONT FORGET TO INSTANCIATE
 						  * THIS !
 						  */

@@ -9,6 +9,8 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
@@ -289,7 +291,11 @@ public class TestChannelCtr {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		Header header = new Header(123, 1, 01012011, 120);
-		Body body = new Body("Test_EVENT");
+		
+		ORB orb=ORB.init();
+		Any any=orb.create_any();
+		any.insert_string("Test_EVENT");
+		Body body = new Body(any,"String");
 		channelCtr.addEvent(new Event(header, body));
 	}
 }
