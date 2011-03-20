@@ -13,6 +13,7 @@ copy %M2_REPO%\mezzo-cosevent-server\0.0.1-SNAPSHOT\mezzo-cosevent-server-0.0.1-
 copy %M2_REPO%\sensorsdatasupplier\0.0.1-SNAPSHOT\sensorsdatasupplier-0.0.1-SNAPSHOT.jar sensorsdatasupplier.jar
 copy %M2_REPO%\systemstatemonitor\0.0.1-SNAPSHOT\systemstatemonitor-0.0.1-SNAPSHOT.jar systemstatemonitor.jar
 copy %M2_REPO%\sensor\0.0.1-SNAPSHOT\sensor-0.0.1-SNAPSHOT.jar sensor.jar
+copy %M2_REPO%\visualizer\0.0.1-SNAPSHOT\visualizer-0.0.1-SNAPSHOT.jar visualizer.jar
 copy %M2_REPO%\mezzo-costime-server\0.0.1-SNAPSHOT\mezzo-costime-server-0.0.1-SNAPSHOT.jar mezzo-costime-server.jar
 
 pause
