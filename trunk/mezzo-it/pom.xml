@@ -46,6 +46,11 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>nuclear-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	<build>
 

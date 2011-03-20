@@ -18,6 +18,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
+import fr.esiag.nuclear.commons.model.Pression;
+import fr.esiag.nuclear.commons.model.RadioActivite;
+import fr.esiag.nuclear.commons.model.Temperature;
 
 public class Morocco {
 
@@ -35,7 +38,7 @@ public class Morocco {
 			CallbackConsumer cbc = ec.serveCallbackConsumer(callback);
 			System.out.println("subscribe du consumer");
 			consumerProxy.subscribe(cbc);
-			Thread.sleep(30000);
+			Thread.sleep(1000);
 			consumerProxy.connect();
 			ORB orb = ec.getOrb();
 			orb.run();
@@ -72,7 +75,36 @@ public class Morocco {
 
 		@Override
 		public void receive(Event evt) throws ConsumerNotFoundException {
-			System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()+" content:"+evt.body.content);
+			
+			 if(evt.body.type.equals("String")){
+				 System.out.println("MOROCCO --> IN STRING");
+				 System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()+" content:"+evt.body.content.extract_string());
+				    }
+			
+			if(evt.body.type.equals("Temperature")){
+				System.out.println("MOROCCO --> IN TEMPERATURE");
+				Temperature t=(Temperature)evt.body.content.extract_Value();
+				System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
+						+" content:"+ t.getValue() +"|"+t.getUnite());
+						
+					
+			}
+			  if(evt.body.type.equals("Pression")){
+			    	System.out.println("IN Pression");
+					Pression t=(Pression)evt.body.content.extract_Value();
+					System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
+							+ ", contenu: Pression" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
+						
+				}
+			    
+			    if(evt.body.type.equals("RadioActivite")){
+			    	System.out.println("IN RADIOACTIVITE");
+					RadioActivite t=(RadioActivite)evt.body.content.extract_Value();
+					System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
+							+ ", contenu: RadioActivite" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
+						
+				}
+			
 
 		}
 	}
