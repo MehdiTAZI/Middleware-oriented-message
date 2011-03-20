@@ -22,7 +22,7 @@ public class EventFactory {
 		return new Event(header, body);
 	}
 	public static Event createEventObject(int priority,long timetolive,Serializable content,String type){
-		System.out.println("Appel CreateEventObject");
+		
 		Random r1= new Random();
 		long code = r1.nextLong()*100;
 		Header header = new Header(code, priority, new Date().getTime(), timetolive);

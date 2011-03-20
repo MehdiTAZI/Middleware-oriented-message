@@ -52,7 +52,7 @@ public class AppSensorSupplier
 		type=st.nextToken();
 		
 		value=Long.valueOf(st.nextToken());
-		System.out.println("VALUE -- >"+value);
+		
 		Event e=null;
 		
 		Random random=new Random();
