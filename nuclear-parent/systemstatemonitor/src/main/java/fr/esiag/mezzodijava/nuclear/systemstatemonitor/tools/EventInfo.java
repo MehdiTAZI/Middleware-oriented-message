@@ -9,6 +9,9 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.nuclear.commons.model.Pression;
+import fr.esiag.nuclear.commons.model.RadioActivite;
+import fr.esiag.nuclear.commons.model.Temperature;
 
 @Entity (name = "EventInfo")
 @Table(name = "EventInfo")
@@ -44,7 +47,10 @@ public class EventInfo implements Serializable{
 	
 	public EventInfo(Event e)
 	{	
+		
+		if(e.body.type.equals("String")){
 		StringTokenizer st= new StringTokenizer(e.body.content.extract_string(),"|");
+		
 		if(st.hasMoreElements())
 			this.type = st.nextToken();
 		else
@@ -54,7 +60,23 @@ public class EventInfo implements Serializable{
 			this.data = st.nextToken();
 		else
 			System.err.println("miss-formed Event Structure : can't find data element");
-		
+		}
+		else if(e.body.type.equals("Temperature")){
+			Temperature temperature=(Temperature)e.body.content.extract_Value();
+			this.type=e.body.type;
+			this.data=""+temperature.getValue();
+			
+		}
+		else if(e.body.type.equals("Pression")){
+			Pression p=(Pression)e.body.content.extract_Value();			
+			this.data=""+p.getValue();
+			this.type=e.body.type;
+		}
+		else if(e.body.type.equals("RadioActivite")){
+			RadioActivite ra=(RadioActivite)e.body.content.extract_Value();			
+			this.data=""+ra.getValue();
+			this.type=e.body.type;
+		}
 		this.priority = e.header.priority;
 		this.code = e.header.code;
 		this.date = e.header.creationdate;
