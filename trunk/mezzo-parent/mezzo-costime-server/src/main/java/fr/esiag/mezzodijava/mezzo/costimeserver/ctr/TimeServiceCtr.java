@@ -1,13 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.ctr;
 
-import java.util.Collections;
-import java.util.TreeSet;
-
-import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
-import fr.esiag.mezzodijava.mezzo.costime.UnreachableException;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 /**
