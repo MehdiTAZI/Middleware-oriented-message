@@ -13,14 +13,21 @@
 	</parent>
 
 	<name>Nuclear Sensors Data Supplier (Mock Component)</name>
-	<dependencies>
+	<dependencies>		
 		<dependency>
 			<groupId>fr.esiag.mezzodijava</groupId>
 			<artifactId>mezzo-libclient</artifactId>
-		</dependency>
+		</dependency>	
+		
+					
 		<dependency>
 			<groupId>org.hibernate.javax.persistence </groupId>
 			<artifactId>hibernate-jpa-2.0-api </artifactId>
+		</dependency>
+		<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>nuclear-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 	<profiles>
