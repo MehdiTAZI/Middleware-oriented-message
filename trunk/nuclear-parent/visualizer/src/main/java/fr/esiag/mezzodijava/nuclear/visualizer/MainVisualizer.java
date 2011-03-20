@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.visualizer;
+package fr.esiag.mezzodijava.nuclear.visualizer;
 
 import java.util.Date;
 
