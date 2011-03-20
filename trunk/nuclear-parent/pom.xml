@@ -80,6 +80,7 @@
 		<module>sensorsdatasupplier</module>
 		<module>systemstatemonitor</module>		
 		<module>nuclear-commons</module>
+		<module>visualizer</module>
 	</modules>
 	<repositories>
 		<repository>
