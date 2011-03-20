@@ -14,23 +14,36 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 public class EventFactory {
 	public static Event createEventString(int priority,long timetolive,String content ){
 		Random r1= new Random();
-		long code = r1.nextLong();
-		Header h1 = new Header(code, priority, new Date().getTime(), timetolive);
+		long code = r1.nextLong()*100;
+		Header header = new Header(code, priority, new Date().getTime(), timetolive);
 		Any any = ORB.init().create_any();
-		any.insert_Value(content);
-		Body b1 = new Body(any,"String");
-		return new Event(h1, b1);
+		any.insert_string(content);
+		Body body = new Body(any,"String");		
+		return new Event(header, body);
 	}
-	public static Event createEventObject(int priority,long timetolive,Serializable content ){
+	public static Event createEventObject(int priority,long timetolive,Serializable content,String type){
+		System.out.println("Appel CreateEventObject");
 		Random r1= new Random();
-		long code = r1.nextLong();
-		Header h1 = new Header(code, priority, new Date().getTime(), timetolive);
+		long code = r1.nextLong()*100;
+		Header header = new Header(code, priority, new Date().getTime(), timetolive);
 		Any any = ORB.init().create_any();
 		any.insert_Value(content);
-		Body b1 = new Body(any,content.getClass().toString());
-		return new Event(h1, b1);
+		Body body = new Body(any,type);
+		return new Event(header, body);
 		
 	}
+	
+	public static final class Test implements Serializable{
+		private String name;
+		public Test() {
+			name="coco";
+		}
+		
+		public String getName(){
+			return this.name;
+		}
+	}
+	
 	
 
 }
