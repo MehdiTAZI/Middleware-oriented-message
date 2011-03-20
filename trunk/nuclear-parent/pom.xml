@@ -76,9 +76,10 @@
 		</plugins>
 	</build>
 	<modules>
-	    <module>sensor</module>
+		<module>sensor</module>
 		<module>sensorsdatasupplier</module>
-		<module>systemstatemonitor</module>
+		<module>systemstatemonitor</module>		
+		<module>nuclear-commons</module>
 	</modules>
 	<repositories>
 		<repository>
