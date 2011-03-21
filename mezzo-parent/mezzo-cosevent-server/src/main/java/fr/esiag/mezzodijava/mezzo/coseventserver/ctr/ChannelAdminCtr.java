@@ -9,6 +9,7 @@ import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+import org.omg.PortableServer.POAPackage.ObjectNotActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
 
@@ -88,7 +89,7 @@ public class ChannelAdminCtr {
      */
     public ProxyForPushConsumer createProxyForPushConsumer() {
 	ProxyForPushConsumer pps = null;
-	try {
+	/*try {
 	    ProxyForPushConsumerImpl proxy = null;
 	    proxy = new ProxyForPushConsumerImpl(channel);
 	    POA poa = POAHelper.narrow(orb
@@ -114,10 +115,23 @@ public class ChannelAdminCtr {
 	} catch (WrongPolicy e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
-	}
+	}*/
+	 byte[] oid;
+		try {
+			oid = getPOA().servant_to_id(
+					    new ProxyForPushConsumerPOATie(new ProxyForPushConsumerImpl(channel)));
+			pps = ProxyForPushConsumerHelper.narrow(getPOA().id_to_reference(oid));
+				oidProxyForPushConsumerMap.put(pps, oid);
+		} catch (ServantNotActive e) {
+			e.printStackTrace();
+		} catch (WrongPolicy e) {
+			e.printStackTrace();
+		} catch (ObjectNotActive e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return pps;
 	
-	 
-	return pps;
     }
 
     /**
@@ -130,28 +144,32 @@ public class ChannelAdminCtr {
     public ProxyForPushSupplier createProxyForPushSupplier()  {
 	ProxyForPushSupplier ppc = null;
 
-	try {
-	    ProxyForPushSupplierImpl proxy = null;
-	    proxy = new ProxyForPushSupplierImpl(channel);
-	    POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-	    poa.the_POAManager().activate();
-	    ppc = ProxyForPushSupplierHelper
-		    .narrow(poa
-			    .servant_to_reference(new ProxyForPushSupplierPOATie(
-				    proxy)));
-
-	} catch (org.omg.CORBA.UserException e) {
-	    // TODO Log Corba error
-	    e.printStackTrace();
-	}
+//	try {
+//	    ProxyForPushSupplierImpl proxy = null;
+//	    proxy = new ProxyForPushSupplierImpl(channel);
+//	    POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
+//	    poa.the_POAManager().activate();
+//	    ppc = ProxyForPushSupplierHelper
+//		    .narrow(poa
+//			    .servant_to_reference(new ProxyForPushSupplierPOATie(
+//				    proxy)));
+//
+//	} catch (org.omg.CORBA.UserException e) {
+//	    // TODO Log Corba error
+//	    e.printStackTrace();
+//	}
 	 byte[] oid;
 	try {
 		oid = getPOA().servant_to_id(
-				    new ProxyForPushSupplierPOATie(ppc));
-		oidProxyForPushSupplierMap.put(ppc, oid);
+				    new ProxyForPushSupplierPOATie(new ProxyForPushSupplierImpl(channel)));
+		ppc = ProxyForPushSupplierHelper.narrow(getPOA().id_to_reference(oid));
+			oidProxyForPushSupplierMap.put(ppc, oid);
 	} catch (ServantNotActive e) {
 		e.printStackTrace();
 	} catch (WrongPolicy e) {
+		e.printStackTrace();
+	} catch (ObjectNotActive e) {
+		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	return ppc;
