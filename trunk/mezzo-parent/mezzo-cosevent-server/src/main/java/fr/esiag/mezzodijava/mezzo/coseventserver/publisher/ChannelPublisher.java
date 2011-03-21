@@ -12,6 +12,8 @@ import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
@@ -96,6 +98,12 @@ public class ChannelPublisher {
 	    nc.unbind(nc.to_name(channelAdminImpl.getTopic()));
 	    //remove from map
 	    oidMap.remove(channelAdminImpl);
+	    for(ProxyForPushConsumer ppc : channelAdminImpl.getChannelAdminctrl().getOidProxyForPushConsumerMap().keySet()){
+	    	getPOA().deactivate_object(channelAdminImpl.getChannelAdminctrl().getOidProxyForPushConsumerMap().get(ppc));
+	    }
+	    for(ProxyForPushSupplier pps : channelAdminImpl.getChannelAdminctrl().getOidProxyForPushSupplierMap().keySet()){
+	    	getPOA().deactivate_object(channelAdminImpl.getChannelAdminctrl().getOidProxyForPushSupplierMap().get(pps));
+	    }
 	} catch (Exception e) {
 	    System.out.println("Impossible de contacter le name service");
 	}
