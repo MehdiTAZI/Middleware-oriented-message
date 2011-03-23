@@ -60,7 +60,7 @@ public class AppSensorSupplier
 		if(randomNumber<5) 
 			return createStringEvent(s);
 		if(type.toLowerCase().trim().equals("temperature")){
-			Temperature t=new Temperature(value, "°C");
+			Temperature t=new Temperature(value, "Celsius");
 			e=EventFactory.createEventObject(1, 5000,t,"Temperature");
 		}
 		else if(type.toLowerCase().trim().equals("pression")){
@@ -68,7 +68,7 @@ public class AppSensorSupplier
 			e=EventFactory.createEventObject(1, 5000,p,"Pression");
 		}
 		else if(type.toLowerCase().trim().equals("radioactivite")){
-			RadioActivite ra=new RadioActivite(value, "HDA");
+			RadioActivite ra=new RadioActivite(value, "SIEVERT");
 			e=EventFactory.createEventObject(1, 5000,ra,"RadioActivite");
 		}
 		
