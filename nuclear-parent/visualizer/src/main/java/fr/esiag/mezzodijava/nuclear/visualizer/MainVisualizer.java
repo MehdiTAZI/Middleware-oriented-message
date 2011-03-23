@@ -76,29 +76,25 @@ public class MainVisualizer {
 		@Override
 		public void receive(Event evt) throws ConsumerNotFoundException {
 			
-			 if(evt.body.type.equals("String")){
-				 System.out.println("MOROCCO --> IN STRING");
+			 if(evt.body.type.equals("String")){				 
 				 System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()+" content:"+evt.body.content.extract_string());
 				    }
 			
-			if(evt.body.type.equals("Temperature")){
-				System.out.println("MOROCCO --> IN TEMPERATURE");
+			if(evt.body.type.equals("Temperature")){				
 				Temperature t=(Temperature)evt.body.content.extract_Value();
 				System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
 						+" content:"+ t.getValue() +"|"+t.getUnite());
 						
 					
 			}
-			  if(evt.body.type.equals("Pression")){
-			    	System.out.println("IN Pression");
+			  if(evt.body.type.equals("Pression")){			    	
 					Pression t=(Pression)evt.body.content.extract_Value();
 					System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
 							+ ", contenu: Pression" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 						
 				}
 			    
-			    if(evt.body.type.equals("RadioActivite")){
-			    	System.out.println("IN RADIOACTIVITE");
+			    if(evt.body.type.equals("RadioActivite")){			    	
 					RadioActivite t=(RadioActivite)evt.body.content.extract_Value();
 					System.out.println("priority:"+evt.header.priority+",date:"+(new Date(evt.header.creationdate)).toGMTString()
 							+ ", contenu: RadioActivite" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
