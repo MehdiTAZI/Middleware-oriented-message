@@ -5,7 +5,7 @@
 
 	<persistence-unit name="Event" transaction-type="RESOURCE_LOCAL">
 	
-<!--	  <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
+    <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 	  <!-- Classes prises en charge par l'ORM -->
 	 
@@ -17,11 +17,7 @@
 		<property name="javax.persistence.jdbc.user"     value="test" />
 		<property name="javax.persistence.jdbc.password" value="test" />
 
-        <!-- Propriétés de l'ORM propres à EclipseLink -->
-		<!-- EclipseLink should create the database schema automatically -->
-		<!--<property name="eclipselink.ddl-generation"             value="creates-tables" />
-		<property name="eclipselink.ddl-generation.output-mode"	value="database" />
-	  -->
+        <!-- Propriétés de l'ORM propres à Hibernate -->
 	  	<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 	  </properties>
 	</persistence-unit>

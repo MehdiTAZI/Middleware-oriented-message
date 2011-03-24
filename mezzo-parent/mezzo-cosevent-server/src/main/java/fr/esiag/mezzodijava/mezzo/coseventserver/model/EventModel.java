@@ -1,122 +1,103 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
-import java.io.*;
-import javax.persistence.*;
+import java.io.Serializable;
 
-import org.w3c.dom.events.Event;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Table;
 
 @Entity (name = "EventModel")
 @Table(name = "EventModel")
-public class EventModel implements Serializable{
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	@javax.persistence.Id
-	@GeneratedValue
-	private int Id;
+public class EventModel implements Serializable {
 	
-	@Column(name="Channel")
-	private Channel channel;
-	
-	
-	@Column(name="Channel")
-	private Event evt;
-	
-	
-	@Column(name = "type")
-	private String type;
-	
-	@Column(name = "code")
-	private long code;
-	
-	@Column(name = "priority")
-	private int priority;
-	
-	@Column(name= "date")
-	private long date;
-	
-	@Column(name = "data")
-	private String data;
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+		@javax.persistence.Id
+		@GeneratedValue
+		private int Id;
+		
+		@Column(name = "priority")
+		private int priority;
+		
+		@Column(name= "date")
+		private long date;
+		
+		@Column(name = "data")
+		private String data;
 
-	
-	
-	
-	public EventModel(int id, Channel channel, Event evt, String data) {
-		super();
-		Id = id;
-		this.channel = channel;
-		this.evt = evt;
-		this.data = data;
+		
+		public EventModel() {
+			super();
+			// TODO Auto-generated constructor stub
+		}
+
+		public EventModel(int id, String type, long code, int priority, long date,
+				String data) {
+			super();
+			Id = id;
+			this.type = type;
+			this.code = code;
+			this.priority = priority;
+			this.date = date;
+			this.data = data;
+		}
+
+		public int getId() {
+			return Id;
+		}
+
+		public void setId(int id) {
+			Id = id;
+		}
+
+		public String getType() {
+			return type;
+		}
+
+		public void setType(String type) {
+			this.type = type;
+		}
+
+		public long getCode() {
+			return code;
+		}
+
+		public void setCode(long code) {
+			this.code = code;
+		}
+
+		public int getPriority() {
+			return priority;
+		}
+
+		public void setPriority(int priority) {
+			this.priority = priority;
+		}
+
+		public long getDate() {
+			return date;
+		}
+
+		public void setDate(long date) {
+			this.date = date;
+		}
+
+		public String getData() {
+			return data;
+		}
+
+		public void setData(String data) {
+			this.data = data;
+		}
+
+		public static long getSerialversionuid() {
+			return serialVersionUID;
+		}
+		
+		
 	}
 
-	public EventModel() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public EventModel(int id, String type, long code, int priority, long date,
-			String data) {
-		super();
-		Id = id;
-		this.type = type;
-		this.code = code;
-		this.priority = priority;
-		this.date = date;
-		this.data = data;
-	}
-
-	public int getId() {
-		return Id;
-	}
-
-	public void setId(int id) {
-		Id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public long getCode() {
-		return code;
-	}
-
-	public void setCode(long code) {
-		this.code = code;
-	}
-
-	public int getPriority() {
-		return priority;
-	}
-
-	public void setPriority(int priority) {
-		this.priority = priority;
-	}
-
-	public long getDate() {
-		return date;
-	}
-
-	public void setDate(long date) {
-		this.date = date;
-	}
-
-	public String getData() {
-		return data;
-	}
-
-	public void setData(String data) {
-		this.data = data;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
-	
 }

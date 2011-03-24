@@ -9,8 +9,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushConsumerImpl
@@ -24,29 +22,18 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  * 
  */
 
-public class ProxyForPushConsumerImpl implements MessageListener,
+public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements MessageListener,
 	ProxyForPushConsumerOperations {
-
-    /**
+	
+	/**
      * The Callback Consumer Interface to the consumer.
      */
     private CallbackConsumer callbackConsumer;
 
-    /**
-     * The Channel Controller used by this facade
-     */
-    private ChannelCtr channelCtr;
-
-    /**
-     * Build a ProxyForPushConsumer instance associated with the given topic and
-     * build the underlying Channel Controller.
-     * 
-     * @param topic
-     *            Channel Topic.
-     */
     public ProxyForPushConsumerImpl(String topic) {
-	this.channelCtr = BFFactory.createChannelCtr(topic);	
-    }
+		super(topic);
+		// TODO Auto-generated constructor stub
+	}
 
     /**
      * Connect this consumer the the channel.
@@ -61,8 +48,9 @@ public class ProxyForPushConsumerImpl implements MessageListener,
      *             If Channel Connection Capaciy is reached.
      */
     @Override
-    public void connect() throws AlreadyConnectedException,
+    public void connect(CallbackConsumer c) throws AlreadyConnectedException,
 	    NotRegisteredException, MaximalConnectionReachedException {
+    this.callbackConsumer = c;
 	channelCtr.addProxyForPushConsumerToConnectedList(this);
 	System.out.println("Connect of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
@@ -114,9 +102,8 @@ public class ProxyForPushConsumerImpl implements MessageListener,
      *             If already present in the list.
      */
     @Override
-    public void subscribe(CallbackConsumer cc)
+    public void subscribe()
 	    throws AlreadyRegisteredException {
-	this.callbackConsumer = cc;
 	channelCtr.addProxyForPushConsumerToSubscribedList(this);
 	System.out.println("Subscribe of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
