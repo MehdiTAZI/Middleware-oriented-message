@@ -20,30 +20,12 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  * 
  */
 
-public class ProxyForPushSupplierImpl implements ProxyForPushSupplierOperations {
+public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements ProxyForPushSupplierOperations {
 
-	/**
-	 * The Channel Controller used by this facade
-	 */
-	private ChannelCtr channelCtr;
 
-	private boolean connected = false;
-
-	/**
-	 * Build a ProxyForPushSupplier instance associated with the given topic and
-	 * build the underlying Channel Controller.
-	 * 
-	 * @param topic
-	 *            Channel Topic.
-	 */
 	public ProxyForPushSupplierImpl(String topic) {
-		channelCtr = BFFactory.createChannelCtr(topic);
-		//TODO : remove after working test.
-//		if (channelCtr.getChannel() != null){
-//		ThreadRemoveExpiredEvent th=new ThreadRemoveExpiredEvent(channelCtr.getChannel().getQueueEvents(), channelCtr.getSynchronizedDate());
-//		Thread thread=new Thread(th);
-//		thread.start();
-//		}
+		super(topic);
+		// TODO Auto-generated constructor stub
 	}
 
 	/**

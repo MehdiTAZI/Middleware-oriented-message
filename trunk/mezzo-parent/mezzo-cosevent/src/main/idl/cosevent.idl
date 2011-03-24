@@ -59,9 +59,9 @@ module cosevent {
 		
 	interface ProxyForPushConsumer{
 			
-		void subscribe(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyRegisteredException);
+		void subscribe() raises (ChannelNotFoundException,AlreadyRegisteredException);
 		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
-		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
+		void connect(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
 		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);
 		
 	};
@@ -73,8 +73,8 @@ module cosevent {
 	};
 	
 	interface ChannelAdmin{
-		ProxyForPushConsumer getProxyForPushConsumer() raises (ChannelNotFoundException);
-		ProxyForPushSupplier getProxyForPushSupplier() raises (ChannelNotFoundException);
+		ProxyForPushConsumer getProxyForPushConsumer(in string idComponent) raises (ChannelNotFoundException);
+		ProxyForPushSupplier getProxyForPushSupplier(in string idComponent) raises (ChannelNotFoundException);
 	};
 	
 	interface EventServerChannelAdmin{
