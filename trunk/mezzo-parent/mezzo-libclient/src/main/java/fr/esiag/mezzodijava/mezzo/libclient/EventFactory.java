@@ -33,17 +33,5 @@ public class EventFactory {
 		
 	}
 	
-	public static final class Test implements Serializable{
-		private String name;
-		public Test() {
-			name="coco";
-		}
-		
-		public String getName(){
-			return this.name;
-		}
-	}
-	
-	
 
 }
