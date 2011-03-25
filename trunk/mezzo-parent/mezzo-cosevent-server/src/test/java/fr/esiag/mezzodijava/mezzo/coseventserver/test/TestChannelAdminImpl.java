@@ -52,14 +52,14 @@ public class TestChannelAdminImpl {
 		// mockAdminCtr.createProxyForPushSupplier();
 
 		// appel et valeur de retour espérée
-		EasyMock.expect(mockAdminCtr.createProxyForPushSupplier()).andReturn(
+		EasyMock.expect(mockAdminCtr.createProxyForPushSupplier("testsupplier")).andReturn(
 				mockpps);
 		// enregistrement
 		EasyMock.replay(mockAdminCtr);
 		// inject mock in Factory
 		BFFactory.setAlternateChannelAdminCtr("TEST", mockAdminCtr);
 		ChannelAdminImpl caImp = new ChannelAdminImpl("TEST");
-		caImp.getProxyForPushSupplier();
+		caImp.getProxyForPushSupplier("testsupplier");
 		EasyMock.verify(mockAdminCtr);
 		mockAdminCtr = null;
 		mockpps = null;
@@ -75,14 +75,14 @@ public class TestChannelAdminImpl {
 		ProxyForPushConsumer mockppc = EasyMock
 				.createNiceMock(ProxyForPushConsumer.class);
 		// appel et valeur de retour espérée
-		EasyMock.expect(mockAdminCtr.createProxyForPushConsumer()).andReturn(
+		EasyMock.expect(mockAdminCtr.createProxyForPushConsumer("testconsumer")).andReturn(
 				mockppc);
 		// enregistrement
 		EasyMock.replay(mockAdminCtr);
 		// inject mock in Factory
 		BFFactory.setAlternateChannelAdminCtr("TEST", mockAdminCtr);
 		ChannelAdminImpl caImp = new ChannelAdminImpl("TEST");
-		caImp.getProxyForPushConsumer();
+		caImp.getProxyForPushConsumer("testconsumer");
 		EasyMock.verify(mockAdminCtr);
 		mockAdminCtr = null;
 		mockppc = null;

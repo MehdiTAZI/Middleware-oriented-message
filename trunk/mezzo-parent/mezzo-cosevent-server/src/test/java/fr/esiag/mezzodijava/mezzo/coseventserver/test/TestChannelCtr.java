@@ -71,7 +71,7 @@ public class TestChannelCtr {
 	@Test
 	public void testAddProxyForPushConsumerToSubscribedListAlreadyRegistered() {
 
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		try {
 			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
@@ -85,7 +85,7 @@ public class TestChannelCtr {
 	@Test
 	public void testAddProxyForPushConsumerToSubscribedListNormal()
 			throws AlreadyRegisteredException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 
 	}
@@ -95,7 +95,7 @@ public class TestChannelCtr {
 			throws AlreadyConnectedException,
 			MaximalConnectionReachedException, NotRegisteredException,
 			NotConnectedException, AlreadyRegisteredException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		// register
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		// connect
@@ -108,7 +108,7 @@ public class TestChannelCtr {
 	@Test
 	public void testRemoveProxyForPushConsumerFromConnectedListNotConnected()
 			throws NotRegisteredException, AlreadyRegisteredException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		try {
 			// register
 			channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
@@ -123,7 +123,7 @@ public class TestChannelCtr {
 	@Test
 	public void testRemoveProxyForPushConsumerFromConnectedListNotRegistered()
 			throws NotConnectedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		try {
 			channelCtr.removeProxyForPushConsumerFromConnectedList(ppc);
 			fail();
@@ -136,7 +136,7 @@ public class TestChannelCtr {
 	public void testRemoveProxyForPushConsumerFromSubscribedListNormal()
 			throws AlreadyRegisteredException, NotRegisteredException {
 
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
 	}
@@ -145,7 +145,7 @@ public class TestChannelCtr {
 	public void testRemoveProxyForPushConsumerFromSubscribedListNotRegistered()
 			throws AlreadyRegisteredException {
 
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		try {
 			channelCtr.removeProxyForPushConsumerFromSubscribedList(ppc);
 			fail();
@@ -158,7 +158,7 @@ public class TestChannelCtr {
 	public void testAddProxyForPushConsumerToConnectedListNormal()
 			throws AlreadyRegisteredException, NotRegisteredException,
 			AlreadyConnectedException, MaximalConnectionReachedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 	}
@@ -167,9 +167,9 @@ public class TestChannelCtr {
 	public void testAddProxyForPushConsumerToConnectedListMaximalConnectionReached()
 			throws AlreadyRegisteredException, NotRegisteredException,
 			AlreadyConnectedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic);
-		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
+		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic,"testconsumer");
+		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc2);
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc3);
@@ -187,9 +187,9 @@ public class TestChannelCtr {
 	public void testAddProxyForPushConsumerToConnectedListNotRegistered()
 			throws AlreadyRegisteredException, AlreadyConnectedException,
 			MaximalConnectionReachedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
-		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic);
-		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
+		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic,"testconsumer");
+		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		try {
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			fail();
@@ -202,7 +202,7 @@ public class TestChannelCtr {
 	public void testAddProxyForPushConsumerToConnectedListAlreadyConnected()
 			throws AlreadyRegisteredException, NotRegisteredException,
 			MaximalConnectionReachedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		try {
 			Channel channel = BFFactory.createChannelEntity(topic, 0);
@@ -219,7 +219,7 @@ public class TestChannelCtr {
 	@Test
 	public void testAddProxyForPushSupplierToConnectedListAlreadyConnected()
 			throws MaximalConnectionReachedException {
-		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
 		try {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
@@ -232,8 +232,8 @@ public class TestChannelCtr {
 	@Test
 	public void testAddProxyForPushSupplierToConnectedListMaximalConnectionReached()
 			throws AlreadyConnectedException {
-		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
-		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
+		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic,"testsupplier");
 
 		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(1);
@@ -249,8 +249,8 @@ public class TestChannelCtr {
 	@Test
 	public void testAddProxyForPushSupplierToConnectedListNormal()
 			throws AlreadyConnectedException, MaximalConnectionReachedException {
-		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
-		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic);
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
+		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic,"testsupplier");
 
 		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(30);
@@ -261,7 +261,7 @@ public class TestChannelCtr {
 	public void testRemoveProxyForPushSupplierFromConnectedListNormal()
 			throws AlreadyConnectedException,
 			MaximalConnectionReachedException, NotConnectedException {
-		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 		channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 	}
@@ -269,7 +269,7 @@ public class TestChannelCtr {
 	@Test
 	public void testRemoveProxyForPushSupplierFromConnectedListNotConnected()
 			throws AlreadyConnectedException, MaximalConnectionReachedException {
-		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic);
+		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
 		try {
 			channelCtr.removeProxyForPushSupplierFromConnectedList(pps);
 			fail();
@@ -288,7 +288,7 @@ public class TestChannelCtr {
 		// }
 		Channel channel = BFFactory.createChannelEntity(topic, 0);
 		channel.setCapacity(2);
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic);
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		Header header = new Header(123, 1, 01012011, 120);
 		
