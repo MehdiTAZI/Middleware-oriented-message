@@ -22,18 +22,17 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
  * 
  */
 
-public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements MessageListener,
-	ProxyForPushConsumerOperations {
-	
-	/**
+public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
+	MessageListener, ProxyForPushConsumerOperations {
+
+    /**
      * The Callback Consumer Interface to the consumer.
      */
     private CallbackConsumer callbackConsumer;
 
-    public ProxyForPushConsumerImpl(String topic) {
-		super(topic);
-		// TODO Auto-generated constructor stub
-	}
+    public ProxyForPushConsumerImpl(String topic, String idComponent) {
+	super(topic, idComponent);
+    }
 
     /**
      * Connect this consumer the the channel.
@@ -50,7 +49,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements Messa
     @Override
     public void connect(CallbackConsumer c) throws AlreadyConnectedException,
 	    NotRegisteredException, MaximalConnectionReachedException {
-    this.callbackConsumer = c;
+	this.callbackConsumer = c;
 	channelCtr.addProxyForPushConsumerToConnectedList(this);
 	System.out.println("Connect of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
@@ -85,7 +84,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements Messa
     @Override
     public void receive(Event evt) throws ConsumerNotFoundException {
 	try {
-		//System.out.println("IN RECEIVE");
+	    // System.out.println("IN RECEIVE");
 	    callbackConsumer.receive(evt);
 	} catch (org.omg.CORBA.SystemException ex) {
 	    throw new ConsumerNotFoundException(ex.getClass().getName() + ":"
@@ -102,8 +101,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements Messa
      *             If already present in the list.
      */
     @Override
-    public void subscribe()
-	    throws AlreadyRegisteredException {
+    public void subscribe() throws AlreadyRegisteredException {
 	channelCtr.addProxyForPushConsumerToSubscribedList(this);
 	System.out.println("Subscribe of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
