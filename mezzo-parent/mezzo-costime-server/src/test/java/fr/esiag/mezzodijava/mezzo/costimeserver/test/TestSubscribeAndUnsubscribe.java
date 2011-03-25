@@ -20,6 +20,7 @@ import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
+import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 
@@ -27,6 +28,7 @@ public class TestSubscribeAndUnsubscribe {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+	    CosTimeServer.initLogging();
 	}
 
 	@AfterClass
@@ -51,6 +53,7 @@ public class TestSubscribeAndUnsubscribe {
 		Iterator<Synchronizable> iterator=  test.getCtr().getModel().getComponentSubscribed().iterator();
 		Synchronizable firstElem= iterator.next();
 		assertEquals(mockSync,firstElem);
+		assertTrue(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
 	}
 	
 	@Test
