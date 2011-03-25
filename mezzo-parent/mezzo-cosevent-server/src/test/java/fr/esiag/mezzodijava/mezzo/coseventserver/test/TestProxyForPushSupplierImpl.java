@@ -50,7 +50,7 @@ public class TestProxyForPushSupplierImpl {
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST_CONNECT", mockCtr);
 		// nouveau proxy
-		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST_CONNECT");
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST_CONNECT","testsupplier");
 		mockCtr.addProxyForPushSupplierToConnectedList(pfps);
 
 		//mockCtr.getChannel();
@@ -78,7 +78,7 @@ public class TestProxyForPushSupplierImpl {
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
-		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 
 		mockCtr.removeProxyForPushSupplierFromConnectedList(pfps);
 
@@ -104,7 +104,7 @@ public class TestProxyForPushSupplierImpl {
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
-		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
 		
@@ -130,7 +130,7 @@ public class TestProxyForPushSupplierImpl {
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
 		// nouveau proxy
-		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST");
+		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
 		
