@@ -25,20 +25,20 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
 /**
  * Classe ChannelAdminCtr
- *
+ * 
  * For Proxy creation : create, store in POA and return the Proxy
- *
+ * 
  * UC n°: US14,US15 (+US children)
- *
+ * 
  * @author Mezzo-Team
- *
+ * 
  */
 
 public class ChannelAdminCtr {
-	private  Map<ProxyForPushConsumer, byte[]> oidProxyForPushConsumerMap = Collections
-    .synchronizedMap(new HashMap<ProxyForPushConsumer, byte[]>());
-	private  Map<ProxyForPushSupplier, byte[]> oidProxyForPushSupplierMap = Collections
-    .synchronizedMap(new HashMap<ProxyForPushSupplier, byte[]>());
+    private Map<ProxyForPushConsumer, byte[]> oidProxyForPushConsumerMap = Collections
+	    .synchronizedMap(new HashMap<ProxyForPushConsumer, byte[]>());
+    private Map<ProxyForPushSupplier, byte[]> oidProxyForPushSupplierMap = Collections
+	    .synchronizedMap(new HashMap<ProxyForPushSupplier, byte[]>());
     private String channel;
     private ChannelCtr channelCtr;
     private ORB orb;
@@ -46,138 +46,108 @@ public class ChannelAdminCtr {
 
     /**
      * Build a Channel Admin Controler associated with a channelCtr.
-     *
+     * 
      * @param topic
      *            Channel topic.
      */
     public Map<ProxyForPushConsumer, byte[]> getOidProxyForPushConsumerMap() {
-		return oidProxyForPushConsumerMap;
-	}
+	return oidProxyForPushConsumerMap;
+    }
+
     public Map<ProxyForPushSupplier, byte[]> getOidProxyForPushSupplierMap() {
-		return oidProxyForPushSupplierMap;
-	}
+	return oidProxyForPushSupplierMap;
+    }
+
     public ChannelAdminCtr(String topic) {
 	this.channel = topic;
 	this.orb = BFFactory.createOrb(null, null);
 	this.channelCtr = BFFactory.createChannelCtr(topic);
     }
-    
-    private static synchronized POA getPOA() {
-    	try {
-    	    if (poa == null) {
-    		poa = POAHelper.narrow(BFFactory.getOrb()
-    			.resolve_initial_references("RootPOA"));
-    		poa.the_POAManager().activate();
-    	    }
 
-    	} catch (InvalidName e) {
-    	    // TODO Auto-generated catch block
-    	    e.printStackTrace();
-    	} catch (AdapterInactive e) {
-    	    // TODO Auto-generated catch block
-    	    e.printStackTrace();
-    	}
-    	return poa;
-        }
+    private static synchronized POA getPOA() {
+	try {
+	    if (poa == null) {
+		poa = POAHelper.narrow(BFFactory.getOrb()
+			.resolve_initial_references("RootPOA"));
+		poa.the_POAManager().activate();
+	    }
+
+	} catch (InvalidName e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	} catch (AdapterInactive e) {
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
+	}
+	return poa;
+    }
 
     /**
      * Create the Proxy For PUSH Consumer and serve it with te CORBA POA.
-     *
+     * 
      * @return A Corba Object.
-     * @throws WrongPolicy 
-     * @throws ServantNotActive 
+     * @throws WrongPolicy
+     * @throws ServantNotActive
      */
-    public ProxyForPushConsumer createProxyForPushConsumer() {
+    public ProxyForPushConsumer createProxyForPushConsumer(String idComponent) {
 	ProxyForPushConsumer pps = null;
-	/*try {
-	    ProxyForPushConsumerImpl proxy = null;
-	    proxy = new ProxyForPushConsumerImpl(channel);
-	    POA poa = POAHelper.narrow(orb
-		    .resolve_initial_references("RootPOA"));
-	    poa.the_POAManager().activate();
 
-	    pps = ProxyForPushConsumerHelper
-		    .narrow(poa
-			    .servant_to_reference(new ProxyForPushConsumerPOATie(
-				    proxy)));
-	} catch (org.omg.CORBA.UserException e) {
-	    // TODO Log Corba error
+	byte[] oid;
+	try {
+	    oid = getPOA()
+		    .servant_to_id(
+			    new ProxyForPushConsumerPOATie(
+				    new ProxyForPushConsumerImpl(channel,
+					    idComponent)));
+	    pps = ProxyForPushConsumerHelper.narrow(getPOA().id_to_reference(
+		    oid));
+	    oidProxyForPushConsumerMap.put(pps, oid);
+	} catch (ServantNotActive e) {
+	    e.printStackTrace();
+	} catch (WrongPolicy e) {
+	    e.printStackTrace();
+	} catch (ObjectNotActive e) {
+	    // TODO Auto-generated catch block
 	    e.printStackTrace();
 	}
-	 byte[] oid;
-	try {
-		oid = getPOA().servant_to_id(
-				    new ProxyForPushConsumerPOATie(pps));
-		 oidProxyForPushConsumerMap.put(pps, oid);
-	} catch (ServantNotActive e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (WrongPolicy e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}*/
-	 byte[] oid;
-		try {
-			oid = getPOA().servant_to_id(
-					    new ProxyForPushConsumerPOATie(new ProxyForPushConsumerImpl(channel)));
-			pps = ProxyForPushConsumerHelper.narrow(getPOA().id_to_reference(oid));
-				oidProxyForPushConsumerMap.put(pps, oid);
-		} catch (ServantNotActive e) {
-			e.printStackTrace();
-		} catch (WrongPolicy e) {
-			e.printStackTrace();
-		} catch (ObjectNotActive e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return pps;
-	
+	return pps;
+
     }
 
     /**
      * Create the Proxy For PUSH Supplier and serve it with te CORBA POA.
-     *
+     * 
      * @return A Corba Object.
-     * @throws WrongPolicy 
-     * @throws ServantNotActive 
+     * @throws WrongPolicy
+     * @throws ServantNotActive
      */
-    public ProxyForPushSupplier createProxyForPushSupplier()  {
+    public ProxyForPushSupplier createProxyForPushSupplier(String idComponent) {
 	ProxyForPushSupplier ppc = null;
-
-//	try {
-//	    ProxyForPushSupplierImpl proxy = null;
-//	    proxy = new ProxyForPushSupplierImpl(channel);
-//	    POA poa = POAHelper.narrow(orb.resolve_initial_references("RootPOA"));
-//	    poa.the_POAManager().activate();
-//	    ppc = ProxyForPushSupplierHelper
-//		    .narrow(poa
-//			    .servant_to_reference(new ProxyForPushSupplierPOATie(
-//				    proxy)));
-//
-//	} catch (org.omg.CORBA.UserException e) {
-//	    // TODO Log Corba error
-//	    e.printStackTrace();
-//	}
-	 byte[] oid;
+	
+	byte[] oid;
 	try {
-		oid = getPOA().servant_to_id(
-				    new ProxyForPushSupplierPOATie(new ProxyForPushSupplierImpl(channel)));
-		ppc = ProxyForPushSupplierHelper.narrow(getPOA().id_to_reference(oid));
-			oidProxyForPushSupplierMap.put(ppc, oid);
+	    oid = getPOA()
+		    .servant_to_id(
+			    new ProxyForPushSupplierPOATie(
+				    new ProxyForPushSupplierImpl(channel,
+					    idComponent)));
+	    ppc = ProxyForPushSupplierHelper.narrow(getPOA().id_to_reference(
+		    oid));
+	    oidProxyForPushSupplierMap.put(ppc, oid);
 	} catch (ServantNotActive e) {
-		e.printStackTrace();
+	    e.printStackTrace();
 	} catch (WrongPolicy e) {
-		e.printStackTrace();
+	    e.printStackTrace();
 	} catch (ObjectNotActive e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	    // TODO Auto-generated catch block
+	    e.printStackTrace();
 	}
 	return ppc;
     }
 
     /**
      * Get the Channel topic.
-     *
+     * 
      * @return topic
      */
     public String getTopic() {

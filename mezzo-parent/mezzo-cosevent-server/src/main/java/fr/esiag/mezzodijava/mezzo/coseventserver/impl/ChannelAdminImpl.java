@@ -48,9 +48,9 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
      *
      */
     @Override
-    public ProxyForPushConsumer getProxyForPushConsumer()
+    public ProxyForPushConsumer getProxyForPushConsumer(String idComponent)
 	    throws ChannelNotFoundException {
-	return channelAdminctrl.createProxyForPushConsumer();
+	return channelAdminctrl.createProxyForPushConsumer(idComponent);
     }
 
     /**
@@ -62,9 +62,9 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
      *
      */
     @Override
-    public ProxyForPushSupplier getProxyForPushSupplier()
+    public ProxyForPushSupplier getProxyForPushSupplier(String idComponent)
 	    throws ChannelNotFoundException {
-	return channelAdminctrl.createProxyForPushSupplier();
+	return channelAdminctrl.createProxyForPushSupplier(idComponent);
     }
 
     /**
