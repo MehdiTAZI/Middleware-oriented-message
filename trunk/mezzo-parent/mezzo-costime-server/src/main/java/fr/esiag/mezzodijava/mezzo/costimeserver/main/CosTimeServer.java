@@ -50,7 +50,7 @@ public class CosTimeServer {
      * @param args
      */
     public static void main(String[] args) {
-	initLogging();
+	//initLogging();
 	new CosTimeServer(args);
     }
 
@@ -63,5 +63,4 @@ public class CosTimeServer {
 	    ex.printStackTrace();
 	}
     }
-
 }

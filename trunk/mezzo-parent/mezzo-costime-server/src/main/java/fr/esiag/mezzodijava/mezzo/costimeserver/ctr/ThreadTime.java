@@ -21,7 +21,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
  */  
 
 public class ThreadTime implements Runnable{
-	 final static Logger log = LoggerFactory.getLogger(ThreadTime.class);
+	 private static Logger log = LoggerFactory.getLogger(ThreadTime.class);
     private TimeServiceModel model;
     private long timeSpan = 1000;
 
