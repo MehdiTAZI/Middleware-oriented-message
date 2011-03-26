@@ -24,8 +24,9 @@ public class InjectorSystemStateSupplier {
 	AlreadyRegisteredException {
 		EventClient ec = EventClient.init(null);
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
+		String idcomponent = "injector";
 		supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 		
 		try {
 			supplierProxy.connect();

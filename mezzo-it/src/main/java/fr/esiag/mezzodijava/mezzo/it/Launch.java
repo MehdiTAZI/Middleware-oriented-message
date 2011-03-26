@@ -28,15 +28,16 @@ public class Launch {
 		try {
 			EventClient ec = EventClient.init(args);
 			ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
+			String idcomp = "launch";
 			ProxyForPushConsumer consumerProxy = channelAdmin
-					.getProxyForPushConsumer();
+					.getProxyForPushConsumer(idcomp);
 			System.out.println("creation callback");
 			CallbackNotConnected callback = new CallbackNotConnected();
 			CallbackConsumer cbc = ec.serveCallbackConsumer(callback);
 			System.out.println("subscribe du consumer");
-			consumerProxy.subscribe(cbc);
+			consumerProxy.subscribe();
 			Thread.sleep(20000);
-			consumerProxy.connect();
+			consumerProxy.connect(cbc);
 			ORB orb = ec.getOrb();
 			orb.run();
 			

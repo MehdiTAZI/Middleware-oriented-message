@@ -21,15 +21,16 @@ public class NuclearSensorConsumer {
 			AlreadyRegisteredException {
 		EventClient ec = EventClient.init(null);
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
+		String idcomponent = "nuclear";
 		ProxyForPushConsumer consumerProxy = channelAdmin
-				.getProxyForPushConsumer();
+				.getProxyForPushConsumer(idcomponent);
 		System.out.println("creation callback");
 		CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl(supplier);
 		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		System.out.println("subscribe du consumer");
-		consumerProxy.subscribe(cbc);
+		consumerProxy.subscribe();
 		try {
-			consumerProxy.connect();
+			consumerProxy.connect(cbc);
 			System.out.println("connexion nuclear sensor");
 		} catch (NotRegisteredException e) {
 			// TODO Auto-generated catch block
