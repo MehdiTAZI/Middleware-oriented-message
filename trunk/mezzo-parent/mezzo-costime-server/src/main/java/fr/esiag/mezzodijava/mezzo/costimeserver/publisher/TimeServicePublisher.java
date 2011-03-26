@@ -5,8 +5,12 @@ import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.costime.TimeServicePOATie;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
+import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 
 /**
@@ -18,6 +22,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
  * 
  */
 public class TimeServicePublisher {
+	final static Logger log = LoggerFactory.getLogger(TimeServicePublisher.class);
     private static Thread thread;
 
     /**
@@ -32,6 +37,7 @@ public class TimeServicePublisher {
      */
     public static void publish(String name, TimeServiceImpl timeService,
 	    ORB orb, long timeSpan) {
+    	log.info("publish \"{}\"  with a timespan of : {}",name,timeSpan);
 	ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
 		timeSpan);
 	thread = new Thread(tt);
@@ -46,7 +52,8 @@ public class TimeServicePublisher {
 	    nc.rebind(nc.to_name(name), poa
 		    .servant_to_reference(new TimeServicePOATie(timeService)));
 	} catch (Exception e) {
-	    System.out.println(e.getMessage());
+		
+	    log.error("Technical error : CORBA", e);
 	}
     }
 

@@ -1,11 +1,16 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.impl;
 
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costime.TimeServiceOperations;
 import fr.esiag.mezzodijava.mezzo.costime.UnreachableException;
+import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 
 /**
@@ -19,6 +24,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 
 public class TimeServiceImpl implements TimeServiceOperations{
 
+	final static Logger log = LoggerFactory.getLogger(TimeServiceImpl.class);
 	private TimeServiceCtr ctr;
 	
 	/**
@@ -54,7 +60,10 @@ public class TimeServiceImpl implements TimeServiceOperations{
      */
 	@Override
 	public void subscribe(Synchronizable cc) throws AlreadyRegisteredException{
+		
 		ctr.subscribe(cc);
+		log.info("Subscribed to TimeServiceImpl");
+		
 	}
 	
 	/**
@@ -71,5 +80,6 @@ public class TimeServiceImpl implements TimeServiceOperations{
 	@Override
 	public void unsubscribe(Synchronizable cc) throws NotRegisteredException {
 		ctr.unsubscribe(cc);
+		log.info("Unsubscribed to TimeServiceImpl");
 	}
 }
