@@ -5,6 +5,9 @@ import java.util.Date;
 
 import javax.print.attribute.standard.DateTimeAtCompleted;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
@@ -18,6 +21,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
  */  
 
 public class ThreadTime implements Runnable{
+	 final static Logger log = LoggerFactory.getLogger(ThreadTime.class);
     private TimeServiceModel model;
     private long timeSpan = 1000;
 
@@ -62,13 +66,15 @@ public class ThreadTime implements Runnable{
      */
     @Override
     public void run() {
-	while (true) {
-	    synchronizeComponent();
-	    try {
-		Thread.sleep(this.timeSpan);
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    }
+    	log.info("Initialize thread");
+    	while (true) {
+    		synchronizeComponent();
+    		try {
+    			log.info("Slept {}",timeSpan);
+    			Thread.sleep(this.timeSpan);
+    		} catch (InterruptedException e) {
+    		log.error("Error in the thread", e);
+    		}
 	}
     }
 }

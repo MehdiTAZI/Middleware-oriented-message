@@ -32,6 +32,7 @@ public class CosTimeServer {
 	    props.load(this.getClass().getClassLoader()
 		    .getResourceAsStream("eventserver.properties"));
 	} catch (IOException e) {
+		log.error("Properties loading error",e);
 
 	}
 	TimeServicePublisher publisher = new TimeServicePublisher();
@@ -41,10 +42,8 @@ public class CosTimeServer {
 	String timeServerName = args[0];
 	long timeServerLifeSpan = Long.parseLong(args[1]);
 	publisher.publish(timeServerName, timeService, orb, timeServerLifeSpan);
-	log.info("Mezzo COS Time Server \"" + timeServerName
-		+ "\" is running...");
-	log.trace("Mezzo COS Time Server \"" + timeServerName
-		+ "\" is running...");
+	log.info("Mezzo COS Time Server \" {} \" is running...", timeServerName);
+	log.trace("Mezzo COS Time Server \" {} \" is running...", timeServerName);
     }
 
     /**

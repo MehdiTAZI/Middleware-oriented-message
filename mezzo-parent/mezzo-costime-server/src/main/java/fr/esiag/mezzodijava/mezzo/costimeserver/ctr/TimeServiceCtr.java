@@ -85,6 +85,6 @@ public class TimeServiceCtr {
 	if (!model.getComponentSubscribed().contains(cc))
 	    throw new NotRegisteredException();
 	model.getComponentSubscribed().remove(cc);
-	System.out.println("Component unsubscribed : " + cc);
+	log.info("Component unsubscribed : " + cc);
     }
 }
