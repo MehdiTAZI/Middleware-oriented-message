@@ -24,7 +24,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 
 public class TimeServiceImpl implements TimeServiceOperations{
 
-	final static Logger log = LoggerFactory.getLogger(TimeServiceImpl.class);
+	private static Logger log = LoggerFactory.getLogger(TimeServiceImpl.class);
 	private TimeServiceCtr ctr;
 	
 	/**

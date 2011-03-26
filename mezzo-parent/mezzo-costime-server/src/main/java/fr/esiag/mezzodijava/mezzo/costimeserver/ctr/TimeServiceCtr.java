@@ -20,7 +20,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 public class TimeServiceCtr {
 
-    final static Logger log = LoggerFactory.getLogger(TimeServiceCtr.class);
+    private static Logger log = LoggerFactory.getLogger(TimeServiceCtr.class);
 
     private TimeServiceModel model;
 

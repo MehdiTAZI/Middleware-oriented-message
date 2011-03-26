@@ -22,7 +22,7 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
  * 
  */
 public class TimeServicePublisher {
-	final static Logger log = LoggerFactory.getLogger(TimeServicePublisher.class);
+	private static Logger log = LoggerFactory.getLogger(TimeServicePublisher.class);
     private static Thread thread;
 
     /**

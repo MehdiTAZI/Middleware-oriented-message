@@ -5,7 +5,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.Vector;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
+import fr.esiag.mezzodijava.mezzo.costimeserver.publisher.TimeServicePublisher;
 
 /**
  * TimeServiceModel : contain subscribed list of component for time service
@@ -16,7 +21,8 @@ import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
  * 
  */
 public class TimeServiceModel {
-
+	private static Logger log = LoggerFactory.getLogger(TimeServiceModel.class);
+	
 	private Set<Synchronizable> componentSubscribed = Collections
     .synchronizedSet((new HashSet<Synchronizable>()));
 	
@@ -28,6 +34,7 @@ public class TimeServiceModel {
 	 *
 	 */
 	public Set<Synchronizable> getComponentSubscribed() {
+		log.info("getComponentSubscribed",componentSubscribed);
 		return componentSubscribed;
 	}	 
 }
