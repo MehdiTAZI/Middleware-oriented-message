@@ -128,15 +128,16 @@ public class COSEventIT {
     public static void main(String[] args) throws Exception {
 	EventClient ec = EventClient.init(null);
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "mezzo";
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
+		.getProxyForPushConsumer(idcomponent);
 	CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
 	CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
-	consumerProxy.subscribe(cbc);
+	consumerProxy.subscribe();
 	if ((args != null) && (args.length >= 1)) {
 	    Thread.sleep(new Long(args[0]).longValue());
 	}
-	consumerProxy.connect();
+	consumerProxy.connect(cbc);
 	ec.getOrb().run();
 	System.out.println("ALL DONE");
     }
@@ -152,20 +153,21 @@ public class COSEventIT {
 	    to.setDaemon(true);
 	    to.start();
 	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	    String idcomponent = "mezzo";
 	    ProxyForPushConsumer consumerProxy = channelAdmin
-		    .getProxyForPushConsumer();
+		    .getProxyForPushConsumer(idcomponent);
 	    CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
 	    CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
-	    consumerProxy.subscribe(cbc);
+	    consumerProxy.subscribe();
 	    if ((args != null) && (args.length >= 1)) {
 		Thread.sleep(new Long(args[0]).longValue());
 	    }
-	    consumerProxy.connect();
+	    consumerProxy.connect(cbc);
 	    Thread.sleep(1000);
 	    consumerProxy.disconnect();
 	    System.out.println("***** " + recu);
 	    Thread.sleep(1000);
-	    consumerProxy.connect();
+	    consumerProxy.connect(cbc);
 
 	    System.out.println("ALL DONE");
 	}
@@ -193,8 +195,8 @@ public class COSEventIT {
     }
 
     /**
-     * Ce server de consummer destroy lo'b endant un certani temps rendan les
-     * consumer innaccessible et le remet en run. Pour le test
+     * Ce server de consummer destroy l'orb pendant un certain temps rendant les
+     * consumers innaccessibles et le remet en run. Pour le test
      */
     private static class ConsumerServer3 {
 	public static void main(String[] args) throws Exception {
@@ -203,15 +205,16 @@ public class COSEventIT {
 	    to.setDaemon(true);
 	    to.start();
 	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	    String idcomponent = "mezzo";
 	    ProxyForPushConsumer consumerProxy = channelAdmin
-		    .getProxyForPushConsumer();
+		    .getProxyForPushConsumer(idcomponent);
 	    CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
 	    CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
-	    consumerProxy.subscribe(cbc);
+	    consumerProxy.subscribe();
 	    if ((args != null) && (args.length >= 1)) {
 		Thread.sleep(new Long(args[0]).longValue());
 	    }
-	    consumerProxy.connect();
+	    consumerProxy.connect(cbc);
 	    Thread.sleep(1000);
 	    ec.getOrb().destroy();
 	    Thread.sleep(1000);
@@ -285,9 +288,9 @@ public class COSEventIT {
 		(String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "mezzo";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	supplierProxy.connect();
 
 	for (int i = 0; i < 10; i++) {
@@ -336,8 +339,9 @@ public class COSEventIT {
 			EventClient ec = EventClient.init(null);
 			ChannelAdmin channelAdmin = ec
 				.resolveChannelByTopic("MEZZO");
+			String idcomponent = "mezzo";
 			ProxyForPushSupplier supplierProxy = channelAdmin
-				.getProxyForPushSupplier();
+				.getProxyForPushSupplier(idcomponent);
 			supplierProxy.connect();
 
 			for (int i = 0; i < 10; i++) {
@@ -415,8 +419,9 @@ public class COSEventIT {
 			EventClient ec = EventClient.init(null);
 			ChannelAdmin channelAdmin = ec
 				.resolveChannelByTopic("MEZZO");
+			String idcomponent = "mezzo";
 			ProxyForPushSupplier supplierProxy = channelAdmin
-				.getProxyForPushSupplier();
+				.getProxyForPushSupplier(idcomponent);
 			supplierProxy.connect();
 
 			for (int i = 0; i < 10; i++) {
@@ -485,9 +490,9 @@ public class COSEventIT {
 		COSEventIT.ConsumerServer2.class, 500, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "mezzo";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	supplierProxy.connect();
 
 	for (int i = 0; i < 50; i++) {
@@ -561,13 +566,14 @@ public class COSEventIT {
 
 	// destruction anticipee du Channel
 	esca.destroyChannel(idChannel);
+	String idcomponent = "mezzo";
 
 	try {
 	    ProxyForPushConsumer consumerProxy = channelAdmin
-		    .getProxyForPushConsumer();
-	    consumerProxy.subscribe(ec
-		    .serveCallbackConsumer(new CallBackConsumerImpl()));
-	    consumerProxy.connect();
+		    .getProxyForPushConsumer(idcomponent);
+	    consumerProxy.subscribe();
+	    consumerProxy.connect(ec
+			    .serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("Should have exit");
 	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
 	    ; // ok
@@ -597,20 +603,22 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idconsumer1 = "consumer1";
+	String idconsumer2 = "consumer2";
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
+		.getProxyForPushConsumer(idconsumer1);
 	// premiere connexion ok
-	consumerProxy.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
-	consumerProxy.connect();
+	consumerProxy.subscribe();
+	consumerProxy.connect(ec
+			.serveCallbackConsumer(new CallBackConsumerImpl()));
 
 	ProxyForPushConsumer consumerProxy2 = channelAdmin
-		.getProxyForPushConsumer();
-	consumerProxy2.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.getProxyForPushConsumer(idconsumer2);
+	consumerProxy2.subscribe();
 
 	try {
-	    consumerProxy2.connect();
+	    consumerProxy2.connect(ec
+	    		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("No MaximalConnectionReachedException thrown!");
 	} catch (MaximalConnectionReachedException e) {
 	    ; // ok
@@ -638,9 +646,9 @@ public class COSEventIT {
 		COSEventIT.ConsumerServer3.class, 500, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	supplierProxy.connect();
 
 	for (int i = 0; i < 50; i++) {
@@ -684,14 +692,15 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
-	consumerProxy.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
-	consumerProxy.connect();
+		.getProxyForPushConsumer(idcomponent);
+	consumerProxy.subscribe();
+	consumerProxy.connect(ec
+			.serveCallbackConsumer(new CallBackConsumerImpl()));
 	try {
-	    consumerProxy.connect();
+	    consumerProxy.connect(ec
+	    		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("Expected AlreadyConnectedException !");
 	} catch (AlreadyConnectedException e) {
 	    ; // ok
@@ -719,12 +728,12 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component"; 
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
-	consumerProxy.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
-	consumerProxy.connect();
+		.getProxyForPushConsumer(idcomponent);
+	consumerProxy.subscribe();
+	consumerProxy.connect(ec
+			.serveCallbackConsumer(new CallBackConsumerImpl()));
 	consumerProxy.disconnect();
 	try {
 	    consumerProxy.disconnect();
@@ -755,15 +764,14 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
-	consumerProxy.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
-	consumerProxy.connect();
+		.getProxyForPushConsumer(idcomponent);
+	consumerProxy.subscribe();
+	consumerProxy.connect(ec
+			.serveCallbackConsumer(new CallBackConsumerImpl()));
 	try {
-	    consumerProxy.subscribe(ec
-		    .serveCallbackConsumer(new CallBackConsumerImpl()));
+	    consumerProxy.subscribe();
 	    fail("Expected AlreadyRegisteredException !");
 	} catch (AlreadyRegisteredException e) {
 	    ; // ok
@@ -791,12 +799,12 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer();
-	consumerProxy.subscribe(ec
-		.serveCallbackConsumer(new CallBackConsumerImpl()));
-	consumerProxy.connect();
+		.getProxyForPushConsumer(idcomponent);
+	consumerProxy.subscribe();
+	consumerProxy.connect(ec
+			.serveCallbackConsumer(new CallBackConsumerImpl()));
 	consumerProxy.disconnect();
 	consumerProxy.unsubscribe();
 	try {
@@ -828,9 +836,9 @@ public class COSEventIT {
 		(String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	supplierProxy.connect();
 
 	// on envoie 5 messages
@@ -925,9 +933,10 @@ public class COSEventIT {
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	// destruction anticipee du Channel
 	esca.destroyChannel(idChannel);
+	String idcomponent = "component";
 	try {
 	    ProxyForPushSupplier supplierProxy = channelAdmin
-		    .getProxyForPushSupplier();
+		    .getProxyForPushSupplier(idcomponent);
 	    supplierProxy.connect();
 	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
 	    ; // ok
@@ -958,14 +967,15 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	// premiere connexion ok
 	supplierProxy.connect();
 
 	try {
 	    ProxyForPushSupplier supplierProxy2 = channelAdmin
-		    .getProxyForPushSupplier();
+		    .getProxyForPushSupplier(idcomponent);
 	    supplierProxy2.connect();
 	    fail("No MaximalConnectionReachedException raided !");
 	} catch (MaximalConnectionReachedException e) {
@@ -996,8 +1006,9 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	// premiere connexion ok
 	supplierProxy.connect();
 
@@ -1029,8 +1040,9 @@ public class COSEventIT {
 		(String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	// connection, envoie d'event, deconnection
 	supplierProxy.connect();
 	ORB orb=ORB.init();
@@ -1156,9 +1168,9 @@ public class COSEventIT {
 		"4000");
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-
+	String idcomponent = "component";
 	ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 	supplierProxy.connect();
 
 	// envoie de 12 messages avec les priorités suivantes 4 2 5 3 1 4 2 4 5
@@ -1253,8 +1265,9 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "component";
 	// on recupere un proxy...
-	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier(idcomponent);
 	// drop it
 	esca.destroyChannel(idChannel);
 
@@ -1275,7 +1288,7 @@ public class COSEventIT {
 
 	// tentative de manipulation du channel admin
 	try {
-	    ca.getProxyForPushSupplier();
+	    ca.getProxyForPushSupplier(idcomponent);
 	    fail("ChannelAdmin still active ?");
 	} catch (org.omg.CORBA.UserException e) {
 	    fail("ChannelAdmin still active ?");
@@ -1312,33 +1325,38 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
-
+	String idsupplier1 = "supplier1";
+	String idsupplier2 = "supplier2";
+	String idsupplier3 = "supplier3";
+	String idconsumer1 = "consumer1";
+	String idconsumer2 = "consumer2";
+	String idconsumer3 = "consumer3";
 	// 2 supplier
-	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier(idsupplier1);
 	pps.connect();
-	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier(idsupplier2);
 	pps2.connect();
 
 	// 2 consumer
-	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer();
-	ppc.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
-	ppc.connect();
+	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer(idconsumer1);
+	ppc.subscribe();
+	ppc.connect(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
 
-	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer();
-	ppc2.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
-	ppc2.connect();
+	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer(idconsumer2);
+	ppc2.subscribe();
+	ppc2.connect(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
 
 	// on augmente à 3
 	esca.changeChannelCapacity(idChannel, 3);
 
 	// 3 ieme supplier
-	ProxyForPushSupplier pps3 = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps3 = ca.getProxyForPushSupplier(idsupplier3);
 	pps3.connect();
 
 	// 3 ieme consumer
-	ProxyForPushConsumer ppc3 = ca.getProxyForPushConsumer();
-	ppc3.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
-	ppc3.connect();
+	ProxyForPushConsumer ppc3 = ca.getProxyForPushConsumer(idconsumer3);
+	ppc3.subscribe();
+	ppc3.connect(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
 
 	// disconnect de 2 supplier
 	pps2.disconnect();
@@ -1428,7 +1446,10 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
 	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
-
+	String idsupplier1 = "supplier1";
+	String idsupplier2 = "supplier2";
+	String idconsumer1 = "consumer1";
+	String idconsumer2 = "consumer2";
 	// test si on reduit a un nombre negatif
 	try {
 	    esca.changeChannelCapacity(idChannel, -1);
@@ -1438,19 +1459,19 @@ public class COSEventIT {
 	}
 
 	// 2 supplier
-	ProxyForPushSupplier pps = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps = ca.getProxyForPushSupplier(idsupplier1);
 	pps.connect();
-	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier();
+	ProxyForPushSupplier pps2 = ca.getProxyForPushSupplier(idsupplier2);
 	pps2.connect();
 
 	// 2 consumer
-	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer();
-	ppc.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
-	ppc.connect();
+	ProxyForPushConsumer ppc = ca.getProxyForPushConsumer(idconsumer1);
+	ppc.subscribe();
+	ppc.connect(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
 
-	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer();
-	ppc2.subscribe(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
-	ppc2.connect();
+	ProxyForPushConsumer ppc2 = ca.getProxyForPushConsumer(idconsumer2);
+	ppc2.subscribe();
+	ppc2.connect(ec.serveCallbackConsumer(new CallBackConsumerImpl()));
 
 	// on tente de reduire à 1
 	try {

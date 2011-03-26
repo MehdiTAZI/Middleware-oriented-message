@@ -1,7 +1,16 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.concurrent.PriorityBlockingQueue;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -11,6 +20,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
 
 @Entity
 @Table(name = "CHANNEL")
@@ -29,13 +43,23 @@ public class ChannelModel implements Serializable {
 	private int connectionCapacity;
 	
 	@ElementCollection  
-	@CollectionTable(name = "channelevents")  
+	@CollectionTable(name = "EVENT")  
 	@Column(name = "events")  
-	List<EventModel> events;
+	private List<EventModel> events;
 	
 	@ElementCollection  
 	@CollectionTable(name = "CONSUMER")   
-	List<ConsumerModel> consumers;
+	private List<ConsumerModel> consumers;
+	
+	private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
+
+    private Map<ProxyForPushConsumerImpl, SortedSet<Event>> consumersSubscribed = Collections
+	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, SortedSet<Event>>());
+
+    private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
+
+    private Comparator<Event> comparator = new PriorityEventComparator();
+	
 
 	public int getId() {
 	    return id;

@@ -113,8 +113,9 @@ public class AppSensorSupplier
 		orb = ec.getOrb();
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
 		System.out.println("Nuclear Sensors Data Supplier creation...");
+		String idcomponent = "sensor";
 		ProxyForPushSupplier supplierProxy = channelAdmin
-		.getProxyForPushSupplier();
+		.getProxyForPushSupplier(idcomponent);
 		System.out.println("Done.");
 
 		System.out.println("Nuclear Sensors Data Supplier connection...");
