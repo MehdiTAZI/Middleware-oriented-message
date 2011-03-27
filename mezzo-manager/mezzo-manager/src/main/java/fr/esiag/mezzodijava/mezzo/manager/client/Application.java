@@ -2,12 +2,16 @@ package fr.esiag.mezzodijava.mezzo.manager.client;
 
 import com.google.gwt.core.client.EntryPoint;
 
+import com.google.gwt.user.client.ui.DecoratedTabPanel;
 import com.google.gwt.user.client.ui.DecoratorPanel;
 import com.google.gwt.user.client.ui.DisclosurePanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
+
+import fr.esiag.mezzodijava.mezzo.manager.client.monitoring.MonitoringPanel;
+
 
 
 
@@ -17,33 +21,56 @@ import com.google.gwt.user.client.ui.Widget;
 public class Application
     implements EntryPoint
 {
-	private AdminPanel control = new AdminPanel();
+	private AdminPanel adminPanel = new AdminPanel();
+	private String adminPanelTitle ="Administration";
+	private String monitoringPanelTitle ="Monitoring";
+	private String homePageLabel ="Bienvenue sur la console d'administration de mezzo";
+	VerticalPanel vadminPanel;
+	DecoratorPanel decorationAdminPanel;
+	
   /**
    * This is the entry point method.
    */
 	
   public void onModuleLoad()
   {
-	  	final Label label = new Label ( "Bienvenue sur la console d'administration de mezzo");
+	  	final Label label = new Label (homePageLabel);
 	 
-	  	Widget wiPanel = control.onInitialize();
+	  	Widget wiPanel = adminPanel.onInitialize();
 	  	
-		DisclosurePanel advancedDisclosure = new DisclosurePanel("Administration");
-		advancedDisclosure.setAnimationEnabled(true);
-	    advancedDisclosure.ensureDebugId("cwDisclosurePanel");
-	    advancedDisclosure.setContent(wiPanel);
+		DisclosurePanel advancedAdminPanel = new DisclosurePanel(adminPanelTitle);
+		advancedAdminPanel.setAnimationEnabled(true);
+	    advancedAdminPanel.ensureDebugId("cwDisclosurePanel"+adminPanelTitle);
+	    advancedAdminPanel.setContent(wiPanel);
+	  
+		DisclosurePanel advancedMonitoringPanel = new DisclosurePanel(monitoringPanelTitle);
+		advancedMonitoringPanel.setAnimationEnabled(true);
+		advancedMonitoringPanel.ensureDebugId("cwDisclosurePanel"+monitoringPanelTitle);
+		advancedMonitoringPanel.setContent(new MonitoringPanel());
+	    
+	  	
+		// Create a tab panel
+		DecoratedTabPanel MenuPannel = new DecoratedTabPanel();
+		MenuPannel.setWidth("500px");
+		
+		MenuPannel.add(advancedAdminPanel, adminPanelTitle);
+		MenuPannel.add(advancedMonitoringPanel, monitoringPanelTitle);
+	  	MenuPannel.setAnimationEnabled(true);
+	  	MenuPannel.selectTab(0);
+	  	
+
 	   
-	    VerticalPanel vPanel = new VerticalPanel();
-		vPanel.add(label);
-		vPanel.add(advancedDisclosure);
+	    vadminPanel = new VerticalPanel();
+		vadminPanel.add(label);
+		vadminPanel.add(MenuPannel);
 
 			// Wrap the contents in a DecoratorPanel
-		    DecoratorPanel decPanel = new DecoratorPanel();
-		    decPanel.setTitle("Console d'administration");
-		    decPanel.setWidget(vPanel);
+		    decorationAdminPanel = new DecoratorPanel();
+		    
+		    decorationAdminPanel.setWidget(vadminPanel);
 		    
 		
-     RootPanel.get().add(decPanel);
+     RootPanel.get().add(decorationAdminPanel);
      
   }
 }
