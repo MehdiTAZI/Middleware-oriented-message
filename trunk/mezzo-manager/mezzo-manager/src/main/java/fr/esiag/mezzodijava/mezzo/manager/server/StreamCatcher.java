@@ -1,7 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.manager.server;
-import java.util.*;
 import java.io.*;
-class StreamCatcher
+class StreamCatcher implements InputReader
 {
 	private InputStream is;
 	StreamCatcher(InputStream is)
@@ -9,7 +8,7 @@ class StreamCatcher
 		this.is = is;
 	}
 
-	public String read()
+	public String getData()
 	{
 		StringBuffer data= new StringBuffer();
 		try
