@@ -1,0 +1,33 @@
+module monitoring {
+
+
+    typedef sequence<Event> Events;//Sur le fichier cosEvent.idl
+    
+	struct ConsumerInfosCollector{
+   	 string id;
+   	 boolean connected;
+   	 long nbQueueEvents;					//Nombre evenemnt dans la queue
+   	 long nbReceivedEvents;					//Nombre Evenement envoyé
+   	 //Changer on un String directement?String Events?
+   	 Events events;							//Quelle sont les message a sa destination
+    };
+    
+    struct SupplierInfosCollector{
+   	 string id;								//Qui a envoyé?
+   	 long pushedEvents;						//Nombre Events Envoyé
+    };
+    
+    struct ChannelInfoscollector{
+   	 string topic;							//Titre
+   	 long capacity;							//Capacité
+   	 long nbQueueEvents;					//nombre Events in the queue
+   	 sequence<PushConsumerStat> consumers;	//Connecté et abonnée
+   	 sequence<PushSupplierStat> suppliers;	//Connecté
+    };
+   
+   typedef sequence<ChannelInfoscollector> ChannelsInfos;   
+   
+    interface CosInfoCollector{
+   	 	ChannelsInfos getChannelsInfos();   	 	
+    };
+};
