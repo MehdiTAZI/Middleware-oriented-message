@@ -24,7 +24,7 @@ public class AdminPanel {
 	{
 
 	}
-	@SuppressWarnings("deprecation")
+
 	public Widget onInitialize() {
 		  // (2) Create an asynchronous callback to handle the result.
 		  final AsyncCallback<String> defaultCallback = new AsyncCallback<String>() {
@@ -54,7 +54,7 @@ public class AdminPanel {
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (3) Make the call
-				  //defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","status"}, defaultCallback);
+				  defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","status"}, defaultCallback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
@@ -62,7 +62,7 @@ public class AdminPanel {
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				 // (3) Make the call
-				  //defaultShellExectuer.execute(new String[]{"ls -l ~"}, defaultCallback);
+				  defaultShellExectuer.execute(new String[]{"ls -l ~"}, defaultCallback);
 			}
 		});
 
