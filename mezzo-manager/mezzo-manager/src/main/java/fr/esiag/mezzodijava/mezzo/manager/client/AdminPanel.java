@@ -11,6 +11,9 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 
+/*Command Writing example using the ShellExecuter with the FileCatcher: 
+String[] cmd = {"/bin/sh", "-c","./opt/mezzo/coseventserver status"};
+String[] cmd = {"/bin/sh", "-c", "/bin/ls"};*/
 
 public class AdminPanel {
 	private HTML moreInfo;
