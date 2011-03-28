@@ -42,6 +42,7 @@ import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 import fr.esiag.mezzodijava.mezzo.costime.TimeService;
 import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
@@ -269,8 +270,7 @@ public class COSEventIT {
     }
 
     @Test
-    public void testUC0203_Nominal_UniqueSupplier()
-	    throws Exception {
+    public void testUC0203_Nominal_UniqueSupplier() throws Exception {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// assume SLF4J is bound to logback in the current environment
 	// LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
@@ -294,15 +294,9 @@ public class COSEventIT {
 	supplierProxy.connect();
 
 	for (int i = 0; i < 10; i++) {
-	    Header header = new Header(123, 1, Calendar.getInstance()
-		    .getTimeInMillis(), 10120);
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
-	    Event evt = new Event(header, body);
+	    Event evt = EventFactory.createEventString(1, 10120, "Test_EVENT"
+		    + i);
+
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
@@ -345,15 +339,8 @@ public class COSEventIT {
 			supplierProxy.connect();
 
 			for (int i = 0; i < 10; i++) {
-			    Header header = new Header(123, 1, Calendar
-				    .getInstance().getTimeInMillis(), 10120);
-			    
-			    ORB orb=ORB.init();
-				Any any=orb.create_any();
-				any.insert_string("Test_EVENT"+i);
-				Body body = new Body(any,"String");
-			    
-			    Event evt = new Event(header, body);
+			    Event evt = EventFactory.createEventString(1,
+				    10120, "Test_EVENT" + i);
 			    supplierProxy.push(evt);
 			    System.out.println("envoye " + evt);
 			    Thread.sleep(100);
@@ -424,16 +411,11 @@ public class COSEventIT {
 				.getProxyForPushSupplier(idcomponent);
 			supplierProxy.connect();
 
-			for (int i = 0; i < 10; i++) {
-			    Header header = new Header(123, 1, Calendar
-				    .getInstance().getTimeInMillis(), 10120);
-			    
-			    ORB orb=ORB.init();
-				Any any=orb.create_any();
-				any.insert_string("Test_EVENT"+i);
-				Body body = new Body(any,"String");
-			    
-			    Event evt = new Event(header, body);
+			for (int j = 0; j < 10; j++) {
+			    Event evt = EventFactory.createEventString(1,
+				    10120, "Test_EVENT"
+					    + Thread.currentThread().getName()
+					    + "_" + j);
 			    supplierProxy.push(evt);
 			    System.out.println("envoye " + evt);
 			    Thread.sleep(100);
@@ -496,15 +478,8 @@ public class COSEventIT {
 	supplierProxy.connect();
 
 	for (int i = 0; i < 50; i++) {
-	    Header header = new Header(123, 1, Calendar.getInstance()
-		    .getTimeInMillis(), 10120);
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
-	    Event evt = new Event(header, body);
+	    Event evt = EventFactory.createEventString(1, 10120, "Test_EVENT"
+		    + i);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
@@ -573,7 +548,7 @@ public class COSEventIT {
 		    .getProxyForPushConsumer(idcomponent);
 	    consumerProxy.subscribe();
 	    consumerProxy.connect(ec
-			    .serveCallbackConsumer(new CallBackConsumerImpl()));
+		    .serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("Should have exit");
 	} catch (org.omg.CORBA.OBJECT_NOT_EXIST e) {
 	    ; // ok
@@ -610,7 +585,7 @@ public class COSEventIT {
 	// premiere connexion ok
 	consumerProxy.subscribe();
 	consumerProxy.connect(ec
-			.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
 
 	ProxyForPushConsumer consumerProxy2 = channelAdmin
 		.getProxyForPushConsumer(idconsumer2);
@@ -618,7 +593,7 @@ public class COSEventIT {
 
 	try {
 	    consumerProxy2.connect(ec
-	    		.serveCallbackConsumer(new CallBackConsumerImpl()));
+		    .serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("No MaximalConnectionReachedException thrown!");
 	} catch (MaximalConnectionReachedException e) {
 	    ; // ok
@@ -652,16 +627,8 @@ public class COSEventIT {
 	supplierProxy.connect();
 
 	for (int i = 0; i < 50; i++) {
-	    Header header = new Header(123, 1, Calendar.getInstance()
-		    .getTimeInMillis(), 10120);
-	    
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
-	    Event evt = new Event(header, body);
+	    Event evt = EventFactory.createEventString(1, 10120, "Test_EVENT"
+		    + i);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
@@ -697,10 +664,10 @@ public class COSEventIT {
 		.getProxyForPushConsumer(idcomponent);
 	consumerProxy.subscribe();
 	consumerProxy.connect(ec
-			.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	try {
 	    consumerProxy.connect(ec
-	    		.serveCallbackConsumer(new CallBackConsumerImpl()));
+		    .serveCallbackConsumer(new CallBackConsumerImpl()));
 	    fail("Expected AlreadyConnectedException !");
 	} catch (AlreadyConnectedException e) {
 	    ; // ok
@@ -728,12 +695,12 @@ public class COSEventIT {
 	// (String[]) null);
 	// s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-	String idcomponent = "component"; 
+	String idcomponent = "component";
 	ProxyForPushConsumer consumerProxy = channelAdmin
 		.getProxyForPushConsumer(idcomponent);
 	consumerProxy.subscribe();
 	consumerProxy.connect(ec
-			.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	consumerProxy.disconnect();
 	try {
 	    consumerProxy.disconnect();
@@ -769,7 +736,7 @@ public class COSEventIT {
 		.getProxyForPushConsumer(idcomponent);
 	consumerProxy.subscribe();
 	consumerProxy.connect(ec
-			.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	try {
 	    consumerProxy.subscribe();
 	    fail("Expected AlreadyRegisteredException !");
@@ -804,7 +771,7 @@ public class COSEventIT {
 		.getProxyForPushConsumer(idcomponent);
 	consumerProxy.subscribe();
 	consumerProxy.connect(ec
-			.serveCallbackConsumer(new CallBackConsumerImpl()));
+		.serveCallbackConsumer(new CallBackConsumerImpl()));
 	consumerProxy.disconnect();
 	consumerProxy.unsubscribe();
 	try {
@@ -843,15 +810,8 @@ public class COSEventIT {
 
 	// on envoie 5 messages
 	for (int i = 0; i < 5; i++) {
-	    Header header = new Header(123, 1, Calendar.getInstance()
-		    .getTimeInMillis(), 10120);
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
-	    Event evt = new Event(header, body);
+	    Event evt = EventFactory.createEventString(1, 10120, "Test_EVENT"
+		    + i);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
@@ -865,12 +825,12 @@ public class COSEventIT {
 	for (int i = 5; i < 10; i++) {
 	    Header header = new Header(123, 1, Calendar.getInstance()
 		    .getTimeInMillis(), 10120);
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
+
+	    ORB orb = ORB.init();
+	    Any any = orb.create_any();
+	    any.insert_string("Test_EVENT" + i);
+	    Body body = new Body(any, "String");
+
 	    Event evt = new Event(header, body);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
@@ -1045,22 +1005,20 @@ public class COSEventIT {
 		.getProxyForPushSupplier(idcomponent);
 	// connection, envoie d'event, deconnection
 	supplierProxy.connect();
-	ORB orb=ORB.init();
-	Any any=orb.create_any();
+	ORB orb = ORB.init();
+	Any any = orb.create_any();
 	any.insert_string("contenu");
-	
-	
+
 	supplierProxy.push(new Event(new Header(232, 1, (new Date()).getTime(),
-		1000), new Body(any,"String")));
+		1000), new Body(any, "String")));
 	supplierProxy.disconnect();
 	// proxy recupere mais pas de connexion
 	// tentative de push
 
 	try {
 	    supplierProxy.push(new Event(new Header(232, 1, (new Date())
-	    		
-	    		
-		    .getTime(), 1000), new Body(any,"String")));
+
+	    .getTime(), 1000), new Body(any, "String")));
 	    fail("push() didn't rose NotConnectedExcepetion !");
 	} catch (NotConnectedException e) {
 	    ; // ok
@@ -1183,16 +1141,8 @@ public class COSEventIT {
 	// on s'attend à n'en recevoir que 10
 	int[] expectedPriorities = { 5, 5, 4, 4, 4, 3, 2, 2, 1, 1 };
 	for (int i = 0; i < 12; i++) {
-	    Header header = new Header(i, inputPriorities[i], Calendar
-		    .getInstance().getTimeInMillis(), inputTimeToLive[i]);
-	    
-	    
-	    ORB orb=ORB.init();
-		Any any=orb.create_any();
-		any.insert_string("Test_EVENT"+i);
-		Body body = new Body(any,"String");
-	    
-	    Event evt = new Event(header, body);
+	    Event evt = EventFactory.createEventString(inputPriorities[i],
+		    inputTimeToLive[i], "Test_EVENT" + i);
 	    supplierProxy.push(evt);
 	    System.out.println("envoye " + evt);
 	    Thread.sleep(100);
@@ -1227,8 +1177,7 @@ public class COSEventIT {
      * 
      */
     @Test
-    public void testUC07_Nominal_CreerUnEventChannel()
-	    throws Exception {
+    public void testUC07_Nominal_CreerUnEventChannel() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
 		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
@@ -1431,10 +1380,9 @@ public class COSEventIT {
      * sur un Event Server.
      * 
      * Se connecte à un event serveur et crée un canal nommé MEZZO de capacité 2
-     * connexions.
-     * D'abord on essaye de reduire a -1 et on s'attend a CannotRedcuCapacityException.
-     * Puis on y met 2 supplier et 2 consummer. Puis le réduit à 3.
-     * Gestion de l'exception. supplier et repasse à 1.
+     * connexions. D'abord on essaye de reduire a -1 et on s'attend a
+     * CannotRedcuCapacityException. Puis on y met 2 supplier et 2 consummer.
+     * Puis le réduit à 3. Gestion de l'exception. supplier et repasse à 1.
      * 
      */
     @Test
