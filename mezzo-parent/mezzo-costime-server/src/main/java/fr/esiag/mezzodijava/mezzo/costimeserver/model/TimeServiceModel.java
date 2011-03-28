@@ -34,7 +34,7 @@ public class TimeServiceModel {
 	 *
 	 */
 	public Set<Synchronizable> getComponentSubscribed() {
-		log.info("getComponentSubscribed",componentSubscribed);
+		log.trace("getComponentSubscribed",componentSubscribed);
 		return componentSubscribed;
 	}	 
 }
