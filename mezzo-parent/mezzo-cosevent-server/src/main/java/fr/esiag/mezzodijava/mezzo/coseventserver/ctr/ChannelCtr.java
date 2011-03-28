@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -19,11 +20,14 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
 
 /**
@@ -62,26 +66,27 @@ public class ChannelCtr {
      */
     public void addEvent(Event e) {
 
-	// System.out.println("Event PUSH "+ evt.body.content);
 	if (CosEventServer.getDelta() + new Date().getTime() < e.header.creationdate
 		+ e.header.timetolive) {
+		
+		EventModel em = new EventConvertor().transformToEventModel(e);
 
-	    // ajout dans les listes des consumers PUSH
-	    for (ProxyForPushConsumerImpl consumer : channel
-		    .getConsumersSubscribed().keySet()) {
-		System.out.println("Event PUSH " + e.body.content);
-		channel.getConsumersSubscribed().get(consumer).add(e);
-		System.out
+		// ajout dans les listes des consumers PUSH
+		for (ConsumerModel consumer : channel.getConsumers()) {
+
+			System.out.println("Event PUSH " + e.body.content);
+			//channel.getConsumersSubscribed().get(consumer).add(e);
+			consumer.getEvents().add(em);
+			System.out
 			.println("Event PUSH "
 				+ e.toString()
 				+ " "
 				+ e.body.content
 				+ " nb evt ="
-				+ channel.getConsumersSubscribed()
-					.get(consumer).size());
+				+ consumer.getEvents().size());
 	    }
 	    // ajout dans la liste nécessaire pour les consummer PULL
-	    channel.getQueueEvents().add(e);
+	    channel.getEvents().add(em);
 	}
 
     }
@@ -103,16 +108,16 @@ public class ChannelCtr {
      *             If Channel Connection Capaciy is reached.
      */
     public void addProxyForPushConsumerToConnectedList(
-	    ProxyForPushConsumerImpl proxyConsumer)
+	    ProxyForPushConsumerImpl proxyConsumer, String idConsumer)
 	    throws NotRegisteredException, AlreadyConnectedException,
 	    MaximalConnectionReachedException {
-	if (!channel.getConsumersSubscribed().containsKey(proxyConsumer)) {
+	if (!channel.getConsumersConnected().containsValue(proxyConsumer)) {
 	    throw new NotRegisteredException();
 	}
 	if (channel.isConsumersConnectedListcapacityReached()) {
 	    throw new MaximalConnectionReachedException();
 	}
-	if (!channel.getConsumersConnected().add(proxyConsumer)) {
+	if (channel.getConsumersConnected().put(idConsumer, proxyConsumer)==null) {
 	    throw new AlreadyConnectedException();
 	}
     }
@@ -121,8 +126,8 @@ public class ChannelCtr {
      * Add a Proxy for PUSH Consumer to the Subscribed Consumers List for this
      * Channel.
      * 
-     * The subscrition allow consumer to store event while it is not connected
-     * and receeive them when connected.
+     * The subscribtion allow consumer to store event while it is not connected
+     * and receive them when connected.
      * 
      * @param proxyConsumer
      *            Proxy For Push Consumer
@@ -270,6 +275,13 @@ public class ChannelCtr {
 	}
 	System.out.println("Disconnect of a PUSH Consumer from \""
 		+ channel.getTopic() + "\".");
+    }
+    
+    public Event removeEvent(List<EventModel> liste, int index){
+    	EventModel em = liste.remove(index);
+    	Event e = new EventConvertor().transformToEvent(em);
+    	return e;
+    	
     }
 
 }

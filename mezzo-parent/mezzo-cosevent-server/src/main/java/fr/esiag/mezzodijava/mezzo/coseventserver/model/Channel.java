@@ -1,230 +1,238 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
-import java.util.Collections;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.concurrent.PriorityBlockingQueue;
+
+import javax.persistence.CollectionTable;
+import javax.persistence.Column;
+import javax.persistence.ElementCollection;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
 
-/**
- * Classe Channel : contain subscribed and connected list of consumer and
- * supplier.
- * 
- * Events are stored with each subscribed consumers in the channel and stay
- * until they are delivered.
- * 
- * The Channel model
- * 
- * UC n°: US14,US15 (+US children)
- * 
- * @author Mezzo-Team
- * 
- */
+@Entity
+@Table(name = "CHANNEL")
+public class Channel implements Serializable {
 
-public class Channel {
+	private static final long serialVersionUID = 1L;
 
-    private final int CAPACITY_QUEUE = 100;
+	private final int CAPACITY_QUEUE = 100;
 
-    private int capacity;
-    private long identifier;
-    private Set<ProxyForPushConsumerImpl> consumersConnected = new HashSet<ProxyForPushConsumerImpl>();
+	private long identifier;
 
-    private Map<ProxyForPushConsumerImpl, SortedSet<Event>> consumersSubscribed = Collections
-	    .synchronizedMap(new HashMap<ProxyForPushConsumerImpl, SortedSet<Event>>());
+	@Id
+	@GeneratedValue
+	private int id;
 
-    private Set<ProxyForPushSupplierImpl> suppliersConnected = new HashSet<ProxyForPushSupplierImpl>();
+	@Column(name = "topic")
+	private String topic;
 
-    private String topic;
+	@Column(name = "connectionCapacity")
+	private int connectionCapacity;
 
-    private Comparator<Event> comparator = new PriorityEventComparator();
+	@ElementCollection
+	@CollectionTable(name = "EVENT")
+	@Column(name = "events")
+	private List<EventModel> events;
 
-    private PriorityBlockingQueue<Event> queueEvents;
+	@ElementCollection
+	@CollectionTable(name = "CONSUMER")
+	private Set<ConsumerModel> consumers;
 
-    /**
-     * Guive a Channel entity with <code>topic</code> and Connection
-     * <code>capacity</code>.
-     * 
-     * @param topic
-     *            String name of the Channel
-     * @param capacity
-     *            Capacity in connection of suppliers or consumers
-     */
-    public Channel(String topic, int capacity) {
-	this.topic = topic;
-	this.capacity = capacity;
-	this.identifier = RandomChannelIdentifier.getUniqueIdentifier();
-	queueEvents = new PriorityBlockingQueue<Event>(CAPACITY_QUEUE,
-		comparator);
+	private Map<String,ProxyForPushConsumerImpl> consumersConnected = new HashMap<String,ProxyForPushConsumerImpl>();
 
-    }
+	private Map<String,ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String,ProxyForPushSupplierImpl>();
 
-    /**
-     * Add a Push Consumer to the connected list.
-     * 
-     * @param ppc
-     *            the push consumer to add.
-     */
-    public void addSubscribedConsumer(ProxyForPushConsumerImpl ppc) {
-	this.consumersSubscribed.put(ppc, Collections
-		.synchronizedSortedSet(new TreeSet<Event>(comparator)));
-    }
+	/**
+	 * Give a Channel entity with <code>topic</code> and Connection
+	 * <code>capacity</code>.
+	 * 
+	 * @param topic
+	 *            String name of the Channel
+	 * @param capacity
+	 *            Capacity in connection of suppliers or consumers
+	 */
+	public Channel(String topic, int connectionCapacity) {
+		this.topic = topic;
+		this.connectionCapacity = connectionCapacity;
+		this.identifier = RandomChannelIdentifier.getUniqueIdentifier();
+		events = new ArrayList<EventModel>();
 
-    /**
-     * Get Channel Maximal Connection number.
-     * 
-     * @return Maximal Connection number
-     */
-    public int getCapacity() {
-	return capacity;
-    }
+	}
 
-    /**
-     * Push Consumers connected.
-     * 
-     * @return set of ProxyPushConsumerImpl
-     */
-    public Set<ProxyForPushConsumerImpl> getConsumersConnected() {
-	return consumersConnected;
-    }
+	/**
+	 * Add a Push Consumer to the connected list.
+	 * 
+	 * @param ppc
+	 *            the push consumer to add.
+	 */
+	public void addSubscribedConsumer(String idConsumer) {
+		ConsumerModel nouveau = new ConsumerModel();
+		nouveau.setIdConsumer(idConsumer);
+		this.consumers.add(nouveau);
+	}
 
-    /**
-     * Map with key as ProxyPushConsumer and valu a List of events.
-     * 
-     * While nnot delivered to its consumer, an event stay in its list.
-     * 
-     * @return.
-     */
-    public Map<ProxyForPushConsumerImpl, SortedSet<Event>> getConsumersSubscribed() {
-	return consumersSubscribed;
-    }
+	/**
+	 * Get Channel Maximal Connection number.
+	 * 
+	 * @return Maximal Connection number
+	 */
+	public int getCapacity() {
+		return connectionCapacity;
+	}
 
-    /**
-     * Push Suppliers connected.
-     * 
-     * @return set of ProxyForPushSupplierImpl
-     */
-    public Set<ProxyForPushSupplierImpl> getSuppliersConnected() {
-	return suppliersConnected;
-    }
+	/**
+	 * Push Consumers connected.
+	 * 
+	 * @return set of ProxyPushConsumerImpl
+	 */
+	public Map<String, ProxyForPushConsumerImpl> getConsumersConnected() {
+		return consumersConnected;
+	}
 
-    /**
-     * Character string unique identifier of the Channel.
-     * 
-     * @return topic
-     */
-    public String getTopic() {
-	return topic;
-    }
+	/**
+	 * Push Suppliers connected.
+	 * 
+	 * @return set of ProxyForPushSupplierImpl
+	 */
+	public Map<String, ProxyForPushSupplierImpl> getSuppliersConnected() {
+		return suppliersConnected;
+	}
+	
 
-    /**
-     * is connection capacity reached for connected consumers ?
-     * 
-     * @return true if the list is full.
-     */
-    public boolean isConsumersConnectedListcapacityReached() {
-	return capacity == consumersConnected.size();
-    }
+	/**
+	 * Character string unique identifier of the Channel.
+	 * 
+	 * @return topic
+	 */
+	public String getTopic() {
+		return topic;
+	}
 
-    /**
-     * is connection capacity reached for connected suppliers ?
-     * 
-     * @return true if the list is full.
-     */
-    public boolean isSuppliersConnectedsListcapacityReached() {
-	return capacity == suppliersConnected.size();
-    }
+	/**
+	 * is connection capacity reached for connected consumers ?
+	 * 
+	 * @return true if the list is full.
+	 */
+	public boolean isConsumersConnectedListcapacityReached() {
+		return connectionCapacity == consumersConnected.size();
+	}
 
-    /**
-     * Define Channel Max connection number.
-     * 
-     * @param capacity
-     *            max nb of connected consumer and suppliers.
-     */
-    public void setCapacity(int capacity) {
-	this.capacity = capacity;
-    }
+	/**
+	 * is connection capacity reached for connected suppliers ?
+	 * 
+	 * @return true if the list is full.
+	 */
+	public boolean isSuppliersConnectedsListcapacityReached() {
+		return connectionCapacity == suppliersConnected.size();
+	}
 
-    /**
-     * Getter of the set of connected push consumer.
-     * 
-     * For persistance purpose only.
-     * 
-     * @param consumersConnected
-     */
-    public void setConsumersConnected(
-	    Set<ProxyForPushConsumerImpl> consumersConnected) {
-	this.consumersConnected = consumersConnected;
-    }
+	/**
+	 * Define Channel Max connection number.
+	 * 
+	 * @param capacity
+	 *            max nb of connected consumer and suppliers.
+	 */
+	public void setCapacity(int capacity) {
+		this.connectionCapacity = capacity;
+	}
 
-    /**
-     * Getter of the map of subscribed push consumer.
-     * 
-     * For persistance purpose only.
-     * 
-     * @param consumersSubscribed
-     */
-    public void setConsumersSubscribed(
-	    Map<ProxyForPushConsumerImpl, SortedSet<Event>> consumersSubscribed) {
-	this.consumersSubscribed = consumersSubscribed;
-    }
+	/**
+	 * Getter of the set of connected push consumer.
+	 * 
+	 * For persistance purpose only.
+	 * 
+	 * @param consumersConnected
+	 */
+	public void setConsumersConnected(
+			Map<String, ProxyForPushConsumerImpl> consumersConnected) {
+		this.consumersConnected = consumersConnected;
+	}
 
-    /**
-     * Getter of the set of connected push supplier.
-     * 
-     * For persistance purpose only.
-     * 
-     * @param suppliersConnected
-     */
-    public void setSuppliersConnected(
-	    Set<ProxyForPushSupplierImpl> suppliersConnected) {
-	this.suppliersConnected = suppliersConnected;
-    }
+	/**
+	 * Getter of the set of subscribed push consumer.
+	 * 
+	 * For persistance purpose only.
+	 * 
+	 * @param consumersSubscribed
+	 */
+	public Set<ConsumerModel> getConsumers() {
+		return consumers;
+	}
 
-    /**
-     * Set the Channel Topic.
-     * 
-     * @param topic
-     *            the topic.
-     */
-    public void setTopic(String topic) {
-	this.topic = topic;
-    }
 
-    public long getIdentifier() {
-	return identifier;
-    }
+	public void setConsumers(Set<ConsumerModel> consumers) {
+		this.consumers = consumers;
+	}
 
-    public void setIdentifier(long identifier) {
-	this.identifier = identifier;
-    }
+	/**
+	 * Getter of the set of connected push supplier.
+	 * 
+	 * For persistance purpose only.
+	 * 
+	 * @param suppliersConnected
+	 */
+	public void setSuppliersConnected(
+			Map<String, ProxyForPushSupplierImpl> suppliersConnected) {
+		this.suppliersConnected = suppliersConnected;
+	}
 
-    /**
-     * Add en event in the queue.
-     * 
-     * @param event
-     *            an Event.
-     */
-    public void addEvent(Event event) {
-	queueEvents.add(event);
+	/**
+	 * Set the Channel Topic.
+	 * 
+	 * @param topic
+	 *            the topic.
+	 */
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
 
-    }
+	public long getIdentifier() {
+		return identifier;
+	}
 
-    public PriorityBlockingQueue<Event> getQueueEvents() {
-	// System.out.println("N getQueueEvents "+queueEvents.size());
-	return queueEvents;
-    }
+	public void setIdentifier(long identifier) {
+		this.identifier = identifier;
+	}
 
-    public void setQueueEvents(PriorityBlockingQueue<Event> listeEvents) {
-	this.queueEvents = listeEvents;
-    }
+	/**
+	 * Add en event in the queue.
+	 * 
+	 * @param event
+	 *            an Event.
+	 */
+	public void addEvent(EventModel em) {
+		events.add(em);
+	}
 
+	public int getConnectionCapacity() {
+		return connectionCapacity;
+	}
+
+	public void setConnectionCapacity(int connectionCapacity) {
+		this.connectionCapacity = connectionCapacity;
+	}
+
+	public List<EventModel> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<EventModel> events) {
+		this.events = events;
+	}
+	
+	
 }

@@ -2,18 +2,19 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
-import java.util.PriorityQueue;
 import java.util.SortedSet;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
 /**
  * Class ThreadEvent to process event in queues and send them to consumers
@@ -46,19 +47,13 @@ public class ThreadEvent implements Runnable {
 	 * 
 	 */
 	public void processSubscribedConsumers() {
-		// For all Subscribed Consumer to the Channel
+		/*// For all Subscribed Consumer to the Channel
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
 			// if the consumer is connected
 			//System.out.println("on passe a un autre " + consumer.toString());
 			if (channel.getConsumersConnected().contains(consumer)) {
 				// for all events of the consumer
-//				System.out
-//						.println("on passe a un autre connecte "
-//								+ consumer.toString()
-//								+ " qui contient nb evt = "
-//								+ channel.getConsumersSubscribed()
-//										.get(consumer).size());
 				SortedSet<Event> le = channel.getConsumersSubscribed().get(
 						consumer);
 				synchronized (le) {
@@ -91,6 +86,59 @@ public class ThreadEvent implements Runnable {
 							// to disconnect it
 							try {
 								consumer.disconnect();
+							} catch (NotConnectedException e2) {
+								e2.printStackTrace();
+							} catch (NotRegisteredException e2) {
+								e2.printStackTrace();
+							}
+							// TMA : todo => ajouter les messages non recu
+							// de la Queue
+							// Sans oublier d'ajouter dans la class qu'il
+							// faut le faite d'essayez
+							// d envoyer l ensemble des messages lors de la
+							// connexion du consumer
+						}
+					}
+				}
+			}
+
+		}*/
+		// For all Subscribed Consumer to the Channel
+		for (ConsumerModel consumer : channel.getConsumers()) {
+			ProxyForPushConsumerImpl pfpc;
+			// if the consumer is connected
+			pfpc=channel.getConsumersConnected().get(consumer.getIdConsumer());
+			if (pfpc!=null) {
+				// for all events of the consumer
+				SortedSet<EventModel> le = consumer.getEvents();
+				synchronized (le) {
+					Iterator<EventModel> i = le.iterator(); 
+					// Must be in
+					// synchronized
+					// block
+					while (i.hasNext()
+							&& pfpc!=null) {
+						EventModel em = i.next();
+						try {
+							// TODO : here manage life of the events.
+							long delta = CosEventServer.getDelta();
+							if (em.getCreationdate() + em.getTimetolive() > new Date()
+									.getTime() + delta) {
+								// send event to the consumer
+								Event e = new EventConvertor().transformToEvent(em);
+								pfpc.receive(e);
+							} else {
+								System.out.println("Event de type " + em.getType() + " expire");
+							}
+							// remove event from the list
+							i.remove();
+
+						} catch (ConsumerNotFoundException e1) {
+							e1.printStackTrace();
+							// Consumer seems to be unreachable so it's time
+							// to disconnect it
+							try {
+								pfpc.disconnect();
 							} catch (NotConnectedException e2) {
 								e2.printStackTrace();
 							} catch (NotRegisteredException e2) {
