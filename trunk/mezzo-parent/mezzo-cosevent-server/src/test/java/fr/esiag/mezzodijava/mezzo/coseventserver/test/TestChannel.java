@@ -5,7 +5,9 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.concurrent.PriorityBlockingQueue;
 
 import org.junit.After;
@@ -19,7 +21,9 @@ import org.omg.CORBA.ORB;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.Header;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
 public class TestChannel {
 
@@ -147,9 +151,10 @@ public class TestChannel {
 		Body body = new Body(any,"String");
 		
 		Event testevent = new Event(header, body);
-		assertTrue(ch.getQueueEvents().isEmpty());
-		ch.getQueueEvents().add(testevent);
-		assertEquals(ch.getQueueEvents().peek(), testevent);
+		EventModel em = new EventConvertor().transformToEventModel(testevent);
+		assertTrue(ch.getEvents().isEmpty());
+		ch.getEvents().add(em);
+		assertTrue(ch.getEvents().contains(em));
 	}
 
 	/**
@@ -168,10 +173,11 @@ public class TestChannel {
 		Body body = new Body(any,"String");
 		
 		Event testevent = new Event(header, body);
-		PriorityBlockingQueue<Event> queue = new PriorityBlockingQueue<Event>();
-		queue.add(testevent);
-		ch.setQueueEvents(queue);
-		assertEquals(queue, ch.getQueueEvents());
+		List<EventModel> queue = new ArrayList<EventModel>();
+		EventModel em = new EventConvertor().transformToEventModel(testevent);
+		queue.add(em);
+		ch.setEvents(queue);
+		assertEquals(queue, ch.getEvents());
 	}
 
 	/**
@@ -191,8 +197,9 @@ public class TestChannel {
 		Body body = new Body(any,"String");
 		
 		Event testevent = new Event(header, body);
-		ch.addEvent(testevent);
-		assertTrue(ch.getQueueEvents().contains(testevent));
+		EventModel em = new EventConvertor().transformToEventModel(testevent);
+		ch.addEvent(em);
+		assertTrue(ch.getEvents().contains(em));
 	}
 
 }
