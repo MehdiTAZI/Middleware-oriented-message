@@ -1,18 +1,13 @@
 module monitoring {
-
-
-    typedef sequence<Event> Events;//Sur le fichier cosEvent.idl
-    
-	struct ConsumerInfosCollector{
+  
+	struct PushConsumerStat{
    	 string id;
    	 boolean connected;
    	 long nbQueueEvents;					//Nombre evenemnt dans la queue
    	 long nbReceivedEvents;					//Nombre Evenement envoyé
-   	 //Changer on un String directement?String Events?
-   	 Events events;							//Quelle sont les message a sa destination
     };
     
-    struct SupplierInfosCollector{
+    struct PushSupplierStat{
    	 string id;								//Qui a envoyé?
    	 long pushedEvents;						//Nombre Events Envoyé
     };
