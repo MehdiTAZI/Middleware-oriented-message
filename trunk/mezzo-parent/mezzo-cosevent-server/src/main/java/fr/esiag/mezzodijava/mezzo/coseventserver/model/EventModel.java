@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import org.omg.CORBA.Any;
+
 @Entity
 @Table(name = "EVENT")
 public class EventModel implements Serializable {
@@ -22,24 +24,36 @@ public class EventModel implements Serializable {
     @Column(name = "priority")
     private int priority;
 
-    @Column(name = "date")
-    private long date;
-
     @Column(name = "data")
     @Lob
     private byte[] data;
+    
+    @Column(name = "code")
+    public long code;
+    
+    @Column(name = "creationdate")
+	public long creationdate;
+    
+    @Column(name = "ttl")
+	public long timetolive;
+    
+    @Column(name = "ttl")
+	public String type;
 
     public EventModel() {
 	super();
     }
 
-    public EventModel(int id, String type, long code, int priority, long date,
-	    byte[] data) {
+    public EventModel(int id, String type, long code, int priority,
+	    byte[] data, long creationdate, long timetolive ) {
 	super();
 	this.id = id;
 	this.priority = priority;
-	this.date = date;
 	this.data = data;
+	this.code = code;
+	this.creationdate = creationdate;
+	this.timetolive = timetolive;
+	this.type = type;
     }
 
     public int getId() {
@@ -58,14 +72,6 @@ public class EventModel implements Serializable {
 	this.priority = priority;
     }
 
-    public long getDate() {
-	return date;
-    }
-
-    public void setDate(long date) {
-	this.date = date;
-    }
-
     public byte[] getData() {
 	return data;
     }
@@ -78,4 +84,35 @@ public class EventModel implements Serializable {
 	return serialVersionUID;
     }
 
+	public long getCode() {
+		return code;
+	}
+
+	public void setCode(long code) {
+		this.code = code;
+	}
+
+	public long getCreationdate() {
+		return creationdate;
+	}
+
+	public void setCreationdate(long creationdate) {
+		this.creationdate = creationdate;
+	}
+
+	public long getTimetolive() {
+		return timetolive;
+	}
+
+	public void setTimetolive(long timetolive) {
+		this.timetolive = timetolive;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 }

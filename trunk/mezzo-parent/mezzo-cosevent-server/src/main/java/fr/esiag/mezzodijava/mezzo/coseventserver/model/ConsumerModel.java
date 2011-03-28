@@ -1,6 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
-import java.util.List;
+import java.util.SortedSet;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -26,7 +26,7 @@ public class ConsumerModel {
 	@ElementCollection  
 	@CollectionTable(name = "channelevents")  
 	@Column(name = "events")  
-	private List<EventModel> events;
+	private SortedSet<EventModel> events;
 
 	public int getId() {
 	    return id;
@@ -44,11 +44,11 @@ public class ConsumerModel {
 	    this.idConsumer = idConsumer;
 	}
 
-	public List<EventModel> getEvents() {
-	    return events;
+	public SortedSet<EventModel> getEvents() {
+		return events;
 	}
 
-	public void setEvents(List<EventModel> events) {
-	    this.events = events;
+	public void setEvents(SortedSet<EventModel> events) {
+		this.events = events;
 	}
 }

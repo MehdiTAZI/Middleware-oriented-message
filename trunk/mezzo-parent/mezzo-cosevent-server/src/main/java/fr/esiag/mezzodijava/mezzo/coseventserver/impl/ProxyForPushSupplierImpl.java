@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import java.util.List;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
@@ -92,9 +94,9 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	// System.out.println("QUEUE CAPACITY --> " + e.body.content +
 	// "        priority : " + e.header.priority);
 	// }
-
-	for (int i = 0; i < channelCtr.getChannel().getQueueEvents().size(); i++) {
-	    Event e = channelCtr.getChannel().getQueueEvents().remove();
+    	
+	for (int i = 0; i < channelCtr.getChannel().getEvents().size(); i++) {
+	    Event e = channelCtr.removeEvent(channelCtr.getChannel().getEvents(),i);
 	    System.out.println("QUEUE CAPACITY --> " + e.body.content
 		    + "        priority : " + e.header.priority);
 	}

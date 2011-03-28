@@ -50,7 +50,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
     public void connect(CallbackConsumer c) throws AlreadyConnectedException,
 	    NotRegisteredException, MaximalConnectionReachedException {
 	this.callbackConsumer = c;
-	channelCtr.addProxyForPushConsumerToConnectedList(this);
+	channelCtr.addProxyForPushConsumerToConnectedList(this,this.idComponent);
 	System.out.println("Connect of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
     }
