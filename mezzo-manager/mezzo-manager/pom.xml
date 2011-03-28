@@ -67,7 +67,7 @@
 	</dependencies>
 
 	<build>
-		<outputDirectory>war/WEB-INF/classes</outputDirectory>
+		<!--outputDirectory>${basedir}/war/WEB-INF/classes</outputDirectory -->
 		<plugins>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -83,6 +83,8 @@
 					</execution>
 				</executions>
 				<configuration>
+					<!--buildOutputDirectory>${basedir}/war</buildOutputDirectory -->
+					<webappDirectory>${basedir}/war</webappDirectory>
 					<runTarget>fr.esiag.mezzodijava.mezzo.manager.Application/Application.html</runTarget>
 				</configuration>
 			</plugin>
@@ -106,7 +108,7 @@
 						<configuration>
 							<tasks>
 								<move file="${project.build.outputDirectory}/Start.class"
-									tofile="war/Start.class" />
+									tofile="${basedir}/war/Start.class" />
 							</tasks>
 						</configuration>
 					</execution>
@@ -130,10 +132,43 @@
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-clean-plugin</artifactId>
+				<configuration>
+					<filesets>
+						<fileset>
+							<directory>${basedir}/war/fr</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/war/javax</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/war/org</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/war/WEB-INF/lib</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/war/META-INF</directory>
+						</fileset>
+						<fileset>
+							<directory>${basedir}/war</directory>
+							<excludes>
+								<exclude>*</exclude>
+							</excludes>
+							<includes>
+								<include>Start.class</include>
+							</includes>
+						</fileset>
+					</filesets>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-war-plugin</artifactId>
 				<version>2.1.1</version>
 				<configuration>
-					<warSourceDirectory>war</warSourceDirectory>
+					<webappDirectory>${basedir}/war</webappDirectory>
+					<warSourceDirectory>${basedir}/war</warSourceDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -142,7 +177,6 @@
 							<goal>war</goal>
 						</goals>
 						<configuration>
-							<warSourceDirectory>war</warSourceDirectory>
 							<archive>
 								<manifest>
 									<mainClass>Start</mainClass>
