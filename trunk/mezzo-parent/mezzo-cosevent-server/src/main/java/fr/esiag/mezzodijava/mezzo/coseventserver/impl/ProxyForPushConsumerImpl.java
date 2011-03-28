@@ -50,7 +50,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
     public void connect(CallbackConsumer c) throws AlreadyConnectedException,
 	    NotRegisteredException, MaximalConnectionReachedException {
 	this.callbackConsumer = c;
-	channelCtr.addProxyForPushConsumerToConnectedList(this,this.idComponent);
+	channelCtr.addProxyForPushConsumerToConnectedList(this.idComponent,this);
 	System.out.println("Connect of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
     }
@@ -68,7 +68,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
     @Override
     public void disconnect() throws NotConnectedException,
 	    NotRegisteredException {
-	channelCtr.removeProxyForPushConsumerFromConnectedList(this);
+	channelCtr.removeProxyForPushConsumerFromConnectedList(this.idComponent,this);
 	System.out.println("Disconnect of a PUSH Consumer from \""
 		+ channelCtr.getChannel().getTopic() + "\".");
     }
@@ -102,7 +102,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
      */
     @Override
     public void subscribe() throws AlreadyRegisteredException {
-	channelCtr.addProxyForPushConsumerToSubscribedList(this);
+	channelCtr.addProxyForPushConsumerToSubscribedList(this.idComponent,this);
 	System.out.println("Subscribe of a PUSH Consumer to \""
 		+ channelCtr.getChannel().getTopic() + "\".");
 
@@ -118,7 +118,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
      */
     @Override
     public void unsubscribe() throws NotRegisteredException {
-	channelCtr.removeProxyForPushConsumerFromSubscribedList(this);
+	channelCtr.removeProxyForPushConsumerFromSubscribedList(this.idComponent,this);
 	System.out.println("Unsubscribe of a PUSH Consumer from \""
 		+ channelCtr.getChannel().getTopic() + "\".");
     }

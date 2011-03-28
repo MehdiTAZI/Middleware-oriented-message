@@ -30,7 +30,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
  * 
  */
 
-public class ChannelOld {
+public class CRAPChannel {
 
     private final int CAPACITY_QUEUE = 100;
 
@@ -58,7 +58,7 @@ public class ChannelOld {
      * @param capacity
      *            Capacity in connection of suppliers or consumers
      */
-    public ChannelOld(String topic, int capacity) {
+    public CRAPChannel(String topic, int capacity) {
 	this.topic = topic;
 	this.capacity = capacity;
 	this.identifier = RandomChannelIdentifier.getUniqueIdentifier();
