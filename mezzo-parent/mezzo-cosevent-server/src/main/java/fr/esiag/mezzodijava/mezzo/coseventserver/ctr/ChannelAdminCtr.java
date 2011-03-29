@@ -12,6 +12,8 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ObjectNotActive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumerHelper;
@@ -22,6 +24,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 
 /**
  * Classe ChannelAdminCtr
@@ -35,6 +38,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
  */
 
 public class ChannelAdminCtr {
+	 private static Logger log = LoggerFactory.getLogger(ChannelAdminCtr.class);
     private Map<ProxyForPushConsumer, byte[]> oidProxyForPushConsumerMap = Collections
 	    .synchronizedMap(new HashMap<ProxyForPushConsumer, byte[]>());
     private Map<ProxyForPushSupplier, byte[]> oidProxyForPushSupplierMap = Collections
@@ -59,12 +63,14 @@ public class ChannelAdminCtr {
     }
 
     public ChannelAdminCtr(String topic) {
+    	log.trace("Creation of ChannelAdminCtr");
 	this.channel = topic;
 	this.orb = BFFactory.createOrb(null, null);
 	this.channelCtr = BFFactory.createChannelCtr(topic);
     }
 
     private static synchronized POA getPOA() {
+    	log.trace("Access to POA");
 	try {
 	    if (poa == null) {
 		poa = POAHelper.narrow(BFFactory.getOrb()
@@ -73,12 +79,11 @@ public class ChannelAdminCtr {
 	    }
 
 	} catch (InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	   log.error("Invalid reference",e);
 	} catch (AdapterInactive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+		log.error("",e);
 	}
+	log.trace("POA accessed");
 	return poa;
     }
 
@@ -92,6 +97,7 @@ public class ChannelAdminCtr {
     public ProxyForPushConsumer createProxyForPushConsumer(String idComponent) {
 	ProxyForPushConsumer pps = null;
 
+	log.trace("Creation of proxyPushConsumer");
 	byte[] oid;
 	try {
 	    oid = getPOA()
@@ -103,13 +109,13 @@ public class ChannelAdminCtr {
 		    oid));
 	    oidProxyForPushConsumerMap.put(pps, oid);
 	} catch (ServantNotActive e) {
-	    e.printStackTrace();
+		log.error("Servant inactive",e);
 	} catch (WrongPolicy e) {
-	    e.printStackTrace();
+		log.error("Wrong policy",e);
 	} catch (ObjectNotActive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+		log.error("Not an active object",e);
 	}
+	log.trace("proxyPushConsumer created");
 	return pps;
 
     }
@@ -123,7 +129,7 @@ public class ChannelAdminCtr {
      */
     public ProxyForPushSupplier createProxyForPushSupplier(String idComponent) {
 	ProxyForPushSupplier ppc = null;
-	
+	log.trace("Creation of proxyPushSupplier");
 	byte[] oid;
 	try {
 	    oid = getPOA()
@@ -135,13 +141,13 @@ public class ChannelAdminCtr {
 		    oid));
 	    oidProxyForPushSupplierMap.put(ppc, oid);
 	} catch (ServantNotActive e) {
-	    e.printStackTrace();
+		log.error("Servant inactive",e);
 	} catch (WrongPolicy e) {
-	    e.printStackTrace();
+		log.error("Wrong policy",e);
 	} catch (ObjectNotActive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+		log.error("Not an active object",e);
 	}
+	log.trace("proxyPushSupplier created");
 	return ppc;
     }
 
