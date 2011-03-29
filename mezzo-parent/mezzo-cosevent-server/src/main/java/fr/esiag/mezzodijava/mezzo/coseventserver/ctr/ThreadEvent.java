@@ -104,7 +104,7 @@ public class ThreadEvent implements Runnable {
 
 		}*/
 		// For all Subscribed Consumer to the Channel
-		for (ConsumerModel consumer : channel.getConsumers()) {
+		for (ConsumerModel consumer : channel.getConsumers().values()) {
 			ProxyForPushConsumerImpl pfpc;
 			// if the consumer is connected
 			pfpc=channel.getConsumersConnected().get(consumer.getIdConsumer());

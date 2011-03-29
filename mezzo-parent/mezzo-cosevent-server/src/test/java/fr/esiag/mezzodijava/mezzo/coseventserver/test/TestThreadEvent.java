@@ -18,9 +18,11 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 
 public class TestThreadEvent {
 
@@ -46,20 +48,20 @@ public class TestThreadEvent {
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
-		channel.addSubscribedConsumer(ppfc);
+		channel.addSubscribedConsumer("testconsumerthread");
 		// adding the mock as connected consumer
-		channel.getConsumersConnected().add(ppfc);
+		channel.getConsumersConnected().put("testconsumerthread",ppfc);
 		// adding an event
-		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
+		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 1200);
 		ORB orb=ORB.init();
 		Any any=orb.create_any();
 		any.insert_string("Test_EVENT");
 		Body body = new Body(any,"String");
 		
 		Event e = new Event(header,body);
-		for (ProxyForPushConsumerImpl consumer : channel
-				.getConsumersSubscribed().keySet()) {
-			channel.getConsumersSubscribed().get(consumer).add(e);
+		for (ConsumerModel consumer : channel
+				.getConsumers().values()) {
+		    consumer.getEvents().add((new EventConvertor()).transformToEventModel(e));
 		}
 		// receive is expected
 		try {
@@ -87,7 +89,7 @@ public class TestThreadEvent {
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
-		channel.addSubscribedConsumer(ppfc);
+		channel.addSubscribedConsumer("testconsumerthread");
 		// adding an event
 		Header header=new Header(123, 1, 01012011, 120);
 		ORB orb=ORB.init();
@@ -96,10 +98,10 @@ public class TestThreadEvent {
 		Body body = new Body(any,"String");
 		
 		Event e = new Event(header,body);
-		for (ProxyForPushConsumerImpl consumer : channel
-				.getConsumersSubscribed().keySet()) {
-			channel.getConsumersSubscribed().get(consumer).add(e);
-		}
+		for (ConsumerModel consumer : channel
+			.getConsumers().values()) {
+	    consumer.getEvents().add((new EventConvertor()).transformToEventModel(e));
+	}
 		// Passage du mock en mode de test
 		EasyMock.replay(ppfc);
 		// Test
@@ -120,9 +122,9 @@ public class TestThreadEvent {
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
-		channel.addSubscribedConsumer(ppfc);
+		channel.addSubscribedConsumer("testconsumerthread");
 		// adding the mock as connected consumer
-		channel.getConsumersConnected().add(ppfc);
+		channel.getConsumersConnected().put("testconsumerthread",ppfc);
 		// adding an event
 		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
 		ORB orb=ORB.init();
@@ -131,10 +133,10 @@ public class TestThreadEvent {
 		Body body = new Body(any,"String");
 		
 		Event e = new Event(header,body);
-		for (ProxyForPushConsumerImpl consumer : channel
-				.getConsumersSubscribed().keySet()) {
-			channel.getConsumersSubscribed().get(consumer).add(e);
-		}
+		for (ConsumerModel consumer : channel
+			.getConsumers().values()) {
+	    consumer.getEvents().add((new EventConvertor()).transformToEventModel(e));
+	}
 		// on s'attend à ce qu'un appel à receive soit fait
 		ppfc.receive(e);
 
