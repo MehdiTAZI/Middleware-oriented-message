@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.SortedSet;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
@@ -29,9 +32,11 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
  * 
  */
 public class ThreadEvent implements Runnable {
+	private static Logger log = LoggerFactory.getLogger(ThreadEvent.class);
 	private Channel channel;
 
 	public ThreadEvent(String topic) {
+		log.trace("ThreadEvent created");
 		channel = BFFactory.getChannel(topic);
 	}
 
@@ -47,6 +52,7 @@ public class ThreadEvent implements Runnable {
 	 * 
 	 */
 	public void processSubscribedConsumers() {
+		log.trace("process subscribed consumers");
 		/*// For all Subscribed Consumer to the Channel
 		for (ProxyForPushConsumerImpl consumer : channel
 				.getConsumersSubscribed().keySet()) {
@@ -128,21 +134,22 @@ public class ThreadEvent implements Runnable {
 								Event e = new EventConvertor().transformToEvent(em);
 								pfpc.receive(e);
 							} else {
-								System.out.println("Event de type " + em.getType() + " expire");
+								log.debug("Event de type " + em.getType() + " expire");
 							}
 							// remove event from the list
 							i.remove();
 
 						} catch (ConsumerNotFoundException e1) {
-							e1.printStackTrace();
+							log.debug("Consumer seems to be unreachable",e1);
 							// Consumer seems to be unreachable so it's time
 							// to disconnect it
 							try {
 								pfpc.disconnect();
+								log.debug("Consumer disconnected");
 							} catch (NotConnectedException e2) {
-								e2.printStackTrace();
+								log.error("Can't disconnect : Consumer not connected",e2);
 							} catch (NotRegisteredException e2) {
-								e2.printStackTrace();
+								log.error("Can't disconnect : Consumer not registered",e2);
 							}
 							// TMA : todo => ajouter les messages non recu
 							// de la Queue
