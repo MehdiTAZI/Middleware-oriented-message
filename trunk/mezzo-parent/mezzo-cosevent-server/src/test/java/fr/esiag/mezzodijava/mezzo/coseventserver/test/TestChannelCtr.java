@@ -25,6 +25,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 public class TestChannelCtr {
 
@@ -34,7 +35,7 @@ public class TestChannelCtr {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String topic = "bla";
-		Channel channel = BFFactory.createChannelEntity(topic, 3);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 3);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -47,7 +48,7 @@ public class TestChannelCtr {
 		Random rm = new Random();
 		topic = rm.nextInt() + "";
 		System.out.println(topic);
-		Channel channel = BFFactory.createChannelEntity(topic, 2);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 2);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -192,7 +193,7 @@ public class TestChannelCtr {
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);
 		try {
-			Channel channel = BFFactory.createChannelEntity(topic, 0);
+			Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 			channel.setCapacity(10);
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
@@ -222,7 +223,7 @@ public class TestChannelCtr {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic,"testsupplier2");
 
-		Channel channel = BFFactory.createChannelEntity(topic, 0);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 		channel.setCapacity(1);
 		try {
 			channelCtr.addProxyForPushSupplierToConnectedList(pps);
@@ -239,7 +240,7 @@ public class TestChannelCtr {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
 		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic,"testsupplier2");
 
-		Channel channel = BFFactory.createChannelEntity(topic, 0);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 		channel.setCapacity(30);
 		channelCtr.addProxyForPushSupplierToConnectedList(pps);
 	}
@@ -273,7 +274,7 @@ public class TestChannelCtr {
 		// channel.getConsumersSubscribed().get(consumer).add(e);
 		// }
 		// }
-		Channel channel = BFFactory.createChannelEntity(topic, 0);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
 		channelCtr.addProxyForPushConsumerToSubscribedList(ppc);

@@ -14,6 +14,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
@@ -27,7 +28,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
  */
 public class BFFactory {
 
-    private static Map<String, Channel> mapChannel = new HashMap<String, Channel>();
+    // private static Map<String, Channel> mapChannel = new HashMap<String,
+    // Channel>();
 
     private static Map<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
     private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();
@@ -35,28 +37,12 @@ public class BFFactory {
 
     // ----------
     private static Map<String, EventServerChannelAdminCtr> mapEventServerChannelAdminCtr = new HashMap<String, EventServerChannelAdminCtr>();
-    private static Map<Long, Channel> mapChannelId = new HashMap<Long, Channel>();
+    // private static Map<Long, Channel> mapChannelId = new HashMap<Long,
+    // Channel>();
 
     // ----------
 
     private static ORB orb;
-
-    /**
-     * Create a Channel Entity associated with the given topic.
-     * 
-     * @param topic
-     *            Channel topic
-     * @param capacity
-     *            Maximal connection allowed
-     * @return existing or new Channel for this topic.
-     */
-    public static synchronized Channel createChannelEntity(String topic,
-	    int capacity) {
-	if (mapChannel.get(topic) == null) {
-	    mapChannel.put(topic, new Channel(topic, capacity));
-	}
-	return mapChannel.get(topic);
-    }
 
     /**
      * Create and publish a ChannelImpl and associated ChannelCtr and Channel
@@ -68,20 +54,19 @@ public class BFFactory {
      *            Maximal connection allowed
      * @return private unique id of the channel.
      */
-    public static synchronized long createChannel(String topic, int capacity)
+    public static synchronized Channel createChannel(String topic, int capacity)
 	    throws ChannelAlreadyExistsException {
+	EventServer es = EventServer.getInstance();
 	Channel channel = null;
 	// Error if Channel Already Exists
-	if (mapChannel.get(topic) != null) {
+	if (es.getMapChannel().get(topic) != null) {
 	    throw new ChannelAlreadyExistsException();
 	}
-	channel = createChannelEntity(topic, capacity);
+	channel = es.createChannelEntity(topic, capacity);
 	ChannelAdminImpl cai = createChannelAdminImpl(topic);
 	// Publish the ChannelAdminImpl with Corba
 	ChannelPublisher.publish(cai);
-	// Register the channel entity in id map
-	mapChannelId.put(channel.getIdentifier(), channel);
-	return channel.getIdentifier();
+	return channel;
     }
 
     /**
@@ -94,7 +79,8 @@ public class BFFactory {
      */
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
-	mapChannel.put(channel.getTopic(), channel);
+	EventServer.getInstance().getMapChannel()
+		.put(channel.getTopic(), channel);
     }
 
     /**
@@ -192,18 +178,6 @@ public class BFFactory {
     }
 
     /**
-     * Return current instance of Channel Bean associated with this topic or
-     * <code>null</null> if not channel exists.
-     * 
-     * @param topic
-     *            The Topic of the wanted channel.
-     * @return Channel with the specified topic or <code>null</null>
-     */
-    public static Channel getChannel(String topic) {
-	return mapChannel.get(topic);
-    }
-
-    /**
      * Return current ChannelCtr associated with this topic or
      * <code>null</null> if topic not exists.
      * 
@@ -216,18 +190,6 @@ public class BFFactory {
     }
 
     /**
-     * Return current instance of Channel Bean associated with this unique id or
-     * <code>null</null> if id not exists.
-     * 
-     * @param id
-     *            The unique id of the wanted channel.
-     * @return Channel with the specified id or <code>null</null>
-     */
-    public static Channel getChannel(long id) {
-	return mapChannelId.get(id);
-    }
-
-    /**
      * Return current ChannelAdmin associated with this unique id or
      * <code>null</null> if id not exists.
      * 
@@ -236,26 +198,14 @@ public class BFFactory {
      * @return ChannelAdmin with the specified id or <code>null</null>
      */
     public static ChannelAdmin getChannelAdmin(long uniqueServerChannelId) {
-	Channel channelEntity = getChannel(uniqueServerChannelId);
+	Channel channelEntity = EventServer.getInstance().getChannel(
+		uniqueServerChannelId);
 	if (channelEntity != null) {
 	    ChannelAdminPOATie tie = new ChannelAdminPOATie(
-		    mapChannelAdminImpl.get(mapChannelId.get(
-			    uniqueServerChannelId).getTopic()));
+		    mapChannelAdminImpl.get(channelEntity.getTopic()));
 	    return tie._this(orb);
 	}
 	return null;
-    }
-
-    /**
-     * Test purpose only. Enable to inject a mock object in the ChannelFactory.
-     * 
-     * @param topic
-     * @param alternateChannel
-     *            An alternative implementation of Channel typically a mock
-     */
-    public static synchronized void setAlternateChannel(String topic,
-	    Channel channel) {
-	mapChannel.put(topic, channel);
     }
 
     /**
@@ -306,12 +256,13 @@ public class BFFactory {
      *            The id of the wanted channel to destroy.
      */
     public static void destroy(long idChannel) {
-	String channelName = mapChannelId.get(idChannel).getTopic();
-	mapChannel.remove(channelName);
+	EventServer es = EventServer.getInstance();
+	String channelName = es.getChannel(idChannel).getTopic();
+	es.getMapChannel().remove(channelName);
 	mapChannelAdminCtr.remove(channelName);
 	mapChannelAdminImpl.remove(channelName);
 	mapChannelCtr.remove(channelName);
-	mapChannelId.remove(idChannel);
+	es.getMapChannelId().remove(idChannel);
     }
 
     /**

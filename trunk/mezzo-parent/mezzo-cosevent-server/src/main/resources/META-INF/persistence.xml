@@ -3,22 +3,25 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
 	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
 
-	<persistence-unit name="Event" transaction-type="RESOURCE_LOCAL">
+	<persistence-unit name="cosevent" transaction-type="RESOURCE_LOCAL">
 	
     <!-- <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>-->
 	<provider>org.hibernate.ejb.HibernatePersistence</provider>
 	  <!-- Classes prises en charge par l'ORM -->
-	 
+	  <class>fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel</class>
+	  <class>fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel</class>	
 	  <class>fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel</class>	
  	  <properties>
  	    <!-- Propriétés de connexion -->
 		<property name="javax.persistence.jdbc.driver"   value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:C:\mezzodev\SystemStateDb\Base;create=true" />
+		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:C:\mezzodev\coseventBase;create=true" />
 		<property name="javax.persistence.jdbc.user"     value="test" />
 		<property name="javax.persistence.jdbc.password" value="test" />
 
         <!-- Propriétés de l'ORM propres à Hibernate -->
 	  	<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+	  	<property name="hibernate.show_sql" value="true"/>
+	  	<property name="hibernate.sql_format" value="true"/>
 	  </properties>
 	</persistence-unit>
 	

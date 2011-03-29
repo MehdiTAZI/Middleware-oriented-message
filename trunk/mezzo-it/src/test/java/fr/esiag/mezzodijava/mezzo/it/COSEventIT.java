@@ -72,7 +72,7 @@ public class COSEventIT {
 	sl.go();
 	// le event serveur
 	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
-		2000, "MEZZO-SERVER");
+		5000, "MEZZO-SERVER");
 	s2.go();
     }
 
@@ -371,7 +371,7 @@ public class COSEventIT {
 	    };
 	    t.start();
 	}
-	Thread.sleep(5000);
+	Thread.sleep(10000);
 	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 100,
 		recu.intValue());
@@ -531,6 +531,7 @@ public class COSEventIT {
 	// EventServerChannelAdmin esca = ec
 	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
 	idChannel = esca.createChannel("MEZZO", 20);
+	System.out.println(idChannel);
 	Thread.sleep(1000);
 	// le consumer ici present
 	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
@@ -540,7 +541,9 @@ public class COSEventIT {
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 
 	// destruction anticipee du Channel
+	System.out.println("coucou");
 	esca.destroyChannel(idChannel);
+	System.out.println("coucou");
 	String idcomponent = "mezzo";
 
 	try {

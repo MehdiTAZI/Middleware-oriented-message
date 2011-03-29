@@ -80,26 +80,4 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	channelCtr.addEvent(evt);
 
     }
-
-    /**
-     * To print capacity and priority
-     */
-    public void afficher() {
-	// System.out.println("In Afficher "+channelCtr.getChannel().getQueueEvents().size());
-
-	// Iterator<Event>
-	// iterator=channelCtr.getChannel().getQueueEvents().iterator();
-	// while(iterator.hasNext()){
-	// Event e=iterator.next();
-	// System.out.println("QUEUE CAPACITY --> " + e.body.content +
-	// "        priority : " + e.header.priority);
-	// }
-    	
-	for (int i = 0; i < channelCtr.getChannel().getEvents().size(); i++) {
-	    Event e = channelCtr.removeEvent(channelCtr.getChannel().getEvents(),i);
-	    System.out.println("QUEUE CAPACITY --> " + e.body.content
-		    + "        priority : " + e.header.priority);
-	}
-
-    }
 }
