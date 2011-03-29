@@ -2,12 +2,9 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -15,10 +12,9 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
-import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
@@ -50,7 +46,8 @@ public class Channel implements Serializable {
 
 	@ElementCollection
 	@CollectionTable(name = "CONSUMER")
-	private Set<ConsumerModel> consumers;
+	@MapKeyColumn(name="id")
+	private Map<String, ConsumerModel> consumers = new HashMap<String,ConsumerModel>();
 
 	private Map<String,ProxyForPushConsumerImpl> consumersConnected = new HashMap<String,ProxyForPushConsumerImpl>();
 
@@ -82,7 +79,7 @@ public class Channel implements Serializable {
 	public void addSubscribedConsumer(String idConsumer) {
 		ConsumerModel nouveau = new ConsumerModel();
 		nouveau.setIdConsumer(idConsumer);
-		this.consumers.add(nouveau);
+		this.consumers.put(nouveau.getIdConsumer(), nouveau);
 	}
 
 	/**
@@ -169,12 +166,12 @@ public class Channel implements Serializable {
 	 * 
 	 * @param consumersSubscribed
 	 */
-	public Set<ConsumerModel> getConsumers() {
+	public Map<String, ConsumerModel> getConsumers() {
 		return consumers;
 	}
 
 
-	public void setConsumers(Set<ConsumerModel> consumers) {
+	public void setConsumers(Map <String,ConsumerModel> consumers) {
 		this.consumers = consumers;
 	}
 

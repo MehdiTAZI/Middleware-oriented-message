@@ -25,4 +25,7 @@ public class AbstractProxyImpl {
 	channelCtr = BFFactory.createChannelCtr(topic);
     }
 
+    public String getIdComponent() {
+        return idComponent;
+    }
 }

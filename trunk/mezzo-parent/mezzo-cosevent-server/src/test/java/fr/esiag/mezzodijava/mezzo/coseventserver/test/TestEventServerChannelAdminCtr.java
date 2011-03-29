@@ -128,9 +128,9 @@ public class TestEventServerChannelAdminCtr {
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
-		channel.addSubscribedConsumer(ppfc);
+		channel.addSubscribedConsumer("testchange");
 		// adding the mock as connected consumer
-		channel.getConsumersConnected().add(ppfc);
+		channel.getConsumersConnected().put("testchange",ppfc);
 		try {
 			ctr.changeChannelCapacity(id, 0);
 			fail("exception non levée");

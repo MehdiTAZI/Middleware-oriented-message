@@ -14,6 +14,8 @@ import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.omg.PortableServer.POAPackage.ServantNotActive;
 import org.omg.PortableServer.POAPackage.WrongPolicy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
@@ -41,6 +43,8 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
  */
 
 public class CosEventServer {
+
+    final static Logger log = LoggerFactory.getLogger(CosEventServer.class);
 
     /**
      * argument : eventServerName
@@ -136,7 +140,7 @@ public class CosEventServer {
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl());
 
-	    System.out.println("Mezzo COS Event Server \"" + eventServerName
+	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
 
 	    orb.run();

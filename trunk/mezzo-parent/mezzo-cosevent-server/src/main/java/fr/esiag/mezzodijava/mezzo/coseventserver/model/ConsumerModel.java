@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.SortedSet;
+import java.util.TreeSet;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.Column;
@@ -26,7 +27,7 @@ public class ConsumerModel {
 	@ElementCollection  
 	@CollectionTable(name = "channelevents")  
 	@Column(name = "events")  
-	private SortedSet<EventModel> events;
+	private SortedSet<EventModel> events = new TreeSet<EventModel>();
 
 	public int getId() {
 	    return id;
