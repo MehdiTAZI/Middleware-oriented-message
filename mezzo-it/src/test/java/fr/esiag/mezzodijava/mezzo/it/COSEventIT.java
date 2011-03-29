@@ -129,7 +129,7 @@ public class COSEventIT {
     public static void main(String[] args) throws Exception {
 	EventClient ec = EventClient.init(null);
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-	String idcomponent = "mezzo";
+	String idcomponent = Thread.currentThread().getName();
 	ProxyForPushConsumer consumerProxy = channelAdmin
 		.getProxyForPushConsumer(idcomponent);
 	CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
@@ -333,7 +333,7 @@ public class COSEventIT {
 			EventClient ec = EventClient.init(null);
 			ChannelAdmin channelAdmin = ec
 				.resolveChannelByTopic("MEZZO");
-			String idcomponent = "mezzo";
+			String idcomponent = Thread.currentThread().getName();
 			ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier(idcomponent);
 			supplierProxy.connect();
@@ -395,18 +395,18 @@ public class COSEventIT {
 	// le consumer ici present
 	for (int i = 0; i < 10; i++) {
 	    MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
-		    500, (String[]) null);
+		    500,(String[])null);
 	    s2.go();
 	}
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	for (int i = 0; i < 10; i++) {
-	    Thread t = new Thread(i + "") {
+	    Thread t = new Thread("consumer_" + i) {
 		public void run() {
 		    try {
 			EventClient ec = EventClient.init(null);
 			ChannelAdmin channelAdmin = ec
 				.resolveChannelByTopic("MEZZO");
-			String idcomponent = "mezzo";
+			String idcomponent = Thread.currentThread().getName();
 			ProxyForPushSupplier supplierProxy = channelAdmin
 				.getProxyForPushSupplier(idcomponent);
 			supplierProxy.connect();
