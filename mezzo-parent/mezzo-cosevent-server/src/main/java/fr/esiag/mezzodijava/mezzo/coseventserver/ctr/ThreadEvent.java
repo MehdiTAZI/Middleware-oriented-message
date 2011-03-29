@@ -12,12 +12,12 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 /**
  * Class ThreadEvent to process event in queues and send them to consumers
@@ -32,154 +32,134 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
  * 
  */
 public class ThreadEvent implements Runnable {
-	private static Logger log = LoggerFactory.getLogger(ThreadEvent.class);
-	private Channel channel;
+    private static Logger log = LoggerFactory.getLogger(ThreadEvent.class);
+    private Channel channel;
+    private EventServer es = EventServer.getInstance();
 
-	public ThreadEvent(String topic) {
-		log.trace("ThreadEvent created");
-		channel = BFFactory.getChannel(topic);
-	}
+    public ThreadEvent(String topic) {
+	log.trace("ThreadEvent created");
+	channel = es.getChannel(topic);
+    }
 
-	/**
-	 * process subscribed consumer list of the channel to find
-	 * ProxyForPushConsumerImpl with Event to send. If the consumer is connected
-	 * and it has Event in his list (in Channel), processSubscribedConsumers()
-	 * call <code>ppfc.receive(Event)</code> on it.
+    /**
+     * process subscribed consumer list of the channel to find
+     * ProxyForPushConsumerImpl with Event to send. If the consumer is connected
+     * and it has Event in his list (in Channel), processSubscribedConsumers()
+     * call <code>ppfc.receive(Event)</code> on it.
+     * 
+     * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
+     * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
+     * 
+     * 
+     */
+    public void processSubscribedConsumers() {
+	log.trace("process subscribed consumers");
+	/*
+	 * // For all Subscribed Consumer to the Channel for
+	 * (ProxyForPushConsumerImpl consumer : channel
+	 * .getConsumersSubscribed().keySet()) { // if the consumer is connected
+	 * //System.out.println("on passe a un autre " + consumer.toString());
+	 * if (channel.getConsumersConnected().contains(consumer)) { // for all
+	 * events of the consumer SortedSet<Event> le =
+	 * channel.getConsumersSubscribed().get( consumer); synchronized (le) {
+	 * Iterator<Event> i = le.iterator(); // Must be in // synchronized //
+	 * block while (i.hasNext() && channel.getConsumersConnected().contains(
+	 * consumer)) { Event e = i.next(); try { // TODO : here manage life of
+	 * the events. long delta = CosEventServer.getDelta(); if
+	 * (e.header.creationdate + e.header.timetolive > new Date() .getTime()
+	 * + delta) { // send event to the consumer
+	 * //System.out.println(e.header.code // + " receive appel");
+	 * consumer.receive(e); } else { System.out.println(e.header.code +
+	 * " expire"); } // remove event from the list i.remove();
 	 * 
-	 * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
-	 * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
+	 * } catch (ConsumerNotFoundException e1) { // TODO log here
+	 * e1.printStackTrace(); // Consumer seems to be unreachable so it's
+	 * time // to disconnect it try { consumer.disconnect(); } catch
+	 * (NotConnectedException e2) { e2.printStackTrace(); } catch
+	 * (NotRegisteredException e2) { e2.printStackTrace(); } // TMA : todo
+	 * => ajouter les messages non recu // de la Queue // Sans oublier
+	 * d'ajouter dans la class qu'il // faut le faite d'essayez // d envoyer
+	 * l ensemble des messages lors de la // connexion du consumer } } } }
 	 * 
-	 * 
+	 * }
 	 */
-	public void processSubscribedConsumers() {
-		log.trace("process subscribed consumers");
-		/*// For all Subscribed Consumer to the Channel
-		for (ProxyForPushConsumerImpl consumer : channel
-				.getConsumersSubscribed().keySet()) {
-			// if the consumer is connected
-			//System.out.println("on passe a un autre " + consumer.toString());
-			if (channel.getConsumersConnected().contains(consumer)) {
-				// for all events of the consumer
-				SortedSet<Event> le = channel.getConsumersSubscribed().get(
-						consumer);
-				synchronized (le) {
-					Iterator<Event> i = le.iterator(); // Must be in
-					// synchronized
-					// block
-					while (i.hasNext()
-							&& channel.getConsumersConnected().contains(
-									consumer)) {
-						Event e = i.next();
-						try {
-							// TODO : here manage life of the events.
-							long delta = CosEventServer.getDelta();
-							if (e.header.creationdate + e.header.timetolive > new Date()
-									.getTime() + delta) {
-								// send event to the consumer
-								//System.out.println(e.header.code
-								//		+ " receive appel");
-								consumer.receive(e);
-							} else {
-								System.out.println(e.header.code + " expire");
-							}
-							// remove event from the list
-							i.remove();
-
-						} catch (ConsumerNotFoundException e1) {
-							// TODO log here
-							e1.printStackTrace();
-							// Consumer seems to be unreachable so it's time
-							// to disconnect it
-							try {
-								consumer.disconnect();
-							} catch (NotConnectedException e2) {
-								e2.printStackTrace();
-							} catch (NotRegisteredException e2) {
-								e2.printStackTrace();
-							}
-							// TMA : todo => ajouter les messages non recu
-							// de la Queue
-							// Sans oublier d'ajouter dans la class qu'il
-							// faut le faite d'essayez
-							// d envoyer l ensemble des messages lors de la
-							// connexion du consumer
-						}
-					}
-				}
-			}
-
-		}*/
-		// For all Subscribed Consumer to the Channel
-		for (ConsumerModel consumer : channel.getConsumers().values()) {
-			ProxyForPushConsumerImpl pfpc;
-			// if the consumer is connected
-			pfpc=channel.getConsumersConnected().get(consumer.getIdConsumer());
-			if (pfpc!=null) {
-				// for all events of the consumer
-				SortedSet<EventModel> le = consumer.getEvents();
-				synchronized (le) {
-					Iterator<EventModel> i = le.iterator(); 
-					// Must be in
-					// synchronized
-					// block
-					while (i.hasNext()
-							&& pfpc!=null) {
-						EventModel em = i.next();
-						try {
-							// TODO : here manage life of the events.
-							long delta = CosEventServer.getDelta();
-							if (em.getCreationdate() + em.getTimetolive() > new Date()
-									.getTime() + delta) {
-								// send event to the consumer
-								Event e = new EventConvertor().transformToEvent(em);
-								pfpc.receive(e);
-							} else {
-								log.debug("Event de type " + em.getType() + " expire");
-							}
-							// remove event from the list
-							i.remove();
-
-						} catch (ConsumerNotFoundException e1) {
-							log.debug("Consumer seems to be unreachable",e1);
-							// Consumer seems to be unreachable so it's time
-							// to disconnect it
-							try {
-								pfpc.disconnect();
-								log.debug("Consumer disconnected");
-							} catch (NotConnectedException e2) {
-								log.error("Can't disconnect : Consumer not connected",e2);
-							} catch (NotRegisteredException e2) {
-								log.error("Can't disconnect : Consumer not registered",e2);
-							}
-							// TMA : todo => ajouter les messages non recu
-							// de la Queue
-							// Sans oublier d'ajouter dans la class qu'il
-							// faut le faite d'essayez
-							// d envoyer l ensemble des messages lors de la
-							// connexion du consumer
-						}
-					}
-				}
-			}
-
-		}
-	}
-
-	/**
-	 * Run the thread to process events
-	 * 
-	 */
-	@Override
-	public void run() {
-		while (true) {
-			processSubscribedConsumers();
+	// For all Subscribed Consumer to the Channel
+	for (ConsumerModel consumer : channel.getConsumers().values()) {
+	    ProxyForPushConsumerImpl pfpc;
+	    // if the consumer is connected
+	    pfpc = channel.getConsumersConnected()
+		    .get(consumer.getIdConsumer());
+	    if (pfpc != null) {
+		// for all events of the consumer
+		SortedSet<EventModel> le = consumer.getEvents();
+		synchronized (le) {
+		    Iterator<EventModel> i = le.iterator();
+		    // Must be in
+		    // synchronized
+		    // block
+		    while (i.hasNext() && pfpc != null) {
+			EventModel em = i.next();
 			try {
-				Thread.sleep(500);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+			    // TODO : here manage life of the events.
+			    long delta = CosEventServer.getDelta();
+			    if (em.getCreationdate() + em.getTimetolive() > new Date()
+				    .getTime() + delta) {
+				// send event to the consumer
+				Event e = new EventConvertor()
+					.transformToEvent(em);
+				pfpc.receive(e);
+			    } else {
+				log.debug("Event de type " + em.getType()
+					+ " expire");
+			    }
+			    // remove event from the list
+			    i.remove();
+
+			} catch (ConsumerNotFoundException e1) {
+			    log.debug("Consumer seems to be unreachable", e1);
+			    // Consumer seems to be unreachable so it's time
+			    // to disconnect it
+			    try {
+				pfpc.disconnect();
+				log.debug("Consumer disconnected");
+			    } catch (NotConnectedException e2) {
+				log.error(
+					"Can't disconnect : Consumer not connected",
+					e2);
+			    } catch (NotRegisteredException e2) {
+				log.error(
+					"Can't disconnect : Consumer not registered",
+					e2);
+			    }
+			    // TMA : todo => ajouter les messages non recu
+			    // de la Queue
+			    // Sans oublier d'ajouter dans la class qu'il
+			    // faut le faite d'essayez
+			    // d envoyer l ensemble des messages lors de la
+			    // connexion du consumer
 			}
+		    }
 		}
+	    }
 
 	}
+    }
+
+    /**
+     * Run the thread to process events
+     * 
+     */
+    @Override
+    public void run() {
+	while (true) {
+	    processSubscribedConsumers();
+	    try {
+		Thread.sleep(500);
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }
+	}
+
+    }
 
 }

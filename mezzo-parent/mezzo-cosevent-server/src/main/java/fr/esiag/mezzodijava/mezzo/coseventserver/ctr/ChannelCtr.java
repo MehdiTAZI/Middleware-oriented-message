@@ -19,6 +19,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
@@ -27,6 +28,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelComparator;
 
 /**
@@ -41,7 +43,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelCompara
  */
 
 public class ChannelCtr {
-	private static Logger log = LoggerFactory.getLogger(ChannelCtr.class);
+    private static Logger log = LoggerFactory.getLogger(ChannelCtr.class);
 
     // lien vers le model
     private Channel channel;
@@ -55,9 +57,10 @@ public class ChannelCtr {
      *            Channel name
      */
     public ChannelCtr(String topic) {
-    	log.trace("Creation of ChannelCtr for {}",topic);
-	this.channel = BFFactory.createChannelEntity(topic, 100);
-	log.info("ChannelCtr for {} created",topic);
+	log.trace("Creation of ChannelCtr for {}", topic);
+	this.channel = EventServer.getInstance()
+		.createChannelEntity(topic, 100);
+	log.info("ChannelCtr for {} created", topic);
     }
 
     /**
@@ -67,7 +70,7 @@ public class ChannelCtr {
      *            an Event
      */
     public void addEvent(Event e) {
-    	log.trace("Add Event");
+	log.trace("Add Event");
 	if (CosEventServer.getDelta() + new Date().getTime() < e.header.creationdate
 		+ e.header.timetolive) {
 
@@ -75,16 +78,14 @@ public class ChannelCtr {
 
 	    // ajout dans les listes des consumers PUSH
 	    for (ConsumerModel consumer : channel.getConsumers().values()) {
-
-		log.info("Event PUSH " + e.body.content);
 		// channel.getConsumersSubscribed().get(consumer).add(e);
 		consumer.getEvents().add(em);
-		log.info("Event PUSH " + e.toString() + " "
-			+ e.body.content + " nb evt ="
-			+ consumer.getEvents().size());
+		log.info("Event PUSH " + e.toString() + " " + e.body.content
+			+ " nb evt =" + consumer.getEvents().size());
 	    }
 	    // ajout dans la liste nécessaire pour les consummer PULL
 	    channel.getEvents().add(em);
+	    DAOFactory.getChannelDAO().update(channel);
 	    log.debug("Event ajoute a la liste");
 	}
 
@@ -110,18 +111,22 @@ public class ChannelCtr {
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException, AlreadyConnectedException,
 	    MaximalConnectionReachedException {
-    	log.trace("Add proxyPushConsumer {} to connected list",proxyConsumer.toString());
+	log.trace("Add proxyPushConsumer {} to connected list",
+		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	if (!channel.getConsumers().containsKey(idConsumer)) {
-		log.error("{} can't connect because it's not registered",proxyConsumer.toString());
+	    log.error("{} can't connect because it's not registered",
+		    proxyConsumer.toString());
 	    throw new NotRegisteredException();
 	}
 	if (channel.isConsumersConnectedListcapacityReached()) {
-		log.error("{} can't connect because maximal connection reached: {}",channel.getConnectionCapacity());
+	    log.error(
+		    "{} can't connect because maximal connection reached: {}",
+		    channel.getConnectionCapacity());
 	    throw new MaximalConnectionReachedException();
 	}
 	if (channel.getConsumersConnected().containsKey(idConsumer)) {
-		log.error("{} can't connect because it's already connected");
+	    log.error("{} can't connect because it's already connected");
 	    throw new AlreadyConnectedException();
 	}
 	channel.getConsumersConnected().put(idConsumer, proxyConsumer);
@@ -142,21 +147,24 @@ public class ChannelCtr {
     public void addProxyForPushConsumerToSubscribedList(
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws AlreadyRegisteredException {
-    	log.trace("Add proxyPushConsumer {} to subscribedList",proxyConsumer.toString());
+	log.trace("Add proxyPushConsumer {} to subscribedList",
+		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	ConsumerModel c = new ConsumerModel();
 	c.setIdConsumer(idConsumer);
 	if (channel.getConsumers().containsKey(idConsumer)
 		|| proxyConsumer == null) {
-		log.error("AlreadyRegistered");
+	    log.error("AlreadyRegistered");
 	    // if (channel.getConsumersSubscribed().containsKey(proxyConsumer)||
 	    // proxyConsumer == null) {
 	    throw new AlreadyRegisteredException();
 	} else {
-		log.info("proxyPushConsumer {} subscribed to {}",proxyConsumer.toString(),channel.getTopic());
+	    log.info("proxyPushConsumer {} subscribed to {}",
+		    proxyConsumer.toString(), channel.getTopic());
 	    c.setEvents(Collections
 		    .synchronizedSortedSet(new TreeSet<EventModel>(comparator)));
 	    channel.getConsumers().put(idConsumer, c);
+	    DAOFactory.getChannelDAO().persist(channel);
 	    // .put(proxyConsumer,Collections.synchronizedSortedSet(new
 	    // TreeSet<Event>(comparator)));
 	}
@@ -179,18 +187,21 @@ public class ChannelCtr {
     public void addProxyForPushSupplierToConnectedList(
 	    ProxyForPushSupplierImpl proxySupplier)
 	    throws AlreadyConnectedException, MaximalConnectionReachedException {
-    	log.trace("Add proxyPushSupplier {} to connectedList",proxySupplier.toString());
+	log.trace("Add proxyPushSupplier {} to connectedList",
+		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.isSuppliersConnectedsListcapacityReached()) {
-		log.error("Maximal connection reached: {}",channel.getConnectionCapacity());
+	    log.error("Maximal connection reached: {}",
+		    channel.getConnectionCapacity());
 	    throw new MaximalConnectionReachedException();
 	}
 	if (channel.getSuppliersConnected().containsKey(idSupplier)) {
-		log.error("Already connected");
+	    log.error("Already connected");
 	    throw new AlreadyConnectedException();
 	}
 	channel.getSuppliersConnected().put(idSupplier, proxySupplier);
-	log.info("proxyPushSupplier {} connected to {}",proxySupplier.toString(),channel.getTopic());
+	log.info("proxyPushSupplier {} connected to {}",
+		proxySupplier.toString(), channel.getTopic());
     }
 
     /**
@@ -200,7 +211,7 @@ public class ChannelCtr {
      */
 
     public Channel getChannel() {
-    	log.trace("access to {}",channel.getTopic());
+	log.trace("access to {}", channel.getTopic());
 	return channel;
     }
 
@@ -219,18 +230,21 @@ public class ChannelCtr {
     public void removeProxyForPushConsumerFromConnectedList(
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException, NotConnectedException {
-    	log.trace("Remove proxyPushConsumer {} to connectedList",proxyConsumer.toString());
+	log.trace("Remove proxyPushConsumer {} to connectedList",
+		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	// ConsumerModel c = new ConsumerModel();
 	// c.setIdConsumer(idConsumer);
 	if (!channel.getConsumers().containsKey(idConsumer)) {
 	    // if (!channel.getConsumersSubscribed().containsKey(proxyConsumer))
 	    // {
-		log.error("{} can't disconnect because it's not subscribed",proxyConsumer.toString());
+	    log.error("{} can't disconnect because it's not subscribed",
+		    proxyConsumer.toString());
 	    throw new NotRegisteredException();
 	}
 	if (channel.getConsumersConnected().remove(idConsumer) == null) {
-		log.error("{} can't disconnect because it's not connected",proxyConsumer.toString());
+	    log.error("{} can't disconnect because it's not connected",
+		    proxyConsumer.toString());
 	    throw new NotConnectedException();
 	}
     }
@@ -248,13 +262,17 @@ public class ChannelCtr {
     public void removeProxyForPushConsumerFromSubscribedList(
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException {
-    	log.trace("Remove proxyPushConsumer {} from subscribedList",proxyConsumer.toString());
+	log.trace("Remove proxyPushConsumer {} from subscribedList",
+		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	ConsumerModel c = new ConsumerModel();
 	c.setIdConsumer(idConsumer);
 	if (channel.getConsumers().remove(idConsumer) == null) {
-		log.error("{} can't unsubscribed because it's not subscribed",proxyConsumer.toString());
+	    log.error("{} can't unsubscribed because it's not subscribed",
+		    proxyConsumer.toString());
 	    throw new NotRegisteredException();
+	} else {
+	    DAOFactory.getChannelDAO().persist(channel);
 	}
     }
 
@@ -265,9 +283,10 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushConsumerFromSubscribedList() {
-    	log.trace("Remove all proxies for push Consumers from the subscribed list.");
+	log.trace("Remove all proxies for push Consumers from the subscribed list.");
 	channel.setConsumers(Collections
 		.synchronizedMap(new HashMap<String, ConsumerModel>()));
+	DAOFactory.getChannelDAO().persist(channel);
     }
 
     /**
@@ -277,7 +296,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushConsumerFromConnectedList() {
-    	log.trace("Remove all proxies push for Consumer from the connected list.");
+	log.trace("Remove all proxies push for Consumer from the connected list.");
 	channel.setConsumersConnected(new HashMap<String, ProxyForPushConsumerImpl>());
     }
 
@@ -288,7 +307,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushSupplierFromConnectedList() {
-    	log.trace("Remove all proxies push for Supplier from the connected list.");
+	log.trace("Remove all proxies push for Supplier from the connected list.");
 	channel.setSuppliersConnected(new HashMap<String, ProxyForPushSupplierImpl>());
     }
 
@@ -305,22 +324,16 @@ public class ChannelCtr {
     public void removeProxyForPushSupplierFromConnectedList(
 	    ProxyForPushSupplierImpl proxySupplier)
 	    throws NotConnectedException {
-    	log.trace("Remove proxyPushSupplier {} from connected list.", proxySupplier.toString());
+	log.trace("Remove proxyPushSupplier {} from connected list.",
+		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.getSuppliersConnected().remove(idSupplier) == null) {
-		log.error("{} can't disconnect because it's not connected",proxySupplier.toString());
+	    log.error("{} can't disconnect because it's not connected",
+		    proxySupplier.toString());
 	    throw new NotConnectedException();
 	}
-	log.debug("Disconnect of a PUSH Consumer from \""
-		+ channel.getTopic() + "\".");
-    }
-
-    public Event removeEvent(List<EventModel> liste, int index) {
-    	log.trace("Remove event number {} from {}",index,liste.getClass());
-	EventModel em = liste.remove(index);
-	Event e = new EventConvertor().transformToEvent(em);
-	return e;
-
+	log.debug("Disconnect of a PUSH Consumer from \"" + channel.getTopic()
+		+ "\".");
     }
 
 }

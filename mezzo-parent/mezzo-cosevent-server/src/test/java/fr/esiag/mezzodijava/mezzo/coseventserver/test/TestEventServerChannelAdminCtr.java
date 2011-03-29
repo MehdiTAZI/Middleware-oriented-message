@@ -22,6 +22,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 @SuppressWarnings("static-access")
 public class TestEventServerChannelAdminCtr {
@@ -52,8 +53,8 @@ public class TestEventServerChannelAdminCtr {
 		EasyMock.replay(factory);
 		long id = ctr.createChannel("MEZZO1", 30);
 		EasyMock.verify(factory);
-		assertEquals(factory.getChannel("MEZZO1").getIdentifier(), id);
-		assertEquals(factory.getChannel(id).getCapacity(), 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO1").getIdentifier(), id);
+		assertEquals(EventServer.getInstance().getChannel(id).getCapacity(), 30);
 	}
 
 	@Test
@@ -67,8 +68,8 @@ public class TestEventServerChannelAdminCtr {
 	public void destroyChannel() throws ChannelAlreadyExistsException,
 			ChannelNotFoundException {
 		long id = ctr.createChannel("MEZZO3", 30);
-		assertEquals(factory.getChannel("MEZZO3").getIdentifier(), id);
-		assertEquals(factory.getChannel("MEZZO3").getCapacity(), 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO3").getIdentifier(), id);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO3").getCapacity(), 30);
 		ctr.destroyChannel(id);
 		try {
 			ctr.getChannel(id);
@@ -82,8 +83,8 @@ public class TestEventServerChannelAdminCtr {
 	@Test
 	public void destroyNotFoundChannel() throws ChannelAlreadyExistsException {
 		long id = ctr.createChannel("MEZZO3", 30);
-		assertEquals(factory.getChannel("MEZZO3").getIdentifier(), id);
-		assertEquals(factory.getChannel("MEZZO3").getCapacity(), 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO3").getIdentifier(), id);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO3").getCapacity(), 30);
 		try {
 			ctr.destroyChannel(id + 500000);
 			fail("exception non levée");
@@ -96,16 +97,16 @@ public class TestEventServerChannelAdminCtr {
 	public void changeChannelCapacity() throws ChannelAlreadyExistsException,
 			ChannelNotFoundException, CannotReduceCapacityException {
 		long id = ctr.createChannel("MEZZO4", 30);
-		assertEquals(factory.getChannel("MEZZO4").getCapacity(), 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO4").getCapacity(), 30);
 		ctr.changeChannelCapacity(id, 40);
-		assertEquals(factory.getChannel(id).getCapacity(), 40);
+		assertEquals(EventServer.getInstance().getChannel(id).getCapacity(), 40);
 	}
 
 	@Test
 	public void changeChannelCapacityButNotFound()
 			throws ChannelAlreadyExistsException {
 		long id = ctr.createChannel("MEZZO5", 30);
-		assertEquals(factory.getChannel("MEZZO5").getCapacity(), 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO5").getCapacity(), 30);
 		try {
 			ctr.changeChannelCapacity(id + 500000, 40);
 			fail("exception non levée");
@@ -123,7 +124,7 @@ public class TestEventServerChannelAdminCtr {
 			ChannelNotFoundException {
 		
 		long id = ctr.createChannel("TEST", 30);
-		Channel channel = factory.getChannel(id);
+		Channel channel = EventServer.getInstance().getChannel(id);
 		// BFFactory.setAlternateChannel("TOPIC_TEST", channel);
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);

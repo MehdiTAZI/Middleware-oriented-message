@@ -23,6 +23,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 public class TestThreadEvent {
 
@@ -43,7 +44,7 @@ public class TestThreadEvent {
 		// 1));
 
 		Channel channel = new Channel("TEST", 1);
-		BFFactory.setAlternateChannel("TOPIC_TEST", channel);
+		EventServer.getInstance().setAlternateChannel("TOPIC_TEST", channel);
 		threadEvent = new ThreadEvent("TOPIC_TEST");
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
@@ -84,7 +85,7 @@ public class TestThreadEvent {
 		// 1));
 
 		Channel channel = new Channel("TEST", 1);
-		BFFactory.setAlternateChannel("TOPIC_TEST", channel);
+		EventServer.getInstance().setAlternateChannel("TOPIC_TEST", channel);
 		threadEvent = new ThreadEvent("TOPIC_TEST");
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
@@ -117,7 +118,7 @@ public class TestThreadEvent {
 		// 1));
 
 		Channel channel = new Channel("TEST", 1);
-		BFFactory.setAlternateChannel("TOPIC_TEST", channel);
+		EventServer.getInstance().setAlternateChannel("TOPIC_TEST", channel);
 		threadEvent = new ThreadEvent("TOPIC_TEST");
 		ProxyForPushConsumerImpl ppfc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);

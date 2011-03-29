@@ -17,7 +17,7 @@ public class EntityManagerUtil {
 			// Create the EntityManagerFactory
 			// Attention : il s'agit du nom de la PersistenceUnit du fichier
 			// persistence.xml qui doit etre utilise
-			emf = Persistence.createEntityManagerFactory("Event");
+			emf = Persistence.createEntityManagerFactory("cosevent");
 		}
 	}
 

@@ -37,7 +37,7 @@ public class EventModel implements Serializable {
     @Column(name = "ttl")
 	public long timetolive;
     
-    @Column(name = "ttl")
+    @Column(name = "type")
 	public String type;
 
     public EventModel() {

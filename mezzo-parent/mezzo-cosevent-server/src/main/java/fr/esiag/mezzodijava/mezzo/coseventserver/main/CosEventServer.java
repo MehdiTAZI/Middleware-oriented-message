@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.main;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
@@ -18,10 +19,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.ChannelDAO;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
+import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
@@ -140,6 +147,25 @@ public class CosEventServer {
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl());
 
+	    log.info("Mezzo COS Event Server \"" + eventServerName
+		    + "\" is loading persisted data...");
+	    ChannelDAO dao = DAOFactory.getChannelDAO();
+	    Collection<Channel> col = dao.findAll();
+	    if (col != null) {
+		for (Channel c : col) {
+		    EventServer.getInstance().addChannel(c);
+		    // Publish the ChannelAdminImpl with Corba
+		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
+			    .getTopic());
+		    ChannelPublisher.publish(cai);
+		}
+		log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
+			+ col.size()
+			+ " persisted channel loaded and published.");
+	    } else {
+		log.info("Mezzo COS Event Server \"" + eventServerName
+			+ "\" 0 persisted channel loaded and published.");
+	    }
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
 

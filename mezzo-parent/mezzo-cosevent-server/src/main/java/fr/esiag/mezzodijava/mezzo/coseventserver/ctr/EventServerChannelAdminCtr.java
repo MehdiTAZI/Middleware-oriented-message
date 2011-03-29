@@ -2,18 +2,17 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.Properties;
 
-import org.omg.CORBA.ORBPackage.InvalidName;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.CosNaming.NamingContextPackage.CannotProceed;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 /**
@@ -29,7 +28,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 
 public class EventServerChannelAdminCtr {
 
-	private static Logger log = LoggerFactory.getLogger(EventServerChannelAdminCtr.class);
+    private static Logger log = LoggerFactory
+	    .getLogger(EventServerChannelAdminCtr.class);
     private String eventServerName;
     private Properties props = new Properties();
 
@@ -40,7 +40,8 @@ public class EventServerChannelAdminCtr {
      *            Name of the server
      */
     public EventServerChannelAdminCtr(String eventServerName) {
-    	log.trace("Creation of an EventServerChannelAdminCtr {}",eventServerName);
+	log.trace("Creation of an EventServerChannelAdminCtr {}",
+		eventServerName);
 	this.eventServerName = eventServerName;
 
     }
@@ -63,11 +64,12 @@ public class EventServerChannelAdminCtr {
      */
     public long createChannel(String topic, int capacity)
 	    throws ChannelAlreadyExistsException {
-    	log.trace("create channel {}. Capacity {}",topic, capacity);
+	log.trace("create channel {}. Capacity {}", topic, capacity);
 	this.eventServerName = topic;
-	long channelPassword = BFFactory.createChannel(topic, capacity);
+	Channel channel = BFFactory.createChannel(topic, capacity);
+	DAOFactory.getChannelDAO().persist(channel);
 	log.debug("Event Channel \"" + topic + "\" created.");
-	return channelPassword;
+	return channel.getIdentifier();
     }
 
     /**
@@ -82,10 +84,12 @@ public class EventServerChannelAdminCtr {
      */
     public ChannelAdmin getChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-    	log.trace("access to channelAdmin number {}", uniqueServerChannelId);
+	log.trace("access to channelAdmin number {}", uniqueServerChannelId);
 	ChannelAdmin ca = BFFactory.getChannelAdmin(uniqueServerChannelId);
 	if (ca == null) {
-		log.error("Can't accessed to channelAdmin number {} because it doesn't exist",uniqueServerChannelId);
+	    log.error(
+		    "Can't accessed to channelAdmin number {} because it doesn't exist",
+		    uniqueServerChannelId);
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException(
 		    "Channel doesn't exist : id=" + uniqueServerChannelId);
 	}
@@ -103,10 +107,11 @@ public class EventServerChannelAdminCtr {
      */
     public void destroyChannel(long uniqueServerChannelId)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException {
-    	log.trace("Destruction of channel number {}", uniqueServerChannelId);
-	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
+	log.info("Destruction of channel number {}", uniqueServerChannelId);
+	Channel channel = EventServer.getInstance().getChannel(
+		uniqueServerChannelId);
 	if (channel != null) {
-		log.debug("channel {} exists",uniqueServerChannelId);
+	    log.debug("channel {} exists", uniqueServerChannelId);
 	    String topic = channel.getTopic();
 	    ChannelCtr channelCtr = BFFactory.getChannelctr(topic);
 	    ChannelPublisher.destroy(BFFactory.createChannelAdminImpl(topic));
@@ -114,11 +119,13 @@ public class EventServerChannelAdminCtr {
 	    channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
 	    channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
 	    BFFactory.destroy(uniqueServerChannelId);
-	    log.debug("Event Channel \"" + topic + "\" destroyed.");
-	} else
-		log.error("channel {} doesn't exist",uniqueServerChannelId);
+	    DAOFactory.getChannelDAO().remove(channel);
+	    log.info("Event Channel \"" + topic + "\" destroyed.");
+	} else {
+	    log.error("channel {} doesn't exist", uniqueServerChannelId);
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException(
 		    "Channel doesn't exist : id=" + uniqueServerChannelId);
+	}
     }
 
     /**
@@ -136,11 +143,12 @@ public class EventServerChannelAdminCtr {
     public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 	    throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 	    fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
-    	log.trace("change channel capacity");
+	log.trace("change channel capacity");
 
-	Channel channel = BFFactory.getChannel(uniqueServerChannelId);
-	if (channel == null){
-		log.error("channel {} not found",uniqueServerChannelId);
+	Channel channel = EventServer.getInstance().getChannel(
+		uniqueServerChannelId);
+	if (channel == null) {
+	    log.error("channel {} not found", uniqueServerChannelId);
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException();
 
 	}
@@ -157,16 +165,18 @@ public class EventServerChannelAdminCtr {
 
 	// impossible a se produire sauf en cas de modification du code de
 	// channel ...
-	if (capacity < nbMaxConnected){
-		log.error("can't reduced capacity : too many connected");
+	if (capacity < nbMaxConnected) {
+	    log.error("can't reduced capacity : too many connected");
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException(
-		    "Cannot reduce current channel capacity : verify that's the number of consumers/suppliers is lower than the capacity you want to apply !");}
-	else if (channelCapacity < nbMaxConnected){
-		log.error("can't reduced capacity : channelCapacity < nbMaxConnected");
+		    "Cannot reduce current channel capacity : verify that's the number of consumers/suppliers is lower than the capacity you want to apply !");
+	} else if (channelCapacity < nbMaxConnected) {
+	    log.error("can't reduced capacity : channelCapacity < nbMaxConnected");
 	    throw new fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException(
-		    "Internal channel configuration error !");}
+		    "Internal channel configuration error !");
+	}
 
 	BFFactory.changeChannelCapacity(channel, capacity);
+	DAOFactory.getChannelDAO().update(channel);
 	log.debug("Event Channel \"" + channel.getTopic()
 		+ "\" capacity updated to \"" + capacity + "\".");
     }
