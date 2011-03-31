@@ -4,42 +4,16 @@ import java.util.Collections;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Sort;
-import org.hibernate.annotations.SortType;
-
-@Entity
-@Table(name = "CONSUMER")
 public class ConsumerModel {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue
     private int id;
 
-    @ManyToOne
     private Channel channel;
 
-    @Column(name = "idConsumer")
     private String idConsumer;
 
-    // @ElementCollection
-    // @CollectionTable(name = "channelevents")
-    // @Column(name = "events")
-    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-    @Sort(type = SortType.COMPARATOR, comparator = PriorityEventModelComparator.class)
     private SortedSet<EventModel> eventsInQueue = Collections
 	    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));
 
