@@ -41,7 +41,7 @@ public class ConsumerModel {
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @Sort(type = SortType.COMPARATOR, comparator = PriorityEventModelComparator.class)
     private SortedSet<EventModel> eventsInQueue = Collections
-	    .synchronizedSortedSet(new TreeSet<EventModel>());
+	    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));
 
     public int getId() {
 	return id;

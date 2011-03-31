@@ -13,7 +13,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.exceptions;
  * @author Mezzo Di Java
  * 
  */
-public class EventServerException extends Exception {
+public class EventServerException extends RuntimeException {
 
     /**
      * Constructor.

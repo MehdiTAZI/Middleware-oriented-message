@@ -17,6 +17,8 @@ import java.util.Map;
 public class EventServer {
 
     private static EventServer instance = null;
+    
+    private String serverName = null;
 
     private Map<String, Channel> mapChannel = new HashMap<String, Channel>();
 
@@ -39,6 +41,14 @@ public class EventServer {
 	    instance = new EventServer();
 	}
 	return instance;
+    }
+
+    public String getServerName() {
+        return serverName;
+    }
+
+    public void setServerName(String serverName) {
+        this.serverName = serverName;
     }
 
     /**

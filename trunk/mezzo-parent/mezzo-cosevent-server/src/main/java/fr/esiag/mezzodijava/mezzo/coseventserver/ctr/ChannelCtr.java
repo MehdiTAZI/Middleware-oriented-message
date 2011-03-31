@@ -152,8 +152,8 @@ public class ChannelCtr {
 	log.trace("Add proxyPushConsumer {} to subscribedList",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
-	ConsumerModel c = new ConsumerModel();
-	c.setIdConsumer(idConsumer);
+//	ConsumerModel c = new ConsumerModel();
+//	c.setIdConsumer(idConsumer);
 	if (channel.getConsumers().containsKey(idConsumer)
 		|| proxyConsumer == null) {
 	    log.error("AlreadyRegistered");
@@ -163,10 +163,10 @@ public class ChannelCtr {
 	} else {
 	    log.info("proxyPushConsumer {} subscribed to {}",
 		    proxyConsumer.toString(), channel.getTopic());
-	    c.setEvents(Collections
-		    .synchronizedSortedSet(new TreeSet<EventModel>(comparator)));
-	    channel.getConsumers().put(idConsumer, c);
-	    
+//	    c.setEvents(Collections
+//		    .synchronizedSortedSet(new TreeSet<EventModel>(comparator)));
+//	    channel.getConsumers().put(idConsumer, c);
+	    ConsumerModel c = channel.addSubscribedConsumer(idConsumer);
 	    // persistance du Consumer
 	    DAOFactory.getJdbcDAO().insertConsumer(c);
 	    
