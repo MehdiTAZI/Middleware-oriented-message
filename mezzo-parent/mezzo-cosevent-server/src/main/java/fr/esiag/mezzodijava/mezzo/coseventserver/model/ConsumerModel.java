@@ -66,4 +66,14 @@ public class ConsumerModel {
     public void setEvents(SortedSet<EventModel> events) {
 	this.eventsInQueue = events;
     }
+
+	public Channel getChannel() {
+		return channel;
+	}
+
+	public void setChannel(Channel channel) {
+		this.channel = channel;
+	}
+    
+    
 }
