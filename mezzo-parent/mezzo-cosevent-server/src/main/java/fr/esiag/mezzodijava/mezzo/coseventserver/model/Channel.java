@@ -7,28 +7,10 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.MapKey;
-import javax.persistence.OneToMany;
-import javax.persistence.PostLoad;
-import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import org.hibernate.annotations.Sort;
-import org.hibernate.annotations.SortType;
-
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
 
-@Entity
-@Table(name = "CHANNEL")
 public class Channel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -37,34 +19,24 @@ public class Channel implements Serializable {
 
     private long identifier;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "topic")
     private String topic;
 
-    @Column(name = "connectionCapacity")
     private int connectionCapacity;
 
     // @ElementCollection
     // @CollectionTable(name = "EVENT")
     // @Column(name = "events")
     // @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-    @Sort(type = SortType.COMPARATOR, comparator = PriorityEventModelComparator.class)
     private SortedSet<EventModel> events = Collections
     .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "channel", cascade = { CascadeType.ALL })
-    @MapKey(name = "idConsumer")
     private Map<String, ConsumerModel> consumers = Collections
     .synchronizedMap(new HashMap<String, ConsumerModel>());
 
-    @Transient
     private Map<String, ProxyForPushConsumerImpl> consumersConnected = new HashMap<String, ProxyForPushConsumerImpl>();
 
-    @Transient
     private Map<String, ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String, ProxyForPushSupplierImpl>();
 
     public Channel() {

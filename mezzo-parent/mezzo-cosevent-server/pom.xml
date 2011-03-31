@@ -34,14 +34,14 @@
 			<artifactId>mezzo-libclient</artifactId>
 		</dependency>
 		<!-- HIBERNATE -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.hibernate </groupId>
 			<artifactId>hibernate-entitymanager </artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.hibernate.javax.persistence </groupId>
 			<artifactId>hibernate-jpa-2.0-api </artifactId>
-		</dependency>
+		</dependency> -->
 		<dependency>
 			<groupId>org.apache.derby</groupId>
 			<artifactId>derby</artifactId>
