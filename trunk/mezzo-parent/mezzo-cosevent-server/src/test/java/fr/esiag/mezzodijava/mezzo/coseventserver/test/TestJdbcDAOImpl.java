@@ -42,6 +42,7 @@ public class TestJdbcDAOImpl {
 	List<Channel> list = dao.findAllChannel();
 	SortedSet<EventModel> set = dao.findEventByChannel(0);
 	Map<String, ConsumerModel> map = dao.findConsumerByChannel(0);
+	dao.deleteEvent(0);
     }
 
 }

@@ -182,7 +182,7 @@ public class EventServerChannelAdminCtr {
 
 	BFFactory.changeChannelCapacity(channel, capacity);
 	// update dans la base de la capacité
-	DAOFactory.getJdbcDAO().updateChannel(channel.getId());
+	DAOFactory.getJdbcDAO().updateChannel(channel);
 	//DAOFactory.getChannelDAO().update(channel);
 	log.debug("Event Channel \"" + channel.getTopic()
 		+ "\" capacity updated to \"" + capacity + "\".");

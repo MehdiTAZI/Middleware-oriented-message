@@ -24,7 +24,7 @@ public interface JdbcDAO {
 	
 	/* methodes de mise à jour */
 	
-	public int updateChannel (int channelId);
+	public void updateChannel (Channel channel);
 	
 	/* methodes de suppression */
 	
