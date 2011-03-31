@@ -2,7 +2,10 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.main;
 
 import java.io.IOException;
 import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Properties;
+import java.util.SortedSet;
 
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
@@ -19,14 +22,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminPOATie;
-import fr.esiag.mezzodijava.mezzo.coseventserver.dao.ChannelDAO;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.JdbcDAO;
 import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
@@ -149,10 +154,27 @@ public class CosEventServer {
 
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is loading persisted data...");
-	    ChannelDAO dao = DAOFactory.getChannelDAO();
-	    Collection<Channel> col = dao.findAll();
+	    
+	    // chargement des éléments de la base
+	    JdbcDAO dao = DAOFactory.getJdbcDAO();
+	    Collection<Channel> col = dao.findAllChannel();
+	    ConsumerModel consumer;
+	    
+	    //ChannelDAO dao = DAOFactory.getChannelDAO();
+	    //Collection<Channel> col = dao.findAll();
 	    if (col != null) {
 		for (Channel c : col) {
+			Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
+			for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
+				consumer = i.next();
+				SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
+				consumer.setEvents(events);
+			}
+			
+			SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
+			c.setEvents(setevents);
+			c.setConsumers(cmap);
+			
 		    EventServer.getInstance().addChannel(c);
 		    // Publish the ChannelAdminImpl with Corba
 		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c

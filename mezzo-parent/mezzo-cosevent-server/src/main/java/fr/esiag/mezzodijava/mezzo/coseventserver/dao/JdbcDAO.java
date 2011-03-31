@@ -28,6 +28,9 @@ public interface JdbcDAO {
 	
 	/* methodes de suppression */
 	
-	public boolean deleteEventByConsumer(int consumerId,int eventId);
-	public boolean deleteEvent(int eventId);
+	public void deleteEventByConsumer(int consumerId,int eventId);
+	public void deleteEvent(int eventId);
+	public void deleteConsumer(int consumerId);
+	public void deleteChannel(int channelId);
+	public void deleteAllConsumers();
 }
