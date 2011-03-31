@@ -54,25 +54,12 @@ public class Channel implements Serializable {
     @OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
     @Sort(type = SortType.COMPARATOR, comparator = PriorityEventModelComparator.class)
     private SortedSet<EventModel> events = Collections
-	    .synchronizedSortedSet(new TreeSet<EventModel>());
-    @Transient
-    private SortedSet<EventModel> syncEvents = Collections
-	    .synchronizedSortedSet(new TreeSet<EventModel>(
-		    new PriorityEventModelComparator()));
-
-    @PostLoad
-    public void synchronizeCollections() {
-	syncEvents = Collections.synchronizedSortedSet(events);
-	syncConsumers = Collections.synchronizedMap(new HashMap<String, ConsumerModel>());
-
-    }
+    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "channel", cascade = { CascadeType.ALL })
     @MapKey(name = "idConsumer")
-    private Map<String, ConsumerModel> consumers = new HashMap<String, ConsumerModel>();
-    @Transient
-    private Map<String, ConsumerModel> syncConsumers = Collections
-	    .synchronizedMap(new HashMap<String, ConsumerModel>());
+    private Map<String, ConsumerModel> consumers = Collections
+    .synchronizedMap(new HashMap<String, ConsumerModel>());
 
     @Transient
     private Map<String, ProxyForPushConsumerImpl> consumersConnected = new HashMap<String, ProxyForPushConsumerImpl>();
@@ -197,11 +184,11 @@ public class Channel implements Serializable {
      * @param consumersSubscribed
      */
     public Map<String, ConsumerModel> getConsumers() {
-	return syncConsumers;
+	return consumers;
     }
 
     public void setConsumers(Map<String, ConsumerModel> consumers) {
-	this.syncConsumers = consumers;
+	this.consumers = consumers;
     }
 
     /**
@@ -253,12 +240,13 @@ public class Channel implements Serializable {
     }
 
     public SortedSet<EventModel> getEvents() {
-	return syncEvents;
+	return events;
     }
 
     public void setEvents(SortedSet<EventModel> events) {
-	this.events = syncEvents;
+	this.events = events;
     }
+
 
 	public int getId() {
 		return id;

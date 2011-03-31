@@ -42,14 +42,6 @@ public class ConsumerModel {
     @Sort(type = SortType.COMPARATOR, comparator = PriorityEventModelComparator.class)
     private SortedSet<EventModel> eventsInQueue = Collections
 	    .synchronizedSortedSet(new TreeSet<EventModel>());
-    @Transient
-    private SortedSet<EventModel> syncEventsInQueue = Collections
-	    .synchronizedSortedSet(new TreeSet<EventModel>());
-
-    @PostLoad
-    public void synchronizeCollection() {
-	syncEventsInQueue = Collections.synchronizedSortedSet(eventsInQueue);
-    }
 
     public int getId() {
 	return id;
@@ -68,10 +60,10 @@ public class ConsumerModel {
     }
 
     public SortedSet<EventModel> getEvents() {
-	return syncEventsInQueue;
+	return eventsInQueue;
     }
 
     public void setEvents(SortedSet<EventModel> events) {
-	this.syncEventsInQueue = events;
+	this.eventsInQueue = events;
     }
 }
