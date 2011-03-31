@@ -86,7 +86,7 @@ public class CosEventServer {
      * @throws EventServerException
      */
     public CosEventServer(String[] args) throws InterruptedException,
-	    TimeClientException {
+	    TimeClientException, EventServerException {
 
 	String eventServerName = args[0];
 	Properties props = new Properties();
@@ -101,35 +101,18 @@ public class CosEventServer {
 	    props.load(this.getClass().getClassLoader()
 		    .getResourceAsStream("eventserver.properties"));
 	} catch (IOException e) {
-	    // TODO log here
+	   log.error("Cannot load eventserver properties",e);
+	   throw new EventServerException("Cannot load eventserver properties",e);
 
 	}
-	// for(String arg:args)
-	// System.out.println(arg);
+
 
 	orb = BFFactory.createOrb(args, props);
 
-	/*
-	 * orb = ORB.init(args, props); Channel channel = new
-	 * Channel(channelName);
-	 * 
-	 * ChannelCtr channelCtr = new ChannelCtr(channel); ChannelAdminCtr
-	 * channelAdminCtr = new ChannelAdminCtr(orb, channelCtr);
-	 * ChannelAdminImpl channelAdminImpl = new ChannelAdminImpl(
-	 * channelAdminCtr);
-	 */
-	// ChannelAdminImpl channelAdminImpl = BFFactory.initiateChannel(
-	// channelName, 10);
-
-	// ChannelPublisher publisher=new ChannelPublisher();
-	// publisher.publish(channelAdminImpl, orb);
-	// ChannelPublisher.publish(channelAdminImpl, orb);
+	EventServer.getInstance().setServerName(eventServerName);
+	
 	EventServerChannelAdminImpl eventServerChannelAdmin = new EventServerChannelAdminImpl(
 		eventServerName);
-
-	// ThreadEvent th = new ThreadEvent(channelName);
-	// Thread thread = new Thread(th);
-	// thread.start();
 
 	try {
 	    POA poa = POAHelper.narrow(orb
@@ -218,7 +201,7 @@ public class CosEventServer {
     }
 
     public static void main(String[] args) throws InterruptedException,
-	    TimeClientException {
+	    TimeClientException, EventServerException {
 	new CosEventServer(args);
     }
 

@@ -133,8 +133,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    while (rs.next()) {
 		EventModel e = new EventModel();
 		e.setId(rs.getInt("ID"));
-		Blob b = rs.getBlob("DATA");
-		e.setData(b.getBytes(0L, (int) b.length()));
+//		Blob b = rs.getBlob("DATA");
+//		e.setData(b.getBytes(0L, (int) b.length()));
+		e.setData(rs.getBytes("DATA"));
 		e.setCode(rs.getLong("CODE"));
 		e.setCreationdate(rs.getLong("CREATIONDATE"));
 		e.setPriority(rs.getInt("PRIORITY"));
@@ -202,206 +203,208 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     @Override
     public int insertChannel(Channel channel) {
-    	int cle=0;
-    	try{
-	    	String sql = "INSERT INTO CHANNEL VALUES(?,?,?,?)";
-		    log.debug(sql);
-		    PreparedStatement stmt = connection.prepareStatement(sql);
-		    stmt.setInt(1, channel.getCapacity());
-		    stmt.setInt(2, channel.getConnectionCapacity());
-		    stmt.setLong(3, channel.getIdentifier());
-		    stmt.setString(4, channel.getTopic());
-		    stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-		    //Les clefs auto-générées sont retournées sous forme de ResultSet
-		    ResultSet clefs = stmt.getGeneratedKeys();
-		    if(clefs.next()){
-		    	cle = (Integer)clefs.getObject(1);
-		    }
-		    return cle;
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	int cle = 0;
+	try {
+	    String[] idColumn = { "ID" };
+	    String sql = "INSERT INTO CHANNEL (CAPACITY_QUEUE, CONNECTIONCAPACITY, IDENTIFIER, TOPIC) VALUES(?,?,?,?)";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql, idColumn);
+	    stmt.setInt(1, channel.getCapacity());
+	    stmt.setInt(2, channel.getConnectionCapacity());
+	    stmt.setLong(3, channel.getIdentifier());
+	    stmt.setString(4, channel.getTopic());
+	    stmt.executeUpdate();
+	    // Les clefs auto-générées sont retournées sous forme de ResultSet
+	    ResultSet clefs = stmt.getGeneratedKeys();
+	    if (clefs.next()) {
+		cle = clefs.getInt(1);
+		channel.setId(cle);
+	    }
+	    return cle;
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public int insertConsumer(ConsumerModel consumer) {
-    	int cle=0;
-    	try{
-	    	String sql = "INSERT INTO CONSUMER VALUES(?,?)";
-		    log.debug(sql);
-		    PreparedStatement stmt = connection.prepareStatement(sql);
-		    stmt.setString(1, consumer.getIdConsumer());
-		    stmt.setInt(2, consumer.getChannel().getId());
-		    stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-		    //Les clefs auto-générées sont retournées sous forme de ResultSet
-		    ResultSet clefs = stmt.getGeneratedKeys();
-		    if(clefs.next()){
-		    	cle = (Integer)clefs.getObject(1);
-		    }
-		    return cle;
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	int cle = 0;
+	try {
+	    String[] idColumn = { "ID" };
+	    String sql = "INSERT INTO CONSUMER (IDCONSUMER, CHANNEL_ID) VALUES(?,?)";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql,idColumn);
+	    stmt.setString(1, consumer.getIdConsumer());
+	    stmt.setInt(2, consumer.getChannel().getId());
+	    stmt.executeUpdate();
+	    // Les clefs auto-générées sont retournées sous forme de ResultSet
+	    ResultSet clefs = stmt.getGeneratedKeys();
+	    if (clefs.next()) {
+		cle = clefs.getInt(1);
+		consumer.setId(cle);
+	    }
+	    return cle;
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public int insertEvent(EventModel event) {
-    	int cle=0;
-    	try{
-	    	String sql = "INSERT INTO EVENT VALUES(?,?,?,?,?,?)";
-		    log.debug(sql);
-		    PreparedStatement stmt = connection.prepareStatement(sql);
-		    stmt.setLong(1, event.getCode());
-		    stmt.setLong(2, event.getCreationdate());
-		    //stmt.setBlob(3, event.getData());
-		    stmt.setInt(4, event.getPriority());
-		    stmt.setLong(5, event.getTimetolive());
-		    stmt.setString(6, event.getType());
-		    
-		    stmt.executeUpdate(sql,Statement.RETURN_GENERATED_KEYS);
-		    //Les clefs auto-générées sont retournées sous forme de ResultSet
-		    ResultSet clefs = stmt.getGeneratedKeys();
-		    if(clefs.next()){
-		    	cle = (Integer)clefs.getObject(1);
-		    }
-		    return cle;
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	int cle = 0;
+	try {
+	    String[] idColumn = { "ID" };
+	    String sql = "INSERT INTO EVENT (CODE, CREATIONDATE, DATA, PRIORITY, TTL, TYPE) VALUES(?,?,?,?,?,?)";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql,idColumn);
+	    stmt.setLong(1, event.getCode());
+	    stmt.setLong(2, event.getCreationdate());
+	    stmt.setBytes(3,event.getData());
+	    stmt.setInt(4, event.getPriority());
+	    stmt.setLong(5, event.getTimetolive());
+	    stmt.setString(6, event.getType());
+	    stmt.executeUpdate();
+	    // Les clefs auto-générées sont retournées sous forme de ResultSet
+	    ResultSet clefs = stmt.getGeneratedKeys();
+	    if (clefs.next()) {
+		cle = clefs.getInt(1);
+		event.setId(cle);
+	    }
+	    return cle;
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public void updateChannel(Channel channel) {
-    	try{
-	    	String sql = "UPDATE CHANNEL SET CAPACITY_QUEUE=? WHERE ID=?";
-		    log.debug(sql);
-		    PreparedStatement stmt = connection.prepareStatement(sql);
-		    stmt.setInt(1, channel.getCapacity());
-		    stmt.setInt(2, channel.getId());
-		    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql = "UPDATE CHANNEL SET CAPACITY_QUEUE=? WHERE ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, channel.getCapacity());
+	    stmt.setInt(2, channel.getId());
+	    int nb = stmt.executeUpdate();
+	    log.debug("nb delete:" + nb);
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public void deleteConsumer(int consumerId) {
-    	try{
-    		String sql2 = "DELETE * FROM CONSUMER_EVENT WHERE CONSUMER_ID=?";
-    	    log.debug(sql2);
-    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-    	    stmt2.setInt(1, consumerId);
-    	    int nb2 = stmt2.executeUpdate(sql2);
-    	    log.debug("nb delete:"+nb2);
-    		
-    		
-    		String sql = "DELETE * FROM CONSUMER WHERE ID=?";
-    		log.debug(sql);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    stmt.setInt(1, consumerId);
-    	    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql2 = "DELETE FROM CONSUMER_EVENT WHERE CONSUMER_ID=?";
+	    log.debug(sql2);
+	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+	    stmt2.setInt(1, consumerId);
+	    int nb2 = stmt2.executeUpdate();
+	    log.debug("nb delete:" + nb2);
+
+	    String sql = "DELETE FROM CONSUMER WHERE ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, consumerId);
+	    int nb = stmt.executeUpdate();
+	    log.debug("nb delete:" + nb);
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
 
     }
 
     @Override
     public void deleteChannel(int channelId) {
-    	try{
-    		String sql2 = "DELETE * FROM CHANNEL_EVENT WHERE CHANNEL_ID=?";
-    	    log.debug(sql2);
-    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-    	    stmt2.setInt(1, channelId);
-    	    int nb2 = stmt2.executeUpdate(sql2);
-    	    log.debug("nb delete:"+nb2);
-    		
-    		
-    		String sql = "DELETE * FROM CHANNEL WHERE ID=?";
-    		log.debug(sql);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    stmt.setInt(1, channelId);
-    	    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql2 = "DELETE FROM CHANNEL_EVENT WHERE CHANNEL_ID=?";
+	    log.debug(sql2);
+	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+	    stmt2.setInt(1, channelId);
+	    int nb2 = stmt2.executeUpdate();
+	    log.debug("nb delete:" + nb2);
+
+	    String sql = "DELETE FROM CHANNEL WHERE ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, channelId);
+	    int nb = stmt.executeUpdate();
+	    log.debug("nb delete:" + nb);
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
 
     }
 
     @Override
     public void deleteAllConsumers() {
-    	try{
-    		String sql2 = "DELETE * FROM CONSUMER_EVENT";
-    	    log.debug(sql2);
-    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-    	    int nb2 = stmt2.executeUpdate(sql2);
-    	    log.debug("nb delete:"+nb2);
-    		
-    		
-    		String sql = "DELETE * FROM CONSUMER";
-    		log.debug(sql);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	    
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql2 = "DELETE FROM CONSUMER_EVENT";
+	    log.debug(sql2);
+	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+	    int nb2 = stmt2.executeUpdate();
+	    log.debug("nb delete:" + nb2);
+
+	    String sql = "DELETE FROM CONSUMER";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    int nb = stmt.executeUpdate();
+	    log.debug("nb delete:" + nb);
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
 
     }
 
     @Override
     public void deleteEventByConsumer(int consumerId, int eventId) {
-    	try{
-    		String sql = "DELETE * FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
-    		log.debug(sql);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    stmt.setInt(1, consumerId);
-    	    stmt.setInt(2, eventId);
-    	    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql = "DELETE * FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, consumerId);
+	    stmt.setInt(2, eventId);
+	    int nb = stmt.executeUpdate(sql);
+	    log.debug("nb delete:" + nb);
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public void deleteEvent(int eventId) {
-    	try{
-    		String sql2 = "DELETE * FROM CHANNEL_EVENT CE WHERE CE.EVENT_ID=?";
-    	    log.debug(sql2);
-    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-    	    stmt2.setInt(1, eventId);
-    	    int nb2 = stmt2.executeUpdate(sql2);
-    	    log.debug("nb delete:"+nb2);
-    		
-    		String sql = "DELETE * FROM EVENT E WHERE E.ID=?";
-    		log.debug(sql);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    stmt.setInt(1, eventId);
-    	    int nb = stmt.executeUpdate(sql);
-    	    log.debug("nb delete:"+nb);
-    	
-    	} catch (SQLException e) {
-    	    log.error("SQL Error", e);
-    	    throw new RuntimeException("SQL Error", e);
-    	}
+	try {
+	    String sql2 = "DELETE * FROM CHANNEL_EVENT CE WHERE CE.EVENT_ID=?";
+	    log.debug(sql2);
+	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+	    stmt2.setInt(1, eventId);
+	    int nb2 = stmt2.executeUpdate(sql2);
+	    log.debug("nb delete:" + nb2);
+
+	    String sql = "DELETE * FROM EVENT E WHERE E.ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, eventId);
+	    int nb = stmt.executeUpdate(sql);
+	    log.debug("nb delete:" + nb);
+
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 }

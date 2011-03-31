@@ -94,10 +94,12 @@ public class Channel implements Serializable {
      * @param ppc
      *            the push consumer to add.
      */
-    public void addSubscribedConsumer(String idConsumer) {
+    public ConsumerModel addSubscribedConsumer(String idConsumer) {
 	ConsumerModel nouveau = new ConsumerModel();
 	nouveau.setIdConsumer(idConsumer);
+	nouveau.setChannel(this);
 	this.consumers.put(nouveau.getIdConsumer(), nouveau);
+	return nouveau;
     }
 
     /**
