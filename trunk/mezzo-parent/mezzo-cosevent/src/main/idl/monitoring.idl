@@ -18,7 +18,7 @@ module monitoring {
    	 Messages messages;
     };
     
-   	typedef sequence<ChannelInfoscollector> ChannelsInfos;   
+   	typedef sequence<ChannelInfosCollector> ChannelsInfos;   
    
     interface CosInfoCollector{
    	 	ChannelsInfos getChannelsInfos();   	 	
