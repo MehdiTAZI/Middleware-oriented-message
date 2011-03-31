@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.TreeSet;
 
 import org.slf4j.Logger;
@@ -21,7 +20,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
@@ -85,7 +83,11 @@ public class ChannelCtr {
 	    }
 	    // ajout dans la liste nécessaire pour les consummer PULL
 	    channel.getEvents().add(em);
-	    DAOFactory.getChannelDAO().update(channel);
+	    
+	    // persistance de l'event
+	    DAOFactory.getJdbcDAO().insertEvent(em);
+	    
+	    //DAOFactory.getChannelDAO().update(channel);
 	    log.debug("Event ajoute a la liste");
 	}
 
@@ -164,7 +166,11 @@ public class ChannelCtr {
 	    c.setEvents(Collections
 		    .synchronizedSortedSet(new TreeSet<EventModel>(comparator)));
 	    channel.getConsumers().put(idConsumer, c);
-	    DAOFactory.getChannelDAO().persist(channel);
+	    
+	    // persistance du Consumer
+	    DAOFactory.getJdbcDAO().insertConsumer(c);
+	    
+	    // DAOFactory.getChannelDAO().persist(channel);
 	    // .put(proxyConsumer,Collections.synchronizedSortedSet(new
 	    // TreeSet<Event>(comparator)));
 	}
@@ -272,7 +278,10 @@ public class ChannelCtr {
 		    proxyConsumer.toString());
 	    throw new NotRegisteredException();
 	} else {
-	    DAOFactory.getChannelDAO().persist(channel);
+		// suppression dans la base
+		DAOFactory.getJdbcDAO().deleteConsumer(c.getId());
+		
+	    //DAOFactory.getChannelDAO().persist(channel);
 	}
     }
 
@@ -286,7 +295,10 @@ public class ChannelCtr {
 	log.trace("Remove all proxies for push Consumers from the subscribed list.");
 	channel.setConsumers(Collections
 		.synchronizedMap(new HashMap<String, ConsumerModel>()));
-	DAOFactory.getChannelDAO().persist(channel);
+	// suppression de tous les consumers abonnés
+	DAOFactory.getJdbcDAO().deleteAllConsumers();
+	
+	//DAOFactory.getChannelDAO().persist(channel);
     }
 
     /**

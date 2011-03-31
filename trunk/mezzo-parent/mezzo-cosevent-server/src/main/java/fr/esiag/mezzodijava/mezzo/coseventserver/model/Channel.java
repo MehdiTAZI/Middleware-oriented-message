@@ -260,4 +260,14 @@ public class Channel implements Serializable {
 	this.events = syncEvents;
     }
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+    
+    
+
 }
