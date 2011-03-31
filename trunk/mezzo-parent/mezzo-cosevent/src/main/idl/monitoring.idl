@@ -1,4 +1,29 @@
 module monitoring {
+    
+     struct Message{
+     	string time;
+     	string code;
+     	string type;
+     	string data;
+     };
+     typedef sequence<Message> Messages;
+       
+     struct ChannelInfosCollector{
+   	 string topic;							//Titre
+   	 long capacity;							//Capacité
+   	 long nbQueueEvents;					//nombre Events in the queue
+   	 long consumersConnected;				//Connecté
+   	 long consumersSubscribed;				//Consumer Abonné
+   	 long suppliersConnected;				//Connecté
+   	 Messages messages;
+    };
+    
+   	typedef sequence<ChannelInfoscollector> ChannelsInfos;   
+   
+    interface CosInfoCollector{
+   	 	ChannelsInfos getChannelsInfos();   	 	
+    };
+};
 
 
     /*
@@ -27,29 +52,3 @@ module monitoring {
    	 sequence<PushSupplierStat> suppliers;	//Connecté
     };
        */
-    
-    
-     struct Message{
-     	string time;
-     	string code;
-     	string type;
-     	string data;
-     };
-     typedef sequence<Message> Messages;
-       
-     struct ChannelInfosCollector{
-   	 string topic;							//Titre
-   	 long capacity;							//Capacité
-   	 long nbQueueEvents;					//nombre Events in the queue
-   	 long consumersConnected;				//Connecté
-   	 long consumersSubscribed;				//Consumer Abonné
-   	 long suppliersConnected;				//Connecté
-   	 Messages messages;
-    };
-    
-   	typedef sequence<ChannelInfoscollector> ChannelsInfos;   
-   
-    interface CosInfoCollector{
-   	 	ChannelsInfos getChannelsInfos();   	 	
-    };
-};
