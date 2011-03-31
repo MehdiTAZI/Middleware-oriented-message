@@ -1,12 +1,16 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.dao;
 
 import java.io.InputStream;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -99,6 +103,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	try {
 	    List<Channel> list = new ArrayList<Channel>();
 	    String sql = "SELECT * FROM CHANNEL";
+	    log.debug(sql);
 	    ResultSet rs = connection.prepareStatement(sql).executeQuery();
 	    while (rs.next()) {
 		Channel c = new Channel();
@@ -120,15 +125,24 @@ public class JdbcDOAImpl implements JdbcDAO {
 	try {
 	    SortedSet<EventModel> set = new TreeSet<EventModel>(
 		    new PriorityEventModelComparator());
-	    String sql = "SELECT * FROM EVENT, CHANNEL_EVENT WHERE EVENT.ID=CHANNEL_EVENT.EVENTS_ID AND CHANNEL_EVENT.CHANNEL_ID=?";
-	    
-	    ResultSet rs = connection.prepareStatement(sql).executeQuery();
+	    String sql = "SELECT * FROM EVENT E, CHANNEL_EVENT CE WHERE E.ID=CE.EVENT_ID AND CE.CHANNEL_ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, channelId);
+	    ResultSet rs = stmt.executeQuery();
 	    while (rs.next()) {
-		EventModel c = new EventModel();
-		c.setId(rs.getInt("ID"));
-		//...
+		EventModel e = new EventModel();
+		e.setId(rs.getInt("ID"));
+		Blob b = rs.getBlob("DATA");
+		e.setData(b.getBytes(0L, (int) b.length()));
+		e.setCode(rs.getLong("CODE"));
+		e.setCreationdate(rs.getLong("CREATIONDATE"));
+		e.setPriority(rs.getInt("PRIORITY"));
+		e.setTimetolive(rs.getLong("TTL"));
+		e.setType(rs.getString("TYPE"));
+		set.add(e);
 	    }
-	    return set;
+	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -137,14 +151,53 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     @Override
     public Map<String, ConsumerModel> findConsumerByChannel(int channelId) {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+	    Map<String, ConsumerModel> map = new HashMap<String, ConsumerModel>();
+	    String sql = "SELECT * FROM CONSUMER CO WHERE CHANNEL_ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, channelId);
+	    ResultSet rs = stmt.executeQuery();
+	    while (rs.next()) {
+		ConsumerModel co = new ConsumerModel();
+		co.setId(rs.getInt("ID"));
+		co.setIdConsumer(rs.getString("IDENTIFIER"));
+		map.put(co.getIdConsumer(), co);
+	    }
+	    return Collections.synchronizedMap(map);
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
     public SortedSet<EventModel> findEventByConsumer(int idConsumer) {
-	// TODO Auto-generated method stub
-	return null;
+	try {
+	    SortedSet<EventModel> set = new TreeSet<EventModel>(
+		    new PriorityEventModelComparator());
+	    String sql = "SELECT * FROM EVENT E, CONSUMER_EVENT CE WHERE E.ID=CE.EVENT_ID AND CE.CHANNEL_ID=?";
+	    log.debug(sql);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    stmt.setInt(1, idConsumer);
+	    ResultSet rs = stmt.executeQuery();
+	    while (rs.next()) {
+		EventModel e = new EventModel();
+		e.setId(rs.getInt("ID"));
+		Blob b = rs.getBlob("DATA");
+		e.setData(b.getBytes(0L, (int) b.length()));
+		e.setCode(rs.getLong("CODE"));
+		e.setCreationdate(rs.getLong("CREATIONDATE"));
+		e.setPriority(rs.getInt("PRIORITY"));
+		e.setTimetolive(rs.getLong("TTL"));
+		e.setType(rs.getString("TYPE"));
+		set.add(e);
+	    }
+	    return Collections.synchronizedSortedSet(set);
+	} catch (SQLException e) {
+	    log.error("SQL Error", e);
+	    throw new RuntimeException("SQL Error", e);
+	}
     }
 
     @Override
@@ -171,38 +224,33 @@ public class JdbcDOAImpl implements JdbcDAO {
 	return 0;
     }
 
-    public static void main(String[] args) {
-	JdbcDOAImpl dao = new JdbcDOAImpl("test", "test",
-		"C:/mezzodev/coseventBase");
-    }
-
     @Override
     public void deleteConsumer(int consumerId) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void deleteChannel(int channelId) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void deleteAllConsumers() {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void deleteEventByConsumer(int consumerId, int eventId) {
 	// TODO Auto-generated method stub
-	
+
     }
 
     @Override
     public void deleteEvent(int eventId) {
 	// TODO Auto-generated method stub
-	
+
     }
 }
