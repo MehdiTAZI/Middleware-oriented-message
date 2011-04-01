@@ -94,7 +94,7 @@
 				<configuration>
 					<!--buildOutputDirectory>${basedir}/war</buildOutputDirectory -->
 					<webappDirectory>${basedir}/war</webappDirectory>
-					<runTarget>fr.esiag.mezzodijava.mezzo.manager.Application/Application.html</runTarget>
+					<runTarget>Test2.html</runTarget>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -119,6 +119,10 @@
 								<move file="${project.build.outputDirectory}/Start.class"
 									tofile="${basedir}/war/Start.class" />
 							</tasks>
+						<!--	<tasks>
+								<move file="${project.build.outputDirectory}/AuthenticationServiceImpl.class"
+									tofile="${basedir}/war/AuthenticationServiceImpl.class" />
+							</tasks> -->
 						</configuration>
 					</execution>
 				</executions>

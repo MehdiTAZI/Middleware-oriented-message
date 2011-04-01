@@ -7,9 +7,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import mezzo.esiag.mezzodijava.mezzo.manager.client.old.ShellExecuter;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import fr.esiag.mezzodijava.mezzo.manager.client.ShellExecuter;
 
 public class ShellExecuterImpl extends RemoteServiceServlet implements ShellExecuter {
 

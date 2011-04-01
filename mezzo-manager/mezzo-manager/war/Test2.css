@@ -1,0 +1,32 @@
+
+
+* { margin: 0px; padding: 0px; } 
+html 		{ min-height: 0%; }
+
+/*text-align: center; pour mettre tout le texte au centre */
+body {min-height: 20%; text-align: center; font-family: arial, verdana, sans-serif; font-size: 12px; color: #333; ; line-height:18px; }
+
+
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; } 
+.clearfix 		{ display:inline-block; } 
+/*\*/ .clearfix { display:block; } /**/ 
+
+
+/*margin:0 auto;pour mettre tout au centre */
+#wrapper 		{ width:760px; margin:0 auto; }
+#header 		{ position:relative; display:block; width:800px; height:102px; background:#FFF url(images/bg_header.gif) repeat-x; }
+
+#nav 			{ display:block; width:800px; height:26px; margin:0; padding:0; list-style:none; text-align:center; background:#A13D3D url(images/bg_nav.gif) repeat-x; }
+
+#content { width:900px; padding:30px 0px 0; min-height:0%; background:#FFF url(images/bg_content.gif) no-repeat 0 0; text-align:left;}
+* html #content, * html #content #col_1 { height:5px; }
+
+#content #col_2 { width:80%; float:left;}
+
+/* la largeur du footer  */
+#footer {display:block; width:715px; padding: 10px 40px; background:#EEE9E8; -moz-border-radius:6px;}
+
+/*modifier la bordure de la 2 eme colone */
+/*min-height:500px modifier l'espace entre le footer et le body*/
+#content #col_2 { width:89%; float:left; min-height:500px; background:url(images/bg_left.gif) no-repeat 100% 50%;}
+
