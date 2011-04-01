@@ -162,7 +162,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    while (rs.next()) {
 		ConsumerModel co = new ConsumerModel();
 		co.setId(rs.getInt("ID"));
-		co.setIdConsumer(rs.getString("IDENTIFIER"));
+		co.setIdConsumer(rs.getString("IDCONSUMER"));
 		map.put(co.getIdConsumer(), co);
 	    }
 	    return Collections.synchronizedMap(map);
@@ -371,12 +371,12 @@ public class JdbcDOAImpl implements JdbcDAO {
     @Override
     public void deleteEventByConsumer(int consumerId, int eventId) {
 	try {
-	    String sql = "DELETE * FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
+	    String sql = "DELETE FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, consumerId);
 	    stmt.setInt(2, eventId);
-	    int nb = stmt.executeUpdate(sql);
+	    int nb = stmt.executeUpdate();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
@@ -388,18 +388,18 @@ public class JdbcDOAImpl implements JdbcDAO {
     @Override
     public void deleteEvent(int eventId) {
 	try {
-	    String sql2 = "DELETE * FROM CHANNEL_EVENT CE WHERE CE.EVENT_ID=?";
+	    String sql2 = "DELETE FROM CHANNEL_EVENT CE WHERE CE.EVENT_ID=?";
 	    log.debug(sql2);
 	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
 	    stmt2.setInt(1, eventId);
-	    int nb2 = stmt2.executeUpdate(sql2);
+	    int nb2 = stmt2.executeUpdate();
 	    log.debug("nb delete:" + nb2);
 
-	    String sql = "DELETE * FROM EVENT E WHERE E.ID=?";
+	    String sql = "DELETE FROM EVENT E WHERE E.ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, eventId);
-	    int nb = stmt.executeUpdate(sql);
+	    int nb = stmt.executeUpdate();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {

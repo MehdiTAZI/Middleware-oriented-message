@@ -11,7 +11,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.JdbcDAO;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
@@ -36,6 +38,8 @@ public class ThreadEvent implements Runnable {
     private Channel channel;
     private EventServer es = EventServer.getInstance();
 
+    private JdbcDAO dao = DAOFactory.getJdbcDAO();
+    
     public ThreadEvent(String topic) {
 	log.trace("ThreadEvent created");
 	channel = es.getChannel(topic);
@@ -100,7 +104,6 @@ public class ThreadEvent implements Runnable {
 		    while (i.hasNext() && pfpc != null) {
 			EventModel em = i.next();
 			try {
-			    // TODO : here manage life of the events.
 			    long delta = CosEventServer.getDelta();
 			    if (em.getCreationdate() + em.getTimetolive() > new Date()
 				    .getTime() + delta) {
@@ -108,13 +111,14 @@ public class ThreadEvent implements Runnable {
 				Event e = new EventConvertor()
 					.transformToEvent(em);
 				pfpc.receive(e);
+				
 			    } else {
 				log.debug("Event de type " + em.getType()
 					+ " expire");
 			    }
 			    // remove event from the list
 			    i.remove();
-
+			    dao.deleteEventByConsumer(consumer.getId(), em.getId());
 			} catch (ConsumerNotFoundException e1) {
 			    log.debug("Consumer seems to be unreachable", e1);
 			    // Consumer seems to be unreachable so it's time
