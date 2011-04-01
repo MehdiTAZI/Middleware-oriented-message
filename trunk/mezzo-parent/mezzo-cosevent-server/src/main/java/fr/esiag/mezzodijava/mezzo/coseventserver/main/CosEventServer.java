@@ -147,17 +147,15 @@ public class CosEventServer {
 	    //Collection<Channel> col = dao.findAll();
 	    if (col != null) {
 		for (Channel c : col) {
+		    	SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
+			c.setEvents(setevents);
 			Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
 			for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
 				consumer = i.next();
 				SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
 				consumer.setEvents(events);
 			}
-			
-			SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
-			c.setEvents(setevents);
 			c.setConsumers(cmap);
-			
 		    EventServer.getInstance().addChannel(c);
 		    // Publish the ChannelAdminImpl with Corba
 		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c

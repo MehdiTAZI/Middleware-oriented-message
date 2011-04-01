@@ -10,18 +10,19 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.esiag.mezzodijava.mezzo.coseventserver.dao.JdbcDOAImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.JdbcDAO;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
 public class TestJdbcDAOImpl {
 
-    public static JdbcDOAImpl dao;
+    public static JdbcDAO dao;
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
-	dao = new JdbcDOAImpl("test", "test", "C:/mezzodev/coseventBase");
+	dao = DAOFactory.getJdbcDAO();
 
     }
 

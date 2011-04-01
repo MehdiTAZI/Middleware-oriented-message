@@ -12,26 +12,14 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
  */
 public class RandomChannelIdentifier {
 
-	
-	private static long id;
-	
-	/**
-     * Constructor for a RandomChannelIdentifier 
-     *
+    /**
+     * Get the unique identifier with a random
+     * 
+     * @return id
+     * 
      */
-	private RandomChannelIdentifier() {
-		id=1000;
-	}
+    public static long getUniqueIdentifier() {
+	return (long) (Math.random() * 1000) + 10;
+    }
 
-	/**
-	 * Get the unique identifier with a random
-	 *
-	 * @return id
-	 *
-	 */
-	public static long getUniqueIdentifier() {
-		return id=(long)(Math.random()*1000)+10;
-	}
-
-	
 }
