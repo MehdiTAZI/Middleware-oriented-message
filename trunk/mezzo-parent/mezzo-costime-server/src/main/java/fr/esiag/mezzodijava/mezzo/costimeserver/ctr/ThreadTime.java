@@ -1,14 +1,12 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.ctr;
 
-import java.util.Calendar;
 import java.util.Date;
-
-import javax.print.attribute.standard.DateTimeAtCompleted;
+import java.util.Iterator;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
@@ -55,14 +53,19 @@ public class ThreadTime implements Runnable {
      * 
      */
     public void synchronizeComponent() {
-	for (Synchronizable component : model.getComponentSubscribed()) {
+	Set<Synchronizable> components = model.getComponentSubscribed();
+	synchronized(components){
+	    Iterator<Synchronizable> i = components.iterator();
+	while(i.hasNext()){
 	    Date date = new Date();
+	    Synchronizable component = i.next();
 	    try {
 		component.date(date.getTime());
 	    } catch (org.omg.CORBA.SystemException ex) {
-		model.getComponentSubscribed().remove(component);
+		i.remove();
 		log.warn("Component unreachable unsubscribed : " + component);
 	    }
+	}
 	}
     }
 
