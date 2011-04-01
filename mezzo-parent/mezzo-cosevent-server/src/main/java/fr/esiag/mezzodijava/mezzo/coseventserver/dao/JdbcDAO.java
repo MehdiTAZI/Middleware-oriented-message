@@ -20,8 +20,8 @@ public interface JdbcDAO {
 	
 	public int insertChannel (Channel channel);
 	public int insertConsumer (ConsumerModel consumer);
-	public int insertEvent (EventModel event);
-	
+	public int insertEvent (int channelId, EventModel event);
+	public void addEventToConsumer(int eventId, int consumerId);
 	/* methodes de mise à jour */
 	
 	public void updateChannel (Channel channel);
@@ -32,5 +32,5 @@ public interface JdbcDAO {
 	public void deleteEvent(int eventId);
 	public void deleteConsumer(int consumerId);
 	public void deleteChannel(int channelId);
-	public void deleteAllConsumers();
+	public void deleteAllConsumers(int channelId);
 }

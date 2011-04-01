@@ -74,18 +74,20 @@ public class ChannelCtr {
 
 	    EventModel em = new EventConvertor().transformToEventModel(e);
 
+	    // ajout dans la liste nécessaire pour les consummer PULL
+	    channel.getEvents().add(em);
+	    // persistance de l'event
+	    DAOFactory.getJdbcDAO().insertEvent(channel.getId(),em);
+	    
 	    // ajout dans les listes des consumers PUSH
 	    for (ConsumerModel consumer : channel.getConsumers().values()) {
-		// channel.getConsumersSubscribed().get(consumer).add(e);
 		consumer.getEvents().add(em);
+		// persistance de l'event
+		DAOFactory.getJdbcDAO().addEventToConsumer(em.getId(), consumer.getId());
 		log.info("Event PUSH " + e.toString() + " " + e.body.content
 			+ " nb evt =" + consumer.getEvents().size());
 	    }
-	    // ajout dans la liste nécessaire pour les consummer PULL
-	    channel.getEvents().add(em);
 	    
-	    // persistance de l'event
-	    DAOFactory.getJdbcDAO().insertEvent(em);
 	    
 	    //DAOFactory.getChannelDAO().update(channel);
 	    log.debug("Event ajoute a la liste");
@@ -296,7 +298,7 @@ public class ChannelCtr {
 	channel.setConsumers(Collections
 		.synchronizedMap(new HashMap<String, ConsumerModel>()));
 	// suppression de tous les consumers abonnés
-	DAOFactory.getJdbcDAO().deleteAllConsumers();
+	DAOFactory.getJdbcDAO().deleteAllConsumers(channel.getId());
 	
 	//DAOFactory.getChannelDAO().persist(channel);
     }
