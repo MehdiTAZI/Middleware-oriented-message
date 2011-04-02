@@ -7,6 +7,8 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
@@ -36,9 +38,10 @@ public class Channel implements Serializable {
     .synchronizedMap(new HashMap<String, ConsumerModel>());
 
     private Map<String, ProxyForPushConsumerImpl> consumersConnected = new HashMap<String, ProxyForPushConsumerImpl>();
-
     private Map<String, ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String, ProxyForPushSupplierImpl>();
-
+    private Map<String, ProxyForPullConsumerImpl> consumersPullConnected = new HashMap<String, ProxyForPullConsumerImpl>();
+    private Map<String, ProxyForPullSupplierImpl> suppliersPullConnected = new HashMap<String, ProxyForPullSupplierImpl>();
+    
     public Channel() {
 	super();
     }
@@ -91,6 +94,15 @@ public class Channel implements Serializable {
     public Map<String, ProxyForPushConsumerImpl> getConsumersConnected() {
 	return consumersConnected;
     }
+    
+    /**
+     * Pull Consumers connected.
+     * 
+     * @return set of ProxyPullConsumerImpl
+     */
+    public Map<String, ProxyForPullConsumerImpl> getConsumersPullConnected() {
+	return consumersPullConnected;
+    }
 
     /**
      * Push Suppliers connected.
@@ -99,6 +111,15 @@ public class Channel implements Serializable {
      */
     public Map<String, ProxyForPushSupplierImpl> getSuppliersConnected() {
 	return suppliersConnected;
+    }
+    
+    /**
+     * Pull Suppliers connected.
+     * 
+     * @return set of ProxyForPullSupplierImpl
+     */
+    public Map<String, ProxyForPullSupplierImpl> getSuppliersPullConnected() {
+	return suppliersPullConnected;
     }
 
     /**
@@ -116,7 +137,7 @@ public class Channel implements Serializable {
      * @return true if the list is full.
      */
     public boolean isConsumersConnectedListcapacityReached() {
-	return connectionCapacity == consumersConnected.size();
+	return connectionCapacity == consumersConnected.size()+consumersPullConnected.size();
     }
 
     /**
@@ -125,7 +146,7 @@ public class Channel implements Serializable {
      * @return true if the list is full.
      */
     public boolean isSuppliersConnectedsListcapacityReached() {
-	return connectionCapacity == suppliersConnected.size();
+	return connectionCapacity == suppliersConnected.size()+consumersPullConnected.size();
     }
 
     /**
@@ -148,6 +169,18 @@ public class Channel implements Serializable {
     public void setConsumersConnected(
 	    Map<String, ProxyForPushConsumerImpl> consumersConnected) {
 	this.consumersConnected = consumersConnected;
+    }
+    
+    /**
+     * Getter of the set of connected pull consumer.
+     * 
+     * For persistance purpose only.
+     * 
+     * @param consumersPullConnected
+     */
+    public void setConsumersPullConnected(
+	    Map<String, ProxyForPullConsumerImpl> consumersPullConnected) {
+	this.consumersPullConnected = consumersPullConnected;
     }
 
     /**
@@ -175,6 +208,18 @@ public class Channel implements Serializable {
     public void setSuppliersConnected(
 	    Map<String, ProxyForPushSupplierImpl> suppliersConnected) {
 	this.suppliersConnected = suppliersConnected;
+    }
+    
+    /**
+     * Getter of the set of connected pull supplier.
+     * 
+     * For persistance purpose only.
+     * 
+     * @param suppliersPullConnected
+     */
+    public void setSuppliersPullConnected(
+	    Map<String, ProxyForPullSupplierImpl> suppliersPullConnected) {
+	this.suppliersPullConnected = suppliersPullConnected;
     }
 
     /**

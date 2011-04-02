@@ -120,6 +120,8 @@ public class EventServerChannelAdminCtr {
 	    channelCtr.removeAllProxiesForPushConsumerFromSubscribedList();
 	    channelCtr.removeAllProxiesForPushConsumerFromConnectedList();
 	    channelCtr.removeAllProxiesForPushSupplierFromConnectedList();
+	    channelCtr.removeAllProxiesForPullConsumerFromConnectedList();
+	    channelCtr.removeAllProxiesForPullSupplierFromConnectedList();
 	    BFFactory.destroy(uniqueServerChannelId);
 	    // suppression du channel dans la base
 	    DAOFactory.getJdbcDAO().deleteChannel(channel.getId());
