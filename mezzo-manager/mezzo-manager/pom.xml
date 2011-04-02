@@ -86,7 +86,7 @@
 					<execution>
 						<goals>
 							<goal>compile</goal>
-							<goal>generateAsync</goal>
+							<!-- <goal>generateAsync</goal> -->
 							<goal>test</goal>
 						</goals>
 					</execution>
@@ -94,7 +94,7 @@
 				<configuration>
 					<!--buildOutputDirectory>${basedir}/war</buildOutputDirectory -->
 					<webappDirectory>${basedir}/war</webappDirectory>
-					<runTarget>Test2.html</runTarget>
+					<runTarget>application.html</runTarget>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -119,10 +119,10 @@
 								<move file="${project.build.outputDirectory}/Start.class"
 									tofile="${basedir}/war/Start.class" />
 							</tasks>
-						<!--	<tasks>
-								<move file="${project.build.outputDirectory}/AuthenticationServiceImpl.class"
-									tofile="${basedir}/war/AuthenticationServiceImpl.class" />
-							</tasks> -->
+							<tasks>
+								<!-- <move file="${project.build.outputDirectory}/AuthenticationServiceImpl.class"
+									tofile="${basedir}/war/AuthenticationServiceImpl.class" /> -->
+							</tasks>
 						</configuration>
 					</execution>
 				</executions>
@@ -165,13 +165,13 @@
 						</fileset>
 						<fileset>
 							<directory>${basedir}/war</directory>
-							<excludes>
+							<!-- <excludes>
 								<exclude>*</exclude>
-							</excludes>
+							</excludes>-->
 							<includes>
 								<include>Start.class</include>
 							</includes>
-						</fileset>
+						</fileset> 
 					</filesets>
 				</configuration>
 			</plugin>

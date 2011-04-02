@@ -23,7 +23,7 @@ import com.smartgwt.client.widgets.grid.ListGridRecord;
 public class HomeView extends View{
 	private Widget content=null;
 	private ListGrid messageGrid;
-	public HomeView(Test2 view) {
+	public HomeView(Application view) {
 		super(view);
 	}
 
