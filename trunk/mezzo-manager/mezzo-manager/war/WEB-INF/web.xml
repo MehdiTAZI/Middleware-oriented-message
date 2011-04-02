@@ -12,10 +12,10 @@
   
   <servlet-mapping>
     <servlet-name>greetServlet</servlet-name>
-    <url-pattern>/test2/greet</url-pattern>
+    <url-pattern>/application/greet</url-pattern>
   </servlet-mapping>
   
   <welcome-file-list>
-    <welcome-file>Test2.html</welcome-file>
+    <welcome-file>application.html</welcome-file>
   </welcome-file-list>
 </web-app>
