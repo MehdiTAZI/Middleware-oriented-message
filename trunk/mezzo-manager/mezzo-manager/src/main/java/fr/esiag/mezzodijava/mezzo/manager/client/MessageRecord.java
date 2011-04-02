@@ -4,6 +4,8 @@ package fr.esiag.mezzodijava.mezzo.manager.client;
 
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
+import fr.esiag.mezzodijava.mezzo.manager.shared.Message;
+
 public class MessageRecord extends ListGridRecord{
 	public MessageRecord(Message event) {
 		super();

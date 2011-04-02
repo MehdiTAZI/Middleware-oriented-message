@@ -10,7 +10,6 @@ import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
 import com.smartgwt.client.widgets.IButton;
 import com.smartgwt.client.widgets.ImgButton;
-import com.smartgwt.client.widgets.Label;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
@@ -18,9 +17,13 @@ import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
+import fr.esiag.mezzodijava.mezzo.manager.shared.Message;
+
 
 
 public class HomeView extends View{
+	private ChannelInfosCollector[] channelInfosCollector=null;
 	private Widget content=null;
 	private ListGrid messageGrid;
 	public HomeView(Application view) {
@@ -49,7 +52,17 @@ public class HomeView extends View{
 
 						public void onClick(
 								com.smartgwt.client.widgets.events.ClickEvent event) {
-							messageGrid.setData(MessageData.getRecords()); 
+							ChannelInfosCollector channelInfo=null; 
+							for(ChannelInfosCollector info:channelInfosCollector){
+								if(record.getAttribute("topic").equals(info.topic))
+									channelInfo=info;
+							}
+							MessageRecord[] data=new MessageRecord[channelInfo.messages.length]; 
+							int i=0;
+							for(Message message:channelInfo.messages){
+								data[i]=new MessageRecord(message);
+								i++;
+							}
 						}
 
                     });  
@@ -97,9 +110,13 @@ public class HomeView extends View{
         
         ChannelGrid.setFields(topic, capacity,nbConsumer,nbConsumersSubscribed, nbSupplier,nbQueueEvents,buttonField,iconField);  
         ChannelGrid.setCanResizeFields(true);  
-        ChannelGrid.setData(ChannelData.getRecords()); 
-        
-        
+        ChannelRecord[] channelData=new ChannelRecord[channelInfosCollector.length];
+        int i=0;
+        for(ChannelInfosCollector info:channelInfosCollector){
+        	channelData[i]=new ChannelRecord(info);
+        	i++;
+        }
+        ChannelGrid.setData(channelData); 
         messageGrid = new ListGrid() {  
             @Override  
             protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {  
@@ -160,5 +177,10 @@ public class HomeView extends View{
 		         window.setShowCloseButton(false);
 		         window.setShowMinimizeButton(false);
 		         return window;  
-		     }  
+		     }
+
+	@Override
+	public void setData(ChannelInfosCollector[] channelInfosCollector) {
+		this.channelInfosCollector=channelInfosCollector;
+	}  
 }

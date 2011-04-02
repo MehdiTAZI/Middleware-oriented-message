@@ -4,6 +4,8 @@ package fr.esiag.mezzodijava.mezzo.manager.client;
 
 import java.util.Date;
 
+import fr.esiag.mezzodijava.mezzo.manager.shared.Message;
+
 public class MessageData {
 	private static MessageRecord[] records;  
 	   
