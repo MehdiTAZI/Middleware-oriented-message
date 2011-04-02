@@ -2,6 +2,8 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
@@ -75,5 +77,33 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
     public String getTopic() {
 	return topic;
     }
+    
+    /**
+     * Get to the client a Proxy on this Channel to access it as an PULL
+     * Consumer.
+     *
+     * @return a ProxyForPullConsumer implementation
+     * @see fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations#getProxyForPullSupplier()
+     *
+     */
+	@Override
+	public ProxyForPullConsumer getProxyForPullConsumer(String idComponent)
+			throws ChannelNotFoundException {
+		return channelAdminctrl.createProxyForPullConsumer(idComponent);
+	}
+	
+	/**
+     * Get to the client a Proxy on this Channel to access it as an PULL
+     * Supplier.
+     *
+     * @return a ProxyForPullSupplier implementation
+     * @see fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations#getProxyForPullSupplier()
+     *
+     */
+	@Override
+	public ProxyForPullSupplier getProxyForPullSupplier(String idComponent)
+			throws ChannelNotFoundException {
+		return channelAdminctrl.createProxyForPullSupplier(idComponent);
+	}
 
 }
