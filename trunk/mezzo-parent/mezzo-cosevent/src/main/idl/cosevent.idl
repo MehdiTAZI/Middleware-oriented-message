@@ -1,0 +1,103 @@
+module cosevent {
+	
+	struct Header{
+		long long code;
+		long priority;
+		long long creationdate;
+		long long timetolive;
+	};
+	
+	struct Body{
+		any content;
+		string type;
+	};
+	
+	struct Event{		
+		Header header;
+		Body body;
+	};
+	
+	exception AlreadyRegisteredException{
+		string message;
+	};
+	
+	exception NotRegisteredException{
+		string message;
+	};
+	
+	exception AlreadyConnectedException{
+		string message;
+	};
+	
+	exception ChannelAlreadyExistsException{
+		string message;
+	};
+	
+	exception NotConnectedException{
+		string message;
+	};
+	
+	exception MaximalConnectionReachedException{
+		string message;
+	};
+	
+	exception ChannelNotFoundException{
+		string message;
+	};
+	
+	exception ConsumerNotFoundException{
+		string message;
+	};
+	
+	exception CannotReduceCapacityException{
+		string message;
+	};
+	
+	interface CallbackConsumer{
+		void receive(in Event evt) raises (ConsumerNotFoundException);
+	};
+	
+	interface CallbackSupplier{
+		void ask(in Event evt) raises (ConsumerNotFoundException);
+	};
+		
+	interface ProxyForPushConsumer{			
+		void subscribe() raises (ChannelNotFoundException,AlreadyRegisteredException);
+		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
+		void connect(in CallbackConsumer cc) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);	
+	};
+	
+	interface ProxyForPushSupplier{
+		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
+		void push(in Event evt) raises (ChannelNotFoundException, NotConnectedException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException);
+	};
+	
+	interface ProxyForPullConsumer{
+		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
+		void pull() raises (ChannelNotFoundException, NotConnectedException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException);
+	};
+	
+	interface ProxyForPullSupplier{		
+		void subscribe() raises (ChannelNotFoundException,AlreadyRegisteredException);
+		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
+		void connect(in CallbackSupplier cs) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);	
+	};
+	
+	interface ChannelAdmin{
+		ProxyForPushConsumer getProxyForPushConsumer(in string idComponent) raises (ChannelNotFoundException);
+		ProxyForPushSupplier getProxyForPushSupplier(in string idComponent) raises (ChannelNotFoundException);
+		ProxyForPullConsumer getProxyForPullConsumer(in string idComponent) raises (ChannelNotFoundException);
+		ProxyForPullSupplier getProxyForPullSupplier(in string idComponent) raises (ChannelNotFoundException);
+	};
+	
+	interface EventServerChannelAdmin{
+		long long createChannel(in string topic, in long capacity) raises (ChannelAlreadyExistsException);
+		ChannelAdmin getChannel(in long long uniqueServerChannelId) raises (ChannelNotFoundException);
+		void destroyChannel(in long long uniqueServerChannelId) raises (ChannelNotFoundException);
+		void changeChannelCapacity(in long long uniqueServerChannelId, in long capacity) raises (ChannelNotFoundException,CannotReduceCapacityException);
+	};
+};
