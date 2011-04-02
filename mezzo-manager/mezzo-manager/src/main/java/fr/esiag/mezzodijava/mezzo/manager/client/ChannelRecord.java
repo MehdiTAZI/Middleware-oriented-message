@@ -1,8 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.manager.client;
 
 
-
 import com.smartgwt.client.widgets.grid.ListGridRecord;
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
 
 public class ChannelRecord extends ListGridRecord{
 
@@ -19,14 +19,17 @@ public class ChannelRecord extends ListGridRecord{
 	public void setCapacity(String capacity) {
 		setAttribute("capacity",capacity);
 	}
-	public ChannelRecord(ChannelInfosCollector channel) {
+	public ChannelRecord(){
+		
+	}
+	public ChannelRecord(ChannelInfosCollector channelInfosCollector) {
 		super();
-		setTopic(channel.topic);
-		setCapacity(""+channel.capacity);
-		setNbConsumerConnected(""+channel.consumersConnected);
-		setNbSupplierConnected(""+channel.suppliersConnected);
-		setNbConsumersSubscribed(""+channel.consumersSubscribed);
-		setNbQeueMessage(""+channel.nbQueueEvents);
+		setTopic(channelInfosCollector.topic);
+		setCapacity(""+channelInfosCollector.capacity);
+		setNbConsumerConnected(""+channelInfosCollector.consumersConnected);
+		setNbSupplierConnected(""+channelInfosCollector.suppliersConnected);
+		setNbConsumersSubscribed(""+channelInfosCollector.consumersSubscribed);
+		setNbQeueMessage(""+channelInfosCollector.nbQueueEvents);
 	}
 	private void setNbQeueMessage(String nbQeueMessage) {
 		setAttribute("nbQeueMessage",nbQeueMessage);
@@ -52,5 +55,4 @@ public class ChannelRecord extends ListGridRecord{
 	public void setNbSupplierConnected(String nbSupplierConnected) {
 		setAttribute("nbSupplierConnected", nbSupplierConnected);
 	}
-	
 }

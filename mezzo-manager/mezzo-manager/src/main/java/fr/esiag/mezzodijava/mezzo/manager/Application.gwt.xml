@@ -16,5 +16,6 @@
   <entry-point class='fr.esiag.mezzodijava.mezzo.manager.client.Application'/>
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
+  <source path='shared'/>
  <servlet path="/greet" class="fr.esiag.mezzodijava.mezzo.manager.server.AuthenticationServiceImpl"/>
 </module>

@@ -20,6 +20,8 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
+
 
 public class Application implements EntryPoint {
 	private final AuthenticationServiceAsync authenticationService = GWT
@@ -57,18 +59,17 @@ public class Application implements EntryPoint {
 							public void onClick(ClickEvent event) {
 								//login.getValueAsString()
 								System.out.println("Click");
-								authenticationService.authenticate(login.getValueAsString(),pwd.getValueAsString() , new AsyncCallback<Boolean>() {
-									public void onFailure(Throwable caught) {
-										System.out.println("Failure");
+								authenticationService.authenticate(login.getValueAsString(), pwd.getValueAsString(), new AsyncCallback<ChannelInfosCollector[]>() {
+									
+									public void onSuccess(ChannelInfosCollector[] channelInfosCollector) {
+										winModal.destroy(); 
+										display("homeView",channelInfosCollector);
 									}
-									public void onSuccess(Boolean result) {
-										if(result==true){
-											winModal.destroy(); 
-											display("homeView");
-										}
+									
+									public void onFailure(Throwable arg0) {
 									}
-								
-								});	
+
+								});
 							}
 						});
 		                 form.setFields(login, pwd,valider);
@@ -80,8 +81,9 @@ public class Application implements EntryPoint {
 		views.put("homeView", homeView);
 		showAuthentification();
 	}
-	public void display(String view) {	
+	public void display(String view,ChannelInfosCollector[] channelInfosCollector) {	
 		View v=views.get(view);
+		v.setData(channelInfosCollector);
 		RootPanel.get("col_2").clear();
 		RootPanel.get("col_2").add(v.getContent());
 	}

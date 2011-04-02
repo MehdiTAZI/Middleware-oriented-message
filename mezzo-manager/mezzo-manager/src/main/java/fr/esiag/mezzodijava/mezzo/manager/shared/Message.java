@@ -1,8 +1,10 @@
-package fr.esiag.mezzodijava.mezzo.manager.client;
+package fr.esiag.mezzodijava.mezzo.manager.shared;
+
+import java.io.Serializable;
 
 
 
-public  class Message
+public  class Message implements Serializable
 {
 public Message(){}
 public java.lang.String time = "";
