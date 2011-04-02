@@ -1,4 +1,4 @@
-package fr.esiag.mezzodijava.mezzo.manager.server;
+package fr.esiag.mezzodijava.mezzo.manager.server.old;
 import java.io.*;
 class StreamCatcher implements InputReader
 {
