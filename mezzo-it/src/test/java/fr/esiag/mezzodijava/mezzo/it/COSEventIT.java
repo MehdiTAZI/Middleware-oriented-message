@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.junit.After;
@@ -126,21 +127,28 @@ public class COSEventIT {
 
     }
 
-    public static void main(String[] args) throws Exception {
-	EventClient ec = EventClient.init(null);
-	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
-	String idcomponent = Thread.currentThread().getName();
-	ProxyForPushConsumer consumerProxy = channelAdmin
-		.getProxyForPushConsumer(idcomponent);
-	CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
-	CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
-	consumerProxy.subscribe();
-	if ((args != null) && (args.length >= 1)) {
-	    Thread.sleep(new Long(args[0]).longValue());
+    /**
+     * Ce server de consummer abonne et connecte une CallBackConsumerImpl sur le
+     * canal MEZZO.
+     */
+    private static class ConsumerServer1 {
+	@SuppressWarnings("unused")
+	public static void main(String[] args) throws Exception {
+	    EventClient ec = EventClient.init(null);
+	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	    String idcomponent = Thread.currentThread().getName();
+	    ProxyForPushConsumer consumerProxy = channelAdmin
+		    .getProxyForPushConsumer(idcomponent);
+	    CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl();
+	    CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
+	    consumerProxy.subscribe();
+	    if ((args != null) && (args.length >= 1)) {
+		Thread.sleep(new Long(args[0]).longValue());
+	    }
+	    consumerProxy.connect(cbc);
+	    ec.getOrb().run();
+	    System.out.println("ALL DONE");
 	}
-	consumerProxy.connect(cbc);
-	ec.getOrb().run();
-	System.out.println("ALL DONE");
     }
 
     /**
@@ -148,6 +156,7 @@ public class COSEventIT {
      * Pour le test
      */
     private static class ConsumerServer2 {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 	    EventClient ec = EventClient.init(null);
 	    Thread to = new Thread(new ThreadOrb());
@@ -179,6 +188,7 @@ public class COSEventIT {
      * Pour le test
      */
     private static class TimeConsumerServer {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 	    TimeClient tc = TimeClient.init(null);
 	    Thread to = new Thread(new ThreadOrb());
@@ -200,6 +210,7 @@ public class COSEventIT {
      * consumers innaccessibles et le remet en run. Pour le test
      */
     private static class ConsumerServer3 {
+	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
 	    EventClient ec = EventClient.init(null);
 	    Thread to = new Thread(new ThreadOrb());
@@ -284,8 +295,8 @@ public class COSEventIT {
 	System.out.println("after = " + idChannel);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "mezzo";
@@ -316,14 +327,14 @@ public class COSEventIT {
 	// print logback's internal status
 	// StatusPrinter.print(lc);
 
-	EventClient ec = EventClient.init(null);
+	//EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
 	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, (String[]) null);
 	s2.go();
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	for (int i = 0; i < 10; i++) {
@@ -387,15 +398,15 @@ public class COSEventIT {
 	// print logback's internal status
 	// StatusPrinter.print(lc);
 
-	EventClient ec = EventClient.init(null);
+	//EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
 	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
 	for (int i = 0; i < 10; i++) {
-	    MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
-		    500,(String[])null);
+	    MainServerLauncher s2 = new MainServerLauncher(
+		    ConsumerServer1.class, 500, (String[]) null);
 	    s2.go();
 	}
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
@@ -534,7 +545,7 @@ public class COSEventIT {
 	System.out.println(idChannel);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -576,7 +587,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 1);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -657,7 +668,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -693,7 +704,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -729,7 +740,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -764,7 +775,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -802,8 +813,8 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "component";
@@ -860,7 +871,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -889,7 +900,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -925,7 +936,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 1);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -964,7 +975,7 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 4);
 	Thread.sleep(1000);
 	// le consumer ici present
-	// MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class,
+	// MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
 	// 2000,
 	// (String[]) null);
 	// s2.go();
@@ -999,8 +1010,8 @@ public class COSEventIT {
 	idChannel = esca.createChannel("MEZZO", 4);
 	Thread.sleep(1000);
 	// le consumer ici present
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		(String[]) null);
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "component";
@@ -1125,8 +1136,8 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// le consumer qui attendra 3000 ms entre le subscribe et le connnect de
 	// son callback
-	MainServerLauncher s2 = new MainServerLauncher(COSEventIT.class, 2000,
-		"4000");
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, "4000");
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "component";
@@ -1140,7 +1151,7 @@ public class COSEventIT {
 	// 2 derniers
 	int[] inputPriorities = { 4, 2, 5, 3, 1, 4, 2, 4, 5, 1, 5, 5 };
 	long[] inputTimeToLive = { 10000, 10000, 10000, 10000, 10000, 10000,
-		10000, 10000, 10000, 10000, 500, 500 };
+		10000, 10000, 10000, 10000, 300, 300 };
 	// on s'attend à n'en recevoir que 10
 	int[] expectedPriorities = { 5, 5, 4, 4, 4, 3, 2, 2, 1, 1 };
 	for (int i = 0; i < 12; i++) {
@@ -1431,5 +1442,57 @@ public class COSEventIT {
 	} catch (CannotReduceCapacityException e) {
 	    ;// ok
 	}
+    }
+
+    /**
+     * Test Automatique - CI03 - US38 - Messages de tous types.
+     * 
+     * Crée un consumer sur le canal MEZZO qui peut recevoir des message de type
+     * MyMessage Crée un supplier émettent 1 message de type MyMessage
+     * 
+     */
+    @Test
+    public void testCI03_MessageDeTousTypes() throws Exception {
+	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
+	// assume SLF4J is bound to logback in the current environment
+	// LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+	// print logback's internal status
+	// StatusPrinter.print(lc);
+
+	EventClient ec = EventClient.init(null);
+	// EventServerChannelAdmin esca = ec
+	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	idChannel = esca.createChannel("MEZZO", 20);
+	System.out.println("after = " + idChannel);
+	Thread.sleep(1000);
+	// le consumer ici present
+	MainServerLauncher s2 = new MainServerLauncher(ConsumerServer1.class,
+		2000, (String[]) null);
+	s2.go();
+	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+	String idcomponent = "mezzo";
+	ProxyForPushSupplier supplierProxy = channelAdmin
+		.getProxyForPushSupplier(idcomponent);
+	supplierProxy.connect();
+	List<MyMessage> listEnvoyes = new ArrayList<MyMessage>();
+	for (int i = 0; i < 1; i++) {
+	    MyMessage message = new MyMessage("message" + i);
+	    Event evt = EventFactory.createEventObject(i, 10120, message,
+		    message.getClass().getName());
+	    supplierProxy.push(evt);
+	    listEnvoyes.add(message);
+	    System.out.println("envoye " + evt);
+	    Thread.sleep(100);
+	}
+	Thread.sleep(5000);
+	// esca.destroyChannel(idChannel);
+	Assert.assertEquals("nombre d'event envoyes et recus", 1,
+		recu.intValue());
+	Iterator<MyMessage> it = listEnvoyes.iterator();
+	for (Event event : messagesRecu) {
+	    Assert.assertEquals("contenu du message", it.next().myString,
+		    ((MyMessage) event.body.content.extract_Value()).myString);
+	}
+	System.out.println("fini");
     }
 }
