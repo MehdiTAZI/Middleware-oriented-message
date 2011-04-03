@@ -275,6 +275,9 @@ public class Channel implements Serializable {
 		this.id = id;
 	}
     
+	public int getPendingEvents(){
+		return events.size();
+	}
     
 
 }

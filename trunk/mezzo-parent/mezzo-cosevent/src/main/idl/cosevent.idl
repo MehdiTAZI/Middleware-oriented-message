@@ -58,7 +58,7 @@ module cosevent {
 	};
 	
 	interface CallbackSupplier{
-		void ask(in Event evt) raises (ConsumerNotFoundException);
+		Event ask(out boolean hasEvent) raises (ConsumerNotFoundException);
 	};
 		
 	interface ProxyForPushConsumer{			
@@ -76,13 +76,11 @@ module cosevent {
 	
 	interface ProxyForPullConsumer{
 		void connect() raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
-		void pull() raises (ChannelNotFoundException, NotConnectedException);
+		Event pull(out boolean hasEvent) raises (ChannelNotFoundException, NotConnectedException);
 		void disconnect() raises (ChannelNotFoundException,NotConnectedException);
 	};
 	
 	interface ProxyForPullSupplier{		
-		void subscribe() raises (ChannelNotFoundException,AlreadyRegisteredException);
-		void unsubscribe() raises (ChannelNotFoundException,NotRegisteredException);
 		void connect(in CallbackSupplier cs) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
 		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);	
 	};

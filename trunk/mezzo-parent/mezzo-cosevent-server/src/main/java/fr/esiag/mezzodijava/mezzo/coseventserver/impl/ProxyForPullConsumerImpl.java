@@ -1,13 +1,12 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.omg.CORBA.BooleanHolder;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
-import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
-import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
-import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumerOperations;
 
 /**
@@ -19,37 +18,46 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumerOperations;
  */
 
 public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
-	MessageListener, ProxyForPullConsumerOperations {
+	ProxyForPullConsumerOperations {
 
 	public ProxyForPullConsumerImpl(String topic, String idComponent) {
 		super(topic, idComponent);
-		// TODO Auto-generated constructor stub
-	}
-
-	@Override
-	public void receive(Event evt) throws ConsumerNotFoundException {
-		// TODO Auto-generated method stub
-		
 	}
 
 	@Override
 	public void connect() throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void pull() throws ChannelNotFoundException, NotConnectedException {
-		// TODO Auto-generated method stub
+		channelCtr.addProxyForPullConsumerToConnectedList(this);
+		System.out.println("Connect of a PULL Consumer to \""
+			+ channelCtr.getChannel().getTopic() + "\".");
 		
 	}
 
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
-		// TODO Auto-generated method stub
+		channelCtr.removeProxyForPullConsumerFromConnectedList(this);
+		System.out.println("Disconnect of a PULL Consumer from \""
+			+ channelCtr.getChannel().getTopic() + "\".");
 		
+	}
+
+	@Override
+	public Event pull(BooleanHolder hasEvent) throws ChannelNotFoundException,
+			NotConnectedException {
+		
+		Event e;
+		// has events in list ?
+		hasEvent.value = (channelCtr.getChannel().getPendingEvents()!=0);
+		
+		// yes, so take it
+		if(hasEvent.value==true){
+			e = channelCtr.getEventForPull();
+		}else{
+			// call the suppliers to generate events
+			e = new Event();
+		}
+		return e;
 	}
 
    
