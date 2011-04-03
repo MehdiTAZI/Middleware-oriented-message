@@ -16,11 +16,13 @@ public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 	public ChannelInfosCollector[] getChannelsInfos() {
 		EventServer es = EventServer.getInstance();
 		ChannelInfosCollector list[] = new ChannelInfosCollector[es.getMapChannel().size()];
+		System.out.println("La taille : "+es.getMapChannel().size());
 		if(es.getMapChannel().size()>0)
 		{
 			int i=0;
 			for(Channel channel:es.getMapChannel().values())
 			{
+				list[i]=new ChannelInfosCollector();
 				list[i].topic=channel.getTopic();
 				list[i].capacity=channel.getCapacity();
 				list[i].consumersConnected=channel.getConsumersConnected().size();
@@ -38,6 +40,7 @@ public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 		int i=0;
 		for(EventModel event:events)
 		{
+			messages[i]=new Message();
 			messages[i].code=""+event.getCode();
 			messages[i].time=""+event.getTimetolive();
 			messages[i].type=""+event.getType();
