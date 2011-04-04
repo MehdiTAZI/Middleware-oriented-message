@@ -1,5 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminOperations;
@@ -21,6 +24,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  */
 public class EventServerChannelAdminImpl implements EventServerChannelAdminOperations 
 {
+	private static Logger log = LoggerFactory.getLogger(EventServerChannelAdminImpl.class);
+
 	private EventServerChannelAdminCtr eventServerChannelAdminctrl;
 
 	private String eventServerName;
@@ -35,6 +40,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
      */
 	public EventServerChannelAdminImpl(String eventServerName)
 	{
+		log.debug("Instanciation of EventServerChannelAdminImpl for {}",eventServerName);
 		this.eventServerName = eventServerName;		
 		this.eventServerChannelAdminctrl = BFFactory.createEventServerChannelAdminCtr(eventServerName);
 	}
@@ -54,6 +60,7 @@ public class EventServerChannelAdminImpl implements EventServerChannelAdminOpera
 	@Override
 	public long createChannel(String topic, int capacity)
 	throws ChannelAlreadyExistsException {	
+		log.debug("Creation of channel {} with a capacity of {} in EventServerChannelAdminImpl",topic,capacity);
 		return eventServerChannelAdminctrl.createChannel(topic, capacity);
 	}
 
