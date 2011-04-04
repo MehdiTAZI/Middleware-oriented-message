@@ -33,11 +33,11 @@ public class EventConvertor {
 	    }
 	    out.close();
 	} catch (IOException e1) {
-	    e1.printStackTrace();
+	    log.error("IOException",e1);
 	}
 	// Get the bytes of the serialized object
 	byte[] buf = bos.toByteArray();
-	System.out.println(buf);
+	log.debug(buf.toString());
 	em.setCode(e.header.code);
 	em.setCreationdate(e.header.creationdate);
 	em.setData(buf);
