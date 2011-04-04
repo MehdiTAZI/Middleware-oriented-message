@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
@@ -12,6 +14,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
@@ -31,6 +34,7 @@ public class BFFactory {
     // private static Map<String, Channel> mapChannel = new HashMap<String,
     // Channel>();
 
+	private static Logger log = LoggerFactory.getLogger(BFFactory.class);
     private static Map<String, ChannelAdminCtr> mapChannelAdminCtr = new HashMap<String, ChannelAdminCtr>();
     private static Map<String, ChannelAdminImpl> mapChannelAdminImpl = new HashMap<String, ChannelAdminImpl>();
     private static Map<String, ChannelCtr> mapChannelCtr = new HashMap<String, ChannelCtr>();
@@ -60,12 +64,14 @@ public class BFFactory {
 	Channel channel = null;
 	// Error if Channel Already Exists
 	if (es.getMapChannel().get(topic) != null) {
+		log.error("Channel already exists");
 	    throw new ChannelAlreadyExistsException();
 	}
 	channel = es.createChannelEntity(topic, capacity);
 	ChannelAdminImpl cai = createChannelAdminImpl(topic);
 	// Publish the ChannelAdminImpl with Corba
 	ChannelPublisher.publish(cai);
+	log.info("Channel {} created with a capacity of {}",topic,capacity);
 	return channel;
     }
 
@@ -79,6 +85,7 @@ public class BFFactory {
      */
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
+	log.debug("Capacity of channel {} changed to {}",channel,capacity);
 	EventServer.getInstance().getMapChannel()
 		.put(channel.getTopic(), channel);
     }
@@ -93,8 +100,10 @@ public class BFFactory {
     public static synchronized ChannelAdminCtr createChannelAdminCtr(
 	    String topic) {
 	if (mapChannelAdminCtr.get(topic) == null) {
+		log.info("Creation of channelAdminCtr for {}",topic);
 	    mapChannelAdminCtr.put(topic, new ChannelAdminCtr(topic));
 	}
+	log.debug("Access to ChannelAdminCtr of {}",topic);
 	return mapChannelAdminCtr.get(topic);
 
     }
@@ -109,8 +118,10 @@ public class BFFactory {
     public static synchronized ChannelAdminImpl createChannelAdminImpl(
 	    String topic) {
 	if (mapChannelAdminImpl.get(topic) == null) {
+		log.info("Creation of channelAdminImpl for {}",topic);
 	    mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
 	}
+	log.debug("Access to ChannelAdminImpl of {}",topic);
 	return mapChannelAdminImpl.get(topic);
     }
 
@@ -123,8 +134,10 @@ public class BFFactory {
      */
     public static synchronized ChannelCtr createChannelCtr(String topic) {
 	if (mapChannelCtr.get(topic) == null) {
+		log.info("Creation of channelCtr for {}",topic);
 	    mapChannelCtr.put(topic, new ChannelCtr(topic));
 	}
+	log.debug("Access to ChannelCtr of {}",topic);
 	return mapChannelCtr.get(topic);
     }
 
@@ -141,9 +154,11 @@ public class BFFactory {
     public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
 	    String eventServerName) {
 	if (mapEventServerChannelAdminCtr.get(eventServerName) == null) {
+		log.info("Creation of EventServerChannelAdminCtr for {}",eventServerName);
 	    mapEventServerChannelAdminCtr.put(eventServerName,
 		    new EventServerChannelAdminCtr(eventServerName));
 	}
+	log.debug("Access to EventServerChannelAdminCtr of {}",eventServerName);
 	return mapEventServerChannelAdminCtr.get(eventServerName);
 
     }
@@ -161,8 +176,10 @@ public class BFFactory {
      */
     public static synchronized ORB createOrb(String[] args, Properties props) {
 	if (orb == null) {
+		log.info("ORB initialization");
 	    orb = ORB.init(args, props);
 	}
+	log.debug("Access to the ORB");
 	return orb;
 
     }
@@ -173,6 +190,7 @@ public class BFFactory {
      * @return singleton instance of the ORB.
      */
     public static synchronized ORB getOrb() {
+    	log.debug("Access to the ORB");
 	return orb;
 
     }
@@ -186,6 +204,7 @@ public class BFFactory {
      * @return ChannelCtr with the specified topic or <code>null</null>
      */
     public static ChannelCtr getChannelctr(String topic) {
+    	log.debug("Access to the ChannelCtr of {}", topic);
 	return mapChannelCtr.get(topic);
     }
 
@@ -201,10 +220,12 @@ public class BFFactory {
 	Channel channelEntity = EventServer.getInstance().getChannel(
 		uniqueServerChannelId);
 	if (channelEntity != null) {
+		log.debug("Access to ChannelAdmin of {}", uniqueServerChannelId);
 	    ChannelAdminPOATie tie = new ChannelAdminPOATie(
 		    mapChannelAdminImpl.get(channelEntity.getTopic()));
 	    return tie._this(orb);
 	}
+	log.warn(" ChannelAdmin of {} does not exist", uniqueServerChannelId);
 	return null;
     }
 
@@ -219,6 +240,7 @@ public class BFFactory {
      */
     public static void setAlternateChannelAdminCtr(String topic,
 	    ChannelAdminCtr alternateChannelAdminCtr) {
+    	log.debug("Set a new ChannelAdminCtr for {}",topic);
 	mapChannelAdminCtr.put(topic, alternateChannelAdminCtr);
     }
 
@@ -232,6 +254,7 @@ public class BFFactory {
      */
     public static void setAlternateChannelCtr(String topic,
 	    ChannelCtr alternateChannelCtr) {
+    	log.debug("Set a new ChannelCtr for {}",topic);
 	mapChannelCtr.put(topic, alternateChannelCtr);
     }
 
@@ -245,6 +268,7 @@ public class BFFactory {
      */
     public static synchronized void setAlternateServerChannelAdminCtr(
 	    String servername, EventServerChannelAdminCtr alternateCtr) {
+    	log.debug("Set a new ServerChannelAdminCtr for {}",servername);
 	mapEventServerChannelAdminCtr.put(servername, alternateCtr);
     }
 
@@ -256,13 +280,20 @@ public class BFFactory {
      *            The id of the wanted channel to destroy.
      */
     public static void destroy(long idChannel) {
+    	log.debug("Destruction of {}",idChannel);
 	EventServer es = EventServer.getInstance();
 	String channelName = es.getChannel(idChannel).getTopic();
+	log.debug("Destruction of {} channel",idChannel);
 	es.getMapChannel().remove(channelName);
+	log.debug("Destruction of {} channelAdminCtr",idChannel);
 	mapChannelAdminCtr.remove(channelName);
+	log.debug("Destruction of {} channelAdminImpl",idChannel);
 	mapChannelAdminImpl.remove(channelName);
+	log.debug("Destruction of {} channelCtr",idChannel);
 	mapChannelCtr.remove(channelName);
+	log.debug("Destruction of {} channelid",idChannel);
 	es.getMapChannelId().remove(idChannel);
+	log.debug("Destruction of {} done",idChannel);
     }
 
     /**
