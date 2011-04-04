@@ -46,7 +46,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		+ ";create=true");
 	log.info("Connected to database");
 	try {
-	    CallableStatement stmt =conn.prepareCall("SELECT COUNT(*) FROM CHANNEL");
+	    CallableStatement stmt = conn
+		    .prepareCall("SELECT COUNT(*) FROM CHANNEL");
 	    stmt.execute();
 	    stmt.close();
 	} catch (SQLException e) {
@@ -108,17 +109,23 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "SELECT * FROM CHANNEL";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    ResultSet rs = stmt.executeQuery();
-	    while (rs.next()) {
-		Channel c = new Channel();
-		c.setId(rs.getInt("ID"));
-		c.setCapacity(rs.getInt("CAPACITY_QUEUE"));
-		c.setIdentifier(rs.getInt("IDENTIFIER"));
-		c.setTopic(rs.getString("TOPIC"));
-		list.add(c);
+	    try {
+		ResultSet rs = stmt.executeQuery();
+		try {
+		    while (rs.next()) {
+			Channel c = new Channel();
+			c.setId(rs.getInt("ID"));
+			c.setCapacity(rs.getInt("CAPACITY_QUEUE"));
+			c.setIdentifier(rs.getInt("IDENTIFIER"));
+			c.setTopic(rs.getString("TOPIC"));
+			list.add(c);
+		    }
+		} finally {
+		    rs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    rs.close();
 	    return list;
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -134,23 +141,29 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "SELECT * FROM EVENT E WHERE CHANNEL_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, channelId);
-	    ResultSet rs = stmt.executeQuery();
-	    while (rs.next()) {
-		EventModel e = new EventModel();
-		e.setId(rs.getInt("ID"));
-//		Blob b = rs.getBlob("DATA");
-//		e.setData(b.getBytes(0L, (int) b.length()));
-		e.setData(rs.getBytes("DATA"));
-		e.setCode(rs.getLong("CODE"));
-		e.setCreationdate(rs.getLong("CREATIONDATE"));
-		e.setPriority(rs.getInt("PRIORITY"));
-		e.setTimetolive(rs.getLong("TTL"));
-		e.setType(rs.getString("TYPE"));
-		set.add(e);
+	    try {
+		stmt.setInt(1, channelId);
+		ResultSet rs = stmt.executeQuery();
+		try {
+		    while (rs.next()) {
+			EventModel e = new EventModel();
+			e.setId(rs.getInt("ID"));
+			// Blob b = rs.getBlob("DATA");
+			// e.setData(b.getBytes(0L, (int) b.length()));
+			e.setData(rs.getBytes("DATA"));
+			e.setCode(rs.getLong("CODE"));
+			e.setCreationdate(rs.getLong("CREATIONDATE"));
+			e.setPriority(rs.getInt("PRIORITY"));
+			e.setTimetolive(rs.getLong("TTL"));
+			e.setType(rs.getString("TYPE"));
+			set.add(e);
+		    }
+		} finally {
+		    rs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -165,16 +178,22 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "SELECT * FROM CONSUMER CO WHERE CHANNEL_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, channelId);
-	    ResultSet rs = stmt.executeQuery();
-	    while (rs.next()) {
-		ConsumerModel co = new ConsumerModel();
-		co.setId(rs.getInt("ID"));
-		co.setIdConsumer(rs.getString("IDCONSUMER"));
-		map.put(co.getIdConsumer(), co);
+	    try {
+		stmt.setInt(1, channelId);
+		ResultSet rs = stmt.executeQuery();
+		try {
+		    while (rs.next()) {
+			ConsumerModel co = new ConsumerModel();
+			co.setId(rs.getInt("ID"));
+			co.setIdConsumer(rs.getString("IDCONSUMER"));
+			map.put(co.getIdConsumer(), co);
+		    }
+		} finally {
+		    rs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    rs.close();
 	    return Collections.synchronizedMap(map);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -190,22 +209,28 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "SELECT * FROM EVENT E, CONSUMER_EVENT CE WHERE E.ID=CE.EVENT_ID AND CE.CONSUMER_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, idConsumer);
-	    ResultSet rs = stmt.executeQuery();
-	    while (rs.next()) {
-		EventModel e = new EventModel();
-		e.setId(rs.getInt("ID"));
-		Blob b = rs.getBlob("DATA");
-		e.setData(b.getBytes(0L, (int) b.length()));
-		e.setCode(rs.getLong("CODE"));
-		e.setCreationdate(rs.getLong("CREATIONDATE"));
-		e.setPriority(rs.getInt("PRIORITY"));
-		e.setTimetolive(rs.getLong("TTL"));
-		e.setType(rs.getString("TYPE"));
-		set.add(e);
+	    try {
+		stmt.setInt(1, idConsumer);
+		ResultSet rs = stmt.executeQuery();
+		try {
+		    while (rs.next()) {
+			EventModel e = new EventModel();
+			e.setId(rs.getInt("ID"));
+			Blob b = rs.getBlob("DATA");
+			e.setData(b.getBytes(0L, (int) b.length()));
+			e.setCode(rs.getLong("CODE"));
+			e.setCreationdate(rs.getLong("CREATIONDATE"));
+			e.setPriority(rs.getInt("PRIORITY"));
+			e.setTimetolive(rs.getLong("TTL"));
+			e.setType(rs.getString("TYPE"));
+			set.add(e);
+		    }
+		} finally {
+		    rs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -221,19 +246,26 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "INSERT INTO CHANNEL (CAPACITY_QUEUE, CONNECTIONCAPACITY, IDENTIFIER, TOPIC) VALUES(?,?,?,?)";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql, idColumn);
-	    stmt.setInt(1, channel.getCapacity());
-	    stmt.setInt(2, channel.getConnectionCapacity());
-	    stmt.setLong(3, channel.getIdentifier());
-	    stmt.setString(4, channel.getTopic());
-	    stmt.executeUpdate();
-	    // Les clefs auto-générées sont retournées sous forme de ResultSet
-	    ResultSet clefs = stmt.getGeneratedKeys();
-	    if (clefs.next()) {
-		cle = clefs.getInt(1);
-		channel.setId(cle);
+	    try {
+		stmt.setInt(1, channel.getCapacity());
+		stmt.setInt(2, channel.getConnectionCapacity());
+		stmt.setLong(3, channel.getIdentifier());
+		stmt.setString(4, channel.getTopic());
+		stmt.executeUpdate();
+		// Les clefs auto-générées sont retournées sous forme de
+		// ResultSet
+		ResultSet clefs = stmt.getGeneratedKeys();
+		try {
+		    if (clefs.next()) {
+			cle = clefs.getInt(1);
+			channel.setId(cle);
+		    }
+		} finally {
+		    clefs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -249,18 +281,25 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String[] idColumn = { "ID" };
 	    String sql = "INSERT INTO CONSUMER (IDCONSUMER, CHANNEL_ID) VALUES(?,?)";
 	    log.debug(sql);
-	    PreparedStatement stmt = connection.prepareStatement(sql,idColumn);
-	    stmt.setString(1, consumer.getIdConsumer());
-	    stmt.setInt(2, consumer.getChannel().getId());
-	    stmt.executeUpdate();
-	    // Les clefs auto-générées sont retournées sous forme de ResultSet
-	    ResultSet clefs = stmt.getGeneratedKeys();
-	    if (clefs.next()) {
-		cle = clefs.getInt(1);
-		consumer.setId(cle);
+	    PreparedStatement stmt = connection.prepareStatement(sql, idColumn);
+	    try {
+		stmt.setString(1, consumer.getIdConsumer());
+		stmt.setInt(2, consumer.getChannel().getId());
+		stmt.executeUpdate();
+		// Les clefs auto-générées sont retournées sous forme de
+		// ResultSet
+		ResultSet clefs = stmt.getGeneratedKeys();
+		try {
+		    if (clefs.next()) {
+			cle = clefs.getInt(1);
+			consumer.setId(cle);
+		    }
+		} finally {
+		    clefs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -270,29 +309,36 @@ public class JdbcDOAImpl implements JdbcDAO {
     }
 
     @Override
-    public synchronized int insertEvent (int channelId, EventModel event) {
+    public synchronized int insertEvent(int channelId, EventModel event) {
 	int cle = 0;
 	try {
 	    String[] idColumn = { "ID" };
 	    String sql = "INSERT INTO EVENT (CODE, CREATIONDATE, DATA, PRIORITY, TTL, TYPE, CHANNEL_ID) VALUES(?,?,?,?,?,?,?)";
 	    log.debug(sql);
-	    PreparedStatement stmt = connection.prepareStatement(sql,idColumn);
-	    stmt.setLong(1, event.getCode());
-	    stmt.setLong(2, event.getCreationdate());
-	    stmt.setBytes(3,event.getData());
-	    stmt.setInt(4, event.getPriority());
-	    stmt.setLong(5, event.getTimetolive());
-	    stmt.setString(6, event.getType());
-	    stmt.setInt(7, channelId);
-	    stmt.executeUpdate();
-	    // Les clefs auto-générées sont retournées sous forme de ResultSet
-	    ResultSet clefs = stmt.getGeneratedKeys();
-	    if (clefs.next()) {
-		cle = clefs.getInt(1);
-		event.setId(cle);
+	    PreparedStatement stmt = connection.prepareStatement(sql, idColumn);
+	    try {
+		stmt.setLong(1, event.getCode());
+		stmt.setLong(2, event.getCreationdate());
+		stmt.setBytes(3, event.getData());
+		stmt.setInt(4, event.getPriority());
+		stmt.setLong(5, event.getTimetolive());
+		stmt.setString(6, event.getType());
+		stmt.setInt(7, channelId);
+		stmt.executeUpdate();
+		// Les clefs auto-générées sont retournées sous forme de
+		// ResultSet
+		ResultSet clefs = stmt.getGeneratedKeys();
+		try {
+		    if (clefs.next()) {
+			cle = clefs.getInt(1);
+			event.setId(cle);
+		    }
+		} finally {
+		    clefs.close();
+		}
+	    } finally {
+		stmt.close();
 	    }
-	    stmt.close();
-	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -300,18 +346,20 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    throw new RuntimeException("SQL Error", e);
 	}
     }
-    
+
     @Override
-    public void addEventToConsumer(int eventId,int consumerId) {
-	int cle = 0;
+    public void addEventToConsumer(int eventId, int consumerId) {
 	try {
 	    String sql = "INSERT INTO CONSUMER_EVENT (CONSUMER_ID,EVENT_ID) VALUES(?,?)";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, consumerId);
-	    stmt.setInt(2, eventId);
-	    stmt.executeUpdate();
-	    stmt.close();
+	    try {
+		stmt.setInt(1, consumerId);
+		stmt.setInt(2, eventId);
+		stmt.executeUpdate();
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -324,11 +372,14 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "UPDATE CHANNEL SET CAPACITY_QUEUE=? WHERE ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, channel.getCapacity());
-	    stmt.setInt(2, channel.getId());
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
+	    try {
+		stmt.setInt(1, channel.getCapacity());
+		stmt.setInt(2, channel.getId());
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -338,22 +389,16 @@ public class JdbcDOAImpl implements JdbcDAO {
     @Override
     public void deleteConsumer(int consumerId) {
 	try {
-	    String sql2 = "DELETE FROM CONSUMER_EVENT WHERE CONSUMER_ID=?";
-	    log.debug(sql2);
-	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-	    stmt2.setInt(1, consumerId);
-	    int nb2 = stmt2.executeUpdate();
-	    stmt2.close();
-	    log.debug("nb delete:" + nb2);
-
 	    String sql = "DELETE FROM CONSUMER WHERE ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, consumerId);
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
-
+	    try {
+		stmt.setInt(1, consumerId);
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -367,11 +412,13 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "DELETE FROM CHANNEL WHERE ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, channelId);
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
-
+	    try {
+		stmt.setInt(1, channelId);
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -382,20 +429,16 @@ public class JdbcDOAImpl implements JdbcDAO {
     @Override
     public void deleteAllConsumers(int channelId) {
 	try {
-//	    String sql2 = "DELETE FROM CONSUMER_EVENT";
-//	    log.debug(sql2);
-//	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-//	    int nb2 = stmt2.executeUpdate();
-//	    log.debug("nb delete:" + nb2);
-
 	    String sql = "DELETE FROM CONSUMER WHERE CHANNEL_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, channelId);
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
-
+	    try {
+		stmt.setInt(1, channelId);
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -409,12 +452,15 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    String sql = "DELETE FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, consumerId);
-	    stmt.setInt(2, eventId);
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
-
+	    try {
+		stmt.setInt(1, consumerId);
+		stmt.setInt(2, eventId);
+		int nb = stmt.executeUpdate();
+		stmt.close();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -424,21 +470,16 @@ public class JdbcDOAImpl implements JdbcDAO {
     @Override
     public void deleteEvent(int eventId) {
 	try {
-//	    String sql2 = "DELETE FROM CHANNEL_EVENT CE WHERE CE.EVENT_ID=?";
-//	    log.debug(sql2);
-//	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-//	    stmt2.setInt(1, eventId);
-//	    int nb2 = stmt2.executeUpdate();
-//	    log.debug("nb delete:" + nb2);
-
 	    String sql = "DELETE FROM EVENT E WHERE E.ID=?";
 	    log.debug(sql);
 	    PreparedStatement stmt = connection.prepareStatement(sql);
-	    stmt.setInt(1, eventId);
-	    int nb = stmt.executeUpdate();
-	    stmt.close();
-	    log.debug("nb delete:" + nb);
-
+	    try {
+		stmt.setInt(1, eventId);
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete:" + nb);
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
