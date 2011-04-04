@@ -22,7 +22,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumerOperations;
 public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	ProxyForPullConsumerOperations {
 
-	private static Logger log = LoggerFactory.getLogger(ProxyForPushConsumerImpl.class);
+	private static Logger log = LoggerFactory.getLogger(ProxyForPullConsumerImpl.class);
 
 	public ProxyForPullConsumerImpl(String topic, String idComponent) {
 		super(topic, idComponent);
