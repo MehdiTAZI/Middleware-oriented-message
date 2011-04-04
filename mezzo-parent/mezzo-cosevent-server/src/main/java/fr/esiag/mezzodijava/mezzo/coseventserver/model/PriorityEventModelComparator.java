@@ -1,10 +1,9 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
+import java.io.Serializable;
 import java.util.Comparator;
 
-import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-
-public class PriorityEventModelComparator implements Comparator<EventModel> {
+public class PriorityEventModelComparator implements Comparator<EventModel>, Serializable {
 
     /**
      * Compare two events.
