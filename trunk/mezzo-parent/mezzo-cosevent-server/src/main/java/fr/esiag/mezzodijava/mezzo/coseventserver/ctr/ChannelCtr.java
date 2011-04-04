@@ -152,8 +152,7 @@ public class ChannelCtr {
 	public void addProxyForPushConsumerToSubscribedList(
 			ProxyForPushConsumerImpl proxyConsumer)
 			throws AlreadyRegisteredException {
-		log.trace("Add proxyPushConsumer {} to subscribedList",
-				proxyConsumer.toString());
+		log.trace("Add proxyPushConsumer to subscribedList");
 		String idConsumer = proxyConsumer.getIdComponent();
 		// ConsumerModel c = new ConsumerModel();
 		// c.setIdConsumer(idConsumer);
