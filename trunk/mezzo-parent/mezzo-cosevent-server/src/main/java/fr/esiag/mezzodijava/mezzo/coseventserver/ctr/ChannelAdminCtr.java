@@ -45,7 +45,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
  */
 
 public class ChannelAdminCtr {
-	
+
 	private static Logger log = LoggerFactory.getLogger(ChannelAdminCtr.class);
 	private Map<ProxyForPushConsumer, byte[]> oidProxyForPushConsumerMap = Collections
 			.synchronizedMap(new HashMap<ProxyForPushConsumer, byte[]>());
@@ -170,7 +170,7 @@ public class ChannelAdminCtr {
 		log.trace("proxyPushSupplier created");
 		return pps;
 	}
-	
+
 	/**
 	 * Create the Proxy For PULL Consumer and serve it with the CORBA POA.
 	 * 

@@ -212,7 +212,7 @@ public class ChannelCtr {
 		log.info("proxyPushSupplier {} connected to {}",
 				proxySupplier.toString(), channel.getTopic());
 	}
-	
+
 	/**
 	 * Add a Proxy for PULL Consumer to the Connected Consumers List for this
 	 * Channel.
@@ -246,7 +246,7 @@ public class ChannelCtr {
 		log.info("proxyPullConsumer {} connected to {}",
 				proxyConsumer.toString(), channel.getTopic());
 	}
-	
+
 	/**
 	 * Add a Proxy for PULL Supplier to the Connected Suppliers List for this
 	 * Channel.
@@ -355,7 +355,7 @@ public class ChannelCtr {
 			// DAOFactory.getChannelDAO().persist(channel);
 		}
 	}
-	
+
 	/**
 	 * Remove a Proxy PUSH Supplier from the connected list.
 	 * 
@@ -380,7 +380,7 @@ public class ChannelCtr {
 		log.debug("Disconnect of a PUSH Supplier from \"" + channel.getTopic()
 				+ "\".");
 	}
-	
+
 	/**
 	 * Remove a Proxy PULL Consumer from the connected list.
 	 * 
@@ -405,7 +405,7 @@ public class ChannelCtr {
 		log.debug("Disconnect of a PULL Consumer from \"" + channel.getTopic()
 				+ "\".");
 	}
-	
+
 	/**
 	 * Remove a Proxy PULL Supplier from the connected list.
 	 * 
@@ -457,7 +457,7 @@ public class ChannelCtr {
 		log.trace("Remove all proxies push for Consumer from the connected list.");
 		channel.setConsumersConnected(new HashMap<String, ProxyForPushConsumerImpl>());
 	}
-	
+
 	/**
 	 * Remove all proxies pull for Consumer from the connected list.
 	 * 
@@ -479,7 +479,7 @@ public class ChannelCtr {
 		log.trace("Remove all proxies push for Supplier from the connected list.");
 		channel.setSuppliersConnected(new HashMap<String, ProxyForPushSupplierImpl>());
 	}
-	
+
 	/**
 	 * Remove all proxies pull for Supplier from the connected list.
 	 * 
@@ -490,15 +490,16 @@ public class ChannelCtr {
 		log.trace("Remove all proxies pull for Supplier from the connected list.");
 		channel.setSuppliersPullConnected(new HashMap<String, ProxyForPullSupplierImpl>());
 	}
-	
-	public Event getEventForPull(){
-		if (channel.getPendingEvents()>0){
-			Event e = new EventConvertor().transformToEvent(channel.getEvents().last());
+
+	public Event getEventForPull() {
+		if (channel.getPendingEvents() > 0) {
+			Event e = new EventConvertor().transformToEvent(channel.getEvents()
+					.last());
 			return e;
-		}else{
+		} else {
 			return null;
 		}
-		
+
 	}
 
 }
