@@ -283,17 +283,17 @@ public class BFFactory {
     	log.debug("Destruction of {}",idChannel);
 	EventServer es = EventServer.getInstance();
 	String channelName = es.getChannel(idChannel).getTopic();
-	log.debug("Destruction of {} channel",idChannel);
+	log.trace("Destruction of {} channel",idChannel);
 	es.getMapChannel().remove(channelName);
-	log.debug("Destruction of {} channelAdminCtr",idChannel);
+	log.trace("Destruction of {} channelAdminCtr",idChannel);
 	mapChannelAdminCtr.remove(channelName);
-	log.debug("Destruction of {} channelAdminImpl",idChannel);
+	log.trace("Destruction of {} channelAdminImpl",idChannel);
 	mapChannelAdminImpl.remove(channelName);
-	log.debug("Destruction of {} channelCtr",idChannel);
+	log.trace("Destruction of {} channelCtr",idChannel);
 	mapChannelCtr.remove(channelName);
-	log.debug("Destruction of {} channelid",idChannel);
+	log.trace("Destruction of {} channelid",idChannel);
 	es.getMapChannelId().remove(idChannel);
-	log.debug("Destruction of {} done",idChannel);
+	log.trace("Destruction of {} done",idChannel);
     }
 
     /**
