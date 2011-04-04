@@ -65,27 +65,27 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    throws SQLException {
 	Scanner s = new Scanner(in);
 	s.useDelimiter("(;(\r)?\n)|(--\n)");
-	PreparedStatement st = null;
-	while (s.hasNext()) {
-	    String line = s.next();
-	    if (line.startsWith("/*!") && line.endsWith("*/")) {
-		int i = line.indexOf(' ');
-		line = line.substring(i + 1, line.length() - " */".length());
-	    }
+	Statement st = conn.createStatement();
+	try {
+	    while (s.hasNext()) {
+		String line = s.next();
+		if (line.startsWith("/*!") && line.endsWith("*/")) {
+		    int i = line.indexOf(' ');
+		    line = line
+			    .substring(i + 1, line.length() - " */".length());
+		}
 
-	    if (line.trim().length() > 0) {
-		try {
-		    log.info(line);
-		    st = conn.prepareStatement(line);
+		if (line.trim().length() > 0) {
 		    try {
+			log.info(line);
 			st.execute(line);
-		    } finally {
-			st.close();
+		    } catch (Exception e) {
+			log.warn(e.toString());
 		    }
-		} catch (Exception e) {
-		    log.info(e.toString());
 		}
 	    }
+	} finally {
+	    st.close();
 	}
     }
 
