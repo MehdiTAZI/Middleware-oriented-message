@@ -47,6 +47,19 @@ public class ConsumerModel {
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;
-	}    
-    
+	}
+	
+	public EventModel getLastFromQueue(){
+		EventModel em;
+		if (this.getQueueSize()==0){
+			return null;
+		}
+		em = this.getEvents().last();
+		this.getEvents().remove(em);
+		return em;
+	}
+	
+	public int getQueueSize(){
+		return this.eventsInQueue.size();
+	}  
 }

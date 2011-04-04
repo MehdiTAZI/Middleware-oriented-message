@@ -85,23 +85,17 @@ public class CosEventServer {
      * @throws TimeClientException
      * @throws EventServerException
      */
-    /**
-     * @param args
-     * @throws InterruptedException
-     * @throws TimeClientException
-     * @throws EventServerException
-     */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException, EventServerException {
 
 	String eventServerName = args[0];
 	Properties props = new Properties();
 
-//	if (args != null) {
-//	    channelName= args[0];
-//	     eventServerName=args[1];
-//
-//	}
+	///if (args != null) {
+	    // channelName= args[0];
+	    // eventServerName=args[1];
+
+	//}
 
 	try {
 	    props.load(this.getClass().getClassLoader()
@@ -147,6 +141,8 @@ public class CosEventServer {
 		    + "\" is running...");
 
 	    orb.run();
+	    
+	    
 
 	} catch (InvalidName e) {
 	    // TODO Auto-generated catch block
@@ -171,47 +167,45 @@ public class CosEventServer {
 	    e.printStackTrace();
 	}
     }
-
+    
     /**
-     * UC
-     * @param eventServerName
-     */
-    private void reloadPersistedChannel(String eventServerName) {
-	log.info("Mezzo COS Event Server \"" + eventServerName
+	 * UC
+	 * @param eventServerName
+	 */
+	 private void reloadPersistedChannel(String eventServerName){ 	
+	 	log.info("Mezzo COS Event Server \"" + eventServerName
 	    + "\" is loading persisted data...");
-	
-	// chargement des éléments de la base
-	JdbcDAO dao = DAOFactory.getJdbcDAO();
-	Collection<Channel> col = dao.findAllChannel();
-	ConsumerModel consumer;
-	
-	//ChannelDAO dao = DAOFactory.getChannelDAO();
-	//Collection<Channel> col = dao.findAll();
-	if (col != null) {
-	for (Channel c : col) {
-	    	SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
-		c.setEvents(setevents);
-		Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
-		for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
-			consumer = i.next();
-			SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
-			consumer.setEvents(events);
+	 	
+	 	// chargement des éléments de la base
+	    JdbcDAO dao = DAOFactory.getJdbcDAO();
+	    Collection<Channel> col = dao.findAllChannel();
+	    ConsumerModel consumer;
+	    
+	    //ChannelDAO dao = DAOFactory.getChannelDAO();
+	    //Collection<Channel> col = dao.findAll();
+	    if (col != null) {
+		for (Channel c : col) {
+			Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
+			for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
+				consumer = i.next();
+				SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
+				consumer.setEvents(events);
+			}
+			c.setConsumers(cmap);
+		    EventServer.getInstance().addChannel(c);
+		    // Publish the ChannelAdminImpl with Corba
+		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
+			    .getTopic());
+		    ChannelPublisher.publish(cai);
 		}
-		c.setConsumers(cmap);
-	    EventServer.getInstance().addChannel(c);
-	    // Publish the ChannelAdminImpl with Corba
-	    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
-		    .getTopic());
-	    ChannelPublisher.publish(cai);
-	}
-	log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
+		log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
 		+ col.size()
 		+ " persisted channel loaded and published.");
 	} else {
-	log.info("Mezzo COS Event Server \"" + eventServerName
+		log.info("Mezzo COS Event Server \"" + eventServerName
 		+ "\" 0 persisted channel loaded and published.");
 	}
-    }
+	}
 
     public static void main(String[] args) throws InterruptedException,
 	    TimeClientException, EventServerException {

@@ -21,7 +21,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumerOperations;
 
 public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	ProxyForPullConsumerOperations {
-
+	
 	private static Logger log = LoggerFactory.getLogger(ProxyForPullConsumerImpl.class);
 
 	public ProxyForPullConsumerImpl(String topic, String idComponent) {
@@ -32,7 +32,8 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	public void connect() throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
 		log.debug("Connection of a Pull Consumer (idComponent {}) to {}",idComponent,channelCtr.getChannel().getTopic());
-		channelCtr.addProxyForPullConsumerToConnectedList(this);		
+		channelCtr.addProxyForPullConsumerToConnectedList(this);
+		
 	}
 
 	@Override
@@ -48,21 +49,11 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 			NotConnectedException {
 		log.debug("Pull");
 		Event e;
-		// has events in list ?
-		hasEvent.value = (channelCtr.getChannel().getPendingEvents()!=0);
-		
-		// yes, so take it
-		if(hasEvent.value==true){
-			log.trace("There is some Event to process");
-			e = channelCtr.getEventForPull();
-		}else{
-			log.trace("There is not some Event to process");
-			// call the suppliers to generate events
-			e = new Event();
+		hasEvent=new BooleanHolder(false);
+		e = channelCtr.getEvent(this);
+		if (e!=null){
+			hasEvent.value=true;
 		}
 		return e;
 	}
-
-   
-
 }
