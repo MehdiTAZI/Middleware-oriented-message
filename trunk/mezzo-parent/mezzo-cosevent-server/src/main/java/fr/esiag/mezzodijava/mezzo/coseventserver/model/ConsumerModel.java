@@ -9,7 +9,7 @@ public class ConsumerModel {
     private static final long serialVersionUID = 1L;
 
     private int id;
-
+    
     private Channel channel;
 
     private String idConsumer;
@@ -47,7 +47,6 @@ public class ConsumerModel {
 
 	public void setChannel(Channel channel) {
 		this.channel = channel;
-	}
-    
+	}    
     
 }

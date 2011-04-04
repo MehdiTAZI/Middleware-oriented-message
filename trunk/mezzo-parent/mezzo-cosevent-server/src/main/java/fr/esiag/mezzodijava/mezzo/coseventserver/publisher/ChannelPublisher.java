@@ -16,10 +16,8 @@ import org.slf4j.LoggerFactory;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
 
 
 
@@ -35,7 +33,6 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
  */
 public class ChannelPublisher {
 	private static Logger log = LoggerFactory.getLogger(ChannelPublisher.class);
-    private static Thread thread;
 
     private static Map<ChannelAdminImpl, byte[]> oidMap = Collections
 	    .synchronizedMap(new HashMap<ChannelAdminImpl, byte[]>());
@@ -69,9 +66,9 @@ public class ChannelPublisher {
      */
     public static void publish(ChannelAdminImpl channelAdminImpl) {
 
-	ThreadEvent te = new ThreadEvent(channelAdminImpl.getTopic());
-	thread = new Thread(te);
-	thread.start();
+//	ThreadEvent te = new ThreadEvent(channelAdminImpl.getTopic());
+//	thread = new Thread(te);
+//	thread.start();
 	try {
 	    NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
 		    .getOrb().resolve_initial_references("NameService"));

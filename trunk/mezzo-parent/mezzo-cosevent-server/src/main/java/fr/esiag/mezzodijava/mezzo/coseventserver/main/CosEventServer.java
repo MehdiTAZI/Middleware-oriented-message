@@ -85,6 +85,12 @@ public class CosEventServer {
      * @throws TimeClientException
      * @throws EventServerException
      */
+    /**
+     * @param args
+     * @throws InterruptedException
+     * @throws TimeClientException
+     * @throws EventServerException
+     */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException, EventServerException {
 
@@ -135,40 +141,8 @@ public class CosEventServer {
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl());
 
-	    log.info("Mezzo COS Event Server \"" + eventServerName
-		    + "\" is loading persisted data...");
+	    reloadPersistedChannel(eventServerName);
 	    
-	    // chargement des éléments de la base
-	    JdbcDAO dao = DAOFactory.getJdbcDAO();
-	    Collection<Channel> col = dao.findAllChannel();
-	    ConsumerModel consumer;
-	    
-	    //ChannelDAO dao = DAOFactory.getChannelDAO();
-	    //Collection<Channel> col = dao.findAll();
-	    if (col != null) {
-		for (Channel c : col) {
-		    	SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
-			c.setEvents(setevents);
-			Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
-			for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
-				consumer = i.next();
-				SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
-				consumer.setEvents(events);
-			}
-			c.setConsumers(cmap);
-		    EventServer.getInstance().addChannel(c);
-		    // Publish the ChannelAdminImpl with Corba
-		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
-			    .getTopic());
-		    ChannelPublisher.publish(cai);
-		}
-		log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
-			+ col.size()
-			+ " persisted channel loaded and published.");
-	    } else {
-		log.info("Mezzo COS Event Server \"" + eventServerName
-			+ "\" 0 persisted channel loaded and published.");
-	    }
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
 
@@ -195,6 +169,47 @@ public class CosEventServer {
 	} catch (AdapterInactive e) {
 	    // TODO Auto-generated catch block
 	    e.printStackTrace();
+	}
+    }
+
+    /**
+     * UC
+     * @param eventServerName
+     */
+    private void reloadPersistedChannel(String eventServerName) {
+	log.info("Mezzo COS Event Server \"" + eventServerName
+	    + "\" is loading persisted data...");
+	
+	// chargement des éléments de la base
+	JdbcDAO dao = DAOFactory.getJdbcDAO();
+	Collection<Channel> col = dao.findAllChannel();
+	ConsumerModel consumer;
+	
+	//ChannelDAO dao = DAOFactory.getChannelDAO();
+	//Collection<Channel> col = dao.findAll();
+	if (col != null) {
+	for (Channel c : col) {
+	    	SortedSet<EventModel> setevents = dao.findEventByChannel(c.getId());
+		c.setEvents(setevents);
+		Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
+		for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
+			consumer = i.next();
+			SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
+			consumer.setEvents(events);
+		}
+		c.setConsumers(cmap);
+	    EventServer.getInstance().addChannel(c);
+	    // Publish the ChannelAdminImpl with Corba
+	    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
+		    .getTopic());
+	    ChannelPublisher.publish(cai);
+	}
+	log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
+		+ col.size()
+		+ " persisted channel loaded and published.");
+	} else {
+	log.info("Mezzo COS Event Server \"" + eventServerName
+		+ "\" 0 persisted channel loaded and published.");
 	}
     }
 

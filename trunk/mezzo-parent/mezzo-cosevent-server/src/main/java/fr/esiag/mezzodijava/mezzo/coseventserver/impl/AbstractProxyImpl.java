@@ -35,4 +35,8 @@ public class AbstractProxyImpl {
     	log.debug("Access to idComponent {} in AbstractProxyImpl",idComponent);
         return idComponent;
     }
+
+    public ChannelCtr getChannelCtr() {
+        return channelCtr;
+    }
 }
