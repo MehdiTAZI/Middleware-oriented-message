@@ -113,6 +113,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		c.setTopic(rs.getString("TOPIC"));
 		list.add(c);
 	    }
+	    rs.close();
 	    return list;
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -143,6 +144,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		e.setType(rs.getString("TYPE"));
 		set.add(e);
 	    }
+	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -165,6 +167,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		co.setIdConsumer(rs.getString("IDCONSUMER"));
 		map.put(co.getIdConsumer(), co);
 	    }
+	    rs.close();
 	    return Collections.synchronizedMap(map);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -194,6 +197,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		e.setType(rs.getString("TYPE"));
 		set.add(e);
 	    }
+	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -220,6 +224,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		channel.setId(cle);
 	    }
+	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -245,6 +250,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		consumer.setId(cle);
 	    }
+	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -275,6 +281,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		event.setId(cle);
 	    }
+	    clefs.close();
 	    return cle;
 
 	} catch (SQLException e) {
@@ -293,6 +300,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    stmt.setInt(1, consumerId);
 	    stmt.setInt(2, eventId);
 	    stmt.executeUpdate();
+	    stmt.close();
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
 	    throw new RuntimeException("SQL Error", e);
@@ -308,6 +316,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    stmt.setInt(1, channel.getCapacity());
 	    stmt.setInt(2, channel.getId());
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 	} catch (SQLException e) {
 	    log.error("SQL Error", e);
@@ -323,6 +332,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
 	    stmt2.setInt(1, consumerId);
 	    int nb2 = stmt2.executeUpdate();
+	    stmt2.close();
 	    log.debug("nb delete:" + nb2);
 
 	    String sql = "DELETE FROM CONSUMER WHERE ID=?";
@@ -330,6 +340,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, consumerId);
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
@@ -347,6 +358,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, channelId);
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
@@ -370,6 +382,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, channelId);
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
@@ -388,6 +401,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    stmt.setInt(1, consumerId);
 	    stmt.setInt(2, eventId);
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
@@ -411,6 +425,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    PreparedStatement stmt = connection.prepareStatement(sql);
 	    stmt.setInt(1, eventId);
 	    int nb = stmt.executeUpdate();
+	    stmt.close();
 	    log.debug("nb delete:" + nb);
 
 	} catch (SQLException e) {
