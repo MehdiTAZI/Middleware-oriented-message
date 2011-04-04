@@ -2,6 +2,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.dao;
 
 import java.io.InputStream;
 import java.sql.Blob;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -45,7 +46,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 		+ ";create=true");
 	log.info("Connected to database");
 	try {
-	    conn.prepareCall("SELECT COUNT(*) FROM CHANNEL").execute();
+	    CallableStatement stmt =conn.prepareCall("SELECT COUNT(*) FROM CHANNEL");
+	    stmt.execute();
+	    stmt.close();
 	} catch (SQLException e) {
 	    log.info("Shema doesn't exist. Creating...");
 	    importSQL(conn, getClass().getResourceAsStream("/cosevent.sql"));
@@ -104,7 +107,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    List<Channel> list = new ArrayList<Channel>();
 	    String sql = "SELECT * FROM CHANNEL";
 	    log.debug(sql);
-	    ResultSet rs = connection.prepareStatement(sql).executeQuery();
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    ResultSet rs = stmt.executeQuery();
 	    while (rs.next()) {
 		Channel c = new Channel();
 		c.setId(rs.getInt("ID"));
@@ -113,6 +117,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		c.setTopic(rs.getString("TOPIC"));
 		list.add(c);
 	    }
+	    stmt.close();
 	    rs.close();
 	    return list;
 	} catch (SQLException e) {
@@ -144,6 +149,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		e.setType(rs.getString("TYPE"));
 		set.add(e);
 	    }
+	    stmt.close();
 	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
@@ -167,6 +173,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		co.setIdConsumer(rs.getString("IDCONSUMER"));
 		map.put(co.getIdConsumer(), co);
 	    }
+	    stmt.close();
 	    rs.close();
 	    return Collections.synchronizedMap(map);
 	} catch (SQLException e) {
@@ -197,6 +204,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		e.setType(rs.getString("TYPE"));
 		set.add(e);
 	    }
+	    stmt.close();
 	    rs.close();
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
@@ -224,6 +232,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		channel.setId(cle);
 	    }
+	    stmt.close();
 	    clefs.close();
 	    return cle;
 
@@ -250,6 +259,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		consumer.setId(cle);
 	    }
+	    stmt.close();
 	    clefs.close();
 	    return cle;
 
@@ -281,6 +291,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		cle = clefs.getInt(1);
 		event.setId(cle);
 	    }
+	    stmt.close();
 	    clefs.close();
 	    return cle;
 
