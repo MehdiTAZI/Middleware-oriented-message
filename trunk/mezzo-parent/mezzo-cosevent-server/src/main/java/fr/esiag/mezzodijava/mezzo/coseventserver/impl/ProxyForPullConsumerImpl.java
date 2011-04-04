@@ -1,6 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
 import org.omg.CORBA.BooleanHolder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
@@ -20,6 +22,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumerOperations;
 public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	ProxyForPullConsumerOperations {
 
+	private static Logger log = LoggerFactory.getLogger(ProxyForPushConsumerImpl.class);
+
 	public ProxyForPullConsumerImpl(String topic, String idComponent) {
 		super(topic, idComponent);
 	}
@@ -27,33 +31,32 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	@Override
 	public void connect() throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
-		channelCtr.addProxyForPullConsumerToConnectedList(this);
-		System.out.println("Connect of a PULL Consumer to \""
-			+ channelCtr.getChannel().getTopic() + "\".");
-		
+		log.debug("Connection of a Pull Consumer (idComponent {}) to {}",idComponent,channelCtr.getChannel().getTopic());
+		channelCtr.addProxyForPullConsumerToConnectedList(this);		
 	}
 
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
+		log.debug("Disconnection of a Pull Consumer (idComponent {}) from {}",idComponent,channelCtr.getChannel().getTopic());
 		channelCtr.removeProxyForPullConsumerFromConnectedList(this);
-		System.out.println("Disconnect of a PULL Consumer from \""
-			+ channelCtr.getChannel().getTopic() + "\".");
 		
 	}
 
 	@Override
 	public Event pull(BooleanHolder hasEvent) throws ChannelNotFoundException,
 			NotConnectedException {
-		
+		log.debug("Pull");
 		Event e;
 		// has events in list ?
 		hasEvent.value = (channelCtr.getChannel().getPendingEvents()!=0);
 		
 		// yes, so take it
 		if(hasEvent.value==true){
+			log.trace("There is some Event");
 			e = channelCtr.getEventForPull();
 		}else{
+			log.trace("There is not some Event");
 			// call the suppliers to generate events
 			e = new Event();
 		}
