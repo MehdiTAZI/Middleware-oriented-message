@@ -40,9 +40,9 @@ public class TestJdbcDAOImpl {
     
     @Test
     public void testDao(){
-	List<Channel> list = dao.findAllChannel();
-	SortedSet<EventModel> set = dao.findEventByChannel(0);
-	Map<String, ConsumerModel> map = dao.findConsumerByChannel(0);
+	dao.findAllChannel();
+	dao.findEventByChannel(0);
+	dao.findConsumerByChannel(0);
 	dao.deleteEvent(0);
     }
 

@@ -38,12 +38,12 @@ public class TestChannelAdminCtr {
 
 	@Test
 	public void testCreateProxyForPushSupplier() {
-		ProxyForPushSupplier pps = cac.createProxyForPushSupplier("testconsumer");
+		cac.createProxyForPushSupplier("testconsumer");
 	}
 
 	@Test
 	public void testCreateProxyForPushConsumer() {
-		ProxyForPushConsumer ppc = cac.createProxyForPushConsumer("testconsumer");
+		cac.createProxyForPushConsumer("testconsumer");
 	}
 
 }
