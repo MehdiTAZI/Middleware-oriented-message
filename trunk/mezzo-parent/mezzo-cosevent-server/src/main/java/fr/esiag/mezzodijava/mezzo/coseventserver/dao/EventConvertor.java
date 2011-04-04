@@ -12,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 
@@ -37,7 +36,7 @@ public class EventConvertor {
 	}
 	// Get the bytes of the serialized object
 	byte[] buf = bos.toByteArray();
-	log.debug(buf.toString());
+	log.trace("bufer size = "+buf.length);
 	em.setCode(e.header.code);
 	em.setCreationdate(e.header.creationdate);
 	em.setData(buf);

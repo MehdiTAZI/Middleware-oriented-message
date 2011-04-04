@@ -182,7 +182,7 @@ public final class TimeClient {
 	try {
 	    service.subscribe(callbackIOR);
 	} catch (AlreadyRegisteredException e) {
-	    new TimeClientException("Deja abonne au COS Time "
+	    throw new TimeClientException("Deja abonne au COS Time "
 		    + timeServiceName, e);
 	}
     }

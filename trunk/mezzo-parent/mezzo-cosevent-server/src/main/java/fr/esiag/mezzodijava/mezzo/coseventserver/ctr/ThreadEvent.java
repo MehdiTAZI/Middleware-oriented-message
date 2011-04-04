@@ -101,7 +101,7 @@ public class ThreadEvent implements Runnable {
 		    // Must be in
 		    // synchronized
 		    // block
-		    while (i.hasNext() && pfpc != null) {
+		    while (i.hasNext()) {
 			EventModel em = i.next();
 			try {
 			    long delta = CosEventServer.getDelta();
