@@ -2,6 +2,9 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
@@ -24,6 +27,9 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	ProxyForPushSupplierOperations {
+	
+	private static Logger log = LoggerFactory
+	.getLogger(ProxyForPushSupplierImpl.class);
 
     public ProxyForPushSupplierImpl(String topic, String idComponent) {
 	super(topic, idComponent);
@@ -44,6 +50,8 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	    MaximalConnectionReachedException {
 	channelCtr.addProxyForPushSupplierToConnectedList(this);
 	connected = true;
+	log.debug("Connection of a Push Supplier (idComponent {}) from {}",
+			idComponent, channelCtr.getChannel().getTopic());
 
     }
 
@@ -59,6 +67,8 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
     public void disconnect() throws NotConnectedException {
 	channelCtr.removeProxyForPushSupplierFromConnectedList(this);
 	connected = false;
+	log.debug("Disconnection of a Push Supplier (idComponent {}) from {}",
+			idComponent, channelCtr.getChannel().getTopic());
 
     }
 
@@ -74,10 +84,13 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
     public void push(Event evt) throws NotConnectedException {
 
 	if (!connected) {
+		log.error("Not connected");
 	    throw new NotConnectedException();
 	}
 
 	channelCtr.addEvent(evt);
+	log.debug(" Push Consumer (idComponent {}) just sent an Event on {}",
+			idComponent, channelCtr.getChannel().getTopic());
 
     }
 }
