@@ -49,7 +49,7 @@ public class EventConvertor {
 
     public Event transformToEvent(EventModel em) {
 	try {
-	    Event e = new Event();
+	    Event e;
 	    // Deserialize from a byte array
 	    ObjectInputStream in;
 	    in = new ObjectInputStream(new ByteArrayInputStream(em.getData()));

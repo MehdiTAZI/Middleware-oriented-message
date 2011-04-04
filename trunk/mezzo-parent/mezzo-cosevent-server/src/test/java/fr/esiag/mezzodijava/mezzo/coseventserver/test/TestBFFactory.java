@@ -38,8 +38,8 @@ public class TestBFFactory {
 	String name = "createChannel";
 	int capacity = 0;
 	try {
-	    Channel chanOutput = BFFactory.createChannel(name, capacity);
-	    Channel chanOutput2 = BFFactory.createChannel(name, capacity);
+	     BFFactory.createChannel(name, capacity);
+	     BFFactory.createChannel(name, capacity);
 	    fail("exception non levée");
 	} catch (ChannelAlreadyExistsException e) {
 	    assertTrue(true);

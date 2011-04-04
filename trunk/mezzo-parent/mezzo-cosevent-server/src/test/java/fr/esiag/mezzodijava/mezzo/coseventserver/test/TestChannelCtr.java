@@ -35,7 +35,7 @@ public class TestChannelCtr {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String topic = "bla";
-		Channel channel = EventServer.getInstance().createChannelEntity(topic, 3);
+		EventServer.getInstance().createChannelEntity(topic, 3);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -48,7 +48,7 @@ public class TestChannelCtr {
 		Random rm = new Random();
 		topic = rm.nextInt() + "";
 		System.out.println(topic);
-		Channel channel = EventServer.getInstance().createChannelEntity(topic, 2);
+		EventServer.getInstance().createChannelEntity(topic, 2);
 		channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
@@ -175,10 +175,7 @@ public class TestChannelCtr {
 	public void testAddProxyForPushConsumerToConnectedListNotRegistered()
 			throws AlreadyRegisteredException, AlreadyConnectedException,
 			MaximalConnectionReachedException {
-		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
-		ProxyForPushConsumerImpl ppc2 = new ProxyForPushConsumerImpl(topic,"testconsumer2");
-		ProxyForPushConsumerImpl ppc3 = new ProxyForPushConsumerImpl(topic,"testconsumer3");
-		try {
+		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");		try {
 			channelCtr.addProxyForPushConsumerToConnectedList(ppc);
 			fail();
 		} catch (NotRegisteredException e) {
@@ -238,7 +235,6 @@ public class TestChannelCtr {
 	public void testAddProxyForPushSupplierToConnectedListNormal()
 			throws AlreadyConnectedException, MaximalConnectionReachedException {
 		ProxyForPushSupplierImpl pps = new ProxyForPushSupplierImpl(topic,"testsupplier");
-		ProxyForPushSupplierImpl pps2 = new ProxyForPushSupplierImpl(topic,"testsupplier2");
 
 		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 		channel.setCapacity(30);
