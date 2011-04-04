@@ -18,7 +18,6 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 /**
  * Class ThreadPushConsumer to process event in queues and send them to consumers
@@ -37,7 +36,6 @@ public class ThreadPushConsumer implements Runnable {
 	    .getLogger(ThreadPushConsumer.class);
     private ProxyForPushConsumerImpl pfpc;
     private ConsumerModel consumer;
-    private EventServer es = EventServer.getInstance();
 
     private JdbcDAO dao = DAOFactory.getJdbcDAO();
 

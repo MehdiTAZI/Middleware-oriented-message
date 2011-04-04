@@ -49,6 +49,10 @@ module cosevent {
 		string message;
 	};
 	
+	exception SupplierNotFoundException{
+		string message;
+	};
+	
 	exception CannotReduceCapacityException{
 		string message;
 	};
@@ -58,7 +62,7 @@ module cosevent {
 	};
 	
 	interface CallbackSupplier{
-		Event ask(out boolean hasEvent) raises (ConsumerNotFoundException);
+		Event ask() raises (SupplierNotFoundException);
 	};
 		
 	interface ProxyForPushConsumer{			
@@ -81,8 +85,8 @@ module cosevent {
 	};
 	
 	interface ProxyForPullSupplier{		
-		void connect(in CallbackSupplier cs) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException,NotRegisteredException);
-		void disconnect() raises (ChannelNotFoundException,NotConnectedException,NotRegisteredException);	
+		void connect(in CallbackSupplier cs) raises (ChannelNotFoundException,AlreadyConnectedException,MaximalConnectionReachedException);
+		void disconnect() raises (ChannelNotFoundException,NotConnectedException);	
 	};
 	
 	interface ChannelAdmin{

@@ -49,7 +49,7 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
     public void connect() throws AlreadyConnectedException,
 	    MaximalConnectionReachedException {
 	channelCtr.addProxyForPushSupplierToConnectedList(this);
-	connected = true;
+	connected=true;
 	log.debug("Connection of a Push Supplier (idComponent {}) from {}",
 			idComponent, channelCtr.getChannel().getTopic());
 
@@ -66,7 +66,7 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
     @Override
     public void disconnect() throws NotConnectedException {
 	channelCtr.removeProxyForPushSupplierFromConnectedList(this);
-	connected = false;
+	connected=false;
 	log.debug("Disconnection of a Push Supplier (idComponent {}) from {}",
 			idComponent, channelCtr.getChannel().getTopic());
 

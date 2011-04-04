@@ -82,7 +82,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
 	}
 
 	/**
-	 * To allow consumer reveice Events from the Channel.
+	 * To allow consumer receive Events from the Channel.
 	 * 
 	 * Call the callback interface of the consumer client to PUSH the Event.
 	 * 
