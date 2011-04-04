@@ -4,10 +4,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +27,6 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelComparator;
 
 /**
  * Classe ChannelCtr

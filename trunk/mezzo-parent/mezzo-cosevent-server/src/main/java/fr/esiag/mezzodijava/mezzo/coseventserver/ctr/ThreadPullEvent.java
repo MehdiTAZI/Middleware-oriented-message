@@ -3,40 +3,72 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
 
-public class ThreadPullEvent implements Runnable{
-	
-	private static Logger log = LoggerFactory.getLogger(ThreadEvent.class);
-    private Channel channel;
-    private EventServer es = EventServer.getInstance();
+/**
+ * Class ThreadPullSupplier to ask suppliers for events
+ * 
+ * 
+ * @author Mezzo-Team
+ * 
+ */
+public class ThreadPullEvent implements Runnable {
     
-    public ThreadPullEvent(String topic) {
-	log.trace("ThreadPullEvent created");
-	channel = es.getChannel(topic);
+	private static Logger log = LoggerFactory
+	    .getLogger(ThreadPushConsumer.class);
+    private ProxyForPullSupplierImpl pfps;
+
+    public ThreadPullEvent(ProxyForPullSupplierImpl proxySupplier) {
+    	log.trace("ThreadPullEvent created");
+    	pfps = proxySupplier;
     }
 
-    public void processConnectedSupplier() {
-    	log.trace("process connected supplier");
-    	//ProxyForPullSupplier pfps
-		//Event e = pfps.ask();	
-    	//channel.addEvent(em);
-	    }
-
     /**
-     * Run the thread to process events
+     * If the supplier is connected
      * 
      */
     @Override
     public void run() {
-	while (true) {
-	    processConnectedSupplier();
-	    try {
-		Thread.sleep(500);
-	    } catch (InterruptedException e) {
-		e.printStackTrace();
-	    }
-	}
+    	log.trace("process connected suppliers");
+    	boolean trouve=true;
+    	Event ev;
+    	while (trouve) {
+    		try{
+				ev=pfps.ask();
+				if (ev==null){
+					trouve=false;
+				}else{
+					pfps.getChannelCtr().addEvent(ev);
+				}
+    		} catch (SupplierNotFoundException e1) {
+				log.debug("Supplier seems to be unreachable", e1);
+				// Supplier seems to be unreachable so it's time
+				// to disconnect it
+				try {
+				    pfps.disconnect();
+				    log.debug("Supplier disconnected");
+				} catch (NotConnectedException e2) {
+				    log.error(
+					    "Can't disconnect : Supplier not connected",
+					    e2);
+				} catch (ChannelNotFoundException e3) {
+					log.error(
+						    "Can't disconnect : Channel not found",
+						    e3);
+				}
+    		}
+	
+    		try {
+    			Thread.sleep(500);
+    		} catch (InterruptedException e) {
+    			log.error(
+					    "Error, interrupted thread",
+					    e);
+    		}
+    	}
     }
 }

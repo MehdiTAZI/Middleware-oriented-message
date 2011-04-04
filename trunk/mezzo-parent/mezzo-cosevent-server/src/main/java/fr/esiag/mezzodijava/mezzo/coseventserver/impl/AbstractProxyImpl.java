@@ -11,12 +11,13 @@ public class AbstractProxyImpl {
 	private static Logger log = LoggerFactory.getLogger(AbstractProxyImpl.class);
 
     protected String idComponent;
+    
+    protected boolean connected;
+    
     /**
      * The Channel Controller used by this facade
      */
     protected ChannelCtr channelCtr;
-
-    protected boolean connected = false;
 
     /**
      * Build a ProxyForPushSupplier instance associated with the given topic and
