@@ -1,5 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumer;
@@ -22,6 +25,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  */
 
 public class ChannelAdminImpl implements ChannelAdminOperations {
+	
+	private static Logger log = LoggerFactory.getLogger(ChannelAdminImpl.class);
 
     private ChannelAdminCtr channelAdminctrl;
     private String topic;
@@ -37,6 +42,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
      *            Channel Topic
      */
     public ChannelAdminImpl(String topic) {
+    	log.debug("Instanciation of ChannelAdminImpl for {}",topic);
 	this.topic = topic;
 	this.channelAdminctrl = BFFactory.createChannelAdminCtr(topic);
     }
@@ -52,6 +58,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
     @Override
     public ProxyForPushConsumer getProxyForPushConsumer(String idComponent)
 	    throws ChannelNotFoundException {
+    	log.debug("Access to ProxyForPushConsumer in ChannelAdminImpl for {}",idComponent);
 	return channelAdminctrl.createProxyForPushConsumer(idComponent);
     }
 
@@ -66,6 +73,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
     @Override
     public ProxyForPushSupplier getProxyForPushSupplier(String idComponent)
 	    throws ChannelNotFoundException {
+    	log.debug("Access to ProxyForPushSupplier in ChannelAdminImpl for {}",idComponent);
 	return channelAdminctrl.createProxyForPushSupplier(idComponent);
     }
 
@@ -89,6 +97,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	@Override
 	public ProxyForPullConsumer getProxyForPullConsumer(String idComponent)
 			throws ChannelNotFoundException {
+    	log.debug("Access to ProxyForPullConsumer in ChannelAdminImpl for {}",idComponent);
 		return channelAdminctrl.createProxyForPullConsumer(idComponent);
 	}
 	
@@ -103,6 +112,7 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
 	@Override
 	public ProxyForPullSupplier getProxyForPullSupplier(String idComponent)
 			throws ChannelNotFoundException {
+    	log.debug("Access to ProxyForPullSupplier in ChannelAdminImpl for {}",idComponent);
 		return channelAdminctrl.createProxyForPullSupplier(idComponent);
 	}
 
