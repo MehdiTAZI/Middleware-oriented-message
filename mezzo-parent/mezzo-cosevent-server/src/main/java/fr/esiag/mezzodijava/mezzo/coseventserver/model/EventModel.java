@@ -29,7 +29,7 @@ public class EventModel implements Serializable {
 	super();
 	this.id = id;
 	this.priority = priority;
-	this.data = data;
+	this.data = data.clone();
 	this.code = code;
 	this.creationdate = creationdate;
 	this.timetolive = timetolive;
@@ -57,7 +57,7 @@ public class EventModel implements Serializable {
     }
 
     public void setData(byte[] data) {
-	this.data = data;
+	this.data = data.clone();
     }
 
     public static long getSerialversionuid() {

@@ -48,8 +48,11 @@ public class JdbcDOAImpl implements JdbcDAO {
 	try {
 	    CallableStatement stmt = conn
 		    .prepareCall("SELECT COUNT(*) FROM CHANNEL");
-	    stmt.execute();
-	    stmt.close();
+	    try {
+		stmt.execute();
+	    } finally {
+		stmt.close();
+	    }
 	} catch (SQLException e) {
 	    log.info("Shema doesn't exist. Creating...");
 	    importSQL(conn, getClass().getResourceAsStream("/cosevent.sql"));
@@ -62,29 +65,27 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    throws SQLException {
 	Scanner s = new Scanner(in);
 	s.useDelimiter("(;(\r)?\n)|(--\n)");
-	Statement st = null;
-	try {
-	    st = conn.createStatement();
-	    while (s.hasNext()) {
-		String line = s.next();
-		if (line.startsWith("/*!") && line.endsWith("*/")) {
-		    int i = line.indexOf(' ');
-		    line = line
-			    .substring(i + 1, line.length() - " */".length());
-		}
+	PreparedStatement st = null;
+	while (s.hasNext()) {
+	    String line = s.next();
+	    if (line.startsWith("/*!") && line.endsWith("*/")) {
+		int i = line.indexOf(' ');
+		line = line.substring(i + 1, line.length() - " */".length());
+	    }
 
-		if (line.trim().length() > 0) {
+	    if (line.trim().length() > 0) {
+		try {
+		    log.info(line);
+		    st = conn.prepareStatement(line);
 		    try {
-			log.info(line);
 			st.execute(line);
-		    } catch (Exception e) {
-			log.info(e.toString());
+		    } finally {
+			st.close();
 		    }
+		} catch (Exception e) {
+		    log.info(e.toString());
 		}
 	    }
-	} finally {
-	    if (st != null)
-		st.close();
 	}
     }
 

@@ -5,7 +5,6 @@ import java.util.SortedSet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
@@ -41,7 +40,7 @@ public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 				log.trace("ConsumersConnected = "+ list[i].consumersConnected+". ");
 				log.trace("ConsumersSubscribed = "+ list[i].consumersSubscribed+". ");
 				log.trace("SuppliersConnected = "+ list[i].suppliersConnected+". ");
-				log.trace("Messages = "+ list[i].messages+". ");
+				log.trace("Messages (nb)= "+ list[i].messages.length+". ");
 				log.trace("End of infos on channel :"+ list[i].topic+". ");
 				i++;
 			}
