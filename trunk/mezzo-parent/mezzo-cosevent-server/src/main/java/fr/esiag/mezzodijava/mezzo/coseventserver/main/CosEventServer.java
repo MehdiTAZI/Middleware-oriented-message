@@ -97,11 +97,11 @@ public class CosEventServer {
 	String eventServerName = args[0];
 	Properties props = new Properties();
 
-	if (args != null) {
-	    // channelName= args[0];
-	    // eventServerName=args[1];
-
-	}
+//	if (args != null) {
+//	    channelName= args[0];
+//	     eventServerName=args[1];
+//
+//	}
 
 	try {
 	    props.load(this.getClass().getClassLoader()
