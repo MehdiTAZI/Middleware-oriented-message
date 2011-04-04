@@ -10,6 +10,8 @@ import org.omg.CosNaming.NamingContextExtHelper;
 import org.omg.PortableServer.POA;
 import org.omg.PortableServer.POAHelper;
 import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
@@ -17,6 +19,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventComparator;
+
+
 
 /**
  * Classe ChannelPublisher
@@ -29,6 +34,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
  * 
  */
 public class ChannelPublisher {
+	private static Logger log = LoggerFactory.getLogger(ChannelPublisher.class);
     private static Thread thread;
 
     private static Map<ChannelAdminImpl, byte[]> oidMap = Collections
@@ -37,6 +43,7 @@ public class ChannelPublisher {
     private static POA poa;
 
     private static synchronized POA getPOA() {
+    	
 	try {
 	    if (poa == null) {
 		poa = POAHelper.narrow(BFFactory.getOrb()
@@ -45,12 +52,11 @@ public class ChannelPublisher {
 	    }
 
 	} catch (InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Name not valid",e);
 	} catch (AdapterInactive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	   log.error("Adapter inactive",e);
 	}
+	log.debug("POA accessed");
 	return poa;
     }
 
@@ -76,9 +82,10 @@ public class ChannelPublisher {
 		    .id_to_reference(oid));
 
 	} catch (Exception e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	   log.error("CORBA ERROR",e);
+	   
 	}
+	log.debug("ChannelAdminImpl of {} is published",channelAdminImpl.getTopic());
     }
 
     /**
@@ -105,7 +112,8 @@ public class ChannelPublisher {
 	    	getPOA().deactivate_object(channelAdminImpl.getChannelAdminctrl().getOidProxyForPushSupplierMap().get(pps));
 	    }
 	} catch (Exception e) {
-	    System.out.println("Impossible de contacter le name service");
+		log.error("Unable to contact NameService",e);
 	}
+	log.debug("Destruction of ChannelAdminImpl {} is done",channelAdminImpl.getTopic());
     }
 }
