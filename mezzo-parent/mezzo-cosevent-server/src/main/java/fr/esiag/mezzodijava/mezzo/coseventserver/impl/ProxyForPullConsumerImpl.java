@@ -53,10 +53,10 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 		
 		// yes, so take it
 		if(hasEvent.value==true){
-			log.trace("There is some Event");
+			log.trace("There is some Event to process");
 			e = channelCtr.getEventForPull();
 		}else{
-			log.trace("There is not some Event");
+			log.trace("There is not some Event to process");
 			// call the suppliers to generate events
 			e = new Event();
 		}
