@@ -8,11 +8,16 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 
 public class EventConvertor {
+	private static Logger log = LoggerFactory.getLogger(EventConvertor.class);
 
     public EventModel transformToEventModel(Event e) {
 	EventModel em = new EventModel();
@@ -63,7 +68,8 @@ public class EventConvertor {
 
 	    return e;
 	} catch (Exception e1) {
-	   throw new RuntimeException("error in transformToEvent", e1);
+		log.error("Error in transformToEvent",e1);
+		throw new RuntimeException("error in transformToEvent", e1);
 	}
     }
 }
