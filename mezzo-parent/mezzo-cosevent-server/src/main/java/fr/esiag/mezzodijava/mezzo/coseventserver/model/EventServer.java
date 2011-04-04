@@ -4,6 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.AbstractProxyImpl;
+
 /**
  * Entity Class EventServer
  * 
@@ -15,6 +20,9 @@ import java.util.Map;
  * 
  */
 public class EventServer {
+	
+	private static Logger log = LoggerFactory.getLogger(EventServer.class);
+
 
     private static EventServer instance = null;
     
@@ -62,12 +70,13 @@ public class EventServer {
      */
     public synchronized Channel createChannelEntity(String topic,
 	    int capacity) {
+    	log.debug("Creation of channelEntity {} with a capacity of {}",topic,capacity);
 	if (mapChannel.get(topic) == null) {
 	    Channel channel = new Channel(topic, capacity);
 	    mapChannel.put(topic, channel);
 		// Register the channel entity in id map
 	    mapChannelId.put(channel.getIdentifier(), channel);
-	    System.out.println("createChannelEntoty " + channel.getIdentifier());
+	    log.trace("Create channelEntity with an identifier of {}",channel.getIdentifier());
 	}
 	return mapChannel.get(topic);
     }
@@ -81,6 +90,7 @@ public class EventServer {
     public void addChannel(Channel channel) {
 	this.mapChannel.put(channel.getTopic(),channel);
 	this.mapChannelId.put(channel.getIdentifier(),channel);
+	log.debug("EventServer added a channel {}",channel.getTopic());
     }
     
     /**

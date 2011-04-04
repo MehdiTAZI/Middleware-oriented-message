@@ -2,9 +2,14 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.Comparator;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 public class PriorityEventComparator implements Comparator<Event> {
+
+	private static Logger log = LoggerFactory.getLogger(PriorityEventComparator.class);
 
     /**
      * Compare two events.
@@ -19,6 +24,7 @@ public class PriorityEventComparator implements Comparator<Event> {
     @Override
     public synchronized int compare(Event evt1, Event evt2) {
 
+    	log.debug("Compare {} with {}",evt1.header.code,evt2.header.code);
 	if (evt1.header.priority > evt2.header.priority) {
 	    return -1;
 	}
