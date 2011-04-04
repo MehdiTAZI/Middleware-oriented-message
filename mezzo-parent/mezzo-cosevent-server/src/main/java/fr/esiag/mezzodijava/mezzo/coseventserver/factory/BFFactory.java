@@ -85,6 +85,7 @@ public class BFFactory {
      */
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
+	mapChannelCtr.get(channel.getTopic()).getThreadPool().setMaxSize(capacity);
 	log.debug("Capacity of channel {} changed to {}",channel,capacity);
 	EventServer.getInstance().getMapChannel()
 		.put(channel.getTopic(), channel);
