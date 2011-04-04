@@ -26,19 +26,18 @@ public class Channel implements Serializable {
 
     private int connectionCapacity;
 
-    // @ElementCollection
-    // @CollectionTable(name = "EVENT")
-    // @Column(name = "events")
-    // @LazyCollection(LazyCollectionOption.FALSE)
-    private SortedSet<EventModel> events = Collections
-    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));
+    /*private SortedSet<EventModel> events = Collections
+    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));*/
 
     private Map<String, ConsumerModel> consumers = Collections
+    .synchronizedMap(new HashMap<String, ConsumerModel>());
+    
+    private Map<String, ConsumerModel> consumersPull = Collections
     .synchronizedMap(new HashMap<String, ConsumerModel>());
 
     private Map<String, ProxyForPushConsumerImpl> consumersConnected = new HashMap<String, ProxyForPushConsumerImpl>();
     private Map<String, ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String, ProxyForPushSupplierImpl>();
-    private Map<String, ProxyForPullConsumerImpl> consumersPullConnected = new HashMap<String, ProxyForPullConsumerImpl>();
+    //private Map<String, ProxyForPullConsumerImpl> consumersPullConnected = new HashMap<String, ProxyForPullConsumerImpl>();
     private Map<String, ProxyForPullSupplierImpl> suppliersPullConnected = new HashMap<String, ProxyForPullSupplierImpl>();
     
     public Channel() {
@@ -58,12 +57,12 @@ public class Channel implements Serializable {
 	this.topic = topic;
 	this.connectionCapacity = connectionCapacity;
 	this.identifier = RandomChannelIdentifier.getUniqueIdentifier();
-	events.clear();
+	//events.clear();
 
     }
 
     /**
-     * Add a Push Consumer to the connected list.
+     * Add a Push Consumer to the subscribed list.
      * 
      * @param ppc
      *            the push consumer to add.
@@ -73,6 +72,20 @@ public class Channel implements Serializable {
 	nouveau.setIdConsumer(idConsumer);
 	nouveau.setChannel(this);
 	this.consumers.put(nouveau.getIdConsumer(), nouveau);
+	return nouveau;
+    }
+    
+    /**
+     * Add a Pull Consumer to the connected list.
+     * 
+     * @param ppc
+     *            the pull consumer to add.
+     */
+    public ConsumerModel addPullConsumer(String idConsumer) {
+	ConsumerModel nouveau = new ConsumerModel();
+	nouveau.setIdConsumer(idConsumer);
+	nouveau.setChannel(this);
+	this.consumersPull.put(nouveau.getIdConsumer(), nouveau);
 	return nouveau;
     }
 
@@ -92,15 +105,6 @@ public class Channel implements Serializable {
      */
     public Map<String, ProxyForPushConsumerImpl> getConsumersConnected() {
 	return consumersConnected;
-    }
-    
-    /**
-     * Pull Consumers connected.
-     * 
-     * @return set of ProxyPullConsumerImpl
-     */
-    public Map<String, ProxyForPullConsumerImpl> getConsumersPullConnected() {
-	return consumersPullConnected;
     }
 
     /**
@@ -136,7 +140,7 @@ public class Channel implements Serializable {
      * @return true if the list is full.
      */
     public boolean isConsumersConnectedListcapacityReached() {
-	return connectionCapacity == consumersConnected.size()+consumersPullConnected.size();
+	return connectionCapacity == consumersConnected.size()+consumersPull.size();
     }
 
     /**
@@ -145,7 +149,7 @@ public class Channel implements Serializable {
      * @return true if the list is full.
      */
     public boolean isSuppliersConnectedsListcapacityReached() {
-	return connectionCapacity == suppliersConnected.size()+consumersPullConnected.size();
+	return connectionCapacity == suppliersConnected.size()+consumersPull.size();
     }
 
     /**
@@ -169,18 +173,6 @@ public class Channel implements Serializable {
 	    Map<String, ProxyForPushConsumerImpl> consumersConnected) {
 	this.consumersConnected = consumersConnected;
     }
-    
-    /**
-     * Getter of the set of connected pull consumer.
-     * 
-     * For persistance purpose only.
-     * 
-     * @param consumersPullConnected
-     */
-    public void setConsumersPullConnected(
-	    Map<String, ProxyForPullConsumerImpl> consumersPullConnected) {
-	this.consumersPullConnected = consumersPullConnected;
-    }
 
     /**
      * Getter of the set of subscribed push consumer.
@@ -191,6 +183,17 @@ public class Channel implements Serializable {
      */
     public Map<String, ConsumerModel> getConsumers() {
 	return consumers;
+    }
+    
+    /**
+     * Getter of the set of subscribed push consumer.
+     * 
+     * For persistance purpose only.
+     * 
+     * @param consumersSubscribed
+     */
+    public Map<String, ConsumerModel> getConsumersPull() {
+	return consumersPull;
     }
 
     public void setConsumers(Map<String, ConsumerModel> consumers) {
@@ -239,16 +242,6 @@ public class Channel implements Serializable {
 	this.identifier = identifier;
     }
 
-    /**
-     * Add en event in the queue.
-     * 
-     * @param event
-     *            an Event.
-     */
-    public void addEvent(EventModel em) {
-	events.add(em);
-    }
-
     public int getConnectionCapacity() {
 	return connectionCapacity;
     }
@@ -257,15 +250,6 @@ public class Channel implements Serializable {
 	this.connectionCapacity = connectionCapacity;
     }
 
-    public SortedSet<EventModel> getEvents() {
-	return events;
-    }
-
-    public void setEvents(SortedSet<EventModel> events) {
-	this.events = events;
-    }
-
-
 	public int getId() {
 		return id;
 	}
@@ -273,10 +257,8 @@ public class Channel implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-    
-	public int getPendingEvents(){
-		return events.size();
-	}
-    
 
+	public void setConsumersPull(Map<String, ConsumerModel> consumersPull) {
+		this.consumersPull = consumersPull;
+	}
 }
