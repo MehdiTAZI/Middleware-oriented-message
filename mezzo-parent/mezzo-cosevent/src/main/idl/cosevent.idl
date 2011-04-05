@@ -62,7 +62,7 @@ module cosevent {
 	};
 	
 	interface CallbackSupplier{
-		Event ask() raises (SupplierNotFoundException);
+		Event ask(out boolean hasEvent) raises (SupplierNotFoundException);
 	};
 		
 	interface ProxyForPushConsumer{			

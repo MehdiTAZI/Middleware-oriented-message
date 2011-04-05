@@ -6,6 +6,7 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,7 +83,7 @@ public class ChannelCtr {
 			// ajout dans la liste nécessaire pour les consumer PULL
 			//channel.getEvents().add(em);
 			// persistance de l'event
-			// DAOFactory.getJdbcDAO().insertEvent(channel.getId(), em);
+			DAOFactory.getJdbcDAO().insertEvent(channel.getId(), em);
 
 			// ajout dans les listes des consumers PUSH
 			for (ConsumerModel consumer : channel.getConsumers().values()) {
@@ -98,7 +99,7 @@ public class ChannelCtr {
 				consumer.getEvents().add(em);
 				// persistance de l'event
 				// DAOFactory.getJdbcDAO().addEventToConsumer(em.getId(),consumer.getId());
-				log.info("Event PULL " + e.toString() + " " + e.body.content
+				log.debug("Event PULL " + e.toString() + " " + e.body.content
 						+ " nb evt =" + consumer.getEvents().size());
 			}
 
@@ -284,6 +285,7 @@ public class ChannelCtr {
 			throw new AlreadyConnectedException();
 		}
 		channel.getSuppliersPullConnected().put(idSupplier, proxySupplier);
+		threadPool.runTask(new ThreadPullEvent(proxySupplier));
 		log.info("proxyPushSupplier {} connected to {}",
 				proxySupplier.toString(), channel.getTopic());
 	}
@@ -505,23 +507,22 @@ public class ChannelCtr {
 	public Event getEvent(ProxyForPullConsumerImpl proxyConsumer)
 		throws NotConnectedException {
 		
-		Event e;
-		EventModel em;
 		log.trace("GetEvents for proxyPullConsumer {}",
-		proxyConsumer.toString());
+				proxyConsumer.toString());
+		EventModel em;
+		Event e;
 		String idConsumer = proxyConsumer.getIdComponent();
-		ConsumerModel c = new ConsumerModel();
-		c.setIdConsumer(idConsumer);
-		if (channel.getConsumersPull().containsKey(idConsumer) == false) {
+		ConsumerModel c = channel.getConsumersPull().get(idConsumer);
+		if (c == null) {
 			log.error("{} can't get events because it's not connected",
 			proxyConsumer.toString());
 			throw new NotConnectedException();
 		} else {
-			em = c.getLastFromQueue();
+			em = c.getFirstFromQueue();
 			if (em!=null){
 				e = new EventConvertor().transformToEvent(em);
 			}else{
-				e=null;
+				e = null;
 			}
 			return e;
 		}

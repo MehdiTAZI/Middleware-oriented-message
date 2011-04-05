@@ -1,5 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.omg.CORBA.BooleanHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -56,7 +57,8 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 	public Event ask() throws SupplierNotFoundException{
 		Event e;
 		try {
-			e = callbackSupplier.ask();
+			BooleanHolder hasEvent=new BooleanHolder();
+			e = callbackSupplier.ask(hasEvent);
 			log.debug("PullSupplier {} just ask for an event",idComponent);
 			return e;
 		} catch (org.omg.CORBA.SystemException ex) {
