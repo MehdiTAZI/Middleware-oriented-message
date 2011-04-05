@@ -20,6 +20,9 @@ import org.slf4j.LoggerFactory;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplier;
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplierOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplierPOATie;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
@@ -236,6 +239,41 @@ public final class EventClient {
 
 	// obtain the objectRef for the tie
 	CallbackConsumer href = tie._this(orb);
+	// return the object and
+	return href;
+    }
+    
+    /**
+     * Server a CallBackSupplier and return its IOR.
+     * 
+     * @param callbackSupplierImplementation
+     *            implementation of callbackSupplierOperation
+     * @return IOR CallbackSupplier
+     * @throws EventClientException
+     */
+    public CallbackSupplier serveCallbackSupplier(
+	    CallbackSupplierOperations callbackSupplierImplementation)
+	    throws EventClientException {
+	Object rootPOAObj = null;
+	try {
+	    rootPOAObj = orb.resolve_initial_references("RootPOA");
+	} catch (InvalidName e) {
+	    throw new EventClientException("Cannot resolve RootPOA", e);
+	}
+	// TODO make a child POA to handle callbacks
+	callbacksPOA = POAHelper.narrow(rootPOAObj);
+	try {
+	    callbacksPOA.the_POAManager().activate();
+	} catch (AdapterInactive e) {
+	    throw new EventClientException(
+		    "Cannot activate the RootPOAManager", e);
+	}
+	// create a tie, with servant being the delegate.
+	CallbackSupplierPOATie tie = new CallbackSupplierPOATie(
+		callbackSupplierImplementation, callbacksPOA);
+
+	// obtain the objectRef for the tie
+	CallbackSupplier href = tie._this(orb);
 	// return the object and
 	return href;
     }

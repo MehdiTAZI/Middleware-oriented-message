@@ -1,18 +1,22 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
+import org.omg.CORBA.Any;
 import org.omg.CORBA.BooleanHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
+import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPullSupplierImpl
@@ -54,10 +58,9 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 		connected=false;
 	}
 	
-	public Event ask() throws SupplierNotFoundException{
+	public Event ask(BooleanHolder hasEvent) throws SupplierNotFoundException{
 		Event e;
 		try {
-			BooleanHolder hasEvent=new BooleanHolder();
 			e = callbackSupplier.ask(hasEvent);
 			log.debug("PullSupplier {} just ask for an event",idComponent);
 			return e;

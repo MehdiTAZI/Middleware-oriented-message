@@ -1,5 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
+import org.omg.CORBA.BooleanHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,20 +35,18 @@ public class ThreadPullEvent implements Runnable {
 	@Override
 	public void run() {
 		log.trace("process connected suppliers");
-		boolean trouve = true;
 		Event ev;
-		while (trouve
-				&& pfps.getChannelCtr().getChannel()
-						.getSuppliersPullConnected()
-						.containsKey(pfps.getIdComponent())) {
-			try {
-				ev = pfps.ask();
-				if (ev == null) {
-					trouve = false;
-				} else {
-					pfps.getChannelCtr().addEvent(ev);
-				}
-			} catch (SupplierNotFoundException e1) {
+	    BooleanHolder hasEvent = new BooleanHolder(true);
+	    while(hasEvent.value && pfps.getChannelCtr().getChannel()
+				.getSuppliersPullConnected()
+				.containsKey(pfps.getIdComponent())){
+	    	try{
+	    		ev = pfps.ask(hasEvent);
+	    		if (hasEvent.value){
+	    			pfps.getChannelCtr().addEvent(ev);
+	    		}
+	    		
+	    	} catch (SupplierNotFoundException e1) {
 				log.debug("Supplier seems to be unreachable", e1);
 				// Supplier seems to be unreachable so it's time
 				// to disconnect it
@@ -60,7 +59,6 @@ public class ThreadPullEvent implements Runnable {
 					log.error("Can't disconnect : Channel not found", e3);
 				}
 			}
-
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
