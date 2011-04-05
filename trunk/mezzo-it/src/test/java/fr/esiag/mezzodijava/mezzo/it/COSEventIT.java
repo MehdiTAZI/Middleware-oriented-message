@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.omg.CORBA.Any;
+import org.omg.CORBA.BooleanHolder;
 import org.omg.CORBA.ORB;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
@@ -24,6 +25,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
+import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplierOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
@@ -35,8 +37,10 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPullConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
+import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
@@ -78,6 +82,8 @@ public class COSEventIT {
     }
 
     public static Integer recu = 0;
+    
+    public static Integer envoye = 0;
 
     public static List<Event> messagesRecu = Collections
 	    .synchronizedList(new ArrayList<Event>());
@@ -126,6 +132,27 @@ public class COSEventIT {
 	}
 
     }
+    
+   /* public static class CallBackSupplierImpl implements
+    CallbackSupplierOperations {
+
+    	@Override
+    	public Event ask() throws SupplierNotFoundException {
+    		Event e;
+    		synchronized (envoye) {
+    			envoye++;
+    		}
+    		System.out.println("envoi " + envoye);
+    	    if (envoye<5){
+    	    	Header h = new Header();
+    	    	h.code=envoye;
+    	    	e=new Event(h,new Body());
+    	    }else{
+    	    	e=null;
+    	    }
+    	    return e;
+    	}
+    }*/
 
     /**
      * Ce server de consummer abonne et connecte une CallBackConsumerImpl sur le
@@ -248,6 +275,23 @@ public class COSEventIT {
 	    }
 	}
     }
+    
+    private static class ConsumerPullServer {
+    	@SuppressWarnings("unused")
+    	public static void main(String[] args) throws Exception {
+    	    EventClient ec = EventClient.init(null);
+    	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+    	    String idcomponent = Thread.currentThread().getName();
+    	    ProxyForPullConsumer consumerProxy = channelAdmin
+    		    .getProxyForPullConsumer(idcomponent);
+    	    if ((args != null) && (args.length >= 1)) {
+    		Thread.sleep(new Long(args[0]).longValue());
+    	    }
+    	    
+    	    ec.getOrb().run();
+    	    System.out.println("ALL DONE");
+    	}
+        }
 
     EventServerChannelAdmin esca;
     long idChannel;
@@ -1495,4 +1539,48 @@ public class COSEventIT {
 	}
 	System.out.println("fini");
     }
+    
+    @Test
+    public void testUC01_Nominal_UniqueConsumerPull() throws Exception {
+    	EventClient ec = EventClient.init(null);
+    	EventServerChannelAdmin esca = ec
+    		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+    	idChannel = esca.createChannel("MEZZO", 2);
+    	Thread.sleep(1000);
+    	
+    	ChannelAdmin ca = ec.resolveChannelByTopic("MEZZO");
+    	String idsupplier1 = "supplier1";
+    	String idconsumer1 = "consumer1";
+
+    	// supplier
+    	ProxyForPushSupplier pps = ca.getProxyForPushSupplier(idsupplier1);
+    	pps.connect();
+
+    	// consumer
+    	ProxyForPullConsumer ppc = ca.getProxyForPullConsumer(idconsumer1);
+    	ppc.connect();
+    	
+    	for (int i = 0; i < 10; i++) {
+    	    Event evt = EventFactory.createEventString(1, 10120, "Test_EVENT"
+    		    + i);
+
+    	    pps.push(evt);
+    	    System.out.println("envoye " + evt);
+    	    Thread.sleep(100);
+    	}
+    	Thread.sleep(2000);
+	    Event ev = new Event();
+	    BooleanHolder hasEvent = new BooleanHolder(true);
+	    while(hasEvent.value)
+	    {
+		    ev = ppc.pull(hasEvent);
+		    if (hasEvent.value){
+		    	messagesRecu.add(ev);
+		    }
+	     }
+    	
+    	Assert.assertEquals("nombre d'event envoyes et recus", 10,
+    			messagesRecu.size());
+    		System.out.println("fini");
+    } 	
 }

@@ -1,6 +1,8 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.Collections;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -49,17 +51,15 @@ public class ConsumerModel {
 		this.channel = channel;
 	}
 	
-	public EventModel getLastFromQueue(){
+	public EventModel getFirstFromQueue(){
 		EventModel em;
-		if (this.getQueueSize()==0){
+		try{
+			em = eventsInQueue.first();
+		}catch (NoSuchElementException e){
 			return null;
 		}
-		em = this.getEvents().last();
-		this.getEvents().remove(em);
+		eventsInQueue.remove(eventsInQueue.first());
+		
 		return em;
 	}
-	
-	public int getQueueSize(){
-		return this.eventsInQueue.size();
-	}  
 }

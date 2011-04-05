@@ -15,6 +15,8 @@ public class PriorityEventModelComparator implements Comparator<EventModel>, Ser
      * @param Event
      *            1 and Event 2 Events to compare.
      */
+	private EventModel evt;
+	
     @Override
     public synchronized int compare(EventModel evt1, EventModel evt2) {
 
@@ -27,10 +29,18 @@ public class PriorityEventModelComparator implements Comparator<EventModel>, Ser
 	if (evt1.getCreationdate() < evt2.getCreationdate()) {
 	    return -1;
 	}
-	if (evt1.getCreationdate() >= evt2.getCreationdate()) {
+	if (evt1.getCreationdate() > evt2.getCreationdate()) {
 	    return 1;
 	}
+	if (evt1.getId() > evt2.getId()) {
+	    return -1;
+	}
+	if (evt1.getId() < evt2.getId()) {
+	    return 1;
+	}
+	/*if (evt1.getCreationdate() == evt2.getCreationdate()) {
+	    return 1;
+	}*/
 	return 0;
     }
-
 }
