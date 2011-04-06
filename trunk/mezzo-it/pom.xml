@@ -40,6 +40,11 @@
 			<artifactId>mezzo-costime</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+				<dependency>
+			<groupId>fr.esiag.mezzodijava</groupId>
+			<artifactId>nuclear-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
