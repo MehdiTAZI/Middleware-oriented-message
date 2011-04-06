@@ -32,8 +32,8 @@ public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 				list[i].consumersConnected=channel.getConsumersConnected().size();
 				list[i].consumersSubscribed=channel.getConsumers().size();
 				list[i].suppliersConnected=channel.getSuppliersConnected().size();
-				list[i].nbQueueEvents=channel.getEvents().size();
-				list[i].messages=EventsToMessage(channel.getEvents());
+				list[i].nbQueueEvents=0;//channel.getEvents().size();
+				list[i].messages=new Message[0];//EventsToMessage(channel.getEvents());
 				log.trace("Infos on channel :"+ list[i].topic+". ");
 				log.trace("Capacity = "+ list[i].capacity+". ");
 				log.trace("NbQueueEvents = "+ list[i].nbQueueEvents+". ");
