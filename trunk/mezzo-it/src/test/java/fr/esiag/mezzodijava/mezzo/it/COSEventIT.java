@@ -4,6 +4,7 @@ import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -45,6 +46,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 import fr.esiag.mezzodijava.mezzo.costime.TimeService;
@@ -70,18 +72,50 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
  */
 public class COSEventIT {
 
+    public static String EVENT_SERVER_NAME;
+    
+    public static String TIME_SERVER_NAME;
+    
+ // Deletes all files and subdirectories under dir.
+    // Returns true if all deletions were successful.
+    // If a deletion fails, the method stops attempting to delete and returns false.
+    public static boolean deleteDir(File dir) {
+        if (dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i=0; i<children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+        }
+    
+        // The directory is now empty so delete it
+        return dir.delete();
+    } 
+    
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// PropertyConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.properties"));
 	// le time serveur
-	MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
-		1000, "MEZZO-COSTIME", "1000");
-	sl.go();
-	// le event serveur
-	MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
-		5000, "MEZZO-SERVER");
-	s2.go();
+	
+	TIME_SERVER_NAME = System.getProperty("mezzoit.timeservename");
+	if (TIME_SERVER_NAME==null){
+	    TIME_SERVER_NAME="MEZZO-COSTIME";
+	    MainServerLauncher sl = new MainServerLauncher(CosTimeServer.class,
+			1000, TIME_SERVER_NAME, "1000");
+		sl.go();
+	}
+	EVENT_SERVER_NAME = System.getProperty("mezzoit.eventservename");
+	if (EVENT_SERVER_NAME==null){
+	    EVENT_SERVER_NAME="MEZZO-COSEVENT";
+	    deleteDir(new File(System.getProperty("user.home")+System.getProperty("file.separator")+"dbcosevent"+EVENT_SERVER_NAME));
+	    MainServerLauncher s2 = new MainServerLauncher(CosEventServer.class,
+			5000, EVENT_SERVER_NAME);
+		s2.go();
+	}
+	
     }
 
     public static Integer recu = 0;
@@ -237,7 +271,7 @@ public class COSEventIT {
 	    Thread to = new Thread(new ThreadOrb());
 	    to.setDaemon(true);
 	    to.start();
-	    TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	    TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	    Synchronizable cc = tc.serveCallbackTime(new CallBackTimeImpl());
 	    ts.subscribe(cc);
 	    if ((args != null) && (args.length >= 1)) {
@@ -323,8 +357,12 @@ public class COSEventIT {
 
 	esca = EventClient
 		.init(null)
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
-
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
+	try{
+	    esca.destroyChannel(1);
+	}catch(Exception e){
+	    ;
+	}
     }
 
     @After
@@ -335,7 +373,7 @@ public class COSEventIT {
 	    EventClient
 		    .init(null)
 		    .resolveEventServerChannelAdminByEventServerName(
-			    "MEZZO-SERVER").destroyChannel(idChannel);
+			    EVENT_SERVER_NAME).destroyChannel(idChannel);
 	} catch (Exception e) {
 	    ;
 	}
@@ -352,7 +390,7 @@ public class COSEventIT {
 
 	EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	System.out.println("after = " + idChannel);
 	Thread.sleep(1000);
@@ -391,7 +429,7 @@ public class COSEventIT {
 
 	//EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
@@ -462,7 +500,7 @@ public class COSEventIT {
 
 	//EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
@@ -537,7 +575,7 @@ public class COSEventIT {
     public void testUC02_Alt1_ReconnexionDuConsumer() throws Exception {
 	EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	// le consumer ici present
@@ -575,7 +613,7 @@ public class COSEventIT {
     public void testUC02_Exc1_ChannelNonTrouve() throws Exception {
 	EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
 	try {
@@ -602,7 +640,7 @@ public class COSEventIT {
     public void testUC02_Exc2_CannotConnect() throws Exception {
 	EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	System.out.println(idChannel);
 	Thread.sleep(1000);
@@ -1142,7 +1180,7 @@ public class COSEventIT {
     @Test
     public void testUC06_Exc1_AlreadyRegistered() throws Exception {
 	TimeClient tc = TimeClient.init(null);
-	TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
 	ts.subscribe(s);
 	try {
@@ -1166,7 +1204,7 @@ public class COSEventIT {
     @Test
     public void testUC06_Exc2_NotRegistered() throws Exception {
 	TimeClient tc = TimeClient.init(null);
-	TimeService ts = tc.resolveTimeService("MEZZO-COSTIME");
+	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
 	ts.subscribe(s);
 	ts.unsubscribe(s);
@@ -1256,7 +1294,7 @@ public class COSEventIT {
     public void testUC07_Nominal_CreerUnEventChannel() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// check by id
@@ -1285,7 +1323,7 @@ public class COSEventIT {
     public void testUC07_Alt1_SupprimerUnChannel() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	long idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
@@ -1345,7 +1383,7 @@ public class COSEventIT {
     public void testUC07_Alt2_ModifierCapacite() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
@@ -1407,7 +1445,7 @@ public class COSEventIT {
     public void testUC07_Exc1_ChannelAlreadyExists() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// check by id
@@ -1438,7 +1476,7 @@ public class COSEventIT {
     public void testUC07_Exc2_ChannelNotFound() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 
@@ -1465,7 +1503,7 @@ public class COSEventIT {
     public void testUC07_Exc3_CannotReduceCapacity() throws Exception {
 	EventClient ec = EventClient.init(null);
 	EventServerChannelAdmin esca = ec
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 2);
 	Thread.sleep(1000);
 	// on recupere un supplier dessus
@@ -1523,7 +1561,7 @@ public class COSEventIT {
 
 	EventClient ec = EventClient.init(null);
 	// EventServerChannelAdmin esca = ec
-	// .resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+	// .resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	idChannel = esca.createChannel("MEZZO", 20);
 	System.out.println("after = " + idChannel);
 	Thread.sleep(1000);
@@ -1562,7 +1600,7 @@ public class COSEventIT {
     public void testUC01_Nominal_UniqueConsumerPull() throws Exception {
     	EventClient ec = EventClient.init(null);
     	EventServerChannelAdmin esca = ec
-    		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+    		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
     	idChannel = esca.createChannel("MEZZO", 2);
     	Thread.sleep(1000);
     	
@@ -1608,7 +1646,7 @@ public class COSEventIT {
     	
     	EventClient ec = EventClient.init(null);
     	EventServerChannelAdmin esca = ec
-    		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+    		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
     	idChannel = esca.createChannel("MEZZO", 2);
     	Thread.sleep(1000);
     	
