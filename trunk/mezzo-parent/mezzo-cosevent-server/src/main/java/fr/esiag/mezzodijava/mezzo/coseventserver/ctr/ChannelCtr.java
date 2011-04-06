@@ -61,8 +61,6 @@ public class ChannelCtr {
 		log.trace("Creation of ChannelCtr for {}", topic);
 	this.channel = EventServer.getInstance()
 		.createChannelEntity(topic, 100);
-	// executor =
-	// Executors.newFixedThreadPool(channel.getConnectionCapacity());
 	threadPool = new ThreadPool(channel.getConnectionCapacity());
 	log.debug("ChannelCtr for {} created", topic);
 	}
@@ -98,12 +96,10 @@ public class ChannelCtr {
 			for (ConsumerModel consumer : channel.getConsumersPull().values()) {
 				consumer.getEvents().add(em);
 				// persistance de l'event
-				// DAOFactory.getJdbcDAO().addEventToConsumer(em.getId(),consumer.getId());
+				DAOFactory.getJdbcDAO().addEventToConsumer(em.getId(),consumer.getId());
 				log.debug("Event PULL " + e.toString() + " " + e.body.content
 						+ " nb evt =" + consumer.getEvents().size());
 			}
-
-			// DAOFactory.getChannelDAO().update(channel);
 			log.debug("Event ajoute a la liste");
 		}
 
@@ -170,27 +166,16 @@ public class ChannelCtr {
 		String idConsumer = null;
 		if (proxyConsumer!=null)
 	 		idConsumer = proxyConsumer.getIdComponent();
-		// ConsumerModel c = new ConsumerModel();
-		// c.setIdConsumer(idConsumer);
 		if (channel.getConsumers().containsKey(idConsumer)
 				|| proxyConsumer == null || idConsumer==null) {
 			log.error("AlreadyRegistered");
-			// if (channel.getConsumersSubscribed().containsKey(proxyConsumer)||
-			// proxyConsumer == null) {
 			throw new AlreadyRegisteredException();
 		} else {
 			log.info("proxyPushConsumer {} subscribed to {}",
 					proxyConsumer.toString(), channel.getTopic());
-			// c.setEvents(Collections
-			// .synchronizedSortedSet(new TreeSet<EventModel>(comparator)));
-			// channel.getConsumers().put(idConsumer, c);
 			ConsumerModel c = channel.addSubscribedConsumer(idConsumer);
 			// persistance du Consumer
 			DAOFactory.getJdbcDAO().insertConsumer(c);
-
-			// DAOFactory.getChannelDAO().persist(channel);
-			// .put(proxyConsumer,Collections.synchronizedSortedSet(new
-			// TreeSet<Event>(comparator)));
 		}
 	}
 
@@ -247,12 +232,8 @@ public class ChannelCtr {
 		log.info("proxyPullConsumer {} connected to {}",
 		proxyConsumer.toString(), channel.getTopic());
 		ConsumerModel c = channel.addPullConsumer(idConsumer);
-		// persistance du Consumer Pull
-		//DAOFactory.getJdbcDAO().insertConsumer(c);
-
-		// DAOFactory.getChannelDAO().persist(channel);
-		// .put(proxyConsumer,Collections.synchronizedSortedSet(new
-		// TreeSet<Event>(comparator)));
+		//persistance du Consumer Pull
+		DAOFactory.getJdbcDAO().insertConsumer(c);
 	}
 	
 	/**
@@ -319,11 +300,7 @@ public class ChannelCtr {
 		log.trace("Remove proxyPushConsumer {} to connectedList",
 				proxyConsumer.toString());
 		String idConsumer = proxyConsumer.getIdComponent();
-		// ConsumerModel c = new ConsumerModel();
-		// c.setIdConsumer(idConsumer);
 		if (!channel.getConsumers().containsKey(idConsumer)) {
-			// if (!channel.getConsumersSubscribed().containsKey(proxyConsumer))
-			// {
 			log.error("{} can't disconnect because it's not subscribed",
 					proxyConsumer.toString());
 			throw new NotRegisteredException();
@@ -360,8 +337,6 @@ public class ChannelCtr {
 		} else {
 			// suppression dans la base
 			DAOFactory.getJdbcDAO().deleteConsumer(c.getId());
-
-			// DAOFactory.getChannelDAO().persist(channel);
 		}
 	}
 	
@@ -413,8 +388,8 @@ public class ChannelCtr {
 					proxyConsumer.toString());
 			throw new NotConnectedException();
 		}
-			// suppression dans la base
-			//DAOFactory.getJdbcDAO().deleteConsumer(c.getId());
+		// suppression dans la base
+		DAOFactory.getJdbcDAO().deleteConsumer(c.getId());
 		log.debug("Disconnect of a PULL Consumer from \"" + channel.getTopic()
 				+ "\".");
 	}
@@ -456,8 +431,6 @@ public class ChannelCtr {
 				.synchronizedMap(new HashMap<String, ConsumerModel>()));
 		// suppression de tous les consumers abonnés
 		DAOFactory.getJdbcDAO().deleteAllConsumers(channel.getId());
-
-		// DAOFactory.getChannelDAO().persist(channel);
 	}
 
 	/**
@@ -521,6 +494,7 @@ public class ChannelCtr {
 			em = c.getFirstFromQueue();
 			if (em!=null){
 				e = new EventConvertor().transformToEvent(em);
+				DAOFactory.getJdbcDAO().deleteEventByConsumer(c.getId(), em.getId());
 			}else{
 				e = null;
 			}
