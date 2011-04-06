@@ -217,8 +217,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		    while (rs.next()) {
 			EventModel e = new EventModel();
 			e.setId(rs.getInt("ID"));
-			Blob b = rs.getBlob("DATA");
-			e.setData(b.getBytes(0L, (int) b.length()));
+			e.setData(rs.getBytes("DATA"));
 			e.setCode(rs.getLong("CODE"));
 			e.setCreationdate(rs.getLong("CREATIONDATE"));
 			e.setPriority(rs.getInt("PRIORITY"));
