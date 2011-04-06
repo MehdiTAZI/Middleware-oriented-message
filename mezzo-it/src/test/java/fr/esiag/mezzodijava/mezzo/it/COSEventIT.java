@@ -72,7 +72,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
  */
 public class COSEventIT {
 
-    public static String EVENT_SERVER_NAME;
+public static String EVENT_SERVER_NAME;
     
     public static String TIME_SERVER_NAME;
     
@@ -92,14 +92,12 @@ public class COSEventIT {
     
         // The directory is now empty so delete it
         return dir.delete();
-    } 
-    
+    }
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// PropertyConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.properties"));
 	// le time serveur
-	
 	TIME_SERVER_NAME = System.getProperty("mezzoit.timeservename");
 	if (TIME_SERVER_NAME==null){
 	    TIME_SERVER_NAME="MEZZO-COSTIME";
@@ -115,7 +113,6 @@ public class COSEventIT {
 			5000, EVENT_SERVER_NAME);
 		s2.go();
 	}
-	
     }
 
     public static Integer recu = 0;
@@ -172,8 +169,11 @@ public class COSEventIT {
 	   
 	   List<Event> messages = Collections
 	    .synchronizedList(new ArrayList<Event>());
+	   
+	   int nb;
 
 	   public CallBackSupplierImpl() {
+		   nb = 0;
 		   for (int i = 0; i < 10; i++) {
 			   Event e = EventFactory.createEventString(1, 10120, "Test_EVENT"+ i);
 			   messages.add(e);
@@ -184,10 +184,9 @@ public class COSEventIT {
 		public Event ask(BooleanHolder hasEvent)
 				throws SupplierNotFoundException {
 			
-			synchronized (envoye) {
-				envoye++;
-			}
-    		if (envoye==11){
+			nb++;
+			
+    		if (nb==11){
     			System.out.println("plus d events");
     			hasEvent.value=false;
     			Any a = BFFactory.getOrb().create_any();
@@ -196,9 +195,12 @@ public class COSEventIT {
 				b.content=a;
 				return new Event(h,b);
     		}else{
-    			System.out.println("envoi " + envoye);
+    			synchronized (envoye) {
+    				envoye++;
+    			}
+    			System.out.println("envoi " + envoye + ",nb=" + nb);
     			hasEvent.value=true;
-    			Event e = messages.get(envoye-1);
+    			Event e = messages.get(nb-1);
     			return e;
     		}
 		}
@@ -344,6 +346,38 @@ public class COSEventIT {
     	    System.out.println("ALL DONE");
     	}
         }
+    
+    private static class ConsumerPullServer {
+    	@SuppressWarnings("unused")
+    	public static void main(String[] args) throws Exception {
+    	    EventClient ec = EventClient.init(null);
+    	    ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
+    	    String idcomponent = Thread.currentThread().getName();
+    	    ProxyForPullConsumer consumerProxy = channelAdmin
+			.getProxyForPullConsumer(idcomponent);
+    	    if ((args != null) && (args.length >= 1)) {
+    	    	Thread.sleep(new Long(args[0]).longValue());
+    	    }
+    	    consumerProxy.connect();
+    	    Thread.sleep(15000);
+    	    // begin of pull consumer 
+    	    Event ev;
+    	    BooleanHolder hasEvent = new BooleanHolder(true);
+    	    while(hasEvent.value)
+    	    {
+    	    	System.out.println("pull consumer");
+    	    	ev = consumerProxy.pull(hasEvent);
+    	    	System.out.println(hasEvent.value);
+    	    	if (hasEvent.value){
+    	    		System.out.println("add_event");
+    	    		messagesRecu.add(ev);
+    	    	}
+    	    }
+    	    ec.getOrb().run();
+    	    System.out.println("ALL DONE");
+    	      
+    		}
+        }
 
     EventServerChannelAdmin esca;
     long idChannel;
@@ -357,7 +391,7 @@ public class COSEventIT {
 
 	esca = EventClient
 		.init(null)
-		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
+		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
 	try{
 	    esca.destroyChannel(1);
 	}catch(Exception e){
@@ -511,7 +545,7 @@ public class COSEventIT {
 	}
 	// ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	for (int i = 0; i < 10; i++) {
-	    Thread t = new Thread("consumer_" + i) {
+	    Thread t = new Thread("supplier_" + i) {
 		public void run() {
 		    try {
 			EventClient ec = EventClient.init(null);
@@ -1596,6 +1630,7 @@ public class COSEventIT {
 	System.out.println("fini");
     }
     
+    
     @Test
     public void testUC01_Nominal_UniqueConsumerPull() throws Exception {
     	EventClient ec = EventClient.init(null);
@@ -1640,6 +1675,7 @@ public class COSEventIT {
     		System.out.println("fini");
     } 	
     
+    
     @Test
     public void testUC04_Nominal_UniqueSupplierPull()
 	    throws Exception {
@@ -1676,6 +1712,28 @@ public class COSEventIT {
     	Assert.assertEquals("nombre d'event envoyes et recus", 10,
     			messagesRecu.size());
     		System.out.println("fini");
+    }
+    
+    @Test
+    public void testUC0104_Nominal_MultiSupplierPullMultiConsumerPull()
+	    throws Exception {
+	idChannel = esca.createChannel("MEZZO", 20);
+	Thread.sleep(1000);
+	for (int i = 0; i < 10; i++) {
+		MainServerLauncher s = new MainServerLauncher(
+				ConsumerPullServer.class, 200, (String[]) null);
+		s.go();
+	}
+	// les suppliers ici present
+	for (int i = 0; i < 10; i++) {
+	    MainServerLauncher s = new MainServerLauncher(
+		    SupplierPullServer.class, 200, (String[]) null);
+	    s.go();
+	}
+	Thread.sleep(15000);
+	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
+		messagesRecu.size());
+	System.out.println("fini");
     }
 	
 }

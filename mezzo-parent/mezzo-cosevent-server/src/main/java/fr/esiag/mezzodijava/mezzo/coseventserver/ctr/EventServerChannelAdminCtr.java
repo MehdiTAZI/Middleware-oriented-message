@@ -69,7 +69,6 @@ public class EventServerChannelAdminCtr {
 		Channel channel = BFFactory.createChannel(topic, capacity);
 		// persistance du channel
 		DAOFactory.getJdbcDAO().insertChannel(channel);
-		// DAOFactory.getChannelDAO().persist(channel);
 		log.debug("Event Channel \"" + topic + "\" created.");
 		return channel.getIdentifier();
 	}
@@ -125,8 +124,6 @@ public class EventServerChannelAdminCtr {
 			BFFactory.destroy(uniqueServerChannelId);
 			// suppression du channel dans la base
 			DAOFactory.getJdbcDAO().deleteChannel(channel.getId());
-
-			// DAOFactory.getChannelDAO().remove(channel);
 			log.info("Event Channel \"" + topic + "\" destroyed.");
 		} else {
 			log.error("channel {} doesn't exist", uniqueServerChannelId);
@@ -185,7 +182,6 @@ public class EventServerChannelAdminCtr {
 		BFFactory.changeChannelCapacity(channel, capacity);
 		// update dans la base de la capacité
 		DAOFactory.getJdbcDAO().updateChannel(channel);
-		// DAOFactory.getChannelDAO().update(channel);
 		log.debug("Event Channel \"" + channel.getTopic()
 				+ "\" capacity updated to \"" + capacity + "\".");
 	}
