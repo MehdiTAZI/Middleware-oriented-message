@@ -72,7 +72,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
  */
 public class COSEventIT {
 
-public static String EVENT_SERVER_NAME;
+    public static String EVENT_SERVER_NAME;
     
     public static String TIME_SERVER_NAME;
     
@@ -92,12 +92,14 @@ public static String EVENT_SERVER_NAME;
     
         // The directory is now empty so delete it
         return dir.delete();
-    }
+    } 
+    
     @BeforeClass
     public static void beforeClass() throws InterruptedException {
 	// DOMConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.xml"));
 	// PropertyConfigurator.configure(COSEventIT.class.getClassLoader().getResource("log4j.properties"));
 	// le time serveur
+	
 	TIME_SERVER_NAME = System.getProperty("mezzoit.timeservename");
 	if (TIME_SERVER_NAME==null){
 	    TIME_SERVER_NAME="MEZZO-COSTIME";
@@ -113,6 +115,7 @@ public static String EVENT_SERVER_NAME;
 			5000, EVENT_SERVER_NAME);
 		s2.go();
 	}
+	
     }
 
     public static Integer recu = 0;
@@ -164,7 +167,7 @@ public static String EVENT_SERVER_NAME;
 		}
     }
     
-   public static class CallBackSupplierImpl implements
+    public static class CallBackSupplierImpl implements
     CallbackSupplierOperations {
 	   
 	   List<Event> messages = Collections
@@ -345,7 +348,7 @@ public static String EVENT_SERVER_NAME;
     	    ec.getOrb().run();
     	    System.out.println("ALL DONE");
     	}
-        }
+    }
     
     private static class ConsumerPullServer {
     	@SuppressWarnings("unused")
@@ -391,7 +394,7 @@ public static String EVENT_SERVER_NAME;
 
 	esca = EventClient
 		.init(null)
-		.resolveEventServerChannelAdminByEventServerName("MEZZO-SERVER");
+		.resolveEventServerChannelAdminByEventServerName(EVENT_SERVER_NAME);
 	try{
 	    esca.destroyChannel(1);
 	}catch(Exception e){
@@ -1630,7 +1633,6 @@ public static String EVENT_SERVER_NAME;
 	System.out.println("fini");
     }
     
-    
     @Test
     public void testUC01_Nominal_UniqueConsumerPull() throws Exception {
     	EventClient ec = EventClient.init(null);
@@ -1674,7 +1676,6 @@ public static String EVENT_SERVER_NAME;
     			messagesRecu.size());
     		System.out.println("fini");
     } 	
-    
     
     @Test
     public void testUC04_Nominal_UniqueSupplierPull()
