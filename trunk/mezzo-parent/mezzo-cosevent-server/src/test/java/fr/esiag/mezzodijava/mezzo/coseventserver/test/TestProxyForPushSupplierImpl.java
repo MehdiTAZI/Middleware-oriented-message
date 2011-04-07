@@ -21,9 +21,11 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
+import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 public class TestProxyForPushSupplierImpl {
 
@@ -125,6 +127,10 @@ public class TestProxyForPushSupplierImpl {
 
 	@Test
 	public void testPushNotConnected() {
+		// ajout manuel du channel pour la correspondance channel-composant
+		Channel channel = EventServer.getInstance().createChannelEntity("TEST", 2);
+		DAOFactory.getJdbcDAO().insertChannel(channel);
+		
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
 		// inject mock in Factory

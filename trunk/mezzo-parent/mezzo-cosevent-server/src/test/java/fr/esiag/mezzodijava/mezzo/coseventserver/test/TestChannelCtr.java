@@ -21,6 +21,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
@@ -31,12 +32,14 @@ public class TestChannelCtr {
 
 	private static ChannelCtr channelCtr;
 	private static String topic;
+	private static int channelId;
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		String topic = "bla";
 		EventServer.getInstance().createChannelEntity(topic, 3);
 		channelCtr = BFFactory.createChannelCtr(topic);
+		
 	}
 
 	@AfterClass
@@ -48,12 +51,16 @@ public class TestChannelCtr {
 		Random rm = new Random();
 		topic = rm.nextInt() + "";
 		System.out.println(topic);
-		EventServer.getInstance().createChannelEntity(topic, 2);
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 2);
 		channelCtr = BFFactory.createChannelCtr(topic);
+		// ajout manuel du channel pour la correspondance channel-composant
+		channelId = DAOFactory.getJdbcDAO().insertChannel(channel);
 	}
 
 	@After
 	public void tearDown() throws Exception {
+		// suppression manuelle du channel
+		DAOFactory.getJdbcDAO().deleteChannel(channelId);
 	}
 
 	@Test
