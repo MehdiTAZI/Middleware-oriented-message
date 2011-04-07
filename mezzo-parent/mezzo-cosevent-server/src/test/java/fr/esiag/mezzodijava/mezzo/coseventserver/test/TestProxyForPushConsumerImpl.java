@@ -39,6 +39,7 @@ public class TestProxyForPushConsumerImpl {
 
 	@Before
 	public void setUp() throws Exception {
+		
 	}
 
 	@After
@@ -175,9 +176,9 @@ public class TestProxyForPushConsumerImpl {
 		// enregistrement
 	    EasyMock.replay(mockCall);
 	    
-	    // subscribe du mock
-	    pfpc.subscribe(); 
-	    pfpc.connect(mockCall); 
+	    // subscribe du proxy
+	    pfpc.subscribe();
+	    pfpc.connect(mockCall);
 		
 	    // lancement du test de la méthode
 		pfpc.receive(evt);
