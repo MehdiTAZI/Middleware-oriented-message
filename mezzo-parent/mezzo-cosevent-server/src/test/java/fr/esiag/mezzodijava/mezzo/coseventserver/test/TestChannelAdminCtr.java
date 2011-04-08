@@ -14,7 +14,8 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 public class TestChannelAdminCtr {
 
-	ChannelAdminCtr cac = new ChannelAdminCtr("TEST_ADMIN");
+	ChannelAdminCtr cac;
+	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -25,6 +26,7 @@ public class TestChannelAdminCtr {
 
 	@Before
 	public void setUp() throws Exception {
+		cac = new ChannelAdminCtr("TEST_ADMIN");
 	}
 
 	@After
@@ -44,6 +46,16 @@ public class TestChannelAdminCtr {
 	@Test
 	public void testCreateProxyForPushConsumer() {
 		cac.createProxyForPushConsumer("testconsumer");
+	}
+	
+	@Test
+	public void testCreateProxyForPullSupplier() {
+		cac.createProxyForPullSupplier("testconsumer");
+	}
+
+	@Test
+	public void testCreateProxyForPullConsumer() {
+		cac.createProxyForPullConsumer("testconsumer");
 	}
 
 }
