@@ -1,5 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.util.Random;
@@ -23,6 +24,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
@@ -268,15 +271,131 @@ public class TestChannelCtr {
 			// test ok nothing to do
 		}
 	}
+	
+	@Test
+	public void testAddProxyForPullSupplierToConnectedListAlreadyConnected()
+			throws MaximalConnectionReachedException {
+		ProxyForPullSupplierImpl pps = new ProxyForPullSupplierImpl(topic,"testsupplier");
+		try {
+			channelCtr.addProxyForPullSupplierToConnectedList(pps);
+			channelCtr.addProxyForPullSupplierToConnectedList(pps);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			// nothing to do test ok
+		}
+	}
+
+	@Test
+	public void testAddProxyForPullSupplierToConnectedListMaximalConnectionReached()
+			throws AlreadyConnectedException {
+		ProxyForPullSupplierImpl pps = new ProxyForPullSupplierImpl(topic,"testsupplier");
+		ProxyForPullSupplierImpl pps2 = new ProxyForPullSupplierImpl(topic,"testsupplier2");
+
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(1);
+		try {
+			channelCtr.addProxyForPullSupplierToConnectedList(pps);
+			channelCtr.addProxyForPullSupplierToConnectedList(pps2);
+			fail();
+		} catch (MaximalConnectionReachedException e) {
+			// nothing to do test ok
+		}
+	}
+
+	@Test
+	public void testAddProxyForPullSupplierToConnectedListNormal()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
+		ProxyForPullSupplierImpl pps = new ProxyForPullSupplierImpl(topic,"testsupplier");
+
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(30);
+		channelCtr.addProxyForPullSupplierToConnectedList(pps);
+	}
+
+	@Test
+	public void testRemoveProxyForPullSupplierFromConnectedListNormal()
+			throws AlreadyConnectedException,
+			MaximalConnectionReachedException, NotConnectedException {
+		ProxyForPullSupplierImpl pps = new ProxyForPullSupplierImpl(topic,"testsupplier");
+		channelCtr.addProxyForPullSupplierToConnectedList(pps);
+		channelCtr.removeProxyForPullSupplierFromConnectedList(pps);
+	}
+
+	@Test
+	public void testRemoveProxyForPullSupplierFromConnectedListNotConnected()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
+		ProxyForPullSupplierImpl pps = new ProxyForPullSupplierImpl(topic,"testsupplier");
+		try {
+			channelCtr.removeProxyForPullSupplierFromConnectedList(pps);
+			fail();
+		} catch (NotConnectedException e) {
+			// test ok nothing to do
+		}
+	}
+	
+	@Test
+	public void testAddProxyForPullConsumerToConnectedListAlreadyConnected()
+			throws MaximalConnectionReachedException {
+		ProxyForPullConsumerImpl pps = new ProxyForPullConsumerImpl(topic,"testsupplier");
+		try {
+			channelCtr.addProxyForPullConsumerToConnectedList(pps);
+			channelCtr.addProxyForPullConsumerToConnectedList(pps);
+			fail();
+		} catch (AlreadyConnectedException e) {
+			// nothing to do test ok
+		}
+	}
+
+	@Test
+	public void testAddProxyForPullConsumerToConnectedListMaximalConnectionReached()
+			throws AlreadyConnectedException {
+		ProxyForPullConsumerImpl pps = new ProxyForPullConsumerImpl(topic,"testsupplier");
+		ProxyForPullConsumerImpl pps2 = new ProxyForPullConsumerImpl(topic,"testsupplier2");
+
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(1);
+		try {
+			channelCtr.addProxyForPullConsumerToConnectedList(pps);
+			channelCtr.addProxyForPullConsumerToConnectedList(pps2);
+			fail();
+		} catch (MaximalConnectionReachedException e) {
+			// nothing to do test ok
+		}
+	}
+
+	@Test
+	public void testAddProxyForPullConsumerToConnectedListNormal()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
+		ProxyForPullConsumerImpl pps = new ProxyForPullConsumerImpl(topic,"testsupplier");
+
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(30);
+		channelCtr.addProxyForPullConsumerToConnectedList(pps);
+	}
+
+	@Test
+	public void testRemoveProxyForPullConsumerFromConnectedListNormal()
+			throws AlreadyConnectedException,
+			MaximalConnectionReachedException, NotConnectedException {
+		ProxyForPullConsumerImpl pps = new ProxyForPullConsumerImpl(topic,"testsupplier");
+		channelCtr.addProxyForPullConsumerToConnectedList(pps);
+		channelCtr.removeProxyForPullConsumerFromConnectedList(pps);
+	}
+
+	@Test
+	public void testRemoveProxyForPullConsumerFromConnectedListNotConnected()
+			throws AlreadyConnectedException, MaximalConnectionReachedException {
+		ProxyForPullConsumerImpl pps = new ProxyForPullConsumerImpl(topic,"testsupplier");
+		try {
+			channelCtr.removeProxyForPullConsumerFromConnectedList(pps);
+			fail();
+		} catch (NotConnectedException e) {
+			// test ok nothing to do
+		}
+	}
 
 	@Test
 	public void testAddEvent() throws AlreadyRegisteredException {
-		// public void addEvent(Event e){
-		// for(ProxyForPushConsumerImpl consumer
-		// :channel.getConsumersSubscribed().keySet()){
-		// channel.getConsumersSubscribed().get(consumer).add(e);
-		// }
-		// }
 		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
 		channel.setCapacity(2);
 		ProxyForPushConsumerImpl ppc = new ProxyForPushConsumerImpl(topic,"testconsumer");
@@ -289,4 +408,60 @@ public class TestChannelCtr {
 		Body body = new Body(any,"String");
 		channelCtr.addEvent(new Event(header, body));
 	}
+	
+	/*@Test
+	public void testGetEventNull() {
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(2);
+		ProxyForPullConsumerImpl ppc = new ProxyForPullConsumerImpl(topic,"testconsumer");
+		Event ev=null;
+		try {
+			channelCtr.addProxyForPullConsumerToConnectedList(ppc);
+			Header header = new Header(123, 1, 01012011, 2000);
+			ORB orb=ORB.init();
+			Any any=orb.create_any();
+			any.insert_string("Test_EVENT");
+			Body body = new Body(any,"String");
+			ev = new Event(header, body);
+			channelCtr.addEvent(ev);
+		} catch (AlreadyConnectedException e) {
+			fail();
+		} catch (MaximalConnectionReachedException e) {
+			fail();
+		}
+		try {
+			assertEquals(ev,channelCtr.getEvent(ppc));
+		} catch (NotConnectedException e) {
+			fail();
+		}
+		
+	}
+	
+	@Test
+	public void testGetEvent() {
+		Channel channel = EventServer.getInstance().createChannelEntity(topic, 0);
+		channel.setCapacity(2);
+		ProxyForPullConsumerImpl ppc = new ProxyForPullConsumerImpl(topic,"testconsumer");
+		Event ev=null;
+		try {
+			channelCtr.addProxyForPullConsumerToConnectedList(ppc);
+			Header header = new Header(123, 1, 01012011, 2000);
+			ORB orb=ORB.init();
+			Any any=orb.create_any();
+			any.insert_string("Test_EVENT");
+			Body body = new Body(any,"String");
+			ev = new Event(header, body);
+			channelCtr.addEvent(ev);
+		} catch (AlreadyConnectedException e) {
+			fail();
+		} catch (MaximalConnectionReachedException e) {
+			fail();
+		}
+		try {
+			assertEquals(ev.body.content.extract_string(),channelCtr.getEvent(ppc).body.content.extract_string());
+		} catch (NotConnectedException e) {
+			fail();
+		}
+		
+	}*/
 }

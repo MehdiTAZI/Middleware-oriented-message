@@ -23,9 +23,6 @@ public class Channel implements Serializable {
 
     private int connectionCapacity;
 
-    /*private SortedSet<EventModel> events = Collections
-    .synchronizedSortedSet(new TreeSet<EventModel>(new PriorityEventModelComparator()));*/
-
     private Map<String, ConsumerModel> consumers = Collections
     .synchronizedMap(new HashMap<String, ConsumerModel>());
     
@@ -34,7 +31,6 @@ public class Channel implements Serializable {
 
     private Map<String, ProxyForPushConsumerImpl> consumersConnected = new HashMap<String, ProxyForPushConsumerImpl>();
     private Map<String, ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String, ProxyForPushSupplierImpl>();
-    //private Map<String, ProxyForPullConsumerImpl> consumersPullConnected = new HashMap<String, ProxyForPullConsumerImpl>();
     private Map<String, ProxyForPullSupplierImpl> suppliersPullConnected = new HashMap<String, ProxyForPullSupplierImpl>();
     
     public Channel() {
@@ -146,7 +142,7 @@ public class Channel implements Serializable {
      * @return true if the list is full.
      */
     public boolean isSuppliersConnectedsListcapacityReached() {
-	return connectionCapacity == suppliersConnected.size()+consumersPull.size();
+	return connectionCapacity == suppliersConnected.size()+suppliersPullConnected.size();
     }
 
     /**
