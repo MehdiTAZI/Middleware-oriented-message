@@ -74,7 +74,7 @@ public class ThreadPushConsumer implements Runnable {
     @Override
     public void run() {
 	log.trace("process subscribed consumers");
-	while (consumer.getChannel().getConsumersConnected()
+	while (pfpc.getChannelCtr().getChannel().getConsumersConnected()
 		.containsKey(consumer.getIdConsumer())) {
 	    // for all events of the consumer
 	    SortedSet<EventModel> le = consumer.getEvents();

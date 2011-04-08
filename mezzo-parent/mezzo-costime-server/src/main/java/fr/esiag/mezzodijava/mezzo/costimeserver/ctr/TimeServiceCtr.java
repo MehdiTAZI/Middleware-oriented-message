@@ -6,8 +6,8 @@ import org.slf4j.LoggerFactory;
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
-import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
+import fr.esiag.mezzodijava.mezzo.servercommons.ThreadPool;
 
 /**
  * TimeServiceCtr : To interact with the model
@@ -23,6 +23,8 @@ public class TimeServiceCtr {
     private static Logger log = LoggerFactory.getLogger(TimeServiceCtr.class);
 
     private TimeServiceModel model;
+
+    private ThreadPool threadPool = new ThreadPool(100);
 
     /**
      * Get the model
@@ -47,7 +49,7 @@ public class TimeServiceCtr {
     /**
      * Subscribe a component to the channel.
      * 
-     * The server will push the time to this component.
+     * The server will push the time to this component each 500 ms
      * 
      * @param component
      *            a component of type Synchronizable
@@ -58,17 +60,29 @@ public class TimeServiceCtr {
 
 	if (!model.getComponentSubscribed().add(cc))
 	    throw new AlreadyRegisteredException();
+	threadPool.runTask(new ThreadTime(cc, model, 500));
 	log.info("Component subscribed : " + cc);
+    }
 
-	/*
-	 * FOR VECTOR VERSION if (model.getComponentSubscribed().contains(cc) ||
-	 * cc == null) { System.out.println("Component allready subscribed : " +
-	 * cc); throw new
-	 * AlreadyRegisteredException("Component allready subscribed ");
-	 * 
-	 * } else { model.getComponentSubscribed().add(cc);
-	 * System.out.println("Component subscribed : " + cc); }
-	 */
+    /**
+     * Subscribe a component to the channel.
+     * 
+     * The server will push the time to this component.
+     * 
+     * @param component
+     *            a component of type Synchronizable
+     * @param timeSpan
+     *            desirated refresh time (cannot be below 200 ms)
+     * @throws AlreadyRegisteredException
+     *             If already present in the list.
+     */
+    public void subscribe(Synchronizable cc, long timeSpan)
+	    throws AlreadyRegisteredException {
+
+	if (!model.getComponentSubscribed().add(cc))
+	    throw new AlreadyRegisteredException();
+	threadPool.runTask(new ThreadTime(cc, model, timeSpan));
+	log.info("Component subscribed : " + cc);
     }
 
     /**
@@ -86,5 +100,14 @@ public class TimeServiceCtr {
 	    throw new NotRegisteredException();
 	model.getComponentSubscribed().remove(cc);
 	log.info("Component unsubscribed : " + cc);
+    }
+
+    /**
+     * Pull time.
+     * 
+     * @return current time in millis.
+     */
+    public long getTime() {
+	return 0;
     }
 }

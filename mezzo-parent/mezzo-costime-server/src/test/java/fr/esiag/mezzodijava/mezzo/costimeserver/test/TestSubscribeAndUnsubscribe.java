@@ -48,7 +48,7 @@ public class TestSubscribeAndUnsubscribe {
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
 		TimeServiceImpl test=new TimeServiceImpl(ctr);
 		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
-		test.subscribe(mockSync);
+		test.subscribe(mockSync,1000);
 		//passage par iterator vue qu'on utilise les set mainteant. 
 		Iterator<Synchronizable> iterator=  test.getCtr().getModel().getComponentSubscribed().iterator();
 		Synchronizable firstElem= iterator.next();
@@ -61,7 +61,7 @@ public class TestSubscribeAndUnsubscribe {
 		TimeServiceCtr ctr=new TimeServiceCtr(new TimeServiceModel());
 		TimeServiceImpl test=new TimeServiceImpl(ctr);
 		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
-		test.subscribe(mockSync);
+		test.subscribe(mockSync,1000);
 		assertTrue(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
 		test.unsubscribe(mockSync);
 		assertFalse(test.getCtr().getModel().getComponentSubscribed().contains(mockSync));
@@ -73,8 +73,8 @@ public class TestSubscribeAndUnsubscribe {
 		TimeServiceImpl test=new TimeServiceImpl(ctr);
 		Synchronizable mockSync=EasyMock.createNiceMock(Synchronizable.class);
 		try {
-			test.subscribe(mockSync);
-			test.subscribe(mockSync);
+			test.subscribe(mockSync,1000);
+			test.subscribe(mockSync,1000);
 			fail("exception non levée");
 		} 
 		catch (AlreadyRegisteredException e) {

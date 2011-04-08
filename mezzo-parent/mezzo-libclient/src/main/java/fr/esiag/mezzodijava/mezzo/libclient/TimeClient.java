@@ -113,7 +113,7 @@ public final class TimeClient {
 			.getResourceAsStream(TimeClient.CLIENT_PROPERTIES));
 	    } catch (IOException e) {
 		// TODO log here
-	    	log.debug("Error in opening time client property file");
+		log.debug("Error in opening time client property file");
 		throw new TimeClientException(
 			"Error in opening time client property file", e);
 	    }
@@ -124,7 +124,7 @@ public final class TimeClient {
 	    nceObj = orb.resolve_initial_references("NameService");
 	} catch (InvalidName e) {
 	    // TODO log here
-		log.debug("Cannot resolve NameService");
+	    log.debug("Cannot resolve NameService");
 	    throw new TimeClientException("Cannot resolve NameService", e);
 	}
 	nce = NamingContextExtHelper.narrow(nceObj);
@@ -150,14 +150,14 @@ public final class TimeClient {
 	try {
 	    channelObj = nce.resolve_str(timeServerName);
 	} catch (NotFound e) {
-	    
+
 	    throw new TimeClientException("Cannot find the Time Service '"
 		    + timeServerName + "'", e);
 	} catch (CannotProceed e) {
-	   
+
 	    throw new TimeClientException("Cannot resolve the Time Service", e);
 	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-	   
+
 	    throw new TimeClientException("Invalid topic name", e);
 	}
 	return TimeServiceHelper.narrow(channelObj);
@@ -172,15 +172,17 @@ public final class TimeClient {
      *            Name of the Time Service in the Name Service
      * @param callbackConsumerImplementation
      *            implementation of callbackConsumerOperation
+     * @param timeSpan
+     *            refresh delay
      * @throws TimeClientException
      */
     public void subscribeToTimeService(String timeServiceName,
-	    SynchronizableOperations callbackTimeImplementation)
+	    SynchronizableOperations callbackTimeImplementation, long timeSpan)
 	    throws TimeClientException {
 	TimeService service = resolveTimeService(timeServiceName);
 	Synchronizable callbackIOR = serveCallbackTime(callbackTimeImplementation);
 	try {
-	    service.subscribe(callbackIOR);
+	    service.subscribe(callbackIOR, timeSpan);
 	} catch (AlreadyRegisteredException e) {
 	    throw new TimeClientException("Deja abonne au COS Time "
 		    + timeServiceName, e);

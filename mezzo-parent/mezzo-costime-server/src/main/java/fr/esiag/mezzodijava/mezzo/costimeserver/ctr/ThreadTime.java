@@ -1,9 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.ctr;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.Set;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,8 +17,9 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 public class ThreadTime implements Runnable {
     private static Logger log = LoggerFactory.getLogger(ThreadTime.class);
-    private TimeServiceModel model;
-    private long timeSpan = 1000;
+    private Synchronizable cc;
+    TimeServiceModel model;
+    long timeSpan;
 
     /**
      * Constructor for a ThreadTime
@@ -30,20 +27,9 @@ public class ThreadTime implements Runnable {
      * @param model
      *            TimeServiceModel
      */
-    public ThreadTime(TimeServiceModel model) {
-	this.model = model;
-    }
-
-    /**
-     * Constructor for a ThreadTime
-     * 
-     * @param model
-     *            TimeServiceModel
-     * @param timeSpan
-     * 
-     */
-    public ThreadTime(TimeServiceModel model, long timeSpan) {
+    public ThreadTime(Synchronizable cc, TimeServiceModel model, long timeSpan) {
 	super();
+	this.cc = cc;
 	this.model = model;
 	this.timeSpan = timeSpan;
     }
@@ -52,37 +38,21 @@ public class ThreadTime implements Runnable {
      * To fill date and time to a synchronize component
      * 
      */
-    public void synchronizeComponent() {
-	Set<Synchronizable> components = model.getComponentSubscribed();
-	synchronized(components){
-	    Iterator<Synchronizable> i = components.iterator();
-	while(i.hasNext()){
-	    Date date = new Date();
-	    Synchronizable component = i.next();
-	    try {
-		component.date(date.getTime());
-	    } catch (org.omg.CORBA.SystemException ex) {
-		i.remove();
-		log.warn("Component unreachable unsubscribed : " + component);
-	    }
-	}
-	}
-    }
-
-    /**
-     * Run the thread to synchronize components
-     * 
-     */
     @Override
     public void run() {
 	log.info("Initialize thread");
-	while (true) {
-	    synchronizeComponent();
+	while (model.getComponentSubscribed().contains(cc)) {
 	    try {
-		log.trace("Slept {}", timeSpan);
-		Thread.sleep(this.timeSpan);
-	    } catch (InterruptedException e) {
-		log.error("Error in the thread", e);
+		cc.date(System.currentTimeMillis());
+		try {
+		    Thread.sleep(timeSpan);
+		} catch (InterruptedException e) {
+		    log.error("time thread interrupted for : " + cc);
+		}
+	    } catch (org.omg.CORBA.SystemException ex) {
+		model.getComponentSubscribed().remove(cc);
+		log.warn("Component unreachable unsubscribed : " + cc);
+		break;
 	    }
 	}
     }
