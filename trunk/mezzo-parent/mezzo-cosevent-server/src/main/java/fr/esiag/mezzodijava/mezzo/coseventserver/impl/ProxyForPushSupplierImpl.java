@@ -89,7 +89,7 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	}
 
 	channelCtr.addEvent(evt);
-	log.debug(" Push Consumer (idComponent {}) just sent an Event on {}",
+	log.info(" Push Consumer (idComponent {}) just sent an Event on {}",
 			idComponent, channelCtr.getChannel().getTopic());
 
     }

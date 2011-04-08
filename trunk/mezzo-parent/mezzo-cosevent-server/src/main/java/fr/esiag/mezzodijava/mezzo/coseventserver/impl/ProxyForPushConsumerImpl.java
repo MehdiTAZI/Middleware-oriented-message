@@ -93,7 +93,7 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
 	public void receive(Event evt) throws ConsumerNotFoundException {
 		try {
 			callbackConsumer.receive(evt);
-			log.debug("PushConsumer {} just receive an event",idComponent);
+			log.info("PushConsumer {} just receive an event",idComponent);
 
 		} catch (org.omg.CORBA.SystemException ex) {
 			log.error("Consumer not found", ex);
