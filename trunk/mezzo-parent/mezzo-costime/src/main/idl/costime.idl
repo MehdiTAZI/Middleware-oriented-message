@@ -14,8 +14,9 @@ module costime{
 		 attribute DateTime date;
 	};
 	interface TimeService{
-		void subscribe(in Synchronizable cc) raises (AlreadyRegisteredException);
+		void subscribe(in Synchronizable cc, in long long timeSpan) raises (AlreadyRegisteredException);
 		void unsubscribe(in Synchronizable cc) raises (NotRegisteredException);
+		long long getTime();
 	};
 };
 

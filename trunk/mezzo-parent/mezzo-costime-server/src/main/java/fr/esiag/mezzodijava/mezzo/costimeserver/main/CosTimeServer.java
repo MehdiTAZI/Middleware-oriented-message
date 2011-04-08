@@ -24,6 +24,10 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.publisher.TimeServicePublisher;
  */
 public class CosTimeServer {
 
+    {
+	initLogging();
+    }
+    
     final static Logger log = LoggerFactory.getLogger(CosTimeServer.class);
 
     public CosTimeServer(String[] args) {

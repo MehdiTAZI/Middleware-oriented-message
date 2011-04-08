@@ -38,10 +38,10 @@ public class TimeServicePublisher {
     public static void publish(String name, TimeServiceImpl timeService,
 	    ORB orb, long timeSpan) {
     	log.info("publish \"{}\"  with a timespan of : {}",name,timeSpan);
-	ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
-		timeSpan);
-	thread = new Thread(tt);
-	thread.start();
+//	ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
+//		timeSpan);
+//	thread = new Thread(tt);
+//	thread.start();
 
 	try {
 	    POA poa = POAHelper.narrow(orb

@@ -133,7 +133,7 @@ public class CosEventServer {
 	    System.out.println("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
-		    new CallbackTimeImpl());
+		    new CallbackTimeImpl(),1000);
 
 	    reloadPersistedChannel(eventServerName);
 	    

@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.derby.tools.sysinfo;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -278,7 +279,7 @@ public class COSEventIT {
 	    to.start();
 	    TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	    Synchronizable cc = tc.serveCallbackTime(new CallBackTimeImpl());
-	    ts.subscribe(cc);
+	    ts.subscribe(cc,1000);
 	    if ((args != null) && (args.length >= 1)) {
 		Thread.sleep(new Long(args[0]).longValue());
 	    }
@@ -1184,6 +1185,19 @@ public class COSEventIT {
 	// Thread.sleep(2000);
 	System.out.println("fini");
     }
+    
+    /**
+     * Test Automatique - UC05 - US17 - Nominal : Interroger le server de temps.
+     * 
+     * Un interrogation est faite au service de temps pour recuperer son temps.
+     */
+    @Test
+    public void testUC05_Nominal_PullTime() throws Exception {
+	TimeClient tc = TimeClient.init(null);
+	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
+	long time = ts.getTime();
+	System.out.println("pull time : " + time);
+    }
 
     /**
      * Test Automatique - UC06 - US176 - Nominal : S’abonner au CosTime.
@@ -1219,9 +1233,9 @@ public class COSEventIT {
 	TimeClient tc = TimeClient.init(null);
 	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
-	ts.subscribe(s);
+	ts.subscribe(s,1000);
 	try {
-	    ts.subscribe(s);
+	    ts.subscribe(s,1000);
 	    fail("expected AlreadyRegisteredException !");
 	} catch (fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException e) {
 	    ;// ok
@@ -1243,7 +1257,7 @@ public class COSEventIT {
 	TimeClient tc = TimeClient.init(null);
 	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
-	ts.subscribe(s);
+	ts.subscribe(s,1000);
 	ts.unsubscribe(s);
 	try {
 	    ts.unsubscribe(s);

@@ -1,8 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.impl;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
@@ -20,7 +17,6 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 
 public class TimeServiceImpl implements TimeServiceOperations {
 
-    private static Logger log = LoggerFactory.getLogger(TimeServiceImpl.class);
     private TimeServiceCtr ctr;
 
     /**
@@ -50,14 +46,17 @@ public class TimeServiceImpl implements TimeServiceOperations {
      * 
      * @param component
      *            a component of type Synchronizable
+     * @param timeSpan
+     *            desirated refresh time (cannot be below 200 ms)
      * @throws AlreadyRegisteredException
      *             If already present in the list.
      * @see fr.esiag.mezzodijava.mezzo.costime.TimeServiceOperations#subscribe(Synchronizable
      *      cc)
      */
     @Override
-    public void subscribe(Synchronizable cc) throws AlreadyRegisteredException {
-	ctr.subscribe(cc);
+    public void subscribe(Synchronizable cc, long timeSpan)
+	    throws AlreadyRegisteredException {
+	ctr.subscribe(cc, timeSpan);
     }
 
     /**
@@ -75,5 +74,15 @@ public class TimeServiceImpl implements TimeServiceOperations {
     @Override
     public void unsubscribe(Synchronizable cc) throws NotRegisteredException {
 	ctr.unsubscribe(cc);
+    }
+
+    /**
+     * Pull time.
+     * 
+     * @return current time in millis.
+     */
+    @Override
+    public long getTime() {
+	return ctr.getTime();
     }
 }

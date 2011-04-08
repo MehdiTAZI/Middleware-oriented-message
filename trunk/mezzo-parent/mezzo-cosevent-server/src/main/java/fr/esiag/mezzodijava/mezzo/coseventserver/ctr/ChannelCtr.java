@@ -28,6 +28,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
+import fr.esiag.mezzodijava.mezzo.servercommons.ThreadPool;
 
 /**
  * Classe ChannelCtr
@@ -66,7 +67,7 @@ public class ChannelCtr {
 	}
 
 	/**
-	 * Add an event to all Subscribed Consumers to this Channel.
+	 * Add an event to all Subscribed Push and Pull Consumers Queue of this Channel.
 	 * 
 	 * @param e
 	 *            an Event

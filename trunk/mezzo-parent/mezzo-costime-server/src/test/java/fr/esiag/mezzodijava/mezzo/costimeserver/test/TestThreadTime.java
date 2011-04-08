@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
+import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
@@ -33,7 +34,7 @@ public class TestThreadTime {
 	}
 	
 	@Test
-	public void testRunWithComponentSubscribed() throws AlreadyRegisteredException {
+	public void testRunWithComponentSubscribedWithTimeSpan() throws AlreadyRegisteredException, NotRegisteredException, InterruptedException {
 		
 		// création du mock pour un component Synchronizable
 		Synchronizable mockSync = EasyMock.createNiceMock(Synchronizable.class);
@@ -44,35 +45,15 @@ public class TestThreadTime {
 		// ajout d'un composant
 		ctr.subscribe(mockSync);
 		// appel espéré
-		mockSync.date(EasyMock.anyLong());
+		//mockSync.date(EasyMock.anyLong());
 		// enregistrement
 		EasyMock.replay(mockSync);
 		// création du threadTime
-		ThreadTime tt = new ThreadTime(model);
-		tt.synchronizeComponent();
-		EasyMock.verify(mockSync);
-		mockSync = null;
-	}
-	
-	@Test
-	public void testRunWithComponentSubscribedWithTimeSpan() throws AlreadyRegisteredException {
-		
-		// création du mock pour un component Synchronizable
-		Synchronizable mockSync = EasyMock.createNiceMock(Synchronizable.class);
-		// création du time model
-		TimeServiceModel model = new TimeServiceModel();
-		// création du time controller
-		TimeServiceCtr ctr = new TimeServiceCtr(model);
-		// ajout d'un composant
-		ctr.subscribe(mockSync);
-		// appel espéré
-		mockSync.date(EasyMock.anyLong());
-		// enregistrement
-		EasyMock.replay(mockSync);
-		// création du threadTime
-		ThreadTime tt = new ThreadTime(model,0);
-		tt.synchronizeComponent();
-		EasyMock.verify(mockSync);
+		ThreadTime tt = new ThreadTime(mockSync,model,100);
+		(new Thread(tt)).start();
+		Thread.sleep(500);
+		ctr.unsubscribe(mockSync);
+		//EasyMock.verify(mockSync);
 		mockSync = null;
 	}
 
