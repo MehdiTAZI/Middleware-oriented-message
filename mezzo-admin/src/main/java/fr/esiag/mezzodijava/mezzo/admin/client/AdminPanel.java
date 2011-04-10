@@ -54,7 +54,7 @@ public class AdminPanel {
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (3) Make the call
-				  defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","status"}, callback);
+				  defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","start"}, callback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
@@ -62,7 +62,7 @@ public class AdminPanel {
 		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				 // (3) Make the call
-				ShellExectuer.execute(new String[]{"bash","/opt/mezzo/coseventserver","status"}, callback);
+				ShellExectuer.execute(new String[]{"bash","/opt/mezzo/coseventserver","stop"}, callback);
 			}
 		});
 
