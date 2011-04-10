@@ -14,6 +14,7 @@ module costime{
 		 attribute DateTime date;
 	};
 	interface TimeService{
+		//Remplacer long long par DateTime ?sinon je ne voie pas l'interet du typedef que j'ai mis
 		void subscribe(in Synchronizable cc, in long long timeSpan) raises (AlreadyRegisteredException);
 		void unsubscribe(in Synchronizable cc) raises (NotRegisteredException);
 		long long getTime();
