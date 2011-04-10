@@ -42,10 +42,10 @@ public class Application
 	    advancedAdminPanel.ensureDebugId("cwDisclosurePanel"+adminPanelTitle);
 	    advancedAdminPanel.setContent(wiPanel);
 	  
-		DisclosurePanel advancedMonitoringPanel = new DisclosurePanel(monitoringPanelTitle);
+		/*DisclosurePanel advancedMonitoringPanel = new DisclosurePanel(monitoringPanelTitle);
 		advancedMonitoringPanel.setAnimationEnabled(true);
 		advancedMonitoringPanel.ensureDebugId("cwDisclosurePanel"+monitoringPanelTitle);
-		advancedMonitoringPanel.setContent(new MonitoringPanel());
+		advancedMonitoringPanel.setContent(new MonitoringPanel());*/
 	    
 	  	
 		// Create a tab panel
@@ -53,7 +53,7 @@ public class Application
 		MenuPannel.setWidth("500px");
 		
 		MenuPannel.add(advancedAdminPanel, adminPanelTitle);
-		MenuPannel.add(advancedMonitoringPanel, monitoringPanelTitle);
+		//MenuPannel.add(advancedMonitoringPanel, monitoringPanelTitle);
 	  	MenuPannel.setAnimationEnabled(true);
 	  	MenuPannel.selectTab(0);
 	  	
