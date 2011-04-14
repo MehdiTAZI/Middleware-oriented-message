@@ -33,6 +33,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 
+// NO MORE COMMENT TO DO AT 14/04/2010
 /**
  * Classe ChannelAdminCtr
  * 
@@ -61,27 +62,42 @@ public class ChannelAdminCtr {
 	private static POA poa;
 
 	/**
-	 * Build a Channel Admin Controler associated with a channelCtr.
 	 * 
-	 * @param topic
-	 *            Channel topic.
+	 * @return Map containing proxyPushConsumer and an array of byte associated
 	 */
 	public Map<ProxyForPushConsumer, byte[]> getOidProxyForPushConsumerMap() {
 		return oidProxyForPushConsumerMap;
 	}
 
+	/**
+	 * 
+	 * @return Map containing proxyPushSupplier and an array of byte associated
+	 */
 	public Map<ProxyForPushSupplier, byte[]> getOidProxyForPushSupplierMap() {
 		return oidProxyForPushSupplierMap;
 	}
 
+	/**
+	 * 
+	 * @return Map containing proxyPullConsumer and an array of byte associated
+	 */
 	public Map<ProxyForPullConsumer, byte[]> getOidProxyForPullConsumerMap() {
 		return oidProxyForPullConsumerMap;
 	}
 
+	/**
+	 * 
+	 * @return Map containing proxyPullSupplier and an array of byte associated
+	 */
 	public Map<ProxyForPullSupplier, byte[]> getOidProxyForPullSupplierMap() {
 		return oidProxyForPullSupplierMap;
 	}
-
+	/**
+	 * Build a Channel Admin Controler associated with a channelCtr.
+	 * 
+	 * @param topic
+	 *            Channel topic.
+	 */
 	public ChannelAdminCtr(String topic) {
 		log.trace("Creation of ChannelAdminCtr");
 		this.channel = topic;
@@ -89,6 +105,7 @@ public class ChannelAdminCtr {
 		this.channelCtr = BFFactory.createChannelCtr(topic);
 	}
 
+	
 	private static synchronized POA getPOA() {
 		log.trace("Access to POA");
 		try {
