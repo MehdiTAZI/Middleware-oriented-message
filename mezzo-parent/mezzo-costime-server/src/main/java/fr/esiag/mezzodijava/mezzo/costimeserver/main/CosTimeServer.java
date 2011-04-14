@@ -51,13 +51,18 @@ public class CosTimeServer {
     }
 
     /**
+     * YAMain
      * @param args
+     * 
      */
     public static void main(String[] args) {
 	//initLogging();
 	new CosTimeServer(args);
     }
 
+    /**
+     * Initialisation of the logging
+     */
     public static void initLogging() {
 	try {
 	    LogManager.getLogManager().readConfiguration(
