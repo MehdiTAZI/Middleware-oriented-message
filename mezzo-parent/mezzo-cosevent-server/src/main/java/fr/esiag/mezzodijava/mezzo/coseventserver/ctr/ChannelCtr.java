@@ -48,6 +48,10 @@ public class ChannelCtr {
 	private Channel channel;
 	private ThreadPool threadPool;
 
+	/**
+	 * 
+	 * @return the pool of thread.
+	 */
     public ThreadPool getThreadPool() {
 	return threadPool;
     }
@@ -214,6 +218,14 @@ public class ChannelCtr {
 				proxySupplier.toString(), channel.getTopic());
 	}
 
+	/**
+	 * Add a proxy for PULL Consumer to connected suppliers list for this channel.
+	 * 
+	 * The consumer will be able to ask for new events to the channel.
+	 * @param proxyConsumer Proxy for pull consumer
+	 * @throws AlreadyConnectedException if already present in the list.
+	 * @throws MaximalConnectionReachedException if channel connection capacity is reached.
+	 */
 	public void addProxyForPullConsumerToConnectedList(
 			ProxyForPullConsumerImpl proxyConsumer)
 			throws AlreadyConnectedException, MaximalConnectionReachedException {
@@ -478,6 +490,12 @@ public class ChannelCtr {
 		channel.setSuppliersPullConnected(new HashMap<String, ProxyForPullSupplierImpl>());
 	}
 	
+	/** 
+	 * Provide the event for a proxy for pull consumer
+	 * @param proxyConsumer the proxy who has got those events
+	 * @return the event attached to the proxy consumer
+	 * @throws NotConnectedException if the proxy is not connected
+	 */
 	public Event getEvent(ProxyForPullConsumerImpl proxyConsumer)
 		throws NotConnectedException {
 		
