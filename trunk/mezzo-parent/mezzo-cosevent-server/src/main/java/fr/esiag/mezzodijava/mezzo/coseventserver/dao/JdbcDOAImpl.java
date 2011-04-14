@@ -61,6 +61,12 @@ public class JdbcDOAImpl implements JdbcDAO {
 	return conn;
     }
 
+    /**
+     * import the SQL 
+     * @param conn the connection where we'll import SQL
+     * @param in the inputStream where we'll process the content
+     * @throws SQLException if SQL error
+     */
     public static void importSQL(Connection conn, InputStream in)
 	    throws SQLException {
 	Scanner s = new Scanner(in);
@@ -89,6 +95,12 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * Constructor
+     * @param userName userName for the database
+     * @param password password associated to the username
+     * @param dbFile the file where we'll persist
+     */
     public JdbcDOAImpl(String userName, String password, String dbFile) {
 	super();
 	this.userName = userName;
@@ -104,6 +116,10 @@ public class JdbcDOAImpl implements JdbcDAO {
     }
 
     @Override
+    /**
+     * access to all the channel
+     * @return a list of the channel
+     */
     public List<Channel> findAllChannel() {
 	try {
 	    List<Channel> list = new ArrayList<Channel>();
@@ -135,6 +151,11 @@ public class JdbcDOAImpl implements JdbcDAO {
     }
 
     @Override
+    /**
+     * access to all the event for a channel
+     * @param channelId the channel
+     * @return all the event associated with channelId
+     */
     public SortedSet<EventModel> findEventByChannel(int channelId) {
 	try {
 	    SortedSet<EventModel> set = new TreeSet<EventModel>(
@@ -172,6 +193,11 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * sort all the consumer for one channel
+     * @param channelId the channel
+     * @return Map with the IDConsumer and the consumer associated
+     */
     @Override
     public Map<String, ConsumerModel> findConsumerByChannel(int channelId) {
 	try {
@@ -202,6 +228,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * @return event for the consumer associated
+     */
     @Override
     public SortedSet<EventModel> findEventByConsumer(int idConsumer) {
 	try {
@@ -238,6 +267,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * @return the channelId associated to the channel that we wanted to persist
+     */
     @Override
     public synchronized int insertChannel(Channel channel) {
 	int cle = 0;
@@ -274,6 +306,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * @return return the consumerID associated to the consumerModel that we wanted to persist
+     */
     @Override
     public synchronized int insertConsumer(ConsumerModel consumer) {
 	int cle = 0;
@@ -308,6 +343,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * @return the eventId associated to the eventModel and the channelId.
+     */
     @Override
     public synchronized int insertEvent(int channelId, EventModel event) {
 	int cle = 0;
@@ -347,6 +385,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * add the Event to the consumer
+     */
     @Override
     public void addEventToConsumer(int eventId, int consumerId) {
 	try {
@@ -366,6 +407,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * refresh capacity and id of channel
+     */
     @Override
     public void updateChannel(Channel channel) {
 	try {
@@ -386,6 +430,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * delete a consumer who was already persisted
+     */
     @Override
     public void deleteConsumer(int consumerId) {
 	try {
@@ -406,6 +453,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     }
 
+    /**
+     * delete a channel who was already persisted
+     */
     @Override
     public void deleteChannel(int channelId) {
 	try {
@@ -426,6 +476,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     }
 
+    /**
+     * delete all consumers associated to a channel
+     */
     @Override
     public void deleteAllConsumers(int channelId) {
 	try {
@@ -446,6 +499,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     }
 
+    /**
+     * delete an event associated to a consumer
+     */
     @Override
     public void deleteEventByConsumer(int consumerId, int eventId) {
 	try {
@@ -467,6 +523,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 	}
     }
 
+    /**
+     * delete an event
+     */
     @Override
     public void deleteEvent(int eventId) {
 	try {
