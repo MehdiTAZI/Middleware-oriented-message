@@ -182,7 +182,7 @@ public class Channel implements Serializable {
     }
     
     /**
-     * Getter of the set of subscribed push consumer.
+     * Getter of the set of subscribed pull consumer.
      * 
      * For persistance purpose only.
      * 
