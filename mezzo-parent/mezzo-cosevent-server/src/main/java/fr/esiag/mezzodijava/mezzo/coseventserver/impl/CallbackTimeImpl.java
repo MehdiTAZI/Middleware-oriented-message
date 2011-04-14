@@ -13,12 +13,18 @@ public class CallbackTimeImpl implements SynchronizableOperations {
     final static Logger log = LoggerFactory.getLogger(CallbackTimeImpl.class);
     private long delta;
 
+    
+/**
+ *  @return the date in long format
+ */
     @Override
     public long date() {
 
 	return CosEventServer.getDelta();
     }
-
+/**
+ * @return the delta associated to the actual time and the time in argument
+ */
     @Override
     public void date(long arg) {
 

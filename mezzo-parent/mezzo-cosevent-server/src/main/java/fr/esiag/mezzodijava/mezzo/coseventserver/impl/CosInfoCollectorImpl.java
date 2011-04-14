@@ -15,6 +15,9 @@ import fr.esiag.mezzodijava.mezzo.monitoring.Message;
 public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 
 	private static Logger log = LoggerFactory.getLogger(CosInfoCollectorImpl.class);
+	/**
+	 * @return an array containing the channel infos
+	 */
 	@Override
 	public ChannelInfosCollector[] getChannelsInfos() {
 		log.debug("Access to channels infos");

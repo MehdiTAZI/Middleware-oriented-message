@@ -31,6 +31,10 @@ public class ChannelAdminImpl implements ChannelAdminOperations {
     private ChannelAdminCtr channelAdminctrl;
     private String topic;
     
+    /**
+     * 
+     * @return the channel admin controler
+     */
     public ChannelAdminCtr getChannelAdminctrl() {
 		return channelAdminctrl;
 	}

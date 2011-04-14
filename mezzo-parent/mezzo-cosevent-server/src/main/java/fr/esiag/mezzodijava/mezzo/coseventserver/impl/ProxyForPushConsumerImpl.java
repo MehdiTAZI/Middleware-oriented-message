@@ -36,6 +36,11 @@ public class ProxyForPushConsumerImpl extends AbstractProxyImpl implements
 	 */
 	private CallbackConsumer callbackConsumer;
 
+	/**
+	 * constructor
+	 * @param topic
+	 * @param idComponent
+	 */
 	public ProxyForPushConsumerImpl(String topic, String idComponent) {
 		super(topic, idComponent);
 	}

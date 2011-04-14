@@ -36,10 +36,18 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 	 */
 	private CallbackSupplier callbackSupplier;
 
+	/**
+	 * constructor
+	 * @param topic
+	 * @param idComponent
+	 */
 	public ProxyForPullSupplierImpl(String topic, String idComponent) {
 		super(topic, idComponent);
 	}
 
+	/**
+	 * connection to the cosEventServer
+	 */
 	@Override
 	public void connect(CallbackSupplier cs) throws ChannelNotFoundException,
 			MaximalConnectionReachedException,
@@ -50,6 +58,9 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 		connected=true;
 	}
 
+	/**
+	 * disconnection of the cosEventServer
+	 */
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
@@ -58,6 +69,12 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 		connected=false;
 	}
 	
+	/**
+	 * ask for new Event on the supplier
+	 * @param hasEvent boolean to say if there is any event
+	 * @return the event
+	 * @throws SupplierNotFoundException if supplier is not connected
+	 */
 	public Event ask(BooleanHolder hasEvent) throws SupplierNotFoundException{
 		Event e;
 		try {

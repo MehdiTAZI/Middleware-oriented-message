@@ -31,6 +31,11 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
 	private static Logger log = LoggerFactory
 	.getLogger(ProxyForPushSupplierImpl.class);
 
+	/**
+	 * constructor
+	 * @param topic
+	 * @param idComponent
+	 */
     public ProxyForPushSupplierImpl(String topic, String idComponent) {
 	super(topic, idComponent);
     }
