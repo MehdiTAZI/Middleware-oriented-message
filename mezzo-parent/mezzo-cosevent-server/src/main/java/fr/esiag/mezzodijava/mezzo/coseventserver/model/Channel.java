@@ -33,6 +33,9 @@ public class Channel implements Serializable {
     private Map<String, ProxyForPushSupplierImpl> suppliersConnected = new HashMap<String, ProxyForPushSupplierImpl>();
     private Map<String, ProxyForPullSupplierImpl> suppliersPullConnected = new HashMap<String, ProxyForPullSupplierImpl>();
     
+    /**
+     * constructor
+     */
     public Channel() {
 	super();
     }
@@ -227,30 +230,58 @@ public class Channel implements Serializable {
 	this.topic = topic;
     }
 
+    /**
+     * Getter of the ChannelIdentifier
+     * @return
+     */
     public long getIdentifier() {
 	return identifier;
     }
 
+    /**
+     * Set the Channel Identifier
+     * @param identifier
+     */
     public void setIdentifier(long identifier) {
 	this.identifier = identifier;
     }
 
+    /**
+     * Getter of the channel capacity
+     * @return
+     */
     public int getConnectionCapacity() {
 	return connectionCapacity;
     }
 
+    /**
+     * Set the channel capacity
+     * @param connectionCapacity
+     */
     public void setConnectionCapacity(int connectionCapacity) {
 	this.connectionCapacity = connectionCapacity;
     }
 
+    /**
+     * Getter of the Channel Id
+     * @return
+     */
 	public int getId() {
 		return id;
 	}
 
+	/**
+	 * Set the channel Id
+	 * @param id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
+	/**
+	 * Set the new map of ConsumerPull
+	 * @param consumersPull
+	 */
 	public void setConsumersPull(Map<String, ConsumerModel> consumersPull) {
 		this.consumersPull = consumersPull;
 	}

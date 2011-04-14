@@ -51,10 +51,18 @@ public class EventServer {
 	return instance;
     }
 
+    /**
+     * Getter of the server name
+     * @return
+     */
     public String getServerName() {
         return serverName;
     }
 
+    /**
+     * Set the server name
+     * @param serverName
+     */
     public void setServerName(String serverName) {
         this.serverName = serverName;
     }
@@ -140,17 +148,35 @@ public class EventServer {
 	this.mapChannelId.remove(channel.getIdentifier());
     }
 
+    /**
+     * Getter of the MapChannel
+     * @return
+     */
     public Map<String, Channel> getMapChannel() {
         return mapChannel;
     }
+    
+    /**
+     * Set the MapChannel
+     * @param mapChannel
+     */
 
     public void setMapChannel(Map<String, Channel> mapChannel) {
         this.mapChannel = mapChannel;
     }
+    
+    /**
+     * Getter of the MapChannelId
+     * @return
+     */
 
     public Map<Long, Channel> getMapChannelId() {
         return mapChannelId;
     }
+    /**
+     * Set the MapChannelId
+     * @param mapChannelId
+     */
 
     public void setMapChannelId(Map<Long, Channel> mapChannelId) {
         this.mapChannelId = mapChannelId;
