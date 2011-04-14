@@ -40,6 +40,10 @@ public class ThreadEvent implements Runnable {
 
     private JdbcDAO dao = DAOFactory.getJdbcDAO();
     
+    /**
+     * constructor for the Thread Event
+     * @param topic the thread Event will be attached to this topic
+     */
     public ThreadEvent(String topic) {
 	log.trace("ThreadEvent created");
 	channel = es.getChannel(topic);
