@@ -18,6 +18,11 @@ import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 public class EventConvertor {
 	private static Logger log = LoggerFactory.getLogger(EventConvertor.class);
 
+	/**
+	 * transform an Event to the Event Model in order to persist it
+	 * @param e the event to persist
+	 * @return the new event
+	 */
     public EventModel transformToEventModel(Event e) {
 	EventModel em = new EventModel();
 	// Serialize to a byte array
@@ -45,7 +50,12 @@ public class EventConvertor {
 	em.setType(e.body.type);
 	return em;
     }
-
+    
+/**
+ * transform and EventModel to the Event in order to modify it
+ * @param em the eventModel to modify
+ * @return the event
+ */
     public Event transformToEvent(EventModel em) {
 	try {
 	    Event e;
