@@ -19,7 +19,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ThreadEvent;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
@@ -46,12 +45,12 @@ public class TestThreadEvent {
 		Channel channel = new Channel("TEST", 1);
 		EventServer.getInstance().setAlternateChannel("TOPIC_TEST", channel);
 		threadEvent = new ThreadEvent("TOPIC_TEST");
-		ProxyForPushConsumerImpl ppfc = EasyMock
+		ProxyForPushConsumerImpl mockPfpc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
 		channel.addSubscribedConsumer("testconsumerthread");
 		// adding the mock as connected consumer
-		channel.getConsumersConnected().put("testconsumerthread",ppfc);
+		channel.getConsumersConnected().put("testconsumerthread",mockPfpc);
 		// adding an event
 		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 1200);
 		ORB orb=ORB.init();
@@ -66,16 +65,17 @@ public class TestThreadEvent {
 		}
 		// receive is expected
 		try {
-			ppfc.receive(e);
+			mockPfpc.receive(EasyMock.isA(Event.class));
+			//ppfc.receive(e);
 		} catch (ConsumerNotFoundException e1) {
 			fail("exception levée");
 		}
 		// Passage du mock en mode de test
-		EasyMock.replay(ppfc);
+		EasyMock.replay(mockPfpc);
 		// Test
 		threadEvent.processSubscribedConsumers();
 		// vérification de l'appel à la méthode receive
-		EasyMock.verify(ppfc);
+		EasyMock.verify(mockPfpc);
 	}
 
 	@Test
@@ -120,12 +120,12 @@ public class TestThreadEvent {
 		Channel channel = new Channel("TEST", 1);
 		EventServer.getInstance().setAlternateChannel("TOPIC_TEST", channel);
 		threadEvent = new ThreadEvent("TOPIC_TEST");
-		ProxyForPushConsumerImpl ppfc = EasyMock
+		ProxyForPushConsumerImpl mockPfpc = EasyMock
 				.createStrictMock(ProxyForPushConsumerImpl.class);
 		// adding the mock as subscribed consumer
 		channel.addSubscribedConsumer("testconsumerthread");
 		// adding the mock as connected consumer
-		channel.getConsumersConnected().put("testconsumerthread",ppfc);
+		channel.getConsumersConnected().put("testconsumerthread",mockPfpc);
 		// adding an event
 		Header header=new Header(123, 1, Calendar.getInstance().getTimeInMillis(), 120);
 		ORB orb=ORB.init();
@@ -139,19 +139,19 @@ public class TestThreadEvent {
 	    consumer.getEvents().add((new EventConvertor()).transformToEventModel(e));
 	}
 		// on s'attend à ce qu'un appel à receive soit fait
-		ppfc.receive(e);
+		mockPfpc.receive(EasyMock.isA(Event.class));
 
 		// Le mock doit renvoye l'exception
 		EasyMock.expectLastCall().andThrow(new ConsumerNotFoundException());
 		// Et donc on s'attend à ce qu'un appel à disconnect soit fait
-		ppfc.disconnect();
+		mockPfpc.disconnect();
 
 		// Passage du mock en mode de test
-		EasyMock.replay(ppfc);
+		EasyMock.replay(mockPfpc);
 		// Test
 		threadEvent.processSubscribedConsumers();
 		// vérification de l'appel à la méthode receive
-		EasyMock.verify(ppfc);
+		EasyMock.verify(mockPfpc);
 	}
 
 }
