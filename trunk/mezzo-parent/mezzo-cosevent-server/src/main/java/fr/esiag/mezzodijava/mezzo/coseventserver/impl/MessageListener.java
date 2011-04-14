@@ -16,6 +16,11 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 
 public interface MessageListener {
 
+	/**
+	 * push method
+	 * @param evt the event that we gonna push
+	 * @throws ConsumerNotFoundException if consumer is disconnected
+	 */
     public void receive(Event evt) throws ConsumerNotFoundException;
 
 }

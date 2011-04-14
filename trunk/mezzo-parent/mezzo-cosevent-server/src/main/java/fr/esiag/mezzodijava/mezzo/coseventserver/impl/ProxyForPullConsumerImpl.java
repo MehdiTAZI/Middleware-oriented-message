@@ -28,10 +28,18 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	
 	private static Logger log = LoggerFactory.getLogger(ProxyForPullConsumerImpl.class);
 
+	/**
+	 * constructor
+	 * @param topic topic associated to the ppcImpl
+	 * @param idComponent
+	 */
 	public ProxyForPullConsumerImpl(String topic, String idComponent) {
 		super(topic, idComponent);
 	}
 
+	/**
+	 * connection to the cosEventServer
+	 */
 	@Override
 	public void connect() throws ChannelNotFoundException,
 			MaximalConnectionReachedException, AlreadyConnectedException {
@@ -40,6 +48,9 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 		connected=true;
 	}
 
+	/**
+	 * disconnection of the cosEventServer
+	 */
 	@Override
 	public void disconnect() throws ChannelNotFoundException,
 			NotConnectedException {
@@ -49,6 +60,9 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 		
 	}
 
+	/**
+	 * use to pull a new Event to the consumer
+	 */
 	@Override
 	public Event pull(BooleanHolder hasEvent) throws ChannelNotFoundException,
 			NotConnectedException {

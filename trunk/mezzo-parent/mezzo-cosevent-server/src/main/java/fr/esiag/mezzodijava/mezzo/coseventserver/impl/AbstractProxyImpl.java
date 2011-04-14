@@ -32,11 +32,19 @@ public class AbstractProxyImpl {
 	channelCtr = BFFactory.createChannelCtr(topic);
     }
 
+    /**
+     * 
+     * @return IdComponent
+     */
     public String getIdComponent() {
     	log.debug("Access to idComponent {} in AbstractProxyImpl",idComponent);
         return idComponent;
     }
 
+    /**
+     * 
+     * @return channelCtr
+     */
     public ChannelCtr getChannelCtr() {
         return channelCtr;
     }
