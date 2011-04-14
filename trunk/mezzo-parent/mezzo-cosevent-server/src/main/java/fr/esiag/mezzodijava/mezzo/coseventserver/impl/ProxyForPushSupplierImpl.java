@@ -1,7 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,8 +8,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplierOperations;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
 /**
  * Classe ProxyForPushSupplierImpl

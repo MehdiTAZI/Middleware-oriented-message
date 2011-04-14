@@ -1,7 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
-import static org.junit.Assert.*;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,6 +13,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.Header;
@@ -22,9 +21,9 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
+import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestProxyForPushConsumerImpl {
@@ -155,10 +154,11 @@ public class TestProxyForPushConsumerImpl {
 	}
 
 	@Test
-	public void testReceive() throws AlreadyRegisteredException, ConsumerNotFoundException, AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException {
+	public void testReceive() throws AlreadyRegisteredException, ConsumerNotFoundException, AlreadyConnectedException, NotRegisteredException, MaximalConnectionReachedException, ChannelAlreadyExistsException {
 		// création du mock pour le callback
 		CallbackConsumer mockCall = EasyMock.createNiceMock(CallbackConsumer.class);
-		
+		EventServerChannelAdminCtr esca = new EventServerChannelAdminCtr("test");
+		long id = esca.createChannel("toto", 2);
 		// nouveau proxy
 		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("toto","testconsumer");
 		

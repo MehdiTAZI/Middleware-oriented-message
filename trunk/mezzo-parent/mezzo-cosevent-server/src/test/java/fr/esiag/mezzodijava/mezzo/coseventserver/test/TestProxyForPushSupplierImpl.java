@@ -55,7 +55,9 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST_CONNECT","testsupplier");
 		mockCtr.addProxyForPushSupplierToConnectedList(pfps);
 
-		//mockCtr.getChannel();
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST_CONNECT", 1));
+		
 		// enregistrement
 		EasyMock.replay(mockCtr);
 		
@@ -83,6 +85,9 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 
 		mockCtr.removeProxyForPushSupplierFromConnectedList(pfps);
+		
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
 
 		// enregistrement
 		EasyMock.replay(mockCtr);
@@ -117,6 +122,8 @@ public class TestProxyForPushSupplierImpl {
 		
 		Event e = new Event(header,body);
 		mockCtr.addEvent(e);
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 3));
 		// on rembobine le mock
 		EasyMock.replay(mockCtr);
 		// on fait le connect
