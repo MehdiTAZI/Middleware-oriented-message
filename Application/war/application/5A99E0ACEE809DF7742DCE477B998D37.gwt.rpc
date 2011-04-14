@@ -1,0 +1,10 @@
+com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException, true, true, true, true, com.google.gwt.user.client.rpc.IncompatibleRemoteServiceException/3936916533, 3936916533
+fr.esiag.java.client.AuthenticationService, false, false, false, false, _, 874109331
+fr.esiag.java.shared.ChannelInfosCollector, true, true, false, false, fr.esiag.java.shared.ChannelInfosCollector/3917356059, 3917356059
+[Lfr.esiag.java.shared.ChannelInfosCollector;, true, true, false, false, [Lfr.esiag.java.shared.ChannelInfosCollector;/1129364980, 1129364980
+fr.esiag.java.shared.Message, true, true, false, false, fr.esiag.java.shared.Message/3342625955, 3342625955
+[Lfr.esiag.java.shared.Message;, true, true, false, false, [Lfr.esiag.java.shared.Message;/3745270075, 3745270075
+java.lang.Exception, true, false, true, false, java.lang.Exception/1920171873, 1920171873
+java.lang.RuntimeException, true, false, true, false, java.lang.RuntimeException/515124647, 515124647
+java.lang.String, true, true, true, true, java.lang.String/2004016611, 2004016611
+java.lang.Throwable, true, false, true, false, java.lang.Throwable/2953622131, 2953622131

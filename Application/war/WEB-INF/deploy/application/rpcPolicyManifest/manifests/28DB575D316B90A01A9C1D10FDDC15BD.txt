@@ -1,0 +1,2 @@
+serviceClass: fr.esiag.java.client.AuthenticationService
+path: 5A99E0ACEE809DF7742DCE477B998D37.gwt.rpc
