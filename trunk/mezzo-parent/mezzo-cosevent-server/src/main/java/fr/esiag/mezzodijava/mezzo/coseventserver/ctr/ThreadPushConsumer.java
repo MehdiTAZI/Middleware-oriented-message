@@ -39,6 +39,10 @@ public class ThreadPushConsumer implements Runnable {
 
     private JdbcDAO dao = DAOFactory.getJdbcDAO();
 
+    /**
+     * constructor for the thread push consumer
+     * @param proxyConsumer there is one threadPushConsumer for each push consumer
+     */
     public ThreadPushConsumer(ProxyForPushConsumerImpl proxyConsumer) {
 	log.trace("ThreadEvent created");
 	pfpc = proxyConsumer;

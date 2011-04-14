@@ -23,6 +23,10 @@ public class ThreadPullEvent implements Runnable {
 			.getLogger(ThreadPushConsumer.class);
 	private ProxyForPullSupplierImpl pfps;
 
+	/**
+	 * constructor for the thread pull event
+	 * @param proxySupplier there is one thread pull event for each proxy pull supplier
+	 */
 	public ThreadPullEvent(ProxyForPullSupplierImpl proxySupplier) {
 		log.trace("ThreadPullEvent created");
 		pfps = proxySupplier;
