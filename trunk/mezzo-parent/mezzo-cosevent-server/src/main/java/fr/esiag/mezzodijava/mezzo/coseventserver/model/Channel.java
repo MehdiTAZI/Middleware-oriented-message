@@ -159,7 +159,7 @@ public class Channel implements Serializable {
     }
 
     /**
-     * Getter of the set of connected push consumer.
+     * Setter of the set of connected push consumer.
      * 
      * For persistance purpose only.
      * 
@@ -197,7 +197,7 @@ public class Channel implements Serializable {
     }
 
     /**
-     * Getter of the set of connected push supplier.
+     * Setter of the set of connected push supplier.
      * 
      * For persistance purpose only.
      * 
@@ -209,7 +209,7 @@ public class Channel implements Serializable {
     }
     
     /**
-     * Getter of the set of connected pull supplier.
+     * Setter of the set of connected pull supplier.
      * 
      * For persistance purpose only.
      * 
