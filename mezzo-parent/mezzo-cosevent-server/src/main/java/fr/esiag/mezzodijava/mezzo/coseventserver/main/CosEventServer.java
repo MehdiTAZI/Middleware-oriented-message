@@ -56,7 +56,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 public class CosEventServer {
 
-    final static Logger log = LoggerFactory.getLogger(CosEventServer.class);
+    private Logger log = LoggerFactory.getLogger(CosEventServer.class);
 
     /**
      * argument : eventServerName
@@ -86,7 +86,7 @@ public class CosEventServer {
      * @throws EventServerException
      */
     public CosEventServer(String[] args) throws InterruptedException,
-	    TimeClientException, EventServerException {
+	    TimeClientException {
 	Properties props = new Properties();
 	props = ConfMgr.loadProperties("eventserver_default", "eventserver");
 	String eventServerName = args[0];
@@ -119,10 +119,10 @@ public class CosEventServer {
 			    eventServerChannelAdmin)));
 
 	    // Subscribe to COSTime
-	    System.out.println("Mezzo COS Event Server \"" + eventServerName
+	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
-		    new CallbackTimeImpl(), 1000);
+		    new CallbackTimeImpl(), cosTimeRefreshDelay);
 
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
@@ -130,26 +130,19 @@ public class CosEventServer {
 	    orb.run();
 
 	} catch (InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (NotFound e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (CannotProceed e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (ServantNotActive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (WrongPolicy e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	} catch (AdapterInactive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
+	    log.error("Cos Event Error", e);
 	}
     }
 
