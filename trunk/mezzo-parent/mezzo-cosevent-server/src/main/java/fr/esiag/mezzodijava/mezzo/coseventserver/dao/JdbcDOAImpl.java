@@ -1,7 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.dao;
 
 import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -28,13 +27,19 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelComparator;
 
 /**
+ * Classe  JdbcDOAImpl.
  * 
- * @author MEZZODIJAVA
- * Implementation of JdbcDAO
- *
+ * JdbcDAO implementation.
+ * 
+ * 
+ * UC n°: US41 (+US children) CI 06: Persistance des messages.
+ * 
+ * @see JdbcDAO
+ * @author Mezzo-Team
  */
 public class JdbcDOAImpl implements JdbcDAO {
 
+    private static final String SQL_ERROR = "SQL Error";
     private String userName = "test";
     private String password = "test";
     private String dbFile = "C:/mezzodev/coseventBase";
@@ -43,7 +48,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     private Connection connection;
 
-    private Connection getConnection() throws SQLException {
+    private final Connection getConnection() throws SQLException {
 	Connection conn = null;
 	Properties connectionProps = new Properties();
 	connectionProps.put("user", this.userName);
@@ -61,7 +66,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	} catch (SQLException e) {
 	    log.info("Shema doesn't exist. Creating...");
-	    importSQL(conn, getClass().getResourceAsStream("/cosevent.sql"));
+	    importSQL(conn, JdbcDOAImpl.class.getResourceAsStream("/cosevent.sql"));
 	    log.info("Shema created.");
 	}
 	return conn;
@@ -116,7 +121,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    this.connection = getConnection();
 	} catch (SQLException e) {
 	    log.error("Error creating connection to derby database", e);
-	    throw new RuntimeException(
+	    throw new PersistenceException(
 		    "Error creating connection to derby database", e);
 	}
     }
@@ -126,7 +131,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * access to all the channel
      * @return a list of the channel
      */
-    public List<Channel> findAllChannel() {
+    public final List<Channel> findAllChannel() {
 	try {
 	    List<Channel> list = new ArrayList<Channel>();
 	    String sql = "SELECT * FROM CHANNEL";
@@ -151,8 +156,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	    return list;
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -162,7 +167,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @param channelId the channel
      * @return all the event associated with channelId
      */
-    public SortedSet<EventModel> findEventByChannel(int channelId) {
+    public final SortedSet<EventModel> findEventByChannel(int channelId) {
 	try {
 	    SortedSet<EventModel> set = new TreeSet<EventModel>(
 		    new PriorityEventModelComparator());
@@ -194,8 +199,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -205,7 +210,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @return Map with the IDConsumer and the consumer associated
      */
     @Override
-    public Map<String, ConsumerModel> findConsumerByChannel(int channelId) {
+    public final Map<String, ConsumerModel> findConsumerByChannel(int channelId) {
 	try {
 	    Map<String, ConsumerModel> map = new HashMap<String, ConsumerModel>();
 	    String sql = "SELECT * FROM CONSUMER CO WHERE CHANNEL_ID=?";
@@ -229,8 +234,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	    return Collections.synchronizedMap(map);
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -238,7 +243,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @return event for the consumer associated
      */
     @Override
-    public SortedSet<EventModel> findEventByConsumer(int idConsumer) {
+    public final SortedSet<EventModel> findEventByConsumer(int idConsumer) {
 	try {
 	    SortedSet<EventModel> set = new TreeSet<EventModel>(
 		    new PriorityEventModelComparator());
@@ -268,8 +273,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	    return Collections.synchronizedSortedSet(set);
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -277,7 +282,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @return the channelId associated to the channel that we wanted to persist
      */
     @Override
-    public synchronized int insertChannel(Channel channel) {
+    public final synchronized int insertChannel(Channel channel) {
 	int cle = 0;
 	try {
 	    String[] idColumn = { "ID" };
@@ -307,8 +312,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    return cle;
 
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -316,7 +321,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @return return the consumerID associated to the consumerModel that we wanted to persist
      */
     @Override
-    public synchronized int insertConsumer(ConsumerModel consumer) {
+    public final synchronized int insertConsumer(ConsumerModel consumer) {
 	int cle = 0;
 	try {
 	    String[] idColumn = { "ID" };
@@ -344,8 +349,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    return cle;
 
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -353,7 +358,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * @return the eventId associated to the eventModel and the channelId.
      */
     @Override
-    public synchronized int insertEvent(int channelId, EventModel event) {
+    public final synchronized int insertEvent(int channelId, EventModel event) {
 	int cle = 0;
 	try {
 	    String[] idColumn = { "ID" };
@@ -386,8 +391,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    return cle;
 
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -395,7 +400,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * add the Event to the consumer
      */
     @Override
-    public void addEventToConsumer(int eventId, int consumerId) {
+    public final void addEventToConsumer(int eventId, int consumerId) {
 	try {
 	    String sql = "INSERT INTO CONSUMER_EVENT (CONSUMER_ID,EVENT_ID) VALUES(?,?)";
 	    log.debug(sql);
@@ -408,8 +413,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -417,7 +422,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * refresh capacity and id of channel
      */
     @Override
-    public void updateChannel(Channel channel) {
+    public final void updateChannel(Channel channel) {
 	try {
 	    String sql = "UPDATE CHANNEL SET CAPACITY_QUEUE=? WHERE ID=?";
 	    log.debug(sql);
@@ -431,8 +436,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -440,7 +445,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * delete a consumer who was already persisted
      */
     @Override
-    public void deleteConsumer(int consumerId) {
+    public final void deleteConsumer(int consumerId) {
 	try {
 	    String sql = "DELETE FROM CONSUMER WHERE ID=?";
 	    log.debug(sql);
@@ -453,8 +458,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
 
     }
@@ -463,7 +468,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * delete a channel who was already persisted
      */
     @Override
-    public void deleteChannel(int channelId) {
+    public final void deleteChannel(int channelId) {
 	try {
 	    String sql = "DELETE FROM CHANNEL WHERE ID=?";
 	    log.debug(sql);
@@ -476,8 +481,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
 
     }
@@ -486,7 +491,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * delete all consumers associated to a channel
      */
     @Override
-    public void deleteAllConsumers(int channelId) {
+    public final void deleteAllConsumers(int channelId) {
 	try {
 	    String sql = "DELETE FROM CONSUMER WHERE CHANNEL_ID=?";
 	    log.debug(sql);
@@ -499,8 +504,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
 
     }
@@ -509,7 +514,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * delete an event associated to a consumer
      */
     @Override
-    public void deleteEventByConsumer(int consumerId, int eventId) {
+    public final void deleteEventByConsumer(int consumerId, int eventId) {
 	try {
 	    String sql = "DELETE FROM CONSUMER_EVENT CE WHERE CE.CONSUMER_ID=? AND CE.EVENT_ID=?";
 	    log.debug(sql);
@@ -524,8 +529,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 
@@ -533,7 +538,7 @@ public class JdbcDOAImpl implements JdbcDAO {
      * delete an event
      */
     @Override
-    public void deleteEvent(int eventId) {
+    public final void deleteEvent(int eventId) {
 	try {
 	    String sql = "DELETE FROM EVENT E WHERE E.ID=?";
 	    log.debug(sql);
@@ -546,8 +551,8 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.close();
 	    }
 	} catch (SQLException e) {
-	    log.error("SQL Error", e);
-	    throw new RuntimeException("SQL Error", e);
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
 }
