@@ -1,5 +1,11 @@
 package fr.esiag.mezzodijava.mezzo.libclient.exception;
 
+/**
+ * 
+ * @author MEZZODIJAVAAAAAAAAA
+ * exception when a topic is not found
+ *
+ */
 public class TopicNotFoundException extends Exception {
 	/**
 	 * When a topic is not kfound
