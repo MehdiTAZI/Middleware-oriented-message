@@ -33,7 +33,9 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfMgr {
 
-    final static Logger log = LoggerFactory.getLogger(ConfMgr.class);
+    private static Logger log = LoggerFactory.getLogger(ConfMgr.class);
+
+    private static final String EXTENSION = ".properties";
 
     /**
      * Charge plusieur fichier properties dans un Properties
@@ -47,7 +49,6 @@ public class ConfMgr {
 	Properties properties = new Properties();
 	ClassLoader loader = Thread.currentThread().getContextClassLoader();
 	InputStream inputStream = null;
-	final String EXTENSION = ".properties";
 	if (loader == null) {
 	    loader = ClassLoader.getSystemClassLoader();
 	}
@@ -126,7 +127,7 @@ public class ConfMgr {
      * @return valeur en String
      */
     public static String getValue(Properties properties, String propertyName) {
-	return getValue(properties, propertyName, null);
+	return properties.getProperty(propertyName);
     }
 
     /**
@@ -138,8 +139,8 @@ public class ConfMgr {
      *            nom de la propriete
      * @return valeur en Integer si possible
      */
-    public static int getIntegerValue(Properties properties, String properyName) {
-	return new Integer(getValue(properties, properyName));
+    public static int getIntegerValue(Properties properties, String propertyName) {
+	return Integer.valueOf(properties.getProperty(propertyName));
     }
 
     /**
@@ -149,19 +150,20 @@ public class ConfMgr {
      *            proprietes
      * @param propertyName
      *            nom de la propriete
-     * @param defaultValue default Value.
+     * @param defaultValue
+     *            default Value.
      * @return valeur en Integer si possible
      */
 
     public static int getIntegerValue(Properties properties,
 	    String propertyName, int defaultValue) {
-	try{
-	    return new Integer(getValue(properties, propertyName));
-	}catch(Exception e){
+	try {
+	    return Integer.valueOf(properties.getProperty(propertyName));
+	} catch (Exception e) {
 	    return defaultValue;
 	}
     }
-    
+
     /**
      * Renvoie un Long.
      * 
@@ -171,8 +173,8 @@ public class ConfMgr {
      *            nom de la propriete
      * @return valeur en Integer si possible
      */
-    public static long getLongValue(Properties properties, String properyName) {
-	return new Long(getValue(properties, properyName));
+    public static long getLongValue(Properties properties, String propertyName) {
+	return Long.valueOf(properties.getProperty(propertyName));
     }
 
     /**
@@ -182,15 +184,16 @@ public class ConfMgr {
      *            proprietes
      * @param propertyName
      *            nom de la propriete
-     * @param defaultValue default Value.
+     * @param defaultValue
+     *            default Value.
      * @return valeur en Integer si possible
      */
 
-    public static long getLongValue(Properties properties,
-	    String propertyName, long defaultValue) {
-	try{
-	    return new Long(getValue(properties, propertyName));
-	}catch(Exception e){
+    public static long getLongValue(Properties properties, String propertyName,
+	    long defaultValue) {
+	try {
+	    return new Long(properties.getProperty(propertyName));
+	} catch (Exception e) {
 	    return defaultValue;
 	}
     }
@@ -205,19 +208,20 @@ public class ConfMgr {
      * @return valeur en Integer si possible
      */
     public static boolean getBooleanValue(Properties properties,
-	    String pProprieteNom) {
-	return (new Boolean(getValue(properties, pProprieteNom)))
-		.booleanValue();
+	    String propertyName) {
+	return Boolean.valueOf(properties.getProperty(propertyName));
     }
 
     private static boolean isEmpty(String string) {
-	int length = 0;
-	if (string == null || (length = string.length()) == 0) {
+	if (string == null) {
 	    return true;
 	}
-	for (int i = 0; i < length; i++) {
-	    if ((Character.isWhitespace(string.charAt(i)) == false)) {
-		return false;
+	int length = string.length();
+	if (length != 0) {
+	    for (int i = 0; i < length; i++) {
+		if (!Character.isWhitespace(string.charAt(i))) {
+		    return false;
+		}
 	    }
 	}
 	return true;
