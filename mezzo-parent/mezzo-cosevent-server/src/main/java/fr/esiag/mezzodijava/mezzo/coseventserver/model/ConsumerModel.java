@@ -6,6 +6,13 @@ import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * 
+ * A consumerModel is a consumer that we want to persist
+ *
+ */
 public class ConsumerModel {
 
     private static final long serialVersionUID = 1L;
@@ -82,7 +89,10 @@ public class ConsumerModel {
 	public void setChannel(Channel channel) {
 		this.channel = channel;
 	}
-	
+	/**
+	 * 
+	 * @return the first EventModel from the queue
+	 */
 	public EventModel getFirstFromQueue(){
 		EventModel em;
 		try{
