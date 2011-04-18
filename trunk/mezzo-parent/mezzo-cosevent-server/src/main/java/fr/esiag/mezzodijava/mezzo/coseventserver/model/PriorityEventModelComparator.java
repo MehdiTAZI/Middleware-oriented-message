@@ -6,7 +6,7 @@ import java.util.Comparator;
 /**
  * 
  * @author MEZZODIJAVA
- * 
+ * trololo
  * 
  */
 public class PriorityEventModelComparator implements Comparator<EventModel>, Serializable {

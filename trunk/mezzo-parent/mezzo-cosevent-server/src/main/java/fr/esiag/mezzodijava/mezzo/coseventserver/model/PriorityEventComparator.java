@@ -6,7 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-
+/**
+ * 
+ * @author MEZZODIJAVA
+ *
+ */
 public class PriorityEventComparator implements Comparator<Event> {
 
 	private static Logger log = LoggerFactory.getLogger(PriorityEventComparator.class);
