@@ -30,6 +30,10 @@ public class CosTimeServer {
     
     final static Logger log = LoggerFactory.getLogger(CosTimeServer.class);
 
+    /**
+     * 
+     * @param args properties for the CosTimeServer
+     */
     public CosTimeServer(String[] args) {
 	Properties props = new Properties();
 	try {
