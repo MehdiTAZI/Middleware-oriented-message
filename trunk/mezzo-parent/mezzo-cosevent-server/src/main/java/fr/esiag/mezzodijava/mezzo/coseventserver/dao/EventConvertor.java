@@ -15,6 +15,12 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Can convert an event to an eventModel which is used to persist event
+ *
+ */
 public class EventConvertor {
 	private static Logger log = LoggerFactory.getLogger(EventConvertor.class);
 
