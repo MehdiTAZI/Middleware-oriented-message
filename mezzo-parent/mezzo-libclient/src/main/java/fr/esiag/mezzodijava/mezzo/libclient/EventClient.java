@@ -191,6 +191,11 @@ public final class EventClient {
 		return ChannelAdminHelper.narrow(channelObj);
 	}
 
+	/**
+	 * Resolve a EventServerChannelAdmin using the EventServerName
+	 * @param eventServerName
+	 * @return the Event server channel admin
+	 */
 	public EventServerChannelAdmin resolveEventServerChannelAdminByEventServerName(
 			String eventServerName) {
 		Object channelObj = null;
