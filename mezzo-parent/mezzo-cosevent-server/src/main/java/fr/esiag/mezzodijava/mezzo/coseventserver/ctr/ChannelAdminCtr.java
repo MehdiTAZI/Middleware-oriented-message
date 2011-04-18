@@ -57,8 +57,6 @@ public class ChannelAdminCtr {
 	private Map<ProxyForPullSupplier, byte[]> oidProxyForPullSupplierMap = Collections
 			.synchronizedMap(new HashMap<ProxyForPullSupplier, byte[]>());
 	private String channel;
-	private ChannelCtr channelCtr;
-	private ORB orb;
 	private static POA poa;
 
 	/**
@@ -101,8 +99,8 @@ public class ChannelAdminCtr {
 	public ChannelAdminCtr(String topic) {
 		log.trace("Creation of ChannelAdminCtr");
 		this.channel = topic;
-		this.orb = BFFactory.createOrb(null, null);
-		this.channelCtr = BFFactory.createChannelCtr(topic);
+		BFFactory.createOrb(null, null);
+		BFFactory.createChannelCtr(topic);
 	}
 
 	

@@ -12,7 +12,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
  * Abstract proxy
  *
  */
-public class AbstractProxyImpl {
+public abstract class AbstractProxyImpl {
 	
 	private static Logger log = LoggerFactory.getLogger(AbstractProxyImpl.class);
 

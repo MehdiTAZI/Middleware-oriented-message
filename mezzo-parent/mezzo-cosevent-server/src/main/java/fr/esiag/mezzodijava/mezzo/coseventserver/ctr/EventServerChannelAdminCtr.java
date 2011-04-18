@@ -30,8 +30,6 @@ public class EventServerChannelAdminCtr {
 
 	private static Logger log = LoggerFactory
 			.getLogger(EventServerChannelAdminCtr.class);
-	private String eventServerName;
-	private Properties props = new Properties();
 
 	/**
 	 * Fill the property eventServerName
@@ -42,7 +40,6 @@ public class EventServerChannelAdminCtr {
 	public EventServerChannelAdminCtr(String eventServerName) {
 		log.trace("Creation of an EventServerChannelAdminCtr {}",
 				eventServerName);
-		this.eventServerName = eventServerName;
 
 	}
 
@@ -65,7 +62,6 @@ public class EventServerChannelAdminCtr {
 	public long createChannel(String topic, int capacity)
 			throws ChannelAlreadyExistsException {
 		log.trace("create channel {}. Capacity {}", topic, capacity);
-		this.eventServerName = topic;
 		Channel channel = BFFactory.createChannel(topic, capacity);
 		// persistance du channel
 		DAOFactory.getJdbcDAO().insertChannel(channel);

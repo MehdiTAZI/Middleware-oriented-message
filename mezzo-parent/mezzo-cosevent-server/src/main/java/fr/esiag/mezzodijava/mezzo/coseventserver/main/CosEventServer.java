@@ -87,8 +87,7 @@ public class CosEventServer {
      */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException {
-	Properties props = new Properties();
-	props = ConfMgr.loadProperties("eventserver_default", "eventserver");
+	Properties props = ConfMgr.loadProperties("eventserver_default", "eventserver");
 	String eventServerName = args[0];
 	if (eventServerName == null) {
 	    eventServerName = ConfMgr.getValue(props, "eventserver.name",
@@ -124,6 +123,9 @@ public class CosEventServer {
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl(), cosTimeRefreshDelay);
 
+	    //reload persisted data
+	    reloadPersistedChannel(eventServerName);
+	    
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
 
