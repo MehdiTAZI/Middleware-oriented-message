@@ -18,12 +18,6 @@
 			<groupId>fr.esiag.mezzodijava</groupId>
 			<artifactId>mezzo-libclient</artifactId>
 		</dependency>	
-		
-					
-		<dependency>
-			<groupId>org.hibernate.javax.persistence </groupId>
-			<artifactId>hibernate-jpa-2.0-api </artifactId>
-		</dependency>
 		<dependency>
 			<groupId>fr.esiag.mezzodijava</groupId>
 			<artifactId>nuclear-commons</artifactId>
