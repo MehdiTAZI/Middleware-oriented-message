@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Class used for persist
  *
  */
-public class EventModel implements Serializable {
+public class EventModel {
 
     private static final long serialVersionUID = 1L;
 

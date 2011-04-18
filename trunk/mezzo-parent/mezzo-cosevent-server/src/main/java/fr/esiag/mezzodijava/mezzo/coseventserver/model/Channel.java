@@ -16,7 +16,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
  * 
  * The channel contains all the event and the consumers
  */
-public class Channel implements Serializable {
+public class Channel {
 
     private static final long serialVersionUID = 1L;
 
