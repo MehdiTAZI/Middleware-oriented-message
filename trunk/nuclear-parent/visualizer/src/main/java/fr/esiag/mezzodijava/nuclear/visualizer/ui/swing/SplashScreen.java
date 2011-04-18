@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -36,8 +37,8 @@ public class SplashScreen {
 	int y= (screen.height-height) / 2 ;
 	
 	splash.setBounds(x, y, width, height);
-	
-	JLabel label=new JLabel(new ImageIcon("splash.gif"));
+	URL url=getClass().getClassLoader().getResource("splash.gif");	
+	JLabel label=new JLabel(new ImageIcon(url.getFile()));
 	JLabel copyr=new JLabel("Copyright 2010/2011, Mezzo Di Java.",JLabel.CENTER);
 	copyr.setFont(new Font("Sans-Serif", Font.BOLD, 12));
 	p.add(label,BorderLayout.CENTER);

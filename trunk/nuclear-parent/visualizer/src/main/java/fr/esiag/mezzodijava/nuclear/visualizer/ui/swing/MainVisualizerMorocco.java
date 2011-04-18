@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -254,7 +255,10 @@ public class MainVisualizerMorocco extends JFrame implements ListSelectionListen
 		}
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
-				sound=new Sound("alerte.wav");
+				//sound=new Sound("alerte.wav");
+				URL url=getClass().getClassLoader().getResource("alerte.wav");
+				sound=new Sound(url.getFile());
+				//getClass().getClassLoader().getResource("/splash.gif"))
 				listEvents.add(evt);
 				if(evt.header.priority == 2)
 					frame.statPanel.getNbrChangeStateValue().setText("   "+changeStateCounter++);
