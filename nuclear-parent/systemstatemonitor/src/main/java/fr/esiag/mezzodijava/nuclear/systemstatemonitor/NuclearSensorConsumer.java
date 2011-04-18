@@ -17,8 +17,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 public class NuclearSensorConsumer {
 
 	public NuclearSensorConsumer(InjectorSystemStateSupplier supplier) throws EventClientException,
-			TopicNotFoundException, ChannelNotFoundException,
-			AlreadyRegisteredException {
+			TopicNotFoundException, ChannelNotFoundException {
 		EventClient ec = EventClient.init(null);
 		ChannelAdmin channelAdmin = ec.resolveChannelByTopic("nuclear sensor");
 		String idcomponent = "nuclear";
@@ -28,7 +27,11 @@ public class NuclearSensorConsumer {
 		CallBackConsumerImpl callbackImpl = new CallBackConsumerImpl(supplier);
 		CallbackConsumer cbc = ec.serveCallbackConsumer(callbackImpl);
 		System.out.println("subscribe du consumer");
-		consumerProxy.subscribe();
+		try {
+		    consumerProxy.subscribe();
+		} catch (AlreadyRegisteredException e1) {
+		   System.out.println("already subscribed so let's connect");
+		}
 		try {
 			consumerProxy.connect(cbc);
 			System.out.println("connexion nuclear sensor");
