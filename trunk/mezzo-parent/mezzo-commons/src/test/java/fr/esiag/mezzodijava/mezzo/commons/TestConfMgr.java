@@ -21,6 +21,7 @@ public class TestConfMgr {
     public void testloadProperties() {
 	Properties props = ConfMgr.loadProperties("first", "second");
 	assertEquals("texte1", props.get("texte1"));
+	assertEquals("texte1", ConfMgr.getValue(props,"texte1"));
 	assertEquals("texte2", props.get("texte2"));
 	assertEquals("texte3", props.get("texte3"));
 	assertEquals("texte4", props.get("texte4"));
@@ -32,6 +33,7 @@ public class TestConfMgr {
 	// valeur par defaut
 	assertEquals(3, ConfMgr.getIntegerValue(props, "entierpasla", 3));
 	assertEquals(3L, ConfMgr.getLongValue(props, "longpasla", 3L));
+	assertEquals("def", ConfMgr.getValue(props, "textepasla", "def"));
     }
 
     @Test
