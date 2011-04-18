@@ -27,6 +27,12 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelComparator;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Implementation of JdbcDAO
+ *
+ */
 public class JdbcDOAImpl implements JdbcDAO {
 
     private String userName = "test";

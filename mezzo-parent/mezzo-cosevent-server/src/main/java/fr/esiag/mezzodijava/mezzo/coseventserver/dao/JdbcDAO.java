@@ -8,6 +8,12 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ *
+ * DAO with some usefull method
+ */
 public interface JdbcDAO {
 	
 	/* methodes de selection */

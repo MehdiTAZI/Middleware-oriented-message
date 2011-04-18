@@ -2,6 +2,13 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.dao;
 
 import java.util.Collection;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ *
+ * @param <K>
+ * @param <E> E is the kind to persist
+ */
 public interface DAO<K, E> {
 
 	/**
