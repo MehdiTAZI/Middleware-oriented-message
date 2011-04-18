@@ -3,6 +3,12 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 import java.io.Serializable;
 import java.util.Comparator;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * 
+ * 
+ */
 public class PriorityEventModelComparator implements Comparator<EventModel>, Serializable {
 
     /**
@@ -16,7 +22,11 @@ public class PriorityEventModelComparator implements Comparator<EventModel>, Ser
      *            1 and Event 2 Events to compare.
      */
 	private EventModel evt;
-	
+	/**
+	 *  gonna compare the evt1 and evt2
+	 *  if first is more important than second, return -1, else return 1
+	 *  if return 0, both are equals
+	 */
     @Override
     public synchronized int compare(EventModel evt1, EventModel evt2) {
 
