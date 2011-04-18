@@ -12,6 +12,12 @@ import fr.esiag.mezzodijava.mezzo.monitoring.ChannelInfosCollector;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorOperations;
 import fr.esiag.mezzodijava.mezzo.monitoring.Message;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Provide informations
+ *
+ */
 public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
 
 	private static Logger log = LoggerFactory.getLogger(CosInfoCollectorImpl.class);

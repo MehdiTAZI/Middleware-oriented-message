@@ -2,6 +2,12 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Class used for persist
+ *
+ */
 public class EventModel implements Serializable {
 
     private static final long serialVersionUID = 1L;
