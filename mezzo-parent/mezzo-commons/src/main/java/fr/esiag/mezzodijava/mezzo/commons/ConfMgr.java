@@ -37,6 +37,10 @@ public class ConfMgr {
 
     private static final String EXTENSION = ".properties";
 
+    private ConfMgr() {
+
+    }
+
     /**
      * Charge plusieur fichier properties dans un Properties
      * 
