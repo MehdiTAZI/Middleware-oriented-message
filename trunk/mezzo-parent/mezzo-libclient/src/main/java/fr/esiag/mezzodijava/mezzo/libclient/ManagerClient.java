@@ -19,6 +19,12 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollector;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * manage client
+ *
+ */
 public class ManagerClient {
 	private final static String CLIENT_PROPERTIES = "eventclient.properties";
 	private static ManagerClient instance=null;
@@ -27,6 +33,11 @@ public class ManagerClient {
 	private ORB orb;
 	private Properties props;
 
+	/**
+	 * init the managerClient
+	 * @param args properties for the managerClient
+	 * @return ManagerClient
+	 */
 	public static synchronized ManagerClient init(String[] args) {
 		if (instance == null) {
 
@@ -58,10 +69,19 @@ public class ManagerClient {
 		}
 	}
 
+	/**
+	 * 
+	 * @return the ORB
+	 */
 	public ORB getOrb() {
 		return orb;
 	}
 
+	/**
+	 * 
+	 * @param managerName name of the managerClient
+	 * @return a CosInfoCollector
+	 */
 	public CosInfoCollector resolveManagerService(String managerName){
 		Object managerObj = null;
 		try {
