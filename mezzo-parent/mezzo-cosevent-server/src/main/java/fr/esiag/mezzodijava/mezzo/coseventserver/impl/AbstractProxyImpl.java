@@ -6,6 +6,12 @@ import org.slf4j.LoggerFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Abstract proxy
+ *
+ */
 public class AbstractProxyImpl {
 	
 	private static Logger log = LoggerFactory.getLogger(AbstractProxyImpl.class);

@@ -9,6 +9,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 /**
  * 
  * @author MEZZODIJAVA
+ * trololo
  *
  */
 public class PriorityEventComparator implements Comparator<Event> {
