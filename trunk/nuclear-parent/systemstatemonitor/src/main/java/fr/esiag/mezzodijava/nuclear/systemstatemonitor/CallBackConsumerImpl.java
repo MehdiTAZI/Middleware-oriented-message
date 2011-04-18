@@ -70,6 +70,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	if (eventInfo.isAlerte()) {
 	    e.header.code = 333;
 	    e.header.priority = 3;
+	    e.header.timetolive=50000000;
 	    supplier.PushEvent(e);
 	}
 
@@ -94,6 +95,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
 	if (state) {
 	    e.header.code = 999;
 	    e.header.priority = 2;
+	    e.header.timetolive=50000000;
 	    supplier.PushEvent(e);
 	}
 
