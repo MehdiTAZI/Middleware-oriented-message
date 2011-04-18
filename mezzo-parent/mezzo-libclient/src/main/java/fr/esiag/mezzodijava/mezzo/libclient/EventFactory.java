@@ -10,7 +10,11 @@ import org.omg.CORBA.ORB;
 import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.Header;
-
+/**
+ * 
+ * @author MEZZODIJAVA
+ * Factory who can create event
+ */
 public class EventFactory {
 	/**
 	 * Create an event with a String content
