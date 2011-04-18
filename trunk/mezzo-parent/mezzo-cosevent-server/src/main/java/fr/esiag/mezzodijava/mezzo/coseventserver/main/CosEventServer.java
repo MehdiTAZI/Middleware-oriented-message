@@ -56,179 +56,189 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 public class CosEventServer {
 
-    final static Logger log = LoggerFactory.getLogger(CosEventServer.class);
+	final static Logger log = LoggerFactory.getLogger(CosEventServer.class);
 
-    /**
-     * argument : eventServerName
-     */
-    private ORB orb;
-    private static long delta = 0;
+	/**
+	 * argument : eventServerName
+	 */
+	private ORB orb;
+	private static long delta = 0;
 
-    /**
-     * Constructor of a COS Event Server.
-     * 
-     * -read properties in eventserver.properties located at the calasspath
-     * root.
-     * 
-     * -create the ORB instance.
-     * 
-     * -serve the Channel Admin alowing Consumers and Suppliers use the Channel.
-     * 
-     * -run The ThreadEvent to deliver Stored Event to the Callback of the PUSH
-     * Consumer.
-     * 
-     * -run the ORB.
-     * 
-     * @param args
-     *            Command min arguments
-     * @throws InterruptedException
-     * @throws TimeClientException
-     * @throws EventServerException
-     */
-    public CosEventServer(String[] args) throws InterruptedException,
-	    TimeClientException, EventServerException {
+	/**
+	 * Constructor of a COS Event Server.
+	 * 
+	 * -read properties in eventserver.properties located at the calasspath
+	 * root.
+	 * 
+	 * -create the ORB instance.
+	 * 
+	 * -serve the Channel Admin alowing Consumers and Suppliers use the Channel.
+	 * 
+	 * -run The ThreadEvent to deliver Stored Event to the Callback of the PUSH
+	 * Consumer.
+	 * 
+	 * -run the ORB.
+	 * 
+	 * @param args
+	 *            Command min arguments
+	 * @throws InterruptedException
+	 * @throws TimeClientException
+	 * @throws EventServerException
+	 */
+	public CosEventServer(String[] args) throws InterruptedException,
+			TimeClientException, EventServerException {
 
-	String eventServerName = args[0];
-	Properties props = new Properties();
+		String eventServerName = args[0];
+		Properties props = new Properties();
 
-	///if (args != null) {
-	    // channelName= args[0];
-	    // eventServerName=args[1];
+		// /if (args != null) {
+		// channelName= args[0];
+		// eventServerName=args[1];
 
-	//}
+		// }
 
-	try {
-	    props.load(this.getClass().getClassLoader()
-		    .getResourceAsStream("eventserver.properties"));
-	} catch (IOException e) {
-	   log.error("Cannot load eventserver properties",e);
-	   throw new EventServerException("Cannot load eventserver properties",e);
+		try {
+			props.load(this.getClass().getClassLoader()
+					.getResourceAsStream("eventserver.properties"));
+		} catch (IOException e) {
+			log.error("Cannot load eventserver properties", e);
+			throw new EventServerException(
+					"Cannot load eventserver properties", e);
 
+		}
+
+		orb = BFFactory.createOrb(args, props);
+
+		EventServer.getInstance().setServerName(eventServerName);
+
+		EventServerChannelAdminImpl eventServerChannelAdmin = new EventServerChannelAdminImpl(
+				eventServerName);
+
+		try {
+			POA poa = POAHelper.narrow(orb
+					.resolve_initial_references("RootPOA"));
+			poa.the_POAManager().activate();
+			NamingContextExt nc = NamingContextExtHelper.narrow(orb
+					.resolve_initial_references("NameService"));
+
+			// nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new
+			// ChannelAdminPOATie(channelAdminImpl)));
+			nc.rebind(nc.to_name(eventServerName), poa
+					.servant_to_reference(new EventServerChannelAdminPOATie(
+							eventServerChannelAdmin)));
+
+			// Subscribe to COSTime
+			// TODO Externalize this :
+			String cosTimeName = "MEZZO-COSTIME";
+			System.out.println("Mezzo COS Event Server \"" + eventServerName
+					+ "\" is subscribing to COS Time " + cosTimeName);
+			TimeClient.init(null).subscribeToTimeService(cosTimeName,
+					new CallbackTimeImpl(), 1000);
+
+			reloadPersistedChannel(eventServerName);
+
+			log.info("Mezzo COS Event Server \"" + eventServerName
+					+ "\" is running...");
+
+			orb.run();
+
+		} catch (InvalidName e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NotFound e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (CannotProceed e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServantNotActive e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (WrongPolicy e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (AdapterInactive e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-
-	orb = BFFactory.createOrb(args, props);
-
-	EventServer.getInstance().setServerName(eventServerName);
-	
-	EventServerChannelAdminImpl eventServerChannelAdmin = new EventServerChannelAdminImpl(
-		eventServerName);
-
-	try {
-	    POA poa = POAHelper.narrow(orb
-		    .resolve_initial_references("RootPOA"));
-	    poa.the_POAManager().activate();
-	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
-		    .resolve_initial_references("NameService"));
-
-	    // nc.rebind(nc.to_name(channelName), poa.servant_to_reference(new
-	    // ChannelAdminPOATie(channelAdminImpl)));
-	    nc.rebind(nc.to_name(eventServerName), poa
-		    .servant_to_reference(new EventServerChannelAdminPOATie(
-			    eventServerChannelAdmin)));
-
-	    // Subscribe to COSTime
-	    // TODO Externalize this :
-	    String cosTimeName = "MEZZO-COSTIME";
-	    System.out.println("Mezzo COS Event Server \"" + eventServerName
-		    + "\" is subscribing to COS Time " + cosTimeName);
-	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
-		    new CallbackTimeImpl(),1000);
-
-	    reloadPersistedChannel(eventServerName);
-	    
-	    log.info("Mezzo COS Event Server \"" + eventServerName
-		    + "\" is running...");
-
-	    orb.run();
-	    
-	    
-
-	} catch (InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (NotFound e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (CannotProceed e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (ServantNotActive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (WrongPolicy e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (AdapterInactive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	}
-    }
-    
-    /**
+	/**
 	 * UC
+	 * 
 	 * @param eventServerName
 	 */
-	 private void reloadPersistedChannel(String eventServerName){ 	
-	 	log.info("Mezzo COS Event Server \"" + eventServerName
-	    + "\" is loading persisted data...");
-	 	
-	 	// chargement des éléments de la base
-	    JdbcDAO dao = DAOFactory.getJdbcDAO();
-	    Collection<Channel> col = dao.findAllChannel();
-	    ConsumerModel consumer;
-	    
-	    //ChannelDAO dao = DAOFactory.getChannelDAO();
-	    //Collection<Channel> col = dao.findAll();
-	    if (col != null) {
-		for (Channel c : col) {
-			Map<String,ConsumerModel> cmap =  dao.findConsumerByChannel(c.getId());	
-			for (Iterator<ConsumerModel> i = cmap.values().iterator() ; i.hasNext() ;){
-				consumer = i.next();
-				SortedSet<EventModel> events =  dao.findEventByConsumer(consumer.getId());
-				consumer.setEvents(events);
-			}
-			c.setConsumers(cmap);
-		    EventServer.getInstance().addChannel(c);
-		    // Publish the ChannelAdminImpl with Corba
-		    ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
-			    .getTopic());
-		    ChannelPublisher.publish(cai);
-		}
-		log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
-		+ col.size()
-		+ " persisted channel loaded and published.");
-	} else {
+	private void reloadPersistedChannel(String eventServerName) {
 		log.info("Mezzo COS Event Server \"" + eventServerName
-		+ "\" 0 persisted channel loaded and published.");
+				+ "\" is loading persisted data...");
+
+		// chargement des éléments de la base
+		JdbcDAO dao = DAOFactory.getJdbcDAO();
+		Collection<Channel> col = dao.findAllChannel();
+		ConsumerModel consumer;
+
+		// ChannelDAO dao = DAOFactory.getChannelDAO();
+		// Collection<Channel> col = dao.findAll();
+		if (col != null) {
+			for (Channel c : col) {
+				Map<String, ConsumerModel> cmap = dao.findConsumerByChannel(c
+						.getId());
+				for (Iterator<ConsumerModel> i = cmap.values().iterator(); i
+						.hasNext();) {
+					consumer = i.next();
+					SortedSet<EventModel> events = dao
+							.findEventByConsumer(consumer.getId());
+					consumer.setEvents(events);
+				}
+				c.setConsumers(cmap);
+				EventServer.getInstance().addChannel(c);
+				// Publish the ChannelAdminImpl with Corba
+				ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
+						.getTopic());
+				ChannelPublisher.publish(cai);
+			}
+			log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
+					+ col.size() + " persisted channel loaded and published.");
+		} else {
+			log.info("Mezzo COS Event Server \"" + eventServerName
+					+ "\" 0 persisted channel loaded and published.");
+		}
 	}
+
+	/**
+	 * Well... This is the main
+	 * trololo
+	 * 
+	 * @param args
+	 * @throws InterruptedException
+	 * @throws TimeClientException
+	 * @throws EventServerException
+	 */
+	public static void main(String[] args) throws InterruptedException,
+			TimeClientException, EventServerException {
+		new CosEventServer(args);
 	}
 
-    public static void main(String[] args) throws InterruptedException,
-	    TimeClientException, EventServerException {
-	new CosEventServer(args);
-    }
+	/**
+	 * Time difference in millis between system time and time service.
+	 * 
+	 * @return difference in millis
+	 */
+	public static long getDelta() {
+		return delta;
+	}
 
-    /**
-     * Time difference in millis between system time and time service.
-     * 
-     * @return difference in millis
-     */
-    public static long getDelta() {
-	return delta;
-    }
-
-    /**
-     * Set the time difference in millis between system time and time service.
-     * 
-     * @param delta
-     *            difference in millis
-     */
-    public static void setDelta(long delta) {
-	CosEventServer.delta = delta;
-    }
+	/**
+	 * Set the time difference in millis between system time and time service.
+	 * 
+	 * @param delta
+	 *            difference in millis
+	 */
+	public static void setDelta(long delta) {
+		CosEventServer.delta = delta;
+	}
 
 }
