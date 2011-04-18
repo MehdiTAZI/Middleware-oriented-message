@@ -12,6 +12,13 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 
 public class EventFactory {
+	/**
+	 * Create an event with a String content
+	 * @param priority
+	 * @param timetolive
+	 * @param content
+	 * @return an event containing a String content
+	 */
 	public static Event createEventString(int priority,long timetolive,String content ){
 		Random r1= new Random();
 		long code = r1.nextLong()*100;
@@ -21,6 +28,14 @@ public class EventFactory {
 		Body body = new Body(any,"String");		
 		return new Event(header, body);
 	}
+	/**
+	 * Create an event with a serializable content
+	 * @param priority
+	 * @param timetolive
+	 * @param content
+	 * @param type
+	 * @return an event containing a serializable content
+	 */
 	public static Event createEventObject(int priority,long timetolive,Serializable content,String type){
 		
 		Random r1= new Random();
