@@ -123,7 +123,8 @@ public class TestEventServerChannelAdminCtr {
 			NotRegisteredException, MaximalConnectionReachedException,
 			ChannelNotFoundException {
 		
-		long id = ctr.createChannel("TEST", 30);
+		long id = ctr.createChannel("MEZZO6", 30);
+		assertEquals(EventServer.getInstance().getChannel("MEZZO6").getCapacity(), 30);
 		Channel channel = EventServer.getInstance().getChannel(id);
 		// BFFactory.setAlternateChannel("TOPIC_TEST", channel);
 		ProxyForPushConsumerImpl ppfc = EasyMock

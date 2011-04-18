@@ -9,9 +9,11 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.BooleanHolder;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
@@ -87,9 +89,30 @@ public class TestProxyForPullConsumerImpl {
 
 	@Test
 	public void testPull() throws ChannelNotFoundException,
-	NotConnectedException {
-		fail("Not yet implemented");
+	NotConnectedException, AlreadyConnectedException, MaximalConnectionReachedException {
+		/*// création du mock pour le contrôleur
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// boolean de retour
+		BooleanHolder b = new BooleanHolder(false);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST_PULL", mockCtr);
+		// nouveau proxy
+		ProxyForPullConsumerImpl pfpc = new ProxyForPullConsumerImpl("TEST_PULL","testconsumer");
+		mockCtr.addProxyForPullConsumerToConnectedList(pfpc);
+		
+		//EasyMock.expect(pfpc.pull(b)).andReturn(new Event());
+		
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
+		// enregistrement
+		EasyMock.replay(mockCtr);
+		
+		// lancement du test de la méthode
+		pfpc.connect();
+		Event e = pfpc.pull(b);
+		
+		// vérification de l'appel à la méthode d'ajout
+		EasyMock.verify(mockCtr);
+		pfpc = null;*/
 	}
-
-
 }
