@@ -7,7 +7,13 @@ import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
-
+/**
+ * 
+ * @author MEZZODIJAVA
+ * 
+ * Implementation of callbackTime
+ *
+ */
 public class CallbackTimeImpl implements SynchronizableOperations {
 
     final static Logger log = LoggerFactory.getLogger(CallbackTimeImpl.class);

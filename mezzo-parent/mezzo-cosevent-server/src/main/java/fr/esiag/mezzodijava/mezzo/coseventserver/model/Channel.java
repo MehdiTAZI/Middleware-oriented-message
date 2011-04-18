@@ -10,6 +10,12 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushSupplierImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.RandomChannelIdentifier;
 
+/**
+ * 
+ * @author MEZZODIJAVA
+ * 
+ * The channel contains all the event and the consumers
+ */
 public class Channel implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -192,6 +198,10 @@ public class Channel implements Serializable {
 	return consumersPull;
     }
 
+    /**
+     * 
+     * @param consumers the new map of consumers that you want to put
+     */
     public void setConsumers(Map<String, ConsumerModel> consumers) {
 	this.consumers = consumers;
     }
