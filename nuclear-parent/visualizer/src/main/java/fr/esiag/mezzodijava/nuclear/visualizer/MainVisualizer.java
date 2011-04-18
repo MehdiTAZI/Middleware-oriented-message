@@ -92,7 +92,8 @@ public class MainVisualizer {
 		System.out.println("priority:" + evt.header.priority + ",date:"
 			+ (new Date(evt.header.creationdate)).toGMTString()
 			+ " content:" + t.getValue() + "|" + t.getUnite());
-
+			
+		
 	    }
 	    if (evt.body.type.equals("Pression")) {
 		Pression t = (Pression) evt.body.content.extract_Value();
