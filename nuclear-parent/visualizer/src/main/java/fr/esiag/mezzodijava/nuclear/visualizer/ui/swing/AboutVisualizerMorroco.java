@@ -8,6 +8,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
@@ -38,8 +39,8 @@ public class AboutVisualizerMorroco extends JWindow implements ActionListener{
 			int y= (screen.height-height) / 2 ;
 			
 			setBounds(x, y, width, height);
-			
-			JLabel label=new JLabel(new ImageIcon("logo.gif"));
+			URL url=getClass().getClassLoader().getResource("logo.gif");
+			JLabel label=new JLabel(new ImageIcon(url.getFile()));
 
 			String s="khqhskqh s"+ "\n"+" jdjsdutjgjgjjgjgjggjgjggjgsd";
 			JLabel description=new JLabel("Morocco Visualizer");

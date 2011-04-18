@@ -7,6 +7,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
+import java.net.URI;
 import java.net.URL;
 
 import javax.sound.sampled.AudioFormat;
@@ -96,6 +97,21 @@ public class Sound {
 		}
 	}
 
+	public void analyseFile(URI file){
+		try{
+			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(file));
+			format = stream.getFormat();
+			samples = getSamples(stream);
+		}
+		catch (UnsupportedAudioFileException e){
+			e.printStackTrace();
+		}
+		catch (IOException e){
+			e.printStackTrace();
+		}
+	}
+
+	
 	public void play() {
 		
 			//Sound player = new Sound("alerte.wav");
