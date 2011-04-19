@@ -28,7 +28,7 @@ public class TestSubscribeAndUnsubscribe {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	    CosTimeServer.initLogging();
+	    CosTimeServer.initConf();
 	}
 
 	@AfterClass
