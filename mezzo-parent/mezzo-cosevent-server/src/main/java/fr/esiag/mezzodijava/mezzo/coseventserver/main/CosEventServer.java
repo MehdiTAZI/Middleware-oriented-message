@@ -56,6 +56,11 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 
 public class CosEventServer {
 
+    /**
+     * Configuration properties
+     */
+    public static Properties properties;
+
     private Logger log = LoggerFactory.getLogger(CosEventServer.class);
 
     /**
@@ -87,16 +92,16 @@ public class CosEventServer {
      */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException {
-	Properties props = ConfMgr.loadProperties("eventserver_default", "eventserver");
+	properties = ConfMgr.loadProperties("eventserver_default",
+		"eventserver");
 	String eventServerName = args[0];
 	if (eventServerName == null) {
-	    eventServerName = ConfMgr.getValue(props, "eventserver.name",
+	    eventServerName = properties.getProperty("eventserver.name",
 		    args[0]);
 	}
-	orb = BFFactory.createOrb(args, props);
-	String cosTimeName = ConfMgr.getValue(props,
-		"eventserver.timeclient.servername", "MEZZO-COSTIME");
-	long cosTimeRefreshDelay = ConfMgr.getLongValue(props,
+	orb = BFFactory.createOrb(args, properties);
+	String cosTimeName = properties.getProperty("eventserver.timeclient.servername", "MEZZO-COSTIME");
+	long cosTimeRefreshDelay = ConfMgr.getLongValue(properties,
 		"eventserver.timeclient.refreshdelay", 1000);
 
 	EventServer.getInstance().setServerName(eventServerName);
@@ -123,9 +128,9 @@ public class CosEventServer {
 	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl(), cosTimeRefreshDelay);
 
-	    //reload persisted data
+	    // reload persisted data
 	    reloadPersistedChannel(eventServerName);
-	    
+
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is running...");
 
