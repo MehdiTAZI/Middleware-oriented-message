@@ -18,6 +18,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.DAOFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.dao.JdbcDAO;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPushConsumerImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 
 public class TestJdbcDAOImpl {
@@ -27,6 +28,7 @@ public class TestJdbcDAOImpl {
 
     @BeforeClass
     public static void setUpBeforeClass() throws Exception {
+	CosEventServer.initConf();
 	dao = DAOFactory.getJdbcDAO();
 	ctr = new EventServerChannelAdminCtr();
     }
@@ -45,10 +47,10 @@ public class TestJdbcDAOImpl {
     
     @Test
     public void testFindAllChannel() throws ChannelAlreadyExistsException, ChannelNotFoundException{
-		long id1 = ctr.createChannel("MEZZO1", 30);
+		long id1 = ctr.createChannel("MEZZO3", 30);
 		long id2 = ctr.createChannel("MEZZO2", 20);
 		List<Channel> channels = dao.findAllChannel();
-		assertEquals("MEZZO1",channels.get(1).getTopic());
+		assertEquals("MEZZO3",channels.get(1).getTopic());
 		assertEquals("MEZZO2",channels.get(0).getTopic());
 		ctr.destroyChannel(id1);
 		ctr.destroyChannel(id2);
@@ -56,8 +58,8 @@ public class TestJdbcDAOImpl {
     
     @Test
     public void testFindConsumerByChannel() throws ChannelAlreadyExistsException, AlreadyRegisteredException, ChannelNotFoundException{
-    	long id1 = ctr.createChannel("MEZZO1", 30);
-		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("MEZZO1","testconsumer");
+    	long id1 = ctr.createChannel("MEZZO4", 30);
+		ProxyForPushConsumerImpl pfpc = new ProxyForPushConsumerImpl("MEZZO4","testconsumer");
 		pfpc.subscribe();
 		ChannelAdmin ca = ctr.getChannel(id1);
 		//Map<String, ConsumerModel> map = dao.findConsumerByChannel(0);
