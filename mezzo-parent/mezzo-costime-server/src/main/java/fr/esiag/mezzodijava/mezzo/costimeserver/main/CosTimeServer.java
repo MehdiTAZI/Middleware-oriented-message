@@ -8,6 +8,7 @@ import org.omg.CORBA.ORB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.esiag.mezzodijava.mezzo.commons.ConfMgr;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
@@ -28,24 +29,22 @@ public class CosTimeServer {
 	initLogging();
     }
     
+    /**
+     * Configuration properties
+     */
+    public static Properties properties;
+    
     final static Logger log = LoggerFactory.getLogger(CosTimeServer.class);
 
+    
     /**
      * 
      * @param args properties for the CosTimeServer
      */
     public CosTimeServer(String[] args) {
-	Properties props = new Properties();
-	try {
-	    props.load(this.getClass().getClassLoader()
-		    .getResourceAsStream("eventserver.properties"));
-	} catch (IOException e) {
-		log.error("Properties loading error",e);
-
-	}
 	TimeServiceCtr ctr = new TimeServiceCtr(new TimeServiceModel());
 	TimeServiceImpl timeService = new TimeServiceImpl(ctr);
-	ORB orb = ORB.init(args, props);
+	ORB orb = ORB.init(args, properties);
 	String timeServerName = args[0];
 	long timeServerLifeSpan = Long.parseLong(args[1]);
 	TimeServicePublisher.publish(timeServerName, timeService, orb, timeServerLifeSpan);
@@ -75,5 +74,7 @@ public class CosTimeServer {
 	} catch (Exception ex) {
 	    ex.printStackTrace();
 	}
+	properties = ConfMgr.loadProperties("timeserver_default",
+	"timeserver");
     }
 }

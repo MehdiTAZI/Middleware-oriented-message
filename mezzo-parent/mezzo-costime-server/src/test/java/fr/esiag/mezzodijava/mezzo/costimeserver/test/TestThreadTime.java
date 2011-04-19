@@ -13,12 +13,14 @@ import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
+import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 
 public class TestThreadTime {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+	    CosTimeServer.initLogging();
 	}
 
 	@AfterClass
@@ -43,7 +45,7 @@ public class TestThreadTime {
 		// création du time controller
 		TimeServiceCtr ctr = new TimeServiceCtr(model);
 		// ajout d'un composant
-		ctr.subscribe(mockSync);
+		ctr.subscribe(mockSync,500);
 		// appel espéré
 		//mockSync.date(EasyMock.anyLong());
 		// enregistrement
