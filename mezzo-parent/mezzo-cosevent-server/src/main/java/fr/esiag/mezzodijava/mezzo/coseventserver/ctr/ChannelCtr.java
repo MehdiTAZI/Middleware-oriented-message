@@ -40,7 +40,7 @@ import fr.esiag.mezzodijava.mezzo.servercommons.ThreadPool;
  * 
  */
 
-public final class ChannelCtr {
+public class ChannelCtr {
     private static Logger log = LoggerFactory.getLogger(ChannelCtr.class);
 
     // lien vers le model

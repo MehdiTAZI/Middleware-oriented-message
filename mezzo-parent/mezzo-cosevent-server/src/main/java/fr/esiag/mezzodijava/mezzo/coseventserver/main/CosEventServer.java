@@ -204,8 +204,7 @@ public class CosEventServer {
      */
     public static void main(String[] args) throws InterruptedException,
 	    TimeClientException, EventServerException {
-	properties = ConfMgr.loadProperties("eventserver_default",
-		"eventserver");
+	initConf();
 	new CosEventServer(args);
     }
 
@@ -226,6 +225,14 @@ public class CosEventServer {
      */
     public static void setDelta(long delta) {
 	CosEventServer.delta = delta;
+    }
+
+    /**
+     * Load properties files.
+     */
+    public static void initConf() {
+	properties = ConfMgr.loadProperties("eventserver_default",
+		"eventserver");
     }
 
 }

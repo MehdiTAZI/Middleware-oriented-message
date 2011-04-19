@@ -1,21 +1,14 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.Object;
-import org.omg.CORBA.ORBPackage.InvalidName;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.CosNaming.NamingContextPackage.CannotProceed;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.POA;
 
-import fr.esiag.mezzodijava.mezzo.costime.TimeService;
-import fr.esiag.mezzodijava.mezzo.costime.TimeServiceHelper;
-import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollector;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;
 
@@ -25,10 +18,9 @@ import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;
  * manage client
  *
  */
-public class ManagerClient {
-	private final static String CLIENT_PROPERTIES = "eventclient.properties";
+public final class ManagerClient {
+	private static final String CLIENT_PROPERTIES = "eventclient.properties";
 	private static ManagerClient instance=null;
-	private POA callbacksPOA;
 	private NamingContextExt nce;
 	private ORB orb;
 	private Properties props;
