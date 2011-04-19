@@ -92,8 +92,10 @@ public class CosEventServer {
      */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException {
-	String eventServerName = args[0];
-	if (eventServerName == null) {
+	String eventServerName;
+	if (args.length == 1) {
+	    eventServerName = args[0];
+	} else {
 	    eventServerName = properties.getProperty("eventserver.name",
 		    args[0]);
 	}
