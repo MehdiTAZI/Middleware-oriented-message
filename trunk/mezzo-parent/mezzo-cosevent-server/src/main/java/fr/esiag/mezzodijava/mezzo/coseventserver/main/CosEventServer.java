@@ -96,8 +96,7 @@ public class CosEventServer {
 	if (args.length == 1) {
 	    eventServerName = args[0];
 	} else {
-	    eventServerName = properties.getProperty("eventserver.name",
-		    args[0]);
+	    eventServerName = properties.getProperty("eventserver.name");
 	}
 	orb = BFFactory.createOrb(args, properties);
 	String cosTimeName = properties.getProperty(
