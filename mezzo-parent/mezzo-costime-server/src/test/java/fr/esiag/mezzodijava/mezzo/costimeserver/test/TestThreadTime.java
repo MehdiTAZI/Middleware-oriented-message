@@ -20,7 +20,7 @@ public class TestThreadTime {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
-	    CosTimeServer.initLogging();
+	    CosTimeServer.initConf();
 	}
 
 	@AfterClass
