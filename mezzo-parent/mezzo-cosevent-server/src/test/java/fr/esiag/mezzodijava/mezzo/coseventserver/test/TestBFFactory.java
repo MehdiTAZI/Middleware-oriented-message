@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
@@ -12,10 +13,17 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 
 public class TestBFFactory {
+
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+	CosEventServer.initConf();
+    }
+
     @Test
     public void createOrb() {
 	assertNotNull(BFFactory.createOrb(null, null));
@@ -38,8 +46,8 @@ public class TestBFFactory {
 	String name = "createChannel";
 	int capacity = 0;
 	try {
-	     BFFactory.createChannel(name, capacity);
-	     BFFactory.createChannel(name, capacity);
+	    BFFactory.createChannel(name, capacity);
+	    BFFactory.createChannel(name, capacity);
 	    fail("exception non levée");
 	} catch (ChannelAlreadyExistsException e) {
 	    assertTrue(true);
