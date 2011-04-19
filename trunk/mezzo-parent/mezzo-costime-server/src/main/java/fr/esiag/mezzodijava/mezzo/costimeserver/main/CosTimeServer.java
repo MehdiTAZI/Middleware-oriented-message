@@ -25,21 +25,17 @@ import fr.esiag.mezzodijava.mezzo.costimeserver.publisher.TimeServicePublisher;
  */
 public class CosTimeServer {
 
-    {
-	initLogging();
-    }
-    
     /**
      * Configuration properties
      */
     public static Properties properties;
-    
+
     final static Logger log = LoggerFactory.getLogger(CosTimeServer.class);
 
-    
     /**
      * 
-     * @param args properties for the CosTimeServer
+     * @param args
+     *            properties for the CosTimeServer
      */
     public CosTimeServer(String[] args) {
 	TimeServiceCtr ctr = new TimeServiceCtr(new TimeServiceModel());
@@ -47,34 +43,29 @@ public class CosTimeServer {
 	ORB orb = ORB.init(args, properties);
 	String timeServerName = args[0];
 	long timeServerLifeSpan = Long.parseLong(args[1]);
-	TimeServicePublisher.publish(timeServerName, timeService, orb, timeServerLifeSpan);
+	TimeServicePublisher.publish(timeServerName, timeService, orb,
+		timeServerLifeSpan);
 	log.info("Mezzo COS Time Server \" {} \" is running...", timeServerName);
-	log.trace("Mezzo COS Time Server \" {} \" is running...", timeServerName);
+	log.trace("Mezzo COS Time Server \" {} \" is running...",
+		timeServerName);
 	orb.run();
     }
 
     /**
      * YAMain
+     * 
      * @param args
      * 
      */
     public static void main(String[] args) {
-	//initLogging();
+	initConf();
 	new CosTimeServer(args);
     }
 
     /**
-     * Initialisation of the logging
+     * Load properties files.
      */
-    public static void initLogging() {
-	try {
-	    LogManager.getLogManager().readConfiguration(
-		    CosTimeServer.class
-			    .getResourceAsStream("/mezzolog.properties"));
-	} catch (Exception ex) {
-	    ex.printStackTrace();
-	}
-	properties = ConfMgr.loadProperties("timeserver_default",
-	"timeserver");
+    public static void initConf() {
+	properties = ConfMgr.loadProperties("timeserver_default", "timeserver");
     }
 }
