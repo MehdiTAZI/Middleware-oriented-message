@@ -33,11 +33,10 @@ public class TimeServicePublisher {
      * @param name name of this time service in the Name Service
      * @param timeService implementation of TimeService
      * @param orb CORBA ORB
-     * @param timeSpan synchronization refresh time.
      */
     public static void publish(String name, TimeServiceImpl timeService,
-	    ORB orb, long timeSpan) {
-    	log.info("publish \"{}\"  with a timespan of : {}",name,timeSpan);
+	    ORB orb) {
+    	log.info("publish \"{}\"",name);
 //	ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
 //		timeSpan);
 //	thread = new Thread(tt);
@@ -56,18 +55,4 @@ public class TimeServicePublisher {
 	    log.error("Technical error : CORBA", e);
 	}
     }
-
-    /**
-     * Publish with CORBA ORB <code>orb</code> a TimeService
-     * <code>timeService</code> and register it on the name service with the
-     * name <code>name</code> a a default refresh time of 1s.
-     * 
-     * @param name name of this time service in the Name Service
-     * @param timeService implementation of TimeService
-     * @param orb CORBA ORB
-     * */
-    public static void publish(String name, TimeServiceImpl timeService, ORB orb) {
-	publish(name, timeService, orb, 1000);
-    }
-
 }
