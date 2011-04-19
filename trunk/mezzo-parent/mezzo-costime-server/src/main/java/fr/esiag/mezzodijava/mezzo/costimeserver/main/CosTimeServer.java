@@ -41,10 +41,13 @@ public class CosTimeServer {
 	TimeServiceCtr ctr = new TimeServiceCtr(new TimeServiceModel());
 	TimeServiceImpl timeService = new TimeServiceImpl(ctr);
 	ORB orb = ORB.init(args, properties);
-	String timeServerName = args[0];
-	long timeServerLifeSpan = Long.parseLong(args[1]);
-	TimeServicePublisher.publish(timeServerName, timeService, orb,
-		timeServerLifeSpan);
+	String timeServerName;
+	if (args.length == 1) {
+	    timeServerName = args[0];
+	} else {
+	    timeServerName = properties.getProperty("timeserver.name");
+	}
+	TimeServicePublisher.publish(timeServerName, timeService, orb);
 	log.info("Mezzo COS Time Server \" {} \" is running...", timeServerName);
 	log.trace("Mezzo COS Time Server \" {} \" is running...",
 		timeServerName);
