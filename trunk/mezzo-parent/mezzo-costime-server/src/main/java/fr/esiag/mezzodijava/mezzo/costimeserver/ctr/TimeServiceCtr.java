@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
+import fr.esiag.mezzodijava.mezzo.costimeserver.main.CosTimeServer;
 import fr.esiag.mezzodijava.mezzo.costimeserver.model.TimeServiceModel;
 import fr.esiag.mezzodijava.mezzo.servercommons.ThreadPool;
 
@@ -24,7 +25,9 @@ public class TimeServiceCtr {
 
     private TimeServiceModel model;
 
-    private ThreadPool threadPool = new ThreadPool(100);
+    private ThreadPool threadPool = new ThreadPool(
+	    Integer.valueOf(CosTimeServer.properties
+		    .getProperty("timeserver.maxconnection")));
 
     /**
      * Get the model
@@ -49,24 +52,6 @@ public class TimeServiceCtr {
     /**
      * Subscribe a component to the channel.
      * 
-     * The server will push the time to this component each 500 ms
-     * 
-     * @param component
-     *            a component of type Synchronizable
-     * @throws AlreadyRegisteredException
-     *             If already present in the list.
-     */
-    public void subscribe(Synchronizable cc) throws AlreadyRegisteredException {
-
-	if (!model.getComponentSubscribed().add(cc))
-	    throw new AlreadyRegisteredException();
-	threadPool.runTask(new ThreadTime(cc, model, 500));
-	log.info("Component subscribed : " + cc);
-    }
-
-    /**
-     * Subscribe a component to the channel.
-     * 
      * The server will push the time to this component.
      * 
      * @param component
@@ -76,11 +61,12 @@ public class TimeServiceCtr {
      * @throws AlreadyRegisteredException
      *             If already present in the list.
      */
-    public void subscribe(Synchronizable cc, long timeSpan)
+    public final void subscribe(Synchronizable cc, long timeSpan)
 	    throws AlreadyRegisteredException {
 
-	if (!model.getComponentSubscribed().add(cc))
+	if (!model.getComponentSubscribed().add(cc)) {
 	    throw new AlreadyRegisteredException();
+	}
 	threadPool.runTask(new ThreadTime(cc, model, timeSpan));
 	log.info("Component subscribed : " + cc);
     }

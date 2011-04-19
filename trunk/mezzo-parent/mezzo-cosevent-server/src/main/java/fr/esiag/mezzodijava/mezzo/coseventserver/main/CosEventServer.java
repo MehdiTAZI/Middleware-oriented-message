@@ -92,15 +92,14 @@ public class CosEventServer {
      */
     public CosEventServer(String[] args) throws InterruptedException,
 	    TimeClientException {
-	properties = ConfMgr.loadProperties("eventserver_default",
-		"eventserver");
 	String eventServerName = args[0];
 	if (eventServerName == null) {
 	    eventServerName = properties.getProperty("eventserver.name",
 		    args[0]);
 	}
 	orb = BFFactory.createOrb(args, properties);
-	String cosTimeName = properties.getProperty("eventserver.timeclient.servername", "MEZZO-COSTIME");
+	String cosTimeName = properties.getProperty(
+		"eventserver.timeclient.servername", "MEZZO-COSTIME");
 	long cosTimeRefreshDelay = ConfMgr.getLongValue(properties,
 		"eventserver.timeclient.refreshdelay", 1000);
 
@@ -205,6 +204,8 @@ public class CosEventServer {
      */
     public static void main(String[] args) throws InterruptedException,
 	    TimeClientException, EventServerException {
+	properties = ConfMgr.loadProperties("eventserver_default",
+		"eventserver");
 	new CosEventServer(args);
     }
 
