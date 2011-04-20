@@ -52,10 +52,6 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
 public final class TimeClient {
 
     private static Logger log = LoggerFactory.getLogger(TimeClient.class);
-    /**
-     * Default Event Client Property File.
-     */
-    private final static String CLIENT_PROPERTIES = "timeclient.properties";
 
     private static TimeClient instance;
 
