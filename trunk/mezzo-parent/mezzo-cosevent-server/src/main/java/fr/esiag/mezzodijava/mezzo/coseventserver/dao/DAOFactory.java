@@ -12,6 +12,10 @@ public abstract class DAOFactory {
 
     private static JdbcDAO jdbcDAOinstance = null;
 
+    private DAOFactory(){
+	
+    }
+    
     /**
      * Singleton access to the JdbcDAO
      * @return the jdbcDAO

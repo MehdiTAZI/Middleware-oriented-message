@@ -1,6 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
-import java.io.Serializable;
 
 /**
  * 

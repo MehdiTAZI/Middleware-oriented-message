@@ -8,14 +8,12 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 
 public class TestChannelAdminCtr {
 
 	ChannelAdminCtr cac;
-	
+
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 	}
@@ -47,7 +45,7 @@ public class TestChannelAdminCtr {
 	public void testCreateProxyForPushConsumer() {
 		cac.createProxyForPushConsumer("testconsumer");
 	}
-	
+
 	@Test
 	public void testCreateProxyForPullSupplier() {
 		cac.createProxyForPullSupplier("testconsumer");

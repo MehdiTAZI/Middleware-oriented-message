@@ -1,7 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.model;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.SortedSet;
 import java.util.TreeSet;

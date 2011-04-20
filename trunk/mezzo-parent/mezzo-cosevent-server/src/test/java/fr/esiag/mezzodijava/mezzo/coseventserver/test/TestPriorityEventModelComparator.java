@@ -29,7 +29,7 @@ public class TestPriorityEventModelComparator {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	public void testCompare(){
 		PriorityEventModelComparator p = new PriorityEventModelComparator();
@@ -43,7 +43,7 @@ public class TestPriorityEventModelComparator {
 		EventModel e8 = new EventModel();
 		EventModel e9 = new EventModel();
 		EventModel e10 = new EventModel();
-		
+
 		// on compare sur les dates de création
 		e1.setCode(1);
 		e1.setCreationdate(15111982);
@@ -57,7 +57,7 @@ public class TestPriorityEventModelComparator {
 		e2.setType("String");
 		// si e1 est > à e2 donc plus récente
 		assertEquals(p.compare(e1, e2),1);
-		
+
 		// on compare sur les dates de création
 		e3.setCode(1);
 		e3.setCreationdate(15111981);
@@ -71,7 +71,7 @@ public class TestPriorityEventModelComparator {
 		e4.setType("String");
 		// si e3 est < à e4 donc plus ancienne
 		assertEquals(p.compare(e3, e4),-1);
-		
+
 		// on compare sur les priorités
 		e5.setCode(1);
 		e5.setCreationdate(15111982);
@@ -85,7 +85,7 @@ public class TestPriorityEventModelComparator {
 		e6.setType("String");
 		// si priorité e5 est > à e6 donc plus prioritaire
 		assertEquals(p.compare(e5, e6),-1);
-		
+
 		// on compare sur les priorités
 		e7.setCode(1);
 		e7.setCreationdate(15111982);
@@ -99,7 +99,7 @@ public class TestPriorityEventModelComparator {
 		e8.setType("String");
 		// si priorité e7 est < à e8 donc moins prioritaire
 		assertEquals(p.compare(e7, e8),1);
-		
+
 		// si égaux
 		e9.setCode(1);
 		e9.setCreationdate(15111982);

@@ -1,7 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.ctr;
 
-import java.util.Properties;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

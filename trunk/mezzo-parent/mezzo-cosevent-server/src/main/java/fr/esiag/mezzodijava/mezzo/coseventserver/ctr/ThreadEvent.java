@@ -33,6 +33,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
  * @author Mezzo-Team
  * 
  */
+@Deprecated
 public class ThreadEvent implements Runnable {
     private static Logger log = LoggerFactory.getLogger(ThreadEvent.class);
     private Channel channel;
@@ -135,7 +136,7 @@ public class ThreadEvent implements Runnable {
 	    try {
 		Thread.sleep(500);
 	    } catch (InterruptedException e) {
-		e.printStackTrace();
+		log.error("thread event interrupted",e);
 	    }
 	}
 

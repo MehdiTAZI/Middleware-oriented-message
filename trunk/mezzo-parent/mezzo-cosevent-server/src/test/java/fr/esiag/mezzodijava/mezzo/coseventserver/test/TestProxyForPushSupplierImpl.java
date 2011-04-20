@@ -2,8 +2,6 @@ package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 import static org.junit.Assert.fail;
 
-import java.util.Date;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -57,13 +55,13 @@ public class TestProxyForPushSupplierImpl {
 
 		//pour que l'appel getChannel.getTopic() fonctionne
 		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST_CONNECT", 1));
-		
+
 		// enregistrement
 		EasyMock.replay(mockCtr);
-		
+
 		//mockCtr.addProxyForPushSupplierToConnectedList(pfps);
 
-		
+
 		// lancement du test de la méthode
 		pfps.connect();
 
@@ -85,7 +83,7 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 
 		mockCtr.removeProxyForPushSupplierFromConnectedList(pfps);
-		
+
 		//pour que l'appel getChannel.getTopic() fonctionne
 		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
 
@@ -114,12 +112,12 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
-		
+
 		ORB orb=ORB.init();
 		Any any=orb.create_any();
 		any.insert_string("Test_PUSH");
 		Body body = new Body(any,"String");
-		
+
 		Event e = new Event(header,body);
 		mockCtr.addEvent(e);
 		//pour que l'appel getChannel.getTopic() fonctionne
@@ -137,7 +135,7 @@ public class TestProxyForPushSupplierImpl {
 		// ajout manuel du channel pour la correspondance channel-composant
 		Channel channel = EventServer.getInstance().createChannelEntity("TEST", 2);
 		DAOFactory.getJdbcDAO().insertChannel(channel);
-		
+
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
 		// inject mock in Factory
@@ -146,12 +144,12 @@ public class TestProxyForPushSupplierImpl {
 		ProxyForPushSupplierImpl pfps = new ProxyForPushSupplierImpl("TEST","testsupplier");
 		// Nouvel event :
 		Header header=new Header(123, 1, 01012011, 120);
-		
+
 		ORB orb=ORB.init();
 		Any any=orb.create_any();
 		any.insert_string("Test_PUSH");
 		Body body = new Body(any,"String");
-		
+
 		Event e = new Event(header,body);
 		// enregistrement d'un appel de addevent dans le mock
 		mockCtr.addEvent(e);

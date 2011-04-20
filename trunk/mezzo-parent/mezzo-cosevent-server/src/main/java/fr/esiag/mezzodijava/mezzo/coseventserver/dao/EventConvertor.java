@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 
@@ -63,13 +64,21 @@ public class EventConvertor {
  * @return the event
  */
     public Event transformToEvent(EventModel em) {
-	try {
 	    Event e;
 	    // Deserialize from a byte array
 	    ObjectInputStream in;
-	    in = new ObjectInputStream(new ByteArrayInputStream(em.getData()));
-	    Object val = (Serializable) in.readObject();
-	    in.close();
+	    Object val;
+	    try {
+		in = new ObjectInputStream(new ByteArrayInputStream(em.getData()));
+		val = (Serializable) in.readObject();
+		in.close();
+	    } catch (IOException e1) {
+			log.error("Error in transformToEvent IO",e1);
+			throw new EventServerException("Error in transformToEvent IO", e1);
+	    } catch (ClassNotFoundException e1) {
+			log.error("Error in transformToEvent serialization ClassNotFound",e1);
+			throw new EventServerException("Error in transformToEvent serialization ClassNotFound", e1);
+	    }
 
 	    if (em.getType().equals("String")) {
 		e = EventFactory.createEventString(em.getPriority(),
@@ -82,9 +91,6 @@ public class EventConvertor {
 	    e.header.creationdate = em.getCreationdate();
 
 	    return e;
-	} catch (Exception e1) {
-		log.error("Error in transformToEvent",e1);
-		throw new RuntimeException("error in transformToEvent", e1);
-	}
+
     }
 }

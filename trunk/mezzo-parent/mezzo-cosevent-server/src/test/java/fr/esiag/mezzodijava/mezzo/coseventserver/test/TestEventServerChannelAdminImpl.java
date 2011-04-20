@@ -13,11 +13,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
-import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
-import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 
 public class TestEventServerChannelAdminImpl {

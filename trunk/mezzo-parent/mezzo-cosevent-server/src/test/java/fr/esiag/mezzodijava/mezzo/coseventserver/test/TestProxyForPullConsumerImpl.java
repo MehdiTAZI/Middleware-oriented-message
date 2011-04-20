@@ -1,19 +1,14 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.test;
 
 
-import static org.junit.Assert.fail;
-
 import org.easymock.EasyMock;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omg.CORBA.BooleanHolder;
-
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
-import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
@@ -38,11 +33,11 @@ public class TestProxyForPullConsumerImpl {
 	@After
 	public void tearDown() throws Exception {
 	}
-	
+
 	@Test
 	public void testConnect() throws ChannelNotFoundException,
 	MaximalConnectionReachedException, AlreadyConnectedException {
-		
+
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
 		// inject mock in Factory
@@ -54,10 +49,10 @@ public class TestProxyForPullConsumerImpl {
 		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST_CONNECT", 1));
 		// enregistrement
 		EasyMock.replay(mockCtr);
-		
+
 		// lancement du test de la méthode
 		pfpc.connect();
-		
+
 		// vérification de l'appel à la méthode d'ajout
 		EasyMock.verify(mockCtr);
 		pfpc = null;
@@ -66,7 +61,7 @@ public class TestProxyForPullConsumerImpl {
 	@Test
 	public void testDisconnect() throws ChannelNotFoundException,
 	NotConnectedException {
-		
+
 		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
 		// inject mock in Factory
@@ -99,18 +94,18 @@ public class TestProxyForPullConsumerImpl {
 		// nouveau proxy
 		ProxyForPullConsumerImpl pfpc = new ProxyForPullConsumerImpl("TEST_PULL","testconsumer");
 		mockCtr.addProxyForPullConsumerToConnectedList(pfpc);
-		
+
 		//EasyMock.expect(pfpc.pull(b)).andReturn(new Event());
-		
+
 		//pour que l'appel getChannel.getTopic() fonctionne
 		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
 		// enregistrement
 		EasyMock.replay(mockCtr);
-		
+
 		// lancement du test de la méthode
 		pfpc.connect();
 		Event e = pfpc.pull(b);
-		
+
 		// vérification de l'appel à la méthode d'ajout
 		EasyMock.verify(mockCtr);
 		pfpc = null;*/

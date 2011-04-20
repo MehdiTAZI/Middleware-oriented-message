@@ -465,9 +465,9 @@ public class TestChannelCtr {
      * } catch (MaximalConnectionReachedException e) { fail(); } try {
      * assertEquals(ev,channelCtr.getEvent(ppc)); } catch (NotConnectedException
      * e) { fail(); }
-     * 
+     *
      * }
-     * 
+     *
      * @Test public void testGetEvent() { Channel channel =
      * EventServer.getInstance().createChannelEntity(topic, 0);
      * channel.setCapacity(2); ProxyForPullConsumerImpl ppc = new
@@ -481,7 +481,7 @@ public class TestChannelCtr {
      * assertEquals
      * (ev.body.content.extract_string(),channelCtr.getEvent(ppc).body
      * .content.extract_string()); } catch (NotConnectedException e) { fail(); }
-     * 
+     *
      * }
      */
 }
