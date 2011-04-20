@@ -163,7 +163,7 @@ public final class TimeClient {
 	    throws TimeClientException {
 	Object channelObj = null;
 	try {
-	    channelObj = nce.resolve_str(timeServerName);
+	    channelObj = nce.resolve_str("timeServer/" + timeServerName);
 	} catch (NotFound e) {
 
 	    throw new TimeClientException("Cannot find the Time Service '"

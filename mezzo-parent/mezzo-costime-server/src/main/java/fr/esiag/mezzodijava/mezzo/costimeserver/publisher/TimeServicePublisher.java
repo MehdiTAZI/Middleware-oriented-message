@@ -12,6 +12,7 @@ import fr.esiag.mezzodijava.mezzo.costime.TimeServicePOATie;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
 import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
+import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
 /**
  * TimeServicePublisher : to publish and start the thread for time service
@@ -48,7 +49,8 @@ public class TimeServicePublisher {
 	    poa.the_POAManager().activate();
 	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
 		    .resolve_initial_references("NameService"));
-	    nc.rebind(nc.to_name(name), poa
+	    CORBAUtils.createContext(nc, "timeServer");
+	    nc.rebind(nc.to_name("timeServer/"+name), poa
 		    .servant_to_reference(new TimeServicePOATie(timeService)));
 	} catch (Exception e) {
 		

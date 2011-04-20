@@ -18,6 +18,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
 
 
@@ -75,7 +76,8 @@ public class ChannelPublisher {
 	    byte[] oid = getPOA().servant_to_id(
 		    new ChannelAdminPOATie(channelAdminImpl));
 	    oidMap.put(channelAdminImpl, oid);
-	    nc.rebind(nc.to_name(channelAdminImpl.getTopic()), getPOA()
+	    CORBAUtils.createContext(nc, "eventChannel");
+	    nc.rebind(nc.to_name("eventChannel/"+channelAdminImpl.getTopic()), getPOA()
 		    .id_to_reference(oid));
 
 	} catch (Exception e) {
