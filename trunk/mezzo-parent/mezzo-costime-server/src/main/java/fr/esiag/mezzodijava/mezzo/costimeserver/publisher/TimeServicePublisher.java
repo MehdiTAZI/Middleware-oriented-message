@@ -9,8 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import fr.esiag.mezzodijava.mezzo.costime.TimeServicePOATie;
-import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.ThreadTime;
-import fr.esiag.mezzodijava.mezzo.costimeserver.ctr.TimeServiceCtr;
+import fr.esiag.mezzodijava.mezzo.costimeserver.exception.TimeServerException;
 import fr.esiag.mezzodijava.mezzo.costimeserver.impl.TimeServiceImpl;
 import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
@@ -23,38 +22,40 @@ import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
  * 
  */
 public class TimeServicePublisher {
-	private static Logger log = LoggerFactory.getLogger(TimeServicePublisher.class);
-    private static Thread thread;
+    private static Logger log = LoggerFactory
+	    .getLogger(TimeServicePublisher.class);
 
     /**
      * Publish with CORBA ORB <code>orb</code> a TimeService
      * <code>timeService</code> and register it on the name service with the
-     * name <code>name</code>.  
+     * name <code>name</code>.
      * 
-     * @param name name of this time service in the Name Service
-     * @param timeService implementation of TimeService
-     * @param orb CORBA ORB
+     * @param name
+     *            name of this time service in the Name Service
+     * @param timeService
+     *            implementation of TimeService
+     * @param orb
+     *            CORBA ORB
      */
-    public static void publish(String name, TimeServiceImpl timeService,
-	    ORB orb) {
-    	log.info("publish \"{}\"",name);
-//	ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
-//		timeSpan);
-//	thread = new Thread(tt);
-//	thread.start();
+    public static void publish(String name, TimeServiceImpl timeService, ORB orb) {
+	log.info("publish \"{}\"", name);
+	// ThreadTime tt = new ThreadTime(timeService.getCtr().getModel(),
+	// timeSpan);
+	// thread = new Thread(tt);
+	// thread.start();
 
 	try {
 	    POA poa = POAHelper.narrow(orb
 		    .resolve_initial_references("RootPOA"));
+
 	    poa.the_POAManager().activate();
 	    NamingContextExt nc = NamingContextExtHelper.narrow(orb
 		    .resolve_initial_references("NameService"));
 	    CORBAUtils.createContext(nc, "timeServer");
-	    nc.rebind(nc.to_name("timeServer/"+name), poa
+	    nc.rebind(nc.to_name("timeServer/" + name), poa
 		    .servant_to_reference(new TimeServicePOATie(timeService)));
 	} catch (Exception e) {
-		
-	    log.error("Technical error : CORBA", e);
+	    throw new TimeServerException("publish server error", e);
 	}
     }
 }

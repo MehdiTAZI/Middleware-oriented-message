@@ -1,8 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.costimeserver.main;
 
-import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.LogManager;
 
 import org.omg.CORBA.ORB;
 import org.slf4j.Logger;
