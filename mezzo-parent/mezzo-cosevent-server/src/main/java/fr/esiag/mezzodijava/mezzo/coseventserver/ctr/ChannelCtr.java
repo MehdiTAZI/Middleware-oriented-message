@@ -173,8 +173,9 @@ public class ChannelCtr {
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws AlreadyRegisteredException {
 	String idConsumer = null;
-	if (proxyConsumer != null)
+	if (proxyConsumer != null){
 	    idConsumer = proxyConsumer.getIdComponent();
+	}
 	if (channel.getConsumers().containsKey(idConsumer)
 		|| proxyConsumer == null || idConsumer == null) {
 	    log.error("AlreadyRegistered");

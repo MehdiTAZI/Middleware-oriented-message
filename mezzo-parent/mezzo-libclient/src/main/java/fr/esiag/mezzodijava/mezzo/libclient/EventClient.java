@@ -1,6 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
 
