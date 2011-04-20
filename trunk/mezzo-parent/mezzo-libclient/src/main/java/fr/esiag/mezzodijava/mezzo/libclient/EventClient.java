@@ -17,6 +17,7 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.esiag.mezzodijava.mezzo.commons.ConfMgr;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerPOATie;
@@ -129,15 +130,7 @@ public final class EventClient {
 	System.out.println("Initilazing Mezzo Client...");
 	props = properties;
 	if (props == null) {
-	    props = new Properties();
-	    try {
-		props.load(this.getClass().getClassLoader()
-			.getResourceAsStream(EventClient.CLIENT_PROPERTIES));
-	    } catch (IOException e) {
-		// TODO log here
-		throw new EventClientException(
-			"Error in opening client property file", e);
-	    }
+	    props = ConfMgr.loadProperties("eventclient_default","eventclient");
 	}
 	orb = ORB.init(args, props);
 	Object nceObj = null;
