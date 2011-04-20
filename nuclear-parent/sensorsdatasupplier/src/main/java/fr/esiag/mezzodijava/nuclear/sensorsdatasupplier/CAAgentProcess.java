@@ -20,33 +20,20 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
+import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 
 public class CAAgentProcess {
 
     public CAAgentProcess(String args[]) {
 	try {
-	    Properties props = new Properties();
-	    try {
-		props.load(this.getClass().getClassLoader()
-			.getResourceAsStream("eventclient.properties"));
-	    } catch (IOException e) {
-		e.printStackTrace();
-
-	    }
-	    ORB orb = ORB.init(args, props);
-	    POA rootPOA = POAHelper.narrow(orb
-		    .resolve_initial_references("RootPOA"));
-	    rootPOA.the_POAManager().activate();
-	    Object objRef = orb.resolve_initial_references("NameService");
-	    NamingContextExt ncRef = NamingContextExtHelper.narrow(objRef);
-
+	    EventClient ec = EventClient.init(args);
 	    System.out.println("***** UC07 - US76 - Nominal - Creation d'Event Channel *****");
 	    String nuclearChannelName = "nuclear sensor";
 	    System.out.println("Asking creation of Channel \""
 		    + nuclearChannelName + "\" on server \"" + args[0]
 		    + "\"...");
-	    EventServerChannelAdmin channelAdmin = EventServerChannelAdminHelper
-		    .narrow(ncRef.resolve_str(args[0]));
+	    EventServerChannelAdmin channelAdmin = ec.resolveEventServerChannelAdminByEventServerName(args[0]);
 	    long id = -1;
 	    try {
 		id = channelAdmin.createChannel(nuclearChannelName, 3);
@@ -59,8 +46,7 @@ public class CAAgentProcess {
 	    System.out.println("Asking creation of Channel \""
 		    + injectorSystemChannelName + "\" on server \"" + args[1]
 		    + "\"...");
-	    EventServerChannelAdmin channelAdmin2 = EventServerChannelAdminHelper
-		    .narrow(ncRef.resolve_str(args[1]));
+	    EventServerChannelAdmin channelAdmin2 = ec.resolveEventServerChannelAdminByEventServerName(args[1]);
 	    long id2 = -1;
 	    try {
 		id2 = channelAdmin2.createChannel(injectorSystemChannelName, 3);
@@ -143,20 +129,7 @@ public class CAAgentProcess {
 	    }*/
 
 	    System.out.println("ALL DONE");
-	} catch (InvalidName e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (AdapterInactive e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (NotFound e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (CannotProceed e) {
-	    // TODO Auto-generated catch block
-	    e.printStackTrace();
-	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
-	    // TODO Auto-generated catch block
+	} catch (EventClientException e) {
 	    e.printStackTrace();
 	}
     }
