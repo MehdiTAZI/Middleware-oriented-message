@@ -16,6 +16,7 @@ import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.esiag.mezzodijava.mezzo.commons.ConfMgr;
 import fr.esiag.mezzodijava.mezzo.costime.AlreadyRegisteredException;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
@@ -122,16 +123,7 @@ public final class TimeClient {
 	System.out.println("Initilazing Mezzo Time Client...");
 	props = properties;
 	if (props == null) {
-	    props = new Properties();
-	    try {
-		props.load(this.getClass().getClassLoader()
-			.getResourceAsStream(TimeClient.CLIENT_PROPERTIES));
-	    } catch (IOException e) {
-		// TODO log here
-		log.debug("Error in opening time client property file");
-		throw new TimeClientException(
-			"Error in opening time client property file", e);
-	    }
+	    props = ConfMgr.loadProperties("timeclient_default","timeclient");
 	}
 	orb = ORB.init(args, props);
 	Object nceObj = null;
