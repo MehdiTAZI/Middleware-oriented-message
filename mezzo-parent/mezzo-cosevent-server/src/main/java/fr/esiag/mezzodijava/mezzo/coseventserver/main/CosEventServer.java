@@ -125,7 +125,7 @@ public class CosEventServer {
 	    // Subscribe to COSTime
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
-	    TimeClient.init(null).subscribeToTimeService(cosTimeName,
+	    TimeClient.init(args,properties).subscribeToTimeService(cosTimeName,
 		    new CallbackTimeImpl(), cosTimeRefreshDelay);
 
 	    // reload persisted data

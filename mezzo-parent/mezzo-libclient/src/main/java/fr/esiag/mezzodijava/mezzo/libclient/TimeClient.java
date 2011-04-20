@@ -1,7 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
@@ -64,19 +63,35 @@ public final class TimeClient {
      * initialized.
      * 
      * @param args
-     *            Command line parameters
+     *            Command line arguments
+     * @param props
+     *            Properties
      * @return a initialized singleton instance of EventClient
      * @throws TimeClientException
      *             Cannot init a resource (ORB or NameService) with this
      *             configuration
      */
-    public static synchronized TimeClient init(String[] args)
+    public static synchronized TimeClient init(String[] args, Properties props)
 	    throws TimeClientException {
 	if (instance == null) {
 
-	    String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
-		    args.length);
-	    instance = new TimeClient(cmdArgs, null);
+	    instance = new TimeClient(args, props);
+	}
+	return instance;
+    }
+
+    /**
+     * Give a singleton instance of EventClient with his orb and his nameservice
+     * initialized.
+     * 
+     * @return a initialized singleton instance of EventClient
+     * @throws TimeClientException
+     *             Cannot init a resource (ORB or NameService) with this
+     *             configuration
+     */
+    public static synchronized TimeClient init() throws TimeClientException {
+	if (instance == null) {
+	    instance = new TimeClient(null, null);
 	}
 	return instance;
     }
