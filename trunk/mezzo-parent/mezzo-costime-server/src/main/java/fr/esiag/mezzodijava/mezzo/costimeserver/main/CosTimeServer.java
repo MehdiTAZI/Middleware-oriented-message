@@ -42,7 +42,7 @@ public class CosTimeServer {
 	TimeServiceImpl timeService = new TimeServiceImpl(ctr);
 	ORB orb = ORB.init(args, properties);
 	String timeServerName;
-	if (args.length == 1) {
+	if (args.length >= 1) {
 	    timeServerName = args[0];
 	} else {
 	    timeServerName = properties.getProperty("timeserver.name");

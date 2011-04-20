@@ -8,8 +8,11 @@ import java.util.SortedSet;
 
 import org.omg.CORBA.ORB;
 import org.omg.CORBA.ORBPackage.InvalidName;
+import org.omg.CosNaming.NameComponent;
+import org.omg.CosNaming.NamingContext;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
+import org.omg.CosNaming.NamingContextPackage.AlreadyBound;
 import org.omg.CosNaming.NamingContextPackage.CannotProceed;
 import org.omg.CosNaming.NamingContextPackage.NotFound;
 import org.omg.PortableServer.POA;
@@ -36,6 +39,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
+import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
 /**
  * Class CosEventServer
@@ -118,7 +122,8 @@ public class CosEventServer {
 	    // nc.rebind(nc.to_name(channelName),
 	    // poa.servant_to_reference(new
 	    // ChannelAdminPOATie(channelAdminImpl)));
-	    nc.rebind(nc.to_name(eventServerName), poa
+	    CORBAUtils.createContext(nc, "eventServer");
+	    nc.rebind(nc.to_name("eventServer/"+eventServerName), poa
 		    .servant_to_reference(new EventServerChannelAdminPOATie(
 			    eventServerChannelAdmin)));
 
