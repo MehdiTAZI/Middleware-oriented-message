@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-import org.apache.derby.tools.sysinfo;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -47,7 +46,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.costime.Synchronizable;
 import fr.esiag.mezzodijava.mezzo.costime.SynchronizableOperations;
 import fr.esiag.mezzodijava.mezzo.costime.TimeService;
@@ -273,7 +271,7 @@ public class COSEventIT {
     private static class TimeConsumerServer {
 	@SuppressWarnings("unused")
 	public static void main(String[] args) throws Exception {
-	    TimeClient tc = TimeClient.init(null);
+	    TimeClient tc = TimeClient.init();
 	    Thread to = new Thread(new ThreadOrb());
 	    to.setDaemon(true);
 	    to.start();
@@ -1193,7 +1191,7 @@ public class COSEventIT {
      */
     @Test
     public void testUC05_Nominal_PullTime() throws Exception {
-	TimeClient tc = TimeClient.init(null);
+	TimeClient tc = TimeClient.init();
 	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	long time = ts.getTime();
 	System.out.println("pull time : " + time);
@@ -1231,7 +1229,7 @@ public class COSEventIT {
      */
     @Test
     public void testUC06_Exc1_AlreadyRegistered() throws Exception {
-	TimeClient tc = TimeClient.init(null);
+	TimeClient tc = TimeClient.init();
 	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
 	ts.subscribe(s,1000);
@@ -1255,7 +1253,7 @@ public class COSEventIT {
      */
     @Test
     public void testUC06_Exc2_NotRegistered() throws Exception {
-	TimeClient tc = TimeClient.init(null);
+	TimeClient tc = TimeClient.init();
 	TimeService ts = tc.resolveTimeService(TIME_SERVER_NAME);
 	Synchronizable s = tc.serveCallbackTime(new CallBackTimeImpl());
 	ts.subscribe(s,1000);
