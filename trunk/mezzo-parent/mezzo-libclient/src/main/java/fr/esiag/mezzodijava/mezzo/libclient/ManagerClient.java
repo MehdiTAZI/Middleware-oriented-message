@@ -7,7 +7,6 @@ import org.omg.CORBA.ORB;
 import org.omg.CORBA.Object;
 import org.omg.CosNaming.NamingContextExt;
 import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.PortableServer.POA;
 
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollector;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;

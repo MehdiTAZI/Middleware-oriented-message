@@ -27,7 +27,7 @@ public interface JdbcDAO {
      * 
      * @return a list of the channel
      */
-    public List<Channel> findAllChannel();
+    List<Channel> findAllChannel();
 
     /**
      * access to all the event for a channel
@@ -36,7 +36,7 @@ public interface JdbcDAO {
      *            the channel
      * @return all the event associated with channelId
      */
-    public SortedSet<EventModel> findEventByChannel(int channelId);
+    SortedSet<EventModel> findEventByChannel(int channelId);
 
     /**
      * sort all the consumer for one channel
@@ -45,65 +45,65 @@ public interface JdbcDAO {
      *            the channel
      * @return Map with the IDConsumer and the consumer associated
      */
-    public Map<String, ConsumerModel> findConsumerByChannel(int channelId);
+    Map<String, ConsumerModel> findConsumerByChannel(int channelId);
 
     /**
      * @return event for the consumer associated
      */
-    public SortedSet<EventModel> findEventByConsumer(int idConsumer);
+    SortedSet<EventModel> findEventByConsumer(int idConsumer);
 
     /* methodes d'insertion */
 
     /**
      * @return the channelId associated to the channel that we wanted to persist
      */
-    public int insertChannel(Channel channel);
+    int insertChannel(Channel channel);
 
     /**
      * @return return the consumerID associated to the consumerModel that we
      *         wanted to persist
      */
-    public int insertConsumer(ConsumerModel consumer);
+    int insertConsumer(ConsumerModel consumer);
 
     /**
      * @return the eventId associated to the eventModel and the channelId.
      */
-    public int insertEvent(int channelId, EventModel event);
+    int insertEvent(int channelId, EventModel event);
 
     /**
      * add the Event to the consumer
      */
-    public void addEventToConsumer(int eventId, int consumerId);
+    void addEventToConsumer(int eventId, int consumerId);
 
     /* methodes de mise à jour */
     /**
      * refresh capacity and id of channel
      */
-    public void updateChannel(Channel channel);
+    void updateChannel(Channel channel);
 
     /* methodes de suppression */
     /**
      * delete an event associated to a consumer
      */
-    public void deleteEventByConsumer(int consumerId, int eventId);
+    void deleteEventByConsumer(int consumerId, int eventId);
 
     /**
      * delete an event
      */
-    public void deleteEvent(int eventId);
+    void deleteEvent(int eventId);
 
     /**
      * delete a consumer who was already persisted
      */
-    public void deleteConsumer(int consumerId);
+    void deleteConsumer(int consumerId);
 
     /**
      * delete a channel who was already persisted
      */
-    public void deleteChannel(int channelId);
+    void deleteChannel(int channelId);
 
     /**
      * delete all consumers associated to a channel
      */
-    public void deleteAllConsumers(int channelId);
+    void deleteAllConsumers(int channelId);
 }

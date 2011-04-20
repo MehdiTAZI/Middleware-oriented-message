@@ -21,6 +21,6 @@ public interface MessageListener {
 	 * @param evt the event that we gonna push
 	 * @throws ConsumerNotFoundException if consumer is disconnected
 	 */
-    public void receive(Event evt) throws ConsumerNotFoundException;
+    void receive(Event evt) throws ConsumerNotFoundException;
 
 }

@@ -82,8 +82,9 @@ public class TimeServiceCtr {
      *             If the component is not registered.
      */
     public void unsubscribe(Synchronizable cc) throws NotRegisteredException {
-	if (!model.getComponentSubscribed().contains(cc))
+	if (!model.getComponentSubscribed().contains(cc)) {
 	    throw new NotRegisteredException();
+	}
 	model.getComponentSubscribed().remove(cc);
 	log.info("Component unsubscribed : " + cc);
     }
