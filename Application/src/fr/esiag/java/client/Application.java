@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Map;
 import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.RootPanel;
@@ -22,7 +23,7 @@ import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 import fr.esiag.java.shared.ChannelInfosCollector;
 
 
-public class Application implements EntryPoint {
+public class Application implements EntryPoint{
 	private final AuthenticationServiceAsync authenticationService = GWT
 	.create(AuthenticationService.class);
 	private TextItem login;
@@ -92,9 +93,30 @@ public class Application implements EntryPoint {
 //		                 winModal.addItem(form);  
 //		                 winModal.show();  
 	}
+	private Timer timer;
 	public void onModuleLoad() {
 		View homeView=new HomeView(this);
 		views.put("homeView", homeView);
+		timer=new Timer() {
+			@Override
+			public void run() {
+					 authenticationService.authenticate("", "", new AsyncCallback<ChannelInfosCollector[]>() {
+							
+							@Override
+							public void onSuccess(ChannelInfosCollector[] result) {
+								View v=views.get("homeView");
+								v.setData(result);
+								v.setContent();
+							}
+							
+							@Override
+							public void onFailure(Throwable caught) {
+
+							}
+						});				
+				}
+		};
+		timer.scheduleRepeating(20000);
 		showAuthentification();
 		//display("homeView",null);
 	}

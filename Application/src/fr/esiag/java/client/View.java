@@ -9,6 +9,7 @@ public abstract class View {
 	public  View(Application view) {
 		this.view=view;
 	}
+	public abstract void setContent();
 	public abstract Widget getContent();
 	public abstract void setData(ChannelInfosCollector[] channelInfosCollector);
 }
