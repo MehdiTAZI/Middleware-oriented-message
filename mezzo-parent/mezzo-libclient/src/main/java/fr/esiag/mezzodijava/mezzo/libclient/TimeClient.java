@@ -1,5 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.libclient;
 
+import java.util.Arrays;
 import java.util.Properties;
 
 import org.omg.CORBA.ORB;
@@ -74,8 +75,9 @@ public final class TimeClient {
     public static synchronized TimeClient init(String[] args, Properties props)
 	    throws TimeClientException {
 	if (instance == null) {
-
-	    instance = new TimeClient(args, props);
+	    String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
+		    args.length);
+	    instance = new TimeClient(cmdArgs, props);
 	}
 	return instance;
     }
