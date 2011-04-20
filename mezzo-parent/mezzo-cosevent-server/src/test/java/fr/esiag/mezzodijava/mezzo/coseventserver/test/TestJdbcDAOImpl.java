@@ -44,7 +44,7 @@ public class TestJdbcDAOImpl {
     @After
     public void tearDown() throws Exception {
     }
-    
+
     @Test
     public void testFindAllChannel() throws ChannelAlreadyExistsException, ChannelNotFoundException{
 		long id1 = ctr.createChannel("MEZZO3", 30);
@@ -55,7 +55,7 @@ public class TestJdbcDAOImpl {
 		ctr.destroyChannel(id1);
 		ctr.destroyChannel(id2);
     }
-    
+
     @Test
     public void testFindConsumerByChannel() throws ChannelAlreadyExistsException, AlreadyRegisteredException, ChannelNotFoundException{
     	long id1 = ctr.createChannel("MEZZO4", 30);
@@ -66,61 +66,61 @@ public class TestJdbcDAOImpl {
 		//assertTrue("erreur pas de consumer",map.containsKey("testconsumer"));
 		ctr.destroyChannel(id1);
     }
-    
+
     @Test
     public void testFindEventByConsumer(){
-    	
+
     }
-    
+
     @Test
     public void testInsertChannel(){
-    	
+
     }
-    
+
     @Test
     public void testInsertConsumer(){
-    	
+
     }
-    
+
     @Test
     public void testInsertEvent(){
-    	
+
     }
-    
+
     @Test
     public void testAddEventToConsumer(){
-    	
+
     }
-    
+
     @Test
     public void testUpdateChannel(){
-    	
+
     }
-    
+
     @Test
     public void testDeleteConsumer(){
-    	
+
     }
-    
+
     @Test
     public void testDeleteChannel(){
-    	
+
     }
-    
+
     @Test
     public void testDeleteAllConsumers(){
-    	
+
     }
-    
+
     @Test
     public void testDeleteEventByConsumer(){
-    	
+
     }
-    
+
     @Test
     public void testDeleteEvent(){
-    	
+
     }
-    
+
 
 }

@@ -25,6 +25,10 @@ public class TimeServicePublisher {
     private static Logger log = LoggerFactory
 	    .getLogger(TimeServicePublisher.class);
 
+    private TimeServicePublisher() {
+
+    }
+
     /**
      * Publish with CORBA ORB <code>orb</code> a TimeService
      * <code>timeService</code> and register it on the name service with the

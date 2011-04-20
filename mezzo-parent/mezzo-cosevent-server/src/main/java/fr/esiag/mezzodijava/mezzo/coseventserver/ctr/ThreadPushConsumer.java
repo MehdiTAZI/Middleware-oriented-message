@@ -132,7 +132,7 @@ public class ThreadPushConsumer implements Runnable {
 	    try {
 		Thread.sleep(500);
 	    } catch (InterruptedException e) {
-		e.printStackTrace();
+		log.error("thread event interrupted",e);
 	    }
 	}
 

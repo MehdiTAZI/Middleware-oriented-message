@@ -14,7 +14,6 @@ import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelAdminCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.EventServerChannelAdminCtr;
-import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
@@ -29,7 +28,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
  * @author Mezzo-Team
  * 
  */
-public class BFFactory {
+public final class BFFactory {
 
     // private static Map<String, Channel> mapChannel = new HashMap<String,
     // Channel>();

@@ -1,7 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.impl;
 
-import org.omg.CORBA.BooleanHolder;
 import org.omg.CORBA.Any;
+import org.omg.CORBA.BooleanHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

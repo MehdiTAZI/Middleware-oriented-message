@@ -41,8 +41,8 @@ public class TestProxyForPullSupplierImpl {
 	public void testConnect() throws ChannelNotFoundException,
 		MaximalConnectionReachedException,
 		AlreadyConnectedException {
-		
-		// création du mock pour le contrôleur 
+
+		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
 		// création du mock pour le callback
 		CallbackSupplier mockCall = EasyMock.createNiceMock(CallbackSupplier.class);
@@ -56,11 +56,11 @@ public class TestProxyForPullSupplierImpl {
 		mockCtr.addProxyForPullSupplierToConnectedList(pfps);
 		// enregistrement
 	    EasyMock.replay(mockCtr);
-	    
+
 	    // lancement du test de la méthode
 	    pfps.connect(mockCall);
-		
-		// vérification de l'appel à la méthode d'ajout  
+
+		// vérification de l'appel à la méthode d'ajout
 	    EasyMock.verify(mockCtr);
 	    pfps = null;
 	}
@@ -68,7 +68,7 @@ public class TestProxyForPullSupplierImpl {
 	@Test
 	public void testDisconnect() throws ChannelNotFoundException,
 		NotConnectedException {
-		// création du mock pour le contrôleur 
+		// création du mock pour le contrôleur
 		ChannelCtr mockCtr = EasyMock.createNiceMock(ChannelCtr.class);
 		// inject mock in Factory
 		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
@@ -81,11 +81,11 @@ public class TestProxyForPullSupplierImpl {
 				new Channel("TEST",3));
 		// enregistrement
 	    EasyMock.replay(mockCtr);
-	   
+
 	    // lancement du test de la méthode
 	    pfps.disconnect();
-	    	
-		// vérification de l'appel à la méthode de suppression  
+
+		// vérification de l'appel à la méthode de suppression
 	    EasyMock.verify(mockCtr);
 	    pfps = null;
 	}

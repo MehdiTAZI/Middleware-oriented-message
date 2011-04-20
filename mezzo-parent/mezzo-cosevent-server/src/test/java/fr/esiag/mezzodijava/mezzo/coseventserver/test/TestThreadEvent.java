@@ -57,7 +57,7 @@ public class TestThreadEvent {
 		Any any=orb.create_any();
 		any.insert_string("Test_EVENT");
 		Body body = new Body(any,"String");
-		
+
 		Event e = new Event(header,body);
 		for (ConsumerModel consumer : channel
 				.getConsumers().values()) {
@@ -97,7 +97,7 @@ public class TestThreadEvent {
 		Any any=orb.create_any();
 		any.insert_string("Test_EVENT");
 		Body body = new Body(any,"String");
-		
+
 		Event e = new Event(header,body);
 		for (ConsumerModel consumer : channel
 			.getConsumers().values()) {
@@ -132,7 +132,7 @@ public class TestThreadEvent {
 		Any any=orb.create_any();
 		any.insert_string("Test_EVENT");
 		Body body = new Body(any,"String");
-		
+
 		Event e = new Event(header,body);
 		for (ConsumerModel consumer : channel
 			.getConsumers().values()) {

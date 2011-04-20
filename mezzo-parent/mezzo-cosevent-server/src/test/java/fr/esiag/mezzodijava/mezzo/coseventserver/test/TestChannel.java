@@ -5,24 +5,12 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-import java.util.Date;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.omg.CORBA.Any;
-import org.omg.CORBA.ORB;
-
-import fr.esiag.mezzodijava.mezzo.cosevent.Body;
-import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-import fr.esiag.mezzodijava.mezzo.cosevent.Header;
-import fr.esiag.mezzodijava.mezzo.coseventserver.dao.EventConvertor;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
-import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
 public class TestChannel {
 

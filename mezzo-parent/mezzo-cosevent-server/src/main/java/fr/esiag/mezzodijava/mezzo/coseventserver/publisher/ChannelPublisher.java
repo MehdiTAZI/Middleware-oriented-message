@@ -101,7 +101,7 @@ public class ChannelPublisher {
 	    // unbind
 	    NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
 		    .getOrb().resolve_initial_references("NameService"));
-	    nc.unbind(nc.to_name(channelAdminImpl.getTopic()));
+	    nc.unbind(nc.to_name("eventChannel/"+channelAdminImpl.getTopic()));
 	    //remove from map
 	    oidMap.remove(channelAdminImpl);
 	    for(ProxyForPushConsumer ppc : channelAdminImpl.getChannelAdminctrl().getOidProxyForPushConsumerMap().keySet()){
