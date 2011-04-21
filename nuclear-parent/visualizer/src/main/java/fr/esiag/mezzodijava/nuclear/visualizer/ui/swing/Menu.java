@@ -49,7 +49,8 @@ public class Menu extends JMenuBar implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getActionCommand().equals("Quitter")){
 			try {
-				frame.getConsumerProxy().disconnect();
+				if(frame.getConnectionPanel().isConnected()==true)
+					frame.getConsumerProxy().disconnect();
 			} catch (ChannelNotFoundException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();
