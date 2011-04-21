@@ -8,12 +8,15 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.omg.CORBA.BooleanHolder;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackSupplier;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.ctr.ChannelCtr;
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
@@ -91,8 +94,35 @@ public class TestProxyForPullSupplierImpl {
 	}
 
 	@Test
-	public void testAsk() {
-		fail("Not yet implemented");
+	public void testAsk() throws SupplierNotFoundException, AlreadyConnectedException, MaximalConnectionReachedException, ChannelNotFoundException {
+		// création du mock pour le contrôleur
+		ChannelCtr mockCtr = EasyMock.createMock(ChannelCtr.class);
+		// création du mock pour le callback
+		CallbackSupplier mockCall = EasyMock.createNiceMock(CallbackSupplier.class);
+		// inject mock in Factory
+		BFFactory.setAlternateChannelCtr("TEST", mockCtr);
+		// nouveau proxy
+		ProxyForPullSupplierImpl pfps = new ProxyForPullSupplierImpl("TEST","testsupplier");
+		//pour que l'appel getChannel.getTopic() fonctionne
+		EasyMock.expect(mockCtr.getChannel()).andReturn(new Channel("TEST", 1));
+		mockCtr.addProxyForPullSupplierToConnectedList(pfps);
+		
+		// boolean de retour
+		BooleanHolder b = new BooleanHolder(false);
+		// appel et valeur de retour espérée
+		EasyMock.expect(mockCall.ask(b)).andReturn(new Event());
+		
+		
+		// enregistrement
+	    EasyMock.replay(mockCtr);
+
+	    // lancement du test de la méthode
+	    pfps.connect(mockCall);
+	    Event e = pfps.ask(b);
+
+		// vérification de l'appel à la méthode d'ajout
+	    EasyMock.verify(mockCtr);
+	    pfps = null;
 	}
 
 }
