@@ -69,7 +69,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
  * @author Mezzo-Team
  * 
  */
-public class COSEventIT {
+public class TestCOSEventIT {
 
     public static String EVENT_SERVER_NAME;
     
@@ -149,7 +149,7 @@ public class COSEventIT {
 
 		@Override
 		public void date(long arg) {
-		    COSEventIT.date = arg;
+		    TestCOSEventIT.date = arg;
 		}
     }
 
@@ -616,7 +616,7 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(
-		COSEventIT.ConsumerServer2.class, 500, (String[]) null);
+		TestCOSEventIT.ConsumerServer2.class, 500, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "mezzo";
@@ -768,7 +768,7 @@ public class COSEventIT {
 	Thread.sleep(1000);
 	// le consumer ici present
 	MainServerLauncher s2 = new MainServerLauncher(
-		COSEventIT.ConsumerServer3.class, 500, (String[]) null);
+		TestCOSEventIT.ConsumerServer3.class, 500, (String[]) null);
 	s2.go();
 	ChannelAdmin channelAdmin = ec.resolveChannelByTopic("MEZZO");
 	String idcomponent = "component";
@@ -1208,7 +1208,7 @@ public class COSEventIT {
     public void testUC06_Nominal_SubscribeToTimeService() throws Exception {
 	// TimeConsumer
 	MainServerLauncher s = new MainServerLauncher(
-		COSEventIT.TimeConsumerServer.class, 500, "11000");
+		TestCOSEventIT.TimeConsumerServer.class, 500, "11000");
 	s.go();
 	// boucle qui vérifi que la variable temps est bien mise à jour.
 	long prev = 0;
