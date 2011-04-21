@@ -84,17 +84,17 @@ public class Menu extends JMenuBar implements ActionListener{
 				}
 				else
 					frame.getConnectionPanel().setVisible(true);
-			}
-			else {
-				JOptionPane.showMessageDialog(frame,"You must subscribe before connecting." ,"Warning Message",JOptionPane.WARNING_MESSAGE);
-			}
+			//}
+			//else {
+			//	JOptionPane.showMessageDialog(frame,"You must subscribe before connecting." ,"Warning Message",JOptionPane.WARNING_MESSAGE);
+			//}
 			
-//		}
-//		else if(e.getActionCommand().equals("About Visualizer Morocco")){
-//			
-//			AboutVisualizerMorroco avm=new AboutVisualizerMorroco();
-//			
-//		}
+		}
+		else if(e.getActionCommand().equals("About Visualizer Morocco")){
+			
+			AboutVisualizerMorroco avm=new AboutVisualizerMorroco();
+			
+		}
 		
 	}
 }
