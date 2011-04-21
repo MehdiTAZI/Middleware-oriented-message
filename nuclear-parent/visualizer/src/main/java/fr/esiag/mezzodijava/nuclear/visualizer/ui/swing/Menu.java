@@ -8,6 +8,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
+
 
 
 public class Menu extends JMenuBar implements ActionListener{
@@ -43,8 +47,21 @@ public class Menu extends JMenuBar implements ActionListener{
 
 	
 	public void actionPerformed(ActionEvent e) {
-		if(e.getActionCommand().equals("Quitter"))
+		if(e.getActionCommand().equals("Quitter")){
+			try {
+				frame.getConsumerProxy().disconnect();
+			} catch (ChannelNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (NotRegisteredException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (NotConnectedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 			System.exit(0);
+		}
 		
 		else if(e.getActionCommand().equals("Subscription")){
 				//SubscriptionPanel sp=new SubscriptionPanel(frame);
@@ -59,7 +76,7 @@ public class Menu extends JMenuBar implements ActionListener{
 		}
 		else if(e.getActionCommand().equals("Connection")){
 			
-			if(!frame.getInformationPanel().getIdComponent().getText().equals("unknown")){
+			//if(!frame.getInformationPanel().getIdComponent().getText().equals("unknown")){
 				//ConnectionPanel cp=new ConnectionPanel(frame);
 				if(indexConnection == 1){
 					frame.getConnectionPanel().initComponents();
@@ -72,12 +89,12 @@ public class Menu extends JMenuBar implements ActionListener{
 				JOptionPane.showMessageDialog(frame,"You must subscribe before connecting." ,"Warning Message",JOptionPane.WARNING_MESSAGE);
 			}
 			
-		}
-		else if(e.getActionCommand().equals("About Visualizer Morocco")){
-			
-			AboutVisualizerMorroco avm=new AboutVisualizerMorroco();
-			
-		}
+//		}
+//		else if(e.getActionCommand().equals("About Visualizer Morocco")){
+//			
+//			AboutVisualizerMorroco avm=new AboutVisualizerMorroco();
+//			
+//		}
 		
 	}
 }

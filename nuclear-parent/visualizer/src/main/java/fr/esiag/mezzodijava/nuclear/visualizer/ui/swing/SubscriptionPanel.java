@@ -171,6 +171,9 @@ public class SubscriptionPanel extends JFrame implements ActionListener{
 					
 				JOptionPane.showMessageDialog(this,e1.getMessage() ,"Error Already Registred",JOptionPane.ERROR_MESSAGE);	
 				
+				isSubscribed=true;
+				subscription.setText("Unsubscribe");
+				this.frame.getStatePanel().getSubsriptionValue().setText("Subscribed");
 			}catch (ChannelNotFoundException e1) {
 					// TODO Auto-generated catch block
 				JOptionPane.showMessageDialog(this,e1.getMessage() ,"Error Channel Not Found",JOptionPane.ERROR_MESSAGE);

@@ -40,7 +40,7 @@ public class AboutVisualizerMorroco extends JWindow implements ActionListener{
 			
 			setBounds(x, y, width, height);
 			URL url=getClass().getClassLoader().getResource("logo.gif");
-			JLabel label=new JLabel(new ImageIcon(url.getFile()));
+			JLabel label=new JLabel(new ImageIcon(url));
 
 			String s="khqhskqh s"+ "\n"+" jdjsdutjgjgjjgjgjggjgjggjgsd";
 			JLabel description=new JLabel("Morocco Visualizer");

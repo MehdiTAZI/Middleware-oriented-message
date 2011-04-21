@@ -38,8 +38,8 @@ public class SplashScreen {
 	
 	splash.setBounds(x, y, width, height);
 	URL url=getClass().getClassLoader().getResource("splash.gif");
-	System.out.println(url.getFile());
-	JLabel label=new JLabel(new ImageIcon(url.getFile()));
+	System.out.println(url.getPath());
+	JLabel label=new JLabel(new ImageIcon(url));
 	JLabel copyr=new JLabel("Copyright 2010/2011, Mezzo Di Java.",JLabel.CENTER);
 	copyr.setFont(new Font("Sans-Serif", Font.BOLD, 12));
 	p.add(label,BorderLayout.CENTER);
