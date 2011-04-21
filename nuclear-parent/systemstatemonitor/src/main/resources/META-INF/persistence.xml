@@ -14,7 +14,7 @@
  	  <properties>
  	    <!-- Propriétés de connexion -->
 		<property name="javax.persistence.jdbc.driver"   value="org.apache.derby.jdbc.EmbeddedDriver" />
-		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:C:\mezzodev\SystemStateDb\Base;create=true" />
+		<property name="javax.persistence.jdbc.url" 	 value="jdbc:derby:memory:SystemStateDb;create=true" />
 		<property name="javax.persistence.jdbc.user"     value="test" />
 		<property name="javax.persistence.jdbc.password" value="test" />
 
