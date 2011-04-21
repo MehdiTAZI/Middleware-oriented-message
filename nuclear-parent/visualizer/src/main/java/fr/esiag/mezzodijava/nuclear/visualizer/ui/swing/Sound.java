@@ -1,15 +1,18 @@
 package fr.esiag.mezzodijava.nuclear.visualizer.ui.swing;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
 
+import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -35,13 +38,7 @@ public class Sound {
 
 	}
 	
-	public Sound(URI filename){
-		analyseFile(filename);
-		//play();
-		Thread thread=new Thread(new ThreadSound());
-		thread.start();
 
-	}
 
 	public byte[] getSamples(){
 		return samples;
@@ -91,23 +88,16 @@ public class Sound {
 		line.close();
 	}
 
-	public void analyseFile(String file){
-		try{
-			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(file));
-			format = stream.getFormat();
-			samples = getSamples(stream);
-		}
-		catch (UnsupportedAudioFileException e){
-			e.printStackTrace();
-		}
-		catch (IOException e){
-			e.printStackTrace();
-		}
-	}
 
-	public void analyseFile(URI file){
+	public void analyseFile(String resourceName){
+		
 		try{
-			AudioInputStream stream = AudioSystem.getAudioInputStream(new File(file));
+			
+			//InputStream is=new Inp 
+			//InputStreamReader(getClass().getClassLoader().getResourceAsStream(""));
+			//BufferedInputStream bis=new BufferedInputStream(is);
+			
+			AudioInputStream stream = AudioSystem.getAudioInputStream(getClass().getClassLoader().getResourceAsStream(resourceName));
 			format = stream.getFormat();
 			samples = getSamples(stream);
 		}

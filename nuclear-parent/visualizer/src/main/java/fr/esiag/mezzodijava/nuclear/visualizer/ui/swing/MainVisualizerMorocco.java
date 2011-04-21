@@ -64,6 +64,8 @@ public class MainVisualizerMorocco extends JFrame implements ListSelectionListen
 	
 	
 	public MainVisualizerMorocco(String[] args) {
+											
+			sound=new Sound("alerte.wav");								
 		
 		try {
 			ec=EventClient.init(args);
@@ -260,15 +262,16 @@ public class MainVisualizerMorocco extends JFrame implements ListSelectionListen
 			public void receive(Event evt) throws ConsumerNotFoundException {
 				//sound=new Sound("alerte.wav");
 				
-				try {
-					URL url=getClass().getClassLoader().getResource("alerte.wav");
-					URI uri=new URI(url.toString());					
-					sound=new Sound(uri);
-				} catch (URISyntaxException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				//sound=new Sound(url);
+//				try {
+//					URL url=getClass().getClassLoader().getResource("alerte.wav");
+//					System.out.println(url.getPath());
+//					URI uri=new URI(url.getPath());					
+//					sound=new Sound(uri);
+//				} catch (URISyntaxException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//				//sound=new Sound(url);
 				//getClass().getClassLoader().getResource("/splash.gif"))
 				System.out.println(evt.body.type);
 				listEvents.add(evt);
