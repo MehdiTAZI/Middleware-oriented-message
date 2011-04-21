@@ -6,8 +6,8 @@ cd %WORK_DIR%\mezzo-parent
 call mvn clean install -Dmaven.test.skip -P shade
 cd %WORK_DIR%\nuclear-parent
 call mvn clean install -Dmaven.test.skip -P shade
-cd %WORK_DIR%\mezzo-manager
-call mvn clean install -Dmaven.test.skip -P shade
+rem cd %WORK_DIR%\mezzo-manager
+rem call mvn clean install -Dmaven.test.skip -P shade
 
 cd %DEMO_DIR%
 del %DEMO_DIR%\*.jar
@@ -17,6 +17,6 @@ copy %M2_REPO%\systemstatemonitor\0.0.1-SNAPSHOT\systemstatemonitor-0.0.1-SNAPSH
 copy %M2_REPO%\sensor\0.0.1-SNAPSHOT\sensor-0.0.1-SNAPSHOT.jar sensor.jar
 copy %M2_REPO%\visualizer\0.0.1-SNAPSHOT\visualizer-0.0.1-SNAPSHOT.jar visualizer.jar
 copy %M2_REPO%\mezzo-costime-server\0.0.1-SNAPSHOT\mezzo-costime-server-0.0.1-SNAPSHOT.jar mezzo-costime-server.jar
-copy %M2_REPO%\mezzo-manager\0.0.1-SNAPSHOT\mezzo-manager-0.0.1-SNAPSHOT.war mezzo-manager.war
+rem copy %M2_REPO%\mezzo-manager\0.0.1-SNAPSHOT\mezzo-manager-0.0.1-SNAPSHOT.war mezzo-manager.war
 
 pause
