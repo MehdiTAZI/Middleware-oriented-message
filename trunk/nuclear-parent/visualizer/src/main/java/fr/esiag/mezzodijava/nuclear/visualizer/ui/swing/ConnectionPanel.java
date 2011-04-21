@@ -228,6 +228,18 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 
 
 
+		public boolean isConnected() {
+			return isConnected;
+		}
+
+
+
+		public void setConnected(boolean isConnected) {
+			this.isConnected = isConnected;
+		}
+
+
+
 
 	
 
