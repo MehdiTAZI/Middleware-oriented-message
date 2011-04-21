@@ -15,12 +15,12 @@ import com.google.gwt.user.client.ui.Widget;
 String[] cmd = {"/bin/sh", "-c","./opt/mezzo/coseventserver status"};
 String[] cmd = {"/bin/sh", "-c", "/bin/ls"};*/
 
-public class AdminPanel {
+public class AdminEventPanel {
 	private HTML moreInfo;
 	// (1) Create the client proxy
 	private final ShellExecuterAsync defaultShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);	
 	private final ShellExecuterAsync ShellExectuer = (ShellExecuterAsync) GWT.create(ShellExecuter.class);
-	public AdminPanel()
+	public AdminEventPanel()
 	{
 
 	}
@@ -29,8 +29,11 @@ public class AdminPanel {
 		  // (2) Create an asynchronous callback to handle the result.
 		  final AsyncCallback<String> defaultCallback = new AsyncCallback<String>() {
 			public void onFailure(Throwable arg0) {
+				moreInfo.setText("Error RPC CALL");
 			}
-			public void onSuccess(String arg0) {	
+			
+			public void onSuccess(String arg0) {
+				moreInfo.setText("Server Started");
 			}
 		  };
 		  final AsyncCallback<String> callback = new AsyncCallback<String>() {
@@ -54,12 +57,12 @@ public class AdminPanel {
 		Button startButton = new Button("Demarrer CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (3) Make the call
-				  defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","start"}, callback);
+				  defaultShellExectuer.execute(new String[]{"/opt/mezzo/coseventserver","start"}, defaultCallback);
 			}});
 
 		startButton.ensureDebugId("cwBasicButton-start");
 
-		Button stopButton = new Button("Arreter Cos-Server", new ClickHandler() {
+		Button stopButton = new Button("Arreter CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				 // (3) Make the call
 				ShellExectuer.execute(new String[]{"bash","/opt/mezzo/coseventserver","stop"}, callback);
@@ -72,7 +75,7 @@ public class AdminPanel {
 		tabPanel.add(stopButton, tabTitles[1]);
 
 		// Add a tab
-		Button statButton = new Button("Etat Cos-Server", new ClickHandler() {
+		Button statButton = new Button("Etat CosEvent", new ClickHandler() {
 			public void onClick(ClickEvent arg0) {
 				  // (2) Create an asynchronous callback to handle the result.
 				  

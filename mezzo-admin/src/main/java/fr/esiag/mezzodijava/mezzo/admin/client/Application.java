@@ -20,12 +20,19 @@ import com.google.gwt.user.client.ui.Widget;
 public class Application
     implements EntryPoint
 {
-	private AdminPanel adminPanel = new AdminPanel();
-	private String adminPanelTitle ="Administration";
-	private String monitoringPanelTitle ="Monitoring";
-	private String homePageLabel ="Bienvenue sur la console d'administration de mezzo";
+	private AdminEventPanel adminPanel = new AdminEventPanel();
+	private AdminTimePanel adminPanelTime = new AdminTimePanel();
+	
+	private String adminPanelTitle ="Administration Serveur D'evenement";
+	private String adminPanelTitleTime ="Administration Serveur de temps";
+	
+	private String homePageLabel ="Bienvenue sur la console d'administration de mezzo\n\n";
+	
 	VerticalPanel vadminPanel;
+	VerticalPanel vadminPanelTime;
+	
 	DecoratorPanel decorationAdminPanel;
+	DecoratorPanel decorationAdminPanelTime;
 	
   /**
    * This is the entry point method.
@@ -36,11 +43,17 @@ public class Application
 	  	final Label label = new Label (homePageLabel);
 	 
 	  	Widget wiPanel = adminPanel.onInitialize();
+	  	Widget wiPanelTime = adminPanelTime.onInitialize();
 	  	
 		DisclosurePanel advancedAdminPanel = new DisclosurePanel(adminPanelTitle);
 		advancedAdminPanel.setAnimationEnabled(true);
 	    advancedAdminPanel.ensureDebugId("cwDisclosurePanel"+adminPanelTitle);
 	    advancedAdminPanel.setContent(wiPanel);
+	    
+	    DisclosurePanel advancedAdminPanelTime = new DisclosurePanel(adminPanelTitleTime);
+		advancedAdminPanelTime.setAnimationEnabled(true);
+	    advancedAdminPanelTime.ensureDebugId("cwDisclosurePanel"+adminPanelTitleTime);
+	    advancedAdminPanelTime.setContent(wiPanelTime);
 	  
 		/*DisclosurePanel advancedMonitoringPanel = new DisclosurePanel(monitoringPanelTitle);
 		advancedMonitoringPanel.setAnimationEnabled(true);
@@ -50,6 +63,7 @@ public class Application
 	  	
 		// Create a tab panel
 		DecoratedTabPanel MenuPannel = new DecoratedTabPanel();
+		
 		MenuPannel.setWidth("500px");
 		
 		MenuPannel.add(advancedAdminPanel, adminPanelTitle);
@@ -57,11 +71,26 @@ public class Application
 	  	MenuPannel.setAnimationEnabled(true);
 	  	MenuPannel.selectTab(0);
 	  	
+	  	
+	 // Create a tab panel
+		DecoratedTabPanel MenuPannelTime = new DecoratedTabPanel();
+		
+		MenuPannelTime.setWidth("500px");
+		
+		MenuPannelTime.add(advancedAdminPanelTime, adminPanelTitleTime);
+		//MenuPannel.add(advancedMonitoringPanel, monitoringPanelTitle);
+		MenuPannelTime.setAnimationEnabled(true);
+		MenuPannelTime.selectTab(0);
+	  	
 
 	   
 	    vadminPanel = new VerticalPanel();
 		vadminPanel.add(label);
 		vadminPanel.add(MenuPannel);
+		vadminPanel.add(MenuPannelTime);
+		
+		
+		
 
 			// Wrap the contents in a DecoratorPanel
 		    decorationAdminPanel = new DecoratorPanel();
