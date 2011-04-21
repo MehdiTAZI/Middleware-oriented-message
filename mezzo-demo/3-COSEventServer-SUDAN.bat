@@ -1,4 +1,4 @@
 @echo off
 TITLE 3 - COSEvent Server SUDAN
-call jaco -jar mezzo-cosevent-server.jar SUDAN_SERVER
+call jaco -Djacorb.home=C:\mezzodev\jacorb-2.3.1 -classpath "c:\mezzodev\mezzo-demo;mezzo-cosevent-server.jar" fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer SUDAN_SERVER
 pause
