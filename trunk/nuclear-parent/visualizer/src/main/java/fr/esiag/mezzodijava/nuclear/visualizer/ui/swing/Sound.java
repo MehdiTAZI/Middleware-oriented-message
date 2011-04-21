@@ -34,6 +34,14 @@ public class Sound {
 		thread.start();
 
 	}
+	
+	public Sound(URI filename){
+		analyseFile(filename);
+		//play();
+		Thread thread=new Thread(new ThreadSound());
+		thread.start();
+
+	}
 
 	public byte[] getSamples(){
 		return samples;

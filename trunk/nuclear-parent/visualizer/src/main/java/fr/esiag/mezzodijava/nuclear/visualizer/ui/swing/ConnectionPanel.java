@@ -181,6 +181,7 @@ public class ConnectionPanel extends JFrame implements ActionListener{
 				try {
 					isConnected=false;
 					frame.getConsumerProxy().disconnect();
+					
 					JOptionPane.showMessageDialog(
 							this,
 							"The Component "+ idComponent.getText() +" is successfully disconnected \n to channel "+channelName.getText(),

@@ -8,6 +8,8 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -250,15 +252,25 @@ public class MainVisualizerMorocco extends JFrame implements ListSelectionListen
 		 private MainVisualizerMorocco frame;
 		 private int changeStateCounter=1;
 		 private int alerteCounter=1;
+		 
 		 public Callback(MainVisualizerMorocco frame) {
 			this.frame=frame;
 		}
 			@Override
 			public void receive(Event evt) throws ConsumerNotFoundException {
 				//sound=new Sound("alerte.wav");
-				URL url=getClass().getClassLoader().getResource("alerte.wav");
-				sound=new Sound(url.getFile());
+				
+				try {
+					URL url=getClass().getClassLoader().getResource("alerte.wav");
+					URI uri=new URI(url.toString());					
+					sound=new Sound(uri);
+				} catch (URISyntaxException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				//sound=new Sound(url);
 				//getClass().getClassLoader().getResource("/splash.gif"))
+				System.out.println(evt.body.type);
 				listEvents.add(evt);
 				if(evt.header.priority == 2)
 					frame.statPanel.getNbrChangeStateValue().setText("   "+changeStateCounter++);
