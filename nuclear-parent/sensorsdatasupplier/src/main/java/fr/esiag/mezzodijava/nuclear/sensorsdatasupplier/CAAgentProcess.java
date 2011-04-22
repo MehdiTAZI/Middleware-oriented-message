@@ -1,25 +1,9 @@
 package fr.esiag.mezzodijava.nuclear.sensorsdatasupplier;
 
-import java.io.IOException;
-import java.util.Properties;
 import java.util.Scanner;
 
-import org.omg.CORBA.ORB;
-import org.omg.CORBA.Object;
-import org.omg.CORBA.ORBPackage.InvalidName;
-import org.omg.CosNaming.NamingContextExt;
-import org.omg.CosNaming.NamingContextExtHelper;
-import org.omg.CosNaming.NamingContextPackage.CannotProceed;
-import org.omg.CosNaming.NamingContextPackage.NotFound;
-import org.omg.PortableServer.POA;
-import org.omg.PortableServer.POAHelper;
-import org.omg.PortableServer.POAManagerPackage.AdapterInactive;
-
-import fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAlreadyExistsException;
-import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
-import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 
@@ -28,7 +12,7 @@ public class CAAgentProcess {
     public CAAgentProcess(String args[]) {
 	try {
 	    EventClient ec = EventClient.init(args);
-	    System.out.println("***** UC07 - US76 - Nominal - Creation d'Event Channel *****");
+	    System.out.println("***** Creation d'Event Channel *****");
 	    String nuclearChannelName = "nuclear sensor";
 	    System.out.println("Asking creation of Channel \""
 		    + nuclearChannelName + "\" on server \"" + args[0]
@@ -83,8 +67,8 @@ public class CAAgentProcess {
 		System.out.println("Error : " + e.toString());
 	    }*/
 	    
-	    pause("Appuyer sur une touche pour reduire la capacite du canal injector");
-	    System.out.println("\n***** UC07 - US167 - exceptionnnel 3 - reduire la capacite d'un canal *****");
+	    //pause("Mise en pause");
+	    /*System.out.println("\n***** UC07 - US167 - exceptionnnel 3 - reduire la capacite d'un canal *****");
 	    try {
 		System.out.println("Asking for modification of Channel \""
 			    + injectorSystemChannelName + "\" on server \"" + args[1]
@@ -101,7 +85,7 @@ public class CAAgentProcess {
 		System.out.println("Error : " + e.toString());
 	    } catch (CannotReduceCapacityException e) {
 		System.out.println("Error : " + e.toString());
-	    }
+	    }*/
 	    
 	    /*pause("Appuyer sur une touche pour supprimer le canal soudan");
 	    System.out.println("\n***** UC07 - US160 - alternatif 1 - supprimer un canal *****");
