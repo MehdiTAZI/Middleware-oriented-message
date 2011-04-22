@@ -377,8 +377,8 @@ public class TestCOSEventIT {
 		ev = consumerProxy.pull(hasEvent);
 		System.out.println(hasEvent.value);
 		if (hasEvent.value) {
-		    System.out.println("add_event");
 		    messagesRecu.add(ev);
+		    System.out.println("add_event " + Thread.currentThread().getName() + " " + messagesRecu.size());
 		}
 	    }
 	    System.out.println("ALL DONE CONSUMER"
