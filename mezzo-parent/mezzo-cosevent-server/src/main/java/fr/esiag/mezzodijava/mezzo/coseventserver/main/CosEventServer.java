@@ -28,6 +28,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException
 import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CallbackTimeImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CosInfoCollectorImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.EventServerChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.Channel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
@@ -36,6 +37,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventServer;
 import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
 import fr.esiag.mezzodijava.mezzo.libclient.TimeClient;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TimeClientException;
+import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorPOATie;
 import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
 /**
@@ -123,7 +125,11 @@ public class CosEventServer {
 	    nc.rebind(nc.to_name("eventServer/"+eventServerName), poa
 		    .servant_to_reference(new EventServerChannelAdminPOATie(
 			    eventServerChannelAdmin)));
-
+	    
+	    CORBAUtils.createContext(nc, "eventMonitor");
+	    nc.rebind(nc.to_name("eventMonitor/"+eventServerName), poa
+			    .servant_to_reference(new CosInfoCollectorPOATie(new CosInfoCollectorImpl())));
+			    
 	    // Subscribe to COSTime
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
