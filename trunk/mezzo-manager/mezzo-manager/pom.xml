@@ -21,6 +21,12 @@
 	</properties>
 
 	<dependencies>
+	
+		<dependency>
+			<groupId>com.googlecode.gchart</groupId>
+			<artifactId>gchart</artifactId>
+			<version>2.5</version>
+		</dependency>
 		<dependency>
    			<groupId>com.smartgwt</groupId>
    			<artifactId>smartgwt</artifactId>
@@ -54,7 +60,11 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 		</dependency>
-		
+		<dependency>
+  			<groupId>jacorb</groupId>
+  			<artifactId>jacorb</artifactId>
+  			<version>2.3.0jboss.patch6-brew</version>
+		</dependency>		
 		<dependency>
 			<groupId>org.mortbay.jetty</groupId>
 			<artifactId>jetty</artifactId>
@@ -232,7 +242,16 @@
          <name>smartclient.com</name>
          <url>http://www.smartclient.com/maven2</url>
      </repository>
-     
+  <repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.com/maven2/</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
 		<repository>
 			<id>fuse</id>
 			<url>http://repo.fusesource.com/maven2/</url>
