@@ -361,7 +361,7 @@ public class TestCOSEventIT {
     	    	Thread.sleep(new Long(args[0]).longValue());
     	    }
     	    consumerProxy.connect();
-    	    Thread.sleep(25000);
+    	    Thread.sleep(35000);
     	    // begin of pull consumer 
     	    Event ev;
     	    BooleanHolder hasEvent = new BooleanHolder(true);
