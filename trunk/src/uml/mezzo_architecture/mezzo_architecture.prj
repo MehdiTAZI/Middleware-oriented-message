@@ -1,0 +1,199 @@
+format 76
+"mezzo_architecture"
+  revision 1
+  modified_by 2 "Franck"
+
+
+  
+  // class settings
+  default_attribute_visibility private default_relation_visibility private default_operation_visibility public
+  //class diagram settings
+  draw_all_relations yes hide_attributes no hide_operations no hide_getset_operations no show_members_full_definition no show_members_visibility no show_members_stereotype no show_members_context no show_members_multiplicity no show_members_initialization no show_attribute_modifiers no member_max_width 127 show_parameter_dir yes show_parameter_name yes package_name_in_tab no class_drawing_mode natural drawing_language uml show_context_mode no auto_label_position yes show_relation_modifiers no show_relation_visibility no show_infonote no shadow yes show_stereotype_properties no
+  //use case diagram settings
+  package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes class_drawing_mode actor shadow yes show_stereotype_properties no
+  //sequence diagram settings
+  show_full_operations_definition no write_horizontally yes class_drawing_mode natural drawing_language uml draw_all_relations yes shadow yes show_stereotype_properties no show_class_context_mode no show_msg_context_mode no
+  //collaboration diagram settings
+  show_full_operations_definition no show_hierarchical_rank no write_horizontally yes class_drawing_mode natural drawing_language uml package_name_in_tab no show_context no show_msg_context no draw_all_relations yes shadow yes show_stereotype_properties no
+  //object diagram settings
+   write_horizontally yes package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes shadow yes show_stereotype_properties no
+  //component diagram settings
+  package_name_in_tab no show_context no auto_label_position yes draw_all_relations yes shadow yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no
+  //deployment diagram settings
+  package_name_in_tab no show_context no write_horizontally yes auto_label_position yes draw_all_relations yes shadow yes
+  draw_component_as_icon no show_component_req_prov no show_component_rea no show_stereotype_properties no
+  //state diagram settings
+  package_name_in_tab no show_context no auto_label_position yes write_trans_label_horizontally yes show_trans_definition no draw_all_relations yes shadow yes
+  show_activities yes region_horizontally yes drawing_language uml show_stereotype_properties no
+  //activity diagram settings
+  package_name_in_tab no show_context no show_opaque_action_definition no auto_label_position yes write_flow_label_horizontally no draw_all_relations yes shadow yes
+  show_infonote yes drawing_language uml show_stereotype_properties no
+  
+  class_color yellow duration_color transparent continuation_color gray note_color blue fragment_color transparent subject_color transparent usecase_color yellow package_color transparent component_color green artifact_color green deploymentnode_color gray state_color yellow stateaction_color transparent activity_color transparent activityregion_color transparent activitypartition_color transparent activityaction_color transparent parameterpin_color white 
+  font_size 8
+  diagram_format A4
+
+  image_root_dir ""
+
+  mark_for_import
+  
+  componentview 128002 "composant"
+    //component diagram settings
+    package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    componentdiagram 128002 "DIAGRAMME DE COMPOSANTS"
+      package_name_in_tab default show_context default auto_label_position default draw_all_relations no shadow default
+      draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    component 128002 "coseventserver"
+      stereotype "daemon shell"
+      simplerelation 128130
+	-_->
+	  on component_ref 128642 // coseventserver.jar
+      end
+
+    end
+
+    component 128130 "cosevent_watcher"
+      stereotype "shell"
+      simplerelation 129154
+	-_->
+	  on component_ref 128002 // coseventserver
+      end
+    end
+
+    component 128258 "costime_watcher"
+      stereotype "shell"
+      simplerelation 129282
+	-_->
+	  on component_ref 129026 // costimeserver
+      end
+    end
+
+    component 128386 "ns-wrapper"
+      stereotype "daemon shell"
+      simplerelation 128898
+	-_->
+	  on component_ref 128514 // jacorb-2.3.1
+      end
+    end
+
+    component 128514 "jacorb-2.3.1"
+      stereotype "ORB"
+    end
+
+    component 128642 "coseventserver.jar"
+      stereotype "main jar"
+      simplerelation 128770
+	-_->
+	  on component_ref 128514 // jacorb-2.3.1
+      end
+
+      simplerelation 130050
+	-_->
+	  on component_ref 130050 // eventserver.properties
+      end
+    end
+
+    component 128770 "costimeserver.jar"
+      stereotype "main jar"
+      simplerelation 128514
+	-_->
+	  on component_ref 128898 // timeserver.properties
+      end
+
+      simplerelation 128642
+	-_->
+	  on component_ref 128514 // jacorb-2.3.1
+      end
+    end
+
+    component 128898 "timeserver.properties"
+      stereotype "properties"
+    end
+
+    component 129026 "costimeserver"
+      stereotype "daemon shell"
+      simplerelation 129410
+	-_->
+	  on component_ref 128770 // costimeserver.jar
+      end
+    end
+
+    component 129154 "visualizer.jar"
+      stereotype "nuclear mock main jar"
+    end
+
+    component 129282 "sensorsdatasupplier.jar"
+      stereotype "nuclear mock main jar"
+      simplerelation 129922
+	-_->
+	  on component_ref 129410 // sensor
+      end
+    end
+
+    component 129410 "sensor"
+      stereotype "nuclear mock main jar"
+      simplerelation 129538
+	-_->
+	  on component_ref 129666 // temperature.txt
+      end
+
+      simplerelation 129666
+	-_->
+	  on component_ref 129794 // radioactivite.txt
+      end
+
+      simplerelation 129794
+	-_->
+	  on component_ref 129922 // pression.txt
+      end
+    end
+
+    component 129538 "systemstatemonitor"
+      stereotype "nuclear mock main jar"
+    end
+
+    component 129666 "temperature.txt"
+      stereotype "text file"
+    end
+
+    component 129794 "radioactivite.txt"
+      stereotype "text file"
+    end
+
+    component 129922 "pression.txt"
+      stereotype "text file"
+    end
+
+    component 130050 "eventserver.properties"
+      stereotype "properties"
+    end
+  end
+
+  deploymentview 128002 "deploiement_miage"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    deploymentdiagram 128130 "DIAGRAMME DE DEPLOIEMENT ESIAG"
+      package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations no shadow default
+      draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+      size A4-Landscape
+    end
+
+    deploymentnode 128002 "mezzo1"
+    end
+
+    deploymentnode 128130 "mezzo2"
+    end
+
+    deploymentnode 128258 "mezzo3"
+    end
+
+    deploymentnode 128386 "LAN"
+    end
+  end
+end

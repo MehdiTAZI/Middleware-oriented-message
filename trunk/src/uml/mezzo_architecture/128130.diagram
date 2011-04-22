@@ -1,0 +1,122 @@
+format 76
+
+deploymentnodecanvas 128002 deploymentnode_ref 128002 // mezzo1
+  name "194.214.13.N1"
+  xyzwh 22 36 2000 353 343
+end
+deploymentnodecanvas 128130 deploymentnode_ref 128130 // mezzo2
+  name "194.214.13.N2"
+  xyzwh 790 36 2000 353 343
+end
+deploymentnodecanvas 128258 deploymentnode_ref 128258 // mezzo3
+  name "194.214.13.N3"
+  xyzwh 408 395 2000 353 343
+end
+deploymentnodecanvas 129666 deploymentnode_ref 128386 // LAN
+  name "194.214.13.0/24"
+  xyzwh 523 174 2000 123 65
+end
+componentcanvas 130178 component_ref 129026 // costimeserver
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 980 186 2005 155 47
+end
+componentcanvas 130306 component_ref 128770 // costimeserver.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 995 240 2011 125 47
+end
+componentcanvas 130562 component_ref 128258 // costime_watcher
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 1004 135 2011 107 47
+end
+componentcanvas 130818 component_ref 128002 // coseventserver
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 793 186 2017 155 47
+end
+componentcanvas 130946 component_ref 128642 // coseventserver.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 808 240 2023 125 47
+end
+componentcanvas 131202 component_ref 128130 // cosevent_watcher
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 812 135 2023 117 47
+end
+componentcanvas 131458 component_ref 129538 // systemstatemonitor
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 870 318 2005 205 47
+end
+componentcanvas 131586 component_ref 128386 // ns-wrapper
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 39 77 2005 155 47
+end
+componentcanvas 131714 component_ref 128514 // jacorb-2.3.1
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 919 78 2029 107 47
+end
+componentcanvas 132226 component_ref 128514 // jacorb-2.3.1
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 244 78 2005 107 47
+end
+componentcanvas 132354 component_ref 129154 // visualizer.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 80 307 2005 205 47
+end
+componentcanvas 132482 component_ref 128002 // coseventserver
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 513 553 2005 155 47
+end
+componentcanvas 132610 component_ref 128642 // coseventserver.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 528 603 2005 125 47
+end
+componentcanvas 132738 component_ref 128130 // cosevent_watcher
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 532 499 2010 117 47
+end
+componentcanvas 132866 component_ref 129282 // sensorsdatasupplier.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 488 670 2005 205 47
+end
+componentcanvas 132994 component_ref 129410 // sensor
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 85 252 2005 205 47
+end
+componentcanvas 133122 component_ref 128514 // jacorb-2.3.1
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 537 441 2015 107 47
+end
+note 133250 "SUDAN"
+  font bold_italic  xyzwh 797 551 2000 97 35
+note 133378 "INDONESIA"
+  font bold_italic  xyzwh 928 401 2000 97 35
+note 133762 "MORROCO"
+  font bold_italic  xyzwh 133 408 2000 97 35
+note 134018 "ARGENTINA"
+  font bold_italic  xyzwh 689 13 2000 97 35
+note 134402 "ALASKA"
+  font bold_italic  xyzwh 805 670 2000 97 35
+image 134786 "C:/mezzodev/uml/mezzo_architecture/MEZ-logo.png" xyz 13 482 2000 end
+textcanvas 134914 "Mezzo di Java
+--
+Démonstration du 27/ Avril 2010
+--
+Diagramme de déploiement"
+  font large_bold  xyzwh 18 591 2000 363 163
+line 129794 ----
+  from ref 128002 z 2001 to ref 129666
+line 129922 ----
+  from ref 128130 z 2001 to ref 129666
+line 130050 ----
+  from ref 128258 z 2001 to ref 129666
+line 133506 -_-_
+  from ref 133378 z 2006 to ref 131458
+line 133634 -_-_
+  from ref 133250 z 2006 to ref 132482
+line 133890 -_-_
+  from ref 133762 z 2006 to ref 132354
+line 134146 -_-_
+  from ref 134018 z 2018 to ref 130818
+line 134274 -_-_
+  from ref 134018 z 2006 to ref 130178
+line 134530 -_-_
+  from ref 134402 z 2006 to ref 132866
+end
