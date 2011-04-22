@@ -361,7 +361,7 @@ public class TestCOSEventIT {
     	    	Thread.sleep(new Long(args[0]).longValue());
     	    }
     	    consumerProxy.connect();
-    	    Thread.sleep(15000);
+    	    Thread.sleep(25000);
     	    // begin of pull consumer 
     	    Event ev;
     	    BooleanHolder hasEvent = new BooleanHolder(true);
@@ -593,7 +593,7 @@ public class TestCOSEventIT {
 	    };
 	    t.start();
 	}
-	Thread.sleep(5000);
+	Thread.sleep(10000);
 	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		recu.intValue());
@@ -1744,7 +1744,7 @@ public class TestCOSEventIT {
 		    SupplierPullServer.class, 200, (String[]) null);
 	    s.go();
 	}
-	Thread.sleep(15000);
+	Thread.sleep(25000);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		messagesRecu.size());
 	System.out.println("fini");
