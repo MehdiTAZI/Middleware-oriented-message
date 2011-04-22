@@ -1,6 +1,6 @@
 format 76
 "mezzo_architecture"
-  revision 1
+  revision 2
   modified_by 2 "Franck"
 
 
@@ -54,7 +54,6 @@ format 76
 	-_->
 	  on component_ref 128642 // coseventserver.jar
       end
-
     end
 
     component 128130 "cosevent_watcher"
@@ -188,6 +187,10 @@ format 76
     end
 
     deploymentnode 128130 "mezzo2"
+      simplerelation 136578
+	-_->
+	  on deploymentnode_ref 134914 // ntp.u-pec.fr
+      end
     end
 
     deploymentnode 128258 "mezzo3"
@@ -195,5 +198,10 @@ format 76
 
     deploymentnode 128386 "LAN"
     end
+
+    deploymentnode 134914 "ntp.u-pec.fr"
+      stereotype "NTP"
+    end
+
   end
 end
