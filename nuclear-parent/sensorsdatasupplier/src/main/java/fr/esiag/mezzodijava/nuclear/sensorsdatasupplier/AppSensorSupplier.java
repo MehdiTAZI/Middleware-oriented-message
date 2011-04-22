@@ -46,10 +46,10 @@ public class AppSensorSupplier {
 
 	Event e = null;
 
-	Random random = new Random();
-	int randomNumber = random.nextInt() * 50;
-	if (randomNumber < 5)
-	    return createStringEvent(s);
+//	Random random = new Random();
+//	int randomNumber = random.nextInt() * 50;
+//	if (randomNumber < 5)
+//	    return createStringEvent(s);
 	if (type.toLowerCase().trim().equals("temperature")) {
 	    Temperature t = new Temperature(value, "Celsius");
 	    e = EventFactory.createEventObject(1, 5000, t, "Temperature");
@@ -57,7 +57,7 @@ public class AppSensorSupplier {
 	    Pression p = new Pression(value, "Pascal");
 	    e = EventFactory.createEventObject(1, 5000, p, "Pression");
 	} else if (type.toLowerCase().trim().equals("radioactivite")) {
-	    RadioActivite ra = new RadioActivite(value, "SIEVERT");
+	    RadioActivite ra = new RadioActivite(value, "Becquerel");
 	    e = EventFactory.createEventObject(1, 5000, ra, "RadioActivite");
 	}
 
