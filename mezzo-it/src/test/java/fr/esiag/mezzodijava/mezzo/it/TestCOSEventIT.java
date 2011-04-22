@@ -593,7 +593,7 @@ public class TestCOSEventIT {
 	    };
 	    t.start();
 	}
-	Thread.sleep(10000);
+	Thread.sleep(20000);
 	// esca.destroyChannel(idChannel);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		recu.intValue());
@@ -1744,7 +1744,7 @@ public class TestCOSEventIT {
 		    SupplierPullServer.class, 200, (String[]) null);
 	    s.go();
 	}
-	Thread.sleep(25000);
+	Thread.sleep(40000);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		messagesRecu.size());
 	System.out.println("fini");
