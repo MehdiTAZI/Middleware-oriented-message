@@ -1745,7 +1745,7 @@ public class TestCOSEventIT {
 		    SupplierPullServer.class, 200, (String[]) null);
 	    s.go();
 	}
-	Thread.sleep(20000);
+	Thread.sleep(60000);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		messagesRecu.size());
 	System.out.println("fini");
