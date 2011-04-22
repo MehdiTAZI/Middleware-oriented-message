@@ -1739,6 +1739,7 @@ public class TestCOSEventIT {
 	    throws Exception {
 	idChannel = esca.createChannel("MEZZO", 20);
 	Thread.sleep(1000);
+	envoye = 0;
 	for (int i = 0; i < 10; i++) {
 	    MainServerLauncher s = new MainServerLauncher(
 		    ConsumerPullServer.class, 200, (String[]) null);
