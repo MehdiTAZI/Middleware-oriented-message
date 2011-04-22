@@ -4,12 +4,15 @@ package fr.esiag.mezzodijava.mezzo.manager.server;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
-import fr.esiag.mezzodijava.mezzo.coseventserver.impl.CosInfoCollectorImpl;
+
+import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.ManagerClient;
-import fr.esiag.java.client.AuthenticationService;
-import fr.esiag.java.shared.ChannelInfosCollector;
-import fr.esiag.java.shared.Message;
+
+import fr.esiag.mezzodijava.mezzo.manager.client.AuthenticationService;
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
+import fr.esiag.mezzodijava.mezzo.manager.shared.Message;
 import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollector;
+import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;
 
 public class AuthenticationServiceImpl extends RemoteServiceServlet implements AuthenticationService {
 	private static final long serialVersionUID = 1L;
@@ -17,11 +20,16 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements A
 	public ChannelInfosCollector[] authenticate(String loging, String pwd) {
 		ChannelInfosCollector[] channelsInfo=null;
 		try{
-		ManagerClient manager=ManagerClient.init(new String[]{"-ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService",
+		EventClient manager=EventClient.init(null);/*(new String[]{"-ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService",
 				"-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
 				"-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
-				"-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton"});	
-		CosInfoCollector managerInfo=manager.resolveManagerService("CosInfoCollector");
+				"-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton"});*/	
+		
+		CosInfoCollector managerInfo=CosInfoCollectorHelper.narrow(
+				manager.resolveChannelByTopic("SUDAN_SERVER"));
+		
+		System.out.println("I 11111");
+		
 		channelsInfo=new ChannelInfosCollector[managerInfo.getChannelsInfos().length];
 		int i=0;
 		for(fr.esiag.mezzodijava.mezzo.monitoring.ChannelInfosCollector channelInfo:managerInfo.getChannelsInfos()){

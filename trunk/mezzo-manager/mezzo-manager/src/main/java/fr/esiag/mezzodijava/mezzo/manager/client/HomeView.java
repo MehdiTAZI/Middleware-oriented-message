@@ -3,11 +3,8 @@ package fr.esiag.mezzodijava.mezzo.manager.client;
 
 
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.google.gwt.user.client.ui.Widget;
-import com.smartgwt.client.data.Criteria;
 import com.smartgwt.client.types.Alignment;
 import com.smartgwt.client.util.SC;
 import com.smartgwt.client.widgets.Canvas;
@@ -16,30 +13,24 @@ import com.smartgwt.client.widgets.ImgButton;
 import com.smartgwt.client.widgets.Window;
 import com.smartgwt.client.widgets.events.ClickEvent;
 import com.smartgwt.client.widgets.events.ClickHandler;
-import com.smartgwt.client.widgets.events.CloseClickHandler;
-import com.smartgwt.client.widgets.events.CloseClientEvent;
-import com.smartgwt.client.widgets.form.DynamicForm;
 import com.smartgwt.client.widgets.grid.ListGrid;
 import com.smartgwt.client.widgets.grid.ListGridField;
 import com.smartgwt.client.widgets.grid.ListGridRecord;
 
-import fr.esiag.java.shared.ChannelInfosCollector;
-import fr.esiag.java.shared.Message;
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
+import fr.esiag.mezzodijava.mezzo.manager.shared.Message;
 
 
 
 public class HomeView extends View{
-	  Window winModal = null;
-	  ListGrid ChannelGrid =null;
-	  private boolean winModalIsActive=false;
-	
 	private ChannelInfosCollector[] channelInfosCollector=null;
 	private Widget content=null;
 	private ListGrid messageGrid;
+	ListGrid ChannelGrid =null;
 	public HomeView(Application view) {
 		super(view);
 	}
-	 Chart chart=null;
+
 	@Override
 	public Widget getContent() {
 		if(content==null)
@@ -48,12 +39,11 @@ public class HomeView extends View{
 	}
 
 	private Widget build() {
-		 ChannelGrid = new ListGrid() {  
+		 ListGrid ChannelGrid = new ListGrid() {  
             @Override  
             protected Canvas createRecordComponent(final ListGridRecord record, Integer colNum) {  
            	 String fieldName = this.getFieldName(colNum);  
-                
-           	 	if (fieldName.equals("buttonInfo")) {  
+                 if (fieldName.equals("buttonInfo")) {  
                     IButton button = new IButton();  
                     button.setHeight(18);  
                     button.setWidth(65);                      
@@ -63,8 +53,7 @@ public class HomeView extends View{
 
 						public void onClick(
 								com.smartgwt.client.widgets.events.ClickEvent event) {
-							System.out.println("Click Info Button !!!");
-							ChannelInfosCollector channelInfo=new ChannelInfosCollector(); 
+							ChannelInfosCollector channelInfo=null; 
 							for(ChannelInfosCollector info:channelInfosCollector){
 								if(record.getAttribute("topic").equals(info.topic))
 									channelInfo=info;
@@ -75,69 +64,28 @@ public class HomeView extends View{
 								data[i]=new MessageRecord(message);
 								i++;
 							}
-							messageGrid.setData(data);
 						}
 
                     });  
                     return button;  
-                } else  if (fieldName.equals("iconField")) {    
+                } /*else  if (fieldName.equals("iconField")) {    
                 	ImgButton chartImg=new ImgButton(); 
                 	chartImg.setSrc("charts.png");
                 	 chartImg.setHeight(16);  
                      chartImg.setWidth(16);  
                 	chartImg.addClickHandler(new ClickHandler() {
 						public void onClick(ClickEvent event) {
-							//SC.say("Chart Icon Clicked for channel : " + record.getAttribute("topic"));
-							if(!winModalIsActive)
-							{
-								winModalIsActive=true;
-								winModal = new Window();
-								DynamicForm form = new DynamicForm(); 
-								String[]channels=new String[channelInfosCollector.length];
-								int i=0;
-								for(ChannelInfosCollector info:channelInfosCollector){
-									channels[i]=info.topic;
-									i++;
-								}
-								int valeur[][]=new int[channelInfosCollector.length][4];
-								int k=0;
-								for(ChannelInfosCollector info:channelInfosCollector){
-										valeur[k][0]=info.consumersConnected;
-										valeur[k][1]=info.consumersSubscribed;
-										valeur[k][2]=info.suppliersConnected;
-										valeur[k][3]=info.nbQueueEvents;
-										k++;
-								}
-								chart=new Chart(channels,valeur);
-								chart.update();
-								winModal.setTitle("Channels Info");
-								winModal.setAutoSize(true);
-								winModal.addItem(chart);
-								winModal.setLeft(400);
-								winModal.setTop(200);
-								//winModal.centerInPage();
-								winModal.addCloseClickHandler(new CloseClickHandler() {			
-									@Override
-									public void onCloseClick(CloseClientEvent event) {
-										winModalIsActive=false;
-										chart.setVisible(false);
-										winModal.destroy();
-										
-									}
-								});
-								winModal.show();
-							}
-							
+							SC.say("Chart Icon Clicked for channel : " + record.getAttribute("topic"));
 						}
 					});
                 	return chartImg;  
-                }
+                }*/
                 else return null;
             }  
         };  
-        ChannelGrid.setCanRemoveRecords(false); 
         ChannelGrid.setShowRecordComponents(true);          
-        ChannelGrid.setShowRecordComponentsByCell(true);    
+        ChannelGrid.setShowRecordComponentsByCell(true);  
+        ChannelGrid.setCanRemoveRecords(true);  
         ChannelGrid.setWidth(785);  
         ChannelGrid.setHeight(230);  
         ChannelGrid.setShowAllRecords(true);  
@@ -180,7 +128,7 @@ public class HomeView extends View{
         };  
         messageGrid.setShowRecordComponents(true);          
         messageGrid.setShowRecordComponentsByCell(true);  
-        messageGrid.setCanRemoveRecords(false); 
+        messageGrid.setCanRemoveRecords(true);  
   
         messageGrid.setWidth(785);  
         messageGrid.setHeight(220);  
@@ -232,21 +180,21 @@ public class HomeView extends View{
 		         return window;  
 		     }
 
-	@Override
-	public void setData(ChannelInfosCollector[] channelInfosCollector) {
-		this.channelInfosCollector=new ChannelInfosCollector[channelInfosCollector.length];
-		this.channelInfosCollector=channelInfosCollector;
-	}
+	 @Override
+		public void setData(ChannelInfosCollector[] channelInfosCollector) {
+			this.channelInfosCollector=new ChannelInfosCollector[channelInfosCollector.length];
+			this.channelInfosCollector=channelInfosCollector;
+		}
 
-	@Override
-	public void setContent() {
-		ChannelRecord[] channelData=new ChannelRecord[channelInfosCollector.length];
-        int i=0;
-        for(ChannelInfosCollector info:channelInfosCollector){
-        	channelData[i]=new ChannelRecord(info);
-        	i++;
-        }
-        ChannelGrid.setData(channelData);
-	} 
-	
-}
+		@Override
+		public void setContent() {
+			ChannelRecord[] channelData=new ChannelRecord[channelInfosCollector.length];
+	        int i=0;
+	        for(ChannelInfosCollector info:channelInfosCollector){
+	        	channelData[i]=new ChannelRecord(info);
+	        	i++;
+	        }
+	        ChannelGrid.setData(channelData);
+		} 
+		
+	}
