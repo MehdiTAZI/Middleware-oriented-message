@@ -28,7 +28,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.publisher.ChannelPublisher;
  * @author Mezzo-Team
  * 
  */
-public final class BFFactory {
+public class BFFactory {
 
     // private static Map<String, Channel> mapChannel = new HashMap<String,
     // Channel>();
