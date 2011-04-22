@@ -1,8 +1,6 @@
 package fr.esiag.mezzodijava.mezzo.manager.client;
 
 
-
-
 import java.util.HashMap;
 import java.util.Map;
 import com.google.gwt.core.client.EntryPoint;
@@ -20,7 +18,7 @@ import com.smartgwt.client.widgets.form.fields.TextItem;
 import com.smartgwt.client.widgets.form.fields.events.ClickEvent;
 import com.smartgwt.client.widgets.form.fields.events.ClickHandler;
 
-import fr.esiag.java.shared.ChannelInfosCollector;
+import fr.esiag.mezzodijava.mezzo.manager.shared.ChannelInfosCollector;
 
 
 public class Application implements EntryPoint{
@@ -46,12 +44,10 @@ public class Application implements EntryPoint{
 						});  
 		                 authenticationService.authenticate("", "", new AsyncCallback<ChannelInfosCollector[]>() {
 							
-							@Override
 							public void onSuccess(ChannelInfosCollector[] result) {
 								display("homeView",result);
 							}
 							
-							@Override
 							public void onFailure(Throwable caught) {
 
 							}
@@ -102,14 +98,12 @@ public class Application implements EntryPoint{
 			public void run() {
 					 authenticationService.authenticate("", "", new AsyncCallback<ChannelInfosCollector[]>() {
 							
-							@Override
 							public void onSuccess(ChannelInfosCollector[] result) {
 								View v=views.get("homeView");
 								v.setData(result);
 								v.setContent();
 							}
 							
-							@Override
 							public void onFailure(Throwable caught) {
 
 							}
