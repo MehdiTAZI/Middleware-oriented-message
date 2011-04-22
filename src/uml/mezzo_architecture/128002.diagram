@@ -1,0 +1,110 @@
+format 76
+
+componentcanvas 128002 component_ref 128002 // coseventserver
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 154 131 2000 125 39
+end
+componentcanvas 128258 component_ref 128130 // cosevent_watcher
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 153 25 2000 127 39
+end
+componentcanvas 128386 component_ref 128258 // costime_watcher
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 597 25 2000 119 39
+end
+componentcanvas 128514 component_ref 128386 // ns-wrapper
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 377 129 2000 125 39
+end
+componentcanvas 128642 component_ref 128514 // jacorb-2.3.1
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 394 278 2000 91 39
+end
+componentcanvas 128770 component_ref 128642 // coseventserver.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 152 278 2000 129 39
+end
+componentcanvas 128898 component_ref 128770 // costimeserver.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 597 278 2000 119 39
+end
+componentcanvas 129154 component_ref 128898 // timeserver.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 586.5 406 2000 141 39
+end
+componentcanvas 130434 component_ref 129026 // costimeserver
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 594 131 2000 125 39
+end
+componentcanvas 131330 component_ref 129154 // visualizer.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 582 675 2000 175 39
+end
+componentcanvas 131458 component_ref 129282 // sensorsdatasupplier.jar
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 328 675 2000 175 39
+end
+componentcanvas 131586 component_ref 129410 // sensor
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 328 598 2000 175 39
+end
+componentcanvas 131714 component_ref 129538 // systemstatemonitor
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 582 597 2000 175 39
+end
+componentcanvas 131842 component_ref 129666 // temperature.txt
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 140 521 2000 109 39
+end
+componentcanvas 131970 component_ref 129794 // radioactivite.txt
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 140 598 2000 111 39
+end
+componentcanvas 132098 component_ref 129922 // pression.txt
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color yellow xyzwh 140 675 2000 93 39
+end
+componentcanvas 132738 component_ref 130050 // eventserver.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 141 406 2005 151 39
+end
+simplerelationcanvas 129410 simplerelation_ref 128130
+  from ref 128002 z 2001 to ref 128770
+end
+simplerelationcanvas 130050 simplerelation_ref 128514
+  from ref 128898 z 2001 to ref 129154
+end
+simplerelationcanvas 130178 simplerelation_ref 128642
+  from ref 128898 z 2001 to ref 128642
+end
+simplerelationcanvas 130306 simplerelation_ref 128770
+  from ref 128770 z 2001 to ref 128642
+end
+simplerelationcanvas 130562 simplerelation_ref 128898
+  from ref 128514 z 2001 to ref 128642
+end
+simplerelationcanvas 130946 simplerelation_ref 129154
+  from ref 128258 z 2001 to ref 128002
+end
+simplerelationcanvas 131074 simplerelation_ref 129282
+  from ref 128386 z 2001 to ref 130434
+end
+simplerelationcanvas 131202 simplerelation_ref 129410
+  from ref 130434 z 2001 to ref 128898
+end
+simplerelationcanvas 132226 simplerelation_ref 129538
+  from ref 131586 z 2001 to ref 131842
+end
+simplerelationcanvas 132354 simplerelation_ref 129666
+  from ref 131586 z 2001 to ref 131970
+end
+simplerelationcanvas 132482 simplerelation_ref 129794
+  from ref 131586 z 2001 to ref 132098
+end
+simplerelationcanvas 132610 simplerelation_ref 129922
+  from ref 131458 z 2001 to ref 131586
+end
+simplerelationcanvas 132866 simplerelation_ref 130050
+  from ref 128770 z 2006 to ref 132738
+end
+end
