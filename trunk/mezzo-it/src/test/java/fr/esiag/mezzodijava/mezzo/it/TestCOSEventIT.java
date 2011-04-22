@@ -361,7 +361,7 @@ public class TestCOSEventIT {
     	    	Thread.sleep(new Long(args[0]).longValue());
     	    }
     	    consumerProxy.connect();
-    	    Thread.sleep(35000);
+    	    Thread.sleep(20000);
     	    // begin of pull consumer 
     	    Event ev;
     	    BooleanHolder hasEvent = new BooleanHolder(true);
@@ -1738,13 +1738,14 @@ public class TestCOSEventIT {
 				ConsumerPullServer.class, 200, (String[]) null);
 		s.go();
 	}
+	Thread.sleep(2000);
 	// les suppliers ici present
 	for (int i = 0; i < 10; i++) {
 	    MainServerLauncher s = new MainServerLauncher(
 		    SupplierPullServer.class, 200, (String[]) null);
 	    s.go();
 	}
-	Thread.sleep(90000);
+	Thread.sleep(20000);
 	Assert.assertEquals("nombre d'event envoyes et recus", 1000,
 		messagesRecu.size());
 	System.out.println("fini");
