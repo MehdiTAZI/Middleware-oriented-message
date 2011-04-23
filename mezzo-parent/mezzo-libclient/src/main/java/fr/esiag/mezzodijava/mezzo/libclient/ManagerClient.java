@@ -76,7 +76,7 @@ public final class ManagerClient {
 	public CosInfoCollector resolveManagerService(String managerName){
 		Object managerObj = null;
 		try {
-			managerObj = nce.resolve_str(managerName);
+			managerObj = nce.resolve_str("eventMonitor/"+managerName);
 		} catch (Exception e) {
 		}
 		return CosInfoCollectorHelper.narrow(managerObj);
