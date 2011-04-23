@@ -9,6 +9,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.Event;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.SupplierNotFoundException;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ProxyForPullSupplierImpl;
+import fr.esiag.mezzodijava.mezzo.coseventserver.main.CosEventServer;
 
 /**
  * Class ThreadPullSupplier to ask suppliers for events
@@ -43,8 +44,8 @@ public class ThreadPullEvent implements Runnable {
 	log.trace("process connected suppliers");
 	Event ev;
 	BooleanHolder hasEvent = new BooleanHolder(true);
-	while (hasEvent.value
-		&& pfps.getChannelCtr().getChannel()
+	int delay = Integer.valueOf(CosEventServer.properties.getProperty("eventserver.pull.delay"));
+	while (pfps.getChannelCtr().getChannel()
 			.getSuppliersPullConnected()
 			.containsKey(pfps.getIdComponent())) {
 	    try {
@@ -67,7 +68,7 @@ public class ThreadPullEvent implements Runnable {
 		}
 	    }
 	    try {
-		Thread.sleep(500);
+		Thread.sleep(delay);
 	    } catch (InterruptedException e) {
 		log.error("Error, interrupted thread", e);
 	    }
