@@ -23,13 +23,25 @@ public class ConsumerPull {
 	private static List<Event> messagesRecu = Collections
 	.synchronizedList(new ArrayList<Event>());
 	
+	private static ORB orb;
+	
 	public static void main(String[] args) throws EventClientException, TopicNotFoundException, ChannelNotFoundException, MaximalConnectionReachedException, AlreadyConnectedException, InterruptedException, NotConnectedException {
 		
 			// mise blanc de la liste des messages reçus
 			messagesRecu = Collections.synchronizedList(new ArrayList<Event>());
 			EventClient ec = EventClient.init(args);
-			ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
-			String idcomp = "moroccopull";
+			//orb = ec.getOrb();
+			String channelName; 
+			String idc;
+			if (args.length == 2) {
+			    channelName = args[0];
+			    idc = args[1];
+			}else{
+				channelName = "injector system state";
+				idc = "moroccopull";
+			}
+			ChannelAdmin channelAdmin = ec.resolveChannelByTopic(channelName);
+			String idcomp = idc;
 			ProxyForPullConsumer consumerProxy = channelAdmin
 					.getProxyForPullConsumer(idcomp);
 			System.out.println("connexion du consumer");
@@ -42,14 +54,11 @@ public class ConsumerPull {
     	    {
     	    	System.out.println("pull consumer");
     	    	ev = consumerProxy.pull(hasEvent);
-    	    	System.out.println(hasEvent.value);
     	    	if (hasEvent.value){
-    	    		System.out.println("add_event");
+    	    		System.out.println("event reçu de type: "+ev.body.type+", contenu: "+ev.body.content);
     	    		messagesRecu.add(ev);
     	    	}
     	    }
     	    System.out.println("nb messages reçus :"+messagesRecu.size());
-			ORB orb = ec.getOrb();
-			orb.run();
 	}
 }

@@ -27,11 +27,23 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 public class SupplierPull {
 	
+	private static ORB orb;
+	
 	public static void main(String[] args) {
 		try {
 			EventClient ec = EventClient.init(args);
-			ChannelAdmin channelAdmin = ec.resolveChannelByTopic("injector system state");
-			String idcomp = "morocco";
+			//orb = ec.getOrb();
+			String channelName; 
+			String idc;
+			if (args.length == 2) {
+			    channelName = args[0];
+			    idc = args[1];
+			}else{
+				channelName = "injector system state";
+				idc = "supplierpull";
+			}
+			ChannelAdmin channelAdmin = ec.resolveChannelByTopic(channelName);
+			String idcomp = idc;
 			ProxyForPullSupplier supplierProxy = channelAdmin
 		    .getProxyForPullSupplier(idcomp);
 			System.out.println("creation callback");
@@ -39,9 +51,7 @@ public class SupplierPull {
     	    CallbackSupplier cbs = ec.serveCallbackSupplier(callbackImpl);
 			System.out.println("connexion du supplier");
 			supplierProxy.connect(cbs);
-			Thread.sleep(1000);
-			ORB orb = ec.getOrb();
-			orb.run();
+			Thread.sleep(5000);
 			
 		} catch (EventClientException e) {
 			e.printStackTrace();
