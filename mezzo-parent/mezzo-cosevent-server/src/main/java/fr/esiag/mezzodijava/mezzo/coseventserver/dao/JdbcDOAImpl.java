@@ -564,10 +564,13 @@ public class JdbcDOAImpl implements JdbcDAO {
     	    String sql = "DELETE FROM EVENT";
     	    String sql2 = "DELETE FROM CONSUMER";
     	    String sql3 = "DELETE FROM CHANNEL";
-    	    log.debug(sql+" "+sql2+" "+sql3);
+    	    String sql4 = "DELETE FROM CONSUMER_EVENT";
+    	    
+    	    log.debug(sql+" "+sql2+" "+sql3+" "+sql4);
     	    PreparedStatement stmt = connection.prepareStatement(sql);
     	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
     	    PreparedStatement stmt3 = connection.prepareStatement(sql3);
+    	    PreparedStatement stmt4 = connection.prepareStatement(sql4);
     	    try {
     	    	int nb = stmt.executeUpdate();
     	    	log.debug("nb delete sql:" + nb);
@@ -585,6 +588,12 @@ public class JdbcDOAImpl implements JdbcDAO {
     	    	log.debug("nb delete sql3:" + nb3);
     	    } finally {
     	    	stmt3.close();
+    	    }
+    	    try {
+    	    	int nb4 = stmt4.executeUpdate();
+    	    	log.debug("nb delete sql:" + nb4);
+    	    } finally {
+    	    	stmt.close();
     	    }
     	} catch (SQLException e) {
     	    log.error(SQL_ERROR, e);
