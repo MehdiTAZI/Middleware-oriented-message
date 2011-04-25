@@ -69,6 +69,7 @@
 				<version>2.8</version>
 				<configuration>
 					<argLine>-Djava.endorsed.dirs=${env.JACORB_HOME}/lib</argLine>
+					<argLine>-Djacorb.home=${env.JACORB_HOME}</argLine>
 				</configuration>
 			</plugin>
 		</plugins>
