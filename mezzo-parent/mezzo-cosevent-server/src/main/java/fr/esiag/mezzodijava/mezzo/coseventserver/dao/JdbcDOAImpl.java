@@ -27,7 +27,7 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.PriorityEventModelComparator;
 
 /**
- * Classe  JdbcDOAImpl.
+ * Classe JdbcDOAImpl.
  * 
  * JdbcDAO implementation.
  * 
@@ -66,17 +66,22 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    }
 	} catch (SQLException e) {
 	    log.info("Shema doesn't exist. Creating...");
-	    importSQL(conn, JdbcDOAImpl.class.getResourceAsStream("/cosevent.sql"));
+	    importSQL(conn,
+		    JdbcDOAImpl.class.getResourceAsStream("/cosevent.sql"));
 	    log.info("Shema created.");
 	}
 	return conn;
     }
 
     /**
-     * import the SQL 
-     * @param conn the connection where we'll import SQL
-     * @param in the inputStream where we'll process the content
-     * @throws SQLException if SQL error
+     * import the SQL
+     * 
+     * @param conn
+     *            the connection where we'll import SQL
+     * @param in
+     *            the inputStream where we'll process the content
+     * @throws SQLException
+     *             if SQL error
      */
     public static void importSQL(Connection conn, InputStream in)
 	    throws SQLException {
@@ -108,9 +113,13 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     /**
      * Constructor
-     * @param userName userName for the database
-     * @param password password associated to the username
-     * @param dbFile the file where we'll persist
+     * 
+     * @param userName
+     *            userName for the database
+     * @param password
+     *            password associated to the username
+     * @param dbFile
+     *            the file where we'll persist
      */
     public JdbcDOAImpl(String userName, String password, String dbFile) {
 	super();
@@ -206,7 +215,9 @@ public class JdbcDOAImpl implements JdbcDAO {
 
     /**
      * sort all the consumer for one channel
-     * @param channelId the channel
+     * 
+     * @param channelId
+     *            the channel
      * @return Map with the IDConsumer and the consumer associated
      */
     @Override
@@ -318,7 +329,8 @@ public class JdbcDOAImpl implements JdbcDAO {
     }
 
     /**
-     * @return return the consumerID associated to the consumerModel that we wanted to persist
+     * @return return the consumerID associated to the consumerModel that we
+     *         wanted to persist
      */
     @Override
     public final synchronized int insertConsumer(ConsumerModel consumer) {
@@ -555,49 +567,50 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    throw new PersistenceException(SQL_ERROR, e);
 	}
     }
+
     /**
      * delete all the database
      */
     @Override
     public final void deleteAllBase() {
-    	try {
-    	    String sql = "DELETE FROM EVENT";
-    	    String sql2 = "DELETE FROM CONSUMER";
-    	    String sql3 = "DELETE FROM CHANNEL";
-    	    String sql4 = "DELETE FROM CONSUMER_EVENT";
-    	    
-    	    log.debug(sql+" "+sql2+" "+sql3+" "+sql4);
-    	    PreparedStatement stmt = connection.prepareStatement(sql);
-    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
-    	    PreparedStatement stmt3 = connection.prepareStatement(sql3);
-    	    PreparedStatement stmt4 = connection.prepareStatement(sql4);
-    	    try {
-    	    	int nb = stmt.executeUpdate();
-    	    	log.debug("nb delete sql:" + nb);
-    	    } finally {
-    	    	stmt.close();
-    	    }
-    	    try {
-    	    	int nb2 = stmt2.executeUpdate();
-    	    	log.debug("nb delete sql2:" + nb2);
-    	    } finally {
-    	    	stmt2.close();
-    	    }
-    	    try {
-    	    	int nb3 = stmt3.executeUpdate();
-    	    	log.debug("nb delete sql3:" + nb3);
-    	    } finally {
-    	    	stmt3.close();
-    	    }
-    	    try {
-    	    	int nb4 = stmt4.executeUpdate();
-    	    	log.debug("nb delete sql:" + nb4);
-    	    } finally {
-    	    	stmt.close();
-    	    }
-    	} catch (SQLException e) {
-    	    log.error(SQL_ERROR, e);
-    	    throw new PersistenceException(SQL_ERROR, e);
-    	}
+	try {
+	    String sql = "DELETE FROM EVENT";
+	    String sql2 = "DELETE FROM CONSUMER";
+	    String sql3 = "DELETE FROM CHANNEL";
+	    String sql4 = "DELETE FROM CONSUMER_EVENT";
+
+	    log.debug(sql + " " + sql2 + " " + sql3 + " " + sql4);
+	    PreparedStatement stmt = connection.prepareStatement(sql);
+	    try {
+		int nb = stmt.executeUpdate();
+		log.debug("nb delete sql:" + nb);
+	    } finally {
+		stmt.close();
+	    }
+	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+	    try {
+		int nb2 = stmt2.executeUpdate();
+		log.debug("nb delete sql2:" + nb2);
+	    } finally {
+		stmt2.close();
+	    }
+	    PreparedStatement stmt3 = connection.prepareStatement(sql3);
+	    try {
+		int nb3 = stmt3.executeUpdate();
+		log.debug("nb delete sql3:" + nb3);
+	    } finally {
+		stmt3.close();
+	    }
+	    PreparedStatement stmt4 = connection.prepareStatement(sql4);
+	    try {
+		int nb4 = stmt4.executeUpdate();
+		log.debug("nb delete sql4:" + nb4);
+	    } finally {
+		stmt4.close();
+	    }
+	} catch (SQLException e) {
+	    log.error(SQL_ERROR, e);
+	    throw new PersistenceException(SQL_ERROR, e);
+	}
     }
 }
