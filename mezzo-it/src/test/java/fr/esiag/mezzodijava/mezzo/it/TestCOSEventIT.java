@@ -1219,7 +1219,8 @@ public class TestCOSEventIT {
 	// boucle qui vérifi que la variable temps est bien mise à jour.
 	long prev = 0;
 	for (int i = 0; i < 10; i++) {
-	    Thread.sleep(1010);
+	    Thread.sleep(1050);
+	    System.out.println("date = "+date);
 	    Assert.assertTrue("reception ok toutes les secondes ",
 		    date > prev + 1000);
 	    prev = date;
