@@ -48,11 +48,11 @@ public class TestJdbcDAOImpl {
 
     @Before
     public void setUp() throws Exception {
+    	dao.deleteAllBase();
     }
 
     @After
     public void tearDown() throws Exception {
-    	dao.deleteAllBase();
     }
 
     @Test
