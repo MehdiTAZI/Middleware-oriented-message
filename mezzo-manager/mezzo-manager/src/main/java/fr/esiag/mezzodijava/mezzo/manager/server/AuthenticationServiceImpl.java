@@ -20,13 +20,12 @@ public class AuthenticationServiceImpl extends RemoteServiceServlet implements A
 	public ChannelInfosCollector[] authenticate(String loging, String pwd) {
 		ChannelInfosCollector[] channelsInfo=null;
 		try{
-		EventClient manager=EventClient.init(null);/*(new String[]{"-ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService",
+		EventClient manager=EventClient.init((new String[]{"-ORBInitRef NameService=corbaloc::127.0.0.1:1050/NameService",
 				"-Djacorb.home=C:\\mezzodev\\jacorb-2.3.1",
 				"-Dorg.omg.CORBA.ORBClass=org.jacorb.orb.ORB",
-				"-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton"});*/	
+				"-Dorg.omg.CORBA.ORBSingletonClass=org.jacorb.orb.ORBSingleton"}));	
 		
-		CosInfoCollector managerInfo=CosInfoCollectorHelper.narrow(
-				manager.resolveChannelByTopic("SUDAN_SERVER"));
+		CosInfoCollector managerInfo=manager.resolveMonitorChannelByTopic("SUDAN_SERVER");
 		
 		System.out.println("I 11111");
 		
