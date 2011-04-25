@@ -17,6 +17,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 import fr.esiag.nuclear.commons.model.Pression;
@@ -88,7 +89,7 @@ public class MainVisualizer {
 	    }
 
 	    if (evt.body.type.equals("Temperature")) {
-		Temperature t = (Temperature) evt.body.content.extract_Value();
+		Temperature t = EventFactory.extractObject(Temperature.class, evt);
 		System.out.println("priority:" + evt.header.priority + ",date:"
 			+ (new Date(evt.header.creationdate)).toGMTString()
 			+ " content:" + t.getValue() + "|" + t.getUnite());
@@ -96,7 +97,7 @@ public class MainVisualizer {
 		
 	    }
 	    if (evt.body.type.equals("Pression")) {
-		Pression t = (Pression) evt.body.content.extract_Value();
+		Pression t = EventFactory.extractObject(Pression.class, evt);
 		System.out.println("priority:" + evt.header.priority + ",date:"
 			+ (new Date(evt.header.creationdate)).toGMTString()
 			+ ", contenu: Pression" + " Value: " + t.getValue()
@@ -105,8 +106,7 @@ public class MainVisualizer {
 	    }
 
 	    if (evt.body.type.equals("RadioActivite")) {
-		RadioActivite t = (RadioActivite) evt.body.content
-			.extract_Value();
+		RadioActivite t = EventFactory.extractObject(RadioActivite.class, evt);
 		System.out.println("priority:" + evt.header.priority + ",date:"
 			+ (new Date(evt.header.creationdate)).toGMTString()
 			+ ", contenu: RadioActivite" + " Value: "

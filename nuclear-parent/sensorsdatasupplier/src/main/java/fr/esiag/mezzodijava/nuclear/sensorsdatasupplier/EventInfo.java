@@ -11,6 +11,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 import fr.esiag.nuclear.commons.model.Pression;
 import fr.esiag.nuclear.commons.model.RadioActivite;
 import fr.esiag.nuclear.commons.model.Temperature;
@@ -77,19 +78,19 @@ public class EventInfo implements Serializable{
 			System.err.println("miss-formed Event Structure : code value is to high ! Check the injectorSystem supplier configuration");
 		}		
 		else if(e.body.type.equals("Temperature")){
-			Temperature t=(Temperature)e.body.content.extract_Value();
+			Temperature t=EventFactory.extractObject(Temperature.class, e);
 			this.code=(int)e.header.code;
 			this.data=""+t.getValue();
 			this.type=e.body.type;
 		}
 		else if(e.body.type.equals("Pression")){
-			Pression p=(Pression)e.body.content.extract_Value();
+			Pression p=EventFactory.extractObject(Pression.class, e);
 			this.code=(int)e.header.code;
 			this.data=""+p.getValue();
 			this.type=e.body.type;
 		}
 		else if(e.body.type.equals("RadioActivite")){
-			RadioActivite ra=(RadioActivite)e.body.content.extract_Value();
+			RadioActivite ra=EventFactory.extractObject(RadioActivite.class, e);
 			this.code=(int)e.header.code;
 			this.data=""+ra.getValue();
 			this.type=e.body.type;

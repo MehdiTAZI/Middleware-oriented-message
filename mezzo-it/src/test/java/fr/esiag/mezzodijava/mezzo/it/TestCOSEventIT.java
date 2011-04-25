@@ -1634,8 +1634,7 @@ public class TestCOSEventIT {
 	List<MyMessage> listEnvoyes = new ArrayList<MyMessage>();
 	for (int i = 0; i < 1; i++) {
 	    MyMessage message = new MyMessage("message" + i);
-	    Event evt = EventFactory.createEventObject(i, 10120, message,
-		    message.getClass().getName());
+	    Event evt = EventFactory.createEventObject(i, 10120, message);
 	    supplierProxy.push(evt);
 	    listEnvoyes.add(message);
 	    System.out.println("envoye " + evt);
@@ -1648,7 +1647,7 @@ public class TestCOSEventIT {
 	Iterator<MyMessage> it = listEnvoyes.iterator();
 	for (Event event : messagesRecu) {
 	    Assert.assertEquals("contenu du message", it.next().myString,
-		    ((MyMessage) event.body.content.extract_Value()).myString);
+		    (EventFactory.extractObject(MyMessage.class, event)).myString);
 	}
 	System.out.println("fini");
     }

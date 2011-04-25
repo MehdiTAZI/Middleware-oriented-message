@@ -1,96 +1,81 @@
 package fr.esiag.mezzodijava.mezzo.coseventserver.dao;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-
+import org.omg.CORBA.Any;
+import org.omg.CORBA.ORB;
+import org.omg.CORBA.OctetSeqHelper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import fr.esiag.mezzodijava.mezzo.cosevent.Body;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
-import fr.esiag.mezzodijava.mezzo.coseventserver.exceptions.EventServerException;
+import fr.esiag.mezzodijava.mezzo.cosevent.Header;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
-import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 
 /**
  * 
- * @author MEZZODIJAVA
- * Can convert an event to an eventModel which is used to persist event
- *
+ * @author MEZZODIJAVA Can convert an event to an eventModel which is used to
+ *         persist event
+ * 
  */
 public class EventConvertor {
-	private static Logger log = LoggerFactory.getLogger(EventConvertor.class);
+    private static Logger log = LoggerFactory.getLogger(EventConvertor.class);
 
-	/**
-	 * transform an Event to the Event Model in order to persist it
-	 * @param e the event to persist
-	 * @return the new event
-	 */
+    /**
+     * transform an Event to the Event Model in order to persist it
+     * 
+     * @param e
+     *            the event to persist
+     * @return the new event
+     */
     public EventModel transformToEventModel(Event e) {
 	EventModel em = new EventModel();
-	// Serialize to a byte array
-	ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	ObjectOutput out;
-	try {
-	    out = new ObjectOutputStream(bos);
-	    if (e.body.type.equals("String")) {
-		out.writeObject(e.body.content.extract_string());
-	    } else {
-		out.writeObject(e.body.content.extract_Value());
-	    }
-	    out.close();
-	} catch (IOException e1) {
-	    log.error("IOException",e1);
-	}
-	// Get the bytes of the serialized object
-	byte[] buf = bos.toByteArray();
-	log.trace("bufer size = "+buf.length);
+	// // Serialize to a byte array
+	// ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	// ObjectOutput out;
+	// try {
+	// out = new ObjectOutputStream(bos);
+	// if (e.body.type.equals("String")) {
+	// out.writeObject(e.body.content.extract_string());
+	// } else {
+	// out.writeObject(e.body.content.extract_Value());
+	// }
+	// out.close();
+	// } catch (IOException e1) {
+	// log.error("IOException",e1);
+	// }
+	// // Get the bytes of the serialized object
+	// byte[] buf = bos.toByteArray();
+	// log.trace("bufer size = "+buf.length);
 	em.setCode(e.header.code);
 	em.setCreationdate(e.header.creationdate);
-	em.setData(buf);
+	if (e.body.type.equals("String")) {
+	    em.setData(e.body.content.extract_string().getBytes());
+	} else {
+	    em.setData(OctetSeqHelper.extract(e.body.content));
+	}
 	em.setPriority(e.header.priority);
 	em.setTimetolive(e.header.timetolive);
 	em.setType(e.body.type);
 	return em;
     }
-    
-/**
- * transform and EventModel to the Event in order to modify it
- * @param em the eventModel to modify
- * @return the event
- */
+
+    /**
+     * transform and EventModel to the Event in order to modify it
+     * 
+     * @param em
+     *            the eventModel to modify
+     * @return the event
+     */
     public Event transformToEvent(EventModel em) {
-	    Event e;
-	    // Deserialize from a byte array
-	    ObjectInputStream in;
-	    Object val;
-	    try {
-		in = new ObjectInputStream(new ByteArrayInputStream(em.getData()));
-		val = (Serializable) in.readObject();
-		in.close();
-	    } catch (IOException e1) {
-			log.error("Error in transformToEvent IO",e1);
-			throw new EventServerException("Error in transformToEvent IO", e1);
-	    } catch (ClassNotFoundException e1) {
-			log.error("Error in transformToEvent serialization ClassNotFound",e1);
-			throw new EventServerException("Error in transformToEvent serialization ClassNotFound", e1);
-	    }
-
-	    if (em.getType().equals("String")) {
-		e = EventFactory.createEventString(em.getPriority(),
-			em.getTimetolive(), (String) val);
-	    } else {
-		e = EventFactory.createEventObject(em.getPriority(),
-			em.getTimetolive(), (Serializable) val, em.getType());
-	    }
-	    e.header.code = em.getCode();
-	    e.header.creationdate = em.getCreationdate();
-
-	    return e;
-
+	Header header = new Header(em.getCode(), em.getPriority(),
+		em.getCreationdate(), em.getTimetolive());
+	Any any = ORB.init().create_any();
+	Body body = new Body(any, em.getType());
+	if (em.getType().equals("String")) {
+	    body.content.insert_string(new String(em.getData()));
+	} else {
+	    OctetSeqHelper.insert(body.content, em.getData());
+	}
+	return new Event(header, body);
     }
 }

@@ -8,7 +8,7 @@ package fr.esiag.mezzodijava.mezzo.libclient.exception;
  * 
  */
 
-public class EventClientException extends Exception {
+public class EventClientException extends RuntimeException {
 
 	/**
 	  * Build a Client Exception
