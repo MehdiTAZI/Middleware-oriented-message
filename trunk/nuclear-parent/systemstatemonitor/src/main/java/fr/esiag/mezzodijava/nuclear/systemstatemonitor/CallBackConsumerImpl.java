@@ -5,6 +5,7 @@ import java.util.List;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnector;
 import fr.esiag.mezzodijava.nuclear.systemmonitor.DB.DbEventConnectorImpl;
 import fr.esiag.mezzodijava.nuclear.systemstatemonitor.tools.EventInfo;
@@ -39,7 +40,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
     
     if(e.body.type.equals("Temperature")){
     	
-		Temperature t=(Temperature)e.body.content.extract_Value();
+		Temperature t=EventFactory.extractObject(Temperature.class, e);
 		System.out.println("Message recu type=(Temperature) timestamp:" + e.header.timetolive
 				+ ", contenu: Temperature" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 			
@@ -47,7 +48,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
     
     if(e.body.type.equals("Pression")){
     	
-		Pression t=(Pression)e.body.content.extract_Value();
+		Pression t=EventFactory.extractObject(Pression.class, e);
 		System.out.println("Message recu type=(Pression) timestamp:" + e.header.timetolive
 				+ ", contenu: Pression" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 			
@@ -55,7 +56,7 @@ public class CallBackConsumerImpl implements CallbackConsumerOperations {
     
     if(e.body.type.equals("RadioActivite")){
     	
-		RadioActivite t=(RadioActivite)e.body.content.extract_Value();
+		RadioActivite t=EventFactory.extractObject(RadioActivite.class, e);
 		System.out.println("Message recu type=(RadioActivite) timestamp:" + e.header.timetolive
 				+ ", contenu: RadioActivite" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 			

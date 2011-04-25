@@ -9,6 +9,7 @@ import fr.esiag.mezzodijava.mezzo.cosevent.MaximalConnectionReachedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushSupplier;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
+import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 import fr.esiag.nuclear.commons.model.Pression;
@@ -56,7 +57,7 @@ public class InjectorSystemStateSupplier {
 			}
 			if(e.body.type.equals("Temperature")){
 				
-				Temperature t=(Temperature)e.body.content.extract_Value();
+				Temperature t=EventFactory.extractObject(Temperature.class, e);
 				System.out.println("!!ALERTE envoyee : Code("+e.header.code+"), Timestamp:" + e.header.creationdate
 						+ ", contenu " + t.getValue() +"/"+t.getUnite());
 					
@@ -64,7 +65,7 @@ public class InjectorSystemStateSupplier {
 			
 			  if(e.body.type.equals("Pression")){
 			    	
-					Pression t=(Pression)e.body.content.extract_Value();
+					Pression t=EventFactory.extractObject(Pression.class, e);
 					System.out.println("!!ALERTE envoyee : Code("+e.header.code+"), Timestamp:" + e.header.creationdate
 							+ ", contenu: Pression" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 						
@@ -72,7 +73,7 @@ public class InjectorSystemStateSupplier {
 			    
 			    if(e.body.type.equals("RadioActivite")){
 			    	
-					RadioActivite t=(RadioActivite)e.body.content.extract_Value();
+					RadioActivite t=EventFactory.extractObject(RadioActivite.class, e);
 					System.out.println("!!ALERTE envoyee : Code("+e.header.code+"), Timestamp:" + e.header.creationdate
 							+ ", contenu: RadioActivite" + " Value: "+t.getValue() +"| Unite: "+t.getUnite());
 						
