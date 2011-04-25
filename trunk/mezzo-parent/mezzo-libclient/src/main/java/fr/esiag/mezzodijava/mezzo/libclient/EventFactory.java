@@ -25,7 +25,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
  * 
  * @author MEZZODIJAVA Factory who can create event
  */
-public class EventFactory {
+public final class EventFactory {
 
     private static Logger log = LoggerFactory.getLogger(EventFactory.class);
 
