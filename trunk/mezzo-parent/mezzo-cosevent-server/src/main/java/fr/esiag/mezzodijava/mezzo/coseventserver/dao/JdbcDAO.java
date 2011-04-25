@@ -106,4 +106,9 @@ public interface JdbcDAO {
      * delete all consumers associated to a channel
      */
     void deleteAllConsumers(int channelId);
+    
+    /**
+     * delete all consumers associated to a channel
+     */
+    void deleteAllBase(); 
 }

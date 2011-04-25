@@ -431,7 +431,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 		stmt.setInt(1, channel.getCapacity());
 		stmt.setInt(2, channel.getId());
 		int nb = stmt.executeUpdate();
-		log.debug("nb delete:" + nb);
+		log.debug("nb update:" + nb);
 	    } finally {
 		stmt.close();
 	    }
@@ -554,5 +554,41 @@ public class JdbcDOAImpl implements JdbcDAO {
 	    log.error(SQL_ERROR, e);
 	    throw new PersistenceException(SQL_ERROR, e);
 	}
+    }
+    /**
+     * delete all the database
+     */
+    @Override
+    public final void deleteAllBase() {
+    	try {
+    	    String sql = "DELETE FROM EVENT";
+    	    String sql2 = "DELETE FROM CONSUMER";
+    	    String sql3 = "DELETE FROM CHANNEL";
+    	    log.debug(sql+" "+sql2+" "+sql3);
+    	    PreparedStatement stmt = connection.prepareStatement(sql);
+    	    PreparedStatement stmt2 = connection.prepareStatement(sql2);
+    	    PreparedStatement stmt3 = connection.prepareStatement(sql3);
+    	    try {
+    	    	int nb = stmt.executeUpdate();
+    	    	log.debug("nb delete sql:" + nb);
+    	    } finally {
+    	    	stmt.close();
+    	    }
+    	    try {
+    	    	int nb2 = stmt2.executeUpdate();
+    	    	log.debug("nb delete sql2:" + nb2);
+    	    } finally {
+    	    	stmt2.close();
+    	    }
+    	    try {
+    	    	int nb3 = stmt3.executeUpdate();
+    	    	log.debug("nb delete sql3:" + nb3);
+    	    } finally {
+    	    	stmt3.close();
+    	    }
+    	} catch (SQLException e) {
+    	    log.error(SQL_ERROR, e);
+    	    throw new PersistenceException(SQL_ERROR, e);
+    	}
     }
 }
