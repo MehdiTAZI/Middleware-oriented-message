@@ -57,11 +57,7 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 public final class EventClient {
 
     private static Logger log = LoggerFactory.getLogger(EventClient.class);
-    /**
-     * Default Event Client Property File.
-     */
-    private final static String CLIENT_PROPERTIES = "eventclient.properties";
-
+   
     private static EventClient instance;
 
     /**
@@ -78,17 +74,6 @@ public final class EventClient {
     public static synchronized EventClient init(String[] args)
 	    throws EventClientException {
 	if (instance == null) {
-	    // // Properties à externaliser
-	    // props = new Properties();
-	    // props.setProperty("ORBInitRef.NameService",
-	    // "corbaloc::127.0.0.1:1050/NameService");
-	    // props.setProperty("jacorb.home", System.getenv("JACORB_HOME"));
-	    // props.setProperty("org.omg.CORBA.ORBClass",
-	    // "org.jacorb.orb.ORB");
-	    // props.setProperty("org.omg.CORBA.ORBSingletonClass",
-	    // "org.jacorb.orb.ORBSingleton");
-	    // // props.setProperty("java.endorsed.dirs",
-	    // // System.getenv("JACORB_HOME") + "/lib");
 	    String[] cmdArgs = args == null ? null : Arrays.copyOf(args,
 		    args.length);
 	    instance = new EventClient(cmdArgs, null);
@@ -126,7 +111,7 @@ public final class EventClient {
      */
     private EventClient(String[] args, Properties properties)
 	    throws EventClientException {
-	System.out.println("Initilazing Mezzo Client...");
+	log.info("Initilazing Mezzo Client...");
 	props = properties;
 	if (props == null) {
 	    props = ConfMgr.loadProperties("eventclient_default","eventclient");
@@ -140,7 +125,7 @@ public final class EventClient {
 	    throw new EventClientException("Cannot resolve NameService", e);
 	}
 	nce = NamingContextExtHelper.narrow(nceObj);
-	System.out.println("Mezzo Client initialized.");
+	log.info("Mezzo Client initialized.");
     }
 
     /**
