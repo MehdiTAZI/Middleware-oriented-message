@@ -29,23 +29,6 @@ public class EventConvertor {
      */
     public EventModel transformToEventModel(Event e) {
 	EventModel em = new EventModel();
-	// // Serialize to a byte array
-	// ByteArrayOutputStream bos = new ByteArrayOutputStream();
-	// ObjectOutput out;
-	// try {
-	// out = new ObjectOutputStream(bos);
-	// if (e.body.type.equals("String")) {
-	// out.writeObject(e.body.content.extract_string());
-	// } else {
-	// out.writeObject(e.body.content.extract_Value());
-	// }
-	// out.close();
-	// } catch (IOException e1) {
-	// log.error("IOException",e1);
-	// }
-	// // Get the bytes of the serialized object
-	// byte[] buf = bos.toByteArray();
-	// log.trace("bufer size = "+buf.length);
 	em.setCode(e.header.code);
 	em.setCreationdate(e.header.creationdate);
 	if (e.body.type.equals("String")) {
