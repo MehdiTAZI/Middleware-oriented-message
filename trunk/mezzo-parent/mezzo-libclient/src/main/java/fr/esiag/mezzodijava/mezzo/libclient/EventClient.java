@@ -29,6 +29,8 @@ import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.EventServerChannelAdminHelper;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.EventClientException;
 import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
+import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollector;
+import fr.esiag.mezzodijava.mezzo.monitoring.CosInfoCollectorHelper;
 
 /**
  * Class EventClient.
@@ -115,15 +117,21 @@ public final class EventClient {
 	props = properties;
 	if (props == null) {
 	    props = ConfMgr.loadProperties("eventclient_default","eventclient");
+	    System.out.println("eventClient Properties loaded");
 	}
 	orb = ORB.init(args, props);
+	System.out.println("ORB initialised");
 	Object nceObj = null;
 	try {
+		System.out.println("affiche toi !");
+		System.out.println("resolving Nameservice");
 	    nceObj = orb.resolve_initial_references("NameService");
 	} catch (InvalidName e) {
 	    // TODO log here
+		System.out.println("Catch Exception Resolving!");
 	    throw new EventClientException("Cannot resolve NameService", e);
 	}
+	System.out.println("Start NameService narrowing");
 	nce = NamingContextExtHelper.narrow(nceObj);
 	log.info("Mezzo Client initialized.");
     }
@@ -168,6 +176,42 @@ public final class EventClient {
 	return ChannelAdminHelper.narrow(channelObj);
     }
 
+    
+    /**
+     * Resolve a Channel with its topic using the NameService declared in
+     * configuration.
+     * 
+     * @param topic
+     *            Channel to find topic
+     * @return an instance of Channel (distant object)
+     * @throws EventClientException
+     *             when name resolution is wrong
+     * @throws TopicNotFoundException
+     */
+    public CosInfoCollector resolveMonitorChannelByTopic(String topic)
+	    throws EventClientException, TopicNotFoundException {
+	Object channelObj = null;
+	try {
+		
+		System.out.println("resolving eventMonitor/"+topic);
+	    channelObj = nce.resolve_str("eventMonitor/" + topic);
+	    // TODO Design a fail-over to switch between several NameService
+	    // before throwing exception
+	} catch (NotFound e) {
+	    // TODO log here
+	    throw new TopicNotFoundException("Cannot find the Monitor Topic '" + topic
+		    + "'", e);
+	} catch (CannotProceed e) {
+	    // TODO log here
+	    throw new EventClientException("Cannot resolve the Monitor channel", e);
+	} catch (org.omg.CosNaming.NamingContextPackage.InvalidName e) {
+	    // TODO log here
+	    throw new EventClientException("Invalid Monitor topic name", e);
+	}
+	return CosInfoCollectorHelper.narrow(channelObj);
+    }
+    
+    
     /**
      * Resolve a EventServerChannelAdmin using the EventServerName
      * 
