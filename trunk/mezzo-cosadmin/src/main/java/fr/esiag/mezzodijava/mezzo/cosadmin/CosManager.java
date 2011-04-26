@@ -72,7 +72,7 @@ public class CosManager {
 
     }
 
-    public List<String> listEventChanne() {
+    public List<String> listEventChannel() {
 	return null;
     }
 
