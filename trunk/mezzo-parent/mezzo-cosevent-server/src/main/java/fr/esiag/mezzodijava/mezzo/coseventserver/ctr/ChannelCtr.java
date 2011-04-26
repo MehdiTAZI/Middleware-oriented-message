@@ -149,10 +149,11 @@ public class ChannelCtr {
 		    channel.getConnectionCapacity());
 	    throw new MaximalConnectionReachedException();
 	}
-	if (channel.getConsumersConnected().containsKey(idConsumer)) {
-	    log.error("{} can't connect because it's already connected");
-	    throw new AlreadyConnectedException();
-	}
+// FGI : Cet AlreadyConnected pose probleme. Laissons plutot remplacer dans la map
+//	if (channel.getConsumersConnected().containsKey(idConsumer)) {
+//	    log.error("{} can't connect because it's already connected");
+//	    throw new AlreadyConnectedException();
+//	}
 	channel.getConsumersConnected().put(idConsumer, proxyConsumer);
 	threadPool.runTask(new ThreadPushConsumer(proxyConsumer));
     }
