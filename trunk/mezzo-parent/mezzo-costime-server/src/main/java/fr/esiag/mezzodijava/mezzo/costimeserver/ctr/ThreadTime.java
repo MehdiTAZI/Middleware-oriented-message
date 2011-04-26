@@ -40,7 +40,7 @@ public class ThreadTime implements Runnable {
      */
     @Override
     public void run() {
-	log.info("Initialize thread");
+	log.info("Initialize Time Thread");
 	while (model.getComponentSubscribed().contains(cc)) {
 	    try {
 		cc.date(System.currentTimeMillis());
@@ -51,7 +51,7 @@ public class ThreadTime implements Runnable {
 		}
 	    } catch (org.omg.CORBA.SystemException ex) {
 		model.getComponentSubscribed().remove(cc);
-		log.warn("Component unreachable unsubscribed : " + cc);
+		log.warn("Synchronizable Callback unreachable unsubscribed : " + cc);
 		break;
 	    }
 	}

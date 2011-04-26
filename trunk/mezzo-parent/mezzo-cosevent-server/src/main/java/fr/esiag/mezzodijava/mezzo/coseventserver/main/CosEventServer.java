@@ -122,19 +122,20 @@ public class CosEventServer {
 	    // poa.servant_to_reference(new
 	    // ChannelAdminPOATie(channelAdminImpl)));
 	    CORBAUtils.createContext(nc, "eventServer");
-	    nc.rebind(nc.to_name("eventServer/"+eventServerName), poa
+	    nc.rebind(nc.to_name("eventServer/" + eventServerName), poa
 		    .servant_to_reference(new EventServerChannelAdminPOATie(
 			    eventServerChannelAdmin)));
-	    
+
 	    CORBAUtils.createContext(nc, "eventMonitor");
-	    nc.rebind(nc.to_name("eventMonitor/"+eventServerName), poa
-			    .servant_to_reference(new CosInfoCollectorPOATie(new CosInfoCollectorImpl())));
-			    
+	    nc.rebind(nc.to_name("eventMonitor/" + eventServerName), poa
+		    .servant_to_reference(new CosInfoCollectorPOATie(
+			    new CosInfoCollectorImpl())));
+
 	    // Subscribe to COSTime
 	    log.info("Mezzo COS Event Server \"" + eventServerName
 		    + "\" is subscribing to COS Time " + cosTimeName);
-	    TimeClient.init(args,properties).subscribeToTimeService(cosTimeName,
-		    new CallbackTimeImpl(), cosTimeRefreshDelay);
+	    TimeClient.init(args, properties).subscribeToTimeService(
+		    cosTimeName, new CallbackTimeImpl(), cosTimeRefreshDelay);
 
 	    // reload persisted data
 	    reloadPersistedChannel(eventServerName);
@@ -162,9 +163,13 @@ public class CosEventServer {
     }
 
     /**
-     * UC
+     * Reload persisted channel with theirs subscribed consumers and bind them
+     * to the Name Service.
+     * 
+     * UC n° UC41 : CI06-Persistence
      * 
      * @param eventServerName
+     *            Event Server Name.
      */
     private void reloadPersistedChannel(String eventServerName) {
 	log.info("Mezzo COS Event Server \"" + eventServerName
@@ -194,6 +199,10 @@ public class CosEventServer {
 		ChannelAdminImpl cai = BFFactory.createChannelAdminImpl(c
 			.getTopic());
 		ChannelPublisher.publish(cai);
+		log.info("Mezzo COS Event Server \"" + eventServerName
+			+ "\" : persisted channel \"" + c.getTopic()
+			+ "\"loaded with " + cmap.size()
+			+ "subscribed consummers and published.");
 	    }
 	    log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
 		    + col.size() + " persisted channel loaded and published.");
@@ -204,7 +213,7 @@ public class CosEventServer {
     }
 
     /**
-     * Well... This is the main trololo
+     * Main.
      * 
      * @param args
      * @throws InterruptedException
