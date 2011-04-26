@@ -1,5 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.cosadmin;
 
+import ihm.main.IHMManager;
+
 /**
  * 
  *
@@ -8,7 +10,11 @@ public class Manager
 {
     public static void main( String[] args )
     {
-	
+	if (args==null){
+	    printUsage();
+	}else if ("-gui".equals(args[0])){
+	    IHMManager.main(args);
+	}
     }
     
     public static void printUsage(){
