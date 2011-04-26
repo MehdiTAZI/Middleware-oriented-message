@@ -5,9 +5,12 @@ import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Properties;
 import java.util.Vector;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -39,17 +42,23 @@ public class IHMManager extends JFrame {
     JLabel labelNew;
     JTextField textFieldNew;
     JTextField textFieldCapacity;
+    
+    
 
     public IHMManager(String[] args, Properties properties) {
 	frame = this;
 	manager = new CosManager(args, properties);
 	try {
 	    listServeur = new JList(new Vector<String>(
-		    manager.listEventServers()));
+		    manager.listEventServers()));	    
 	    listTimeServeur = new JList(new Vector<String>(
 		    manager.listTimeServers()));
 	    listChannels = new JList(new Vector<String>(
 		    manager.listEventChannel()));
+	    
+	    listChannels.addMouseListener(new MouseRight());
+	    	
+	    
 	} catch (Exception e) {
 	    JOptionPane.showMessageDialog(frame, "Erreur: " + e.toString());
 	}
@@ -60,8 +69,11 @@ public class IHMManager extends JFrame {
 	
 	
 	paneServeur = new JScrollPane(listServeur);
+	paneServeur.setBorder(BorderFactory.createTitledBorder("Serveur"));
 	paneTimeServeur = new JScrollPane(listTimeServeur);
+	paneTimeServeur.setBorder(BorderFactory.createTitledBorder("Time Serveur"));
 	paneChannels = new JScrollPane(listChannels);
+	paneChannels.setBorder(BorderFactory.createTitledBorder("Channels"));
 	paneMethod = new JScrollPane(panelMethod);
 
 	buttonNew = new JButton("new channel");
@@ -69,7 +81,7 @@ public class IHMManager extends JFrame {
 	buttonDelete = new JButton("delete channel");
 
 	labelNew = new JLabel("channel's name");
-	labelCapacity = new JLabel("new capacity");
+	labelCapacity = new JLabel("capacity");
 
 	textFieldNew = new JTextField();
 	textFieldCapacity = new JTextField();
@@ -166,6 +178,8 @@ public class IHMManager extends JFrame {
     	    paneServeur.setViewportView(listServeur);
     	    paneTimeServeur.setViewportView(listTimeServeur);
     	    paneChannels.setViewportView(listChannels);
+    	    listChannels.addMouseListener(new MouseRight());
+    	    repaint();
     	} catch (Exception e) {
     	    JOptionPane.showMessageDialog(frame, "Erreur: " + e.toString());
     	}
@@ -196,11 +210,49 @@ public class IHMManager extends JFrame {
 	    return false;
 	return true;
     }
+    
 
     public static void main(String[] args) {
 	IHMManager ihm = new IHMManager(args, null);
 	ihm.pack();
 	ihm.setVisible(true);
     }
+   
+public class MouseRight extends MouseAdapter{
+	private void action(MouseEvent e){
+		
+		System.out.println(e.getButton());
+		if(e.getButton()== MouseEvent.BUTTON3 & IHMManager.this.listChannels.getSelectedValue()!=null){
+			System.out.println("Remove");
+			try {
+				if (manager.listEventChannel().contains(IHMManager.this.listChannels.getSelectedValue()));
+				manager.delChannel((String)IHMManager.this.listChannels.getSelectedValue());
+				refresh();
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+	}
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		action(e);
+		super.mouseReleased(e);
+	}
+	@Override
+	public void mousePressed(MouseEvent e) {
+		action(e);
+		super.mousePressed(e);
+	}
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		action(e);
+		super.mouseClicked(e);
+	}
+	
+    }
+    
 
 }
+
