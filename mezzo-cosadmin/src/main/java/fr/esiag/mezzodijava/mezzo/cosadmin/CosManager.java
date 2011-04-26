@@ -37,7 +37,7 @@ public class CosManager {
      * @throws EventClientException
      *             Initialization failure
      */
-    private CosManager(String[] args, Properties properties)
+    public CosManager(String[] args, Properties properties)
 	    throws EventClientException {
 	log.info("Initilazing Manager...");
 	props = properties;
@@ -80,11 +80,11 @@ public class CosManager {
 
     }
 
-    public void modChannel(String serverName, String channelName) {
+    public void modChannel(String channelName, int capacity) {
 
     }
 
-    public void delChannel(String serverName, String channelName) {
+    public void delChannel(String channelName) {
 
     }
 }
