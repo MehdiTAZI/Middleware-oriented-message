@@ -71,10 +71,10 @@ public class ProxyForPullSupplierImpl extends AbstractProxyImpl implements
 	 * @throws SupplierNotFoundException if supplier is not connected
 	 */
 	public Event ask(BooleanHolder hasEvent) throws SupplierNotFoundException{
-		Event e;
+	    log.debug("PULL SUPPLIER (id={}) ==> CHANNEL ({}) : Pulling event",idComponent,channelCtr.getChannel().getTopic());
+	    Event e;
 		try {
 			e = callbackSupplier.ask(hasEvent);
-			log.debug("PullSupplier {} just ask for an event",idComponent);
 			return e;
 		} catch (org.omg.CORBA.SystemException ex) {
 			log.error("Supplier not found", ex);
