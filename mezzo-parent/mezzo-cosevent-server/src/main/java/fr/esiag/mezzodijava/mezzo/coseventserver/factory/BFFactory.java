@@ -70,7 +70,7 @@ public class BFFactory {
 	ChannelAdminImpl cai = createChannelAdminImpl(topic);
 	// Publish the ChannelAdminImpl with Corba
 	ChannelPublisher.publish(cai);
-	log.info("Channel {} created with a capacity of {}",topic,capacity);
+	log.debug("Channel {} created with a capacity of {}",topic,capacity);
 	return channel;
     }
 
@@ -85,7 +85,7 @@ public class BFFactory {
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
 	mapChannelCtr.get(channel.getTopic()).getThreadPool().setMaxSize(capacity);
-	log.info("Capacity of channel {} changed to {}",channel,capacity);
+	log.debug("Capacity of channel {} changed to {}",channel,capacity);
 	EventServer.getInstance().getMapChannel()
 		.put(channel.getTopic(), channel);
     }
@@ -100,7 +100,7 @@ public class BFFactory {
     public static synchronized ChannelAdminCtr createChannelAdminCtr(
 	    String topic) {
 	if (mapChannelAdminCtr.get(topic) == null) {
-		log.info("Creation of channelAdminCtr for {}",topic);
+		log.debug("Creation of channelAdminCtr for {}",topic);
 	    mapChannelAdminCtr.put(topic, new ChannelAdminCtr(topic));
 	}
 	log.debug("Access to ChannelAdminCtr of {}",topic);
@@ -118,7 +118,7 @@ public class BFFactory {
     public static synchronized ChannelAdminImpl createChannelAdminImpl(
 	    String topic) {
 	if (mapChannelAdminImpl.get(topic) == null) {
-		log.info("Creation of channelAdminImpl for {}",topic);
+		log.debug("Creation of channelAdminImpl for {}",topic);
 	    mapChannelAdminImpl.put(topic, new ChannelAdminImpl(topic));
 	}
 	log.debug("Access to ChannelAdminImpl of {}",topic);
@@ -134,7 +134,7 @@ public class BFFactory {
      */
     public static synchronized ChannelCtr createChannelCtr(String topic) {
 	if (mapChannelCtr.get(topic) == null) {
-		log.info("Creation of channelCtr for {}",topic);
+		log.debug("Creation of channelCtr for {}",topic);
 	    mapChannelCtr.put(topic, new ChannelCtr(topic));
 	}
 	log.debug("Access to ChannelCtr of {}",topic);
@@ -154,7 +154,7 @@ public class BFFactory {
     public static synchronized EventServerChannelAdminCtr createEventServerChannelAdminCtr(
 	    String eventServerName) {
 	if (mapEventServerChannelAdminCtr.get(eventServerName) == null) {
-		log.info("Creation of EventServerChannelAdminCtr for {}",eventServerName);
+		log.debug("Creation of EventServerChannelAdminCtr for {}",eventServerName);
 	    mapEventServerChannelAdminCtr.put(eventServerName,
 		    new EventServerChannelAdminCtr(eventServerName));
 	}

@@ -99,7 +99,7 @@ public class JdbcDOAImpl implements JdbcDAO {
 
 		if (line.trim().length() > 0) {
 		    try {
-			log.info(line);
+			log.debug(line);
 			st.execute(line);
 		    } catch (Exception e) {
 			log.warn(e.toString());

@@ -68,7 +68,7 @@ public class TimeServiceCtr {
 	    throw new AlreadyRegisteredException();
 	}
 	threadPool.runTask(new ThreadTime(cc, model, timeSpan));
-	log.info("Component subscribed : " + cc);
+	log.info("Synchronizable Callback subscribed : " + cc.toString());
     }
 
     /**

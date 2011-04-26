@@ -47,8 +47,6 @@ public class CosTimeServer {
 	}
 	TimeServicePublisher.publish(timeServerName, timeService, orb);
 	log.info("Mezzo COS Time Server \" {} \" is running...", timeServerName);
-	log.trace("Mezzo COS Time Server \" {} \" is running...",
-		timeServerName);
 	orb.run();
     }
 

@@ -20,8 +20,6 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.factory.BFFactory;
 import fr.esiag.mezzodijava.mezzo.coseventserver.impl.ChannelAdminImpl;
 import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
 
-
-
 /**
  * Classe ChannelPublisher
  * 
@@ -33,7 +31,7 @@ import fr.esiag.mezzodijava.mezzo.servercommons.CORBAUtils;
  * 
  */
 public class ChannelPublisher {
-	private static Logger log = LoggerFactory.getLogger(ChannelPublisher.class);
+    private static Logger log = LoggerFactory.getLogger(ChannelPublisher.class);
 
     private static Map<ChannelAdminImpl, byte[]> oidMap = Collections
 	    .synchronizedMap(new HashMap<ChannelAdminImpl, byte[]>());
@@ -41,20 +39,18 @@ public class ChannelPublisher {
     private static POA poa;
 
     private static synchronized POA getPOA() {
-    	
-	try {
-	    if (poa == null) {
+	if (poa == null) {
+	    try {
 		poa = POAHelper.narrow(BFFactory.getOrb()
 			.resolve_initial_references("RootPOA"));
 		poa.the_POAManager().activate();
+		log.debug("POA activated");
+	    } catch (InvalidName e) {
+		log.error("Name not valid", e);
+	    } catch (AdapterInactive e) {
+		log.error("Adapter inactive", e);
 	    }
-
-	} catch (InvalidName e) {
-	    log.error("Name not valid",e);
-	} catch (AdapterInactive e) {
-	   log.error("Adapter inactive",e);
 	}
-	log.debug("POA accessed");
 	return poa;
     }
 
@@ -66,10 +62,6 @@ public class ChannelPublisher {
      *            the implementation of ChannelAdmin
      */
     public static void publish(ChannelAdminImpl channelAdminImpl) {
-
-//	ThreadEvent te = new ThreadEvent(channelAdminImpl.getTopic());
-//	thread = new Thread(te);
-//	thread.start();
 	try {
 	    NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
 		    .getOrb().resolve_initial_references("NameService"));
@@ -77,14 +69,16 @@ public class ChannelPublisher {
 		    new ChannelAdminPOATie(channelAdminImpl));
 	    oidMap.put(channelAdminImpl, oid);
 	    CORBAUtils.createContext(nc, "eventChannel");
-	    nc.rebind(nc.to_name("eventChannel/"+channelAdminImpl.getTopic()), getPOA()
-		    .id_to_reference(oid));
+	    nc.rebind(
+		    nc.to_name("eventChannel/" + channelAdminImpl.getTopic()),
+		    getPOA().id_to_reference(oid));
 
 	} catch (Exception e) {
-	   log.error("CORBA ERROR",e);
-	   
+	    log.error("CORBA ERROR", e);
+
 	}
-	log.debug("ChannelAdminImpl of {} is published",channelAdminImpl.getTopic());
+	log.debug("ChannelAdminImpl of {} is published",
+		channelAdminImpl.getTopic());
     }
 
     /**
@@ -101,18 +95,27 @@ public class ChannelPublisher {
 	    // unbind
 	    NamingContextExt nc = NamingContextExtHelper.narrow(BFFactory
 		    .getOrb().resolve_initial_references("NameService"));
-	    nc.unbind(nc.to_name("eventChannel/"+channelAdminImpl.getTopic()));
-	    //remove from map
+	    nc.unbind(nc.to_name("eventChannel/" + channelAdminImpl.getTopic()));
+	    // remove from map
 	    oidMap.remove(channelAdminImpl);
-	    for(ProxyForPushConsumer ppc : channelAdminImpl.getChannelAdminctrl().getOidProxyForPushConsumerMap().keySet()){
-	    	getPOA().deactivate_object(channelAdminImpl.getChannelAdminctrl().getOidProxyForPushConsumerMap().get(ppc));
+	    for (ProxyForPushConsumer ppc : channelAdminImpl
+		    .getChannelAdminctrl().getOidProxyForPushConsumerMap()
+		    .keySet()) {
+		getPOA().deactivate_object(
+			channelAdminImpl.getChannelAdminctrl()
+				.getOidProxyForPushConsumerMap().get(ppc));
 	    }
-	    for(ProxyForPushSupplier pps : channelAdminImpl.getChannelAdminctrl().getOidProxyForPushSupplierMap().keySet()){
-	    	getPOA().deactivate_object(channelAdminImpl.getChannelAdminctrl().getOidProxyForPushSupplierMap().get(pps));
+	    for (ProxyForPushSupplier pps : channelAdminImpl
+		    .getChannelAdminctrl().getOidProxyForPushSupplierMap()
+		    .keySet()) {
+		getPOA().deactivate_object(
+			channelAdminImpl.getChannelAdminctrl()
+				.getOidProxyForPushSupplierMap().get(pps));
 	    }
 	} catch (Exception e) {
-		log.error("Unable to contact NameService",e);
+	    log.error("Unable to contact NameService", e);
 	}
-	log.debug("Destruction of ChannelAdminImpl {} is done",channelAdminImpl.getTopic());
+	log.debug("Destruction of ChannelAdminImpl {} is done",
+		channelAdminImpl.getTopic());
     }
 }

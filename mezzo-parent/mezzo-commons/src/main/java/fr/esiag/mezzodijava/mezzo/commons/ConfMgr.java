@@ -91,7 +91,7 @@ public class ConfMgr {
 	    List<String> keys = new ArrayList(properties.keySet());
 	    Collections.sort(keys);
 	    for (Object key : keys) {
-		logStr.append("\n");
+		logStr.append("\n - ");
 		logStr.append(key);
 		logStr.append("=");
 		logStr.append(properties.get(key));
