@@ -1,7 +1,5 @@
 package fr.esiag.mezzodijava.mezzo.it;
 
-import org.omg.CORBA.ORB;
-
 import fr.esiag.mezzodijava.mezzo.cosevent.AlreadyConnectedException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
@@ -15,29 +13,27 @@ import fr.esiag.mezzodijava.mezzo.libclient.exception.TopicNotFoundException;
 
 public class SupplierPush {
 	
-	private static ORB orb;
-	
 	public static void main(String[] args) {
 		try {
 			EventClient ec = EventClient.init(args);
-			//orb = ec.getOrb();
 			String channelName; 
 			String idc;
 			if (args.length == 2) {
 			    channelName = args[0];
 			    idc = args[1];
 			}else{
-				channelName = "injector system state";
+				channelName = "nuclear sensor";
 				idc = "supplierpush";
 			}
 			ChannelAdmin channelAdmin = ec.resolveChannelByTopic(channelName);
 			String idcomp = idc;
 			ProxyForPushSupplier supplierProxy = channelAdmin
 		    .getProxyForPushSupplier(idcomp);
-			System.out.println("connexion du supplier");
+			System.out.println("connexion du supplier "+idc);
 			supplierProxy.connect();
 			Thread.sleep(5000);
 			for(int n = 0;n<10;n++){
+				System.out.println(n);
 				String toSend = new String( "Message number "+n+": trolololo");
 				try {
 					supplierProxy.push(EventFactory.createEventString(n, 600, toSend));
