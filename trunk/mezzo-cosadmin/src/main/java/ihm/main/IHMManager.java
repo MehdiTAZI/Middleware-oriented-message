@@ -28,15 +28,20 @@ public class IHMManager extends JFrame{
 	JTextField textFieldCapacity;
 	public IHMManager(){
 		final CosManager manager = new CosManager(args, properties);
+		
 		listServeur = new JList(new Vector<String>(manager.listEventServers()));
 		listTimeServeur = new JList(new Vector<String>(manager.listTimeServers()));
 		listChannels = new JList(new Vector<String>(manager.listEventChannel()));
+		
 		panelMethod = new JPanel(new BorderLayout());
 		panelModify = new JPanel(new GridLayout(1, 3));
+		
 		buttonNew = new JButton("new channel");
 		buttonModify = new JButton("modify channel");
 		buttonDelete = new JButton("delete channel");
+		
 		labelCapacity = new JLabel("new capacity");
+		
 		textFieldCapacity = new JTextField();
 		
 		this.setLayout(new GridLayout(4, 1));
