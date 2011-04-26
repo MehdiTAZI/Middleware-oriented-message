@@ -66,7 +66,7 @@ public class ProxyForPullConsumerImpl extends AbstractProxyImpl implements
 	@Override
 	public Event pull(BooleanHolder hasEvent) throws ChannelNotFoundException,
 			NotConnectedException {
-		log.info("Pull (idComponent {})",idComponent);
+		log.debug("CHANNEL ({}) ==> PULL CONSUMER (id={}) : Pulling event",channelCtr.getChannel().getTopic(),idComponent);
 		if (!connected) {
 			log.error("Not connected");
 		    throw new NotConnectedException();

@@ -84,14 +84,12 @@ public class ProxyForPushSupplierImpl extends AbstractProxyImpl implements
     @Override
     public void push(Event evt) throws NotConnectedException {
 
+	log.debug("PUSH SUPPLIER (id={}) ==> CHANNEL ({}) : Pushing event",idComponent,channelCtr.getChannel().getTopic());
 	if (!connected) {
 		log.error("Not connected");
 	    throw new NotConnectedException();
 	}
-
 	channelCtr.addEvent(evt);
-	log.info(" Push Consumer (idComponent {}) just sent an Event on {}",
-			idComponent, channelCtr.getChannel().getTopic());
-
+	
     }
 }
