@@ -85,7 +85,7 @@ public class BFFactory {
     public static void changeChannelCapacity(Channel channel, int capacity) {
 	channel.setCapacity(capacity);
 	mapChannelCtr.get(channel.getTopic()).getThreadPool().setMaxSize(capacity);
-	log.debug("Capacity of channel {} changed to {}",channel,capacity);
+	log.info("Capacity of channel {} changed to {}",channel,capacity);
 	EventServer.getInstance().getMapChannel()
 		.put(channel.getTopic(), channel);
     }
@@ -190,7 +190,7 @@ public class BFFactory {
      * @return singleton instance of the ORB.
      */
     public static synchronized ORB getOrb() {
-    	log.debug("Access to the ORB");
+    	log.trace("Access to the ORB");
 	return orb;
 
     }
@@ -280,7 +280,7 @@ public class BFFactory {
      *            The id of the wanted channel to destroy.
      */
     public static void destroy(long idChannel) {
-    	log.debug("Destruction of {}",idChannel);
+    	log.info("Destruction of {}",idChannel);
 	EventServer es = EventServer.getInstance();
 	String channelName = es.getChannel(idChannel).getTopic();
 	log.trace("Destruction of {} channel",idChannel);

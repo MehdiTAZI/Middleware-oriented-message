@@ -80,7 +80,7 @@ public class ChannelCtr {
      *            an Event
      */
     public void addEvent(Event e) {
-	log.trace("Add Event");
+	log.info("Add Event to the channel {}",channel.getTopic());
 	if (CosEventServer.getDelta() + new Date().getTime() < e.header.creationdate
 		+ e.header.timetolive) {
 
@@ -134,7 +134,7 @@ public class ChannelCtr {
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException, AlreadyConnectedException,
 	    MaximalConnectionReachedException {
-	log.trace("Add proxyPushConsumer {} to connected list",
+	log.info("Add proxyPushConsumer {} to connected list",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	ConsumerModel consumer = channel.getConsumers().get(idConsumer);
@@ -206,7 +206,7 @@ public class ChannelCtr {
     public void addProxyForPushSupplierToConnectedList(
 	    ProxyForPushSupplierImpl proxySupplier)
 	    throws AlreadyConnectedException, MaximalConnectionReachedException {
-	log.trace("Add proxyPushSupplier {} to connectedList",
+	log.info("Add proxyPushSupplier {} to connectedList",
 		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.isSuppliersConnectedsListcapacityReached()) {
@@ -239,7 +239,7 @@ public class ChannelCtr {
     public void addProxyForPullConsumerToConnectedList(
 	    ProxyForPullConsumerImpl proxyConsumer)
 	    throws AlreadyConnectedException, MaximalConnectionReachedException {
-	log.trace("Add proxyPullConsumer {} to connectedList",
+	log.info("Add proxyPullConsumer {} to connectedList",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	if (channel.isConsumersConnectedListcapacityReached()) {
@@ -275,7 +275,7 @@ public class ChannelCtr {
     public void addProxyForPullSupplierToConnectedList(
 	    ProxyForPullSupplierImpl proxySupplier)
 	    throws AlreadyConnectedException, MaximalConnectionReachedException {
-	log.trace("Add proxyPullSupplier {} to connectedList",
+	log.info("Add proxyPullSupplier {} to connectedList",
 		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.isSuppliersConnectedsListcapacityReached()) {
@@ -319,7 +319,7 @@ public class ChannelCtr {
     public void removeProxyForPushConsumerFromConnectedList(
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException, NotConnectedException {
-	log.trace("Remove proxyPushConsumer {} to connectedList",
+	log.info("Remove proxyPushConsumer {} to connectedList",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	if (!channel.getConsumers().containsKey(idConsumer)) {
@@ -347,7 +347,7 @@ public class ChannelCtr {
     public void removeProxyForPushConsumerFromSubscribedList(
 	    ProxyForPushConsumerImpl proxyConsumer)
 	    throws NotRegisteredException {
-	log.trace("Remove proxyPushConsumer {} from subscribedList",
+	log.info("Remove proxyPushConsumer {} from subscribedList",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	ConsumerModel c = new ConsumerModel();
@@ -375,7 +375,7 @@ public class ChannelCtr {
     public void removeProxyForPushSupplierFromConnectedList(
 	    ProxyForPushSupplierImpl proxySupplier)
 	    throws NotConnectedException {
-	log.trace("Remove proxyPushSupplier {} from connected list.",
+	log.info("Remove proxyPushSupplier {} from connected list.",
 		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.getSuppliersConnected().remove(idSupplier) == null) {
@@ -400,7 +400,7 @@ public class ChannelCtr {
     public void removeProxyForPullConsumerFromConnectedList(
 	    ProxyForPullConsumerImpl proxyConsumer)
 	    throws NotConnectedException {
-	log.trace("Remove proxyPullConsumer {} from connected List",
+	log.info("Remove proxyPullConsumer {} from connected List",
 		proxyConsumer.toString());
 	String idConsumer = proxyConsumer.getIdComponent();
 	ConsumerModel c = new ConsumerModel();
@@ -429,7 +429,7 @@ public class ChannelCtr {
     public void removeProxyForPullSupplierFromConnectedList(
 	    ProxyForPullSupplierImpl proxySupplier)
 	    throws NotConnectedException {
-	log.trace("Remove proxyPullSupplier {} from connected list.",
+	log.info("Remove proxyPullSupplier {} from connected list.",
 		proxySupplier.toString());
 	String idSupplier = proxySupplier.getIdComponent();
 	if (channel.getSuppliersPullConnected().remove(idSupplier) == null) {
@@ -448,7 +448,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushConsumerFromSubscribedList() {
-	log.trace("Remove all proxies for push Consumers from the subscribed list.");
+	log.info("Remove all proxies for push Consumers from the subscribed list.");
 	channel.setConsumers(Collections
 		.synchronizedMap(new HashMap<String, ConsumerModel>()));
 	// suppression de tous les consumers abonnés
@@ -462,7 +462,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushConsumerFromConnectedList() {
-	log.trace("Remove all proxies push for Consumer from the connected list.");
+	log.info("Remove all proxies push for Consumer from the connected list.");
 	channel.setConsumersConnected(new HashMap<String, ProxyForPushConsumerImpl>());
     }
 
@@ -473,7 +473,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPullConsumerFromConnectedList() {
-	log.trace("Remove all proxies pull for Consumer from the connected list.");
+	log.info("Remove all proxies pull for Consumer from the connected list.");
 	channel.setConsumersPull(new HashMap<String, ConsumerModel>());
     }
 
@@ -484,7 +484,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPushSupplierFromConnectedList() {
-	log.trace("Remove all proxies push for Supplier from the connected list.");
+	log.info("Remove all proxies push for Supplier from the connected list.");
 	channel.setSuppliersConnected(new HashMap<String, ProxyForPushSupplierImpl>());
     }
 
@@ -495,7 +495,7 @@ public class ChannelCtr {
      * 
      */
     public void removeAllProxiesForPullSupplierFromConnectedList() {
-	log.trace("Remove all proxies pull for Supplier from the connected list.");
+	log.info("Remove all proxies pull for Supplier from the connected list.");
 	channel.setSuppliersPullConnected(new HashMap<String, ProxyForPullSupplierImpl>());
     }
 

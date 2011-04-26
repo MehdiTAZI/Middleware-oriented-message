@@ -131,7 +131,7 @@ public class ChannelAdminCtr {
 	public ProxyForPushConsumer createProxyForPushConsumer(String idComponent) {
 		ProxyForPushConsumer ppc = null;
 
-		log.trace("Creation of proxyPushConsumer");
+		log.info("Creation of proxyPushConsumer {} in {}",idComponent, channel);
 		byte[] oid;
 		try {
 			oid = getPOA()
@@ -163,7 +163,7 @@ public class ChannelAdminCtr {
 	 */
 	public ProxyForPushSupplier createProxyForPushSupplier(String idComponent) {
 		ProxyForPushSupplier pps = null;
-		log.trace("Creation of proxyPushSupplier");
+		log.info("Creation of proxyPushSupplier {} in {}",idComponent, channel);
 		byte[] oid;
 		try {
 			oid = getPOA()
@@ -195,7 +195,7 @@ public class ChannelAdminCtr {
 	public ProxyForPullConsumer createProxyForPullConsumer(String idComponent) {
 		ProxyForPullConsumer ppc = null;
 
-		log.trace("Creation of proxyPullConsumer");
+		log.info("Creation of proxyPullConsumer {} in {}",idComponent, channel);
 		byte[] oid;
 		try {
 			oid = getPOA()
@@ -226,7 +226,7 @@ public class ChannelAdminCtr {
 	 */
 	public ProxyForPullSupplier createProxyForPullSupplier(String idComponent) {
 		ProxyForPullSupplier pps = null;
-		log.trace("Creation of proxyPullSupplier");
+		log.info("Creation of proxyPullSupplier {} in {}",idComponent, channel);
 		byte[] oid;
 		try {
 			oid = getPOA()
