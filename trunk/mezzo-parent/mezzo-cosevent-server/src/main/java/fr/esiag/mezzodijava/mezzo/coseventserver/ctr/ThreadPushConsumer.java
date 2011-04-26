@@ -51,21 +51,6 @@ public class ThreadPushConsumer implements Runnable {
     }
 
     /**
-     * process subscribed consumer list of the channel to find
-     * ProxyForPushConsumerImpl with Event to send. If the consumer is connected
-     * and it has Event in his list (in Channel), processSubscribedConsumers()
-     * call <code>ppfc.receive(Event)</code> on it.
-     * 
-     * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
-     * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
-     * 
-     * 
-     */
-    public void processSubscribedConsumers() {
-
-
-    }
-    /**
      * If the consumer is connected
      * and it has Event in his list (in Channel), processSubscribedConsumers()
      * call <code>ppfc.receive(Event)</code> on it.

@@ -28,6 +28,7 @@ public class EventConvertor {
      * @return the new event
      */
     public EventModel transformToEventModel(Event e) {
+    	log.info("Event transform to Event Model");
 	EventModel em = new EventModel();
 	em.setCode(e.header.code);
 	em.setCreationdate(e.header.creationdate);
@@ -50,6 +51,7 @@ public class EventConvertor {
      * @return the event
      */
     public Event transformToEvent(EventModel em) {
+    	log.info("EventModel transform to Event");
 	Header header = new Header(em.getCode(), em.getPriority(),
 		em.getCreationdate(), em.getTimetolive());
 	Any any = ORB.init().create_any();

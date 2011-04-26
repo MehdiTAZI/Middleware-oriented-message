@@ -59,7 +59,7 @@ public class EventServerChannelAdminCtr {
 	 */
 	public long createChannel(String topic, int capacity)
 			throws ChannelAlreadyExistsException {
-		log.trace("create channel {}. Capacity {}", topic, capacity);
+		log.info("create channel {} with a capacity of {} connected", topic, capacity);
 		Channel channel = BFFactory.createChannel(topic, capacity);
 		// persistance du channel
 		DAOFactory.getJdbcDAO().insertChannel(channel);
@@ -141,7 +141,7 @@ public class EventServerChannelAdminCtr {
 	public void changeChannelCapacity(long uniqueServerChannelId, int capacity)
 			throws fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException,
 			fr.esiag.mezzodijava.mezzo.cosevent.CannotReduceCapacityException {
-		log.trace("change channel capacity");
+		log.info("change channel capacity of {} to {}",uniqueServerChannelId,capacity);
 
 		Channel channel = EventServer.getInstance().getChannel(
 				uniqueServerChannelId);
