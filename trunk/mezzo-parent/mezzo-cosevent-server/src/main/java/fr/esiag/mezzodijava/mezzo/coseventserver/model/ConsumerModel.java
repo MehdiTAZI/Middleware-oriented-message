@@ -16,7 +16,12 @@ public class ConsumerModel {
 
     private static final long serialVersionUID = 1L;
 
-    private int id;
+    public SortedSet<EventModel> getEventsInQueue() {
+		return eventsInQueue;
+	}
+
+
+	private int id;
     
     private Channel channel;
 
