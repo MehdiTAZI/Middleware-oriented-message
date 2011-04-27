@@ -204,11 +204,11 @@ public class CosEventServer {
 			+ "\"loaded with " + cmap.size()
 			+ "subscribed consummers and published.");
 	    }
-	    log.info("Mezzo COS Event Server \"" + eventServerName + "\" "
-		    + col.size() + " persisted channel loaded and published.");
+	    log.info("Mezzo COS Event Server \"" + eventServerName + "\" : "
+		    + col.size() + " persisted channel(s) loaded and published.");
 	} else {
 	    log.info("Mezzo COS Event Server \"" + eventServerName
-		    + "\" 0 persisted channel loaded and published.");
+		    + "\" : 0 persisted channel loaded and published.");
 	}
     }
 
