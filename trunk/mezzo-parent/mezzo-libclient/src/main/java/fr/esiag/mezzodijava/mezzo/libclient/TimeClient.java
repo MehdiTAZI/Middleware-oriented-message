@@ -117,7 +117,7 @@ public final class TimeClient {
      */
     private TimeClient(String[] args, Properties properties)
 	    throws TimeClientException {
-	System.out.println("Initilazing Mezzo Time Client...");
+	log.info("Initilazing Mezzo Time Client...");
 	props = properties;
 	if (props == null) {
 	    props = ConfMgr.loadProperties("timeclient_default","timeclient");
@@ -132,7 +132,7 @@ public final class TimeClient {
 	    throw new TimeClientException("Cannot resolve NameService", e);
 	}
 	nce = NamingContextExtHelper.narrow(nceObj);
-	System.out.println("Mezzo Time Client initialized.");
+	log.info("Mezzo Time Client initialized.");
     }
 
     public ORB getOrb() {
