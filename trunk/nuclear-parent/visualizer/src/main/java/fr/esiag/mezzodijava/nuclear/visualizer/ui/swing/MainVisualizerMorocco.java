@@ -5,6 +5,8 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,8 +23,11 @@ import javax.swing.event.ListSelectionListener;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumer;
 import fr.esiag.mezzodijava.mezzo.cosevent.CallbackConsumerOperations;
 import fr.esiag.mezzodijava.mezzo.cosevent.ChannelAdmin;
+import fr.esiag.mezzodijava.mezzo.cosevent.ChannelNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ConsumerNotFoundException;
 import fr.esiag.mezzodijava.mezzo.cosevent.Event;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotConnectedException;
+import fr.esiag.mezzodijava.mezzo.cosevent.NotRegisteredException;
 import fr.esiag.mezzodijava.mezzo.cosevent.ProxyForPushConsumer;
 import fr.esiag.mezzodijava.mezzo.libclient.EventClient;
 import fr.esiag.mezzodijava.mezzo.libclient.EventFactory;
@@ -49,9 +54,10 @@ public class MainVisualizerMorocco extends JFrame implements
     private ConnectionPanel connectionPanel;
     private SubscriptionPanel subscriptionPanel;
 
+    
     public MainVisualizerMorocco(String[] args) {
 
-	sound = new Sound("alerte.wav");
+	
 
 	try {
 	    ec = EventClient.init(args);
@@ -69,7 +75,7 @@ public class MainVisualizerMorocco extends JFrame implements
 
 	lsm.addListSelectionListener(this);
 	setTitle("Visualizer Morocco");
-	// setResizable(false);
+	setResizable(false);
 
 	// Get the size of the screen
 	Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
@@ -114,6 +120,30 @@ public class MainVisualizerMorocco extends JFrame implements
 	// Move the window
 	setBounds(x, y, w, h);
 
+	//listener for a window  closing 
+    addWindowListener(new WindowAdapter() {
+
+    	public void windowClosing (WindowEvent we){
+    		try {
+				if(connectionPanel.isConnected()==true)
+					consumerProxy.disconnect();
+			} catch (ChannelNotFoundException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (NotRegisteredException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (NotConnectedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		System.exit(0);
+	}
+	});
+
+	
+	
+	
 	setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	setVisible(true);
     }
@@ -214,19 +244,8 @@ public class MainVisualizerMorocco extends JFrame implements
 
 	@Override
 	public void receive(Event evt) throws ConsumerNotFoundException {
-	    // sound=new Sound("alerte.wav");
-
-	    // try {
-	    // URL url=getClass().getClassLoader().getResource("alerte.wav");
-	    // System.out.println(url.getPath());
-	    // URI uri=new URI(url.getPath());
-	    // sound=new Sound(uri);
-	    // } catch (URISyntaxException e) {
-	    // // TODO Auto-generated catch block
-	    // e.printStackTrace();
-	    // }
-	    // //sound=new Sound(url);
-	    // getClass().getClassLoader().getResource("/splash.gif"))
+		sound = new Sound("alerte.wav");
+	    
 	    System.out.println(evt.body.type);
 	    listEvents.add(evt);
 	    if (evt.header.priority == 2)
@@ -255,7 +274,7 @@ public class MainVisualizerMorocco extends JFrame implements
 		//
 		// frame.getEventsPanel().setCurrentRow(frame.getEventsPanel().getCurrentRow()+1);
 		String[] tmp = new String[] { "" + evt.header.code,
-			new Date(evt.header.creationdate).toGMTString(),
+			new Date(evt.header.creationdate).toString(),
 			"" + evt.header.priority, evt.body.type };
 		frame.getEventsPanel().getTableModel().addRow(tmp);
 
@@ -283,7 +302,7 @@ public class MainVisualizerMorocco extends JFrame implements
 		// frame.getEventsPanel().setCurrentRow(frame.getEventsPanel().getCurrentRow()+1);
 
 		String[] tmp = new String[] { "" + evt.header.code,
-			new Date(evt.header.creationdate).toGMTString(),
+			new Date(evt.header.creationdate).toString(),
 			"" + evt.header.priority, evt.body.type };
 		frame.getEventsPanel().getTableModel().addRow(tmp);
 
@@ -307,7 +326,7 @@ public class MainVisualizerMorocco extends JFrame implements
 		// frame.getEventsPanel().setCurrentRow(frame.getEventsPanel().getCurrentRow()+1);
 
 		String[] tmp = new String[] { "" + evt.header.code,
-			new Date(evt.header.creationdate).toGMTString(),
+			new Date(evt.header.creationdate).toString(),
 			"" + evt.header.priority, evt.body.type };
 		frame.getEventsPanel().getTableModel().addRow(tmp);
 	    }
@@ -330,7 +349,7 @@ public class MainVisualizerMorocco extends JFrame implements
 		//
 		// frame.getEventsPanel().setCurrentRow(frame.getEventsPanel().getCurrentRow()+1);
 		String[] tmp = new String[] { "" + evt.header.code,
-			new Date(evt.header.creationdate).toGMTString(),
+			new Date(evt.header.creationdate).toString(),
 			"" + evt.header.priority, evt.body.type };
 		frame.getEventsPanel().getTableModel().addRow(tmp);
 	    }
@@ -371,7 +390,7 @@ public class MainVisualizerMorocco extends JFrame implements
 
 	    detailEventPanel.getTextCode().setText("" + event.header.code);
 	    detailEventPanel.getTextTime().setText(
-		    new Date(event.header.creationdate).toGMTString());
+		    new Date(event.header.creationdate).toString());
 	    detailEventPanel.getTextTTL().setText("" + event.header.timetolive);
 	    detailEventPanel.getTextPriority().setText(
 		    "" + event.header.priority);

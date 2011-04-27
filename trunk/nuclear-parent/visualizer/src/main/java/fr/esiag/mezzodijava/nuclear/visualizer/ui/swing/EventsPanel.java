@@ -42,8 +42,8 @@ public class EventsPanel extends JPanel{
 		listEventsTable=new JTable(tableModel);
 		
 		listEventsTable.setShowHorizontalLines( false );
-		listEventsTable.setRowSelectionAllowed( true );
-		listEventsTable.setColumnSelectionAllowed( true );
+		//listEventsTable.setRowSelectionAllowed( true );
+		//listEventsTable.setColumnSelectionAllowed( true );
 		listEventsTable.getTableHeader().setBackground(Color.LIGHT_GRAY);
 		
 		
