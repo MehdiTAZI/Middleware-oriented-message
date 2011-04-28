@@ -1,6 +1,7 @@
 package fr.esiag.mezzodijava.mezzo.it;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -42,20 +43,20 @@ public class LoadTest {
 
     private static Map<String, Long> channels = new HashMap<String, Long>();;
 
-    private static Map<String, Long> pullSuppliedSent = new HashMap<String, Long>();
+    private static Map<String, Long> pullSuppliedSent = Collections.synchronizedMap(new HashMap<String, Long>());
 
-    private static Map<String, Long> pushSuppliedSent = new HashMap<String, Long>();
+    private static Map<String, Long> pushSuppliedSent = Collections.synchronizedMap(new HashMap<String, Long>());
 
-    private static Map<String, List<Long>> pushConsumptionDelays = new HashMap<String, List<Long>>();
+    private static Map<String, List<Long>> pushConsumptionDelays = Collections.synchronizedMap(new HashMap<String, List<Long>>());
 
-    private static Map<String, List<Long>> pullConsumptionDelays = new HashMap<String, List<Long>>();
+    private static Map<String, List<Long>> pullConsumptionDelays = Collections.synchronizedMap(new HashMap<String, List<Long>>());
 
     public static boolean live = true;
 
     public static long connected = 0;
-    
+
     public static long expectedConnected = 0;
-    
+
     public static void main(String args[]) {
 	if (args.length != 7) {
 	    printUsage();
@@ -68,22 +69,24 @@ public class LoadTest {
 	    maxPushCon = new Integer(args[3]);
 	    maxPullSup = new Integer(args[4]);
 	    maxPullCon = new Integer(args[5]);
-	    duration = new Integer(args[6])*1000;
+	    duration = new Integer(args[6]) * 1000;
 	} catch (Exception e) {
 	    printUsage();
 	}
 	initServer();
 	try {
 	    initChannels();
-	    
-	    connected=0;
-	    expectedConnected=(maxPushCon+maxPushSup+maxPullCon+maxPullSup)*maxChannel;
+
+	    connected = 0;
+	    expectedConnected = (maxPushCon + maxPushSup + maxPullCon + maxPullSup)
+		    * maxChannel;
 	    launchComponentServers();
-	    //wait for connected
-	    while(connected<expectedConnected){
-		    Thread.sleep(10);
-		}
-	    System.out.println("Everybody ("+connected+") seem to be connected... Lets's rock !");
+	    // wait for connected
+	    while (connected < expectedConnected) {
+		Thread.sleep(10);
+	    }
+	    System.out.println("Everybody (" + connected
+		    + ") seem to be connected... Lets's rock !");
 	    // duree du test ATTENTION TEMPS DE CONNECTION COMPRIS
 	    try {
 		Thread.sleep(duration);
@@ -93,11 +96,10 @@ public class LoadTest {
 	    }
 	    live = false;
 	    // pour redescendre :
-	    try {
-		Thread.sleep(3000);
-	    } catch (InterruptedException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
+	    // wait for connected
+	    System.out.println("Wait for disconnect...");
+	    while (connected > 0) {
+		Thread.sleep(10);
 	    }
 	    displayStats();
 	} catch (Exception e) {
@@ -106,7 +108,7 @@ public class LoadTest {
 	    removeChannels();
 	}
     }
-    
+
     public static void printUsage() {
 	System.out.println("Mezzo COS Event LOAD TEST");
 	System.out.println("Usage :");
@@ -192,9 +194,12 @@ public class LoadTest {
 
 	System.out.println("Results :");
 	System.out.println("------- :");
-	System.out.println("Test summary : "+maxChannel+" channels and per channel :");
-	System.out.println("  PUSH Suppliers : "+maxPushSup+"    PUSH Consumers : "+maxPushCon);
-	System.out.println("  PULL Suppliers : "+maxPullSup+"    PULL Consumers : "+maxPullCon);
+	System.out.println("Test summary : " + maxChannel
+		+ " channels and per channel :");
+	System.out.println("  PUSH Suppliers : " + maxPushSup
+		+ "    PUSH Consumers : " + maxPushCon);
+	System.out.println("  PULL Suppliers : " + maxPullSup
+		+ "    PULL Consumers : " + maxPullCon);
 	System.out
 		.println("Total Push Supplied Events (nb)                      : "
 			+ totPushSuppliedNb);
@@ -240,7 +245,7 @@ public class LoadTest {
 		supplierProxy.connect();
 		connected++;
 		System.out.println("connected push supplier n°" + name);
-		while(connected<expectedConnected){
+		while (connected < expectedConnected) {
 		    Thread.sleep(100);
 		}
 		while (live) {
@@ -255,6 +260,7 @@ public class LoadTest {
 		e.printStackTrace();
 	    }
 	    pushSuppliedSent.put(name, sent);
+	    connected--;
 	    System.out.println("ALL DONE push supplier n°" + name);
 	}
     }
@@ -284,13 +290,14 @@ public class LoadTest {
 		System.out.println("connected push consumer n°" + name);
 		while (live) {
 		    Thread.sleep(100);
-		}		
+		}
 		consumerProxy.disconnect();
 		consumerProxy.unsubscribe();
 	    } catch (Exception e) {
 		e.printStackTrace();
 	    }
 	    pushConsumptionDelays.put(name, delays);
+	    connected--;
 	    System.out.println("ALL DONE push consumer n°" + name);
 	}
 
@@ -331,6 +338,7 @@ public class LoadTest {
 		e.printStackTrace();
 	    }
 	    pullSuppliedSent.put(name, sent);
+	    connected--;
 	    System.out.println("ALL DONE SUPPLIER pull supplier n°" + name);
 	}
 
@@ -370,7 +378,7 @@ public class LoadTest {
 		consumerProxy.connect();
 		connected++;
 		System.out.println("connected pull consumer n°" + name);
-		while(connected<expectedConnected){
+		while (connected < expectedConnected) {
 		    Thread.sleep(100);
 		}
 		// begin of pull consumer
@@ -388,6 +396,7 @@ public class LoadTest {
 		e.printStackTrace();
 	    }
 	    pullConsumptionDelays.put(name, delays);
+	    connected--;
 	    System.out.println("ALL DONE pull consumer n°" + name);
 
 	}
