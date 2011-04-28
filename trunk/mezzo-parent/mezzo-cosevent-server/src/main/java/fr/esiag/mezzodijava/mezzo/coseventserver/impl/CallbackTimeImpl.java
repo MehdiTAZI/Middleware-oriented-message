@@ -36,7 +36,7 @@ public class CallbackTimeImpl implements SynchronizableOperations {
 
 	delta = arg - new Date().getTime();
 	CosEventServer.setDelta(delta);
-	log.trace("Time synchonization {}",delta);
+	log.debug("Time synchonization {}",delta);
     }
 
 }
