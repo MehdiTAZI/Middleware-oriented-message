@@ -20,10 +20,11 @@ import fr.esiag.mezzodijava.mezzo.coseventserver.model.ConsumerModel;
 import fr.esiag.mezzodijava.mezzo.coseventserver.model.EventModel;
 
 /**
- * Class ThreadPushConsumer to process event in queues and send them to consumers
+ * Class ThreadPushConsumer to process event in queues and send them to
+ * consumers
  * 
- * In a infinite loop each 0.5s : for the provided consumer if it is
- * connected for each event in its list consumer.receive() if unreachable
+ * In a infinite loop each 0.5s : for the provided consumer if it is connected
+ * for each event in its list consumer.receive() if unreachable
  * consumer.disconnect() end if end for end if end for
  * 
  * UC n°: US15 (+US children)
@@ -41,19 +42,21 @@ public class ThreadPushConsumer implements Runnable {
 
     /**
      * constructor for the thread push consumer
-     * @param proxyConsumer there is one threadPushConsumer for each push consumer
+     * 
+     * @param proxyConsumer
+     *            there is one threadPushConsumer for each push consumer
      */
     public ThreadPushConsumer(ProxyForPushConsumerImpl proxyConsumer) {
 	log.trace("ThreadEvent created");
 	pfpc = proxyConsumer;
-	consumer = pfpc.getChannelCtr().getChannel().getConsumers().get(proxyConsumer.getIdComponent());
+	consumer = pfpc.getChannelCtr().getChannel().getConsumers()
+		.get(proxyConsumer.getIdComponent());
 	// channel = es.getChannel(topic);
     }
 
     /**
-     * If the consumer is connected
-     * and it has Event in his list (in Channel), processSubscribedConsumers()
-     * call <code>ppfc.receive(Event)</code> on it.
+     * If the consumer is connected and it has Event in his list (in Channel),
+     * processSubscribedConsumers() call <code>ppfc.receive(Event)</code> on it.
      * 
      * If <code>ppfc.receive()</code> throws ConsumerUnreachableExcepetion, the
      * method disconnect the consummer calling <code>ppfc.disconnect()</code>.
@@ -65,6 +68,7 @@ public class ThreadPushConsumer implements Runnable {
 	log.trace("process subscribed consumers");
 	while (pfpc.getChannelCtr().getChannel().getConsumersConnected()
 		.containsKey(consumer.getIdConsumer())) {
+	    log.trace("process consummer " + consumer.getIdConsumer());
 	    // for all events of the consumer
 	    SortedSet<EventModel> le = consumer.getEvents();
 	    synchronized (le) {
@@ -75,6 +79,7 @@ public class ThreadPushConsumer implements Runnable {
 		while (i.hasNext() && pfpc != null) {
 		    EventModel em = i.next();
 		    try {
+			log.trace("process event " + em.getCode());
 			long delta = CosEventServer.getDelta();
 			if (em.getCreationdate() + em.getTimetolive() > new Date()
 				.getTime() + delta) {
@@ -117,10 +122,9 @@ public class ThreadPushConsumer implements Runnable {
 	    try {
 		Thread.sleep(500);
 	    } catch (InterruptedException e) {
-		log.error("thread event interrupted",e);
+		log.error("thread event interrupted", e);
 	    }
 	}
 
     }
-
 }
