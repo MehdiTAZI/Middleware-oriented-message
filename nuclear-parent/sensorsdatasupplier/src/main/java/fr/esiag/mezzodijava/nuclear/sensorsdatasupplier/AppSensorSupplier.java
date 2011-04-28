@@ -52,13 +52,13 @@ public class AppSensorSupplier {
 //	    return createStringEvent(s);
 	if (type.toLowerCase().trim().equals("temperature")) {
 	    Temperature t = new Temperature(value, "Celsius");
-	    e = EventFactory.createEventObject(1, 5000, t);
+	    e = EventFactory.createEventObject(1, 5000000, t);
 	} else if (type.toLowerCase().trim().equals("pression")) {
 	    Pression p = new Pression(value, "Pascal");
-	    e = EventFactory.createEventObject(1, 5000, p);
+	    e = EventFactory.createEventObject(1, 5000000, p);
 	} else if (type.toLowerCase().trim().equals("radioactivite")) {
 	    RadioActivite ra = new RadioActivite(value, "Becquerel");
-	    e = EventFactory.createEventObject(1, 5000, ra);
+	    e = EventFactory.createEventObject(1, 5000000, ra);
 	}
 
 	return e;
