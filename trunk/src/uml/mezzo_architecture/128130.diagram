@@ -18,59 +18,59 @@ deploymentnodecanvas 129666 deploymentnode_ref 128386 // LAN
 end
 componentcanvas 130178 component_ref 129026 // costimeserver
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 1001 186 2005 125 39
+  xyzwh 1001 153 2005 125 39
 end
 componentcanvas 130306 component_ref 128770 // costimeserver.jar
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 1004 240 2011 119 39
+  xyzwh 1004 202 2011 119 39
 end
 componentcanvas 130562 component_ref 128258 // costime_watcher
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 1004 135 2011 119 39
+  xyzwh 1004 106 2011 119 39
 end
 componentcanvas 130818 component_ref 128002 // coseventserver
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 813 186 2017 125 39
+  xyzwh 813 153 2017 125 39
 end
 componentcanvas 130946 component_ref 128642 // coseventserver.jar
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 811 240 2023 129 39
+  xyzwh 811 202 2023 129 39
 end
 componentcanvas 131202 component_ref 128130 // cosevent_watcher
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 812 135 2023 127 39
+  xyzwh 812 106 2023 127 39
 end
 componentcanvas 131458 component_ref 129538 // systemstatemonitor
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color yellow xyzwh 870 318 2005 175 39
+  color yellow xyzwh 886 337 2005 175 39
 end
 componentcanvas 131586 component_ref 128386 // ns-wrapper
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 39 77 2005 125 39
+  color lightred xyzwh 39 77 2005 125 39
 end
 componentcanvas 131714 component_ref 128514 // jacorb-2.3.1
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 919 78 2029 91 39
+  color lightred xyzwh 867 64 2029 91 39
 end
 componentcanvas 132226 component_ref 128514 // jacorb-2.3.1
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 244 78 2005 91 39
+  color lightred xyzwh 258 78 2005 91 39
 end
 componentcanvas 132354 component_ref 129154 // visualizer.jar
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  color yellow xyzwh 80 307 2005 175 39
+  color yellow xyzwh 84 307 2005 175 39
 end
 componentcanvas 132482 component_ref 128002 // coseventserver
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 519 555 2005 125 39
+  xyzwh 599 555 2005 125 39
 end
 componentcanvas 132610 component_ref 128642 // coseventserver.jar
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 517 605 2005 129 39
+  xyzwh 597 605 2005 129 39
 end
 componentcanvas 132738 component_ref 128130 // cosevent_watcher
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 518 501 2010 127 39
+  xyzwh 598 501 2010 127 39
 end
 componentcanvas 132866 component_ref 129282 // sensorsdatasupplier.jar
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
@@ -82,7 +82,7 @@ componentcanvas 132994 component_ref 129410 // sensor
 end
 componentcanvas 133122 component_ref 128514 // jacorb-2.3.1
   draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 536 443 2015 91 39
+  color lightred xyzwh 471 435 2015 91 39
 end
 note 133250 "SUDAN"
   font bold_italic  xyzwh 797 551 2000 97 35
@@ -91,31 +91,69 @@ note 133378 "INDONESIA"
 note 133762 "MORROCO"
   font bold_italic  xyzwh 133 408 2000 97 35
 note 134018 "ARGENTINA"
-  font bold_italic  xyzwh 689 13 2000 97 35
+  font bold_italic  xyzwh 672 5 2000 97 35
 note 134402 "ALASKA"
   font bold_italic  xyzwh 805 670 2000 97 35
-image 134786 "C:/mezzodev/uml/mezzo_architecture/MEZ-logo.png" xyz 13 482 2000 end
+image 134786 "C:/mezzodev/uml/mezzo_architecture/MEZ-logo.png" xyz 13 451 2000 end
 textcanvas 134914 "Mezzo di Java
 --
-Démonstration du 27 Avril 2010
+Démonstration du 28 Avril 2011
 --
-Diagramme de déploiement"
-  font large_bold  xyzwh 18 591 2000 363 163
+Diagramme de déploiement
+--
+Architecture Esiag"
+  font large_bold  xyzwh 18 560 2000 367 183
 deploymentnodecanvas 135298 deploymentnode_ref 134914 // ntp.u-pec.fr
   xyzwh 1037 532 2000 75 46
 end
 hubcanvas 135554 xyz 373 204 2000
 hubcanvas 135810 xyz 785 203 2000
 hubcanvas 136066 xyz 581 390 2005
+componentcanvas 136322 component_ref 136706 // eventargentinalog4j.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 793 295 2005 195 39
+end
+componentcanvas 136450 component_ref 130050 // eventserver.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 803 247 2010 151 39
+end
+componentcanvas 136578 component_ref 136834 // timelog4j.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 994 294 2010 133 39
+end
+componentcanvas 136706 component_ref 128898 // timeserver.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 983 247 2015 141 39
+end
+componentcanvas 136834 component_ref 130050 // eventserver.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 414.5 555.5 2010 151 39
+end
+componentcanvas 136962 component_ref 136578 // eventsudanlog4j.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 413 605 2010 177 39
+end
+componentcanvas 137090 component_ref 136962 // jacorb.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color lightred xyzwh 230 123 2005 119 39
+end
+componentcanvas 137218 component_ref 136962 // jacorb.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color lightred xyzwh 960 64 2016 119 39
+end
+componentcanvas 137346 component_ref 136962 // jacorb.properties
+  draw_component_as_icon yes show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color lightred xyzwh 574 435 2020 119 39
+end
 simplerelationcanvas 135426 simplerelation_ref 136578
   from ref 128130 z 2001 to ref 135298
 end
 line 135682 ----
-  from ref 135554 z 2001 label "TCP 1050 / IIOP" xyz 388 172 3000 to ref 129666
+  from ref 135554 z 2001 label "TCP 1050 / IIOP" xyz 388 172 2001 to ref 129666
 line 135938 ----
-  from ref 129666 z 2001 label "TCP ? / IIOP" xyz 719.5 177.5 3000 to ref 135810
+  from ref 129666 z 2001 label "TCP ? / IIOP" xyz 719 177 2001 to ref 135810
 line 136194 ----
-  from ref 129666 z 2006 label "TCP ? / IIOP" xyz 506 377 3000 to ref 136066
+  from ref 129666 z 2006 label "TCP ? / IIOP" xyz 506 377 2006 to ref 136066
 line 133506 -_-_
   from ref 133378 z 2006 to ref 131458
 line 133634 -_-_
