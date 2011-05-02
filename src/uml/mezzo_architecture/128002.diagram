@@ -14,11 +14,11 @@ componentcanvas 128386 component_ref 128258 // costime_watcher
 end
 componentcanvas 128514 component_ref 128386 // ns-wrapper
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 377 129 2000 125 39
+  color lightred xyzwh 377 129 2000 125 39
 end
 componentcanvas 128642 component_ref 128514 // jacorb-2.3.1
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
-  xyzwh 394 278 2000 91 39
+  color lightred xyzwh 394 278 2000 91 39
 end
 componentcanvas 128770 component_ref 128642 // coseventserver.jar
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
@@ -68,6 +68,28 @@ componentcanvas 132738 component_ref 130050 // eventserver.properties
   draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
   xyzwh 141 406 2005 151 39
 end
+componentcanvas 133122 component_ref 136578 // eventsudanlog4j.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 9 213 2000 177 39
+end
+componentcanvas 133378 component_ref 136706 // eventargentinalog4j.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 2 345 2000 195 39
+end
+componentcanvas 133506 component_ref 136834 // timelog4j.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  xyzwh 775 278 2000 133 39
+end
+componentcanvas 134018 component_ref 136962 // jacorb.properties
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  color lightred xyzwh 379 382 2000 119 39
+end
+textcanvas 134274 "Mezzo di Java
+--
+Démonstration du 28 Avril 2011
+--
+Diagramme de composants"
+  font large_bold  xyzwh 784 585 2000 348 137
 simplerelationcanvas 129410 simplerelation_ref 128130
   from ref 128002 z 2001 to ref 128770
 end
@@ -106,5 +128,17 @@ simplerelationcanvas 132610 simplerelation_ref 129922
 end
 simplerelationcanvas 132866 simplerelation_ref 130050
   from ref 128770 z 2006 to ref 132738
+end
+simplerelationcanvas 133634 simplerelation_ref 143106
+  from ref 128898 z 2001 to ref 133506
+end
+simplerelationcanvas 133762 simplerelation_ref 143234
+  from ref 128770 z 2001 to ref 133378
+end
+simplerelationcanvas 133890 simplerelation_ref 143362
+  from ref 128770 z 2001 to ref 133122
+end
+simplerelationcanvas 134146 simplerelation_ref 143490
+  from ref 128642 z 2001 to ref 134018
 end
 end

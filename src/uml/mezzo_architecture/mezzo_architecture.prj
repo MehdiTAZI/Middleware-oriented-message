@@ -1,6 +1,6 @@
 format 76
 "mezzo_architecture"
-  revision 2
+  revision 3
   modified_by 2 "Franck"
 
 
@@ -82,6 +82,10 @@ format 76
 
     component 128514 "jacorb-2.3.1"
       stereotype "ORB"
+      simplerelation 143490
+	-_->
+	  on component_ref 136962 // jacorb.properties
+      end
     end
 
     component 128642 "coseventserver.jar"
@@ -95,6 +99,16 @@ format 76
 	-_->
 	  on component_ref 130050 // eventserver.properties
       end
+
+      simplerelation 143234
+	-_->
+	  on component_ref 136706 // eventargentinalog4j.properties
+      end
+
+      simplerelation 143362
+	-_->
+	  on component_ref 136578 // eventsudanlog4j.properties
+      end
     end
 
     component 128770 "costimeserver.jar"
@@ -107,6 +121,11 @@ format 76
       simplerelation 128642
 	-_->
 	  on component_ref 128514 // jacorb-2.3.1
+      end
+
+      simplerelation 143106
+	-_->
+	  on component_ref 136834 // timelog4j.properties
       end
     end
 
@@ -171,6 +190,22 @@ format 76
     component 130050 "eventserver.properties"
       stereotype "properties"
     end
+
+    component 136578 "eventsudanlog4j.properties"
+      stereotype "properties"
+    end
+
+    component 136706 "eventargentinalog4j.properties"
+      stereotype "properties"
+    end
+
+    component 136834 "timelog4j.properties"
+      stereotype "properties"
+    end
+
+    component 136962 "jacorb.properties"
+      stereotype "properties"
+    end
   end
 
   deploymentview 128002 "deploiement_miage"
@@ -202,6 +237,5 @@ format 76
     deploymentnode 134914 "ntp.u-pec.fr"
       stereotype "NTP"
     end
-
   end
 end
