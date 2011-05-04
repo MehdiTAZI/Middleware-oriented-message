@@ -63,7 +63,7 @@ public class CosInfoCollectorImpl implements CosInfoCollectorOperations{
                     }
                 }
                 
-                list[i].messages=new Message[listEvent.size()];
+                list[i].messages=new Message[listEvent.values().size()];
                 list[i].messages=EventsToMessage();
                 listEvent=new HashMap<Integer, EventModel>();
                 log.trace("Infos on channel :"+ list[i].topic+". ");
