@@ -1,0 +1,73 @@
+
+# Documentation projet #
+
+La documentation est disponible sur Google Code :
+http://code.google.com/p/pds2011/
+
+Le WIKI permet d'initialiser la rédaction des documents. Utiliser la syntaxe proposé par Google Code à droite de la fenêtre d'édition.
+
+Conseil :
+  * Rédiger en dehors (éditeur de texte) en sauvegardant régulièrement)
+  * Plus simple : Utiliser Firefox 3.6 avec l'extension Textarea Cache (https://addons.mozilla.org/en-US/firefox/addon/5761/) qui en cas de crash vous permet de garder le contenu courant de la zone de saisie.
+  * Utiliser les commentaires pour rapidement faire des remarques sur un doc.
+
+
+# Poste de travail développeur #
+
+## OS ##
+
+Nous travaillerons de préférence avec des technologie portables et libres donc l'OS du poste de travail du développeur ne doit avoir que peu d'incidence si touts les outils existent. Cependant pour faciliter le travail de configuration et l'installation d'une nouvelle machine, il convient de se limiter à une distribution OS Linux.
+
+Linux Ubuntu 10.4
+
+## Outils ##
+
+Nom, Version de chaque brique :
+
+  * Eclipse ?
+  * détail et version de chaque plugin eclipse ?
+  * Maven ?
+  * JDK ?
+
+### Installation de Subclipse ###
+
+  * Ajouter la source http://subclipse.tigris.org/update_1.6.x dans les site update eclipse ou recherchez "subclipse" dans le marketplace (3.6)
+  * Sous linux faire aussi :
+```
+sudo apt-get install libsvn-java
+```
+et ajouter à la fin de votre ~/opt/eclipse/eclipse.ini :
+```
+-Djava.library.path=/usr/lib/jni
+```
+
+# Gestion des sources #
+
+## Emplacement ##
+Les sources du projet sont centralisé et versionné sur le serveur Subversion proposé par Google Code à ces adresses :
+
+via un client SVN (Subclipse, TortoiseSVN,...):
+
+`https://pds2011.googlecode.com/svn/trunk/ pds2011 --username <nomutilisateur_sansextensiongmail>`
+
+via un navigateur web pour visualisation :
+http://code.google.com/p/pds2011/source/browse/
+
+## Arborescence SVN premier niveau ##
+à la racine du SVN nous aurons :
+svn/pds/trunk
+svn/pds/tags
+svn/pds/branches
+
+Le trunk contiendra les sources de nos modules du framework, des tests, et de la plate-forme exemple.
+
+## Règles d'utilisation ##
+
+  1. Avant de travailler sur une source, faire un update de TOUT le projet
+  1. Avant de commit des sources, faire une synchronisation et traiter conflits LOCALEMENT, puis exécuter localement via eclipse ou maven toute la batterie de **test unitaires**.
+  1. TOUT, je dis bien TOUT ;) commit doit se faire avec une entrée de log expliquant la raison du commit.
+  1. Le SVN ne doit contenir AUCUN élément généré par maven ou autre (idl) ce qui exclut donc:
+  * les fichiers de configuration eclipse : .project, .classpath, .settings
+  * le répertoire target de maven (qui contiendra aussi les generated-sources issu de l'idl)
+
+Pour cette quatrième règle, il sera nécessaire que les ressources à exlure soit marquées ignore au niveau du SVN (via les clients) empêchant ainsi leur commit.

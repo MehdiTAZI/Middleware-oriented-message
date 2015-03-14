@@ -1,0 +1,9 @@
+PUSH / PULL MODEL :
+
+http://techpubs.borland.com/books/vbnes/vbnes33/programmer/chap02.html
+
+http://sardes.inrialpes.fr/~krakowia/Enseignement/M2R-SL/CR/Flips/DEA-0506-cours-MOM-4.pdf
+
+JMS :
+
+MOM et JMS : http://pyfourmond.free.fr/mom.htm

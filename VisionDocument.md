@@ -1,0 +1,41 @@
+
+
+# POSITIONNEMENT #
+
+## Objet du projet ##
+
+Le projet consiste en la réalisation de modules d'un nouveau framework middleware destiné à un environnement orienté message dans le but d'offrir aux développeurs d'application distribuer les services Event et Time.
+
+Il consiste en deux sous-systèmes :
+  * Le COS Event permettant de gérer des envoie et réceptions de message de manière découplée entre fournisseurs et consommateurs
+  * Le COS Time offrant la synchronisation à une horloge commune aux composants répartis, dont le COS Event.
+
+## Objectif et enjeux du projet ##
+
+## Elevator Statement ##
+
+# DÉCIDEURS ET UTILISATEURS #
+
+## Utilisateurs ##
+
+## Décideurs ##
+
+## Besoins fondamentaux ##
+
+## Environnement utilisateurs ##
+
+# LIENS ENTRE APPLICATIONS #
+
+![http://pds2011.googlecode.com/files/liens_entre_applications.png](http://pds2011.googlecode.com/files/liens_entre_applications.png)
+
+# FONCTIONNALITÉS DU PRODUIT #
+
+# EXIGENCES SUPPLÉMENTAIRES ET CONTRAINTES #
+
+## FURPS ##
+
+## Contraintes de documentation ##
+
+## Contraintes "+" ##
+
+# CRITÈRES D'ÉVALUATION #

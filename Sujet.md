@@ -1,0 +1,63 @@
+# Introduction #
+
+[Sujet du PDS](http://code.google.com/p/pds2011/downloads/detail?name=Sujet_Projet_de_Synth%C3%A8se_Isidis_2010-2011.doc&can=2&q=)
+
+# Informations additionnelles #
+
+## Méthode ##
+
+  * COPIL : pt avencement avec roadmap fait et reste à faire.
+  * Tout le monde devra parler.
+  * Questions : Réponses synthétiques et fluides est preuve de maîtrise.
+  * Revue de code : bien commenter, indiquer les UserStories , cohérence Conception UML - Code
+  * Les livrables concernent le framework et non l'architecture exemple.
+
+  * Positionnement : Quel est notre positionnement : Est ce un concurrent des middlewares existants, ou une solution qui ne prend pas en compte la concurrence ?
+```
+Tu le dis toi-même, il y a des middlewares existants. Vous devez donc proposer mieux que les autres ou plus spécifique, ou plus adapté à certains besoins précis.  
+```
+réponse AB 18/10/2010
+  * Lien inter application : le diagramme de collaboration doit-il représenter une vue des relations avec un des deux exemples d'architecture proposés ou doit-on faire une vue des relations du framework avec des composants externes de manière générique.
+```
+Première solution.  
+```
+réponse AB 18/10/2010
+  * Décideurs: afin de pouvoir définir le décideur, est ce que ceux çi sont imaginaires ou les professeurs car nous avons des problèmes pour la description succincte.
+```
+En l'occurrence cette section est très peu importante pour votre projet. N'y passez pas trop de temps. Pensez à qui doit réellement prendre des décisions sur les mois à venir en dehors de vous-mêmes.   
+```
+réponse AB 18/10/2010
+
+> 4) Product Owner : Pouvons-nous solliciter votre participation bienveillante dans le rôle de Product Owner ?
+
+Non. D'abord je ne suis pas bienveillant ;) et surtout je ne peux pas être juge et partie. Il faudra chercher plus loin...
+
+## Technique ##
+
+  * TimeCOS : Les messages de temps ne sont pas horodatés)
+  * Il faut enrichir ou adapter les interfaces existantes du marché.
+  * Intelligent Agent : agent pouvant être producteur/consommateur en pull ou en push
+  * Ex d'utilisateur : des développeur qui utiliseraient le framework
+  * COS indépendant mais le EventCOS utilise le TimeCOS pour remplir une de ses fonctionnalités.
+  * Choisir une solution pour limiter les queues : queue avec limite ? exception ?
+  * L'architecture de démonstration choisie peut influence les choix d'implémentation mais les COS doivent rester transposable qqs leur utilisation.
+  * Bench : Il faudra étudier TOUTE la pile logicielle de la solution : l'OS, les librairies utilisés (ParserXML, driver jdbc, ...), les bases de données (sqlite,mysql,...), les ORB (JacORB, Mico, TAO, ORBid...) : étude de documentations,  d'articles, et dans l'idéal, test en réel.
+
+  * Est ce que le système "nuclear" est temps réel : sur le document il est marqué que NON tandis que lors de la réunion de lancement il a été dit que oui ?
+```
+La question n'est pas du tout précise; je ne vois pas ce que la réponse peut vous apporter
+à ce stade du projet.
+Quelle est la réelle question qui se cache la question posée ?
+En d'autres termes, qu'est-ce que ça implique pour la réalisation de votre projet si la solution
+est temps réel ou non ? Avez-vous fait des recherches sur ce que signifie le temp réel ?
+Parlez-vous de temps réel mou ou dur ? Est-ce qu'on ne parletait pas plutôt de temps
+de réponse acceptable ou impératif ?
+```
+réponse GG 22/10/2010
+
+## Environnement ##
+
+  * Vers le 3/12, un disque partagé sera mis à disposition. Modalités ultérieurement communiqués
+  * Évaluation à la fin du copil => A prendre pour ajuster le projet.
+  * JANVIER : note de CC (50% du CC)
+  * AVRIL : Soutenance individuelle mais évaluation silencieuse dés le lancement.
